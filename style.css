@@ -189,11 +189,14 @@ section h2::after {
     color: #111;
 }
 
-/* FIXED: Centered badge with no conflicting rules */
+/* FINAL OVERRIDE — GUARANTEED CENTERING */
 .trust-badge {
     width: 200px;
-    display: block;
-    margin: 20px auto;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .trust p {
@@ -201,14 +204,15 @@ section h2::after {
     color: #333;
 }
 
-/* QR Code */
 .trust-qr {
     text-align: center;
 }
 
 .trust-qr-img {
-    display: block;
-    margin: 10px auto;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 10px;
 }
 
 /* FOOTER */
