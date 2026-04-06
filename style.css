@@ -1,15 +1,10 @@
-/* GLOBAL STYLES */
+/* GLOBAL */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     background: #f7f7f7;
     color: #222;
-}
-
-h1, h2, h3 {
-    margin: 0;
-    font-weight: bold;
 }
 
 section {
@@ -20,7 +15,6 @@ section {
 section h2 {
     font-size: 2.4rem;
     margin-bottom: 20px;
-    position: relative;
     display: inline-block;
 }
 
@@ -34,15 +28,20 @@ section h2::after {
     border-radius: 2px;
 }
 
-/* HERO SECTION */
+/* HERO */
 .hero {
     background: #d9d9d9;
     padding: 100px 20px 80px;
-    text-align: center;
     border-bottom: 6px solid #d40000;
+    text-align: center;
 }
 
-/* ⭐ LOCK HERO LOGO SIZE — prevents enlargement */
+.hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ⭐ FIXED: Prevent ACES logo from enlarging */
 .hero-logo {
     width: 180px !important;
     height: auto !important;
@@ -50,17 +49,15 @@ section h2::after {
     margin: 0 auto 25px auto;
 }
 
-/* HERO TEXT */
 .hero h1 {
     font-size: 3rem;
     color: #111;
-    margin-top: 10px;
 }
 
 .tagline {
     font-size: 1.3rem;
-    margin-top: 12px;
     color: #444;
+    margin-top: 12px;
 }
 
 .hero-buttons {
@@ -70,65 +67,36 @@ section h2::after {
 .btn, .btn-outline {
     padding: 12px 25px;
     margin: 10px;
-    font-size: 1rem;
-    text-decoration: none;
     border-radius: 6px;
-    display: inline-block;
+    text-decoration: none;
+    font-size: 1rem;
 }
 
-/* Primary Button */
 .btn {
     background: #d40000;
     color: white;
-    border: none;
 }
 
-.btn:hover {
-    background: #b30000;
-}
-
-/* Outline Button */
 .btn-outline {
     border: 2px solid #d40000;
     color: #d40000;
-    background: transparent;
 }
 
-.btn-outline:hover {
-    background: #d40000;
-    color: white;
-}
-
-/* Small Button */
-.btn-small {
-    padding: 10px 20px;
-    background: #d40000;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.btn-small:hover {
-    background: #b30000;
-}
-
-/* ABOUT SECTION */
+/* ABOUT */
 .about p {
     max-width: 700px;
     margin: 20px auto;
     font-size: 1.1rem;
-    line-height: 1.6;
 }
 
-/* SERVICES SECTION */
+/* SERVICES */
 .services {
-    background: #ffffff;
+    background: #fff;
 }
 
 .service-icon {
     width: 50px;
     margin-bottom: 15px;
-    filter: brightness(0) saturate(100%) invert(12%) sepia(96%) saturate(7480%) hue-rotate(356deg) brightness(92%) contrast(110%);
 }
 
 .service-grid {
@@ -140,20 +108,14 @@ section h2::after {
 }
 
 .service-box {
-    background: #ffffff;
+    background: #fff;
     padding: 35px;
     border-radius: 10px;
     border-left: 6px solid #d40000;
     box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.service-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-}
-
-/* CONTACT CARD SECTION */
+/* CONTACT CARD */
 .contact-card {
     background: #000;
     color: white;
@@ -167,46 +129,13 @@ section h2::after {
     padding: 40px;
     border-radius: 12px;
     border: 3px solid #d40000;
-    box-shadow: 0 0 20px rgba(212,0,0,0.3);
-}
-
-.card-content p {
-    margin: 8px 0;
-    font-size: 1.1rem;
-}
-
-.agent-name {
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-bottom: 10px;
 }
 
 /* TRUST SECTION */
 .trust {
     text-align: center;
-    width: 100%;
 }
 
-.trust h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #111;
-}
-
-.trust p {
-    font-size: 1.1rem;
-    color: #333;
-}
-
-/* QR Code */
-.trust-qr-img {
-    width: 160px;
-    max-width: 60vw;
-    display: block;
-    margin: 10px auto 0;
-}
-
-/* ⭐ FINAL FIX — TRUE CENTERING USING WRAPPER */
 .trust-badge-wrapper {
     width: 100%;
     display: flex;
@@ -215,9 +144,14 @@ section h2::after {
 
 .trust-badge {
     width: 200px;
-    max-width: 100%;
     display: block;
     margin: 20px 0;
+}
+
+.trust-qr-img {
+    width: 160px;
+    display: block;
+    margin: 10px auto 0;
 }
 
 /* FOOTER */
