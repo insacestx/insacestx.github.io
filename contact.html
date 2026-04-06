@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <title>Contact - ACES Insurance Services</title>
 
-  <!-- 🔵 Toggle Switch Styling -->
+<!-- 🔵 ACES Toggle + Grid + Card Styling -->
 <style>
+
+  /* Toggle Wrapper */
   .toggle-wrapper {
     display: flex;
     justify-content: center;
@@ -66,11 +68,12 @@
     color: #b30000;
   }
 
+  /* Fade Animation */
   .fade-section {
     transition: opacity 0.3s ease;
   }
 
-  <style>
+  /* Grid Layout */
   .agent-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -78,6 +81,7 @@
     margin-top: 20px;
   }
 
+  /* Agent Card */
   .agent-card {
     background: #ffffff;
     border: 1px solid #ddd;
@@ -87,6 +91,11 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
+  .agent-card h3 {
+    margin: 0 0 6px 0;
+  }
+
+  /* Contact Button */
   .agent-btn {
     display: inline-block;
     margin-top: 10px;
@@ -102,7 +111,6 @@
   .agent-btn:hover {
     background: #8a0000;
   }
-</style>
 
 </style>
 
@@ -126,7 +134,7 @@
 
 <h1>Contact Us</h1>
 
-<!-- 🔵 Bilingual Toggle Switch -->
+<!-- 🔵 Bilingual Toggle -->
 <div class="toggle-wrapper">
   <label class="toggle-switch">
     <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
@@ -202,7 +210,6 @@
   </div>
 </div>
 
-
 <!-- 🇲🇽 SPANISH SECTION -->
 <div id="spanish" class="fade-section" style="display:none; opacity:0;">
 
@@ -237,7 +244,6 @@
 
 </div>
 
-
 <!-- 🔁 Toggle Script -->
 <script>
 function toggleLanguage() {
@@ -247,26 +253,18 @@ function toggleLanguage() {
 
   if (toggle.checked) {
     english.style.opacity = 0;
-
     setTimeout(() => {
       english.style.display = "none";
       spanish.style.display = "block";
-
-      setTimeout(() => {
-        spanish.style.opacity = 1;
-      }, 50);
+      setTimeout(() => { spanish.style.opacity = 1; }, 50);
     }, 300);
 
   } else {
     spanish.style.opacity = 0;
-
     setTimeout(() => {
       spanish.style.display = "none";
       english.style.display = "block";
-
-      setTimeout(() => {
-        english.style.opacity = 1;
-      }, 50);
+      setTimeout(() => { english.style.opacity = 1; }, 50);
     }, 300);
   }
 }
