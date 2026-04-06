@@ -217,6 +217,12 @@ section h2::after {
     max-width: 60vw;
     display: block;
     margin: 10px auto 0;
+    /* Correct visual centering for badge with uneven PNG padding */
+.trust-badge {
+    width: 200px;
+    display: block;
+    margin: 20px auto;
+    transform: translateX(18px); /* adjust this number until perfect */
 }
 
 /* FOOTER */
