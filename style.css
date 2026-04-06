@@ -42,13 +42,15 @@ section h2::after {
     border-bottom: 6px solid #d40000;
 }
 
+/* ⭐ LOCK HERO LOGO SIZE — prevents enlargement */
 .hero-logo {
-    width: 180px;
-    height: auto;
+    width: 180px !important;
+    height: auto !important;
     display: block;
     margin: 0 auto 25px auto;
 }
 
+/* HERO TEXT */
 .hero h1 {
     font-size: 3rem;
     color: #111;
