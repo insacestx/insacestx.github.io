@@ -25,18 +25,14 @@
   .slider {
     position: absolute;
     cursor: pointer;
-    background-color: #000; /* ACES black */
+    background-color: #000;
     border-radius: 34px;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     transition: 0.4s;
-    
-    /* Thin ACES red border */
     border: 2px solid #b30000;
-
-    /* Subtle glow */
     box-shadow: 0 0 6px rgba(179, 0, 0, 0.4);
   }
 
@@ -48,7 +44,7 @@
     left: 4px;
     bottom: 4px;
     background-color: white;
-    color: #b30000; /* ACES red text */
+    color: #b30000;
     font-size: 12px;
     font-weight: bold;
     display: flex;
@@ -56,15 +52,12 @@
     justify-content: center;
     border-radius: 50%;
     transition: 0.4s;
-
-    /* Subtle glow on knob */
     box-shadow: 0 2px 4px rgba(0,0,0,0.25);
   }
 
-  /* When switched to Spanish */
   input:checked + .slider {
-    background-color: #b30000; /* ACES red */
-    box-shadow: 0 0 8px rgba(179, 0, 0, 0.6); /* stronger glow */
+    background-color: #b30000;
+    box-shadow: 0 0 8px rgba(179, 0, 0, 0.6);
   }
 
   input:checked + .slider:before {
@@ -73,17 +66,14 @@
     color: #b30000;
   }
 
-  /* Fade animation for content sections */
   .fade-section {
     transition: opacity 0.3s ease;
   }
-</style>
-  
-<style>
+
   .agent {
     margin-bottom: 20px;
     padding: 12px 16px;
-    border-left: 3px solid #b30000; /* ACES red */
+    border-left: 3px solid #b30000;
     background: #f9f9f9;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -93,7 +83,7 @@
     margin: 0 0 4px 0;
   }
 </style>
-  
+
 </head>
 
 <body>
@@ -122,7 +112,7 @@
   </label>
 </div>
 
-<!-- 🇺🇸 ENGLISH SECTION (content + agents) -->
+<!-- 🇺🇸 ENGLISH SECTION -->
 <div id="english" class="fade-section" style="opacity:1;">
 
   <h2>Meet Our Team</h2>
@@ -180,7 +170,7 @@
 
 </div>
 
-<!-- 🇲🇽 SPANISH SECTION (content + agents) -->
+<!-- 🇲🇽 SPANISH SECTION -->
 <div id="spanish" class="fade-section" style="display:none; opacity:0;">
 
   <h2>Conozca a Nuestro Equipo</h2>
@@ -208,7 +198,6 @@
 
 </div>
 
-
 <!-- 🔁 Toggle Script -->
 <script>
 function toggleLanguage() {
@@ -217,26 +206,24 @@ function toggleLanguage() {
   const toggle = document.getElementById("langToggle");
 
   if (toggle.checked) {
-    // Fade out English
     english.style.opacity = 0;
 
     setTimeout(() => {
       english.style.display = "none";
-
       spanish.style.display = "block";
+
       setTimeout(() => {
         spanish.style.opacity = 1;
       }, 50);
     }, 300);
 
   } else {
-    // Fade out Spanish
     spanish.style.opacity = 0;
 
     setTimeout(() => {
       spanish.style.display = "none";
-
       english.style.display = "block";
+
       setTimeout(() => {
         english.style.opacity = 1;
       }, 50);
@@ -244,8 +231,6 @@ function toggleLanguage() {
   }
 }
 </script>
-
-</div>
 
 </body>
 </html>
