@@ -79,6 +79,21 @@
   }
 </style>
   
+<style>
+  .agent {
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    border-left: 3px solid #b30000; /* ACES red */
+    background: #f9f9f9;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .agent h3 {
+    margin: 0 0 4px 0;
+  }
+</style>
+  
 </head>
 
 <body>
@@ -197,14 +212,45 @@
 function toggleLanguage() {
   const english = document.getElementById("english");
   const spanish = document.getElementById("spanish");
+  const englishAgents = document.getElementById("english-agents");
+  const spanishAgents = document.getElementById("spanish-agents");
   const toggle = document.getElementById("langToggle");
 
   if (toggle.checked) {
-    english.style.display = "none";
-    spanish.style.display = "block";
+    // Fade out English
+    english.style.opacity = 0;
+    englishAgents.style.opacity = 0;
+
+    setTimeout(() => {
+      english.style.display = "none";
+      englishAgents.style.display = "none";
+
+      spanish.style.display = "block";
+      spanishAgents.style.display = "block";
+
+      setTimeout(() => {
+        spanish.style.opacity = 1;
+        spanishAgents.style.opacity = 1;
+      }, 50);
+    }, 300);
+
   } else {
-    english.style.display = "block";
-    spanish.style.display = "none";
+    // Fade out Spanish
+    spanish.style.opacity = 0;
+    spanishAgents.style.opacity = 0;
+
+    setTimeout(() => {
+      spanish.style.display = "none";
+      spanishAgents.style.display = "none";
+
+      english.style.display = "block";
+      englishAgents.style.display = "block";
+
+      setTimeout(() => {
+        english.style.opacity = 1;
+        englishAgents.style.opacity = 1;
+      }, 50);
+    }, 300);
   }
 }
 </script>
