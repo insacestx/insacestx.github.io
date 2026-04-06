@@ -22,10 +22,53 @@
 </nav>
 
 <div class="container">
-    <h2>Contact Us</h2>
-    <p>We are here to help with all your insurance needs. Bilingual support available.</p>
-    <p>Email: your-email@example.com</p>
-    <p>Phone: (000) 000-0000</p>
+<h1>Contact Us</h1>
+
+<!-- Language Toggle -->
+<button onclick="toggleLanguage()" id="langButton">Español</button>
+
+<!-- English Version -->
+<div id="english">
+  <p>We are here to help with all your insurance needs. Proudly offering bilingual support (English & Spanish).</p>
+
+  <p><strong>Email:</strong> george@insacestx.com</p>
+  <p><strong>Cell Phone:</strong> (254) 709-6486</p>
+  <p><strong>Office Phone:</strong> (254) 227-6560</p>
+
+  <p>Available by call, text, or email.<br>
+  Disponible por llamada, texto o correo electrónico.</p>
+</div>
+
+<!-- Spanish Version -->
+<div id="spanish" style="display:none;">
+  <p>Estamos aquí para ayudarle con todas sus necesidades de seguro. Orgullosamente ofrecemos apoyo bilingüe (Inglés y Español).</p>
+
+  <p><strong>Correo electrónico:</strong> george@insacestx.com</p>
+  <p><strong>Celular:</strong> (254) 709-6486</p>
+  <p><strong>Teléfono de oficina:</strong> (254) 227-6560</p>
+
+  <p>Disponible por llamada, texto o correo electrónico.<br>
+  Available by call, text, or email.</p>
+</div>
+
+<script>
+function toggleLanguage() {
+  const english = document.getElementById("english");
+  const spanish = document.getElementById("spanish");
+  const button = document.getElementById("langButton");
+
+  if (english.style.display === "none") {
+    english.style.display = "block";
+    spanish.style.display = "none";
+    button.textContent = "Español";
+  } else {
+    english.style.display = "none";
+    spanish.style.display = "block";
+    button.textContent = "English";
+  }
+}
+</script>
+
 </div>
 
 </body>
