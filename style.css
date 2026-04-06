@@ -16,6 +16,7 @@ section {
     padding: 80px 20px;
     text-align: center;
 }
+
 section h2 {
     font-size: 2.4rem;
     margin-bottom: 20px;
@@ -41,7 +42,6 @@ section h2::after {
     border-bottom: 6px solid #d40000;
 }
 
-
 .hero-logo {
     width: 180px;
     margin-bottom: 25px;
@@ -58,7 +58,6 @@ section h2::after {
     margin-top: 12px;
     color: #444;
 }
-
 
 .hero-buttons {
     margin-top: 25px;
@@ -121,6 +120,7 @@ section h2::after {
 .services {
     background: #ffffff;
 }
+
 .service-icon {
     width: 50px;
     margin-bottom: 15px;
@@ -183,11 +183,25 @@ section h2::after {
     width: 100%;
 }
 
-.trust-badge {
-    display: block;
-    margin: 0 auto;
+.trust h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #111;
 }
 
+/* FIXED: Centered badge with no conflicting rules */
+.trust-badge {
+    width: 200px;
+    display: block;
+    margin: 20px auto;
+}
+
+.trust p {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* QR Code */
 .trust-qr {
     text-align: center;
 }
@@ -196,23 +210,6 @@ section h2::after {
     display: block;
     margin: 10px auto;
 }
-
-.trust h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #111;
-}
-
-.trust-badge {
-    width: 200px;
-    margin: 20px 0;
-}
-
-.trust p {
-    font-size: 1.1rem;
-    color: #333;
-}
-
 
 /* FOOTER */
 .footer {
