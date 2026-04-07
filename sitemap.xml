@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://insacestx.github.io/sitemap.xml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>https://insacestx.github.io/</loc>
     <priority>1.0</priority>
   </url>
 
+  <!-- rebuild 4 -->
+  
   <url>
     <loc>https://insacestx.github.io/about.html</loc>
     <priority>0.8</priority>
