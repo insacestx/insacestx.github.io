@@ -2,6 +2,66 @@
 <html lang="en">
     <!-- publish sitemap folder -->
 <head>
+    <header class="aces-header">
+  <div class="header-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="header-logo">ACES Insurance Services</a>
+
+    <!-- Desktop Navigation -->
+    <nav class="nav-menu">
+      <div class="nav-item dropdown">
+        <span class="nav-link">Services ▾</span>
+        <div class="dropdown-menu">
+          <a href="services.html#commercial">Commercial Insurance</a>
+          <a href="services.html#personal">Personal Insurance</a>
+          <a href="services.html#specialty">Specialty Lines</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span class="nav-link">Applications ▾</span>
+        <div class="dropdown-menu">
+          <a href="applications.html#commercial">Commercial Apps</a>
+          <a href="applications.html#personal">Personal Apps</a>
+        </div>
+      </div>
+
+      <a class="nav-link" href="coi.html">COI Request</a>
+      <a class="nav-link" href="claims.html">Claims</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+
+    <!-- Mobile Hamburger -->
+    <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
+
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="index.html">Home</a>
+
+    <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Services ▾</button>
+    <div class="mobile-dropdown-content">
+      <a href="services.html#commercial">Commercial Insurance</a>
+      <a href="services.html#personal">Personal Insurance</a>
+      <a href="services.html#specialty">Specialty Lines</a>
+    </div>
+
+    <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Applications ▾</button>
+    <div class="mobile-dropdown-content">
+      <a href="applications.html#commercial">Commercial Apps</a>
+      <a href="applications.html#personal">Personal Apps</a>
+    </div>
+
+    <a href="coi.html">COI Request</a>
+    <a href="claims.html">Claims</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</header>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACES Insurance Services | Texas Independent Insurance Agency</title>
