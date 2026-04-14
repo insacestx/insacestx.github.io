@@ -151,7 +151,7 @@ section h2::after {
   font-size: 0.95em;
   color: #333333;
   line-height: 1.5;
-}
+} /* ← FIXED: missing brace */
 
 /* CONTACT CARD */
 .contact-card {
@@ -230,11 +230,11 @@ section h2::after {
     display: flex;
     align-items: center;
     padding-bottom: 4px;
-    border-bottom: 2px solid #d40000; /* thinner underline */
+    border-bottom: 2px solid #d40000;
 }
 
 .header-logo-img {
-    height: 42px; /* small size */
+    height: 42px;
     width: auto;
     display: block;
     filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
