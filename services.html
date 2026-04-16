@@ -1,201 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Services - ACES Insurance Services</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services - ACES Insurance Services</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-<header>
-    <div class="header-container">
+<!-- 🔴 ACES GLOBAL HEADER -->
+<header class="aces-header">
+  <div class="header-inner">
 
-        <!-- LEFT SIDE: Logo + Toggle -->
-        <div class="left-header-group">
-            <a href="index.html">
-                <img src="image2.png" alt="ACES Insurance Services" style="height: 55px;">
-            </a>
+    <!-- Logo -->
+    <a href="index.html" class="header-logo">
+      <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
+    </a>
 
-            <!-- Bilingual Toggle -->
-            <div id="language-toggle">
-                <button id="en-btn">EN</button> |
-                <button id="es-btn">ES</button>
-            </div>
+    <!-- Desktop Navigation -->
+    <nav class="nav-menu">
+      <div class="nav-item dropdown">
+        <span class="nav-link">Services ▾</span>
+        <div class="dropdown-menu">
+          <a href="services.html#commercial-lines">Commercial Lines</a>
+          <a href="services.html#personal-lines">Personal Lines</a>
+          <a href="services.html#property-lines">Property Lines</a>
         </div>
+      </div>
 
-        <!-- RIGHT SIDE NAV -->
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
+      <div class="nav-item dropdown">
+        <span class="nav-link">Applications ▾</span>
+        <div class="dropdown-menu">
+          <a href="applications.html#commercial">Commercial Apps</a>
+          <a href="applications.html#personal">Personal Apps</a>
+        </div>
+      </div>
 
-                <li class="dropdown">
-                    <a href="#">Services ▾</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="services.html?type=personal">Personal Lines</a></li>
-                        <li><a href="services.html?type=commercial">Commercial Lines</a></li>
-                        <li><a href="services.html?type=property">Property Lines</a></li>
-                    </ul>
-                </li>
+      <a class="nav-link" href="coi.html">COI Request</a>
+      <a class="nav-link" href="claims.html">Claims</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
 
-                <li><a href="applications.html">Applications</a></li>
-                <li><a href="coi.html">COI Request</a></li>
-                <li><a href="claims.html">Claims</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+    <!-- Mobile Hamburger -->
+    <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
 
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="index.html">Home</a>
+
+    <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Services ▾</button>
+    <div class="mobile-dropdown-content">
+      <a href="services.html#commercial-lines">Commercial Lines</a>
+      <a href="services.html#personal-lines">Personal Lines</a>
+      <a href="services.html#property-lines">Property Lines</a>
     </div>
+
+    <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Applications ▾</button>
+    <div class="mobile-dropdown-content">
+      <a href="applications.html#commercial">Commercial Apps</a>
+      <a href="applications.html#personal">Personal Apps</a>
+    </div>
+
+    <a href="coi.html">COI Request</a>
+    <a href="claims.html">Claims</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
 </header>
 
+<!-- PAGE TITLE -->
 <section class="page-title">
-    <h1>Our Services</h1>
-    <p>ACES Insurance Services provides a wide range of personal and commercial insurance solutions.</p>
+  <h1>Our Services</h1>
+  <p>ACES Insurance Services provides a wide range of personal and commercial insurance solutions.</p>
 </section>
 
 <!-- PERSONAL LINES -->
-<section id="personal-section" class="services-section">
-    <h2>Personal Lines</h2>
-    <div class="services-grid">
+<section id="personal-lines" class="services-section">
+  <h2>Personal Lines</h2>
+  <div class="services-grid">
 
-        <div class="service-card">
-            <img src="icon-property-aces.png" alt="Home Insurance">
-            <h3>Home Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-property-aces.png" alt="Rental Insurance">
-            <h3>Rental Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-auto-aces.png" alt="RV Insurance">
-            <h3>RV Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-auto-aces.png" alt="Motorcycle Insurance">
-            <h3>Motorcycle Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-auto-aces.png" alt="Golf Cart Insurance">
-            <h3>Golf Cart Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-auto-aces.png" alt="Auto Insurance">
-            <h3>Auto Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-life-aces.png" alt="Life Insurance">
-            <h3>Life Insurance</h3>
-        </div>
-
+    <div class="service-card">
+      <img src="icon-property-aces.png" alt="Home Insurance">
+      <h3>Home Insurance</h3>
     </div>
+
+    <div class="service-card">
+      <img src="icon-property-aces.png" alt="Rental Insurance">
+      <h3>Rental Insurance</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-auto-aces.png" alt="RV Insurance">
+      <h3>RV Insurance</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-auto-aces.png" alt="Motorcycle Insurance">
+      <h3>Motorcycle Insurance</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-auto-aces.png" alt="Golf Cart Insurance">
+      <h3>Golf Cart Insurance</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-auto-aces.png" alt="Auto Insurance">
+      <h3>Auto Insurance</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-life-aces.png" alt="Life Insurance">
+      <h3>Life Insurance</h3>
+    </div>
+
+  </div>
 </section>
 
 <!-- COMMERCIAL LINES -->
-<section id="commercial-section" class="services-section">
-    <h2>Commercial Lines</h2>
-    <div class="services-grid">
+<section id="commercial-lines" class="services-section">
+  <h2>Commercial Lines</h2>
+  <div class="services-grid">
 
-        <div class="service-card">
-            <img src="icon-commercial-aces.png" alt="General Liability">
-            <h3>General Liability</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-commercial-aces.png" alt="Commercial Auto">
-            <h3>Commercial Auto</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-commercial-aces.png" alt="Workers Comp">
-            <h3>Workers Comp</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-commercial-aces.png" alt="Bonds">
-            <h3>Bonds</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-specialty-aces.png" alt="Specialty Lines">
-            <h3>Specialty Lines</h3>
-        </div>
-
+    <div class="service-card">
+      <img src="icon-commercial-aces.png" alt="General Liability">
+      <h3>General Liability</h3>
     </div>
+
+    <div class="service-card">
+      <img src="icon-commercial-aces.png" alt="Commercial Auto">
+      <h3>Commercial Auto</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-commercial-aces.png" alt="Workers Comp">
+      <h3>Workers Comp</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-commercial-aces.png" alt="Bonds">
+      <h3>Bonds</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-specialty-aces.png" alt="Specialty Lines">
+      <h3>Specialty Lines</h3>
+    </div>
+
+  </div>
 </section>
 
 <!-- PROPERTY LINES -->
-<section id="property-section" class="services-section">
-    <h2>Property Lines</h2>
-    <div class="services-grid">
+<section id="property-lines" class="services-section">
+  <h2>Property Lines</h2>
+  <div class="services-grid">
 
-        <div class="service-card">
-            <img src="icon-property-aces.png" alt="Home Insurance">
-            <h3>Home Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-property-aces.png" alt="Rental Insurance">
-            <h3>Rental Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-property-aces.png" alt="Condo Insurance">
-            <h3>Condo Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-property-aces.png" alt="Landlord Insurance">
-            <h3>Landlord Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-property-aces.png" alt="Flood Insurance">
-            <h3>Flood Insurance</h3>
-        </div>
-
-        <div class="service-card">
-            <img src="icon-property-aces.png" alt="Windstorm Insurance">
-            <h3>Windstorm Insurance</h3>
-        </div>
-
+    <div class="service-card">
+      <img src="icon-property-aces.png" alt="Home Insurance">
+      <h3>Home Insurance</h3>
     </div>
+
+    <div class="service-card">
+      <img src="icon-property-aces.png" alt="Rental Insurance">
+      <h3>Rental Insurance</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-property-aces.png" alt="Condo Insurance">
+      <h3>Condo Insurance</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-property-aces.png" alt="Landlord Insurance">
+      <h3>Landlord Insurance</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-property-aces.png" alt="Flood Insurance">
+      <h3>Flood Insurance</h3>
+    </div>
+
+    <div class="service-card">
+      <img src="icon-property-aces.png" alt="Windstorm Insurance">
+      <h3>Windstorm Insurance</h3>
+    </div>
+
+  </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-    <p>© 2026 ACES Insurance Services</p>
+  <p>© 2026 ACES Insurance Services</p>
 </footer>
 
-<!-- FILTER SCRIPT -->
+<!-- HASH‑BASED FILTERING SCRIPT -->
 <script>
-    const params = new URLSearchParams(window.location.search);
-    const type = params.get("type");
+  function filterSections() {
+    const hash = window.location.hash.replace("#", "");
 
-    const personal = document.getElementById("personal-section");
-    const commercial = document.getElementById("commercial-section");
-    const property = document.getElementById("property-section");
+    const sections = ["personal-lines", "commercial-lines", "property-lines"];
 
-    if (type === "personal") {
-        commercial.classList.add("hidden");
-        property.classList.add("hidden");
-    }
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (hash && id !== hash) {
+        el.style.display = "none";
+      } else {
+        el.style.display = "block";
+      }
+    });
+  }
 
-    if (type === "commercial") {
-        personal.classList.add("hidden");
-        property.classList.add("hidden");
-    }
-
-    if (type === "property") {
-        personal.classList.add("hidden");
-        commercial.classList.add("hidden");
-    }
+  window.addEventListener("load", filterSections);
+  window.addEventListener("hashchange", filterSections);
 </script>
 
 </body>
