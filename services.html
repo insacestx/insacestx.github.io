@@ -4,292 +4,199 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Services - ACES Insurance Services</title>
-
-    <!-- Correct CSS file -->
     <link rel="stylesheet" href="style.css" />
-
-    <style>
-        /* Header layout fix for toggle placement */
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 20px;
-        }
-
-        .left-header-group {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        /* Dropdown hover delay fix */
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            background: white;
-            padding: 10px 0;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 999;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-        /* Service grid layout */
-        .services-section {
-            padding: 40px 20px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .service-card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid #ddd;
-            transition: 0.2s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-4px);
-            border-color: #d40000;
-        }
-
-        .service-card img {
-            width: 70px;
-            height: 70px;
-            margin-bottom: 12px;
-        }
-
-        /* Hidden sections for filtering */
-        .hidden {
-            display: none !important;
-        }
-    </style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <div class="header-container">
+<header>
+    <div class="header-container">
 
-            <!-- LEFT SIDE: Logo + Toggle -->
-            <div class="left-header-group">
-                <a href="index.html">
-                    <img src="image2.png" alt="ACES Insurance Services" style="height: 55px;">
-                </a>
+        <!-- LEFT SIDE: Logo + Toggle -->
+        <div class="left-header-group">
+            <a href="index.html">
+                <img src="image2.png" alt="ACES Insurance Services" style="height: 55px;">
+            </a>
 
-                <!-- Bilingual Toggle (your current design) -->
-                <div id="language-toggle">
-                    <button id="en-btn">EN</button> |
-                    <button id="es-btn">ES</button>
-                </div>
+            <!-- Bilingual Toggle -->
+            <div id="language-toggle">
+                <button id="en-btn">EN</button> |
+                <button id="es-btn">ES</button>
             </div>
-
-            <!-- RIGHT SIDE: Navigation -->
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-
-                    <li class="dropdown">
-                        <a href="#">Services ▾</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="services.html?type=personal">Personal Lines</a></li>
-                            <li><a href="services.html?type=commercial">Commercial Lines</a></li>
-                            <li><a href="services.html?type=property">Property Lines</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href="applications.html">Applications</a></li>
-                    <li><a href="coi.html">COI Request</a></li>
-                    <li><a href="claims.html">Claims</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-
         </div>
-    </header>
 
-    <!-- PAGE TITLE -->
-    <section class="page-title">
-        <h1>Our Services</h1>
-        <p>Select the insurance solutions that fit your needs.</p>
-    </section>
+        <!-- RIGHT SIDE NAV -->
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
 
-    <!-- PERSONAL LINES -->
-    <section id="personal-section" class="services-section">
-        <h2>Personal Lines</h2>
-        <div class="services-grid">
+                <li class="dropdown">
+                    <a href="#">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="services.html?type=personal">Personal Lines</a></li>
+                        <li><a href="services.html?type=commercial">Commercial Lines</a></li>
+                        <li><a href="services.html?type=property">Property Lines</a></li>
+                    </ul>
+                </li>
 
-            <div class="service-card">
-                <img src="icon-property-aces.png" alt="Home Insurance">
-                <h3>Home Insurance</h3>
-            </div>
+                <li><a href="applications.html">Applications</a></li>
+                <li><a href="coi.html">COI Request</a></li>
+                <li><a href="claims.html">Claims</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
 
-            <div class="service-card">
-                <img src="icon-property-aces.png" alt="Rental Insurance">
-                <h3>Rental Insurance</h3>
-            </div>
+    </div>
+</header>
 
-            <div class="service-card">
-                <img src="icon-auto-aces.png" alt="RV Insurance">
-                <h3>RV Insurance</h3>
-            </div>
+<section class="page-title">
+    <h1>Our Services</h1>
+    <p>ACES Insurance Services provides a wide range of personal and commercial insurance solutions.</p>
+</section>
 
-            <div class="service-card">
-                <img src="icon-auto-aces.png" alt="Motorcycle Insurance">
-                <h3>Motorcycle Insurance</h3>
-            </div>
+<!-- PERSONAL LINES -->
+<section id="personal-section" class="services-section">
+    <h2>Personal Lines</h2>
+    <div class="services-grid">
 
-            <div class="service-card">
-                <img src="icon-auto-aces.png" alt="Golf Cart Insurance">
-                <h3>Golf Cart Insurance</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-auto-aces.png" alt="Auto Insurance">
-                <h3>Auto Insurance</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-life-aces.png" alt="Life Insurance">
-                <h3>Life Insurance</h3>
-            </div>
-
+        <div class="service-card">
+            <img src="icon-property-aces.png" alt="Home Insurance">
+            <h3>Home Insurance</h3>
         </div>
-    </section>
 
-    <!-- COMMERCIAL LINES -->
-    <section id="commercial-section" class="services-section">
-        <h2>Commercial Lines</h2>
-        <div class="services-grid">
-
-            <div class="service-card">
-                <img src="icon-commercial-aces.png" alt="General Liability">
-                <h3>General Liability</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-commercial-aces.png" alt="Commercial Auto">
-                <h3>Commercial Auto</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-commercial-aces.png" alt="Workers Comp">
-                <h3>Workers Comp</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-commercial-aces.png" alt="Bonds">
-                <h3>Bonds</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-specialty-aces.png" alt="Specialty Lines">
-                <h3>Specialty Lines</h3>
-            </div>
-
+        <div class="service-card">
+            <img src="icon-property-aces.png" alt="Rental Insurance">
+            <h3>Rental Insurance</h3>
         </div>
-    </section>
 
-    <!-- PROPERTY LINES -->
-    <section id="property-section" class="services-section">
-        <h2>Property Lines</h2>
-        <div class="services-grid">
-
-            <div class="service-card">
-                <img src="icon-property-aces.png" alt="Home Insurance">
-                <h3>Home Insurance</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-property-aces.png" alt="Rental Insurance">
-                <h3>Rental Insurance</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-property-aces.png" alt="Condo Insurance">
-                <h3>Condo Insurance</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-property-aces.png" alt="Landlord Insurance">
-                <h3>Landlord Insurance</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-property-aces.png" alt="Flood Insurance">
-                <h3>Flood Insurance</h3>
-            </div>
-
-            <div class="service-card">
-                <img src="icon-property-aces.png" alt="Windstorm Insurance">
-                <h3>Windstorm Insurance</h3>
-            </div>
-
+        <div class="service-card">
+            <img src="icon-auto-aces.png" alt="RV Insurance">
+            <h3>RV Insurance</h3>
         </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer>
-        <p>© 2026 ACES Insurance Services. All Rights Reserved.</p>
-    </footer>
+        <div class="service-card">
+            <img src="icon-auto-aces.png" alt="Motorcycle Insurance">
+            <h3>Motorcycle Insurance</h3>
+        </div>
 
-    <!-- DROPDOWN DELAY SCRIPT -->
-    <script>
-        let hideTimeout;
+        <div class="service-card">
+            <img src="icon-auto-aces.png" alt="Golf Cart Insurance">
+            <h3>Golf Cart Insurance</h3>
+        </div>
 
-        document.querySelectorAll('.dropdown').forEach(drop => {
-            const menu = drop.querySelector('.dropdown-menu');
+        <div class="service-card">
+            <img src="icon-auto-aces.png" alt="Auto Insurance">
+            <h3>Auto Insurance</h3>
+        </div>
 
-            drop.addEventListener('mouseenter', () => {
-                clearTimeout(hideTimeout);
-                menu.style.display = 'block';
-            });
+        <div class="service-card">
+            <img src="icon-life-aces.png" alt="Life Insurance">
+            <h3>Life Insurance</h3>
+        </div>
 
-            drop.addEventListener('mouseleave', () => {
-                hideTimeout = setTimeout(() => {
-                    menu.style.display = 'none';
-                }, 250);
-            });
-        });
-    </script>
+    </div>
+</section>
 
-    <!-- CATEGORY FILTERING SCRIPT -->
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const type = params.get("type");
+<!-- COMMERCIAL LINES -->
+<section id="commercial-section" class="services-section">
+    <h2>Commercial Lines</h2>
+    <div class="services-grid">
 
-        const personal = document.getElementById("personal-section");
-        const commercial = document.getElementById("commercial-section");
-        const property = document.getElementById("property-section");
+        <div class="service-card">
+            <img src="icon-commercial-aces.png" alt="General Liability">
+            <h3>General Liability</h3>
+        </div>
 
-        if (type === "personal") {
-            commercial.classList.add("hidden");
-            property.classList.add("hidden");
-        }
+        <div class="service-card">
+            <img src="icon-commercial-aces.png" alt="Commercial Auto">
+            <h3>Commercial Auto</h3>
+        </div>
 
-        if (type === "commercial") {
-            personal.classList.add("hidden");
-            property.classList.add("hidden");
-        }
+        <div class="service-card">
+            <img src="icon-commercial-aces.png" alt="Workers Comp">
+            <h3>Workers Comp</h3>
+        </div>
 
-        if (type === "property") {
-            personal.classList.add("hidden");
-            commercial.classList.add("hidden");
-        }
-    </script>
+        <div class="service-card">
+            <img src="icon-commercial-aces.png" alt="Bonds">
+            <h3>Bonds</h3>
+        </div>
+
+        <div class="service-card">
+            <img src="icon-specialty-aces.png" alt="Specialty Lines">
+            <h3>Specialty Lines</h3>
+        </div>
+
+    </div>
+</section>
+
+<!-- PROPERTY LINES -->
+<section id="property-section" class="services-section">
+    <h2>Property Lines</h2>
+    <div class="services-grid">
+
+        <div class="service-card">
+            <img src="icon-property-aces.png" alt="Home Insurance">
+            <h3>Home Insurance</h3>
+        </div>
+
+        <div class="service-card">
+            <img src="icon-property-aces.png" alt="Rental Insurance">
+            <h3>Rental Insurance</h3>
+        </div>
+
+        <div class="service-card">
+            <img src="icon-property-aces.png" alt="Condo Insurance">
+            <h3>Condo Insurance</h3>
+        </div>
+
+        <div class="service-card">
+            <img src="icon-property-aces.png" alt="Landlord Insurance">
+            <h3>Landlord Insurance</h3>
+        </div>
+
+        <div class="service-card">
+            <img src="icon-property-aces.png" alt="Flood Insurance">
+            <h3>Flood Insurance</h3>
+        </div>
+
+        <div class="service-card">
+            <img src="icon-property-aces.png" alt="Windstorm Insurance">
+            <h3>Windstorm Insurance</h3>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 ACES Insurance Services</p>
+</footer>
+
+<!-- FILTER SCRIPT -->
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+
+    const personal = document.getElementById("personal-section");
+    const commercial = document.getElementById("commercial-section");
+    const property = document.getElementById("property-section");
+
+    if (type === "personal") {
+        commercial.classList.add("hidden");
+        property.classList.add("hidden");
+    }
+
+    if (type === "commercial") {
+        personal.classList.add("hidden");
+        property.classList.add("hidden");
+    }
+
+    if (type === "property") {
+        personal.classList.add("hidden");
+        commercial.classList.add("hidden");
+    }
+</script>
 
 </body>
 </html>
