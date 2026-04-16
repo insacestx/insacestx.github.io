@@ -341,9 +341,9 @@ section h2::after {
     cursor: pointer;
 }
 
-.mobile-dropdown-content {
-    display: none;
-    padding-left: 15px;
+.mobile-dropdown-content a {
+    display: block;
+    padding: 10px 0;
 }
 
 @media (max-width: 850px) {
