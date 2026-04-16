@@ -333,6 +333,7 @@ section h2::after {
 
 /* MOBILE DROPDOWNS */
 .mobile-dropdown-btn {
+    margin-top: 10px;
     background: none;
     border: none;
     padding: 12px 0;
