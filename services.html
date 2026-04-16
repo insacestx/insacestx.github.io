@@ -1,32 +1,83 @@
 <!DOCTYPE html>
-<html>
-    <!-- rebuild -->
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - ACES Insurance Services</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body>
 
-<header>
-    <h1>ACES Insurance Services</h1>
-</header>
+<!-- 🔴 ACES GLOBAL HEADER -->
+<header class="aces-header">
+  <div class="header-inner">
 
-<!-- rebuild -->
-    
-<nav>
+    <!-- Logo -->
+    <a href="index.html" class="header-logo">
+      <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="nav-menu">
+      <div class="nav-item dropdown">
+        <span class="nav-link">Services ▾</span>
+        <div class="dropdown-menu">
+          <a href="services.html#commercial">Commercial Insurance</a>
+          <a href="services.html#personal">Personal Insurance</a>
+          <a href="services.html#specialty">Specialty Lines</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span class="nav-link">Applications ▾</span>
+        <div class="dropdown-menu">
+          <a href="applications.html#commercial">Commercial Apps</a>
+          <a href="applications.html#personal">Personal Apps</a>
+        </div>
+      </div>
+
+      <a class="nav-link" href="coi.html">COI Request</a>
+      <a class="nav-link" href="claims.html">Claims</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+
+    <!-- Mobile Hamburger -->
+    <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
+
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu">
     <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
+
+    <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Services ▾</button>
+    <div class="mobile-dropdown-content">
+      <a href="services.html#commercial">Commercial Insurance</a>
+      <a href="services.html#personal">Personal Insurance</a>
+      <a href="services.html#specialty">Specialty Lines</a>
+    </div>
+
+    <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Applications ▾</button>
+    <div class="mobile-dropdown-content">
+      <a href="applications.html#commercial">Commercial Apps</a>
+      <a href="applications.html#personal">Personal Apps</a>
+    </div>
+
     <a href="coi.html">COI Request</a>
     <a href="claims.html">Claims</a>
-    <a href="applications.html">Applications</a>
+    <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
-</nav>
+  </div>
+</header>
 
-<div class="container">
+<!-- PAGE CONTENT -->
+<section class="about">
     <h2>Our Services</h2>
-    <ul>
+    <p>ACES Insurance Services provides a wide range of personal and commercial insurance solutions.</p>
+
+    <ul style="max-width:600px; margin:auto; text-align:left; font-size:1.1rem; line-height:1.6;">
         <li>Auto Insurance</li>
         <li>Homeowners Insurance</li>
         <li>Renters Insurance</li>
@@ -35,7 +86,26 @@
         <li>Commercial Auto</li>
         <li>Bonding</li>
     </ul>
-</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <img src="image2.png" alt="ACES Logo" class="footer-logo">
+    <p>© 2026 ACES Insurance Services</p>
+</footer>
+
+<!-- MOBILE MENU SCRIPT -->
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById("mobileMenu");
+    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+
+function toggleMobileDropdown(button) {
+    const content = button.nextElementSibling;
+    content.style.display = (content.style.display === "block") ? "none" : "block";
+}
+</script>
 
 </body>
 </html>
