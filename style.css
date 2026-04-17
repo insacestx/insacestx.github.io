@@ -418,3 +418,29 @@ input:checked + .slider:before {
 .fade-section {
     transition: opacity 0.3s ease;
 }
+
+<script>
+function toggleLanguage() {
+  const english = document.getElementById("english");
+  const spanish = document.getElementById("spanish");
+  const toggle = document.getElementById("langToggle");
+
+  if (!english || !spanish) return; // Prevent errors on Services page
+
+  if (toggle.checked) {
+    english.style.opacity = 0;
+    setTimeout(() => {
+      english.style.display = "none";
+      spanish.style.display = "block";
+      setTimeout(() => { spanish.style.opacity = 1; }, 50);
+    }, 300);
+  } else {
+    spanish.style.opacity = 0;
+    setTimeout(() => {
+      spanish.style.display = "none";
+      english.style.display = "block";
+      setTimeout(() => { english.style.opacity = 1; }, 50);
+    }, 300);
+  }
+}
+</script>
