@@ -9,27 +9,32 @@
     <meta name="keywords" content="insurance, Texas insurance, bilingual insurance, auto insurance, home insurance, commercial insurance, Waco insurance, Hewitt insurance, independent insurance agent">
     <meta name="robots" content="index, follow">
 
-    <link rel="stylesheet" href="style.css?v=23">
+    <link rel="stylesheet" href="style.css?v=24">
 </head>
 
 <body>
 
 <!-- ============================================================
-     HEADER (TOGGLE ONLY — NAVIGATION MOVED INTO WRAPPERS)
+     HEADER (LOGO → TOGGLE → NAVIGATION)
 ============================================================ -->
 <header class="aces-header">
   <div class="header-inner">
 
-    <!-- Logo -->
+    <!-- LOGO -->
     <a href="index.html" class="header-logo">
       <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
     </a>
 
-    <!-- SINGLE LANGUAGE TOGGLE -->
+    <!-- TOGGLE -->
     <label class="toggle-switch header-toggle">
       <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
       <span class="slider"></span>
     </label>
+
+    <!-- NAV CONTAINER (this stays in header visually) -->
+    <div id="navContainer">
+      <!-- English nav loads here by default -->
+    </div>
 
   </div>
 </header>
@@ -41,8 +46,8 @@
 ============================================================ -->
 <div id="english" style="opacity:1; transition:opacity .3s ease;">
 
-<!-- ENGLISH NAVIGATION -->
-<nav class="nav-menu">
+<!-- ENGLISH NAVIGATION (invisible, cloned into header) -->
+<nav id="navEN" class="nav-menu" style="display:none;">
   <div class="dropdown">
     <span class="nav-link">Services ▾</span>
     <div class="dropdown-menu">
@@ -153,8 +158,8 @@
 ============================================================ -->
 <div id="spanish" style="display:none; opacity:0; transition:opacity .3s ease;">
 
-<!-- SPANISH NAVIGATION -->
-<nav class="nav-menu">
+<!-- SPANISH NAVIGATION (invisible, cloned into header) -->
+<nav id="navES" class="nav-menu" style="display:none;">
   <div class="dropdown">
     <span class="nav-link">Servicios ▾</span>
     <div class="dropdown-menu">
@@ -223,7 +228,7 @@
     <h2>Contáctenos y Conozca a Nuestro Equipo</h2>
 
     <div class="card-content">
-        <p>Nuestro equipo bilingüe está aquí para ayudar with aseguranza personal, comercial, de propiedad y de auto.</p>
+        <p>Nuestro equipo bilingüe está aquí para ayudar con aseguranza personal, comercial, de propiedad y de auto.</p>
 
         <a href="contact.html" class="btn-small">Contáctenos</a>
 
@@ -263,12 +268,25 @@
      SCRIPTS
 ============================================================ -->
 <script>
+function loadNav(language) {
+  const navContainer = document.getElementById("navContainer");
+  const navEN = document.getElementById("navEN");
+  const navES = document.getElementById("navES");
+
+  if (language === "en") {
+    navContainer.innerHTML = navEN.innerHTML;
+  } else {
+    navContainer.innerHTML = navES.innerHTML;
+  }
+}
+
 function toggleLanguage() {
   const en = document.getElementById("english");
   const es = document.getElementById("spanish");
   const toggle = document.getElementById("langToggle");
 
   if (toggle.checked) {
+    loadNav("es");
     en.style.opacity = 0;
     setTimeout(() => {
       en.style.display = "none";
@@ -276,6 +294,7 @@ function toggleLanguage() {
       setTimeout(() => { es.style.opacity = 1; }, 50);
     }, 300);
   } else {
+    loadNav("en");
     es.style.opacity = 0;
     setTimeout(() => {
       es.style.display = "none";
@@ -284,6 +303,9 @@ function toggleLanguage() {
     }, 300);
   }
 }
+
+// Load English nav on page load
+loadNav("en");
 </script>
 
 </body>
