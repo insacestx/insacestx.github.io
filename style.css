@@ -287,7 +287,7 @@ section h2::after {
 }
 
 /* ============================
-   DROPDOWN
+   DROPDOWN (IMPROVED SPEED + BUFFER)
 ============================ */
 .dropdown {
     position: relative;
@@ -305,8 +305,22 @@ section h2::after {
     padding: 0;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.25s ease-in-out;
+    pointer-events: none;
+    transition: opacity 0.35s ease-in-out, visibility 0.35s ease-in-out;
     z-index: 999;
+}
+
+/* Hover buffer — keeps menu open while moving cursor */
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Delay closing — makes dropdown easier to use */
+.dropdown:not(:hover) .dropdown-menu {
+    transition-delay: 0.25s;
 }
 
 .dropdown-menu a {
@@ -319,12 +333,6 @@ section h2::after {
 .dropdown-menu a:hover {
     background: #d40000;
     color: #fff;
-}
-
-.dropdown:hover .dropdown-menu,
-.dropdown-menu:hover {
-    opacity: 1;
-    visibility: visible;
 }
 
 /* ============================
