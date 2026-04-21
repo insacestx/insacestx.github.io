@@ -1,4 +1,6 @@
-/* GLOBAL */
+/* ============================
+   GLOBAL
+============================ */
 body {
     margin: 0;
     padding: 0;
@@ -28,7 +30,9 @@ section h2::after {
     border-radius: 2px;
 }
 
-/* HERO */
+/* ============================
+   HERO
+============================ */
 .hero {
     background: #d9d9d9;
     padding: 100px 20px 80px;
@@ -88,14 +92,18 @@ section h2::after {
     font-size: 0.9rem;
 }
 
-/* ABOUT */
+/* ============================
+   ABOUT
+============================ */
 .about p {
     max-width: 700px;
     margin: 20px auto;
     font-size: 1.1rem;
 }
 
-/* ===== SERVICES SECTION ===== */
+/* ============================
+   SERVICES SECTION
+============================ */
 #services {
   text-align: center;
   padding: 80px 20px;
@@ -118,11 +126,18 @@ section h2::after {
 
 .service-box {
   text-align: center;
-  padding: 20px;
-  background: #ffffff;
+  padding: 25px;
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 220px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(212, 0, 0, 0.45);
 }
 
 .service-icon {
@@ -132,21 +147,6 @@ section h2::after {
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-.service-box {
-  background-color: #fafafa;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 25px;
-  width: 220px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.service-box:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 22px rgba(212, 0, 0, 0.45);
 }
 
 .service-box h3 {
@@ -167,7 +167,9 @@ section h2::after {
   border-radius: 2px;
 }
 
-/* CONTACT CARD */
+/* ============================
+   CONTACT CARD
+============================ */
 .contact-card {
     background: #000;
     color: white;
@@ -183,7 +185,9 @@ section h2::after {
     border: 3px solid #d40000;
 }
 
-/* TRUST SECTION */
+/* ============================
+   TRUST SECTION
+============================ */
 .trust {
     text-align: center;
 }
@@ -206,7 +210,9 @@ section h2::after {
     margin: 10px auto 0;
 }
 
-/* FOOTER */
+/* ============================
+   FOOTER
+============================ */
 .footer {
     background: #000;
     color: white;
@@ -220,7 +226,9 @@ section h2::after {
     margin-bottom: 15px;
 }
 
-/* GLOBAL HEADER */
+/* ============================
+   GLOBAL HEADER
+============================ */
 .aces-header {
     background: #fff;
     border-bottom: 4px solid #d40000;
@@ -239,7 +247,6 @@ section h2::after {
     align-items: center;
 }
 
-/* SMALL HEADER LOGO WITH UNDERLINE + DROP SHADOW */
 .header-logo {
     display: flex;
     align-items: center;
@@ -254,7 +261,9 @@ section h2::after {
     filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
 }
 
-/* DESKTOP NAV */
+/* ============================
+   DESKTOP NAV
+============================ */
 .nav-menu {
     display: flex;
     gap: 25px;
@@ -276,21 +285,29 @@ section h2::after {
     color: #fff;
 }
 
-/* DROPDOWN */
+/* ============================
+   FIXED DROPDOWN (NO MORE DEAD ZONE)
+============================ */
 .dropdown {
     position: relative;
 }
 
 .dropdown-menu {
-    display: none;
     position: absolute;
-    background: #fff;
-    min-width: 180px;
     top: 35px;
     left: 0;
+    min-width: 180px;
+    background: #fff;
     border-left: 4px solid #d40000;
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
     border-radius: 4px;
+    padding: 0;
+
+    /* NEW behavior */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease-in-out;
+    z-index: 999;
 }
 
 .dropdown-menu a {
@@ -305,11 +322,16 @@ section h2::after {
     color: #fff;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
+/* The magic fix */
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    opacity: 1;
+    visibility: visible;
 }
 
-/* MOBILE */
+/* ============================
+   MOBILE
+============================ */
 .hamburger {
     display: none;
     font-size: 28px;
@@ -346,138 +368,3 @@ section h2::after {
     display: block;
     padding: 10px 0;
 }
-
-@media (max-width: 850px) {
-    .nav-menu {
-        display: none;
-    }
-    .hamburger {
-        display: block;
-    }
-}
-
-/* ============================
-   BILINGUAL TOGGLE SWITCH
-============================ */
-.toggle-wrapper {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.toggle-switch {
-    position: relative;
-    width: 70px;
-    height: 34px;
-}
-
-.toggle-switch input {
-    display: none;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    background-color: #000;
-    border-radius: 34px;
-    top: 0; left: 0; right: 0; bottom: 0;
-    transition: 0.4s;
-    border: 2px solid #d40000;
-    box-shadow: 0 0 6px rgba(212,0,0,0.4);
-}
-
-.slider:before {
-    position: absolute;
-    content: "EN";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    color: #d40000;
-    font-size: 12px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: 0.4s;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
-}
-
-input:checked + .slider {
-    background-color: #d40000;
-    box-shadow: 0 0 8px rgba(212,0,0,0.6);
-}
-
-input:checked + .slider:before {
-    transform: translateX(36px);
-    content: "ES";
-}
-
-.fade-section {
-    transition: opacity 0.3s ease;
-}
-
-<script>
-function toggleLanguage() {
-  const english = document.getElementById("english");
-  const spanish = document.getElementById("spanish");
-  const toggle = document.getElementById("langToggle");
-
-  if (!english || !spanish) return; // Prevent errors on Services page
-
-  if (toggle.checked) {
-    english.style.opacity = 0;
-    setTimeout(() => {
-      english.style.display = "none";
-      spanish.style.display = "block";
-      setTimeout(() => { spanish.style.opacity = 1; }, 50);
-    }, 300);
-  } else {
-    spanish.style.opacity = 0;
-    setTimeout(() => {
-      spanish.style.display = "none";
-      english.style.display = "block";
-      setTimeout(() => { english.style.opacity = 1; }, 50);
-    }, 300);
-  }
-}
-      /* ============================
-   FIX: Smooth Dropdown Behavior
-   ============================ */
-
-.dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 35px;
-    left: 0;
-    min-width: 180px;
-    background: #fff;
-    border-left: 4px solid #d40000;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    border-radius: 4px;
-
-    /* NEW BEHAVIOR */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease-in-out;
-    z-index: 999;
-}
-
-/* The magic fix — keeps menu open while hovering the dropdown OR the menu */
-.dropdown:hover .dropdown-menu,
-.dropdown-menu:hover {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Remove old display:block behavior */
-.dropdown:hover .dropdown-menu {
-    display: block; /* overridden by visibility/opacity */
-}
-
-</script>
