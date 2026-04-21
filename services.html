@@ -4,84 +4,84 @@
   <meta charset="UTF-8">
   <title>Services - ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header class="aces-header">
-  <div class="header-inner">
-
-    <a href="index.html" class="header-logo">
-      <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
-    </a>
-
-    <nav class="nav-menu">
-
-      <div class="dropdown">
-        <span class="nav-link">Services ▾</span>
-        <div class="dropdown-menu">
-          <a href="#commercial-lines">Commercial Lines</a>
-          <a href="#personal-lines">Personal Lines</a>
-          <a href="#property-lines">Property Lines</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <span class="nav-link">Applications ▾</span>
-        <div class="dropdown-menu">
-          <a href="applications.html#commercial">Commercial Apps</a>
-          <a href="applications.html#personal">Personal Apps</a>
-        </div>
-      </div>
-
-      <a class="nav-link" href="coi.html">COI Request</a>
-      <a class="nav-link" href="claims.html">Claims</a>
-      <a class="nav-link" href="about.html">About</a>
-      <a class="nav-link" href="contact.html">Contact</a>
-    </nav>
-
-    <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
-  </div>
-
-  <!-- MOBILE MENU -->
-  <div id="mobileMenu" class="mobile-menu">
-    <a href="index.html">Home</a>
-
-    <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Services ▾</button>
-    <div class="mobile-dropdown-content">
-      <a href="#commercial-lines">Commercial Lines</a>
-      <a href="#personal-lines">Personal Lines</a>
-      <a href="#property-lines">Property Lines</a>
-    </div>
-
-    <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Applications ▾</button>
-    <div class="mobile-dropdown-content">
-      <a href="applications.html#commercial">Commercial Apps</a>
-      <a href="applications.html#personal">Personal Apps</a>
-    </div>
-
-    <a href="coi.html">COI Request</a>
-    <a href="claims.html">Claims</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </div>
-</header>
-
-<!-- LANGUAGE TOGGLE -->
-<div class="toggle-wrapper" style="margin-top:20px; text-align:center;">
-  <label class="toggle-switch">
-    <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
-    <span class="slider"></span>
-  </label>
-</div>
-
 <!-- ============================
-     ENGLISH VERSION
+     ENGLISH VERSION WRAPPER
 ============================ -->
 <div id="english" style="opacity:1; transition:opacity .3s ease;">
 
+  <!-- HEADER -->
+  <header class="aces-header">
+    <div class="header-inner">
+
+      <a href="index.html" class="header-logo">
+        <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
+      </a>
+
+      <nav class="nav-menu">
+        <div class="dropdown">
+          <span class="nav-link">Services ▾</span>
+          <div class="dropdown-menu">
+            <a href="#commercial-lines">Commercial Lines</a>
+            <a href="#personal-lines">Personal Lines</a>
+            <a href="#property-lines">Property Lines</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <span class="nav-link">Applications ▾</span>
+          <div class="dropdown-menu">
+            <a href="applications.html#commercial">Commercial Apps</a>
+            <a href="applications.html#personal">Personal Apps</a>
+          </div>
+        </div>
+
+        <a class="nav-link" href="coi.html">COI Request</a>
+        <a class="nav-link" href="claims.html">Claims</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </nav>
+
+      <div class="hamburger" onclick="toggleMobileMenu('en')">☰</div>
+    </div>
+
+    <!-- MOBILE MENU EN -->
+    <div id="mobileMenu-en" class="mobile-menu">
+      <a href="index.html">Home</a>
+
+      <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Services ▾</button>
+      <div class="mobile-dropdown-content">
+        <a href="#commercial-lines">Commercial Lines</a>
+        <a href="#personal-lines">Personal Lines</a>
+        <a href="#property-lines">Property Lines</a>
+      </div>
+
+      <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Applications ▾</button>
+      <div class="mobile-dropdown-content">
+        <a href="applications.html#commercial">Commercial Apps</a>
+        <a href="applications.html#personal">Personal Apps</a>
+      </div>
+
+      <a href="coi.html">COI Request</a>
+      <a href="claims.html">Claims</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </header>
+
+  <!-- LANGUAGE TOGGLE (shared) -->
+  <div class="toggle-wrapper">
+    <label class="toggle-switch">
+      <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- MAIN CONTENT EN -->
   <section>
     <h2>Our Services</h2>
     <p>ACES Insurance Services provides a wide range of personal, commercial, and property insurance solutions.</p>
@@ -124,19 +124,93 @@
     </div>
   </section>
 
+  <!-- FOOTER EN -->
+  <footer class="footer">
+    <img src="image2.png" alt="ACES Logo" class="footer-logo">
+    <p>© 2026 ACES Insurance Services</p>
+  </footer>
+
 </div>
 
 <!-- ============================
-     SPANISH VERSION (Texas Hispanic)
+     SPANISH VERSION WRAPPER
 ============================ -->
 <div id="spanish" style="display:none; opacity:0; transition:opacity .3s ease;">
 
+  <!-- HEADER ES -->
+  <header class="aces-header">
+    <div class="header-inner">
+
+      <a href="index.html" class="header-logo">
+        <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
+      </a>
+
+      <nav class="nav-menu">
+        <div class="dropdown">
+          <span class="nav-link">Servicios ▾</span>
+          <div class="dropdown-menu">
+            <a href="#commercial-lines-es">Líneas Comerciales</a>
+            <a href="#personal-lines-es">Líneas Personales</a>
+            <a href="#property-lines-es">Líneas de Propiedad</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <span class="nav-link">Aplicaciones ▾</span>
+          <div class="dropdown-menu">
+            <a href="applications.html#commercial">Aplicaciones Comerciales</a>
+            <a href="applications.html#personal">Aplicaciones Personales</a>
+          </div>
+        </div>
+
+        <a class="nav-link" href="coi.html">Solicitud de COI</a>
+        <a class="nav-link" href="claims.html">Reclamos</a>
+        <a class="nav-link" href="about.html">Acerca de</a>
+        <a class="nav-link" href="contact.html">Contacto</a>
+      </nav>
+
+      <div class="hamburger" onclick="toggleMobileMenu('es')">☰</div>
+    </div>
+
+    <!-- MOBILE MENU ES -->
+    <div id="mobileMenu-es" class="mobile-menu">
+      <a href="index.html">Inicio</a>
+
+      <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Servicios ▾</button>
+      <div class="mobile-dropdown-content">
+        <a href="#commercial-lines-es">Líneas Comerciales</a>
+        <a href="#personal-lines-es">Líneas Personales</a>
+        <a href="#property-lines-es">Líneas de Propiedad</a>
+      </div>
+
+      <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Aplicaciones ▾</button>
+      <div class="mobile-dropdown-content">
+        <a href="applications.html#commercial">Aplicaciones Comerciales</a>
+        <a href="applications.html#personal">Aplicaciones Personales</a>
+      </div>
+
+      <a href="coi.html">Solicitud de COI</a>
+      <a href="claims.html">Reclamos</a>
+      <a href="about.html">Acerca de</a>
+      <a href="contact.html">Contacto</a>
+    </div>
+  </header>
+
+  <!-- LANGUAGE TOGGLE (same position) -->
+  <div class="toggle-wrapper">
+    <label class="toggle-switch">
+      <input type="checkbox" checked onclick="toggleLanguage()">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- MAIN CONTENT ES -->
   <section>
     <h2>Nuestros Servicios</h2>
     <p>ACES Insurance Services ofrece una amplia gama de soluciones de aseguranza personal, comercial y de propiedad.</p>
   </section>
 
-  <!-- PROPERTY LINES -->
+  <!-- PROPERTY LINES ES -->
   <section id="property-lines-es">
     <h2>Líneas de Propiedad</h2>
     <div class="services-grid">
@@ -149,7 +223,7 @@
     </div>
   </section>
 
-  <!-- PERSONAL LINES -->
+  <!-- PERSONAL LINES ES -->
   <section id="personal-lines-es">
     <h2>Líneas Personales</h2>
     <div class="services-grid">
@@ -161,7 +235,7 @@
     </div>
   </section>
 
-  <!-- COMMERCIAL LINES -->
+  <!-- COMMERCIAL LINES ES -->
   <section id="commercial-lines-es">
     <h2>Líneas Comerciales</h2>
     <div class="services-grid">
@@ -173,20 +247,24 @@
     </div>
   </section>
 
+  <!-- FOOTER ES -->
+  <footer class="footer">
+    <img src="image2.png" alt="ACES Logo" class="footer-logo">
+    <p>© 2026 ACES Insurance Services</p>
+  </footer>
+
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <img src="image2.png" alt="ACES Logo" class="footer-logo">
-  <p>© 2026 ACES Insurance Services</p>
-</footer>
-
-<!-- LANGUAGE TOGGLE SCRIPT -->
+<!-- ============================
+     SCRIPTS
+============================ -->
 <script>
 function toggleLanguage() {
   const english = document.getElementById("english");
   const spanish = document.getElementById("spanish");
   const toggle = document.getElementById("langToggle");
+
+  if (!english || !spanish || !toggle) return;
 
   if (toggle.checked) {
     english.style.opacity = 0;
@@ -204,17 +282,17 @@ function toggleLanguage() {
     }, 300);
   }
 }
-</script>
 
-<!-- MOBILE MENU SCRIPT -->
-<script>
-function toggleMobileMenu() {
-  const menu = document.getElementById("mobileMenu");
+function toggleMobileMenu(lang) {
+  const menuId = lang === 'es' ? 'mobileMenu-es' : 'mobileMenu-en';
+  const menu = document.getElementById(menuId);
+  if (!menu) return;
   menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
 }
 
 function toggleMobileDropdown(button) {
   const content = button.nextElementSibling;
+  if (!content) return;
   content.style.display = (content.style.display === "block") ? "none" : "block";
 }
 </script>
