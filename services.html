@@ -296,6 +296,61 @@ function toggleMobileDropdown(button) {
   content.style.display = (content.style.display === "block") ? "none" : "block";
 }
 </script>
+  
+<script>
+function filterLines() {
+  const hash = window.location.hash.replace("#", "");
 
+  // English sections
+  const enSections = {
+    "commercial-lines": document.getElementById("commercial-lines"),
+    "personal-lines": document.getElementById("personal-lines"),
+    "property-lines": document.getElementById("property-lines")
+  };
+
+  // Spanish sections
+  const esSections = {
+    "commercial-lines-es": document.getElementById("commercial-lines-es"),
+    "personal-lines-es": document.getElementById("personal-lines-es"),
+    "property-lines-es": document.getElementById("property-lines-es")
+  };
+
+  const english = document.getElementById("english");
+  const spanish = document.getElementById("spanish");
+  const toggle = document.getElementById("langToggle");
+
+  // Determine which language is active
+  const activeSections = toggle.checked ? esSections : enSections;
+
+  // If no hash → show all
+  if (!hash) {
+    Object.values(activeSections).forEach(sec => sec.style.display = "block");
+    return;
+  }
+
+  // Hide all except selected
+  Object.keys(activeSections).forEach(key => {
+    if (key === hash || key === hash + "-es") {
+      activeSections[key].style.display = "block";
+    } else {
+      activeSections[key].style.display = "none";
+    }
+  });
+}
+
+// Run on load + when hash changes
+window.addEventListener("load", filterLines);
+window.addEventListener("hashchange", filterLines);
+
+// Re-run filter when language toggles
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("langToggle");
+  if (toggle) toggle.addEventListener("change", () => {
+    setTimeout(filterLines, 350); // wait for fade animation
+  });
+});
+</script>
+
+  
 </body>
 </html>
