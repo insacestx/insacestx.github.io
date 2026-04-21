@@ -122,6 +122,7 @@ section h2::after {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
   padding: 20px;
+  justify-items: center;
 }
 
 .service-box {
@@ -286,7 +287,7 @@ section h2::after {
 }
 
 /* ============================
-   FIXED DROPDOWN (NO MORE DEAD ZONE)
+   DROPDOWN (FIXED HOVER)
 ============================ */
 .dropdown {
     position: relative;
@@ -302,8 +303,6 @@ section h2::after {
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
     border-radius: 4px;
     padding: 0;
-
-    /* NEW behavior */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.25s ease-in-out;
@@ -322,11 +321,71 @@ section h2::after {
     color: #fff;
 }
 
-/* The magic fix */
+/* Keep menu open while hovering trigger OR menu */
 .dropdown:hover .dropdown-menu,
 .dropdown-menu:hover {
     opacity: 1;
     visibility: visible;
+}
+
+/* ============================
+   LANGUAGE TOGGLE
+============================ */
+.toggle-wrapper {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 32px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "EN";
+    height: 24px;
+    width: 32px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #fff;
+    color: #000;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    transition: 0.4s;
+}
+
+.toggle-switch input:checked + .slider {
+    background-color: #d40000;
+}
+
+.toggle-switch input:checked + .slider:before {
+    transform: translateX(30px);
+    content: "ES";
+    color: #d40000;
 }
 
 /* ============================
@@ -364,7 +423,28 @@ section h2::after {
     cursor: pointer;
 }
 
+.mobile-dropdown-content {
+    display: none;
+}
+
 .mobile-dropdown-content a {
     display: block;
     padding: 10px 0;
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    section {
+        padding: 60px 15px;
+    }
 }
