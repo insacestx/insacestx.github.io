@@ -9,14 +9,14 @@
     <meta name="keywords" content="insurance, Texas insurance, bilingual insurance, auto insurance, home insurance, commercial insurance, Waco insurance, Hewitt insurance, independent insurance agent">
     <meta name="robots" content="index, follow">
 
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=20">
 </head>
 
 <body>
 
-<!-- ============================
+<!-- ============================================================
      ENGLISH WRAPPER
-============================ -->
+============================================================ -->
 <div id="english" style="opacity:1; transition:opacity .3s ease;">
 
 <header class="aces-header">
@@ -27,7 +27,7 @@
       <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
     </a>
 
-    <!-- Language Toggle (inside header, next to logo) -->
+    <!-- Language Toggle (same style as Services page) -->
     <label class="toggle-switch header-toggle">
       <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
       <span class="slider"></span>
@@ -171,9 +171,11 @@
 
 </div> <!-- END ENGLISH WRAPPER -->
 
-<!-- ============================
+
+
+<!-- ============================================================
      SPANISH WRAPPER
-============================ -->
+============================================================ -->
 <div id="spanish" style="display:none; opacity:0; transition:opacity .3s ease;">
 
 <header class="aces-header">
@@ -327,9 +329,11 @@
 
 </div> <!-- END SPANISH WRAPPER -->
 
-<!-- ============================
+
+
+<!-- ============================================================
      SCRIPTS
-============================ -->
+============================================================ -->
 <script>
 function toggleLanguage() {
   const en = document.getElementById("english");
