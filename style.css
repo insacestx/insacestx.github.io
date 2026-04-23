@@ -1,4 +1,6 @@
-/* ====== GLOBAL ====== */
+/* ============================================================
+   GLOBAL
+============================================================ */
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -12,7 +14,11 @@ body {
   transition: opacity 0.3s ease;
 }
 
-/* ====== HEADER ====== */
+
+
+/* ============================================================
+   HEADER
+============================================================ */
 .aces-header {
   background: #ffffff;
   border-bottom: 1px solid #ddd;
@@ -37,7 +43,11 @@ body {
   width: auto;
 }
 
-/* Toggle */
+
+
+/* ============================================================
+   LANGUAGE TOGGLE
+============================================================ */
 .header-toggle {
   position: relative;
   display: inline-block;
@@ -80,7 +90,11 @@ body {
   transform: translateX(26px);
 }
 
-/* ====== NAVIGATION (DESKTOP) ====== */
+
+
+/* ============================================================
+   NAVIGATION (DESKTOP)
+============================================================ */
 .nav-menu {
   display: flex;
   align-items: center;
@@ -88,11 +102,14 @@ body {
   font-size: 0.95rem;
 }
 
+#navContainer {
+  margin-left: 40px; /* ⭐ Option B‑2 spacing */
+}
+
 .nav-link {
   color: #111;
   text-decoration: none;
   cursor: pointer;
-  position: relative;
   padding: 4px 2px;
 }
 
@@ -134,7 +151,11 @@ body {
   display: flex;
 }
 
-/* ====== MOBILE NAV TOGGLE ====== */
+
+
+/* ============================================================
+   MOBILE NAV
+============================================================ */
 .mobile-nav-toggle {
   display: none;
   margin-left: auto;
@@ -156,38 +177,29 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
-/* On mobile, dropdown menus become inline lists */
+
+
+/* ============================================================
+   MOBILE BEHAVIOR
+============================================================ */
 @media (max-width: 768px) {
+
   .header-inner {
     justify-content: space-between;
     gap: 10px;
   }
 
-  /* Logo + toggle on left, hamburger on right */
-  .header-logo {
-    flex-shrink: 0;
-  }
-
-  .header-toggle {
-    margin-left: 8px;
-  }
-
+  /* Hide desktop nav */
   #navContainer {
-    display: none; /* hidden in header; we use mobile menu instead */
+    display: none;
   }
 
+  /* Show hamburger */
   .mobile-nav-toggle {
     display: block;
   }
 
-  .nav-menu {
-    display: none;
-  }
-
-  .nav-menu.mobile-open {
-    display: flex;
-  }
-
+  /* Mobile dropdowns become inline lists */
   .dropdown-menu {
     position: static;
     border: none;
@@ -200,7 +212,11 @@ body {
   }
 }
 
-/* Desktop: show nav inline in header */
+
+
+/* ============================================================
+   DESKTOP BEHAVIOR
+============================================================ */
 @media (min-width: 769px) {
   .mobile-nav-toggle {
     display: none;
@@ -209,6 +225,5 @@ body {
   #navContainer {
     display: flex;
     align-items: center;
-    margin-left: 20px; /* your Option B spacing */
   }
 }
