@@ -9,7 +9,7 @@
     <meta name="keywords" content="insurance, Texas insurance, bilingual insurance, auto insurance, home insurance, commercial insurance, Waco insurance, Hewitt insurance, independent insurance agent">
     <meta name="robots" content="index, follow">
 
-    <link rel="stylesheet" href="style.css?v=25">
+    <link rel="stylesheet" href="style.css?v=27">
 </head>
 
 <body>
@@ -32,7 +32,7 @@
     </label>
 
     <!-- Desktop nav (cloned here) -->
-   <nav id="navContainer" class="nav-menu" style="margin-left: 40px;"></nav>
+    <nav id="navContainer" class="nav-menu" style="margin-left: 40px;"></nav>
 
     <!-- Mobile hamburger -->
     <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
@@ -41,6 +41,8 @@
 
   </div>
 </header>
+
+
 
 <!-- ============================================================
      ENGLISH WRAPPER
@@ -235,8 +237,8 @@
 
         <div class="team-preview">
             <h3>Conozca a Nuestro Equipo</h3>
-            <p>Esta sección se está actualizando mientras reunimos la información del equipo.</p>
-            <p><em>Vuelva pronto para ver los perfiles completos.</em></p>
+            <p>Estamos actualizando esta sección.</p>
+            <p><em>Pronto podrá ver los perfiles completos.</em></p>
         </div>
     </div>
 </section>
@@ -266,7 +268,7 @@
 
 
 <!-- ============================================================
-     SCRIPTS
+     GLOBAL SCRIPTS
 ============================================================ -->
 <script>
 function loadNav(language) {
@@ -307,8 +309,8 @@ function toggleLanguage() {
 
 // Load English nav on page load
 loadNav("en");
-</script>
-    // Mobile nav toggle
+
+// Mobile nav toggle
 document.getElementById("mobileNavToggle").addEventListener("click", () => {
   let mobileMenu = document.getElementById("mobileNavMenu");
   const toggle = document.getElementById("langToggle");
@@ -329,6 +331,7 @@ document.getElementById("mobileNavToggle").addEventListener("click", () => {
     mobileMenu.style.display = "flex";
   }
 });
+</script>
 
 </body>
 </html>
