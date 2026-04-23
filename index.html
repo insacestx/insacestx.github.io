@@ -13,8 +13,6 @@
 </head>
 
 <body>
-<!-- rebuild -->
-  <!-- force rebuild -->
 
 <header class="aces-header">
   <div class="header-inner">
@@ -239,7 +237,6 @@
     <img src="image2.png" alt="ACES Logo" class="footer-logo">
     <p>© 2026 ACES Insurance Services</p>
   </footer>
-
 </div>
 
 <!-- ================= GLOBAL SCRIPT ================= -->
@@ -248,19 +245,16 @@ function loadNav(language) {
   const navContainer = document.getElementById("navContainer");
   const navEN = document.getElementById("navEN");
   const navES = document.getElementById("navES");
-
   if (language === "en") {
     navContainer.innerHTML = navEN.innerHTML;
   } else {
     navContainer.innerHTML = navES.innerHTML;
   }
 }
-
 function toggleLanguage() {
   const en = document.getElementById("english");
   const es = document.getElementById("spanish");
   const toggle = document.getElementById("langToggle");
-
   if (toggle.checked) {
     loadNav("es");
     en.style.opacity = 0;
@@ -279,9 +273,7 @@ function toggleLanguage() {
     }, 300);
   }
 }
-
 loadNav("en");
-
 document.getElementById("mobileNavToggle").addEventListener("click", () => {
   let mobileMenu = document.getElementById("mobileNavMenu");
   const toggle = document.getElementById("langToggle");
