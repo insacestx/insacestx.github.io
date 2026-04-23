@@ -1,275 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACES Insurance Services | Texas Independent Insurance Agency</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACES Insurance Services | Texas Independent Insurance Agency</title>
 
-    <meta name="description" content="ACES Insurance Services – Bilingual insurance support for Texas families and businesses. Auto, home, commercial, property, and more.">
-    <meta name="keywords" content="insurance, Texas insurance, bilingual insurance, auto insurance, home insurance, commercial insurance, Waco insurance, Hewitt insurance, independent insurance agent">
-    <meta name="robots" content="index, follow">
+  <meta name="description" content="ACES Insurance Services – Bilingual insurance support for Texas families and businesses. Auto, home, commercial, property, and more.">
+  <meta name="keywords" content="insurance, Texas insurance, bilingual insurance, auto insurance, home insurance, commercial insurance, Waco insurance, Hewitt insurance, independent insurance agent">
+  <meta name="robots" content="index, follow">
 
-    <link rel="stylesheet" href="style.css?v=27">
+  <link rel="stylesheet" href="style.css?v=27">
 </head>
 
 <body>
 
-<!-- ============================================================
-     HEADER — LOGO → TOGGLE → NAVIGATION (SIDE‑BY‑SIDE)
-============================================================ -->
 <header class="aces-header">
   <div class="header-inner">
 
-    <!-- Logo -->
     <a href="index.html" class="header-logo">
       <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
     </a>
 
-    <!-- Language toggle -->
     <label class="toggle-switch header-toggle">
       <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
       <span class="slider"></span>
     </label>
 
-    <!-- Desktop nav (cloned here) -->
-    <nav id="navContainer" class="nav-menu" style="margin-left: 40px;"></nav>
+    <nav id="navContainer" class="nav-menu" style="margin-left:40px;"></nav>
 
-    <!-- Mobile hamburger -->
-    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
-      ☰
-    </button>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
 
   </div>
 </header>
 
+<!-- ================= ENGLISH ================= -->
+<div id="english" style="opacity:1;transition:opacity .3s ease;">
 
-
-<!-- ============================================================
-     ENGLISH WRAPPER
-============================================================ -->
-<div id="english" style="opacity:1; transition:opacity .3s ease;">
-
-<!-- ENGLISH NAVIGATION (hidden, cloned into header) -->
-<nav id="navEN" class="nav-menu" style="display:none;">
-  <div class="dropdown">
-    <span class="nav-link">Services ▾</span>
-    <div class="dropdown-menu">
-      <a href="services.html#commercial-lines">Commercial Insurance</a>
-      <a href="services.html#personal-lines">Personal Insurance</a>
-      <a href="services.html#property-lines">Property Insurance</a>
+  <nav id="navEN" class="nav-menu" style="display:none;">
+    <div class="dropdown">
+      <span class="nav-link">Services ▾</span>
+      <div class="dropdown-menu">
+        <a href="services.html#commercial-lines">Commercial Insurance</a>
+        <a href="services.html#personal-lines">Personal Insurance</a>
+        <a href="services.html#property-lines">Property Insurance</a>
+      </div>
     </div>
-  </div>
 
-  <div class="dropdown">
-    <span class="nav-link">Applications ▾</span>
-    <div class="dropdown-menu">
-      <a href="applications.html#commercial">Commercial Apps</a>
-      <a href="applications.html#personal">Personal Apps</a>
+    <div class="dropdown">
+      <span class="nav-link">Applications ▾</span>
+      <div class="dropdown-menu">
+        <a href="applications.html#commercial">Commercial Apps</a>
+        <a href="applications.html#personal">Personal Apps</a>
+      </div>
     </div>
-  </div>
 
-  <a class="nav-link" href="coi.html">COI Request</a>
-  <a class="nav-link" href="claims.html">Claims</a>
-  <a class="nav-link" href="about.html">About</a>
-  <a class="nav-link" href="contact.html">Contact</a>
-</nav>
+    <a class="nav-link" href="coi.html">COI Request</a>
+    <a class="nav-link" href="claims.html">Claims</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link" href="contact.html">Contact</a>
+  </nav>
 
-
-<section class="about">
+  <section class="about">
     <h2>Who We Are</h2>
     <p>
-        ACES Insurance Services is your trusted independent agency serving Central Texas. 
-        We provide personal and commercial insurance solutions with bilingual support and 
-        a commitment to exceptional service.
+      ACES Insurance Services is your trusted independent agency serving Central Texas.
+      We provide personal and commercial insurance solutions with bilingual support and
+      a commitment to exceptional service.
     </p>
     <a href="about.html" class="btn-small">Learn More</a>
-</section>
+  </section>
 
-<section id="services">
-  <h2>Our Services</h2>
-  <div class="services-grid">
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services-grid">
 
-    <div class="service-box">
-      <img src="icon-life-aces.png" alt="Life Insurance Icon" class="service-icon">
-      <h3>Life Insurance</h3>
-      <p>Coverage designed to protect you and your family.</p>
+      <div class="service-box">
+        <img src="icon-life-aces.png" alt="Life Insurance Icon" class="service-icon">
+        <h3>Life Insurance</h3>
+        <p>Coverage designed to protect you and your family.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-commercial-aces.png" alt="Commercial Insurance Icon" class="service-icon">
+        <h3>Commercial Insurance</h3>
+        <p>Solutions tailored for your business needs.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-property-aces.png" alt="Property Insurance Icon" class="service-icon">
+        <h3>Property Insurance</h3>
+        <p>Protection for your home and valuable assets.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-auto-aces.png" alt="Auto Insurance Icon" class="service-icon">
+        <h3>Auto Insurance</h3>
+        <p>Reliable coverage for your vehicles.</p>
+      </div>
+
     </div>
+  </section>
 
-    <div class="service-box">
-      <img src="icon-commercial-aces.png" alt="Commercial Insurance Icon" class="service-icon">
-      <h3>Commercial Insurance</h3>
-      <p>Solutions tailored for your business needs.</p>
-    </div>
-
-    <div class="service-box">
-      <img src="icon-property-aces.png" alt="Property Insurance Icon" class="service-icon">
-      <h3>Property Insurance</h3>
-      <p>Protection for your home and valuable assets.</p>
-    </div>
-
-    <div class="service-box">
-      <img src="icon-auto-aces.png" alt="Auto Insurance Icon" class="service-icon">
-      <h3>Auto Insurance</h3>
-      <p>Reliable coverage for your vehicles.</p>
-    </div>
-
-  </div>
-</section>
-
-<section class="contact-card">
+  <section class="contact-card">
     <h2>Contact Us & Meet Our Team</h2>
-
     <div class="card-content">
-        <p>Our bilingual team is here to help with personal, commercial, property, and auto insurance needs.</p>
+      <p>Our bilingual team is here to help with personal, commercial, property, and auto insurance needs.</p>
+      <a href="contact.html" class="btn-small">Contact Us</a>
 
-        <a href="contact.html" class="btn-small">Contact Us</a>
-
-        <div class="team-preview">
-            <h3>Meet Our Team</h3>
-            <p>This section is currently being updated as we gather team information.</p>
-            <p><em>Check back soon for full team profiles.</em></p>
-        </div>
+      <div class="team-preview">
+        <h3>Meet Our Team</h3>
+        <p>This section is currently being updated as we gather team information.</p>
+        <p><em>Check back soon for full team profiles.</em></p>
+      </div>
     </div>
-</section>
+  </section>
 
-<section class="trust">
+  <section class="trust">
     <h2>Proud Member</h2>
 
     <div class="trust-badge-wrapper">
-        <img src="chamber-badge.png" alt="Chamber of Commerce Badge" class="trust-badge">
+      <img src="chamber-badge.png" alt="Chamber of Commerce Badge" class="trust-badge">
     </div>
 
     <p>Central Texas Hispanic Chamber of Commerce</p>
 
     <div class="trust-qr">
-        <p>Scan to visit the Chamber website</p>
-        <img src="chamber-qr.png" alt="Chamber QR Code" class="trust-qr-img">
+      <p>Scan to visit the Chamber website</p>
+      <img src="chamber-qr.png" alt="Chamber QR Code" class="trust-qr-img">
     </div>
-</section>
+  </section>
 
-<footer class="footer">
+  <footer class="footer">
     <img src="image2.png" alt="ACES Logo" class="footer-logo">
     <p>© 2026 ACES Insurance Services</p>
-</footer>
+  </footer>
 
-</div> <!-- END ENGLISH WRAPPER -->
+</div>
 
+<!-- ================= SPANISH ================= -->
+<div id="spanish" style="display:none;opacity:0;transition:opacity .3s ease;">
 
-
-<!-- ============================================================
-     SPANISH WRAPPER
-============================================================ -->
-<div id="spanish" style="display:none; opacity:0; transition:opacity .3s ease;">
-
-<!-- SPANISH NAVIGATION (hidden, cloned into header) -->
-<nav id="navES" class="nav-menu" style="display:none;">
-  <div class="dropdown">
-    <span class="nav-link">Servicios ▾</span>
-    <div class="dropdown-menu">
-      <a href="services.html#commercial-lines-es">Líneas Comerciales</a>
-      <a href="services.html#personal-lines-es">Líneas Personales</a>
-      <a href="services.html#property-lines-es">Líneas de Propiedad</a>
+  <nav id="navES" class="nav-menu" style="display:none;">
+    <div class="dropdown">
+      <span class="nav-link">Servicios ▾</span>
+      <div class="dropdown-menu">
+        <a href="services.html#commercial-lines-es">Líneas Comerciales</a>
+        <a href="services.html#personal-lines-es">Líneas Personales</a>
+        <a href="services.html#property-lines-es">Líneas de Propiedad</a>
+      </div>
     </div>
-  </div>
 
-  <div class="dropdown">
-    <span class="nav-link">Aplicaciones ▾</span>
-    <div class="dropdown-menu">
-      <a href="applications.html#commercial">Aplicaciones Comerciales</a>
-      <a href="applications.html#personal">Aplicaciones Personales</a>
+    <div class="dropdown">
+      <span class="nav-link">Aplicaciones ▾</span>
+      <div class="dropdown-menu">
+        <a href="applications.html#commercial">Aplicaciones Comerciales</a>
+        <a href="applications.html#personal">Aplicaciones Personales</a>
+      </div>
     </div>
-  </div>
 
-  <a class="nav-link" href="coi.html">Solicitud de COI</a>
-  <a class="nav-link" href="claims.html">Reclamos</a>
-  <a class="nav-link" href="about.html">Acerca de</a>
-  <a class="nav-link" href="contact.html">Contacto</a>
-</nav>
+    <a class="nav-link" href="coi.html">Solicitud de COI</a>
+    <a class="nav-link" href="claims.html">Reclamos</a>
+    <a class="nav-link" href="about.html">Acerca de</a>
+    <a class="nav-link" href="contact.html">Contacto</a>
+  </nav>
 
-
-<section class="about">
+  <section class="about">
     <h2>Quiénes Somos</h2>
     <p>
-        ACES Insurance Services es su agencia independiente de confianza en el centro de Texas.
-        Ofrecemos soluciones de aseguranza personal y comercial con apoyo bilingüe y un compromiso con el servicio excepcional.
+      ACES Insurance Services es su agencia independiente de confianza en el centro de Texas.
+      Ofrecemos soluciones de aseguranza personal y comercial con apoyo bilingüe y un compromiso con el servicio excepcional.
     </p>
     <a href="about.html" class="btn-small">Aprender Más</a>
-</section>
+  </section>
 
-<section id="services">
-  <h2>Nuestros Servicios</h2>
-  <div class="services-grid">
+  <section id="services">
+    <h2>Nuestros Servicios</h2>
+    <div class="services-grid">
 
-    <div class="service-box">
-      <img src="icon-life-aces.png" alt="Icono de Vida" class="service-icon">
-      <h3>Aseguranza de Vida</h3>
-      <p>Cobertura diseñada para protegerlo a usted y a su familia.</p>
+      <div class="service-box">
+        <img src="icon-life-aces.png" alt="Icono de Vida" class="service-icon">
+        <h3>Aseguranza de Vida</h3>
+        <p>Cobertura diseñada para protegerlo a usted y a su familia.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-commercial-aces.png" alt="Icono Comercial" class="service-icon">
+        <h3>Aseguranza Comercial</h3>
+        <p>Soluciones adaptadas a las necesidades de su negocio.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-property-aces.png" alt="Icono de Propiedad" class="service-icon">
+        <h3>Aseguranza de Propiedad</h3>
+        <p>Protección para su hogar y bienes valiosos.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-auto-aces.png" alt="Icono de Auto" class="service-icon">
+        <h3>Aseguranza de Auto</h3>
+        <p>Cobertura confiable para sus vehículos.</p>
+      </div>
+
     </div>
+  </section>
 
-    <div class="service-box">
-      <img src="icon-commercial-aces.png" alt="Icono Comercial" class="service-icon">
-      <h3>Aseguranza Comercial</h3>
-      <p>Soluciones adaptadas a las necesidades de su negocio.</p>
-    </div>
-
-    <div class="service-box">
-      <img src="icon-property-aces.png" alt="Icono de Propiedad" class="service-icon">
-      <h3>Aseguranza de Propiedad</h3>
-      <p>Protección para su hogar y bienes valiosos.</p>
-    </div>
-
-    <div class="service-box">
-      <img src="icon-auto-aces.png" alt="Icono de Auto" class="service-icon">
-      <h3>Aseguranza de Auto</h3>
-      <p>Cobertura confiable para sus vehículos.</p>
-    </div>
-
-  </div>
-</section>
-
-<section class="contact-card">
+  <section class="contact-card">
     <h2>Contáctenos y Conozca a Nuestro Equipo</h2>
-
     <div class="card-content">
-        <p>Nuestro equipo bilingüe está aquí para ayudar con aseguranza personal, comercial, de propiedad y de auto.</p>
+      <p>Nuestro equipo bilingüe está aquí para ayudar con aseguranza personal, comercial, de propiedad y de auto.</p>
+      <a href="contact.html" class="btn-small">Contáctenos</a>
 
-        <a href="contact.html" class="btn-small">Contáctenos</a>
-
-        <div class="team-preview">
-            <h3>Conozca a Nuestro Equipo</h3>
-            <p>Estamos actualizando esta sección.</p>
-            <p><em>Pronto podrá ver los perfiles completos.</em></p>
-        </div>
+      <div class="team-preview">
+        <h3>Conozca a Nuestro Equipo</h3>
+        <p>Estamos actualizando esta sección.</p>
+        <p><em>Pronto podrá ver los perfiles completos.</em></p>
+      </div>
     </div>
-</section>
+  </section>
 
-<section class="trust">
+  <section class="trust">
     <h2>Miembro Orgulloso</h2>
 
     <div class="trust-badge-wrapper">
-        <img src="chamber-badge.png" alt="Insignia de la Cámara" class="trust-badge">
+      <img src="chamber-badge.png" alt="Insignia de la Cámara" class="trust-badge">
     </div>
 
     <p>Cámara de Comercio Hispana del Centro de Texas</p>
 
     <div class="trust-qr">
-        <p>Escanee para visitar el sitio web de la Cámara</p>
-        <img src="chamber-qr.png" alt="Código QR de la Cámara" class="trust-qr-img">
+      <p>Escanee para visitar el sitio web de la Cámara</p>
+      <img src="chamber-qr.png" alt="Código QR de la Cámara" class="trust-qr-img">
     </div>
-</section>
+  </section>
 
-<footer class="footer">
+  <footer class="footer">
     <img src="image2.png" alt="ACES Logo" class="footer-logo">
     <p>© 2026 ACES Insurance Services</p>
-</footer>
+  </footer>
 
-</div> <!-- END SPANISH WRAPPER -->
+</div>
 
-
-
-<!-- ============================================================
-     GLOBAL SCRIPTS
-============================================================ -->
+<!-- ================= GLOBAL SCRIPT ================= -->
 <script>
 function loadNav(language) {
   const navContainer = document.getElementById("navContainer");
@@ -307,10 +278,8 @@ function toggleLanguage() {
   }
 }
 
-// Load English nav on page load
 loadNav("en");
 
-// Mobile nav toggle
 document.getElementById("mobileNavToggle").addEventListener("click", () => {
   let mobileMenu = document.getElementById("mobileNavMenu");
   const toggle = document.getElementById("langToggle");
