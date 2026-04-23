@@ -14,64 +14,30 @@
 ============================ -->
 <div id="english" style="opacity:1; transition:opacity .3s ease;">
 
-  <!-- HEADER EN -->
-  <header class="aces-header">
-    <div class="header-inner">
+<header class="aces-header">
+  <div class="header-inner">
 
-      <a href="index.html" class="header-logo">
-        <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
-      </a>
+    <!-- Logo -->
+    <a href="index.html" class="header-logo">
+      <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
+    </a>
 
-      <nav class="nav-menu">
-        <div class="dropdown">
-          <span class="nav-link">Services ▾</span>
-          <div class="dropdown-menu">
-            <a href="#commercial-lines">Commercial Lines</a>
-            <a href="#personal-lines">Personal Lines</a>
-            <a href="#property-lines">Property Lines</a>
-          </div>
-        </div>
+    <!-- Language toggle -->
+    <label class="toggle-switch header-toggle">
+      <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
+      <span class="slider"></span>
+    </label>
 
-        <div class="dropdown">
-          <span class="nav-link">Applications ▾</span>
-          <div class="dropdown-menu">
-            <a href="applications.html#commercial">Commercial Apps</a>
-            <a href="applications.html#personal">Personal Apps</a>
-          </div>
-        </div>
+    <!-- Desktop nav (cloned here) -->
+    <nav id="navContainer" class="nav-menu"></nav>
 
-        <a class="nav-link" href="coi.html">COI Request</a>
-        <a class="nav-link" href="claims.html">Claims</a>
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link" href="contact.html">Contact</a>
-      </nav>
+    <!-- Mobile hamburger -->
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
+      ☰
+    </button>
 
-      <div class="hamburger" onclick="toggleMobileMenu('en')">☰</div>
-    </div>
-
-    <!-- MOBILE MENU EN -->
-    <div id="mobileMenu-en" class="mobile-menu">
-      <a href="index.html">Home</a>
-
-      <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Services ▾</button>
-      <div class="mobile-dropdown-content">
-        <a href="#commercial-lines">Commercial Lines</a>
-        <a href="#personal-lines">Personal Lines</a>
-        <a href="#property-lines">Property Lines</a>
-      </div>
-
-      <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown(this)">Applications ▾</button>
-      <div class="mobile-dropdown-content">
-        <a href="applications.html#commercial">Commercial Apps</a>
-        <a href="applications.html#personal">Personal Apps</a>
-      </div>
-
-      <a href="coi.html">COI Request</a>
-      <a href="claims.html">Claims</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </header>
+  </div>
+</header>
 
   <!-- LANGUAGE TOGGLE -->
   <div class="toggle-wrapper">
