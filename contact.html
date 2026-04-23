@@ -5,9 +5,8 @@
   <title>Contact - ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=27">
 
-  <!-- 🔵 ACES Contact Page Styling -->
   <style>
     body {
       background-color: #ffffff;
@@ -38,70 +37,6 @@
       border-bottom: 3px solid #b30000;
       display: table;
       padding-bottom: 8px;
-    }
-
-    .toggle-wrapper {
-      display: flex;
-      justify-content: center;
-      margin: 20px 0;
-    }
-
-    .toggle-switch {
-      position: relative;
-      width: 70px;
-      height: 34px;
-    }
-
-    .toggle-switch input {
-      display: none;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      background-color: #000;
-      border-radius: 34px;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      transition: 0.4s;
-      border: 2px solid #b30000;
-      box-shadow: 0 0 6px rgba(179, 0, 0, 0.4);
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "EN";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      color: #b30000;
-      font-size: 12px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: 0.4s;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.25);
-    }
-
-    input:checked + .slider {
-      background-color: #b30000;
-      box-shadow: 0 0 8px rgba(179, 0, 0, 0.6);
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(36px);
-      content: "ES";
-      color: #b30000;
-    }
-
-    .fade-section {
-      transition: opacity 0.3s ease;
     }
 
     .agent-grid {
@@ -140,12 +75,21 @@
     .agent-btn:hover {
       background: #8a0000;
     }
+
+    /* Centered two-card Spanish layout */
+    .spanish-center {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
   </style>
 </head>
 
 <body>
 
-<!-- 🔴 ACES GLOBAL HEADER -->
+<!-- ⭐ GLOBAL HEADER -->
 <header class="aces-header">
   <div class="header-inner">
 
@@ -171,16 +115,36 @@
   </div>
 </header>
 
-<!-- 🔵 LANGUAGE TOGGLE -->
-<div class="toggle-wrapper">
-  <label class="toggle-switch">
-    <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
-    <span class="slider"></span>
-  </label>
-</div>
 
-<!-- 🇺🇸 ENGLISH -->
-<div id="english" class="fade-section" style="opacity:1;">
+
+<!-- ⭐ ENGLISH WRAPPER -->
+<div id="english" style="opacity:1; transition:opacity .3s ease;">
+
+  <!-- Hidden EN nav source -->
+  <nav id="navEN" class="nav-menu" style="display:none;">
+    <div class="dropdown">
+      <span class="nav-link">Services ▾</span>
+      <div class="dropdown-menu">
+        <a href="services.html#commercial-lines">Commercial Insurance</a>
+        <a href="services.html#personal-lines">Personal Insurance</a>
+        <a href="services.html#property-lines">Property Insurance</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <span class="nav-link">Applications ▾</span>
+      <div class="dropdown-menu">
+        <a href="applications.html#commercial">Commercial Apps</a>
+        <a href="applications.html#personal">Personal Apps</a>
+      </div>
+    </div>
+
+    <a class="nav-link" href="coi.html">COI Request</a>
+    <a class="nav-link" href="claims.html">Claims</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link" href="contact.html">Contact</a>
+  </nav>
+
   <div class="page-section">
     <div class="light-block">
       <h2 class="section-title">Meet Our Team</h2>
@@ -224,7 +188,6 @@
           <p><strong>Agent</strong></p>
           <p>Email: jimmy@insaces.com</p>
           <p>Phone: (214) 498‑6928</p>
-          <p>Languages: English, Spanish</p>
           <a class="agent-btn" href="mailto:jimmy@insaces.com">Contact This Agent</a>
         </div>
 
@@ -241,7 +204,6 @@
           <p><strong>Agent</strong></p>
           <p>Email: george@insaces.com</p>
           <p>Phone: (254) 709‑6487</p>
-          <p>Languages: English, Spanish</p>
           <a class="agent-btn" href="mailto:george@insaces.com">Contact This Agent</a>
         </div>
 
@@ -250,20 +212,47 @@
   </div>
 </div>
 
-<!-- 🇲🇽 SPANISH -->
-<div id="spanish" class="fade-section" style="display:none; opacity:0;">
+
+
+<!-- ⭐ SPANISH WRAPPER -->
+<div id="spanish" style="display:none; opacity:0; transition:opacity .3s ease;">
+
+  <!-- Hidden ES nav source -->
+  <nav id="navES" class="nav-menu" style="display:none;">
+    <div class="dropdown">
+      <span class="nav-link">Servicios ▾</span>
+      <div class="dropdown-menu">
+        <a href="services.html#commercial-lines-es">Líneas Comerciales</a>
+        <a href="services.html#personal-lines-es">Líneas Personales</a>
+        <a href="services.html#property-lines-es">Líneas de Propiedad</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <span class="nav-link">Aplicaciones ▾</span>
+      <div class="dropdown-menu">
+        <a href="applications.html#commercial">Aplicaciones Comerciales</a>
+        <a href="applications.html#personal">Aplicaciones Personales</a>
+      </div>
+    </div>
+
+    <a class="nav-link" href="coi.html">Solicitud de COI</a>
+    <a class="nav-link" href="claims.html">Reclamos</a>
+    <a class="nav-link" href="about.html">Acerca de</a>
+    <a class="nav-link" href="contact.html">Contacto</a>
+  </nav>
+
   <div class="page-section">
     <div class="light-block">
       <h2 class="section-title">Conozca a Nuestro Equipo</h2>
 
-      <div class="agent-grid">
+      <div class="spanish-center">
 
         <div class="agent-card">
           <h3>Jimmy Rodriguez</h3>
           <p><strong>Agente</strong></p>
           <p>Correo: jimmy@insaces.com</p>
           <p>Teléfono: (214) 498‑6928</p>
-          <p>Idiomas: Español, Inglés</p>
           <a class="agent-btn" href="mailto:jimmy@insaces.com">Contactar a Este Agente</a>
         </div>
 
@@ -272,7 +261,6 @@
           <p><strong>Agente</strong></p>
           <p>Correo: george@insaces.com</p>
           <p>Teléfono: (254) 709‑6487</p>
-          <p>Idiomas: Español, Inglés</p>
           <a class="agent-btn" href="mailto:george@insaces.com">Contactar a Este Agente</a>
         </div>
 
@@ -287,43 +275,73 @@
   </div>
 </div>
 
-<!-- 🔁 LANGUAGE TOGGLE SCRIPT -->
+
+
+<!-- ⭐ GLOBAL LANGUAGE + NAV SCRIPT -->
 <script>
+function loadNav(language) {
+  const navContainer = document.getElementById("navContainer");
+  const navEN = document.getElementById("navEN");
+  const navES = document.getElementById("navES");
+
+  if (language === "en") {
+    navContainer.innerHTML = navEN.innerHTML;
+  } else {
+    navContainer.innerHTML = navES.innerHTML;
+  }
+}
+
 function toggleLanguage() {
-  const english = document.getElementById("english");
-  const spanish = document.getElementById("spanish");
+  const en = document.getElementById("english");
+  const es = document.getElementById("spanish");
   const toggle = document.getElementById("langToggle");
 
   if (toggle.checked) {
-    english.style.opacity = 0;
+    loadNav("es");
+    en.style.opacity = 0;
     setTimeout(() => {
-      english.style.display = "none";
-      spanish.style.display = "block";
-      setTimeout(() => { spanish.style.opacity = 1; }, 50);
+      en.style.display = "none";
+      es.style.display = "block";
+      setTimeout(() => { es.style.opacity = 1; }, 50);
     }, 300);
   } else {
-    spanish.style.opacity = 0;
+    loadNav("en");
+    es.style.opacity = 0;
     setTimeout(() => {
-      spanish.style.display = "none";
-      english.style.display = "block";
-      setTimeout(() => { english.style.opacity = 1; }, 50);
+      es.style.display = "none";
+      en.style.display = "block";
+      setTimeout(() => { en.style.opacity = 1; }, 50);
     }, 300);
   }
 }
+
+// Load English nav on page load
+loadNav("en");
+
+// Mobile nav toggle
+document.getElementById("mobileNavToggle").addEventListener("click", () => {
+  let mobileMenu = document.getElementById("mobileNavMenu");
+  const toggle = document.getElementById("langToggle");
+  const currentLang = toggle.checked ? "es" : "en";
+  const sourceNav = currentLang === "en" ? document.getElementById("navEN") : document.getElementById("navES");
+
+  if (!mobileMenu) {
+    mobileMenu = document.createElement("nav");
+    mobileMenu.id = "mobileNavMenu";
+    mobileMenu.className = "nav-menu mobile-open";
+    document.querySelector(".aces-header").appendChild(mobileMenu);
+  }
+
+  if (mobileMenu.style.display === "flex") {
+    mobileMenu.style.display = "none";
+  } else {
+    mobileMenu.innerHTML = sourceNav.innerHTML;
+    mobileMenu.style.display = "flex";
+  }
+});
 </script>
 
-<!-- 🔴 MOBILE MENU SCRIPT -->
-<script>
-function toggleMobileMenu() {
-  const menu = document.getElementById("mobileMenu");
-  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
-}
 
-function toggleMobileDropdown(button) {
-  const content = button.nextElementSibling;
-  content.style.display = (content.style.display === "block") ? "none" : "block";
-}
-</script>
 
 <!-- FOOTER -->
 <footer class="footer">
