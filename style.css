@@ -279,18 +279,26 @@ body {
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
+/* STRONGER UNDERGLOW */
 .service-link:hover .service-box {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 16px rgba(212, 0, 0, 0.35);
+  transform: translateY(-10px);
+  box-shadow: 0 14px 32px rgba(212, 0, 0, 0.55);
   border-color: #d40000;
 }
 
+/* ONLY TITLE GLOWS */
 .service-box h3 {
   transition: color 0.25s ease;
 }
 
 .service-link:hover .service-box h3 {
   color: #d40000;
+}
+
+/* DESCRIPTION ALWAYS VISIBLE */
+.service-box p {
+  opacity: 1;
+  color: #111;
 }
 
 .service-icon {
@@ -304,44 +312,55 @@ body {
 
 
 /* ============================================================
-   SECTION 3 — CONTACT CARD (WHITE)
+   SECTION 3 — CONTACT US (RED)
 ============================================================ */
 .contact-card {
-  background: #ffffff;
-  color: #111;
-  padding: 40px 20px;
-  border-radius: 8px;
-  margin-top: 40px;
+  background: #d40000 !important;
+  color: white !important;
+  padding: 50px 20px;
   text-align: center;
+  border-radius: 0;
 }
 
-.card-content {
-  max-width: 700px;
-  margin: 0 auto;
+.contact-card h2,
+.contact-card p {
+  color: white !important;
+}
+
+.contact-card a.btn-small {
+  background: white;
+  color: #d40000;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 
 
 /* ============================================================
-   SECTION 4 — TRUST / CHAMBER (RED)
+   SECTION 4 — PROUD MEMBER (WHITE)
 ============================================================ */
 .trust {
-  background: #d40000;
-  color: white;
+  background: #ffffff !important;
+  color: #111 !important;
   padding: 50px 20px;
   text-align: center;
 }
 
 .trust h2,
 .trust p {
-  color: white;
+  color: #111 !important;
+}
+
+/* FIX CHAMBER LOGO CENTERING */
+.trust-badge-wrapper {
+  text-align: center !important;
 }
 
 .trust-badge {
-  width: 180px;
-  height: auto;
   display: block;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 20px auto !important;
 }
 
 .trust-qr-img {
