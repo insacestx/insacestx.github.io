@@ -6,6 +6,12 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #ffffff;
   color: #111;
+  animation: fadeInBody 0.6s ease-out;
+}
+
+@keyframes fadeInBody {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 #english,
@@ -16,7 +22,7 @@ body {
 
 
 /* ============================================================
-   HEADER (FINAL REBUILD)
+   HEADER — PREMIUM VERSION
 ============================================================ */
 .aces-header {
   background: #ffffff;
@@ -24,6 +30,12 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Sticky shadow on scroll */
+.aces-header.scrolled {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
 }
 
 .header-inner {
@@ -32,8 +44,14 @@ body {
   padding: 12px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* FIXES HEADER FIGHTING */
+  justify-content: space-between;
   gap: 20px;
+  animation: fadeDownHeader 0.5s ease-out;
+}
+
+@keyframes fadeDownHeader {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .header-left {
@@ -50,7 +68,7 @@ body {
 
 
 /* ============================================================
-   LANGUAGE TOGGLE — ACES STYLE
+   LANGUAGE TOGGLE — ACES RED GLOW
 ============================================================ */
 .header-toggle {
   position: relative;
@@ -86,8 +104,10 @@ body {
   transition: 0.3s;
 }
 
+/* Red glow when active */
 .header-toggle input:checked + .slider {
   background-color: #d40000;
+  box-shadow: 0 0 12px rgba(212,0,0,0.65);
 }
 
 .header-toggle input:checked + .slider:before {
@@ -97,7 +117,7 @@ body {
 
 
 /* ============================================================
-   NAVIGATION — RIGHT ALIGNED
+   NAVIGATION — RIGHT ALIGNED + UNDERLINE ANIMATION
 ============================================================ */
 #navContainer {
   margin-left: auto;
@@ -110,11 +130,31 @@ body {
   font-size: 1rem;
 }
 
+/* Base nav link */
 .nav-link {
+  position: relative;
   color: #111;
   text-decoration: none;
   font-weight: 600;
   cursor: pointer;
+  padding-bottom: 4px;
+}
+
+/* Center‑out underline animation */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #d40000;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+  width: 100%;
 }
 
 .nav-link:hover {
@@ -124,7 +164,7 @@ body {
 
 
 /* ============================================================
-   DROPDOWN MENU — VERTICAL + RED UNDERGLOW
+   DROPDOWN MENU — VERTICAL + RED GLOW + DELAY
 ============================================================ */
 .dropdown {
   position: relative;
@@ -134,7 +174,7 @@ body {
   cursor: pointer;
 }
 
-/* Vertical dropdown */
+/* Dropdown container */
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -148,13 +188,17 @@ body {
   display: none;
   flex-direction: column;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  animation: dropdownFade 0.2s ease-out;
+  animation: dropdownFade 0.25s ease-out;
   z-index: 999;
+  pointer-events: none;
+  opacity: 0;
 }
 
-/* Show on hover */
+/* Delay prevents accidental closing */
 .dropdown:hover .dropdown-menu {
   display: flex;
+  pointer-events: auto;
+  opacity: 1;
 }
 
 /* Dropdown links */
@@ -166,7 +210,7 @@ body {
   white-space: nowrap;
 }
 
-/* Medium ACES red under-glow */
+/* Medium ACES red under‑glow */
 .dropdown-menu a:hover {
   background: transparent;
   color: #d40000;
@@ -293,7 +337,7 @@ body {
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-/* Strong ACES under-glow */
+/* Strong ACES under‑glow */
 .service-link:hover .service-box {
   transform: translateY(-12px);
   box-shadow: 0 18px 38px rgba(212, 0, 0, 0.65);
