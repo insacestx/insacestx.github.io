@@ -8,7 +8,6 @@ body {
   color: #111;
 }
 
-/* Smooth fade for language wrappers */
 #english,
 #spanish {
   transition: opacity 0.3s ease;
@@ -37,7 +36,6 @@ body {
   gap: 16px;
 }
 
-/* Logo */
 .header-logo-img {
   height: 48px;
   width: auto;
@@ -93,7 +91,7 @@ body {
 
 
 /* ============================================================
-   NAVIGATION (DESKTOP)
+   NAVIGATION
 ============================================================ */
 .nav-menu {
   display: flex;
@@ -118,7 +116,6 @@ body {
   color: #d40000;
 }
 
-/* Dropdown */
 .dropdown {
   position: relative;
 }
@@ -127,7 +124,6 @@ body {
   cursor: pointer;
 }
 
-/* CLICK‑TO‑OPEN DROPDOWN MENU */
 .dropdown-menu {
   position: absolute;
   top: 120%;
@@ -167,7 +163,6 @@ body {
   border: none;
 }
 
-/* Mobile nav container */
 .nav-menu.mobile-open {
   position: absolute;
   top: 100%;
@@ -191,17 +186,14 @@ body {
     gap: 10px;
   }
 
-  /* Hide desktop nav */
   #navContainer {
     display: none;
   }
 
-  /* Show hamburger */
   .mobile-nav-toggle {
     display: block;
   }
 
-  /* Mobile dropdowns become inline lists */
   .dropdown-menu {
     position: static;
     border: none;
@@ -220,7 +212,7 @@ body {
    HOMEPAGE SECTIONS
 ============================================================ */
 
-/* ABOUT SECTION */
+/* ABOUT */
 .about {
   text-align: center;
   padding: 40px 20px;
@@ -233,12 +225,29 @@ body {
 
 
 
-/* SERVICES GRID */
+/* SERVICES SECTION */
+#services {
+  background: #fff5f5;
+  padding: 40px 20px;
+  border-radius: 8px;
+}
+
+#services h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 30px;
   padding: 20px 0;
+}
+
+.service-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .service-box {
@@ -248,9 +257,23 @@ body {
   border-radius: 8px;
   border: 1px solid #ddd;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-/* Service Icons */
+.service-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(212, 0, 0, 0.25);
+  border-color: #d40000;
+}
+
+.service-box h3 {
+  transition: color 0.25s ease;
+}
+
+.service-box:hover h3 {
+  color: #d40000;
+}
+
 .service-icon {
   width: 90px;
   height: 90px;
