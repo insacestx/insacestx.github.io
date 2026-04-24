@@ -209,33 +209,49 @@ body {
 
 
 /* ============================================================
-   HOMEPAGE SECTIONS
+   SECTION 1 — WHO WE ARE (RED)
 ============================================================ */
-
-/* ABOUT */
 .about {
+  background: #d40000;
+  color: white;
+  padding: 50px 20px;
   text-align: center;
-  padding: 40px 20px;
+}
+
+.about h2 {
+  color: white;
 }
 
 .about p {
   max-width: 700px;
   margin: 0 auto 20px auto;
+  color: white;
+}
+
+.about a.btn-small {
+  background: white;
+  color: #d40000;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 
 
-/* SERVICES SECTION */
+/* ============================================================
+   SECTION 2 — OUR SERVICES (BLACK)
+============================================================ */
 #services {
-  background: #fff5f5 !important;
-  padding: 40px 20px;
-  border-radius: 8px;
+  background: #000000 !important;
+  color: white;
+  padding: 50px 20px;
+  border-radius: 0;
 }
 
 #services > h2 {
   text-align: center !important;
-  width: 100%;
-  display: block;
+  color: white !important;
   margin-bottom: 20px;
 }
 
@@ -256,7 +272,7 @@ body {
 .service-box {
   text-align: center;
   padding: 20px;
-  background: #fff;
+  background: #ffffff;
   border-radius: 8px;
   border: 1px solid #ddd;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
@@ -265,7 +281,7 @@ body {
 
 .service-link:hover .service-box {
   transform: translateY(-6px);
-  box-shadow: 0 6px 16px rgba(212, 0, 0, 0.25);
+  box-shadow: 0 6px 16px rgba(212, 0, 0, 0.35);
   border-color: #d40000;
 }
 
@@ -287,9 +303,12 @@ body {
 
 
 
-/* CONTACT CARD */
+/* ============================================================
+   SECTION 3 — CONTACT CARD (WHITE)
+============================================================ */
 .contact-card {
-  background: #f5f5f5;
+  background: #ffffff;
+  color: #111;
   padding: 40px 20px;
   border-radius: 8px;
   margin-top: 40px;
@@ -303,14 +322,19 @@ body {
 
 
 
-/* TRUST SECTION */
+/* ============================================================
+   SECTION 4 — TRUST / CHAMBER (RED)
+============================================================ */
 .trust {
+  background: #d40000;
+  color: white;
+  padding: 50px 20px;
   text-align: center;
-  padding: 40px 20px;
 }
 
-.trust-badge-wrapper {
-  margin-bottom: 10px;
+.trust h2,
+.trust p {
+  color: white;
 }
 
 .trust-badge {
@@ -329,13 +353,16 @@ body {
 
 
 
-/* FOOTER */
+/* ============================================================
+   SECTION 5 — FOOTER (BLACK)
+============================================================ */
 .footer {
+  background: #000000;
+  color: white;
   text-align: center;
   padding: 30px 20px;
   margin-top: 40px;
-  background: #ffffff;
-  border-top: 1px solid #ddd;
+  border-top: none;
 }
 
 .footer-logo {
@@ -343,105 +370,5 @@ body {
   height: auto !important;
   display: block !important;
   margin: 0 auto 10px auto !important;
-}
-
-/* ============================================================
-   ACES COLOR STRIPE LAYOUT
-   Red → Black → White → Red → Black
-============================================================ */
-
-/* 1️⃣ WHO WE ARE — RED */
-.about {
-  background: #d40000;
-  color: white;
-  padding: 50px 20px;
-}
-.about h2 {
-  color: white;
-}
-.about p {
-  color: white;
-}
-.about a.btn-small {
-  background: white;
-  color: #d40000;
-}
-
-/* 2️⃣ OUR SERVICES — BLACK */
-#services {
-  background: #000000 !important;
-  color: white;
-  padding: 50px 20px;
-  border-radius: 0;
-}
-#services h2 {
-  color: white !important;
-}
-
-/* White service cards on black background */
-.service-box {
-  background: #ffffff;
-  border: 1px solid #ddd;
-}
-
-/* Hover glow + title glow */
-.service-link:hover .service-box {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 16px rgba(212, 0, 0, 0.35);
-  border-color: #d40000;
-}
-.service-link:hover .service-box h3 {
-  color: #d40000;
-}
-
-/* ============================================================
-   SECTION: CONTACT CARD (WHITE)
-============================================================ */
-.contact-card {
-  background: #ffffff;
-  color: #111;
-  text-align: center;
-}
-
-.card-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-
-
-/* ============================================================
-   SECTION: TRUST (RED)
-============================================================ */
-.trust {
-  background: #d40000;
-  color: #ffffff;
-  text-align: center;
-}
-
-.trust-badge {
-  height: 120px;
-  margin: 20px 0;
-}
-
-.trust-qr-img {
-  height: 140px;
-  margin-top: 10px;
-}
-
-
-
-/* ============================================================
-   FOOTER (BLACK)
-============================================================ */
-.footer {
-  background: #000000;
-  color: #ffffff;
-  text-align: center;
-  padding: 30px 20px;
-}
-
-.footer-logo {
-  height: 50px;
-  margin-bottom: 10px;
+  filter: brightness(0) invert(1);
 }
