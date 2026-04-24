@@ -370,3 +370,22 @@ body {
   color: #d40000;
 }
 
+#services > h2 {
+  text-align: center !important;
+  width: 100%;
+  display: block;
+}
+
+#services {
+  background: #fff5f5 !important;
+  padding: 40px 20px;
+  border-radius: 8px;
+}
+
+.services-grid {
+  margin-top: 20px;
+}
+
+.service-link:hover .service-box h3 {
+  color: #d40000;
+}
