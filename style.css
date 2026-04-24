@@ -43,7 +43,7 @@ body {
 
 /* RIGHT‑ALIGNED NAV */
 #navContainer {
-  margin-left: auto;
+  margin-right: auto;
 }
 
 .nav-menu {
