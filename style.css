@@ -43,7 +43,7 @@ body {
 
 /* RIGHT‑ALIGNED NAV */
 #navContainer {
-  margin-right: auto;
+  margin-left: auto;
 }
 
 .nav-menu {
@@ -82,6 +82,7 @@ body {
   position: absolute;
   top: 100%;
   right: 0;
+  left: auto;
   background: #ffffff;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -108,10 +109,11 @@ body {
   white-space: nowrap;
 }
 
-/* RED BACKLIGHT ON HOVER */
+/* MEDIUM RED UNDER‑GLOW ON HOVER */
 .dropdown-menu a:hover {
-  background: #d40000;
-  color: #ffffff;
+  background: transparent;
+  color: #d40000;
+  text-shadow: 0 0 12px rgba(212, 0, 0, 0.75);
 }
 
 /* FADE ANIMATION */
