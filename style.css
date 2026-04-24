@@ -53,32 +53,22 @@ body {
   font-size: 1rem;
 }
 
-/* ============================================================
-   NAVIGATION
-============================================================ */
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 0.95rem;
-}
-
-#navContainer {
-  margin-left: 40px;
-}
-
 .nav-link {
   color: #111;
   text-decoration: none;
-  cursor: pointer;
-  padding: 6px 4px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .nav-link:hover {
   color: #d40000;
 }
 
+
+
+/* ============================================================
+   DROPDOWN MENU
+============================================================ */
 .dropdown {
   position: relative;
 }
@@ -87,87 +77,47 @@ body {
   cursor: pointer;
 }
 
+/* VERTICAL DROPDOWN LIST */
 .dropdown-menu {
   position: absolute;
-  top: 120%;
-  left: 0;
-  min-width: 180px;
+  top: 100%;
+  right: 0;
   background: #ffffff;
   border: 1px solid #ddd;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  border-radius: 6px;
+  min-width: 180px;
+  padding: 6px 0;
   display: none;
   flex-direction: column;
-  z-index: 1200;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  animation: dropdownFade 0.2s ease-out;
+  z-index: 999;
 }
 
+/* SHOW ON HOVER */
+.dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+/* DROPDOWN LINKS */
 .dropdown-menu a {
-  padding: 8px 12px;
+  padding: 10px 14px;
   text-decoration: none;
   color: #111;
+  font-weight: 500;
   white-space: nowrap;
 }
 
+/* RED BACKLIGHT ON HOVER */
 .dropdown-menu a:hover {
-  background: #f5f5f5;
-  color: #d40000;
+  background: #d40000;
+  color: #ffffff;
 }
 
-.nav-link {
-  color: #111;
-  text-decoration: none;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.nav-link:hover {
-  color: #d40000;
-}
-
-
-
-/* ============================================================
-   LANGUAGE TOGGLE
-============================================================ */
-.header-toggle {
-  position: relative;
-  display: inline-block;
-  width: 52px;
-  height: 26px;
-  cursor: pointer;
-}
-
-.header-toggle input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.header-toggle .slider {
-  position: absolute;
-  inset: 0;
-  background-color: #ccc;
-  border-radius: 26px;
-  transition: 0.3s;
-}
-
-.header-toggle .slider:before {
-  position: absolute;
-  content: "";
-  height: 20px;
-  width: 20px;
-  left: 3px;
-  top: 3px;
-  background-color: white;
-  border-radius: 50%;
-  transition: 0.3s;
-}
-
-.header-toggle input:checked + .slider {
-  background-color: #d40000;
-}
-
-.header-toggle input:checked + .slider:before {
-  transform: translateX(26px);
+/* FADE ANIMATION */
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 
