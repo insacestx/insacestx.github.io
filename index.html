@@ -1,263 +1,320 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>ACES Insurance Services | Texas Independent Insurance Agency</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* ============================================================
+   GLOBAL
+============================================================ */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #ffffff;
+  color: #111;
+}
 
-  <meta name="description" content="ACES Insurance Services – Bilingual insurance support for Texas families and businesses. Auto, home, commercial, property, and more.">
-  <meta name="keywords" content="insurance, Texas insurance, bilingual insurance, auto insurance, home insurance, commercial insurance, Waco insurance, Hewitt insurance, independent insurance agent">
-  <meta name="robots" content="index, follow">
+/* Smooth fade for language wrappers */
+#english,
+#spanish {
+  transition: opacity 0.3s ease;
+}
 
-  <link rel="stylesheet" href="style.css?v=27">
-</head>
 
-<body>
 
-<!-- ⭐ GLOBAL HEADER -->
-<header class="aces-header">
-  <div class="header-inner">
+/* ============================================================
+   HEADER
+============================================================ */
+.aces-header {
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-    <!-- Logo -->
-    <a href="index.html" class="header-logo">
-      <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
-    </a>
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+}
 
-    <!-- Language toggle -->
-    <label class="toggle-switch header-toggle">
-      <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
-      <span class="slider"></span>
-    </label>
+/* Logo */
+.header-logo-img {
+  height: 48px;
+  width: auto;
+}
 
-    <!-- Desktop nav (auto-filled by global.js) -->
-    <nav id="navContainer" class="nav-menu"></nav>
 
-    <!-- Mobile hamburger -->
-    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
 
-  </div>
-</header>
+/* ============================================================
+   LANGUAGE TOGGLE
+============================================================ */
+.header-toggle {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 26px;
+  cursor: pointer;
+}
 
-<!-- ================= ENGLISH ================= -->
-<div id="english" style="opacity:1;transition:opacity .3s ease;">
+.header-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 
-  <!-- HERO / ABOUT -->
-  <section class="about">
-    <h2>Who We Are</h2>
-    <p>
-      ACES Insurance Services is your trusted independent agency serving Central Texas.
-      We provide personal and commercial insurance solutions with bilingual support and
-      a commitment to exceptional service.
-    </p>
-    <a href="about.html" class="btn-small">Learn More</a>
-  </section>
+.header-toggle .slider {
+  position: absolute;
+  inset: 0;
+  background-color: #ccc;
+  border-radius: 26px;
+  transition: 0.3s;
+}
 
-  <!-- SERVICES GRID -->
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="services-grid">
+.header-toggle .slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  top: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
 
-      <div class="service-box">
-        <img src="icon-life-aces.png" alt="Life Insurance Icon" class="service-icon">
-        <h3>Life Insurance</h3>
-        <p>Coverage designed to protect you and your family.</p>
-      </div>
+.header-toggle input:checked + .slider {
+  background-color: #d40000;
+}
 
-      <div class="service-box">
-        <img src="icon-commercial-aces.png" alt="Commercial Insurance Icon" class="service-icon">
-        <h3>Commercial Insurance</h3>
-        <p>Solutions tailored for your business needs.</p>
-      </div>
+.header-toggle input:checked + .slider:before {
+  transform: translateX(26px);
+}
 
-      <div class="service-box">
-        <img src="icon-property-aces.png" alt="Property Insurance Icon" class="service-icon">
-        <h3>Property Insurance</h3>
-        <p>Protection for your home and valuable assets.</p>
-      </div>
 
-      <div class="service-box">
-        <img src="icon-auto-aces.png" alt="Auto Insurance Icon" class="service-icon">
-        <h3>Auto Insurance</h3>
-        <p>Reliable coverage for your vehicles.</p>
-      </div>
 
-    </div>
-  </section>
+/* ============================================================
+   NAVIGATION (DESKTOP)
+============================================================ */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.95rem;
+}
 
-  <!-- CONTACT CARD -->
-  <section class="contact-card">
-    <h2>Contact Us & Meet Our Team</h2>
-    <div class="card-content">
-      <p>Our bilingual team is here to help with personal, commercial, property, and auto insurance needs.</p>
-      <a href="contact.html" class="btn-small">Contact Us</a>
+#navContainer {
+  margin-left: 40px; /* ⭐ Option B‑2 spacing */
+}
 
-      <div class="team-preview">
-        <h3>Meet Our Team</h3>
-        <p>This section is currently being updated as we gather team information.</p>
-        <p><em>Check back soon for full team profiles.</em></p>
-      </div>
-    </div>
-  </section>
+.nav-link {
+  color: #111;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 6px 4px;
+  font-weight: 600;
+}
 
-  <!-- TRUST BADGE -->
-  <section class="trust">
-    <h2>Proud Member</h2>
+.nav-link:hover {
+  color: #d40000;
+}
 
-    <div class="trust-badge-wrapper">
-      <img src="chamber-badge.png" alt="Chamber of Commerce Badge" class="trust-badge">
-    </div>
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
 
-    <p>Central Texas Hispanic Chamber of Commerce</p>
+.dropdown-toggle {
+  cursor: pointer;
+}
 
-    <div class="trust-qr">
-      <p>Scan to visit the Chamber website</p>
-      <img src="chamber-qr.png" alt="Chamber QR Code" class="trust-qr-img">
-    </div>
-  </section>
+/* CLICK‑TO‑OPEN DROPDOWN MENU */
+.dropdown-menu {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  min-width: 180px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  display: none; /* JS controls visibility */
+  flex-direction: column;
+  z-index: 1200;
+}
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <img src="image2.png" alt="ACES Logo" class="footer-logo">
-    <p>© 2026 ACES Insurance Services</p>
-  </footer>
+.dropdown-menu a {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #111;
+  white-space: nowrap;
+}
 
-</div>
+.dropdown-menu a:hover {
+  background: #f5f5f5;
+  color: #d40000;
+}
 
-<!-- ================= SPANISH ================= -->
-<div id="spanish" style="display:none;opacity:0;transition:opacity .3s ease;">
 
-  <!-- HERO / ABOUT -->
-  <section class="about">
-    <h2>Quiénes Somos</h2>
-    <p>
-      ACES Insurance Services es su agencia independiente de confianza en el centro de Texas.
-      Ofrecemos soluciones de aseguranza personal y comercial con apoyo bilingüe y un compromiso con el servicio excepcional.
-    </p>
-    <a href="about.html" class="btn-small">Aprender Más</a>
-  </section>
 
-  <!-- SERVICES GRID -->
-  <section id="services">
-    <h2>Nuestros Servicios</h2>
-    <div class="services-grid">
+/* ============================================================
+   MOBILE NAV
+============================================================ */
+.mobile-nav-toggle {
+  display: none;
+  margin-left: auto;
+  font-size: 1.4rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
 
-      <div class="service-box">
-        <img src="icon-life-aces.png" alt="Icono de Vida" class="service-icon">
-        <h3>Aseguranza de Vida</h3>
-        <p>Cobertura diseñada para protegerlo a usted y a su familia.</p>
-      </div>
+/* Mobile nav container */
+.nav-menu.mobile-open {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  background: #ffffff;
+  flex-direction: column;
+  padding: 10px 16px 12px;
+  border-bottom: 1px solid #ddd;
+}
 
-      <div class="service-box">
-        <img src="icon-commercial-aces.png" alt="Icono Comercial" class="service-icon">
-        <h3>Aseguranza Comercial</h3>
-        <p>Soluciones adaptadas a las necesidades de su negocio.</p>
-      </div>
 
-      <div class="service-box">
-        <img src="icon-property-aces.png" alt="Icono de Propiedad" class="service-icon">
-        <h3>Aseguranza de Propiedad</h3>
-        <p>Protección para su hogar y bienes valiosos.</p>
-      </div>
 
-      <div class="service-box">
-        <img src="icon-auto-aces.png" alt="Icono de Auto" class="service-icon">
-        <h3>Aseguranza de Auto</h3>
-        <p>Cobertura confiable para sus vehículos.</p>
-      </div>
+/* ============================================================
+   MOBILE BEHAVIOR
+============================================================ */
+@media (max-width: 768px) {
 
-    </div>
-  </section>
+  .header-inner {
+    justify-content: space-between;
+    gap: 10px;
+  }
 
-  <!-- CONTACT CARD -->
-  <section class="contact-card">
-    <h2>Contáctenos y Conozca a Nuestro Equipo</h2>
-    <div class="card-content">
-      <p>Nuestro equipo bilingüe está aquí para ayudar con aseguranza personal, comercial, de propiedad y de auto.</p>
-      <a href="contact.html" class="btn-small">Contáctenos</a>
+  /* Hide desktop nav */
+  #navContainer {
+    display: none;
+  }
 
-      <div class="team-preview">
-        <h3>Conozca a Nuestro Equipo</h3>
-        <p>Estamos actualizando esta sección.</p>
-        <p><em>Pronto podrá ver los perfiles completos.</em></p>
-      </div>
-    </div>
-  </section>
+  /* Show hamburger */
+  .mobile-nav-toggle {
+    display: block;
+  }
 
-  <!-- TRUST BADGE -->
-  <section class="trust">
-    <h2>Miembro Orgulloso</h2>
+  /* Mobile dropdowns become inline lists */
+  .dropdown-menu {
+    position: static;
+    border: none;
+    box-shadow: none;
+    padding-left: 10px;
+  }
 
-    <div class="trust-badge-wrapper">
-      <img src="chamber-badge.png" alt="Insignia de la Cámara" class="trust-badge">
-    </div>
+  .dropdown-menu a {
+    padding: 4px 0;
+  }
+}
 
-    <p>Cámara de Comercio Hispana del Centro de Texas</p>
 
-    <div class="trust-qr">
-      <p>Escanee para visitar el sitio web de la Cámara</p>
-      <img src="chamber-qr.png" alt="Código QR de la Cámara" class="trust-qr-img">
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <img src="image2.png" alt="ACES Logo" class="footer-logo">
-    <p>© 2026 ACES Insurance Services</p>
-  </footer>
+/* ============================================================
+   HOMEPAGE SECTIONS
+============================================================ */
 
-</div>
+/* ABOUT SECTION */
+.about {
+  text-align: center;
+  padding: 40px 20px;
+}
 
-<!-- ⭐ HIDDEN NAV TEMPLATES (REQUIRED FOR global.js) -->
-<nav id="navEN" style="display:none;">
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Services ▾</span>
-    <div class="dropdown-menu">
-      <a href="services.html#life">Life Insurance</a>
-      <a href="services.html#personal-lines">Personal Insurance</a>
-      <a href="services.html#commercial-lines">Commercial Insurance</a>
-    </div>
-  </div>
+.about p {
+  max-width: 700px;
+  margin: 0 auto 20px auto;
+}
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Applications ▾</span>
-    <div class="dropdown-menu">
-      <a href="applications.html#commercial">Commercial Apps</a>
-      <a href="applications.html#personal">Personal Apps</a>
-    </div>
-  </div>
 
-  <a class="nav-link" href="coi.html">COI Request</a>
-  <a class="nav-link" href="claims.html">Claims</a>
-  <a class="nav-link" href="about.html">About</a>
-  <a class="nav-link" href="contact.html">Contact</a>
-</nav>
 
-<nav id="navES" style="display:none;">
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Servicios ▾</span>
-    <div class="dropdown-menu">
-      <a href="services.html#life-es">Seguro de Vida</a>
-      <a href="services.html#personal-lines-es">Seguro Personal</a>
-      <a href="services.html#commercial-lines-es">Seguro Comercial</a>
-    </div>
-  </div>
+/* SERVICES GRID */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  padding: 20px 0;
+}
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Aplicaciones ▾</span>
-    <div class="dropdown-menu">
-      <a href="applications.html#commercial">Aplicaciones Comerciales</a>
-      <a href="applications.html#personal">Aplicaciones Personales</a>
-    </div>
-  </div>
+.service-box {
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
 
-  <a class="nav-link" href="coi.html">Solicitud de COI</a>
-  <a class="nav-link" href="claims.html">Reclamos</a>
-  <a class="nav-link" href="about.html">Acerca de</a>
-  <a class="nav-link" href="contact.html">Contacto</a>
-</nav>
+/* Service Icons */
+.service-icon {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 12px auto;
+}
 
-<!-- ⭐ GLOBAL SCRIPT -->
-<script src="global.js"></script>
 
-</body>
-</html>
+
+/* CONTACT CARD */
+.contact-card {
+  background: #f5f5f5;
+  padding: 40px 20px;
+  border-radius: 8px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.card-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+
+
+/* TRUST SECTION */
+.trust {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.trust-badge-wrapper {
+  margin-bottom: 10px;
+}
+
+.trust-badge {
+  width: 180px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.trust-qr-img {
+  width: 160px;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 40px;
+  background: #ffffff;
+  border-top: 1px solid #ddd;
+}
+
+.footer-logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px auto;
+}
