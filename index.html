@@ -9,7 +9,7 @@
   <meta name="keywords" content="insurance, Texas insurance, bilingual insurance, auto insurance, home insurance, commercial insurance, Waco insurance, Hewitt insurance, independent insurance agent">
   <meta name="robots" content="index, follow">
 
-  <link rel="stylesheet" href="style.css?v=30">
+  <link rel="stylesheet" href="style.css?v=31">
 </head>
 
 <body>
@@ -21,10 +21,12 @@
       <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
     </a>
 
-    <label class="toggle-switch header-toggle">
-      <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
-      <span class="slider"></span>
-    </label>
+    <!-- NEW FLAG + TEXT LANGUAGE SWITCH -->
+    <div class="lang-switch">
+      <span class="lang-option active" data-lang="english">🇺🇸 EN</span>
+      <span class="divider">|</span>
+      <span class="lang-option" data-lang="spanish">🇲🇽 ES</span>
+    </div>
 
     <nav id="navContainer" class="nav-menu"></nav>
 
@@ -261,14 +263,41 @@
 
 <script src="global.js"></script>
 
-  <script>
+<!-- NEW LANGUAGE SWITCH SCRIPT -->
+<script>
+document.querySelectorAll('.lang-option').forEach(option => {
+  option.addEventListener('click', () => {
+
+    // Update active highlight
+    document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
+    option.classList.add('active');
+
+    // Switch language content
+    const lang = option.dataset.lang;
+    if (lang === "english") {
+      document.getElementById("english").style.display = "block";
+      document.getElementById("spanish").style.display = "none";
+      document.getElementById("english").style.opacity = "1";
+      document.getElementById("spanish").style.opacity = "0";
+      document.getElementById("navContainer").innerHTML = document.getElementById("navEN").innerHTML;
+    } else {
+      document.getElementById("english").style.display = "none";
+      document.getElementById("spanish").style.display = "block";
+      document.getElementById("english").style.opacity = "0";
+      document.getElementById("spanish").style.opacity = "1";
+      document.getElementById("navContainer").innerHTML = document.getElementById("navES").innerHTML;
+    }
+  });
+});
+</script>
+
+<script>
 document.addEventListener("scroll", () => {
   const header = document.querySelector(".aces-header");
   if (window.scrollY > 10) header.classList.add("scrolled");
   else header.classList.remove("scrolled");
 });
 </script>
-
 
 </body>
 </html>
