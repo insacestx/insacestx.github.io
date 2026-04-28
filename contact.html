@@ -5,7 +5,7 @@
   <title>Contact - ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css?v=27">
+  <link rel="stylesheet" href="style.css?v=41">
 
   <style>
     body {
@@ -76,7 +76,6 @@
       background: #8a0000;
     }
 
-    /* Centered two-card Spanish layout */
     .spanish-center {
       display: flex;
       justify-content: center;
@@ -93,24 +92,20 @@
 <header class="aces-header">
   <div class="header-inner">
 
-    <!-- Logo -->
     <a href="index.html" class="header-logo">
       <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
     </a>
 
-    <!-- Language toggle -->
-    <label class="toggle-switch header-toggle">
-      <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
-      <span class="slider"></span>
-    </label>
+    <!-- NEW FLAG + TEXT LANGUAGE SWITCH -->
+    <div class="lang-switch">
+      <span class="lang-option active" data-lang="english">🇺🇸 EN</span>
+      <span class="divider">|</span>
+      <span class="lang-option" data-lang="spanish">🇲🇽 ES</span>
+    </div>
 
-    <!-- Desktop nav (cloned here) -->
     <nav id="navContainer" class="nav-menu"></nav>
 
-    <!-- Mobile hamburger -->
-    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
-      ☰
-    </button>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
 
   </div>
 </header>
@@ -118,21 +113,20 @@
 
 
 <!-- ⭐ ENGLISH WRAPPER -->
-<div id="english" style="opacity:1; transition:opacity .3s ease;">
+<div id="english">
 
-  <!-- Hidden EN nav source -->
-  <nav id="navEN" class="nav-menu" style="display:none;">
+  <nav id="navEN" style="display:none;">
     <div class="dropdown">
-      <span class="nav-link">Services ▾</span>
+      <span class="nav-link dropdown-toggle">Services ▾</span>
       <div class="dropdown-menu">
-        <a href="services.html#commercial-lines">Commercial Insurance</a>
+        <a href="services.html#life">Life Insurance</a>
         <a href="services.html#personal-lines">Personal Insurance</a>
-        <a href="services.html#property-lines">Property Insurance</a>
+        <a href="services.html#commercial-lines">Commercial Insurance</a>
       </div>
     </div>
 
     <div class="dropdown">
-      <span class="nav-link">Applications ▾</span>
+      <span class="nav-link dropdown-toggle">Applications ▾</span>
       <div class="dropdown-menu">
         <a href="applications.html#commercial">Commercial Apps</a>
         <a href="applications.html#personal">Personal Apps</a>
@@ -215,21 +209,20 @@
 
 
 <!-- ⭐ SPANISH WRAPPER -->
-<div id="spanish" style="display:none; opacity:0; transition:opacity .3s ease;">
+<div id="spanish" style="display:none; opacity:0;">
 
-  <!-- Hidden ES nav source -->
-  <nav id="navES" class="nav-menu" style="display:none;">
+  <nav id="navES" style="display:none;">
     <div class="dropdown">
-      <span class="nav-link">Servicios ▾</span>
+      <span class="nav-link dropdown-toggle">Servicios ▾</span>
       <div class="dropdown-menu">
-        <a href="services.html#commercial-lines-es">Líneas Comerciales</a>
-        <a href="services.html#personal-lines-es">Líneas Personales</a>
-        <a href="services.html#property-lines-es">Líneas de Propiedad</a>
+        <a href="services.html#life-es">Seguro de Vida</a>
+        <a href="services.html#personal-lines-es">Seguro Personal</a>
+        <a href="services.html#commercial-lines-es">Seguro Comercial</a>
       </div>
     </div>
 
     <div class="dropdown">
-      <span class="nav-link">Aplicaciones ▾</span>
+      <span class="nav-link dropdown-toggle">Aplicaciones ▾</span>
       <div class="dropdown-menu">
         <a href="applications.html#commercial">Aplicaciones Comerciales</a>
         <a href="applications.html#personal">Aplicaciones Personales</a>
@@ -277,67 +270,37 @@
 
 
 
-<!-- ⭐ GLOBAL LANGUAGE + NAV SCRIPT -->
+<!-- ⭐ LANGUAGE + NAV SCRIPT -->
 <script>
-function loadNav(language) {
-  const navContainer = document.getElementById("navContainer");
-  const navEN = document.getElementById("navEN");
-  const navES = document.getElementById("navES");
+document.querySelectorAll('.lang-option').forEach(option => {
+  option.addEventListener('click', () => {
 
-  if (language === "en") {
-    navContainer.innerHTML = navEN.innerHTML;
-  } else {
-    navContainer.innerHTML = navES.innerHTML;
-  }
-}
+    document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
+    option.classList.add('active');
 
-function toggleLanguage() {
-  const en = document.getElementById("english");
-  const es = document.getElementById("spanish");
-  const toggle = document.getElementById("langToggle");
+    const lang = option.dataset.lang;
 
-  if (toggle.checked) {
-    loadNav("es");
-    en.style.opacity = 0;
-    setTimeout(() => {
-      en.style.display = "none";
-      es.style.display = "block";
-      setTimeout(() => { es.style.opacity = 1; }, 50);
-    }, 300);
-  } else {
-    loadNav("en");
-    es.style.opacity = 0;
-    setTimeout(() => {
-      es.style.display = "none";
-      en.style.display = "block";
-      setTimeout(() => { en.style.opacity = 1; }, 50);
-    }, 300);
-  }
-}
+    if (lang === "english") {
+      document.getElementById("english").style.display = "block";
+      document.getElementById("spanish").style.display = "none";
+      document.getElementById("navContainer").innerHTML = document.getElementById("navEN").innerHTML;
+    } else {
+      document.getElementById("english").style.display = "none";
+      document.getElementById("spanish").style.display = "block";
+      document.getElementById("navContainer").innerHTML = document.getElementById("navES").innerHTML;
+    }
+  });
+});
 
 // Load English nav on page load
-loadNav("en");
+document.getElementById("navContainer").innerHTML = document.getElementById("navEN").innerHTML;
+</script>
 
-// Mobile nav toggle
-document.getElementById("mobileNavToggle").addEventListener("click", () => {
-  let mobileMenu = document.getElementById("mobileNavMenu");
-  const toggle = document.getElementById("langToggle");
-  const currentLang = toggle.checked ? "es" : "en";
-  const sourceNav = currentLang === "en" ? document.getElementById("navEN") : document.getElementById("navES");
-
-  if (!mobileMenu) {
-    mobileMenu = document.createElement("nav");
-    mobileMenu.id = "mobileNavMenu";
-    mobileMenu.className = "nav-menu mobile-open";
-    document.querySelector(".aces-header").appendChild(mobileMenu);
-  }
-
-  if (mobileMenu.style.display === "flex") {
-    mobileMenu.style.display = "none";
-  } else {
-    mobileMenu.innerHTML = sourceNav.innerHTML;
-    mobileMenu.style.display = "flex";
-  }
+<script>
+document.addEventListener("scroll", () => {
+  const header = document.querySelector(".aces-header");
+  if (window.scrollY > 10) header.classList.add("scrolled");
+  else header.classList.remove("scrolled");
 });
 </script>
 
