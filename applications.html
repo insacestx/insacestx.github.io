@@ -1,63 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applications - ACES Insurance Services</title>
-    <link rel="stylesheet" href="style.css?v=3">
+  <meta charset="UTF-8">
+  <title>Applications - ACES Insurance Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css?v=53">
+
+  <style>
+    .app-section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fafafa;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .app-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input, textarea, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #d40000;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #a00000;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- 🔴 ACES GLOBAL HEADER -->
+<!-- ⭐ GLOBAL HEADER -->
 <header class="aces-header">
   <div class="header-inner">
 
-    <!-- Logo -->
     <a href="index.html" class="header-logo">
       <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
     </a>
 
-    <!-- Language toggle -->
-    <label class="toggle-switch header-toggle">
-      <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
-      <span class="slider"></span>
-    </label>
+    <div class="lang-switch">
+      <span class="lang-option active" data-lang="english">🇺🇸 EN</span>
+      <span class="divider">|</span>
+      <span class="lang-option" data-lang="spanish">🇲🇽 ES</span>
+    </div>
 
-    <!-- Desktop nav (cloned here) -->
     <nav id="navContainer" class="nav-menu"></nav>
 
-    <!-- Mobile hamburger -->
-    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
-      ☰
-    </button>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
 
   </div>
 </header>
 
-<!-- PAGE CONTENT -->
-<section class="about">
-    <h2>Applications & Forms</h2>
-    <p>Here you will find downloadable applications and forms for personal and commercial insurance. Bilingual versions will be added soon.</p>
-</section>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <img src="image2.png" alt="ACES Logo" class="footer-logo">
-    <p>© 2026 ACES Insurance Services</p>
-</footer>
 
-<!-- MOBILE MENU SCRIPT -->
+<!-- ⭐ ENGLISH WRAPPER -->
+<div id="english">
+
+  <!-- Hidden EN nav -->
+  <nav id="navEN" style="display:none;">
+    <div class="dropdown">
+      <span class="nav-link dropdown-toggle">Services ▾</span>
+      <div class="dropdown-menu">
+        <a href="services.html#life">Life Insurance</a>
+        <a href="services.html#personal-lines">Personal Insurance</a>
+        <a href="services.html#commercial-lines">Commercial Insurance</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <span class="nav-link dropdown-toggle">Applications ▾</span>
+      <div class="dropdown-menu">
+        <a href="applications.html#commercial">Commercial Apps</a>
+        <a href="applications.html#personal">Personal Apps</a>
+      </div>
+    </div>
+
+    <a class="nav-link" href="coi.html">COI Request</a>
+    <a class="nav-link" href="claims.html">Claims</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link" href="contact.html">Contact</a>
+  </nav>
+
+  <section class="about">
+    <h2>Insurance Applications</h2>
+    <p>Please complete the application below based on your selected insurance product.</p>
+  </section>
+
+  <!-- ⭐ APPLICATION FORMS (ENGLISH) -->
+  <div id="forms-en">
+
+    <!-- HOMEOWNERS -->
+    <div class="app-section hidden" id="home">
+      <h2>Homeowners Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="Property Address" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Describe your home"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- RENTERS -->
+    <div class="app-section hidden" id="renters">
+      <h2>Renters Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="Rental Address" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Describe your rental unit"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- CONDO -->
+    <div class="app-section hidden" id="condo">
+      <h2>Condo Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="Condo Address" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Describe your condo"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- LANDLORD -->
+    <div class="app-section hidden" id="landlord">
+      <h2>Landlord Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="Rental Property Address" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Describe your rental property"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- FLOOD -->
+    <div class="app-section hidden" id="flood">
+      <h2>Flood Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="Property Address" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Flood zone or concerns"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- WINDSTORM -->
+    <div class="app-section hidden" id="windstorm">
+      <h2>Windstorm Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="Property Address" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Windstorm concerns"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- AUTO -->
+    <div class="app-section hidden" id="auto">
+      <h2>Auto Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="Vehicle Year / Make / Model" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Additional vehicle details"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- MOTORCYCLE -->
+    <div class="app-section hidden" id="motorcycle">
+      <h2>Motorcycle Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="Motorcycle Year / Make / Model" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Additional motorcycle details"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- RV -->
+    <div class="app-section hidden" id="rv">
+      <h2>RV Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="RV Year / Make / Model" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Additional RV details"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- ATV -->
+    <div class="app-section hidden" id="atv">
+      <h2>ATV Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="ATV Year / Make / Model" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Additional ATV details"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- GOLF CART -->
+    <div class="app-section hidden" id="golf-cart">
+      <h2>Golf Cart Insurance Application</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="Golf Cart Year / Make / Model" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Additional golf cart details"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- COMMERCIAL FORMS -->
+    <div class="app-section hidden" id="general-liability">
+      <h2>General Liability Application</h2>
+      <form>
+        <input type="text" placeholder="Business Name" required>
+        <input type="text" placeholder="Business Address" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Describe your business operations"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <div class="app-section hidden" id="bop">
+      <h2>Business Owners Policy (BOP) Application</h2>
+      <form>
+        <input type="text" placeholder="Business Name" required>
+        <input type="text" placeholder="Business Address" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Describe your business operations"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <div class="app-section hidden" id="commercial-auto">
+      <h2>Commercial Auto Application</h2>
+      <form>
+        <input type="text" placeholder="Business Name" required>
+        <input type="text" placeholder="Vehicle Year / Make / Model" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Describe your commercial vehicle use"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <div class="app-section hidden" id="workers-comp">
+      <h2>Workers Compensation Application</h2>
+      <form>
+        <input type="text" placeholder="Business Name" required>
+        <input type="text" placeholder="Business Address" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Number of employees and job duties"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <div class="app-section hidden" id="commercial-property">
+      <h2>Commercial Property Application</h2>
+      <form>
+        <input type="text" placeholder="Business Name" required>
+        <input type="text" placeholder="Property Address" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Describe your commercial property"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <div class="app-section hidden" id="bonds">
+      <h2>Bonds Application</h2>
+      <form>
+        <input type="text" placeholder="Business Name" required>
+        <input type="text" placeholder="Bond Type" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Describe your bond needs"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ⭐ SPANISH WRAPPER -->
+<div id="spanish" style="display:none;">
+
+  <!-- Hidden ES nav -->
+  <nav id="navES" style="display:none;">
+    <div class="dropdown">
+      <span class="nav-link dropdown-toggle">Servicios ▾</span>
+      <div class="dropdown-menu">
+        <a href="services.html#life-es">Seguro de Vida</a>
+        <a href="services.html#personal-lines-es">Seguro Personal</a>
+        <a href="services.html#commercial-lines-es">Seguro Comercial</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <span class="nav-link dropdown-toggle">Aplicaciones ▾</span>
+      <div class="dropdown-menu">
+        <a href="applications.html#commercial">Aplicaciones Comerciales</a>
+        <a href="applications.html#personal">Aplicaciones Personales</a>
+      </div>
+    </div>
+
+    <a class="nav-link" href="coi.html">Solicitud de COI</a>
+    <a class="nav-link" href="claims.html">Reclamos</a>
+    <a class="nav-link" href="about.html">Acerca de</a>
+    <a class="nav-link" href="contact.html">Contacto</a>
+  </nav>
+
+  <section class="about">
+    <h2>Aplicaciones de Aseguranza</h2>
+    <p>Complete la aplicación basada en el producto seleccionado.</p>
+  </section>
+
+  <!-- ⭐ SPANISH FORMS (same structure, translated) -->
+  <div id="forms-es">
+
+    <div class="app-section hidden" id="home-es">
+      <h2>Aplicación de Seguro de Casa</h2>
+      <form>
+        <input type="text" placeholder="Nombre Completo" required>
+        <input type="text" placeholder="Dirección de la Propiedad" required>
+        <input type="email" placeholder="Correo Electrónico" required>
+        <input type="tel" placeholder="Número de Teléfono" required>
+        <textarea placeholder="Describa su casa"></textarea>
+        <button type="submit">Enviar Aplicación</button>
+      </form>
+    </div>
+
+    <!-- (Spanish versions for all forms can be added here — identical structure) -->
+
+  </div>
+</div>
+
+
+
+<!-- ⭐ LANGUAGE + NAV + FORM LOADING SCRIPT -->
 <script>
-function toggleMobileMenu() {
-    const menu = document.getElementById("mobileMenu");
-    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+/* LANGUAGE SWITCH */
+document.querySelectorAll('.lang-option').forEach(option => {
+  option.addEventListener('click', () => {
+
+    document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
+    option.classList.add('active');
+
+    const lang = option.dataset.lang;
+
+    if (lang === "english") {
+      document.getElementById("english").style.display = "block";
+      document.getElementById("spanish").style.display = "none";
+      document.getElementById("navContainer").innerHTML =
+        document.getElementById("navEN").innerHTML;
+    } else {
+      document.getElementById("english").style.display = "none";
+      document.getElementById("spanish").style.display = "block";
+      document.getElementById("navContainer").innerHTML =
+        document.getElementById("navES").innerHTML;
+    }
+  });
+});
+
+// Load English nav on page load
+document.getElementById("navContainer").innerHTML =
+  document.getElementById("navEN").innerHTML;
+
+
+
+/* FORM LOADING BASED ON URL HASH */
+function loadForm() {
+  const hash = window.location.hash.replace("#", "");
+
+  // Hide all forms
+  document.querySelectorAll(".app-section").forEach(f => f.classList.add("hidden"));
+
+  if (!hash) return;
+
+  const form = document.getElementById(hash);
+  if (form) form.classList.remove("hidden");
+
+  const formEs = document.getElementById(hash + "-es");
+  if (formEs) formEs.classList.remove("hidden");
 }
 
-function toggleMobileDropdown(button) {
-    const content = button.nextElementSibling;
-    content.style.display = (content.style.display === "block") ? "none" : "block";
-}
+window.addEventListener("load", loadForm);
+window.addEventListener("hashchange", loadForm);
+</script>
+
+<script>
+document.addEventListener("scroll", () => {
+  const header = document.querySelector(".aces-header");
+  if (window.scrollY > 10) header.classList.add("scrolled");
+  else header.classList.remove("scrolled");
+});
 </script>
 
 </body>
