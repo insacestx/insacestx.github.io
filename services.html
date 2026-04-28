@@ -5,68 +5,133 @@
   <title>Services - ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css?v=52">
+  <link rel="stylesheet" href="style.css?v=60">
 
   <style>
-    .service-category {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
-      cursor: pointer;
-      transition: 0.3s ease;
+    .services-wrapper {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 16px 40px;
     }
 
-    .service-category:hover {
-      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    .services-wrapper h2 {
+      text-align: center;
+      margin-bottom: 10px;
     }
 
-    .service-category h3 {
-      margin: 0;
+    .services-wrapper p.section-intro {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .services-group {
+      margin-bottom: 40px;
+    }
+
+    .services-group-title {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+
+    .services-subtitle {
+      font-size: 1.1rem;
+      margin: 18px 0 10px;
+      color: #444;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      position: relative;
+      background: #ffffff;
+      border-radius: 14px;
+      border: 2px solid #111;
+      padding: 26px 18px 30px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      text-decoration: none;
+      color: #111;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .service-details {
-      display: none;
-      margin-top: 15px;
-      padding-left: 10px;
-      animation: fadeIn 0.3s ease;
+    .service-card::before {
+      content: "A ♠";
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
+    .service-card::after {
+      content: "♠ A";
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transform: rotate(180deg);
     }
 
-    .service-details ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
     }
 
-    .service-details li {
-      padding: 6px 0;
-      border-bottom: 1px solid #eee;
+    .card-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
     }
 
-    .service-details a {
-      color: #d40000;
-      font-weight: bold;
-      text-decoration: none;
+    .card-spade {
+      font-size: 2.4rem;
+      line-height: 1;
+      margin-bottom: 4px;
     }
 
-    .service-details a:hover {
-      text-decoration: underline;
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: #555;
+      min-height: 32px;
+    }
+
+    .card-brand {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 6px;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      .service-card {
+        padding: 22px 14px 26px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<!-- ⭐ GLOBAL HEADER -->
+<!-- HEADER -->
 <header class="aces-header">
   <div class="header-inner">
 
@@ -87,9 +152,7 @@
   </div>
 </header>
 
-
-
-<!-- ⭐ ENGLISH WRAPPER -->
+<!-- ENGLISH -->
 <div id="english">
 
   <!-- Hidden EN nav -->
@@ -97,9 +160,9 @@
     <div class="dropdown">
       <span class="nav-link dropdown-toggle">Services ▾</span>
       <div class="dropdown-menu">
-        <a href="services.html#life">Life Insurance</a>
-        <a href="services.html#personal-lines">Personal Insurance</a>
-        <a href="services.html#commercial-lines">Commercial Insurance</a>
+        <a href="services.html?type=life">Life Insurance</a>
+        <a href="services.html?type=personal">Personal Insurance</a>
+        <a href="services.html?type=commercial">Commercial Insurance</a>
       </div>
     </div>
 
@@ -117,81 +180,223 @@
     <a class="nav-link" href="contact.html">Contact</a>
   </nav>
 
-  <section class="about">
+  <section class="services-wrapper">
     <h2>Our Services</h2>
-    <p>Select a category below to view the insurance products we offer.</p>
-  </section>
-
-  <section class="page-section">
+    <p class="section-intro">
+      Select the insurance product that best fits your needs. Each card will take you to the application.
+    </p>
 
     <!-- LIFE -->
-    <div class="service-category" data-cat="life">
-      <h3>Life Insurance <span>➤</span></h3>
-      <div class="service-details" id="life-details">
-        <ul>
-          <li><a href="applications.html#term-life">Term Life</a></li>
-          <li><a href="applications.html#whole-life">Whole Life</a></li>
-          <li><a href="applications.html#final-expense">Final Expense</a></li>
-        </ul>
+    <div class="services-group" data-group="life">
+      <h3 class="services-group-title">Life Insurance</h3>
+      <div class="cards-grid">
+        <a href="applications.html#term-life" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Term Life</div>
+            <div class="card-desc">Affordable coverage for a set period of time.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#whole-life" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Whole Life</div>
+            <div class="card-desc">Lifetime protection with cash value potential.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#final-expense" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Final Expense</div>
+            <div class="card-desc">Helps cover funeral and final expenses.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- PERSONAL (PROPERTY + AUTO) -->
+    <div class="services-group" data-group="personal">
+      <h3 class="services-group-title">Personal Insurance</h3>
+
+      <h4 class="services-subtitle">Property Lines</h4>
+      <div class="cards-grid">
+        <a href="applications.html#home" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Homeowners</div>
+            <div class="card-desc">Protection for your home and belongings.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#renters" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Renters</div>
+            <div class="card-desc">Coverage for your personal property as a renter.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#condo" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Condo</div>
+            <div class="card-desc">Tailored coverage for condo owners.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#landlord" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Landlord</div>
+            <div class="card-desc">Protection for your rental properties.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#flood" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Flood</div>
+            <div class="card-desc">Coverage for flood-related damage.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#windstorm" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Windstorm</div>
+            <div class="card-desc">Protection from wind and storm damage.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+      </div>
+
+      <h4 class="services-subtitle">Auto Lines</h4>
+      <div class="cards-grid">
+        <a href="applications.html#auto" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Auto</div>
+            <div class="card-desc">Coverage for your personal vehicles.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#motorcycle" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Motorcycle</div>
+            <div class="card-desc">Protection for your motorcycle.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#rv" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">RV</div>
+            <div class="card-desc">Coverage for your recreational vehicle.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#atv" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">ATV</div>
+            <div class="card-desc">Protection for your all-terrain vehicles.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#golf-cart" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Golf Cart</div>
+            <div class="card-desc">Coverage for your golf cart.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
       </div>
     </div>
 
     <!-- COMMERCIAL -->
-    <div class="service-category" data-cat="commercial">
-      <h3>Commercial Insurance <span>➤</span></h3>
-      <div class="service-details" id="commercial-details">
-        <ul>
-          <li><a href="applications.html#general-liability">General Liability</a></li>
-          <li><a href="applications.html#bop">Business Owners Policy (BOP)</a></li>
-          <li><a href="applications.html#commercial-auto">Commercial Auto</a></li>
-          <li><a href="applications.html#workers-comp">Workers Compensation</a></li>
-          <li><a href="applications.html#commercial-property">Commercial Property</a></li>
-          <li><a href="applications.html#bonds">Bonds</a></li>
-        </ul>
+    <div class="services-group" data-group="commercial">
+      <h3 class="services-group-title">Commercial Insurance</h3>
+      <div class="cards-grid">
+        <a href="applications.html#general-liability" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">General Liability</div>
+            <div class="card-desc">Helps protect your business from liability claims.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#bop" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">BOP</div>
+            <div class="card-desc">Business Owners Policy for small businesses.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#commercial-auto" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Commercial Auto</div>
+            <div class="card-desc">Coverage for vehicles used in your business.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#workers-comp" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Workers Comp</div>
+            <div class="card-desc">Helps protect your employees and business.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#commercial-property" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Commercial Property</div>
+            <div class="card-desc">Protection for your business property.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#bonds" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Bonds</div>
+            <div class="card-desc">Surety and other bond solutions.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
       </div>
     </div>
 
-    <!-- PROPERTY -->
-    <div class="service-category" data-cat="property">
-      <h3>Property Insurance <span>➤</span></h3>
-      <div class="service-details" id="property-details">
-        <ul>
-          <li><a href="applications.html#home">Homeowners</a></li>
-          <li><a href="applications.html#renters">Renters</a></li>
-          <li><a href="applications.html#condo">Condo</a></li>
-          <li><a href="applications.html#landlord">Landlord</a></li>
-          <li><a href="applications.html#flood">Flood</a></li>
-          <li><a href="applications.html#windstorm">Windstorm</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- AUTO -->
-    <div class="service-category" data-cat="auto">
-      <h3>Auto Insurance <span>➤</span></h3>
-      <div class="service-details" id="auto-details">
-        <ul>
-          <li><a href="applications.html#auto">Auto</a></li>
-          <li><a href="applications.html#motorcycle">Motorcycle</a></li>
-          <li><a href="applications.html#rv">RV</a></li>
-          <li><a href="applications.html#atv">ATV</a></li>
-          <li><a href="applications.html#golf-cart">Golf Cart</a></li>
-        </ul>
-      </div>
-    </div>
-
+    <footer class="footer">
+      <img src="image2.png" class="footer-logo">
+      <p>© 2026 ACES Insurance Services</p>
+    </footer>
   </section>
-
-  <footer class="footer">
-    <img src="image2.png" class="footer-logo">
-    <p>© 2026 ACES Insurance Services</p>
-  </footer>
-
 </div>
 
-
-
-<!-- ⭐ SPANISH WRAPPER -->
+<!-- SPANISH -->
 <div id="spanish" style="display:none;">
 
   <!-- Hidden ES nav -->
@@ -199,9 +404,9 @@
     <div class="dropdown">
       <span class="nav-link dropdown-toggle">Servicios ▾</span>
       <div class="dropdown-menu">
-        <a href="services.html#life-es">Seguro de Vida</a>
-        <a href="services.html#personal-lines-es">Seguro Personal</a>
-        <a href="services.html#commercial-lines-es">Seguro Comercial</a>
+        <a href="services.html?type=life">Seguro de Vida</a>
+        <a href="services.html?type=personal">Seguro Personal</a>
+        <a href="services.html?type=commercial">Seguro Comercial</a>
       </div>
     </div>
 
@@ -219,144 +424,278 @@
     <a class="nav-link" href="contact.html">Contacto</a>
   </nav>
 
-  <section class="about">
+  <section class="services-wrapper">
     <h2>Nuestros Servicios</h2>
-    <p>Seleccione una categoría para ver los productos que ofrecemos.</p>
-  </section>
-
-  <section class="page-section">
+    <p class="section-intro">
+      Seleccione la opción de aseguranza que mejor se adapte a sus necesidades.
+    </p>
 
     <!-- VIDA -->
-    <div class="service-category" data-cat="life-es">
-      <h3>Seguro de Vida <span>➤</span></h3>
-      <div class="service-details" id="life-es-details">
-        <ul>
-          <li><a href="applications.html#term-life">Seguro de Vida a Término</a></li>
-          <li><a href="applications.html#whole-life">Seguro de Vida Entera</a></li>
-          <li><a href="applications.html#final-expense">Gastos Finales</a></li>
-        </ul>
+    <div class="services-group" data-group="life">
+      <h3 class="services-group-title">Seguro de Vida</h3>
+      <div class="cards-grid">
+        <a href="applications.html#term-life" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Vida a Término</div>
+            <div class="card-desc">Cobertura accesible por un período específico.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#whole-life" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Vida Entera</div>
+            <div class="card-desc">Protección de por vida con valor en efectivo.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#final-expense" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Gastos Finales</div>
+            <div class="card-desc">Ayuda a cubrir gastos funerarios y finales.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- PERSONAL (PROPERTY + AUTO) -->
+    <div class="services-group" data-group="personal">
+      <h3 class="services-group-title">Seguro Personal</h3>
+
+      <h4 class="services-subtitle">Líneas de Propiedad</h4>
+      <div class="cards-grid">
+        <a href="applications.html#home" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Casa</div>
+            <div class="card-desc">Protección para su hogar y pertenencias.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#renters" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Renteros</div>
+            <div class="card-desc">Cobertura para sus pertenencias como inquilino.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#condo" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Condominio</div>
+            <div class="card-desc">Cobertura diseñada para dueños de condominio.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#landlord" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Propietario</div>
+            <div class="card-desc">Protección para sus propiedades en renta.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#flood" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Inundación</div>
+            <div class="card-desc">Cobertura para daños por inundación.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#windstorm" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Viento</div>
+            <div class="card-desc">Protección contra daños por viento y tormentas.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+      </div>
+
+      <h4 class="services-subtitle">Líneas de Auto</h4>
+      <div class="cards-grid">
+        <a href="applications.html#auto" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Auto</div>
+            <div class="card-desc">Cobertura para sus vehículos personales.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#motorcycle" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Motocicleta</div>
+            <div class="card-desc">Protección para su motocicleta.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#rv" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">RV</div>
+            <div class="card-desc">Cobertura para su vehículo recreativo.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#atv" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">ATV</div>
+            <div class="card-desc">Protección para sus vehículos todo terreno.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#golf-cart" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Carrito de Golf</div>
+            <div class="card-desc">Cobertura para su carrito de golf.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
       </div>
     </div>
 
     <!-- COMERCIAL -->
-    <div class="service-category" data-cat="commercial-es">
-      <h3>Seguro Comercial <span>➤</span></h3>
-      <div class="service-details" id="commercial-es-details">
-        <ul>
-          <li><a href="applications.html#general-liability">Responsabilidad General</a></li>
-          <li><a href="applications.html#bop">Póliza para Dueños de Negocio (BOP)</a></li>
-          <li><a href="applications.html#commercial-auto">Auto Comercial</a></li>
-          <li><a href="applications.html#workers-comp">Compensación al Trabajador</a></li>
-          <li><a href="applications.html#commercial-property">Propiedad Comercial</a></li>
-          <li><a href="applications.html#bonds">Fianzas</a></li>
-        </ul>
+    <div class="services-group" data-group="commercial">
+      <h3 class="services-group-title">Seguro Comercial</h3>
+      <div class="cards-grid">
+        <a href="applications.html#general-liability" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Responsabilidad General</div>
+            <div class="card-desc">Ayuda a proteger su negocio de reclamaciones.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#bop" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">BOP</div>
+            <div class="card-desc">Póliza para dueños de negocio.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#commercial-auto" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Auto Comercial</div>
+            <div class="card-desc">Cobertura para vehículos usados en su negocio.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#workers-comp" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Compensación al Trabajador</div>
+            <div class="card-desc">Ayuda a proteger a sus empleados y negocio.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#commercial-property" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Propiedad Comercial</div>
+            <div class="card-desc">Protección para la propiedad de su negocio.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
+
+        <a href="applications.html#bonds" class="service-card">
+          <div class="card-center">
+            <div class="card-spade">♠</div>
+            <div class="card-title">Fianzas</div>
+            <div class="card-desc">Soluciones de fianzas y garantías.</div>
+            <div class="card-brand">ACES Insurance Services</div>
+          </div>
+        </a>
       </div>
     </div>
 
-    <!-- PROPIEDAD -->
-    <div class="service-category" data-cat="property-es">
-      <h3>Seguro de Propiedad <span>➤</span></h3>
-      <div class="service-details" id="property-es-details">
-        <ul>
-          <li><a href="applications.html#home">Casa</a></li>
-          <li><a href="applications.html#renters">Renteros</a></li>
-          <li><a href="applications.html#condo">Condominio</a></li>
-          <li><a href="applications.html#landlord">Propietario</a></li>
-          <li><a href="applications.html#flood">Inundación</a></li>
-          <li><a href="applications.html#windstorm">Viento</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- AUTO -->
-    <div class="service-category" data-cat="auto-es">
-      <h3>Seguro de Auto <span>➤</span></h3>
-      <div class="service-details" id="auto-es-details">
-        <ul>
-          <li><a href="applications.html#auto">Auto</a></li>
-          <li><a href="applications.html#motorcycle">Motocicleta</a></li>
-          <li><a href="applications.html#rv">RV</a></li>
-          <li><a href="applications.html#atv">ATV</a></li>
-          <li><a href="applications.html#golf-cart">Carrito de Golf</a></li>
-        </ul>
-      </div>
-    </div>
-
+    <footer class="footer">
+      <img src="image2.png" class="footer-logo">
+      <p>© 2026 ACES Insurance Services</p>
+    </footer>
   </section>
-
-  <footer class="footer">
-    <img src="image2.png" class="footer-logo">
-    <p>© 2026 ACES Insurance Services</p>
-  </footer>
-
 </div>
 
-
-
-<!-- ⭐ LANGUAGE + NAV + CATEGORY SCRIPT -->
+<!-- LANGUAGE + FILTER SCRIPT -->
 <script>
-/* LANGUAGE SWITCH */
-document.querySelectorAll('.lang-option').forEach(option => {
-  option.addEventListener('click', () => {
+  // Language switch
+  document.querySelectorAll('.lang-option').forEach(option => {
+    option.addEventListener('click', () => {
+      document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
+      option.classList.add('active');
 
-    document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
-    option.classList.add('active');
+      const lang = option.dataset.lang;
+      if (lang === "english") {
+        document.getElementById("english").style.display = "block";
+        document.getElementById("spanish").style.display = "none";
+        document.getElementById("navContainer").innerHTML =
+          document.getElementById("navEN").innerHTML;
+      } else {
+        document.getElementById("english").style.display = "none";
+        document.getElementById("spanish").style.display = "block";
+        document.getElementById("navContainer").innerHTML =
+          document.getElementById("navES").innerHTML;
+      }
+    });
+  });
 
-    const lang = option.dataset.lang;
+  // Load English nav on page load
+  document.getElementById("navContainer").innerHTML =
+    document.getElementById("navEN").innerHTML;
 
-    if (lang === "english") {
-      document.getElementById("english").style.display = "block";
-      document.getElementById("spanish").style.display = "none";
-      document.getElementById("navContainer").innerHTML =
-        document.getElementById("navEN").innerHTML;
-    } else {
-      document.getElementById("english").style.display = "none";
-      document.getElementById("spanish").style.display = "block";
-      document.getElementById("navContainer").innerHTML =
-        document.getElementById("navES").innerHTML;
+  // Filter groups based on ?type=
+  function applyServiceFilter() {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get('type'); // life, personal, commercial
+
+    const groups = document.querySelectorAll('.services-group');
+
+    if (!type) {
+      // show all if no type
+      groups.forEach(g => g.style.display = "block");
+      return;
     }
-  });
-});
 
-// Load English nav on page load
-document.getElementById("navContainer").innerHTML =
-  document.getElementById("navEN").innerHTML;
+    groups.forEach(g => {
+      const groupType = g.getAttribute('data-group');
+      g.style.display = (groupType === type) ? "block" : "none";
+    });
+  }
 
-
-
-/* CATEGORY EXPANSION */
-document.querySelectorAll('.service-category').forEach(cat => {
-  cat.addEventListener('click', () => {
-    const id = cat.dataset.cat + "-details";
-    const box = document.getElementById(id);
-
-    // collapse all
-    document.querySelectorAll('.service-details').forEach(d => d.style.display = "none");
-
-    // expand selected
-    if (box) box.style.display = "block";
-  });
-});
-
-
-
-/* URL HASH HANDLING */
-window.addEventListener("load", () => {
-  const hash = window.location.hash.replace("#", "");
-
-  if (!hash) return;
-
-  const target = document.querySelector(`[data-cat="${hash}"]`);
-  if (target) target.click();
-});
+  window.addEventListener('load', applyServiceFilter);
+  window.addEventListener('popstate', applyServiceFilter);
 </script>
 
 <script>
-document.addEventListener("scroll", () => {
-  const header = document.querySelector(".aces-header");
-  if (window.scrollY > 10) header.classList.add("scrolled");
-  else header.classList.remove("scrolled");
-});
+  document.addEventListener("scroll", () => {
+    const header = document.querySelector(".aces-header");
+    if (window.scrollY > 10) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
+  });
 </script>
 
 </body>
