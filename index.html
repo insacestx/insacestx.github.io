@@ -9,7 +9,7 @@
   <meta name="keywords" content="insurance, Texas insurance, bilingual insurance, auto insurance, home insurance, commercial insurance, Waco insurance, Hewitt insurance, independent insurance agent">
   <meta name="robots" content="index, follow">
 
-  <link rel="stylesheet" href="style.css?v=31">
+  <link rel="stylesheet" href="style.css?v=40">
 </head>
 
 <body>
@@ -176,35 +176,6 @@
     </div>
   </section>
 
-  <section class="contact-card">
-    <h2>Contáctenos y Conozca a Nuestro Equipo</h2>
-    <div class="card-content">
-      <p>Nuestro equipo bilingüe está aquí para ayudar con aseguranza personal, comercial, de propiedad y de auto.</p>
-      <a href="contact.html" class="btn-small">Contáctenos</a>
-
-      <div class="team-preview">
-        <h3>Conozca a Nuestro Equipo</h3>
-        <p>Estamos actualizando esta sección.</p>
-        <p><em>Pronto podrá ver los perfiles completos.</em></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="trust">
-    <h2>Miembro Orgulloso</h2>
-
-    <div class="trust-badge-wrapper">
-      <img src="chamber-badge.png" class="trust-badge">
-    </div>
-
-    <p>Cámara de Comercio Hispana del Centro de Texas</p>
-
-    <div class="trust-qr">
-      <p>Escanee para visitar el sitio web de la Cámara</p>
-      <img src="chamber-qr.png" class="trust-qr-img">
-    </div>
-  </section>
-
   <footer class="footer">
     <img src="image2.png" class="footer-logo">
     <p>© 2026 ACES Insurance Services</p>
@@ -263,28 +234,23 @@
 
 <script src="global.js"></script>
 
-<!-- NEW LANGUAGE SWITCH SCRIPT -->
+<!-- LANGUAGE SWITCH SCRIPT -->
 <script>
 document.querySelectorAll('.lang-option').forEach(option => {
   option.addEventListener('click', () => {
 
-    // Update active highlight
     document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
     option.classList.add('active');
 
-    // Switch language content
     const lang = option.dataset.lang;
+
     if (lang === "english") {
       document.getElementById("english").style.display = "block";
       document.getElementById("spanish").style.display = "none";
-      document.getElementById("english").style.opacity = "1";
-      document.getElementById("spanish").style.opacity = "0";
       document.getElementById("navContainer").innerHTML = document.getElementById("navEN").innerHTML;
     } else {
       document.getElementById("english").style.display = "none";
       document.getElementById("spanish").style.display = "block";
-      document.getElementById("english").style.opacity = "0";
-      document.getElementById("spanish").style.opacity = "1";
       document.getElementById("navContainer").innerHTML = document.getElementById("navES").innerHTML;
     }
   });
