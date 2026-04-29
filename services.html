@@ -26,6 +26,7 @@
 
     .services-group {
       margin-bottom: 40px;
+      transition: opacity 0.3s ease;
     }
 
     .services-group-title {
@@ -667,7 +668,7 @@
   document.getElementById("navContainer").innerHTML =
     document.getElementById("navEN").innerHTML;
 
-  // Filter groups based on ?type=
+  // Filter groups based on ?type= with smooth transitions
   function applyServiceFilter() {
     const params = new URLSearchParams(window.location.search);
     const type = params.get('type'); // life, personal, commercial
@@ -675,14 +676,27 @@
     const groups = document.querySelectorAll('.services-group');
 
     if (!type) {
-      // show all if no type
-      groups.forEach(g => g.style.display = "block");
+      // Show all if no type
+      groups.forEach(g => {
+        g.style.opacity = 1;
+        g.style.display = "block";
+      });
       return;
     }
 
+    // Hide/show with fade effect
     groups.forEach(g => {
       const groupType = g.getAttribute('data-group');
-      g.style.display = (groupType === type) ? "block" : "none";
+      if (groupType === type) {
+        g.style.opacity = 0;
+        g.style.display = "block";
+        // Trigger reflow to ensure transition works
+        void g.offsetWidth;
+        setTimeout(() => { g.style.opacity = 1; }, 50);
+      } else {
+        g.style.opacity = 0;
+        setTimeout(() => { g.style.display = "none"; }, 300);
+      }
     });
   }
 
