@@ -4,18 +4,15 @@
   <meta charset="UTF-8">
   <title>Contact Us | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="description" content="Contact ACES Insurance Services for bilingual personal and commercial insurance support in Central Texas.">
   <meta name="robots" content="index, follow">
-
-  <link rel="stylesheet" href="style.css?v=42">
+  <link rel="stylesheet" href="style.css?v=43">
 </head>
 
 <body>
 
 <header class="aces-header">
   <div class="header-inner">
-
     <a href="index.html" class="header-logo">
       <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
     </a>
@@ -27,9 +24,7 @@
     </div>
 
     <nav id="navContainer" class="nav-menu"></nav>
-
     <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
-
   </div>
 </header>
 
@@ -38,9 +33,7 @@
 
   <section class="contact-page">
     <h2>Contact Us</h2>
-    <p class="contact-intro">
-      Our bilingual team is ready to help with personal, commercial, property, and auto insurance needs.
-    </p>
+    <p class="contact-intro">Our bilingual team is ready to help with personal, commercial, property, and auto insurance needs.</p>
 
     <div class="contact-layout">
 
@@ -48,48 +41,55 @@
       <div class="contact-info">
         <h3>Office Information</h3>
 
-        <p><strong>Address:</strong><br>
-        404 Sapphire Blvd.<br>
-        Hewitt, TX 76643</p>
-
-        <p><strong>Phone:</strong><br>
-        <a href="tel:2542276560">254-227-6560</a></p>
-
-        <p><strong>Email:</strong><br>
-        <a href="mailto:office@insaces.com">office@insaces.com</a></p>
+        <p><strong>Address:</strong><br>404 Sapphire Blvd.<br>Hewitt, TX 76643</p>
+        <p><strong>Phone:</strong><br><a href="tel:2542276560">254‑227‑6560</a></p>
+        <p><strong>Email:</strong><br><a href="mailto:office@insaces.com">office@insaces.com</a></p>
 
         <p><strong>Business Hours:</strong><br>
         Monday–Friday: 9:00 AM – 5:00 PM<br>
         Saturday–Sunday: Closed</p>
 
         <div class="map-wrapper">
-          <iframe
-            src="https://www.google.com/maps?q=404+Sapphire+Blvd+Hewitt+TX+76643&output=embed"
-            class="map-frame"
-            loading="lazy">
-          </iframe>
+          <iframe src="https://www.google.com/maps?q=404+Sapphire+Blvd+Hewitt+TX+76643&output=embed" class="map-frame" loading="lazy"></iframe>
         </div>
       </div>
 
-      <!-- RIGHT: CONTACT FORM -->
-      <div class="contact-form">
-        <h3>Send Us a Message</h3>
+      <!-- RIGHT: AGENT SYSTEM 2 -->
+      <div class="agent-section">
+        <h3>Meet Our Team</h3>
 
-        <form>
-          <label>Your Name</label>
-          <input type="text" required>
+        <div class="agent-layout">
 
-          <label>Email Address</label>
-          <input type="email" required>
+          <!-- LEFT: Agent List -->
+          <div class="agent-list">
 
-          <label>Phone Number</label>
-          <input type="tel">
+            <div class="agent-item" data-name="George J. Santibañez" data-title="Independent Insurance Agent" data-email="george@insaces.com" data-phone="254-227-6560" data-photo="george.jpg">George J. Santibañez</div>
 
-          <label>Your Message</label>
-          <textarea rows="5" required></textarea>
+            <div class="agent-item" data-name="Jimmy Rodriguez" data-title="Commercial & Personal Lines" data-email="jimmy@insaces.com" data-phone="214-498-6928" data-photo="jimmy.jpg">Jimmy Rodriguez</div>
 
-          <button type="submit" class="btn-small">Send Message</button>
-        </form>
+            <div class="agent-item" data-name="Jordan Jones" data-title="Co‑Owner" data-email="jordan@insaces.com" data-phone="254-289-2423" data-photo="jordan.jpg">Jordan Jones</div>
+
+            <div class="agent-item" data-name="Lanse Derrick" data-title="Co‑Owner" data-email="lanse@insaces.com" data-phone="214-770-1488" data-photo="lanse.jpg">Lanse Derrick</div>
+
+            <div class="agent-item" data-name="Robert Hyde" data-title="Co‑Owner" data-email="robert@insaces.com" data-phone="254-292-0961" data-photo="robert.jpg">Robert Hyde</div>
+
+            <div class="agent-item" data-name="Bryan Carter" data-title="Co‑Owner" data-email="bryan@insaces.com" data-phone="254-744-6600" data-photo="bryan.jpg">Bryan Carter</div>
+
+            <div class="agent-item" data-name="Renee Ridling" data-title="Office Manager" data-email="office@insaces.com" data-phone="254-227-6560" data-photo="renee.jpg">Renee Ridling</div>
+
+          </div>
+
+          <!-- RIGHT: Dynamic Panel -->
+          <div class="agent-panel">
+            <img id="agentPhoto" class="agent-photo-large" src="placeholder-agent.png">
+            <h2 id="agentName">Select an Agent</h2>
+            <p id="agentTitle"></p>
+            <p><strong>Email:</strong> <span id="agentEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="agentPhone"></span></p>
+            <a id="agentEmailBtn" class="btn-small" href="#">Email This Agent</a>
+          </div>
+
+        </div>
       </div>
 
     </div>
@@ -107,9 +107,7 @@
 
   <section class="contact-page">
     <h2>Contáctenos</h2>
-    <p class="contact-intro">
-      Nuestro equipo bilingüe está listo para ayudarle con seguros personales, comerciales, de propiedad y auto.
-    </p>
+    <p class="contact-intro">Nuestro equipo bilingüe está listo para ayudarle con seguros personales, comerciales, de propiedad y auto.</p>
 
     <div class="contact-layout">
 
@@ -117,48 +115,55 @@
       <div class="contact-info">
         <h3>Información de la Oficina</h3>
 
-        <p><strong>Dirección:</strong><br>
-        404 Sapphire Blvd.<br>
-        Hewitt, TX 76643</p>
-
-        <p><strong>Teléfono:</strong><br>
-        <a href="tel:2542276560">254-227-6560</a></p>
-
-        <p><strong>Correo Electrónico:</strong><br>
-        <a href="mailto:office@insaces.com">office@insaces.com</a></p>
+        <p><strong>Dirección:</strong><br>404 Sapphire Blvd.<br>Hewitt, TX 76643</p>
+        <p><strong>Teléfono:</strong><br><a href="tel:2542276560">254‑227‑6560</a></p>
+        <p><strong>Correo Electrónico:</strong><br><a href="mailto:office@insaces.com">office@insaces.com</a></p>
 
         <p><strong>Horario:</strong><br>
         Lunes–Viernes: 9:00 AM – 5:00 PM<br>
         Sábado–Domingo: Cerrado</p>
 
         <div class="map-wrapper">
-          <iframe
-            src="https://www.google.com/maps?q=404+Sapphire+Blvd+Hewitt+TX+76643&output=embed"
-            class="map-frame"
-            loading="lazy">
-          </iframe>
+          <iframe src="https://www.google.com/maps?q=404+Sapphire+Blvd+Hewitt+TX+76643&output=embed" class="map-frame" loading="lazy"></iframe>
         </div>
       </div>
 
-      <!-- RIGHT: CONTACT FORM -->
-      <div class="contact-form">
-        <h3>Envíenos un Mensaje</h3>
+      <!-- RIGHT: AGENT SYSTEM 2 -->
+      <div class="agent-section">
+        <h3>Conozca Nuestro Equipo</h3>
 
-        <form>
-          <label>Su Nombre</label>
-          <input type="text" required>
+        <div class="agent-layout">
 
-          <label>Correo Electrónico</label>
-          <input type="email" required>
+          <!-- LEFT: Agent List -->
+          <div class="agent-list">
 
-          <label>Número de Teléfono</label>
-          <input type="tel">
+            <div class="agent-item" data-name="George J. Santibañez" data-title="Agente de Seguros Independiente" data-email="george@insaces.com" data-phone="254-227-6560" data-photo="george.jpg">George J. Santibañez</div>
 
-          <label>Su Mensaje</label>
-          <textarea rows="5" required></textarea>
+            <div class="agent-item" data-name="Jimmy Rodriguez" data-title="Líneas Comerciales y Personales" data-email="jimmy@insaces.com" data-phone="214-498-6928" data-photo="jimmy.jpg">Jimmy Rodriguez</div>
 
-          <button type="submit" class="btn-small">Enviar Mensaje</button>
-        </form>
+            <div class="agent-item" data-name="Jordan Jones" data-title="Co‑Propietario" data-email="jordan@insaces.com" data-phone="254-289-2423" data-photo="jordan.jpg">Jordan Jones</div>
+
+            <div class="agent-item" data-name="Lanse Derrick" data-title="Co‑Propietario" data-email="lanse@insaces.com" data-phone="214-770-1488" data-photo="lanse.jpg">Lanse Derrick</div>
+
+            <div class="agent-item" data-name="Robert Hyde" data-title="Co‑Propietario" data-email="robert@insaces.com" data-phone="254-292-0961" data-photo="robert.jpg">Robert Hyde</div>
+
+            <div class="agent-item" data-name="Bryan Carter" data-title="Co‑Propietario" data-email="bryan@insaces.com" data-phone="254-744-6600" data-photo="bryan.jpg">Bryan Carter</div>
+
+            <div class="agent-item" data-name="Renee Ridling" data-title="Gerente de Oficina" data-email="office@insaces.com" data-phone="254-227-6560" data-photo="renee.jpg">Renee Ridling</div>
+
+          </div>
+
+          <!-- RIGHT: Dynamic Panel -->
+          <div class="agent-panel">
+            <img id="agentPhoto" class="agent-photo-large" src="placeholder-agent.png">
+            <h2 id="agentName">Seleccione un Agente</h2>
+            <p id="agentTitle"></p>
+            <p><strong>Correo:</strong> <span id="agentEmail"></span></p>
+            <p><strong>Teléfono:</strong> <span id="agentPhone"></span></p>
+            <a id="agentEmailBtn" class="btn-small" href="#">Enviar Correo</a>
+          </div>
+
+        </div>
       </div>
 
     </div>
@@ -220,7 +225,24 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=42"></script>
+<!-- SYSTEM 2 SCRIPT -->
+<script>
+document.querySelectorAll(".agent-item").forEach(item => {
+  item.addEventListener("click", () => {
+    document.getElementById("agentName").textContent = item.dataset.name;
+    document.getElementById("agentTitle").textContent = item.dataset.title;
+    document.getElementById("agentEmail").textContent = item.dataset.email;
+    document.getElementById("agentPhone").textContent = item.dataset.phone;
+    document.getElementById("agentPhoto").src = item.dataset.photo;
+
+    document.getElementById("agentEmailBtn").href =
+      "mailto:" + item.dataset.email +
+      "?subject=Client Inquiry for " + encodeURIComponent(item.dataset.name);
+  });
+});
+</script>
+
+<script src="global.js?v=43"></script>
 
 </body>
 </html>
