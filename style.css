@@ -12,13 +12,12 @@ body{
 @keyframes fadeInBody{from{opacity:0;}to{opacity:1;}}
 #english,#spanish{transition:opacity .3s ease;}
 
-/* Utility */
 h2,h3{margin-top:0;}
 a{text-decoration:none;color:inherit;}
 
 
 /* ============================================================
-   HEADER — PREMIUM VERSION
+   HEADER
 ============================================================ */
 .aces-header{
   background:#fff;
@@ -47,7 +46,7 @@ a{text-decoration:none;color:inherit;}
 
 
 /* ============================================================
-   LANGUAGE SWITCH — FLAGS + TEXT
+   LANGUAGE SWITCH
 ============================================================ */
 .lang-switch{
   display:flex;
@@ -81,7 +80,7 @@ a{text-decoration:none;color:inherit;}
 
 
 /* ============================================================
-   NAVIGATION — RIGHT ALIGNED + UNDERLINE ANIMATION
+   NAVIGATION
 ============================================================ */
 #navContainer{margin-left:auto;}
 .nav-menu{
@@ -111,13 +110,8 @@ a{text-decoration:none;color:inherit;}
 .nav-link:hover::after{width:100%;}
 .nav-link:hover{color:#d40000;}
 
-
-/* ============================================================
-   DROPDOWN MENU — CLICK + HOVER SUPPORT
-============================================================ */
 .dropdown{position:relative;}
 .dropdown-toggle{cursor:pointer;}
-
 .dropdown-menu{
   position:absolute;
   top:100%;
@@ -134,7 +128,6 @@ a{text-decoration:none;color:inherit;}
   z-index:999;
 }
 .dropdown-menu.show{display:flex;}
-
 .dropdown-menu a{
   padding:10px 14px;
   font-weight:500;
@@ -180,7 +173,7 @@ a{text-decoration:none;color:inherit;}
 
 
 /* ============================================================
-   HOME / SERVICES GRID
+   SERVICES GRID
 ============================================================ */
 .services-grid{
   display:grid;
@@ -189,7 +182,7 @@ a{text-decoration:none;color:inherit;}
   margin-top:20px;
 }
 .service-box{
-  background:#fff;
+  background:rgba(255,255,255,0.92);
   border:1px solid #ddd;
   border-radius:8px;
   padding:20px;
@@ -208,7 +201,7 @@ a{text-decoration:none;color:inherit;}
 
 
 /* ============================================================
-   CONTACT PAGE — SYSTEM 2 (DYNAMIC AGENT PANEL)
+   CONTACT PAGE — SYSTEM 2
 ============================================================ */
 .contact-page{
   padding:40px 20px;
@@ -226,7 +219,6 @@ a{text-decoration:none;color:inherit;}
   flex-wrap:wrap;
 }
 
-/* LEFT — OFFICE INFO */
 .contact-info{flex:1;min-width:280px;}
 .contact-info h3{margin-bottom:10px;font-size:1.3rem;}
 .map-wrapper{margin-top:15px;}
@@ -237,12 +229,10 @@ a{text-decoration:none;color:inherit;}
   border-radius:8px;
 }
 
-/* RIGHT — AGENT SYSTEM */
 .agent-section{flex:1.5;min-width:320px;}
 .agent-section h3{margin-bottom:12px;font-size:1.3rem;}
 .agent-layout{display:flex;gap:25px;}
 
-/* LEFT LIST */
 .agent-list{
   width:40%;
   border-right:2px solid #ddd;
@@ -261,7 +251,6 @@ a{text-decoration:none;color:inherit;}
   text-shadow:0 0 8px rgba(212,0,0,.35);
 }
 
-/* RIGHT PANEL */
 .agent-panel{
   width:60%;
   padding-left:15px;
@@ -291,7 +280,6 @@ a{text-decoration:none;color:inherit;}
   box-shadow:0 0 10px rgba(212,0,0,.55);
 }
 
-/* MOBILE */
 @media(max-width:900px){
   .agent-layout{flex-direction:column;}
   .agent-list,.agent-panel{
@@ -301,65 +289,49 @@ a{text-decoration:none;color:inherit;}
   }
   .agent-photo-large{max-width:100%;}
 }
-@media(max-width:600px){
-  .contact-layout{flex-direction:column;}
-  .contact-info,.agent-section{width:100%;}
-}
+
+
 /* ============================================================
-   ACES COLOR STRIPE SYSTEM — FIXED FOR LANGUAGE WRAPPERS
+   ABOUT PAGE — TEAM FILTERS
 ============================================================ */
-
-/* ENGLISH */
-#english > section:nth-of-type(1){
+.team-filters{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+.team-filter-btn{
+  padding:8px 14px;
+  border-radius:4px;
+  background:#fff;
+  border:1px solid #d40000;
+  color:#d40000;
+  cursor:pointer;
+  font-weight:600;
+  transition:all .25s ease;
+}
+.team-filter-btn:hover{
   background:#d40000;
   color:#fff;
 }
-#english > section:nth-of-type(2){
-  background:#000;
-  color:#fff;
-}
-#english > section:nth-of-type(3){
-  background:#fff;
-  color:#111;
-}
-#english > section:nth-of-type(4){
+.team-filter-btn.active{
   background:#d40000;
   color:#fff;
-}
-#english > section:nth-of-type(5){
-  background:#000;
-  color:#fff;
-}
-#english > section:nth-of-type(6){
-  background:#fff;
-  color:#111;
 }
 
-/* SPANISH */
-#spanish > section:nth-of-type(1){
-  background:#d40000;
-  color:#fff;
+.team-card{
+  padding:20px;
+  border-radius:8px;
+  background:rgba(255,255,255,0.92);
+  border:1px solid #ddd;
+  text-align:center;
+  transition:all .25s ease;
 }
-#spanish > section:nth-of-type(2){
-  background:#000;
-  color:#fff;
+.team-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 4px 14px rgba(0,0,0,.12);
 }
-#spanish > section:nth-of-type(3){
-  background:#fff;
-  color:#111;
-}
-#spanish > section:nth-of-type(4){
-  background:#d40000;
-  color:#fff;
-}
-#spanish > section:nth-of-type(5){
-  background:#000;
-  color:#fff;
-}
-#spanish > section:nth-of-type(6){
-  background:#fff;
-  color:#111;
-}
+
 
 /* ============================================================
    FOOTER
@@ -375,4 +347,53 @@ a{text-decoration:none;color:inherit;}
   width:120px;
   height:auto;
   margin-bottom:10px;
+}
+
+
+/* ============================================================
+   ACES COLOR STRIPE SYSTEM — FIXED FOR LANGUAGE WRAPPERS
+============================================================ */
+
+/* UNDERGLOW */
+#english > section,
+#spanish > section{
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  position:relative;
+  z-index:1;
+}
+
+/* ENGLISH */
+#english > section:nth-of-type(1){
+  background:#d40000;
+  color:#fff;
+}
+#english > section:nth-of-type(2){
+  background:#000;
+  color:#fff;
+}
+#english > section:nth-of-type(3){
+  background:#ffffff;
+  color:#111;
+}
+#english > section:nth-of-type(4){
+  background:#d40000;
+  color:#fff;
+}
+
+/* SPANISH */
+#spanish > section:nth-of-type(1){
+  background:#d40000;
+  color:#fff;
+}
+#spanish > section:nth-of-type(2){
+  background:#000;
+  color:#fff;
+}
+#spanish > section:nth-of-type(3){
+  background:#ffffff;
+  color:#111;
+}
+#spanish > section:nth-of-type(4){
+  background:#d40000;
+  color:#fff;
 }
