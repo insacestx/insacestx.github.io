@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta name="description" content="ACES Insurance Services – Bilingual insurance support for Texas families and businesses. Auto, home, commercial, property, and more.">
-  <meta name="keywords" content="insurance, Texas insurance, bilingual insurance, auto insurance, home insurance, commercial insurance, Waco insurance, Hewitt insurance, independent insurance agent[...]
+  <meta name="keywords" content="insurance, Texas insurance, bilingual insurance, auto insurance, home insurance, commercial insurance, Waco insurance, Hewitt insurance, independent insurance agent">
   <meta name="robots" content="index, follow">
 
-  <link rel="stylesheet" href="style.css?v=41">
+  <link rel="stylesheet" href="style.css?v=42">
 </head>
 
 <body>
@@ -21,9 +21,8 @@
       <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
     </a>
 
-    <!-- NEW FLAG + TEXT LANGUAGE SWITCH -->
     <div class="lang-switch">
-      <span class="lang-option active" data-lang="english">🇺🇸 EN</span>
+      <span class="lang-option" data-lang="english">🇺🇸 EN</span>
       <span class="divider">|</span>
       <span class="lang-option" data-lang="spanish">🇲🇽 ES</span>
     </div>
@@ -217,9 +216,9 @@
   <div class="dropdown">
     <span class="nav-link dropdown-toggle">Services ▾</span>
     <div class="dropdown-menu">
-      <a href="services.html#life">Life Insurance</a>
-      <a href="services.html#personal-lines">Personal Insurance</a>
-      <a href="services.html#commercial-lines">Commercial Insurance</a>
+      <a href="services.html?type=life">Life Insurance</a>
+      <a href="services.html?type=personal">Personal Insurance</a>
+      <a href="services.html?type=commercial">Commercial Insurance</a>
     </div>
   </div>
 
@@ -241,9 +240,9 @@
   <div class="dropdown">
     <span class="nav-link dropdown-toggle">Servicios ▾</span>
     <div class="dropdown-menu">
-      <a href="services.html#life-es">Seguro de Vida</a>
-      <a href="services.html#personal-lines-es">Seguro Personal</a>
-      <a href="services.html#commercial-lines-es">Seguro Comercial</a>
+      <a href="services.html?type=life">Seguro de Vida</a>
+      <a href="services.html?type=personal">Seguro Personal</a>
+      <a href="services.html?type=commercial">Seguro Comercial</a>
     </div>
   </div>
 
@@ -261,38 +260,7 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js"></script>
-
-<!-- LANGUAGE SWITCH SCRIPT -->
-<script>
-document.querySelectorAll('.lang-option').forEach(option => {
-  option.addEventListener('click', () => {
-
-    document.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
-    option.classList.add('active');
-
-    const lang = option.dataset.lang;
-
-    if (lang === "english") {
-      document.getElementById("english").style.display = "block";
-      document.getElementById("spanish").style.display = "none";
-      document.getElementById("navContainer").innerHTML = document.getElementById("navEN").innerHTML;
-    } else {
-      document.getElementById("english").style.display = "none";
-      document.getElementById("spanish").style.display = "block";
-      document.getElementById("navContainer").innerHTML = document.getElementById("navES").innerHTML;
-    }
-  });
-});
-</script>
-
-<script>
-document.addEventListener("scroll", () => {
-  const header = document.querySelector(".aces-header");
-  if (window.scrollY > 10) header.classList.add("scrolled");
-  else header.classList.remove("scrolled");
-});
-</script>
+<script src="global.js?v=42"></script>
 
 </body>
 </html>
