@@ -305,7 +305,61 @@ a{text-decoration:none;color:inherit;}
   .contact-layout{flex-direction:column;}
   .contact-info,.agent-section{width:100%;}
 }
+/* ============================================================
+   ACES COLOR STRIPE SYSTEM — FIXED FOR LANGUAGE WRAPPERS
+============================================================ */
 
+/* ENGLISH */
+#english > section:nth-of-type(1){
+  background:#d40000;
+  color:#fff;
+}
+#english > section:nth-of-type(2){
+  background:#000;
+  color:#fff;
+}
+#english > section:nth-of-type(3){
+  background:#fff;
+  color:#111;
+}
+#english > section:nth-of-type(4){
+  background:#d40000;
+  color:#fff;
+}
+#english > section:nth-of-type(5){
+  background:#000;
+  color:#fff;
+}
+#english > section:nth-of-type(6){
+  background:#fff;
+  color:#111;
+}
+
+/* SPANISH */
+#spanish > section:nth-of-type(1){
+  background:#d40000;
+  color:#fff;
+}
+#spanish > section:nth-of-type(2){
+  background:#000;
+  color:#fff;
+}
+#spanish > section:nth-of-type(3){
+  background:#fff;
+  color:#111;
+}
+#spanish > section:nth-of-type(4){
+  background:#d40000;
+  color:#fff;
+}
+#spanish > section:nth-of-type(5){
+  background:#000;
+  color:#fff;
+}
+#spanish > section:nth-of-type(6){
+  background:#fff;
+  color:#111;
+}
 
 /* ============================================================
    FOOTER
