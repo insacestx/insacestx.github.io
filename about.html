@@ -4,15 +4,18 @@
   <meta charset="UTF-8">
   <title>About Us | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <meta name="description" content="Learn about ACES Insurance Services, our mission, values, and licensed team serving Central Texas.">
   <meta name="robots" content="index, follow">
-  <link rel="stylesheet" href="style.css?v=50">
+
+  <link rel="stylesheet" href="style.css?v=70">
 </head>
 
 <body>
 
 <header class="aces-header">
   <div class="header-inner">
+
     <a href="index.html" class="header-logo">
       <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
     </a>
@@ -24,107 +27,131 @@
     </div>
 
     <nav id="navContainer" class="nav-menu"></nav>
+
     <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
+
   </div>
 </header>
 
 <!-- ================= ENGLISH ================= -->
 <div id="english">
 
-  <section class="contact-page">
+  <!-- SECTION 1 — OFF-WHITE -->
+  <section class="about">
     <h2>About ACES Insurance Services</h2>
-    <p class="contact-intro">
+    <p>
       ACES Insurance Services is a locally rooted, fully licensed independent agency serving Central Texas with personal and commercial insurance solutions.
     </p>
-
-    <h3>Our Mission</h3>
     <p>
       Our mission is to protect families, businesses, and property with tailored coverage, clear communication, and long‑term relationships built on trust.
     </p>
-
-    <h3>Our Values</h3>
-    <ul>
-      <li><strong>Integrity:</strong> Honest guidance, every time.</li>
-      <li><strong>Service:</strong> Responsive support when it matters most.</li>
-      <li><strong>Expertise:</strong> Licensed professionals who understand real‑world risk.</li>
-      <li><strong>Community:</strong> Proudly serving Central Texas neighbors and businesses.</li>
-    </ul>
-
-    <h3>Why Choose ACES</h3>
-    <ul>
-      <li>Independent agency with access to multiple carriers.</li>
-      <li>Bilingual support for English and Spanish‑speaking clients.</li>
-      <li>Experience across personal, commercial, property, and auto lines.</li>
-      <li>Local presence with a dedicated, licensed team.</li>
-    </ul>
   </section>
 
-  <section class="contact-page">
-    <h2>Meet Our Team</h2>
+  <!-- SECTION 2 — BLACK -->
+  <section id="services">
+    <h2>Our Values</h2>
 
-    <!-- FILTER BUTTONS (EN) -->
+    <div class="services-grid">
+
+      <div class="service-box">
+        <img src="icon-life-aces.png" class="service-icon">
+        <h3>Integrity</h3>
+        <p>Honest guidance, every time.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-commercial-aces.png" class="service-icon">
+        <h3>Service</h3>
+        <p>Responsive support when it matters most.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-property-aces.png" class="service-icon">
+        <h3>Expertise</h3>
+        <p>Licensed professionals who understand real‑world risk.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-auto-aces.png" class="service-icon">
+        <h3>Community</h3>
+        <p>Proudly serving Central Texas neighbors and businesses.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3 — RED -->
+  <section class="contact-card">
+    <h2>Meet Our Team</h2>
+    <p>Filter by role or language preference.</p>
+
+    <!-- FILTER BUTTONS -->
     <div class="team-filters" id="teamFiltersEN">
-      <button class="btn-small team-filter-btn active" data-filter="all">All</button>
-      <button class="btn-small team-filter-btn" data-filter="owner">Owners</button>
-      <button class="btn-small team-filter-btn" data-filter="agent">Agents</button>
-      <button class="btn-small team-filter-btn" data-filter="spanish">Spanish‑Speaking</button>
-      <button class="btn-small team-filter-btn" data-filter="nonspanish">Non‑Spanish‑Speaking</button>
+      <button class="team-filter-btn active" data-filter="all">All</button>
+      <button class="team-filter-btn" data-filter="owner">Owners</button>
+      <button class="team-filter-btn" data-filter="agent">Agents</button>
+      <button class="team-filter-btn" data-filter="spanish">Spanish‑Speaking</button>
+      <button class="team-filter-btn" data-filter="nonspanish">Non‑Spanish</button>
     </div>
 
-    <!-- TEAM GRID (EN) -->
+    <!-- TEAM GRID -->
     <div class="services-grid" id="teamGridEN">
 
       <div class="service-box team-card" data-role="owner" data-spanish="false">
-        <img src="jordan.jpg" alt="Jordan Jones" class="service-icon">
+        <img src="jordan.jpg" class="service-icon">
         <h3>Jordan Jones</h3>
         <p>Co‑Owner</p>
       </div>
 
       <div class="service-box team-card" data-role="owner" data-spanish="false">
-        <img src="lanse.jpg" alt="Lanse Derrick" class="service-icon">
+        <img src="lanse.jpg" class="service-icon">
         <h3>Lanse Derrick</h3>
         <p>Co‑Owner</p>
       </div>
 
       <div class="service-box team-card" data-role="owner" data-spanish="false">
-        <img src="robert.jpg" alt="Robert Hyde" class="service-icon">
+        <img src="robert.jpg" class="service-icon">
         <h3>Robert Hyde</h3>
         <p>Co‑Owner</p>
       </div>
 
       <div class="service-box team-card" data-role="owner" data-spanish="false">
-        <img src="bryan.jpg" alt="Bryan Carter" class="service-icon">
+        <img src="bryan.jpg" class="service-icon">
         <h3>Bryan Carter</h3>
         <p>Co‑Owner</p>
       </div>
 
       <div class="service-box team-card" data-role="agent" data-spanish="true">
-        <img src="george.jpg" alt="George J. Santibañez" class="service-icon">
+        <img src="george.jpg" class="service-icon">
         <h3>George J. Santibañez</h3>
         <p>Independent Insurance Agent</p>
       </div>
 
       <div class="service-box team-card" data-role="agent" data-spanish="true">
-        <img src="jimmy.jpg" alt="Jimmy Rodriguez" class="service-icon">
+        <img src="jimmy.jpg" class="service-icon">
         <h3>Jimmy Rodriguez</h3>
         <p>Commercial & Personal Lines</p>
       </div>
 
       <div class="service-box team-card" data-role="agent" data-spanish="false">
-        <img src="renee.jpg" alt="Renee Ridling" class="service-icon">
+        <img src="renee.jpg" class="service-icon">
         <h3>Renee Ridling</h3>
         <p>Office Manager (Licensed)</p>
       </div>
 
     </div>
 
-    <p style="margin-top:25px;">
-      Need coverage or have questions? <a href="contact.html">Contact us today</a> to speak with one of our licensed professionals.
-    </p>
   </section>
 
+  <!-- SECTION 4 — WHITE -->
+  <section class="trust">
+    <h2>Our Commitment</h2>
+    <p>We believe in long‑term relationships, honest guidance, and protecting what matters most.</p>
+  </section>
+
+  <!-- FOOTER — BLACK -->
   <footer class="footer">
-    <img src="image2.png" class="footer-logo" alt="ACES Insurance Services">
+    <img src="image2.png" class="footer-logo">
     <p>© 2026 ACES Insurance Services</p>
   </footer>
 
@@ -133,106 +160,128 @@
 <!-- ================= SPANISH ================= -->
 <div id="spanish" style="display:none;">
 
-  <section class="contact-page">
+  <!-- SECTION 1 — OFF-WHITE -->
+  <section class="about">
     <h2>Acerca de ACES Insurance Services</h2>
-    <p class="contact-intro">
+    <p>
       ACES Insurance Services es una agencia independiente con raíces locales que sirve a Centro de Texas con soluciones de seguros personales y comerciales.
     </p>
-
-    <h3>Nuestra Misión</h3>
     <p>
       Nuestra misión es proteger a familias, negocios y propiedades con coberturas adecuadas, comunicación clara y relaciones a largo plazo basadas en la confianza.
     </p>
-
-    <h3>Nuestros Valores</h3>
-    <ul>
-      <li><strong>Integridad:</strong> Asesoría honesta en todo momento.</li>
-      <li><strong>Servicio:</strong> Atención rápida cuando más la necesita.</li>
-      <li><strong>Experiencia:</strong> Profesionales licenciados que entienden el riesgo real.</li>
-      <li><strong>Comunidad:</strong> Orgullosamente al servicio de nuestros vecinos y negocios en Centro de Texas.</li>
-    </ul>
-
-    <h3>Por Qué Elegir ACES</h3>
-    <ul>
-      <li>Agencia independiente con acceso a múltiples aseguradoras.</li>
-      <li>Atención bilingüe en inglés y español.</li>
-      <li>Experiencia en seguros personales, comerciales, de propiedad y auto.</li>
-      <li>Presencia local con un equipo dedicado y licenciado.</li>
-    </ul>
   </section>
 
-  <section class="contact-page">
-    <h2>Conozca Nuestro Equipo</h2>
+  <!-- SECTION 2 — BLACK -->
+  <section id="services">
+    <h2>Nuestros Valores</h2>
 
-    <!-- FILTER BUTTONS (ES) -->
+    <div class="services-grid">
+
+      <div class="service-box">
+        <img src="icon-life-aces.png" class="service-icon">
+        <h3>Integridad</h3>
+        <p>Asesoría honesta en todo momento.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-commercial-aces.png" class="service-icon">
+        <h3>Servicio</h3>
+        <p>Atención rápida cuando más la necesita.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-property-aces.png" class="service-icon">
+        <h3>Experiencia</h3>
+        <p>Profesionales licenciados que entienden el riesgo real.</p>
+      </div>
+
+      <div class="service-box">
+        <img src="icon-auto-aces.png" class="service-icon">
+        <h3>Comunidad</h3>
+        <p>Orgullosamente al servicio de nuestros vecinos y negocios.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3 — RED -->
+  <section class="contact-card">
+    <h2>Conozca Nuestro Equipo</h2>
+    <p>Filtre por rol o preferencia de idioma.</p>
+
+    <!-- FILTER BUTTONS -->
     <div class="team-filters" id="teamFiltersES">
-      <button class="btn-small team-filter-btn active" data-filter="all">Todos</button>
-      <button class="btn-small team-filter-btn" data-filter="owner">Dueños</button>
-      <button class="btn-small team-filter-btn" data-filter="agent">Agentes</button>
-      <button class="btn-small team-filter-btn" data-filter="spanish">Hablan Español</button>
-      <button class="btn-small team-filter-btn" data-filter="nonspanish">No Hablan Español</button>
+      <button class="team-filter-btn active" data-filter="all">Todos</button>
+      <button class="team-filter-btn" data-filter="owner">Dueños</button>
+      <button class="team-filter-btn" data-filter="agent">Agentes</button>
+      <button class="team-filter-btn" data-filter="spanish">Hablan Español</button>
+      <button class="team-filter-btn" data-filter="nonspanish">No Español</button>
     </div>
 
-    <!-- TEAM GRID (ES) -->
+    <!-- TEAM GRID -->
     <div class="services-grid" id="teamGridES">
 
       <div class="service-box team-card" data-role="owner" data-spanish="false">
-        <img src="jordan.jpg" alt="Jordan Jones" class="service-icon">
+        <img src="jordan.jpg" class="service-icon">
         <h3>Jordan Jones</h3>
         <p>Co‑Propietario</p>
       </div>
 
       <div class="service-box team-card" data-role="owner" data-spanish="false">
-        <img src="lanse.jpg" alt="Lanse Derrick" class="service-icon">
+        <img src="lanse.jpg" class="service-icon">
         <h3>Lanse Derrick</h3>
         <p>Co‑Propietario</p>
       </div>
 
       <div class="service-box team-card" data-role="owner" data-spanish="false">
-        <img src="robert.jpg" alt="Robert Hyde" class="service-icon">
+        <img src="robert.jpg" class="service-icon">
         <h3>Robert Hyde</h3>
         <p>Co‑Propietario</p>
       </div>
 
       <div class="service-box team-card" data-role="owner" data-spanish="false">
-        <img src="bryan.jpg" alt="Bryan Carter" class="service-icon">
+        <img src="bryan.jpg" class="service-icon">
         <h3>Bryan Carter</h3>
         <p>Co‑Propietario</p>
       </div>
 
       <div class="service-box team-card" data-role="agent" data-spanish="true">
-        <img src="george.jpg" alt="George J. Santibañez" class="service-icon">
+        <img src="george.jpg" class="service-icon">
         <h3>George J. Santibañez</h3>
         <p>Agente de Seguros Independiente</p>
       </div>
 
       <div class="service-box team-card" data-role="agent" data-spanish="true">
-        <img src="jimmy.jpg" alt="Jimmy Rodriguez" class="service-icon">
+        <img src="jimmy.jpg" class="service-icon">
         <h3>Jimmy Rodriguez</h3>
         <p>Líneas Comerciales y Personales</p>
       </div>
 
       <div class="service-box team-card" data-role="agent" data-spanish="false">
-        <img src="renee.jpg" alt="Renee Ridling" class="service-icon">
+        <img src="renee.jpg" class="service-icon">
         <h3>Renee Ridling</h3>
         <p>Gerente de Oficina (Licenciada)</p>
       </div>
 
     </div>
 
-    <p style="margin-top:25px;">
-      ¿Necesita cobertura o tiene preguntas? <a href="contact.html">Contáctenos hoy</a> para hablar con uno de nuestros profesionales licenciados.
-    </p>
   </section>
 
+  <!-- SECTION 4 — WHITE -->
+  <section class="trust">
+    <h2>Nuestro Compromiso</h2>
+    <p>Creemos en relaciones a largo plazo, asesoría honesta y proteger lo que más importa.</p>
+  </section>
+
+  <!-- FOOTER — BLACK -->
   <footer class="footer">
-    <img src="image2.png" class="footer-logo" alt="ACES Insurance Services">
+    <img src="image2.png" class="footer-logo">
     <p>© 2026 ACES Insurance Services</p>
   </footer>
 
 </div>
 
-<!-- ================= NAV TEMPLATES ================= -->
+<!-- ================= NAVIGATION TEMPLATES ================= -->
 <nav id="navEN" style="display:none;">
   <div class="dropdown">
     <span class="nav-link dropdown-toggle">Services ▾</span>
@@ -281,6 +330,8 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
+<script src="global.js?v=70"></script>
+
 <!-- TEAM FILTER SCRIPT -->
 <script>
   function wireTeamFilters(filterContainerId, gridId){
@@ -322,8 +373,6 @@
     wireTeamFilters("teamFiltersES","teamGridES");
   });
 </script>
-
-<script src="global.js?v=50"></script>
 
 </body>
 </html>
