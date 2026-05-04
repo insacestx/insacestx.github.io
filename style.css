@@ -1,5 +1,5 @@
 /* ============================================================
-   ACES 2026 — B2 GLOBAL STYLE.CSS
+   ACES 2026 — FINAL GLOBAL STYLE.CSS
 ============================================================ */
 
 *{box-sizing:border-box;}
@@ -44,11 +44,16 @@ h1,h2,h3{margin-top:0;}
 .lang-option{
   border:1px solid #ddd;
   background:#f7f7f7;
-  padding:4px 10px;
+  padding:4px 12px;
   border-radius:999px;
   font-size:.85rem;
   cursor:pointer;
   font-weight:600;
+  transition:background .25s, color .25s, border-color .25s;
+}
+.lang-option:hover{
+  background:#ffe5e5;
+  border-color:#d40000;
 }
 .lang-option.active{
   background:#d40000;
@@ -127,7 +132,7 @@ h1,h2,h3{margin-top:0;}
   .mobile-nav-toggle{display:block;}
 }
 
-/* HERO — H1 BLACK HERO */
+/* HERO */
 .hero-black{
   background:#000;
   color:#fff;
@@ -176,47 +181,27 @@ h1,h2,h3{margin-top:0;}
 }
 
 /* SECTIONS */
-.section-light{
-  background:#fafafa;
-  color:#111;
-  max-width:1200px;
-  margin:60px auto;
-  padding:60px 20px;
-  border-radius:12px;
-  box-shadow:0 18px 48px rgba(0,0,0,.18);
-  text-align:center;
-}
-
-.section-dark{
-  background:#000;
-  color:#fff;
-  max-width:1200px;
-  margin:60px auto;
-  padding:60px 20px;
-  border-radius:12px;
-  box-shadow:0 18px 48px rgba(0,0,0,.28);
-  text-align:center;
-}
-
+.section-light,
+.section-dark,
 .section-red{
-  background:#d40000;
-  color:#fff;
   max-width:1200px;
   margin:60px auto;
   padding:60px 20px;
   border-radius:12px;
   text-align:center;
-  box-shadow:0 18px 48px rgba(0,0,0,.28);
+  box-shadow:0 18px 48px rgba(0,0,0,.18);
 }
+.section-light{background:#fafafa;color:#111;}
+.section-dark{background:#000;color:#fff;}
+.section-red{background:#d40000;color:#fff;}
 
-/* SERVICES GRID + CARDS */
+/* SERVICES GRID */
 .services-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:24px;
   margin-top:30px;
 }
-
 .service-card{
   background:#fff;
   color:#111;
@@ -226,24 +211,17 @@ h1,h2,h3{margin-top:0;}
   text-align:center;
   transition:.3s;
 }
-
-.animated-card{
-  transform:translateY(0);
-  opacity:1;
-  transition:transform .35s ease, opacity .35s ease, box-shadow .35s ease;
-}
 .animated-card:hover{
   transform:translateY(-10px);
   box-shadow:0 18px 48px rgba(212,0,0,.45);
 }
 
-/* CONTACT PAGE — TEAM GRID / AGENT CARDS */
+/* TEAM GRID */
 .team-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:24px;
 }
-
 .agent-card{
   background:#fff;
   border-radius:16px;
@@ -259,7 +237,6 @@ h1,h2,h3{margin-top:0;}
   box-shadow:0 16px 36px rgba(212,0,0,.45);
   border-color:#d40000;
 }
-
 .agent-photo{
   width:120px;
   height:120px;
@@ -267,37 +244,10 @@ h1,h2,h3{margin-top:0;}
   border-radius:14px;
   margin-bottom:12px;
 }
-
 .title{
   font-weight:600;
   color:#d40000;
   margin-bottom:6px;
-}
-.email,.phone{
-  font-size:.95rem;
-  color:#444;
-  margin:4px 0;
-}
-
-/* BUTTONS */
-.btn-small{
-  background:#d40000;
-  color:#fff;
-  padding:10px 18px;
-  border-radius:6px;
-  font-weight:600;
-  display:inline-block;
-  margin-top:10px;
-}
-
-.btn-white{
-  background:#fff;
-  color:#d40000;
-  padding:12px 22px;
-  border-radius:6px;
-  font-weight:700;
-  display:inline-block;
-  margin-top:20px;
 }
 
 /* CHAMBER BADGE */
@@ -308,7 +258,7 @@ h1,h2,h3{margin-top:0;}
   filter:drop-shadow(0 6px 12px rgba(0,0,0,.35));
 }
 
-/* GENERIC PAGE WRAPPER */
+/* PAGE WRAPPER */
 .page-wrapper{
   max-width:1200px;
   margin:40px auto 80px;
