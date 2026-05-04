@@ -124,22 +124,28 @@ h2,h3{margin-top:0;}
 }
 
 /* ============================================================
-   SECTION BASE — MATCH INDEX.HTML
+   SECTION BASE
 ============================================================ */
-#english > section,
-#spanish > section{
+.section-light{
+  background:#fafafa;
+  color:#111;
+  max-width:1200px;
+  margin:40px auto;
+  padding:60px 20px;
+  border-radius:12px;
+  box-shadow:0 18px 48px rgba(0,0,0,.18);
+  text-align:center;
+}
+
+.section-dark{
+  background:#000;
+  color:#fff;
   max-width:1200px;
   margin:40px auto;
   padding:60px 20px;
   border-radius:12px;
   box-shadow:0 18px 48px rgba(0,0,0,.28);
-  text-align:center;
 }
-
-/* Alternating backgrounds like index.html */
-.about{background:#fafafa;}
-.contact-layout{background:#000;color:#fff;}
-.team-grid{background:#fff;color:#111;padding:40px;border-radius:12px;}
 
 /* ============================================================
    CONTACT PAGE LAYOUT
@@ -149,7 +155,6 @@ h2,h3{margin-top:0;}
   grid-template-columns:1fr 2fr;
   gap:40px;
   align-items:flex-start;
-  border-radius:12px;
 }
 @media(max-width:900px){
   .contact-layout{grid-template-columns:1fr;}
