@@ -1,5 +1,5 @@
 /* ============================================================
-   ACES 2026 MASTER STYLE.CSS — RESTORED + CORRECT
+   ACES 2026 — RESTORED B2 MODERN STYLE.CSS
 ============================================================ */
 
 *{box-sizing:border-box;}
@@ -10,7 +10,7 @@ body{
   color:#111;
 }
 a{text-decoration:none;color:inherit;cursor:pointer;}
-h2,h3{margin-top:0;}
+h1,h2,h3{margin-top:0;}
 
 /* ============================================================
    HEADER
@@ -62,6 +62,7 @@ h2,h3{margin-top:0;}
 .nav-link:hover::after{width:100%;}
 
 .dropdown{position:relative;}
+.dropdown-toggle{cursor:pointer;}
 .dropdown-menu{
   position:absolute;
   top:100%;
@@ -74,6 +75,7 @@ h2,h3{margin-top:0;}
   display:none;
   flex-direction:column;
   box-shadow:0 4px 12px rgba(0,0,0,.15);
+  z-index:2000;
 }
 .dropdown-menu.show{display:flex;}
 .dropdown-menu a{
@@ -101,13 +103,65 @@ h2,h3{margin-top:0;}
 }
 
 /* ============================================================
-   SECTION STYLES (MATCHING YOUR ORIGINAL HOMEPAGE)
+   HERO — H1 VERSION (BLACK HERO)
+============================================================ */
+.hero-black{
+  background:#000;
+  color:#fff;
+  text-align:center;
+  padding:120px 20px;
+}
+.hero-black h1{
+  font-size:2.8rem;
+  font-weight:800;
+  margin-bottom:12px;
+}
+.hero-black p{
+  font-size:1.2rem;
+  opacity:.9;
+  margin-bottom:24px;
+}
+.btn-hero{
+  background:#d40000;
+  color:#fff;
+  padding:14px 28px;
+  border-radius:6px;
+  font-weight:700;
+  display:inline-block;
+  transition:.25s;
+}
+.btn-hero:hover{
+  background:#b00000;
+}
+
+/* ============================================================
+   UNDERGLOW SECTIONS
+============================================================ */
+.underglow{
+  position:relative;
+}
+.underglow::before{
+  content:"";
+  position:absolute;
+  top:-20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:60%;
+  height:20px;
+  background:rgba(212,0,0,.35);
+  filter:blur(22px);
+  border-radius:50%;
+  z-index:-1;
+}
+
+/* ============================================================
+   SECTION STYLES
 ============================================================ */
 .section-light{
   background:#fafafa;
   color:#111;
   max-width:1200px;
-  margin:40px auto;
+  margin:60px auto;
   padding:60px 20px;
   border-radius:12px;
   box-shadow:0 18px 48px rgba(0,0,0,.18);
@@ -118,7 +172,7 @@ h2,h3{margin-top:0;}
   background:#000;
   color:#fff;
   max-width:1200px;
-  margin:40px auto;
+  margin:60px auto;
   padding:60px 20px;
   border-radius:12px;
   box-shadow:0 18px 48px rgba(0,0,0,.28);
@@ -129,7 +183,7 @@ h2,h3{margin-top:0;}
   background:#d40000;
   color:#fff;
   max-width:1200px;
-  margin:40px auto;
+  margin:60px auto;
   padding:60px 20px;
   border-radius:12px;
   text-align:center;
@@ -137,7 +191,7 @@ h2,h3{margin-top:0;}
 }
 
 /* ============================================================
-   SERVICES GRID
+   SERVICES — B2 ANIMATED CARDS
 ============================================================ */
 .services-grid{
   display:grid;
@@ -153,10 +207,21 @@ h2,h3{margin-top:0;}
   border-radius:12px;
   box-shadow:0 12px 32px rgba(0,0,0,.18);
   text-align:center;
+  transition:.3s;
+}
+
+.animated-card{
+  transform:translateY(0);
+  opacity:1;
+  transition:transform .35s ease, opacity .35s ease, box-shadow .35s ease;
+}
+.animated-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 18px 48px rgba(212,0,0,.45);
 }
 
 /* ============================================================
-   CONTACT PAGE SUPPORT (AGENT CARDS)
+   CONTACT PAGE — AGENT CARDS
 ============================================================ */
 .team-grid{
   display:grid;
@@ -220,6 +285,16 @@ h2,h3{margin-top:0;}
 }
 
 /* ============================================================
+   CHAMBER BADGE
+============================================================ */
+.chamber-badge{
+  width:160px;
+  margin:20px auto;
+  display:block;
+  filter:drop-shadow(0 6px 12px rgba(0,0,0,.35));
+}
+
+/* ============================================================
    FOOTER
 ============================================================ */
 .footer{
@@ -227,7 +302,7 @@ h2,h3{margin-top:0;}
   color:#fff;
   text-align:center;
   padding:40px 20px;
-  margin-top:40px;
+  margin-top:60px;
 }
 .footer-logo{
   width:120px;
