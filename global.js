@@ -1,56 +1,62 @@
-/* ------------------------------
+/* --------------------------------------------------
    LANGUAGE SWITCHING
------------------------------- */
+-------------------------------------------------- */
 function setLanguage(lang) {
+  document.documentElement.setAttribute("data-lang", lang);
+
+  // Swap text for elements with data-en / data-es
   document.querySelectorAll("[data-en]").forEach(el => {
-    el.innerText = lang === "english" ? el.getAttribute("data-en") : el.getAttribute("data-es");
+    const en = el.getAttribute("data-en");
+    const es = el.getAttribute("data-es");
+    el.textContent = lang === "english" ? en : es;
   });
 
-  // Page wrappers
-  const enPage = document.getElementById("english") || document.getElementById("services-en") || document.getElementById("apps-en") || document.getElementById("about-en");
-  const esPage = document.getElementById("spanish") || document.getElementById("services-es") || document.getElementById("apps-es") || document.getElementById("about-es");
+  // Page wrapper pairs
+  const pairs = [
+    ["english", "spanish"],
+    ["services-en", "services-es"],
+    ["apps-en", "apps-es"],
+    ["about-en", "about-es"]
+  ];
 
-  if (enPage && esPage) {
-    enPage.style.display = lang === "english" ? "block" : "none";
-    esPage.style.display = lang === "spanish" ? "block" : "none";
-  }
+  pairs.forEach(([enId, esId]) => {
+    const en = document.getElementById(enId);
+    const es = document.getElementById(esId);
+    if (en && es) {
+      en.style.display = lang === "english" ? "block" : "none";
+      es.style.display = lang === "spanish" ? "block" : "none";
+    }
+  });
 
-  // Navigation
+  // Inject navigation
   const navEN = document.getElementById("navEN");
   const navES = document.getElementById("navES");
   const navContainer = document.getElementById("navContainer");
 
-  if (lang === "english") {
-    navContainer.innerHTML = navEN.innerHTML;
-  } else {
-    navContainer.innerHTML = navES.innerHTML;
+  if (navContainer && navEN && navES) {
+    navContainer.innerHTML = lang === "english" ? navEN.innerHTML : navES.innerHTML;
   }
 
-  // Filter agents based on language
+  // Filter agents
   filterAgentsByLanguage(lang);
 }
 
-/* ------------------------------
-   FILTER AGENTS (CONTACT PAGE)
------------------------------- */
+/* --------------------------------------------------
+   CONTACT PAGE — FILTER AGENTS
+-------------------------------------------------- */
 function filterAgentsByLanguage(lang) {
   const cards = document.querySelectorAll(".agent-card");
   if (!cards.length) return;
 
   cards.forEach(card => {
     const speaksSpanish = card.getAttribute("data-spanish") === "true";
-
-    if (lang === "spanish") {
-      card.style.display = speaksSpanish ? "block" : "none";
-    } else {
-      card.style.display = "block";
-    }
+    card.style.display = (lang === "spanish" && !speaksSpanish) ? "none" : "block";
   });
 }
 
-/* ------------------------------
-   FILTER SERVICES (S3 SYSTEM)
------------------------------- */
+/* --------------------------------------------------
+   SERVICES PAGE — FILTER BY ?type=
+-------------------------------------------------- */
 function filterServices(type) {
   const cards = document.querySelectorAll(".service-card");
   if (!cards.length) return;
@@ -61,7 +67,7 @@ function filterServices(type) {
   if (target) target.style.display = "block";
 }
 
-function scrollToServiceFromQuery() {
+function handleServiceQuery() {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type");
   if (!type) return;
@@ -70,20 +76,20 @@ function scrollToServiceFromQuery() {
 
   setTimeout(() => {
     const target = document.getElementById(type);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    if (target) target.scrollIntoView({ behavior: "smooth" });
   }, 300);
 }
 
-/* ------------------------------
-   MOBILE NAV TOGGLE
------------------------------- */
+/* --------------------------------------------------
+   DOM READY
+-------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
+
+  // Mobile nav toggle
   const toggle = document.getElementById("mobileNavToggle");
   const nav = document.getElementById("navContainer");
 
-  if (toggle) {
+  if (toggle && nav) {
     toggle.addEventListener("click", () => {
       nav.classList.toggle("open");
     });
@@ -93,9 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setLanguage("english");
 
   // Service filtering
-  scrollToServiceFromQuery();
+  handleServiceQuery();
 
-  // Language switch buttons
+  // Language buttons
   document.querySelectorAll(".lang-option").forEach(btn => {
     btn.addEventListener("click", () => {
       setLanguage(btn.getAttribute("data-lang"));
