@@ -1,75 +1,233 @@
-/* ------------------------------
-   SERVICE CARD ALIGNMENT FIX
------------------------------- */
-.service-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+/* --------------------------------------------------
+   GLOBAL RESET
+-------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.service-card p {
-  flex-grow: 1;
-}
-
-.service-card .service-cta {
-  margin-top: 20px;
-  align-self: center;
-}
-
-/* ------------------------------
-   WHITE BUTTONS WITH RED TEXT
------------------------------- */
-.btn-white {
+body {
+  font-family: Arial, sans-serif;
   background: #ffffff;
-  color: #c40000;
-  border: 2px solid #c40000;
-  padding: 12px 26px;
-  border-radius: 6px;
-  font-weight: 700;
-  transition: 0.25s;
-  display: inline-block;
+  color: #111;
+  line-height: 1.6;
 }
 
-.btn-white:hover {
+/* --------------------------------------------------
+   HEADER
+-------------------------------------------------- */
+.aces-header {
+  background: #ffffff;
+  border-bottom: 2px solid #c40000;
+  padding: 12px 0;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo-img {
+  height: 60px;
+}
+
+/* Language Switch */
+.lang-switch {
+  display: flex;
+  gap: 10px;
+}
+
+.lang-option {
+  background: #ffffff;
+  border: 2px solid #c40000;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #c40000;
+}
+
+.lang-option:hover {
   background: #c40000;
   color: #ffffff;
 }
 
-/* ------------------------------
-   CHAMBER CARD FIX
------------------------------- */
-.chamber-section {
-  background: #f7f3ea;
-}
-
-.chamber-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 20px 24px;
-  max-width: 420px;
-  margin: 24px auto;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+/* Navigation */
+.nav-menu {
   display: flex;
+  gap: 20px;
   align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #111;
+  font-weight: bold;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  top: 24px;
+  left: 0;
+  z-index: 10;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Mobile Nav */
+.mobile-nav-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 20px;
+    border-top: 2px solid #c40000;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------
+   HERO (BLACK)
+-------------------------------------------------- */
+.hero-black {
+  background: #000000;
+  color: #ffffff;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.hero-black h1 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+
+.hero-black p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.btn-hero {
+  background: #c40000;
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.btn-hero:hover {
+  background: #a00000;
+}
+
+/* --------------------------------------------------
+   SECTIONS
+-------------------------------------------------- */
+.section-light {
+  background: #f7f7f7;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.section-red {
+  background: #c40000;
+  color: #ffffff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* --------------------------------------------------
+   SERVICES GRID
+-------------------------------------------------- */
+.services-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.service-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  gap: 16px;
 }
 
-.chamber-badge-img {
-  width: 160px;
-  height: auto;
-}
-
-.chamber-qr-img {
+.service-card img {
   width: 120px;
-  height: auto;
+  margin: 0 auto 16px;
 }
 
-/* ------------------------------
+.service-card p {
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+/* --------------------------------------------------
+   WHITE BUTTONS (RED TEXT)
+-------------------------------------------------- */
+.btn-white {
+  background: #ffffff;
+  color: #c40000;
+  border: 2px solid #ffffff;
+  padding: 12px 26px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.btn-white:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* --------------------------------------------------
    TEAM GRID (CONTACT PAGE)
------------------------------- */
+-------------------------------------------------- */
 .team-grid {
+  max-width: 1200px;
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
@@ -86,24 +244,49 @@
 
 .agent-photo {
   width: 120px;
-  height: auto;
   margin-bottom: 12px;
 }
 
-.agent-card .name {
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 4px;
+/* --------------------------------------------------
+   CHAMBER CARD
+-------------------------------------------------- */
+.chamber-section {
+  background: #f7f3ea;
+  padding: 60px 20px;
+  text-align: center;
 }
 
-.agent-card .title {
-  font-size: 0.95rem;
-  margin-bottom: 6px;
-  color: #444;
+.chamber-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 420px;
+  margin: 24px auto;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.agent-card .email,
-.agent-card .phone {
-  font-size: 0.9rem;
-  margin-bottom: 4px;
+.chamber-badge-img {
+  width: 160px;
+}
+
+.chamber-qr-img {
+  width: 120px;
+}
+
+/* --------------------------------------------------
+   FOOTER
+-------------------------------------------------- */
+.footer {
+  background: #000000;
+  color: #ffffff;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.footer-logo {
+  height: 60px;
+  margin-bottom: 10px;
 }
