@@ -1,69 +1,105 @@
 /* ============================================================
-   ACES GLOBAL.JS — RESTORED + CLEAN
+   ACES GLOBAL.JS — RESTORED B2 VERSION
+   Supports:
+   - Navigation injection
+   - Dropdown menus
+   - Mobile menu
+   - Contact page language toggle
 ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* NAVIGATION INJECTION */
+  /* ============================================================
+     NAVIGATION INJECTION
+  ============================================================ */
   const navContainer = document.getElementById("navContainer");
   const navEN = document.getElementById("navEN");
   const navES = document.getElementById("navES");
 
-  function loadNav(lang){
-    if(!navContainer) return;
-    navContainer.innerHTML = lang === "spanish" ? navES.innerHTML : navEN.innerHTML;
+  function loadNav(lang) {
+    if (!navContainer) return;
+
+    // Inject correct nav template
+    navContainer.innerHTML = lang === "spanish"
+      ? navES.innerHTML
+      : navEN.innerHTML;
+
     activateDropdowns();
   }
 
-  /* DROPDOWNS */
-  function activateDropdowns(){
-    document.querySelectorAll(".dropdown-toggle").forEach(toggle=>{
-      toggle.addEventListener("click",e=>{
+  /* ============================================================
+     DROPDOWN MENUS
+  ============================================================ */
+  function activateDropdowns() {
+    const toggles = document.querySelectorAll(".dropdown-toggle");
+
+    toggles.forEach(toggle => {
+      toggle.addEventListener("click", e => {
         e.stopPropagation();
+
         const menu = toggle.nextElementSibling;
-        document.querySelectorAll(".dropdown-menu").forEach(m=>{
-          if(m!==menu) m.classList.remove("show");
+
+        // Close all other dropdowns
+        document.querySelectorAll(".dropdown-menu").forEach(m => {
+          if (m !== menu) m.classList.remove("show");
         });
+
+        // Toggle this dropdown
         menu.classList.toggle("show");
       });
     });
 
-    document.addEventListener("click",()=>{
-      document.querySelectorAll(".dropdown-menu").forEach(m=>m.classList.remove("show"));
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", () => {
+      document.querySelectorAll(".dropdown-menu").forEach(m => m.classList.remove("show"));
     });
   }
 
-  /* MOBILE NAV */
+  /* ============================================================
+     MOBILE NAV MENU
+  ============================================================ */
   const mobileToggle = document.getElementById("mobileNavToggle");
-  if(mobileToggle){
-    mobileToggle.addEventListener("click",()=>{
+
+  if (mobileToggle) {
+    mobileToggle.addEventListener("click", () => {
       navContainer.classList.toggle("open");
     });
   }
 
-  /* LANGUAGE SWITCH (CONTACT PAGE ONLY) */
+  /* ============================================================
+     CONTACT PAGE LANGUAGE SWITCH
+  ============================================================ */
   const langButtons = document.querySelectorAll(".lang-option");
   const englishSection = document.getElementById("english");
   const spanishSection = document.getElementById("spanish");
 
-  function setLanguage(lang){
-    if(!englishSection || !spanishSection) return;
+  function setLanguage(lang) {
+    // Only run on contact page
+    if (!englishSection || !spanishSection) {
+      loadNav("english");
+      return;
+    }
 
-    langButtons.forEach(btn=>btn.classList.remove("active"));
-    document.querySelector(`[data-lang="${lang}"]`).classList.add("active");
+    // Update active button
+    langButtons.forEach(btn => btn.classList.remove("active"));
+    const activeBtn = document.querySelector(`[data-lang="${lang}"]`);
+    if (activeBtn) activeBtn.classList.add("active");
 
+    // Show correct language section
     englishSection.style.display = lang === "english" ? "block" : "none";
     spanishSection.style.display = lang === "spanish" ? "block" : "none";
 
+    // Load correct nav language
     loadNav(lang);
   }
 
-  langButtons.forEach(btn=>{
-    btn.addEventListener("click",()=>setLanguage(btn.dataset.lang));
+  // Bind language buttons
+  langButtons.forEach(btn => {
+    btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
   });
 
-  /* INITIAL LOAD */
-  loadNav("english");
-  setLanguage("english");
-
+  /* ============================================================
+     INITIAL LOAD
+  ============================================================ */
+  setLanguage("english"); // Loads nav + correct page content
 });
