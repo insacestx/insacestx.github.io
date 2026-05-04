@@ -10,7 +10,9 @@
 
 <header class="aces-header">
   <div class="header-inner">
-    <a href="index.html"><img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo"></a>
+    <a href="index.html">
+      <img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo">
+    </a>
 
     <div class="lang-switch">
       <button class="lang-option" data-lang="english">EN 🇺🇸</button>
@@ -22,54 +24,58 @@
   </div>
 </header>
 
-<div class="page-wrapper">
-  <section id="services-en">
-    <h1>Our Services</h1>
-    <p>Explore the types of coverage we offer and find the right protection for you or your business.</p>
+<div class="page-wrapper" id="services-en">
+  <h1>Our Services</h1>
+  <p>Explore the types of coverage we offer and find the right protection for you or your business.</p>
 
-    <div class="services-grid">
-      <div class="service-card animated-card">
-        <h3>Life Insurance</h3>
-        <p>Coverage designed to protect your family’s financial future.</p>
-      </div>
-      <div class="service-card animated-card">
-        <h3>Personal Insurance</h3>
-        <p>Home, auto, and personal liability coverage tailored to your needs.</p>
-      </div>
-      <div class="service-card animated-card">
-        <h3>Commercial Insurance</h3>
-        <p>Business owners policies, general liability, property, and more.</p>
-      </div>
-      <div class="service-card animated-card">
-        <h3>Auto Insurance</h3>
-        <p>Coverage options for personal and commercial vehicles.</p>
-      </div>
+  <div class="services-grid">
+    <div class="service-card animated-card" id="life">
+      <h3>Life Insurance</h3>
+      <p>Coverage designed to protect your family’s financial future.</p>
     </div>
-  </section>
 
-  <section id="services-es" style="display:none;">
-    <h1>Servicios</h1>
-    <p>Explore los tipos de cobertura que ofrecemos y encuentre la protección adecuada para usted o su negocio.</p>
-
-    <div class="services-grid">
-      <div class="service-card animated-card">
-        <h3>Seguro de Vida</h3>
-        <p>Cobertura diseñada para proteger el futuro financiero de su familia.</p>
-      </div>
-      <div class="service-card animated-card">
-        <h3>Seguro Personal</h3>
-        <p>Cobertura de hogar, auto y responsabilidad personal adaptada a sus necesidades.</p>
-      </div>
-      <div class="service-card animated-card">
-        <h3>Seguro Comercial</h3>
-        <p>Pólizas para dueños de negocios, responsabilidad general, propiedad y más.</p>
-      </div>
-      <div class="service-card animated-card">
-        <h3>Seguro de Auto</h3>
-        <p>Opciones de cobertura para vehículos personales y comerciales.</p>
-      </div>
+    <div class="service-card animated-card" id="personal">
+      <h3>Personal Insurance</h3>
+      <p>Home, auto, and personal liability coverage tailored to your needs.</p>
     </div>
-  </section>
+
+    <div class="service-card animated-card" id="commercial">
+      <h3>Commercial Insurance</h3>
+      <p>Business owners policies, general liability, property, and more.</p>
+    </div>
+
+    <div class="service-card animated-card" id="auto">
+      <h3>Auto Insurance</h3>
+      <p>Coverage options for personal and commercial vehicles.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrapper" id="services-es" style="display:none;">
+  <h1>Servicios</h1>
+  <p>Explore los tipos de cobertura que ofrecemos y encuentre la protección adecuada para usted o su negocio.</p>
+
+  <div class="services-grid">
+    <div class="service-card animated-card" id="life-es">
+      <h3>Seguro de Vida</h3>
+      <p>Cobertura diseñada para proteger el futuro financiero de su familia.</p>
+    </div>
+
+    <div class="service-card animated-card" id="personal-es">
+      <h3>Seguro Personal</h3>
+      <p>Cobertura de hogar, auto y responsabilidad personal adaptada a sus necesidades.</p>
+    </div>
+
+    <div class="service-card animated-card" id="commercial-es">
+      <h3>Seguro Comercial</h3>
+      <p>Pólizas para dueños de negocios, responsabilidad general, propiedad y más.</p>
+    </div>
+
+    <div class="service-card animated-card" id="auto-es">
+      <h3>Seguro de Auto</h3>
+      <p>Opciones de cobertura para vehículos personales y comerciales.</p>
+    </div>
+  </div>
 </div>
 
 <footer class="footer">
@@ -115,8 +121,8 @@
   <div class="dropdown">
     <span class="nav-link dropdown-toggle">Aplicaciones ▾</span>
     <div class="dropdown-menu">
-      <a href="applications.html#commercial">Aplicaciones Comerciales</a>
-      <a href="applications.html#personal">Aplicaciones Personales</a>
+      <a href="applications.html#commercial-es">Aplicaciones Comerciales</a>
+      <a href="applications.html#personal-es">Aplicaciones Personales</a>
     </div>
   </div>
   <a class="nav-link" href="coi.html">Solicitud de COI</a>
