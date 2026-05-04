@@ -1,75 +1,124 @@
 /* ============================
-   ACES GLOBAL.JS (FINAL BUILD)
-   ============================ */
+   ACES GLOBAL.JS — 2026 BUILD
+============================ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* ============================
+     NAVIGATION INJECTION
+  ============================= */
   const navContainer = document.getElementById("navContainer");
-  const mobileToggle = document.getElementById("mobileNavToggle");
+  const navEN = document.getElementById("navEN");
+  const navES = document.getElementById("navES");
 
-  /* -------------------------
-     Inject Navigation (EN/ES)
-     ------------------------- */
   function loadNav(lang) {
-    const navEN = document.getElementById("navEN").innerHTML;
-    const navES = document.getElementById("navES").innerHTML;
-    navContainer.innerHTML = (lang === "spanish") ? navES : navEN;
-    rebindDropdowns();
+    if (!navContainer) return;
+    navContainer.innerHTML = lang === "spanish" ? navES.innerHTML : navEN.innerHTML;
+    activateDropdowns();
   }
 
-  /* -------------------------
-     Dropdown Click Behavior
-     ------------------------- */
-  function rebindDropdowns() {
+  /* ============================
+     DROPDOWN MENUS
+  ============================= */
+  function activateDropdowns() {
     document.querySelectorAll(".dropdown-toggle").forEach(toggle => {
-      toggle.addEventListener("click", () => {
+      toggle.addEventListener("click", e => {
+        e.stopPropagation();
         const menu = toggle.nextElementSibling;
+        document.querySelectorAll(".dropdown-menu").forEach(m => {
+          if (m !== menu) m.classList.remove("show");
+        });
         menu.classList.toggle("show");
       });
     });
+
+    document.addEventListener("click", () => {
+      document.querySelectorAll(".dropdown-menu").forEach(m => m.classList.remove("show"));
+    });
   }
 
-  /* -------------------------
-     Mobile Menu Toggle
-     ------------------------- */
-  mobileToggle.addEventListener("click", () => {
-    navContainer.classList.toggle("open");
-  });
+  /* ============================
+     MOBILE NAV
+  ============================= */
+  const mobileToggle = document.getElementById("mobileNavToggle");
+  if (mobileToggle) {
+    mobileToggle.addEventListener("click", () => {
+      navContainer.classList.toggle("open");
+    });
+  }
 
-  /* -------------------------
-     Language Switching
-     ------------------------- */
+  /* ============================
+     LANGUAGE SWITCHING
+  ============================= */
+  const langButtons = document.querySelectorAll(".lang-option");
+  const englishSection = document.getElementById("english");
+  const spanishSection = document.getElementById("spanish");
+
   function setLanguage(lang) {
-    localStorage.setItem("acesLang", lang);
+    langButtons.forEach(btn => btn.classList.remove("active"));
+    document.querySelector(`[data-lang="${lang}"]`).classList.add("active");
 
-    document.querySelectorAll(".lang-option").forEach(o => o.classList.remove("active"));
-    document.querySelector(`.lang-option[data-lang="${lang}"]`).classList.add("active");
-
-    document.getElementById("english").style.display = (lang === "english") ? "block" : "none";
-    document.getElementById("spanish").style.display = (lang === "spanish") ? "block" : "none";
+    if (lang === "spanish") {
+      englishSection.style.display = "none";
+      spanishSection.style.display = "block";
+    } else {
+      englishSection.style.display = "block";
+      spanishSection.style.display = "none";
+    }
 
     loadNav(lang);
+    filterAgents(lang);
   }
 
-  document.querySelectorAll(".lang-option").forEach(option => {
-    option.addEventListener("click", () => {
-      setLanguage(option.dataset.lang);
+  langButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      setLanguage(btn.dataset.lang);
     });
   });
 
-  /* -------------------------
-     Load Saved Language
-     ------------------------- */
-  const savedLang = localStorage.getItem("acesLang") || "english";
-  setLanguage(savedLang);
+  /* ============================
+     CONTACT PAGE — FILTERING
+  ============================= */
+  function filterAgents(lang) {
+    document.querySelectorAll(".agent-card").forEach(card => {
+      const langs = card.getAttribute("data-lang").split(" ");
+      card.style.display = langs.includes(lang === "spanish" ? "es" : "en") ? "block" : "none";
+    });
+  }
 
-  /* -------------------------
-     Header Scroll Effect
-     ------------------------- */
-  document.addEventListener("scroll", () => {
-    const header = document.querySelector(".aces-header");
-    if (window.scrollY > 10) header.classList.add("scrolled");
-    else header.classList.remove("scrolled");
-  });
+  /* ============================
+     SELECTED AGENT PANEL
+  ============================= */
+  window.selectAgent = function(card) {
+    const name = card.querySelector("h3").innerText;
+    const title = card.querySelector(".title").innerText;
+    const email = card.querySelector(".email").innerText;
+    const phone = card.querySelector(".phone").innerText;
+    const photo = card.querySelector("img").src;
 
+    // English panel
+    if (document.getElementById("sa-name")) {
+      document.getElementById("sa-name").innerText = name;
+      document.getElementById("sa-title").innerText = title;
+      document.getElementById("sa-email").innerText = email;
+      document.getElementById("sa-phone").innerText = phone;
+      document.getElementById("sa-photo").src = photo;
+      document.getElementById("sa-email-btn").href = "mailto:" + email;
+    }
+
+    // Spanish panel
+    if (document.getElementById("sa-name-es")) {
+      document.getElementById("sa-name-es").innerText = name;
+      document.getElementById("sa-title-es").innerText = title;
+      document.getElementById("sa-email-es").innerText = email;
+      document.getElementById("sa-phone-es").innerText = phone;
+      document.getElementById("sa-photo-es").src = photo;
+      document.getElementById("sa-email-btn-es").href = "mailto:" + email;
+    }
+  };
+
+  /* ============================
+     INITIAL LOAD
+  ============================= */
+  setLanguage("english");
 });
