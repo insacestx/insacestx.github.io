@@ -4,206 +4,109 @@
   <meta charset="UTF-8">
   <title>Contact Us | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contact ACES Insurance Services. Bilingual support for personal, commercial, property, and auto insurance.">
-  <link rel="stylesheet" href="style.css?v=91">
+  <link rel="stylesheet" href="style.css?v=100">
 </head>
-
 <body>
 
 <header class="aces-header">
   <div class="header-inner">
-    <a href="index.html"><img src="image2.png" class="header-logo-img"></a>
+    <a href="index.html"><img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo"></a>
 
     <div class="lang-switch">
-      <span class="lang-option active" data-lang="english">🇺🇸 EN</span>
-      <span class="divider">|</span>
-      <span class="lang-option" data-lang="spanish">🇲🇽 ES</span>
+      <button class="lang-option" data-lang="english">EN 🇺🇸</button>
+      <button class="lang-option" data-lang="spanish">ES 🇲🇽</button>
     </div>
 
     <nav id="navContainer" class="nav-menu"></nav>
-    <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
   </div>
 </header>
 
-<!-- ================= ENGLISH ================= -->
-<div id="english">
+<div class="page-wrapper" id="english">
+  <h1>Contact Us</h1>
+  <p>Reach out to our team for quotes, policy changes, certificates, or claims questions.</p>
 
-  <section class="about section-light">
-    <h2>Contact Us</h2>
-    <p>Our bilingual team is ready to help with personal, commercial, property, and auto insurance needs.</p>
-  </section>
-
-  <section class="contact-layout section-dark">
-
-    <!-- LEFT SIDE — OFFICE INFO -->
-    <div class="office-info">
-      <h3>Office Information</h3>
-
-      <p><strong>Address:</strong><br>404 Sapphire Blvd<br>Hewitt, TX 76643</p>
-      <p><strong>Phone:</strong><br>254‑227‑6560</p>
-      <p><strong>Email:</strong><br>office@insaces.com</p>
-
-      <p><strong>Business Hours:</strong><br>
-        Monday–Friday: 9:00 AM – 5:00 PM<br>
-        Saturday–Sunday: Closed
-      </p>
-
-      <div class="map-wrapper">
-        <iframe 
-          width="100%" 
-          height="260" 
-          style="border:0;" 
-          loading="lazy" 
-          allowfullscreen
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.501058652715!2d-97.195889!3d31.462013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864f8b7e3c1e9e4f%3A0x4b8b7f7d0f4c2f0!2s404%20Sapphire%20Blvd%2C%20Hewitt%2C%20TX%2076643!5e0!3m2!1sen!2sus!4v1714500000000">
-        </iframe>
-      </div>
+  <h2>Our Team</h2>
+  <div class="team-grid">
+    <div class="agent-card">
+      <img src="agent1.jpg" alt="Agent" class="agent-photo">
+      <div class="title">Agent Name</div>
+      <div class="email">email@example.com</div>
+      <div class="phone">(000) 000-0000</div>
     </div>
-
-    <!-- RIGHT SIDE — AGENT CARDS -->
-    <div class="team-grid">
-
-      <!-- George -->
-      <div class="agent-card" data-lang="en es">
-        <img src="agent-george.png" class="agent-photo">
-        <h3>George J. Santibañez</h3>
-        <p class="title">Commercial & Personal Lines</p>
-        <p class="email">george@insaces.com</p>
-        <p class="phone">254‑709‑6487</p>
-        <a href="mailto:george@insaces.com" class="btn-small">Email This Agent</a>
-      </div>
-
-      <!-- Jimmy -->
-      <div class="agent-card" data-lang="en es">
-        <img src="agent-jimmy.png" class="agent-photo">
-        <h3>Jimmy Rodriguez</h3>
-        <p class="title">Commercial & Personal Lines</p>
-        <p class="email">jimmy@insaces.com</p>
-        <p class="phone">214‑498‑6928</p>
-        <a href="mailto:jimmy@insaces.com" class="btn-small">Email This Agent</a>
-      </div>
-
-      <!-- Jordan -->
-      <div class="agent-card" data-lang="en">
-        <img src="agent-jordan.png" class="agent-photo">
-        <h3>Jordan Jones</h3>
-        <p class="title">Co‑Owner</p>
-        <p class="email">jordan@insaces.com</p>
-        <p class="phone">254‑289‑2423</p>
-        <a href="mailto:jordan@insaces.com" class="btn-small">Email This Agent</a>
-      </div>
-
-      <!-- Lanse -->
-      <div class="agent-card" data-lang="en">
-        <img src="agent-lanse.png" class="agent-photo">
-        <h3>Lanse Derrick</h3>
-        <p class="title">Co‑Owner</p>
-        <p class="email">lanse@insaces.com</p>
-        <p class="phone">214‑770‑1488</p>
-        <a href="mailto:lanse@insaces.com" class="btn-small">Email This Agent</a>
-      </div>
-
-      <!-- Robert -->
-      <div class="agent-card" data-lang="en">
-        <img src="agent-robert.png" class="agent-photo">
-        <h3>Robert Hyde</h3>
-        <p class="title">Co‑Owner</p>
-        <p class="email">robert@insaces.com</p>
-        <p class="phone">254‑292‑0961</p>
-        <a href="mailto:robert@insaces.com" class="btn-small">Email This Agent</a>
-      </div>
-
-      <!-- Bryan -->
-      <div class="agent-card" data-lang="en">
-        <img src="agent-bryan.png" class="agent-photo">
-        <h3>Bryan Carter</h3>
-        <p class="title">Co‑Owner</p>
-        <p class="email">bryan@insaces.com</p>
-        <p class="phone">254‑744‑6600</p>
-        <a href="mailto:bryan@insaces.com" class="btn-small">Email This Agent</a>
-      </div>
-
-      <!-- Renee -->
-      <div class="agent-card" data-lang="en">
-        <img src="agent-renee.png" class="agent-photo">
-        <h3>Renee Ridling</h3>
-        <p class="title">Commercial & Personal Lines</p>
-        <p class="email">office@insaces.com</p>
-        <p class="phone">254‑227‑6560</p>
-        <a href="mailto:office@insaces.com" class="btn-small">Email This Agent</a>
-      </div>
-
-    </div>
-
-  </section>
-
+    <!-- Add your real agents here -->
+  </div>
 </div>
 
-<!-- ================= SPANISH ================= -->
-<div id="spanish" style="display:none;">
+<div class="page-wrapper" id="spanish" style="display:none;">
+  <h1>Contáctenos</h1>
+  <p>Comuníquese con nuestro equipo para cotizaciones, cambios de póliza, certificados o preguntas de reclamos.</p>
 
-  <section class="about section-light">
-    <h2>Contáctenos</h2>
-    <p>Nuestro equipo bilingüe está aquí para ayudarle con sus necesidades de aseguranza.</p>
-  </section>
-
-  <section class="contact-layout section-dark">
-
-    <!-- LEFT SIDE — OFFICE INFO -->
-    <div class="office-info">
-      <h3>Información de la Oficina</h3>
-
-      <p><strong>Dirección:</strong><br>404 Sapphire Blvd<br>Hewitt, TX 76643</p>
-      <p><strong>Teléfono:</strong><br>254‑227‑6560</p>
-      <p><strong>Email:</strong><br>office@insaces.com</p>
-
-      <p><strong>Horario:</strong><br>
-        Lunes–Viernes: 9:00 AM – 5:00 PM<br>
-        Sábado–Domingo: Cerrado
-      </p>
-
-      <div class="map-wrapper">
-        <iframe 
-          width="100%" 
-          height="260" 
-          style="border:0;" 
-          loading="lazy" 
-          allowfullscreen
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.501058652715!2d-97.195889!3d31.462013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864f8b7e3c1e9e4f%3A0x4b8b7f7d0f4c2f0!2s404%20Sapphire%20Blvd%2C%20Hewitt%2C%20TX%2076643!5e0!3m2!1sen!2sus!4v1714500000000">
-        </iframe>
-      </div>
+  <h2>Nuestro Equipo</h2>
+  <div class="team-grid">
+    <div class="agent-card">
+      <img src="agent1.jpg" alt="Agente" class="agent-photo">
+      <div class="title">Nombre del Agente</div>
+      <div class="email">email@example.com</div>
+      <div class="phone">(000) 000-0000</div>
     </div>
-
-    <!-- RIGHT SIDE — ONLY SPANISH SPEAKERS -->
-    <div class="team-grid">
-
-      <!-- George -->
-      <div class="agent-card" data-lang="es">
-        <img src="agent-george.png" class="agent-photo">
-        <h3>George J. Santibañez</h3>
-        <p class="title">Líneas Comerciales y Personales</p>
-        <p class="email">george@insaces.com</p>
-        <p class="phone">254‑709‑6487</p>
-        <a href="mailto:george@insaces.com" class="btn-small">Enviar Correo</a>
-      </div>
-
-      <!-- Jimmy -->
-      <div class="agent-card" data-lang="es">
-        <img src="agent-jimmy.png" class="agent-photo">
-        <h3>Jimmy Rodriguez</h3>
-        <p class="title">Líneas Comerciales y Personales</p>
-        <p class="email">jimmy@insaces.com</p>
-        <p class="phone">214‑498‑6928</p>
-        <a href="mailto:jimmy@insaces.com" class="btn-small">Enviar Correo</a>
-      </div>
-
-    </div>
-
-  </section>
-
+    <!-- Agregue sus agentes reales aquí -->
+  </div>
 </div>
 
-<script src="global.js?v=91"></script>
+<footer class="footer">
+  <img src="image2.png" class="footer-logo" alt="ACES Insurance Logo">
+  <p>© 2026 ACES Insurance Services</p>
+</footer>
 
+<nav id="navEN" style="display:none;">
+  <a class="nav-link" href="index.html">Home</a>
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Services ▾</span>
+    <div class="dropdown-menu">
+      <a href="services.html?type=life">Life Insurance</a>
+      <a href="services.html?type=personal">Personal Insurance</a>
+      <a href="services.html?type=commercial">Commercial Insurance</a>
+      <a href="services.html?type=auto">Auto Insurance</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Applications ▾</span>
+    <div class="dropdown-menu">
+      <a href="applications.html#commercial">Commercial Apps</a>
+      <a href="applications.html#personal">Personal Apps</a>
+    </div>
+  </div>
+  <a class="nav-link" href="coi.html">COI Request</a>
+  <a class="nav-link" href="claims.html">Claims</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+</nav>
+
+<nav id="navES" style="display:none;">
+  <a class="nav-link" href="index.html">Inicio</a>
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Servicios ▾</span>
+    <div class="dropdown-menu">
+      <a href="services.html?type=life">Seguro de Vida</a>
+      <a href="services.html?type=personal">Seguro Personal</a>
+      <a href="services.html?type=commercial">Seguro Comercial</a>
+      <a href="services.html?type=auto">Seguro de Auto</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Aplicaciones ▾</span>
+    <div class="dropdown-menu">
+      <a href="applications.html#commercial-es">Aplicaciones Comerciales</a>
+      <a href="applications.html#personal-es">Aplicaciones Personales</a>
+    </div>
+  </div>
+  <a class="nav-link" href="coi.html">Solicitud de COI</a>
+  <a class="nav-link" href="claims.html">Reclamos</a>
+  <a class="nav-link" href="about.html">Acerca de</a>
+  <a class="nav-link" href="contact.html">Contacto</a>
+</nav>
+
+<script src="global.js?v=100"></script>
 </body>
 </html>
