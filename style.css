@@ -1,5 +1,5 @@
 /* ============================================================
-   ACES 2026 — RESTORED B2 MODERN STYLE.CSS
+   ACES 2026 — B2 GLOBAL STYLE.CSS
 ============================================================ */
 
 *{box-sizing:border-box;}
@@ -12,9 +12,7 @@ body{
 a{text-decoration:none;color:inherit;cursor:pointer;}
 h1,h2,h3{margin-top:0;}
 
-/* ============================================================
-   HEADER
-============================================================ */
+/* HEADER */
 .aces-header{
   background:#fff;
   border-bottom:1px solid #ddd;
@@ -102,9 +100,7 @@ h1,h2,h3{margin-top:0;}
   .mobile-nav-toggle{display:block;}
 }
 
-/* ============================================================
-   HERO — H1 VERSION (BLACK HERO)
-============================================================ */
+/* HERO — H1 BLACK HERO */
 .hero-black{
   background:#000;
   color:#fff;
@@ -134,9 +130,7 @@ h1,h2,h3{margin-top:0;}
   background:#b00000;
 }
 
-/* ============================================================
-   UNDERGLOW SECTIONS
-============================================================ */
+/* UNDERGLOW */
 .underglow{
   position:relative;
 }
@@ -154,9 +148,7 @@ h1,h2,h3{margin-top:0;}
   z-index:-1;
 }
 
-/* ============================================================
-   SECTION STYLES
-============================================================ */
+/* SECTIONS */
 .section-light{
   background:#fafafa;
   color:#111;
@@ -190,9 +182,7 @@ h1,h2,h3{margin-top:0;}
   box-shadow:0 18px 48px rgba(0,0,0,.28);
 }
 
-/* ============================================================
-   SERVICES — B2 ANIMATED CARDS
-============================================================ */
+/* SERVICES GRID + CARDS */
 .services-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -220,9 +210,7 @@ h1,h2,h3{margin-top:0;}
   box-shadow:0 18px 48px rgba(212,0,0,.45);
 }
 
-/* ============================================================
-   CONTACT PAGE — AGENT CARDS
-============================================================ */
+/* CONTACT PAGE — TEAM GRID / AGENT CARDS */
 .team-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -264,6 +252,7 @@ h1,h2,h3{margin-top:0;}
   margin:4px 0;
 }
 
+/* BUTTONS */
 .btn-small{
   background:#d40000;
   color:#fff;
@@ -284,9 +273,7 @@ h1,h2,h3{margin-top:0;}
   margin-top:20px;
 }
 
-/* ============================================================
-   CHAMBER BADGE
-============================================================ */
+/* CHAMBER BADGE */
 .chamber-badge{
   width:160px;
   margin:20px auto;
@@ -294,9 +281,7 @@ h1,h2,h3{margin-top:0;}
   filter:drop-shadow(0 6px 12px rgba(0,0,0,.35));
 }
 
-/* ============================================================
-   FOOTER
-============================================================ */
+/* FOOTER */
 .footer{
   background:#000;
   color:#fff;
