@@ -3,16 +3,29 @@
    - Navigation injection (EN/ES)
    - Dropdown menus
    - Mobile menu
-   - Contact page language toggle
+   - Global language switch with localStorage
+   - Page content switching where bilingual content exists
 ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* NAVIGATION INJECTION */
   const navContainer = document.getElementById("navContainer");
   const navEN = document.getElementById("navEN");
   const navES = document.getElementById("navES");
+  const langButtons = document.querySelectorAll(".lang-option");
+  const mobileToggle = document.getElementById("mobileNavToggle");
 
+  /* LANGUAGE STATE */
+  function getSavedLanguage() {
+    const saved = localStorage.getItem("acesLang");
+    return saved === "spanish" ? "spanish" : "english";
+  }
+
+  function saveLanguage(lang) {
+    localStorage.setItem("acesLang", lang);
+  }
+
+  /* NAV INJECTION */
   function loadNav(lang) {
     if (!navContainer || !navEN || !navES) return;
 
@@ -46,39 +59,72 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* MOBILE NAV */
-  const mobileToggle = document.getElementById("mobileNavToggle");
   if (mobileToggle && navContainer) {
     mobileToggle.addEventListener("click", () => {
       navContainer.classList.toggle("open");
     });
   }
 
-  /* CONTACT PAGE LANGUAGE SWITCH */
-  const langButtons = document.querySelectorAll(".lang-option");
-  const englishSection = document.getElementById("english");
-  const spanishSection = document.getElementById("spanish");
-
-  function setLanguage(lang) {
-    // If not on contact page, just load nav and exit
-    if (!englishSection || !spanishSection) {
-      loadNav("english");
-      return;
-    }
-
-    langButtons.forEach(btn => btn.classList.remove("active"));
-    const activeBtn = document.querySelector(`[data-lang="${lang}"]`);
-    if (activeBtn) activeBtn.classList.add("active");
-
-    englishSection.style.display = lang === "english" ? "block" : "none";
-    spanishSection.style.display = lang === "spanish" ? "block" : "none";
-
-    loadNav(lang);
+  /* APPLY LANGUAGE TO TEXT ELEMENTS WITH data-en / data-es */
+  function applyLanguageToDataAttributes(lang) {
+    const elements = document.querySelectorAll("[data-en][data-es]");
+    elements.forEach(el => {
+      const text = lang === "spanish" ? el.getAttribute("data-es") : el.getAttribute("data-en");
+      if (text !== null) el.textContent = text;
+    });
   }
 
+  /* PAGE-SPECIFIC SECTIONS (CONTACT, SERVICES, ABOUT, APPLICATIONS) */
+  function applyLanguageToSections(lang) {
+    const englishSection = document.getElementById("english");
+    const spanishSection = document.getElementById("spanish");
+    if (englishSection && spanishSection) {
+      englishSection.style.display = lang === "english" ? "block" : "none";
+      spanishSection.style.display = lang === "spanish" ? "block" : "none";
+    }
+
+    const englishServices = document.getElementById("services-en");
+    const spanishServices = document.getElementById("services-es");
+    if (englishServices && spanishServices) {
+      englishServices.style.display = lang === "english" ? "block" : "none";
+      spanishServices.style.display = lang === "spanish" ? "block" : "none";
+    }
+
+    const englishAbout = document.getElementById("about-en");
+    const spanishAbout = document.getElementById("about-es");
+    if (englishAbout && spanishAbout) {
+      englishAbout.style.display = lang === "english" ? "block" : "none";
+      spanishAbout.style.display = lang === "spanish" ? "block" : "none";
+    }
+
+    const englishApps = document.getElementById("apps-en");
+    const spanishApps = document.getElementById("apps-es");
+    if (englishApps && spanishApps) {
+      englishApps.style.display = lang === "english" ? "block" : "none";
+      spanishApps.style.display = lang === "spanish" ? "block" : "none";
+    }
+  }
+
+  /* SET LANGUAGE (GLOBAL) */
+  function setLanguage(lang) {
+    const finalLang = lang === "spanish" ? "spanish" : "english";
+    saveLanguage(finalLang);
+
+    langButtons.forEach(btn => btn.classList.remove("active"));
+    const activeBtn = document.querySelector(`.lang-option[data-lang="${finalLang}"]`);
+    if (activeBtn) activeBtn.classList.add("active");
+
+    loadNav(finalLang);
+    applyLanguageToDataAttributes(finalLang);
+    applyLanguageToSections(finalLang);
+  }
+
+  /* BIND LANGUAGE BUTTONS */
   langButtons.forEach(btn => {
     btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
   });
 
   /* INITIAL LOAD */
-  setLanguage("english");
+  const initialLang = getSavedLanguage();
+  setLanguage(initialLang);
 });
