@@ -4,31 +4,27 @@
   <meta charset="UTF-8">
   <title>ACES Insurance Services | Texas Independent Insurance Agency</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=92">
+  <link rel="stylesheet" href="style.css?v=93">
 </head>
 
 <body>
 
 <header class="aces-header">
   <div class="header-inner">
-    <a href="index.html"><img src="image2.png" class="header-logo-img"></a>
+    <a href="index.html"><img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo"></a>
     <nav id="navContainer" class="nav-menu"></nav>
-    <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
   </div>
 </header>
 
-<!-- ============================
-     HERO (H1 VERSION)
-=============================== -->
+<!-- HERO (H1 BLACK HERO) -->
 <section class="hero-black">
   <h1>Your Trusted Independent Insurance Agency</h1>
   <p>Serving Central Texas with bilingual support and personalized insurance solutions.</p>
   <a href="contact.html" class="btn-hero">Get a Quote</a>
 </section>
 
-<!-- ============================
-     SERVICES (MODERN B2)
-=============================== -->
+<!-- OUR SERVICES -->
 <section class="section-light underglow">
   <h2>Our Services</h2>
 
@@ -36,28 +32,30 @@
     <div class="service-card animated-card">
       <h3>Life Insurance</h3>
       <p>Protect what matters most with flexible life insurance options.</p>
+      <a href="services.html?type=life" class="btn-small">Learn More</a>
     </div>
 
     <div class="service-card animated-card">
       <h3>Commercial Insurance</h3>
       <p>Coverage tailored to safeguard your business operations.</p>
+      <a href="services.html?type=commercial" class="btn-small">Learn More</a>
     </div>
 
     <div class="service-card animated-card">
       <h3>Property Insurance</h3>
       <p>Reliable protection for your home and valuable assets.</p>
+      <a href="services.html?type=personal" class="btn-small">Learn More</a>
     </div>
 
     <div class="service-card animated-card">
       <h3>Auto Insurance</h3>
       <p>Affordable and dependable coverage for your vehicles.</p>
+      <a href="services.html?type=auto" class="btn-small">Learn More</a>
     </div>
   </div>
 </section>
 
-<!-- ============================
-     CTA SECTION
-=============================== -->
+<!-- CONTACT & TEAM CTA -->
 <section class="section-red underglow">
   <h2>Contact Us & Meet Our Team</h2>
   <p>Our bilingual team is ready to help with all your insurance needs.</p>
@@ -68,9 +66,7 @@
   </div>
 </section>
 
-<!-- ============================
-     CHAMBER BADGE
-=============================== -->
+<!-- CHAMBER BADGE -->
 <section class="section-dark underglow">
   <h2>Proud Member</h2>
   <p>Central Texas Hispanic Chamber of Commerce</p>
@@ -79,13 +75,11 @@
 </section>
 
 <footer class="footer">
-  <img src="image2.png" class="footer-logo">
+  <img src="image2.png" class="footer-logo" alt="ACES Insurance Logo">
   <p>© 2026 ACES Insurance Services</p>
 </footer>
 
-<!-- ============================
-     NAVIGATION TEMPLATES
-=============================== -->
+<!-- NAVIGATION TEMPLATES (EN / ES) -->
 <nav id="navEN" style="display:none;">
   <div class="dropdown">
     <span class="nav-link dropdown-toggle">Services ▾</span>
@@ -93,6 +87,7 @@
       <a href="services.html?type=life">Life Insurance</a>
       <a href="services.html?type=personal">Personal Insurance</a>
       <a href="services.html?type=commercial">Commercial Insurance</a>
+      <a href="services.html?type=auto">Auto Insurance</a>
     </div>
   </div>
 
@@ -117,6 +112,7 @@
       <a href="services.html?type=life">Seguro de Vida</a>
       <a href="services.html?type=personal">Seguro Personal</a>
       <a href="services.html?type=commercial">Seguro Comercial</a>
+      <a href="services.html?type=auto">Seguro de Auto</a>
     </div>
   </div>
 
@@ -134,7 +130,7 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=92"></script>
+<script src="global.js?v=93"></script>
 
 </body>
 </html>
