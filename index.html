@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>ACES Insurance Services | Texas Independent Insurance Agency</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=93">
+  <link rel="stylesheet" href="style.css?v=100">
 </head>
 
 <body>
@@ -12,66 +12,102 @@
 <header class="aces-header">
   <div class="header-inner">
     <a href="index.html"><img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo"></a>
+
+    <div class="lang-switch">
+      <button class="lang-option" data-lang="english">EN 🇺🇸</button>
+      <button class="lang-option" data-lang="spanish">ES 🇲🇽</button>
+    </div>
+
     <nav id="navContainer" class="nav-menu"></nav>
     <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
   </div>
 </header>
 
-<!-- HERO (H1 BLACK HERO) -->
+<!-- HERO -->
 <section class="hero-black">
-  <h1>Your Trusted Independent Insurance Agency</h1>
-  <p>Serving Central Texas with bilingual support and personalized insurance solutions.</p>
-  <a href="contact.html" class="btn-hero">Get a Quote</a>
+  <h1 data-en="Your Trusted Independent Insurance Agency"
+      data-es="Su Agencia de Seguros Independiente de Confianza">
+    Your Trusted Independent Insurance Agency
+  </h1>
+  <p data-en="Serving Central Texas with bilingual support and personalized insurance solutions."
+     data-es="Sirviendo al Centro de Texas con apoyo bilingüe y soluciones de seguros personalizadas.">
+    Serving Central Texas with bilingual support and personalized insurance solutions.
+  </p>
+  <a href="contact.html" class="btn-hero" data-en="Get a Quote" data-es="Solicitar Cotización">Get a Quote</a>
 </section>
 
 <!-- OUR SERVICES -->
 <section class="section-light underglow">
-  <h2>Our Services</h2>
+  <h2 data-en="Our Services" data-es="Nuestros Servicios">Our Services</h2>
 
   <div class="services-grid">
     <div class="service-card animated-card">
-      <h3>Life Insurance</h3>
-      <p>Protect what matters most with flexible life insurance options.</p>
-      <a href="services.html?type=life" class="btn-small">Learn More</a>
+      <h3 data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</h3>
+      <p data-en="Protect what matters most with flexible life insurance options."
+         data-es="Proteja lo que más importa con opciones flexibles de seguro de vida.">
+        Protect what matters most with flexible life insurance options.
+      </p>
+      <a href="services.html?type=life" class="btn-small" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="service-card animated-card">
-      <h3>Commercial Insurance</h3>
-      <p>Coverage tailored to safeguard your business operations.</p>
-      <a href="services.html?type=commercial" class="btn-small">Learn More</a>
+      <h3 data-en="Commercial Insurance" data-es="Seguro Comercial">Commercial Insurance</h3>
+      <p data-en="Coverage tailored to safeguard your business operations."
+         data-es="Cobertura diseñada para proteger las operaciones de su negocio.">
+        Coverage tailored to safeguard your business operations.
+      </p>
+      <a href="services.html?type=commercial" class="btn-small" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="service-card animated-card">
-      <h3>Property Insurance</h3>
-      <p>Reliable protection for your home and valuable assets.</p>
-      <a href="services.html?type=personal" class="btn-small">Learn More</a>
+      <h3 data-en="Property Insurance" data-es="Seguro de Propiedad">Property Insurance</h3>
+      <p data-en="Reliable protection for your home and valuable assets."
+         data-es="Protección confiable para su hogar y bienes valiosos.">
+        Reliable protection for your home and valuable assets.
+      </p>
+      <a href="services.html?type=personal" class="btn-small" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="service-card animated-card">
-      <h3>Auto Insurance</h3>
-      <p>Affordable and dependable coverage for your vehicles.</p>
-      <a href="services.html?type=auto" class="btn-small">Learn More</a>
+      <h3 data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</h3>
+      <p data-en="Affordable and dependable coverage for your vehicles."
+         data-es="Cobertura accesible y confiable para sus vehículos.">
+        Affordable and dependable coverage for your vehicles.
+      </p>
+      <a href="services.html?type=auto" class="btn-small" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
   </div>
 </section>
 
-<!-- CONTACT & TEAM CTA -->
+<!-- CTA -->
 <section class="section-red underglow">
-  <h2>Contact Us & Meet Our Team</h2>
-  <p>Our bilingual team is ready to help with all your insurance needs.</p>
+  <h2 data-en="Contact Us & Meet Our Team" data-es="Contáctenos y Conozca a Nuestro Equipo">
+    Contact Us & Meet Our Team
+  </h2>
+  <p data-en="Our bilingual team is ready to help with all your insurance needs."
+     data-es="Nuestro equipo bilingüe está listo para ayudarle con todas sus necesidades de seguros.">
+    Our bilingual team is ready to help with all your insurance needs.
+  </p>
 
   <div style="margin-top:20px;">
-    <a href="contact.html" class="btn-white">Contact Us</a>
-    <a href="contact.html" class="btn-white" style="margin-left:10px;">Meet Our Team</a>
+    <a href="contact.html" class="btn-white" data-en="Contact Us" data-es="Contáctenos">Contact Us</a>
+    <a href="contact.html" class="btn-white" style="margin-left:10px;"
+       data-en="Meet Our Team" data-es="Conozca a Nuestro Equipo">Meet Our Team</a>
   </div>
 </section>
 
 <!-- CHAMBER BADGE -->
 <section class="section-dark underglow">
-  <h2>Proud Member</h2>
-  <p>Central Texas Hispanic Chamber of Commerce</p>
+  <h2 data-en="Proud Member" data-es="Miembro Orgulloso">Proud Member</h2>
+  <p data-en="Central Texas Hispanic Chamber of Commerce"
+     data-es="Cámara de Comercio Hispana del Centro de Texas">
+    Central Texas Hispanic Chamber of Commerce
+  </p>
   <img src="chamber.png" alt="Chamber Badge" class="chamber-badge">
-  <p>Scan to visit the Chamber website</p>
+  <p data-en="Scan to visit the Chamber website"
+     data-es="Escanee para visitar el sitio web de la Cámara">
+    Scan to visit the Chamber website
+  </p>
 </section>
 
 <footer class="footer">
@@ -79,8 +115,10 @@
   <p>© 2026 ACES Insurance Services</p>
 </footer>
 
-<!-- NAVIGATION TEMPLATES (EN / ES) -->
+<!-- NAV TEMPLATES -->
 <nav id="navEN" style="display:none;">
+  <a class="nav-link" href="index.html">Home</a>
+
   <div class="dropdown">
     <span class="nav-link dropdown-toggle">Services ▾</span>
     <div class="dropdown-menu">
@@ -106,6 +144,8 @@
 </nav>
 
 <nav id="navES" style="display:none;">
+  <a class="nav-link" href="index.html">Inicio</a>
+
   <div class="dropdown">
     <span class="nav-link dropdown-toggle">Servicios ▾</span>
     <div class="dropdown-menu">
@@ -130,7 +170,7 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=93"></script>
+<script src="global.js?v=100"></script>
 
 </body>
 </html>
