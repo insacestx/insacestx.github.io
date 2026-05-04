@@ -42,48 +42,54 @@
   <h2 data-en="Our Services" data-es="Nuestros Servicios">Our Services</h2>
 
   <div class="services-grid">
-    <div class="service-card animated-card" id="life">
+    <div class="service-card animated-card">
       <h3 data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</h3>
-      <p data-en="Protect what matters most with flexible life insurance options."
-         data-es="Proteja lo que más importa con opciones flexibles de seguro de vida.">
-        Protect what matters most with flexible life insurance options.
+      <img src="Aces-Spade.jpg" alt="Life Insurance" class="agent-photo">
+      <p data-en="Protect your family’s future with flexible, affordable life insurance options designed to provide financial security when it matters most."
+         data-es="Proteja el futuro de su familia con opciones de seguro de vida flexibles y accesibles diseñadas para brindar seguridad financiera cuando más se necesita.">
+        Protect your family’s future with flexible, affordable life insurance options designed to provide financial security when it matters most.
       </p>
-      <a href="services.html?type=life" class="btn-small" data-en="Learn More" data-es="Más Información">
+      <a href="services.html?type=life" class="btn-hero" style="padding:8px 18px;font-size:.9rem;"
+         data-en="Learn More" data-es="Más Información">
         Learn More
       </a>
     </div>
 
-    <div class="service-card animated-card" id="commercial">
+    <div class="service-card animated-card">
+      <h3 data-en="Personal Insurance" data-es="Seguro Personal">Personal Insurance</h3>
+      <img src="Aces-Spade.jpg" alt="Personal Insurance" class="agent-photo">
+      <p data-en="Safeguard your home, vehicles, and personal belongings with comprehensive coverage built to fit your lifestyle and budget."
+         data-es="Proteja su hogar, vehículos y pertenencias personales con una cobertura integral diseñada para su estilo de vida y presupuesto.">
+        Safeguard your home, vehicles, and personal belongings with comprehensive coverage built to fit your lifestyle and budget.
+      </p>
+      <a href="services.html?type=personal" class="btn-hero" style="padding:8px 18px;font-size:.9rem;"
+         data-en="Learn More" data-es="Más Información">
+        Learn More
+      </a>
+    </div>
+
+    <div class="service-card animated-card">
       <h3 data-en="Commercial Insurance" data-es="Seguro Comercial">Commercial Insurance</h3>
-      <p data-en="Coverage tailored to safeguard your business operations."
-         data-es="Cobertura diseñada para proteger las operaciones de su negocio.">
-        Coverage tailored to safeguard your business operations.
+      <img src="Aces-Spade.jpg" alt="Commercial Insurance" class="agent-photo">
+      <p data-en="Protect your business with tailored commercial coverage that supports your operations, employees, and long-term growth."
+         data-es="Proteja su negocio con coberturas comerciales a la medida que respaldan sus operaciones, empleados y crecimiento a largo plazo.">
+        Protect your business with tailored commercial coverage that supports your operations, employees, and long-term growth.
       </p>
-      <a href="services.html?type=commercial" class="btn-small" data-en="Learn More" data-es="Más Información">
+      <a href="services.html?type=commercial" class="btn-hero" style="padding:8px 18px;font-size:.9rem;"
+         data-en="Learn More" data-es="Más Información">
         Learn More
       </a>
     </div>
 
-    <div class="service-card animated-card" id="personal">
-      <h3 data-en="Property & Personal Insurance" data-es="Seguro de Propiedad y Personal">
-        Property & Personal Insurance
-      </h3>
-      <p data-en="Reliable protection for your home and personal assets."
-         data-es="Protección confiable para su hogar y bienes personales.">
-        Reliable protection for your home and personal assets.
-      </p>
-      <a href="services.html?type=personal" class="btn-small" data-en="Learn More" data-es="Más Información">
-        Learn More
-      </a>
-    </div>
-
-    <div class="service-card animated-card" id="auto">
+    <div class="service-card animated-card">
       <h3 data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</h3>
-      <p data-en="Affordable and dependable coverage for your vehicles."
-         data-es="Cobertura accesible y confiable para sus vehículos.">
-        Affordable and dependable coverage for your vehicles.
+      <img src="Aces-Spade.jpg" alt="Auto Insurance" class="agent-photo">
+      <p data-en="Get dependable, cost-effective auto coverage that keeps you protected on the road — whether personal or commercial."
+         data-es="Obtenga una cobertura de auto confiable y accesible que lo mantenga protegido en el camino, ya sea personal o comercial.">
+        Get dependable, cost-effective auto coverage that keeps you protected on the road — whether personal or commercial.
       </p>
-      <a href="services.html?type=auto" class="btn-small" data-en="Learn More" data-es="Más Información">
+      <a href="services.html?type=auto" class="btn-hero" style="padding:8px 18px;font-size:.9rem;"
+         data-en="Learn More" data-es="Más Información">
         Learn More
       </a>
     </div>
@@ -110,15 +116,17 @@
   </div>
 </section>
 
-<section class="section-dark underglow">
+<section class="section-light chamber-section">
   <h2 data-en="Proud Member" data-es="Miembro Orgulloso">Proud Member</h2>
   <p data-en="Central Texas Hispanic Chamber of Commerce"
      data-es="Cámara de Comercio Hispana del Centro de Texas">
     Central Texas Hispanic Chamber of Commerce
   </p>
 
-  <img src="chamber-badge.png" alt="Chamber Badge" class="chamber-badge">
-  <img src="chamber-qr.png" alt="Chamber QR Code" class="chamber-badge" style="width:140px;">
+  <div class="chamber-card">
+    <img src="chamber-badge.png" alt="Chamber Badge" class="chamber-badge-img">
+    <img src="chamber-qr.png" alt="Chamber QR Code" class="chamber-qr-img">
+  </div>
 
   <p data-en="Scan to visit the Chamber website"
      data-es="Escanee para visitar el sitio web de la Cámara">
@@ -147,6 +155,8 @@
     <div class="dropdown-menu">
       <a href="applications.html#commercial">Commercial Apps</a>
       <a href="applications.html#personal">Personal Apps</a>
+      <a href="applications.html#auto">Auto Apps</a>
+      <a href="applications.html#life">Life Apps</a>
     </div>
   </div>
   <a class="nav-link" href="coi.html">COI Request</a>
@@ -171,6 +181,8 @@
     <div class="dropdown-menu">
       <a href="applications.html#commercial-es">Aplicaciones Comerciales</a>
       <a href="applications.html#personal-es">Aplicaciones Personales</a>
+      <a href="applications.html#auto-es">Aplicaciones de Auto</a>
+      <a href="applications.html#life-es">Aplicaciones de Vida</a>
     </div>
   </div>
   <a class="nav-link" href="coi.html">Solicitud de COI</a>
