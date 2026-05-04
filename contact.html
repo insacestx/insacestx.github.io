@@ -5,7 +5,7 @@
   <title>Contact Us | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Contact ACES Insurance Services. Bilingual support for personal, commercial, auto, and property insurance.">
-  <link rel="stylesheet" href="style.css?v=83">
+  <link rel="stylesheet" href="style.css?v=84">
 </head>
 
 <body>
@@ -44,7 +44,7 @@
 
       <div class="map-wrapper">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.501...etc"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.501..."
           width="100%" height="260" style="border:0;" allowfullscreen loading="lazy">
         </iframe>
       </div>
@@ -54,7 +54,7 @@
     <div class="team-grid">
 
       <!-- Jordan -->
-      <div class="agent-card" data-lang="en">
+      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
         <img src="agent-jordan.png" class="agent-photo">
         <h3>Jordan Jones</h3>
         <p class="title">Co‑Owner</p>
@@ -63,7 +63,7 @@
       </div>
 
       <!-- Lanse -->
-      <div class="agent-card" data-lang="en">
+      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
         <img src="agent-lanse.png" class="agent-photo">
         <h3>Lanse Derrick</h3>
         <p class="title">Co‑Owner</p>
@@ -72,7 +72,7 @@
       </div>
 
       <!-- Robert -->
-      <div class="agent-card" data-lang="en">
+      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
         <img src="agent-robert.png" class="agent-photo">
         <h3>Robert Hyde</h3>
         <p class="title">Co‑Owner</p>
@@ -81,7 +81,7 @@
       </div>
 
       <!-- Bryan -->
-      <div class="agent-card" data-lang="en">
+      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
         <img src="agent-bryan.png" class="agent-photo">
         <h3>Bryan Carter</h3>
         <p class="title">Co‑Owner</p>
@@ -90,7 +90,7 @@
       </div>
 
       <!-- George -->
-      <div class="agent-card" data-lang="en es">
+      <div class="agent-card" data-lang="en es" onclick="selectAgent(this)">
         <img src="agent-george.png" class="agent-photo">
         <h3>George J. Santibañez</h3>
         <p class="title">Commercial & Personal Lines</p>
@@ -99,7 +99,7 @@
       </div>
 
       <!-- Jimmy -->
-      <div class="agent-card" data-lang="en es">
+      <div class="agent-card" data-lang="en es" onclick="selectAgent(this)">
         <img src="agent-jimmy.png" class="agent-photo">
         <h3>Jimmy Rodriguez</h3>
         <p class="title">Commercial & Personal Lines</p>
@@ -108,7 +108,7 @@
       </div>
 
       <!-- Renee -->
-      <div class="agent-card" data-lang="en">
+      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
         <img src="agent-renee.png" class="agent-photo">
         <h3>Renee Ridling</h3>
         <p class="title">Commercial & Personal Lines</p>
@@ -118,6 +118,17 @@
 
     </div>
 
+  </section>
+
+  <!-- SELECTED AGENT PANEL (RESTYLED TO MATCH CARDS) -->
+  <section class="selected-agent-card">
+    <h3>Selected Agent</h3>
+    <img id="sa-photo" src="placeholder.png" class="agent-photo-large">
+    <p id="sa-name">Select an Agent</p>
+    <p id="sa-title"></p>
+    <p id="sa-email"></p>
+    <p id="sa-phone"></p>
+    <a id="sa-email-btn" class="btn-small" href="#">Email This Agent</a>
   </section>
 
 </div>
@@ -141,7 +152,7 @@
 
       <div class="map-wrapper">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.501...etc"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.501..."
           width="100%" height="260" style="border:0;" allowfullscreen loading="lazy">
         </iframe>
       </div>
@@ -151,7 +162,7 @@
     <div class="team-grid">
 
       <!-- George -->
-      <div class="agent-card" data-lang="es">
+      <div class="agent-card" data-lang="es" onclick="selectAgent(this)">
         <img src="agent-george.png" class="agent-photo">
         <h3>George J. Santibañez</h3>
         <p class="title">Líneas Comerciales y Personales</p>
@@ -160,7 +171,7 @@
       </div>
 
       <!-- Jimmy -->
-      <div class="agent-card" data-lang="es">
+      <div class="agent-card" data-lang="es" onclick="selectAgent(this)">
         <img src="agent-jimmy.png" class="agent-photo">
         <h3>Jimmy Rodriguez</h3>
         <p class="title">Líneas Comerciales y Personales</p>
@@ -170,6 +181,17 @@
 
     </div>
 
+  </section>
+
+  <!-- SELECTED AGENT PANEL (SPANISH) -->
+  <section class="selected-agent-card">
+    <h3>Agente Seleccionado</h3>
+    <img id="sa-photo-es" src="placeholder.png" class="agent-photo-large">
+    <p id="sa-name-es">Seleccione un Agente</p>
+    <p id="sa-title-es"></p>
+    <p id="sa-email-es"></p>
+    <p id="sa-phone-es"></p>
+    <a id="sa-email-btn-es" class="btn-small" href="#">Enviar Correo</a>
   </section>
 
 </div>
@@ -223,7 +245,33 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=83"></script>
+<script src="global.js?v=84"></script>
+
+<script>
+function selectAgent(card) {
+  const name = card.querySelector("h3").innerText;
+  const title = card.querySelector(".title").innerText;
+  const email = card.querySelector(".email").innerText;
+  const phone = card.querySelector(".phone").innerText;
+  const photo = card.querySelector("img").src;
+
+  // English panel
+  document.getElementById("sa-name").innerText = name;
+  document.getElementById("sa-title").innerText = title;
+  document.getElementById("sa-email").innerText = email;
+  document.getElementById("sa-phone").innerText = phone;
+  document.getElementById("sa-photo").src = photo;
+  document.getElementById("sa-email-btn").href = "mailto:" + email;
+
+  // Spanish panel
+  document.getElementById("sa-name-es").innerText = name;
+  document.getElementById("sa-title-es").innerText = title;
+  document.getElementById("sa-email-es").innerText = email;
+  document.getElementById("sa-phone-es").innerText = phone;
+  document.getElementById("sa-photo-es").src = photo;
+  document.getElementById("sa-email-btn-es").href = "mailto:" + email;
+}
+</script>
 
 </body>
 </html>
