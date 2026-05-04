@@ -1,64 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COI Request - ACES Insurance Services</title>
-    <link rel="stylesheet" href="style.css?v=3">
+  <meta charset="UTF-8">
+  <title>COI Request | ACES Insurance Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css?v=100">
 </head>
-
 <body>
 
-<!-- 🔴 ACES GLOBAL HEADER -->
 <header class="aces-header">
   <div class="header-inner">
-
-    <!-- Logo -->
-    <a href="index.html" class="header-logo">
-      <img src="image2.png" alt="ACES Insurance Services Logo" class="header-logo-img">
+    <a href="index.html">
+      <img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo">
     </a>
 
-    <!-- Language toggle -->
-    <label class="toggle-switch header-toggle">
-      <input type="checkbox" id="langToggle" onclick="toggleLanguage()">
-      <span class="slider"></span>
-    </label>
+    <div class="lang-switch">
+      <button class="lang-option" data-lang="english">EN 🇺🇸</button>
+      <button class="lang-option" data-lang="spanish">ES 🇲🇽</button>
+    </div>
 
-    <!-- Desktop nav (cloned here) -->
     <nav id="navContainer" class="nav-menu"></nav>
-
-    <!-- Mobile hamburger -->
-    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
-      ☰
-    </button>
-
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
   </div>
 </header>
 
-<!-- PAGE CONTENT -->
-<section class="about">
-    <h2>Certificate of Insurance Request</h2>
-    <p>Please use this page to request a Certificate of Insurance. A bilingual form will be added here soon.</p>
-</section>
+<div class="page-wrapper" id="english">
+  <h1>Certificate of Insurance (COI) Request</h1>
+  <p>Use this page to request a Certificate of Insurance for your clients, landlords, or vendors.</p>
+  <p>Please contact our office or email your agent with the details required for your certificate.</p>
+</div>
 
-<!-- FOOTER -->
+<div class="page-wrapper" id="spanish" style="display:none;">
+  <h1>Solicitud de Certificado de Seguro (COI)</h1>
+  <p>Use esta página para solicitar un Certificado de Seguro para sus clientes, arrendadores o proveedores.</p>
+  <p>Comuníquese con nuestra oficina o envíe un correo electrónico a su agente con los detalles requeridos.</p>
+</div>
+
 <footer class="footer">
-    <img src="image2.png" alt="ACES Logo" class="footer-logo">
-    <p>© 2026 ACES Insurance Services</p>
+  <img src="image2.png" class="footer-logo" alt="ACES Insurance Logo">
+  <p>© 2026 ACES Insurance Services</p>
 </footer>
 
-<!-- MOBILE MENU SCRIPT -->
-<script>
-function toggleMobileMenu() {
-    const menu = document.getElementById("mobileMenu");
-    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
-}
+<nav id="navEN" style="display:none;">
+  <a class="nav-link" href="index.html">Home</a>
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Services ▾</span>
+    <div class="dropdown-menu">
+      <a href="services.html?type=life">Life Insurance</a>
+      <a href="services.html?type=personal">Personal Insurance</a>
+      <a href="services.html?type=commercial">Commercial Insurance</a>
+      <a href="services.html?type=auto">Auto Insurance</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Applications ▾</span>
+    <div class="dropdown-menu">
+      <a href="applications.html#commercial">Commercial Apps</a>
+      <a href="applications.html#personal">Personal Apps</a>
+    </div>
+  </div>
+  <a class="nav-link" href="coi.html">COI Request</a>
+  <a class="nav-link" href="claims.html">Claims</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+</nav>
 
-function toggleMobileDropdown(button) {
-    const content = button.nextElementSibling;
-    content.style.display = (content.style.display === "block") ? "none" : "block";
-}
-</script>
+<nav id="navES" style="display:none;">
+  <a class="nav-link" href="index.html">Inicio</a>
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Servicios ▾</span>
+    <div class="dropdown-menu">
+      <a href="services.html?type=life">Seguro de Vida</a>
+      <a href="services.html?type=personal">Seguro Personal</a>
+      <a href="services.html?type=commercial">Seguro Comercial</a>
+      <a href="services.html?type=auto">Seguro de Auto</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Aplicaciones ▾</span>
+    <div class="dropdown-menu">
+      <a href="applications.html#commercial-es">Aplicaciones Comerciales</a>
+      <a href="applications.html#personal-es">Aplicaciones Personales</a>
+    </div>
+  </div>
+  <a class="nav-link" href="coi.html">Solicitud de COI</a>
+  <a class="nav-link" href="claims.html">Reclamos</a>
+  <a class="nav-link" href="about.html">Acerca de</a>
+  <a class="nav-link" href="contact.html">Contacto</a>
+</nav>
 
+<script src="global.js?v=100"></script>
 </body>
 </html>
