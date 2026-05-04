@@ -5,7 +5,7 @@
   <title>Contact Us | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Contact ACES Insurance Services. Bilingual support for personal, commercial, auto, and property insurance.">
-  <link rel="stylesheet" href="style.css?v=84">
+  <link rel="stylesheet" href="style.css?v=85">
 </head>
 
 <body>
@@ -29,8 +29,8 @@
 <div id="english">
 
   <section class="about">
-    <h2>Contact Our Team</h2>
-    <p>Our dedicated team is here to help with all your insurance needs.</p>
+    <h2>Contact Us</h2>
+    <p>Our bilingual team is ready to help with personal, commercial, property, and auto insurance needs.</p>
   </section>
 
   <section class="contact-layout">
@@ -38,13 +38,19 @@
     <!-- LEFT SIDE — OFFICE INFO -->
     <div class="office-info">
       <h3>Office Information</h3>
-      <p><strong>Address:</strong><br>404 Sapphire Blvd, Hewitt, TX 76643</p>
+
+      <p><strong>Address:</strong><br>404 Sapphire Blvd<br>Hewitt, TX 76643</p>
+      <p><strong>Phone:</strong><br>254‑227‑6560</p>
       <p><strong>Email:</strong><br>office@insaces.com</p>
-      <p><strong>Phone:</strong><br>(254) 227‑6560</p>
+
+      <p><strong>Business Hours:</strong><br>
+        Monday–Friday: 9:00 AM – 5:00 PM<br>
+        Saturday–Sunday: Closed
+      </p>
 
       <div class="map-wrapper">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.501..."
+          src="https://www.google.com/maps/embed?pb=!1m18..."
           width="100%" height="260" style="border:0;" allowfullscreen loading="lazy">
         </iframe>
       </div>
@@ -53,49 +59,13 @@
     <!-- RIGHT SIDE — AGENT CARDS -->
     <div class="team-grid">
 
-      <!-- Jordan -->
-      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
-        <img src="agent-jordan.png" class="agent-photo">
-        <h3>Jordan Jones</h3>
-        <p class="title">Co‑Owner</p>
-        <p class="email">jordan@insaces.com</p>
-        <p class="phone">(254) 289‑2423</p>
-      </div>
-
-      <!-- Lanse -->
-      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
-        <img src="agent-lanse.png" class="agent-photo">
-        <h3>Lanse Derrick</h3>
-        <p class="title">Co‑Owner</p>
-        <p class="email">lanse@insaces.com</p>
-        <p class="phone">(214) 770‑1488</p>
-      </div>
-
-      <!-- Robert -->
-      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
-        <img src="agent-robert.png" class="agent-photo">
-        <h3>Robert Hyde</h3>
-        <p class="title">Co‑Owner</p>
-        <p class="email">robert@insaces.com</p>
-        <p class="phone">(254) 292‑0961</p>
-      </div>
-
-      <!-- Bryan -->
-      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
-        <img src="agent-bryan.png" class="agent-photo">
-        <h3>Bryan Carter</h3>
-        <p class="title">Co‑Owner</p>
-        <p class="email">bryan@insaces.com</p>
-        <p class="phone">(254) 744‑6600</p>
-      </div>
-
       <!-- George -->
       <div class="agent-card" data-lang="en es" onclick="selectAgent(this)">
         <img src="agent-george.png" class="agent-photo">
         <h3>George J. Santibañez</h3>
         <p class="title">Commercial & Personal Lines</p>
         <p class="email">george@insaces.com</p>
-        <p class="phone">(254) 709‑6487</p>
+        <p class="phone">254‑709‑6487</p>
       </div>
 
       <!-- Jimmy -->
@@ -104,7 +74,43 @@
         <h3>Jimmy Rodriguez</h3>
         <p class="title">Commercial & Personal Lines</p>
         <p class="email">jimmy@insaces.com</p>
-        <p class="phone">(214) 498‑6928</p>
+        <p class="phone">214‑498‑6928</p>
+      </div>
+
+      <!-- Jordan -->
+      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
+        <img src="agent-jordan.png" class="agent-photo">
+        <h3>Jordan Jones</h3>
+        <p class="title">Co‑Owner</p>
+        <p class="email">jordan@insaces.com</p>
+        <p class="phone">254‑289‑2423</p>
+      </div>
+
+      <!-- Lanse -->
+      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
+        <img src="agent-lanse.png" class="agent-photo">
+        <h3>Lanse Derrick</h3>
+        <p class="title">Co‑Owner</p>
+        <p class="email">lanse@insaces.com</p>
+        <p class="phone">214‑770‑1488</p>
+      </div>
+
+      <!-- Robert -->
+      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
+        <img src="agent-robert.png" class="agent-photo">
+        <h3>Robert Hyde</h3>
+        <p class="title">Co‑Owner</p>
+        <p class="email">robert@insaces.com</p>
+        <p class="phone">254‑292‑0961</p>
+      </div>
+
+      <!-- Bryan -->
+      <div class="agent-card" data-lang="en" onclick="selectAgent(this)">
+        <img src="agent-bryan.png" class="agent-photo">
+        <h3>Bryan Carter</h3>
+        <p class="title">Co‑Owner</p>
+        <p class="email">bryan@insaces.com</p>
+        <p class="phone">254‑744‑6600</p>
       </div>
 
       <!-- Renee -->
@@ -113,14 +119,14 @@
         <h3>Renee Ridling</h3>
         <p class="title">Commercial & Personal Lines</p>
         <p class="email">office@insaces.com</p>
-        <p class="phone">(254) 227‑6560</p>
+        <p class="phone">254‑227‑6560</p>
       </div>
 
     </div>
 
   </section>
 
-  <!-- SELECTED AGENT PANEL (RESTYLED TO MATCH CARDS) -->
+  <!-- SELECTED AGENT PANEL -->
   <section class="selected-agent-card">
     <h3>Selected Agent</h3>
     <img id="sa-photo" src="placeholder.png" class="agent-photo-large">
@@ -137,7 +143,7 @@
 <div id="spanish" style="display:none;">
 
   <section class="about">
-    <h2>Contacte a Nuestro Equipo</h2>
+    <h2>Contáctenos</h2>
     <p>Nuestro equipo bilingüe está aquí para ayudarle con sus necesidades de aseguranza.</p>
   </section>
 
@@ -146,13 +152,19 @@
     <!-- LEFT SIDE — OFFICE INFO -->
     <div class="office-info">
       <h3>Información de la Oficina</h3>
-      <p><strong>Dirección:</strong><br>404 Sapphire Blvd, Hewitt, TX 76643</p>
+
+      <p><strong>Dirección:</strong><br>404 Sapphire Blvd<br>Hewitt, TX 76643</p>
+      <p><strong>Teléfono:</strong><br>254‑227‑6560</p>
       <p><strong>Email:</strong><br>office@insaces.com</p>
-      <p><strong>Teléfono:</strong><br>(254) 227‑6560</p>
+
+      <p><strong>Horario:</strong><br>
+        Lunes–Viernes: 9:00 AM – 5:00 PM<br>
+        Sábado–Domingo: Cerrado
+      </p>
 
       <div class="map-wrapper">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.501..."
+          src="https://www.google.com/maps/embed?pb=!1m18..."
           width="100%" height="260" style="border:0;" allowfullscreen loading="lazy">
         </iframe>
       </div>
@@ -167,7 +179,7 @@
         <h3>George J. Santibañez</h3>
         <p class="title">Líneas Comerciales y Personales</p>
         <p class="email">george@insaces.com</p>
-        <p class="phone">(254) 709‑6487</p>
+        <p class="phone">254‑709‑6487</p>
       </div>
 
       <!-- Jimmy -->
@@ -176,7 +188,7 @@
         <h3>Jimmy Rodriguez</h3>
         <p class="title">Líneas Comerciales y Personales</p>
         <p class="email">jimmy@insaces.com</p>
-        <p class="phone">(214) 498‑6928</p>
+        <p class="phone">214‑498‑6928</p>
       </div>
 
     </div>
@@ -245,33 +257,7 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=84"></script>
-
-<script>
-function selectAgent(card) {
-  const name = card.querySelector("h3").innerText;
-  const title = card.querySelector(".title").innerText;
-  const email = card.querySelector(".email").innerText;
-  const phone = card.querySelector(".phone").innerText;
-  const photo = card.querySelector("img").src;
-
-  // English panel
-  document.getElementById("sa-name").innerText = name;
-  document.getElementById("sa-title").innerText = title;
-  document.getElementById("sa-email").innerText = email;
-  document.getElementById("sa-phone").innerText = phone;
-  document.getElementById("sa-photo").src = photo;
-  document.getElementById("sa-email-btn").href = "mailto:" + email;
-
-  // Spanish panel
-  document.getElementById("sa-name-es").innerText = name;
-  document.getElementById("sa-title-es").innerText = title;
-  document.getElementById("sa-email-es").innerText = email;
-  document.getElementById("sa-phone-es").innerText = phone;
-  document.getElementById("sa-photo-es").src = photo;
-  document.getElementById("sa-email-btn-es").href = "mailto:" + email;
-}
-</script>
+<script src="global.js?v=85"></script>
 
 </body>
 </html>
