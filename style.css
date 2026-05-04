@@ -1,279 +1,109 @@
-/* ============================================================
-   ACES 2026 — FINAL GLOBAL STYLE.CSS
-============================================================ */
-
-*{box-sizing:border-box;}
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-  background:#fff;
-  color:#111;
-}
-a{text-decoration:none;color:inherit;cursor:pointer;}
-h1,h2,h3{margin-top:0;}
-
-/* HEADER */
-.aces-header{
-  background:#fff;
-  border-bottom:1px solid #ddd;
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
-.header-inner{
-  max-width:1200px;
-  margin:auto;
-  padding:12px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-}
-.header-logo-img{
-  height:52px;
-  width:auto;
-  cursor:pointer;
+/* ------------------------------
+   SERVICE CARD ALIGNMENT FIX
+------------------------------ */
+.service-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
-/* LANGUAGE SWITCH */
-.lang-switch{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.lang-option{
-  border:1px solid #ddd;
-  background:#f7f7f7;
-  padding:4px 12px;
-  border-radius:999px;
-  font-size:.85rem;
-  cursor:pointer;
-  font-weight:600;
-  transition:background .25s, color .25s, border-color .25s;
-}
-.lang-option:hover{
-  background:#ffe5e5;
-  border-color:#d40000;
-}
-.lang-option.active{
-  background:#d40000;
-  color:#fff;
-  border-color:#d40000;
+.service-card p {
+  flex-grow: 1;
 }
 
-/* NAVIGATION */
-.nav-menu{
-  display:flex;
-  align-items:center;
-  gap:22px;
-}
-.nav-link{
-  position:relative;
-  font-weight:600;
-  padding-bottom:4px;
-}
-.nav-link:hover{color:#d40000;}
-.nav-link::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:0;
-  width:0;
-  height:2px;
-  background:#d40000;
-  transition:.3s;
-  transform:translateX(-50%);
-}
-.nav-link:hover::after{width:100%;}
-
-.dropdown{position:relative;}
-.dropdown-toggle{cursor:pointer;}
-.dropdown-menu{
-  position:absolute;
-  top:100%;
-  right:0;
-  background:#fff;
-  border:1px solid #ddd;
-  border-radius:6px;
-  min-width:180px;
-  padding:6px 0;
-  display:none;
-  flex-direction:column;
-  box-shadow:0 4px 12px rgba(0,0,0,.15);
-  z-index:2000;
-}
-.dropdown-menu.show{display:flex;}
-.dropdown-menu a{
-  padding:10px 14px;
-  font-weight:500;
-}
-.dropdown-menu a:hover{color:#d40000;}
-
-.mobile-nav-toggle{
-  display:none;
-  font-size:1.4rem;
-  background:none;
-  border:none;
-}
-@media(max-width:900px){
-  .header-inner{
-    flex-wrap:wrap;
-    gap:12px;
-  }
-  .nav-menu{display:none;}
-  .nav-menu.open{
-    display:flex;
-    flex-direction:column;
-    background:#fff;
-    padding:10px 16px;
-    border-bottom:1px solid #ddd;
-    width:100%;
-  }
-  .mobile-nav-toggle{display:block;}
+.service-card .service-cta {
+  margin-top: 20px;
+  align-self: center;
 }
 
-/* HERO */
-.hero-black{
-  background:#000;
-  color:#fff;
-  text-align:center;
-  padding:120px 20px;
-}
-.hero-black h1{
-  font-size:2.8rem;
-  font-weight:800;
-  margin-bottom:12px;
-}
-.hero-black p{
-  font-size:1.2rem;
-  opacity:.9;
-  margin-bottom:24px;
-}
-.btn-hero{
-  background:#d40000;
-  color:#fff;
-  padding:14px 28px;
-  border-radius:6px;
-  font-weight:700;
-  display:inline-block;
-  transition:.25s;
-}
-.btn-hero:hover{
-  background:#b00000;
+/* ------------------------------
+   WHITE BUTTONS WITH RED TEXT
+------------------------------ */
+.btn-white {
+  background: #ffffff;
+  color: #c40000;
+  border: 2px solid #c40000;
+  padding: 12px 26px;
+  border-radius: 6px;
+  font-weight: 700;
+  transition: 0.25s;
+  display: inline-block;
 }
 
-/* UNDERGLOW */
-.underglow{
-  position:relative;
-}
-.underglow::before{
-  content:"";
-  position:absolute;
-  top:-20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:60%;
-  height:20px;
-  background:rgba(212,0,0,.35);
-  filter:blur(22px);
-  border-radius:50%;
-  z-index:-1;
+.btn-white:hover {
+  background: #c40000;
+  color: #ffffff;
 }
 
-/* SECTIONS */
-.section-light,
-.section-dark,
-.section-red{
-  max-width:1200px;
-  margin:60px auto;
-  padding:60px 20px;
-  border-radius:12px;
-  text-align:center;
-  box-shadow:0 18px 48px rgba(0,0,0,.18);
-}
-.section-light{background:#fafafa;color:#111;}
-.section-dark{background:#000;color:#fff;}
-.section-red{background:#d40000;color:#fff;}
-
-/* SERVICES GRID */
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:24px;
-  margin-top:30px;
-}
-.service-card{
-  background:#fff;
-  color:#111;
-  padding:30px;
-  border-radius:12px;
-  box-shadow:0 12px 32px rgba(0,0,0,.18);
-  text-align:center;
-  transition:.3s;
-}
-.animated-card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 18px 48px rgba(212,0,0,.45);
+/* ------------------------------
+   CHAMBER CARD FIX
+------------------------------ */
+.chamber-section {
+  background: #f7f3ea;
 }
 
-/* TEAM GRID */
-.team-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:24px;
-}
-.agent-card{
-  background:#fff;
-  border-radius:16px;
-  padding:20px;
-  text-align:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.18);
-  border:1px solid #eee;
-  transition:.25s;
-  cursor:pointer;
-}
-.agent-card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 16px 36px rgba(212,0,0,.45);
-  border-color:#d40000;
-}
-.agent-photo{
-  width:120px;
-  height:120px;
-  object-fit:cover;
-  border-radius:14px;
-  margin-bottom:12px;
-}
-.title{
-  font-weight:600;
-  color:#d40000;
-  margin-bottom:6px;
+.chamber-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  max-width: 420px;
+  margin: 24px auto;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-/* CHAMBER BADGE */
-.chamber-badge{
-  width:160px;
-  margin:20px auto;
-  display:block;
-  filter:drop-shadow(0 6px 12px rgba(0,0,0,.35));
+.chamber-badge-img {
+  width: 160px;
+  height: auto;
 }
 
-/* PAGE WRAPPER */
-.page-wrapper{
-  max-width:1200px;
-  margin:40px auto 80px;
-  padding:0 20px;
+.chamber-qr-img {
+  width: 120px;
+  height: auto;
 }
 
-/* FOOTER */
-.footer{
-  background:#000;
-  color:#fff;
-  text-align:center;
-  padding:40px 20px;
-  margin-top:60px;
+/* ------------------------------
+   TEAM GRID (CONTACT PAGE)
+------------------------------ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
 }
-.footer-logo{
-  width:120px;
-  margin-bottom:10px;
+
+.agent-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  text-align: center;
+}
+
+.agent-photo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.agent-card .name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.agent-card .title {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.agent-card .email,
+.agent-card .phone {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
 }
