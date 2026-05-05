@@ -96,7 +96,13 @@
 .section-dark .service-card p {
   color: #ccc;
 }
+/* ============================================================
+   CONTACT PAGE — AGENT GRID + SLIDE-OUT PANEL
+============================================================ */
 
+.team-grid {
+  display: grid;
+  grid
 .section-dark .service-card:hover {
   border-color: #d40000;
   box-shadow: 0 12px 30px rgba(212,0,0,.35);
