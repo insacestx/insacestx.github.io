@@ -7,23 +7,14 @@
 -------------------------------------------------- */
 function setLanguage(lang) {
   localStorage.setItem("acesLang", lang);
-  document.documentElement.setAttribute("data-lang", lang);
 
-  const pairs = [
-    ["english", "spanish"],
-    ["services-en", "services-es"],
-    ["apps-en", "apps-es"],
-    ["about-en", "about-es"]
-  ];
+  const english = document.getElementById("english");
+  const spanish = document.getElementById("spanish");
 
-  pairs.forEach(([enId, esId]) => {
-    const en = document.getElementById(enId);
-    const es = document.getElementById(esId);
-    if (en && es) {
-      en.style.display = lang === "english" ? "block" : "none";
-      es.style.display = lang === "spanish" ? "block" : "none";
-    }
-  });
+  if (english && spanish) {
+    english.style.display = lang === "english" ? "block" : "none";
+    spanish.style.display = lang === "spanish" ? "block" : "none";
+  }
 
   injectNavigation(lang);
   filterAgentsByLanguage(lang);
