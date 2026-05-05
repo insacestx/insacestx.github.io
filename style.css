@@ -453,3 +453,107 @@ section{
     flex-direction:column;
   }
 }
+
+/* ============================================================
+   ACES 2026 — FINAL HEADER + NAV FIX (SAFE MERGE)
+============================================================ */
+
+/* Align all nav items perfectly */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+/* Ensure nav links and dropdown toggles align vertically */
+.nav-link,
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+}
+
+/* Dropdown menu — correct position + behavior */
+.dropdown-menu {
+  position: absolute;
+  top: 42px;        /* aligns directly under nav item */
+  left: 0;          /* fixes right-alignment issue */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  min-width: 180px;
+  padding: 6px 0;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  z-index: 9999;
+}
+
+/* Hover behavior (desktop) */
+.dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+/* Dropdown menu items */
+.dropdown-menu a {
+  padding: 10px 14px;
+  font-weight: 500;
+  color: #111;
+  white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+  background: #f2f2f2;
+  color: #d40000;
+}
+
+/* Mobile nav toggle */
+.mobile-nav-toggle {
+  display: none;
+  font-size: 1.6rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #111;
+}
+
+/* Mobile behavior */
+@media (max-width: 900px) {
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-link,
+  .dropdown-toggle {
+    height: auto;
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: none; /* hover disabled on mobile */
+  }
+}
