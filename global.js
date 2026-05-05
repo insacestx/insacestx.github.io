@@ -1,29 +1,14 @@
 /* ============================================================
    ACES INSURANCE — GLOBAL.JS (FINAL 2026 BUILD)
-   Handles:
-   - Language switching
-   - Navigation injection
-   - Agent filtering
-   - Services filtering
-   - Mobile nav toggle
-   - Dropdown tap support
-   - Slide‑out agent panel
 ============================================================ */
 
 /* --------------------------------------------------
-   LANGUAGE SWITCHING
+   LANGUAGE SWITCHING (with persistent memory)
 -------------------------------------------------- */
 function setLanguage(lang) {
+  localStorage.setItem("acesLang", lang);
   document.documentElement.setAttribute("data-lang", lang);
 
-  // Swap bilingual text
-  document.querySelectorAll("[data-en]").forEach(el => {
-    const en = el.getAttribute("data-en");
-    const es = el.getAttribute("data-es");
-    el.textContent = lang === "english" ? en : es;
-  });
-
-  // Page wrapper pairs
   const pairs = [
     ["english", "spanish"],
     ["services-en", "services-es"],
@@ -128,7 +113,7 @@ function handleServiceQuery() {
 -------------------------------------------------- */
 function initAgentPanel() {
   const panel = document.getElementById("agentPanel");
-  if (!panel) return; // Only runs on contact page
+  if (!panel) return;
 
   const closePanel = document.getElementById("closePanel");
   const panelPhoto = document.getElementById("panelPhoto");
@@ -217,7 +202,9 @@ function initAgentPanel() {
 -------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Mobile nav toggle
+  const savedLang = localStorage.getItem("acesLang") || "english";
+  setLanguage(savedLang);
+
   const toggle = document.getElementById("mobileNavToggle");
   const nav = document.getElementById("navContainer");
 
@@ -227,19 +214,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Default language
-  setLanguage("english");
-
-  // Services filtering
   handleServiceQuery();
 
-  // Language buttons
   document.querySelectorAll(".lang-option").forEach(btn => {
     btn.addEventListener("click", () => {
       setLanguage(btn.getAttribute("data-lang"));
     });
   });
 
-  // Contact page slide-out panel
   initAgentPanel();
 });
