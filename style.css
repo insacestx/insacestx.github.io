@@ -116,4 +116,106 @@
 
 .team-grid {
   display: grid;
-  grid
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* Agent cards behave like service cards */
+.agent-card {
+  cursor: pointer;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.agent-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(212, 0, 0, 0.25);
+}
+
+/* Agent photos */
+.agent-photo {
+  width: 100%;
+  max-width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  display: block;
+}
+
+/* ============================================================
+   SLIDE-OUT PANEL
+============================================================ */
+
+.agent-panel {
+  position: fixed;
+  top: 0;
+  right: -400px; /* hidden by default */
+  width: 350px;
+  height: 100vh;
+  background: #ffffff;
+  box-shadow: -4px 0 18px rgba(0,0,0,0.15);
+  padding: 30px;
+  z-index: 99999;
+  transition: right .35s ease;
+  overflow-y: auto;
+}
+
+.agent-panel.open {
+  right: 0; /* slide in */
+}
+
+.close-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #d40000;
+}
+
+.panel-photo {
+  width: 100%;
+  max-width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 20px auto;
+  display: block;
+}
+
+.agent-panel h2 {
+  margin-top: 10px;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.agent-panel p {
+  text-align: center;
+  margin: 6px 0;
+  font-size: 1rem;
+}
+
+/* ============================================================
+   CONTACT PAGE LAYOUT (Office Info + Map)
+============================================================ */
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 900px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-panel {
+    width: 100%;
+  }
+}
