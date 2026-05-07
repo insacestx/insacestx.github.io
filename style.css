@@ -241,6 +241,7 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 25px;
   margin-top: 40px;
+  align-items: stretch; /* NEW */
 }
 
 .service-card {
@@ -267,7 +268,7 @@ section {
   width: 90px;
   height: 90px;
   object-fit: contain;
-  margin-bottom: 15px;
+  margin: 0 auto 15px auto; /* NEW: center icons */
 }
 
 .service-card h3 {
@@ -286,7 +287,26 @@ section {
 /* NEW: readable text on dark background */
 .section-dark .service-card h3,
 .section-dark .service-card p {
-  color: #fff !important;
+  color: #222 !important;
+}
+
+/* ============================================================
+   CHAMBER BADGE WRAPPER
+============================================================ */
+.badge-wrapper {
+  width: 220px;
+  height: 220px;
+  background: white;
+  border-radius: 50%;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-wrapper img {
+  width: 70%;
+  height: auto;
 }
 
 /* ============================================================
