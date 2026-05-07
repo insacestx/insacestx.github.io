@@ -249,6 +249,12 @@ section {
   border-radius: 8px;
   border: 2px solid #ddd;
   transition: transform .3s ease, box-shadow .3s ease;
+
+  /* NEW: alignment fix */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .service-card:hover {
@@ -267,6 +273,20 @@ section {
 .service-card h3 {
   margin-bottom: 10px;
   font-size: 1.3rem;
+}
+
+.service-card p {
+  flex-grow: 1; /* NEW */
+}
+
+.service-card .btn-small {
+  margin-top: auto; /* NEW */
+}
+
+/* NEW: readable text on dark background */
+.section-dark .service-card h3,
+.section-dark .service-card p {
+  color: #fff !important;
 }
 
 /* ============================================================
