@@ -142,7 +142,7 @@ body {
 }
 
 /* ============================================================
-   SECTION STRIPING — RED → DARK → LIGHT
+   SECTION STRIPING
 ============================================================ */
 section {
   padding: 70px 20px;
@@ -160,12 +160,12 @@ section {
 }
 
 .section-light {
-  background: var(--aces-light);
+  background: var(--aces-white);
   color: #222;
 }
 
 /* ============================================================
-   HOMEPAGE HERO — WHITE
+   HERO — WHITE
 ============================================================ */
 .hero-white {
   background: var(--aces-white);
@@ -189,7 +189,8 @@ section {
 .btn-white,
 .btn-red,
 .btn-dark,
-.btn-small {
+.btn-small,
+.btn-contact-white {
   display: inline-block;
   padding: 10px 20px;
   margin: 8px;
@@ -198,23 +199,9 @@ section {
   font-weight: bold;
 }
 
-.btn-white {
-  background: var(--aces-white);
-  color: var(--aces-red);
-  border: 2px solid var(--aces-white);
-}
-
-.btn-white:hover {
-  background: #f0f0f0;
-}
-
 .btn-red {
   background: var(--aces-red);
   color: var(--aces-white);
-}
-
-.btn-red:hover {
-  background: #b30000;
 }
 
 .btn-dark {
@@ -229,8 +216,16 @@ section {
   font-size: 0.9rem;
 }
 
-.btn-small:hover {
-  background: #b30000;
+/* CONTACT US — WHITE BUTTON WITH RED TEXT + SHADOW */
+.btn-contact-white {
+  background: var(--aces-white);
+  color: var(--aces-red);
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.btn-contact-white:hover {
+  background: #f0f0f0;
 }
 
 /* ============================================================
@@ -241,7 +236,7 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 25px;
   margin-top: 40px;
-  align-items: stretch; /* NEW */
+  align-items: stretch;
 }
 
 .service-card {
@@ -251,7 +246,6 @@ section {
   border: 2px solid #ddd;
   transition: transform .3s ease, box-shadow .3s ease;
 
-  /* NEW: alignment fix */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -268,23 +262,18 @@ section {
   width: 90px;
   height: 90px;
   object-fit: contain;
-  margin: 0 auto 15px auto; /* NEW: center icons */
-}
-
-.service-card h3 {
-  margin-bottom: 10px;
-  font-size: 1.3rem;
+  margin: 0 auto 15px auto;
 }
 
 .service-card p {
-  flex-grow: 1; /* NEW */
+  flex-grow: 1;
 }
 
 .service-card .btn-small {
-  margin-top: auto; /* NEW */
+  margin-top: auto;
 }
 
-/* NEW: readable text on dark background */
+/* Force readable text on dark background */
 .section-dark .service-card h3,
 .section-dark .service-card p {
   color: #222 !important;
@@ -310,94 +299,7 @@ section {
 }
 
 /* ============================================================
-   CONTACT PAGE — AGENT GRID + SLIDE-OUT PANEL
-============================================================ */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 25px;
-  margin-top: 40px;
-}
-
-.agent-card {
-  cursor: pointer;
-  padding: 25px;
-  background: var(--aces-white);
-  border-radius: 8px;
-  border: 2px solid #ddd;
-  transition: transform .3s ease, box-shadow .3s ease;
-}
-
-.agent-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(212, 0, 0, 0.25);
-  border-color: var(--aces-red);
-}
-
-.agent-photo {
-  width: 100%;
-  max-width: 140px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin: 0 auto 15px;
-  display: block;
-}
-
-/* SLIDE-OUT PANEL */
-.agent-panel {
-  position: fixed;
-  top: 0;
-  right: -400px;
-  width: 350px;
-  height: 100vh;
-  background: var(--aces-white);
-  box-shadow: -4px 0 18px rgba(0,0,0,0.15);
-  padding: 30px;
-  z-index: 99999;
-  transition: right .35s ease;
-  overflow-y: auto;
-}
-
-.agent-panel.open {
-  right: 0;
-}
-
-.close-panel {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: var(--aces-red);
-}
-
-.panel-photo {
-  width: 100%;
-  max-width: 220px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin: 20px auto;
-  display: block;
-}
-
-.agent-panel h2 {
-  margin-top: 10px;
-  font-size: 1.6rem;
-  text-align: center;
-}
-
-.agent-panel p {
-  text-align: center;
-  margin: 6px 0;
-  font-size: 1rem;
-}
-
-/* ============================================================
-   FOOTER
+   FOOTER — BLACK
 ============================================================ */
 .footer {
   background: var(--aces-dark);
