@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <title>ACES Insurance Services | Texas Independent Insurance Agency</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=504">
+  <link rel="stylesheet" href="style.css?v=505">
 </head>
 
 <body>
 
 <!-- ============================================================
-     HEADER (RESTORED)
+     HEADER (GLOBAL, SHARED ACROSS ALL PAGES)
 ============================================================ -->
 <header class="aces-header">
   <div class="header-inner">
@@ -30,7 +30,7 @@
   </div>
 </header>
 
-  <!-- ============================================================
+<!-- ============================================================
      ENGLISH VERSION
 ============================================================ -->
 <div id="english">
@@ -191,7 +191,68 @@
   <p>© 2026 ACES Insurance Services</p>
 </footer>
 
-<script src="global.js?v=504"></script>
+<!-- ============================================================
+     REQUIRED NAVIGATION TEMPLATES (GLOBAL)
+============================================================ -->
+<nav id="navEN" style="display:none;">
+  <a class="nav-link" href="index.html">Home</a>
+
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Services ▾</span>
+    <div class="dropdown-menu">
+      <a href="services.html?type=life">Life Insurance</a>
+      <a href="services.html?type=personal">Personal Insurance</a>
+      <a href="services.html?type=commercial">Commercial Insurance</a>
+      <a href="services.html?type=auto">Auto Insurance</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Applications ▾</span>
+    <div class="dropdown-menu">
+      <a href="applications.html#commercial">Commercial Apps</a>
+      <a href="applications.html#personal">Personal Apps</a>
+      <a href="applications.html#auto">Auto Apps</a>
+      <a href="applications.html#life">Life Apps</a>
+    </div>
+  </div>
+
+  <a class="nav-link" href="coi.html">COI Request</a>
+  <a class="nav-link" href="claims.html">Claims</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+</nav>
+
+<nav id="navES" style="display:none;">
+  <a class="nav-link" href="index.html">Inicio</a>
+
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Servicios ▾</span>
+    <div class="dropdown-menu">
+      <a href="services.html?type=life">Seguro de Vida</a>
+      <a href="services.html?type=personal">Seguro Personal</a>
+      <a href="services.html?type=commercial">Seguro Comercial</a>
+      <a href="services.html?type=auto">Seguro de Auto</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <span class="nav-link dropdown-toggle">Aplicaciones ▾</span>
+    <div class="dropdown-menu">
+      <a href="applications.html#commercial-es">Aplicaciones Comerciales</a>
+      <a href="applications.html#personal-es">Aplicaciones Personales</a>
+      <a href="applications.html#auto-es">Aplicaciones de Auto</a>
+      <a href="applications.html#life-es">Aplicaciones de Vida</a>
+    </div>
+  </div>
+
+  <a class="nav-link" href="coi.html">Solicitud de COI</a>
+  <a class="nav-link" href="claims.html">Reclamos</a>
+  <a class="nav-link" href="about.html">Acerca de</a>
+  <a class="nav-link" href="contact.html">Contacto</a>
+</nav>
+
+<script src="global.js?v=505"></script>
 
 </body>
 </html>
