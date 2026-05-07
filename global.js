@@ -1,55 +1,67 @@
 /* ============================================================
-   ACES INSURANCE — GLOBAL.JS (FINAL 2026 BUILD)
+   ACES INSURANCE — GLOBAL JAVASCRIPT
+   Handles:
+   - Language switching
+   - Navigation injection
+   - Dropdown menus
+   - Mobile nav toggle
+   - Agent slide-out panel (contact page)
 ============================================================ */
 
-/* --------------------------------------------------
-   LANGUAGE SWITCHING (with persistent memory)
--------------------------------------------------- */
+/* ============================================================
+   LANGUAGE SWITCHING
+============================================================ */
+const englishDiv = document.getElementById("english");
+const spanishDiv = document.getElementById("spanish");
+const langButtons = document.querySelectorAll(".lang-option");
+
 function setLanguage(lang) {
-  localStorage.setItem("acesLang", lang);
-  document.documentElement.setAttribute("data-lang", lang);
+  if (!englishDiv || !spanishDiv) return;
 
-  const pairs = [
-    ["english", "spanish"],
-    ["services-en", "services-es"],
-    ["apps-en", "apps-es"],
-    ["about-en", "about-es"]
-  ];
-
-  pairs.forEach(([enId, esId]) => {
-    const en = document.getElementById(enId);
-    const es = document.getElementById(esId);
-    if (en && es) {
-      en.style.display = lang === "english" ? "block" : "none";
-      es.style.display = lang === "spanish" ? "block" : "none";
-    }
-  });
-
-  injectNavigation(lang);
-  filterAgentsByLanguage(lang);
+  if (lang === "spanish") {
+    englishDiv.style.display = "none";
+    spanishDiv.style.display = "block";
+    localStorage.setItem("aces-lang", "spanish");
+    injectNav("spanish");
+  } else {
+    englishDiv.style.display = "block";
+    spanishDiv.style.display = "none";
+    localStorage.setItem("aces-lang", "english");
+    injectNav("english");
+  }
 }
 
-/* --------------------------------------------------
+langButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    setLanguage(btn.dataset.lang);
+  });
+});
+
+// Load saved language
+const savedLang = localStorage.getItem("aces-lang") || "english";
+setLanguage(savedLang);
+
+/* ============================================================
    NAVIGATION INJECTION
--------------------------------------------------- */
-function injectNavigation(lang) {
+============================================================ */
+function injectNav(lang) {
+  const navContainer = document.getElementById("navContainer");
   const navEN = document.getElementById("navEN");
   const navES = document.getElementById("navES");
-  const navContainer = document.getElementById("navContainer");
 
   if (!navContainer || !navEN || !navES) return;
 
-  navContainer.innerHTML = lang === "english"
-    ? navEN.innerHTML
-    : navES.innerHTML;
+  navContainer.innerHTML = (lang === "spanish")
+    ? navES.innerHTML
+    : navEN.innerHTML;
 
-  enableDropdownTap();
+  enableDropdowns();
 }
 
-/* --------------------------------------------------
-   MOBILE DROPDOWN TAP SUPPORT
--------------------------------------------------- */
-function enableDropdownTap() {
+/* ============================================================
+   DROPDOWN MENUS
+============================================================ */
+function enableDropdowns() {
   const dropdowns = document.querySelectorAll(".dropdown");
 
   dropdowns.forEach(drop => {
@@ -58,169 +70,62 @@ function enableDropdownTap() {
 
     if (!toggle || !menu) return;
 
-    toggle.addEventListener("click", e => {
-      if (window.innerWidth <= 900) {
-        e.preventDefault();
-        menu.classList.toggle("show");
-      }
-    });
-  });
-}
-
-/* --------------------------------------------------
-   CONTACT PAGE — FILTER AGENTS BY LANGUAGE
--------------------------------------------------- */
-function filterAgentsByLanguage(lang) {
-  const cards = document.querySelectorAll(".agent-card");
-  if (!cards.length) return;
-
-  cards.forEach(card => {
-    const speaksSpanish = card.getAttribute("data-spanish") === "true";
-    card.style.display = (lang === "spanish" && !speaksSpanish)
-      ? "none"
-      : "block";
-  });
-}
-
-/* --------------------------------------------------
-   SERVICES PAGE — FILTER BY ?type=
--------------------------------------------------- */
-function filterServices(type) {
-  const cards = document.querySelectorAll(".service-card");
-  if (!cards.length) return;
-
-  cards.forEach(card => card.style.display = "none");
-
-  const target = document.getElementById(type);
-  if (target) target.style.display = "block";
-}
-
-function handleServiceQuery() {
-  const params = new URLSearchParams(window.location.search);
-  const type = params.get("type");
-  if (!type) return;
-
-  filterServices(type);
-
-  setTimeout(() => {
-    const target = document.getElementById(type);
-    if (target) target.scrollIntoView({ behavior: "smooth" });
-  }, 300);
-}
-
-/* --------------------------------------------------
-   CONTACT PAGE — SLIDE-OUT AGENT PANEL
--------------------------------------------------- */
-function initAgentPanel() {
-  const panel = document.getElementById("agentPanel");
-  if (!panel) return;
-
-  const closePanel = document.getElementById("closePanel");
-  const panelPhoto = document.getElementById("panelPhoto");
-  const panelName = document.getElementById("panelName");
-  const panelTitle = document.getElementById("panelTitle");
-  const panelEmail = document.getElementById("panelEmail");
-  const panelPhone = document.getElementById("panelPhone");
-
-  const agentData = {
-    george: {
-      photo: "george.jpg",
-      name: "George J. Santibañez",
-      title: "Commercial & Personal Lines Agent",
-      email: "george@insaces.com",
-      phone: "(000) 000-0000"
-    },
-    jimmy: {
-      photo: "jimmy.jpg",
-      name: "Jimmy Rodriguez",
-      title: "Commercial & Personal Lines Agent",
-      email: "jimmy@insaces.com",
-      phone: "(214) 498-6928"
-    },
-    jordan: {
-      photo: "jordan.jpg",
-      name: "Jordan Jones",
-      title: "Agency Co‑Owner",
-      email: "jordan@insaces.com",
-      phone: "(254) 289-2423"
-    },
-    lanse: {
-      photo: "lanse.jpg",
-      name: "Lanse Derrick",
-      title: "Agency Co‑Owner",
-      email: "lanse@insaces.com",
-      phone: "(214) 770-1488"
-    },
-    robert: {
-      photo: "robert.jpg",
-      name: "Robert Hyde",
-      title: "Agency Co‑Owner",
-      email: "robert@insaces.com",
-      phone: "(254) 292-0961"
-    },
-    bryan: {
-      photo: "bryan.jpg",
-      name: "Bryan Carter",
-      title: "Agency Co‑Owner",
-      email: "bryan@insaces.com",
-      phone: "(254) 744-6600"
-    },
-    renee: {
-      photo: "renee.jpg",
-      name: "Renee Ridling",
-      title: "Commercial & Personal Lines Agent",
-      email: "office@insaces.com",
-      phone: "(254) 227-6560"
-    }
-  };
-
-  document.querySelectorAll(".agent-card").forEach(card => {
-    card.addEventListener("click", () => {
-      const id = card.getAttribute("data-agent");
-      const data = agentData[id];
-      if (!data) return;
-
-      panelPhoto.src = data.photo;
-      panelName.textContent = data.name;
-      panelTitle.textContent = data.title;
-      panelEmail.textContent = "Email: " + data.email;
-      panelPhone.textContent = "Phone: " + data.phone;
-
-      panel.classList.add("open");
-    });
-  });
-
-  if (closePanel) {
-    closePanel.addEventListener("click", () => {
-      panel.classList.remove("open");
-    });
-  }
-}
-
-/* --------------------------------------------------
-   DOM READY
--------------------------------------------------- */
-document.addEventListener("DOMContentLoaded", () => {
-
-  const savedLang = localStorage.getItem("acesLang") || "english";
-  setLanguage(savedLang);
-
-  const toggle = document.getElementById("mobileNavToggle");
-  const nav = document.getElementById("navContainer");
-
-  if (toggle && nav) {
     toggle.addEventListener("click", () => {
-      nav.classList.toggle("open");
-    });
-  }
-
-  handleServiceQuery();
-
-  document.querySelectorAll(".lang-option").forEach(btn => {
-    btn.addEventListener("click", () => {
-      setLanguage(btn.getAttribute("data-lang"));
+      const isOpen = menu.style.display === "block";
+      document.querySelectorAll(".dropdown-menu").forEach(m => m.style.display = "none");
+      menu.style.display = isOpen ? "none" : "block";
     });
   });
 
-  initAgentPanel();
-});
+  // Close dropdowns when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".dropdown")) {
+      document.querySelectorAll(".dropdown-menu").forEach(m => m.style.display = "none");
+    }
+  });
+}
+
+/* ============================================================
+   MOBILE NAV TOGGLE
+============================================================ */
+const mobileToggle = document.getElementById("mobileNavToggle");
+const navMenu = document.querySelector(".nav-menu");
+
+if (mobileToggle && navMenu) {
+  mobileToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("open");
+  });
+}
+
+/* ============================================================
+   CONTACT PAGE — AGENT PANEL LOGIC
+============================================================ */
+const agentCards = document.querySelectorAll(".agent-card");
+const agentPanel = document.querySelector(".agent-panel");
+const closePanelBtn = document.querySelector(".close-panel");
+
+if (agentCards && agentPanel) {
+  agentCards.forEach(card => {
+    card.addEventListener("click", () => {
+      const name = card.dataset.name;
+      const title = card.dataset.title;
+      const phone = card.dataset.phone;
+      const email = card.dataset.email;
+      const photo = card.dataset.photo;
+
+      agentPanel.querySelector("h2").textContent = name;
+      agentPanel.querySelector(".panel-photo").src = photo;
+      agentPanel.querySelector(".panel-title").textContent = title;
+      agentPanel.querySelector(".panel-phone").textContent = phone;
+      agentPanel.querySelector(".panel-email").textContent = email;
+
+      agentPanel.classList.add("open");
+    });
+  });
+}
+
+if (closePanelBtn) {
+  closePanelBtn.addEventListener("click", () => {
+    agentPanel.classList.remove("open");
+  });
+}
