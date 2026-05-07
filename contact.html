@@ -4,14 +4,17 @@
   <meta charset="UTF-8">
   <title>Contact Us | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=300">
+  <link rel="stylesheet" href="style.css?v=500">
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- ============================================================
+     HEADER
+============================================================ -->
 <header class="aces-header">
   <div class="header-inner">
+
     <a href="index.html">
       <img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo">
     </a>
@@ -23,6 +26,7 @@
 
     <nav id="navContainer" class="nav-menu"></nav>
     <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+
   </div>
 </header>
 
@@ -31,77 +35,94 @@
 ============================================================ -->
 <div id="english">
 
-  <!-- SECTION 1 — RED -->
+  <!-- RED SECTION -->
   <section class="section-red">
-    <h1>Contact Us</h1>
-    <p>Our bilingual team is ready to help with personal, commercial, property, and auto insurance needs.</p>
-
-    <h2>Office Information</h2>
-    <p><strong>Address:</strong> 404 Sapphire Blvd., Hewitt, TX 76643</p>
-    <p><strong>Phone:</strong> (254) 227‑6560</p>
-    <p><strong>Email:</strong> office@insaces.com</p>
-    <p><strong>Business Hours:</strong> Monday–Friday: 9:00 AM – 5:00 PM</p>
+    <h1>Contact ACES Insurance Services</h1>
+    <p>Our bilingual team is ready to help with all your insurance needs.</p>
   </section>
 
-  <!-- SECTION 2 — DARK -->
+  <!-- DARK SECTION -->
   <section class="section-dark">
-    <h2>Find Us</h2>
-    <iframe
-      width="100%"
-      height="300"
-      style="border:0; border-radius:10px;"
-      loading="lazy"
-      allowfullscreen
-      src="https://www.google.com/maps?q=404+Sapphire+Blvd+Hewitt+TX+76643&output=embed">
-    </iframe>
+    <h2>Get in Touch</h2>
+    <p>Call, email, or meet with one of our licensed agents.</p>
+
+    <p><strong>Phone:</strong> (254) 227-6560</p>
+    <p><strong>Email:</strong> office@insaces.com</p>
+    <p><strong>Address:</strong> 404 Sapphire Blvd., Hewitt, TX 76643</p>
   </section>
 
-  <!-- SECTION 3 — LIGHT -->
-  <section class="section-light">
+  <!-- LIGHT SECTION — TEAM GRID -->
+  <section class="section-light" id="team">
     <h2>Meet Our Team</h2>
+    <p>Click any team member to view full details.</p>
 
-    <div class="services-grid">
+    <div class="team-grid">
 
-      <div class="service-card agent-card" data-spanish="true" data-agent="george">
-        <img src="george.jpg" class="agent-photo" alt="George J. Santibañez">
+      <!-- AGENT CARD TEMPLATE -->
+      <div class="agent-card"
+           data-name="George J. Santibañez"
+           data-title="Agent"
+           data-phone="(254) 709-6487"
+           data-email="george@insaces.com"
+           data-photo="george.jpg">
+        <img src="george.jpg" class="agent-photo">
         <h3>George J. Santibañez</h3>
-        <p>Commercial & Personal Lines Agent</p>
+        <p>Independent Agent</p>
       </div>
 
-      <div class="service-card agent-card" data-spanish="true" data-agent="jimmy">
-        <img src="jimmy.jpg" class="agent-photo" alt="Jimmy Rodriguez">
+      <div class="agent-card"
+           data-name="Jimmy Rodriguez"
+           data-title="Agent"
+           data-phone="(214) 498-6928"
+           data-email="jimmy@insaces.com"
+           data-photo="jimmy.jpg">
+        <img src="jimmy.jpg" class="agent-photo">
         <h3>Jimmy Rodriguez</h3>
-        <p>Commercial & Personal Lines Agent</p>
+        <p>Agent</p>
       </div>
 
-      <div class="service-card agent-card" data-spanish="false" data-agent="jordan">
-        <img src="jordan.jpg" class="agent-photo" alt="Jordan Jones">
-        <h3>Jordan Jones</h3>
-        <p>Agency Co‑Owner</p>
-      </div>
-
-      <div class="service-card agent-card" data-spanish="false" data-agent="lanse">
-        <img src="lanse.jpg" class="agent-photo" alt="Lanse Derrick">
-        <h3>Lanse Derrick</h3>
-        <p>Agency Co‑Owner</p>
-      </div>
-
-      <div class="service-card agent-card" data-spanish="false" data-agent="robert">
-        <img src="robert.jpg" class="agent-photo" alt="Robert Hyde">
-        <h3>Robert Hyde</h3>
-        <p>Agency Co‑Owner</p>
-      </div>
-
-      <div class="service-card agent-card" data-spanish="false" data-agent="bryan">
-        <img src="bryan.jpg" class="agent-photo" alt="Bryan Carter">
-        <h3>Bryan Carter</h3>
-        <p>Agency Co‑Owner</p>
-      </div>
-
-      <div class="service-card agent-card" data-spanish="false" data-agent="renee">
-        <img src="renee.jpg" class="agent-photo" alt="Renee Ridling">
+      <div class="agent-card"
+           data-name="Renee Ridling"
+           data-title="Agent"
+           data-phone="(254) 227-6560"
+           data-email="office@insaces.com"
+           data-photo="renee.jpg">
+        <img src="renee.jpg" class="agent-photo">
         <h3>Renee Ridling</h3>
-        <p>Commercial & Personal Lines Agent</p>
+        <p>Agent</p>
+      </div>
+
+      <div class="agent-card"
+           data-name="Bryan Carter"
+           data-title="Co‑Owner"
+           data-phone="(254) 744-6600"
+           data-email="bryan@insaces.com"
+           data-photo="bryan.jpg">
+        <img src="bryan.jpg" class="agent-photo">
+        <h3>Bryan Carter</h3>
+        <p>Co‑Owner</p>
+      </div>
+
+      <div class="agent-card"
+           data-name="Robert Hyde"
+           data-title="Co‑Owner"
+           data-phone="(254) 292-0961"
+           data-email="robert@insaces.com"
+           data-photo="robert.jpg">
+        <img src="robert.jpg" class="agent-photo">
+        <h3>Robert Hyde</h3>
+        <p>Co‑Owner</p>
+      </div>
+
+      <div class="agent-card"
+           data-name="Lanse Derrick"
+           data-title="Co‑Owner"
+           data-phone="(214) 770-1488"
+           data-email="lanse@insaces.com"
+           data-photo="lanse.jpg">
+        <img src="lanse.jpg" class="agent-photo">
+        <h3>Lanse Derrick</h3>
+        <p>Co‑Owner</p>
       </div>
 
     </div>
@@ -114,47 +135,93 @@
 ============================================================ -->
 <div id="spanish" style="display:none;">
 
-  <!-- SECTION 1 — RED -->
+  <!-- RED SECTION -->
   <section class="section-red">
-    <h1>Contáctenos</h1>
-    <p>Nuestro equipo bilingüe está listo para ayudar con seguros personales, comerciales, de propiedad y de auto.</p>
-
-    <h2>Información de la Oficina</h2>
-    <p><strong>Dirección:</strong> 404 Sapphire Blvd., Hewitt, TX 76643</p>
-    <p><strong>Teléfono:</strong> (254) 227‑6560</p>
-    <p><strong>Correo:</strong> office@insaces.com</p>
-    <p><strong>Horario:</strong> Lunes–Viernes: 9:00 AM – 5:00 PM</p>
+    <h1>Contacto ACES Insurance Services</h1>
+    <p>Nuestro equipo bilingüe está listo para ayudarle.</p>
   </section>
 
-  <!-- SECTION 2 — DARK -->
+  <!-- DARK SECTION -->
   <section class="section-dark">
-    <h2>Encuéntrenos</h2>
-    <iframe
-      width="100%"
-      height="300"
-      style="border:0; border-radius:10px;"
-      loading="lazy"
-      allowfullscreen
-      src="https://www.google.com/maps?q=404+Sapphire+Blvd+Hewitt+TX+76643&output=embed">
-    </iframe>
+    <h2>Comuníquese con Nosotros</h2>
+
+    <p><strong>Teléfono:</strong> (254) 227-6560</p>
+    <p><strong>Correo:</strong> office@insaces.com</p>
+    <p><strong>Dirección:</strong> 404 Sapphire Blvd., Hewitt, TX 76643</p>
   </section>
 
-  <!-- SECTION 3 — LIGHT -->
-  <section class="section-light">
+  <!-- LIGHT SECTION — TEAM GRID -->
+  <section class="section-light" id="team-es">
     <h2>Conozca a Nuestro Equipo</h2>
+    <p>Haga clic en cualquier miembro para ver detalles completos.</p>
 
-    <div class="services-grid">
+    <div class="team-grid">
 
-      <div class="service-card agent-card" data-spanish="true" data-agent="george">
-        <img src="george.jpg" class="agent-photo" alt="George J. Santibañez">
+      <!-- Same agent cards, Spanish version -->
+      <div class="agent-card"
+           data-name="George J. Santibañez"
+           data-title="Agente"
+           data-phone="(254) 709-6487"
+           data-email="george@insaces.com"
+           data-photo="george.jpg">
+        <img src="george.jpg" class="agent-photo">
         <h3>George J. Santibañez</h3>
-        <p>Agente de Líneas Comerciales y Personales</p>
+        <p>Agente Independiente</p>
       </div>
 
-      <div class="service-card agent-card" data-spanish="true" data-agent="jimmy">
-        <img src="jimmy.jpg" class="agent-photo" alt="Jimmy Rodriguez">
+      <div class="agent-card"
+           data-name="Jimmy Rodriguez"
+           data-title="Agente"
+           data-phone="(214) 498-6928"
+           data-email="jimmy@insaces.com"
+           data-photo="jimmy.jpg">
+        <img src="jimmy.jpg" class="agent-photo">
         <h3>Jimmy Rodriguez</h3>
-        <p>Agente de Líneas Comerciales y Personales</p>
+        <p>Agente</p>
+      </div>
+
+      <div class="agent-card"
+           data-name="Renee Ridling"
+           data-title="Agente"
+           data-phone="(254) 227-6560"
+           data-email="office@insaces.com"
+           data-photo="renee.jpg">
+        <img src="renee.jpg" class="agent-photo">
+        <h3>Renee Ridling</h3>
+        <p>Agente</p>
+      </div>
+
+      <div class="agent-card"
+           data-name="Bryan Carter"
+           data-title="Co‑Propietario"
+           data-phone="(254) 744-6600"
+           data-email="bryan@insaces.com"
+           data-photo="bryan.jpg">
+        <img src="bryan.jpg" class="agent-photo">
+        <h3>Bryan Carter</h3>
+        <p>Co‑Propietario</p>
+      </div>
+
+      <div class="agent-card"
+           data-name="Robert Hyde"
+           data-title="Co‑Propietario"
+           data-phone="(254) 292-0961"
+           data-email="robert@insaces.com"
+           data-photo="robert.jpg">
+        <img src="robert.jpg" class="agent-photo">
+        <h3>Robert Hyde</h3>
+        <p>Co‑Propietario</p>
+      </div>
+
+      <div class="agent-card"
+           data-name="Lanse Derrick"
+           data-title="Co‑Propietario"
+           data-phone="(214) 770-1488"
+           data-email="lanse@insaces.com"
+           data-photo="lanse.jpg">
+        <img src="lanse.jpg" class="agent-photo">
+        <h3>Lanse Derrick</h3>
+        <p>Co‑Propietario</p>
       </div>
 
     </div>
@@ -162,23 +229,29 @@
 
 </div>
 
-<!-- SLIDE‑OUT PANEL -->
-<div id="agentPanel" class="agent-panel">
-  <button id="closePanel" class="close-panel">×</button>
-  <img id="panelPhoto" class="panel-photo" src="" alt="">
-  <h2 id="panelName"></h2>
-  <p id="panelTitle"></p>
-  <p id="panelEmail"></p>
-  <p id="panelPhone"></p>
+<!-- ============================================================
+     AGENT SLIDE-OUT PANEL
+============================================================ -->
+<div class="agent-panel">
+  <button class="close-panel">×</button>
+  <img class="panel-photo" src="">
+  <h2></h2>
+  <p class="panel-title"></p>
+  <p class="panel-phone"></p>
+  <p class="panel-email"></p>
 </div>
 
-<!-- FOOTER -->
+<!-- ============================================================
+     FOOTER
+============================================================ -->
 <footer class="footer">
   <img src="image2.png" class="footer-logo">
   <p>© 2026 ACES Insurance Services</p>
 </footer>
 
-<!-- NAVIGATION TEMPLATES -->
+<!-- ============================================================
+     NAVIGATION TEMPLATES (HIDDEN)
+============================================================ -->
 <nav id="navEN" style="display:none;">
   <a class="nav-link" href="index.html">Home</a>
 
@@ -237,7 +310,7 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=300"></script>
+<script src="global.js?v=500"></script>
 
 </body>
 </html>
