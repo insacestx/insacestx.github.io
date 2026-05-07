@@ -4,14 +4,17 @@
   <meta charset="UTF-8">
   <title>Our Services | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=102">
+  <link rel="stylesheet" href="style.css?v=505">
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- ============================================================
+     GLOBAL HEADER (SHARED ACROSS ALL PAGES)
+============================================================ -->
 <header class="aces-header">
   <div class="header-inner">
+
     <a href="index.html">
       <img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo">
     </a>
@@ -23,138 +26,118 @@
 
     <nav id="navContainer" class="nav-menu"></nav>
     <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+
   </div>
 </header>
 
-<!-- ENGLISH PAGE -->
-<div class="page-wrapper" id="services-en">
+<!-- ============================================================
+     ENGLISH VERSION
+============================================================ -->
+<div id="english">
 
-  <h1>Our Services</h1>
-  <p>Explore the types of coverage we offer and find the right protection for you or your business.</p>
+  <section class="hero-white">
+    <h1>Our Insurance Services</h1>
+    <p>Comprehensive coverage options for families, individuals, and businesses across Texas.</p>
+  </section>
 
-  <p><a href="index.html" style="text-decoration:underline;">Back to All Services</a></p>
+  <!-- BLACK SECTION FOR SERVICES -->
+  <section class="section-dark">
+    <h2>Explore Our Coverage Options</h2>
 
-  <div class="services-grid">
+    <div class="services-grid">
 
-    <!-- LIFE -->
-    <div class="service-card" id="life">
-      <h3>Life Insurance</h3>
-      <img src="Aces-Spade.jpg" class="agent-photo" alt="Life Insurance">
+      <div class="service-card">
+        <img src="icon-life-aces.png" alt="Life Insurance">
+        <h3>Life Insurance</h3>
+        <p>Protect your family’s financial future with term, whole, and universal life options.</p>
+        <a href="services.html?type=life" class="btn-small">Learn More</a>
+      </div>
 
-      <p>
-        Protect your family’s future with flexible, affordable life insurance options designed to provide financial security when it matters most.
-      </p>
+      <div class="service-card">
+        <img src="icon-property-aces.png" alt="Personal Insurance">
+        <h3>Personal Insurance</h3>
+        <p>Home, renters, motorcycle, boat, and more — tailored to your lifestyle.</p>
+        <a href="services.html?type=personal" class="btn-small">Learn More</a>
+      </div>
 
-      <a href="applications.html#life" class="btn-hero service-cta">Apply Now</a>
+      <div class="service-card">
+        <img src="icon-commercial-aces.png" alt="Commercial Insurance">
+        <h3>Commercial Insurance</h3>
+        <p>Coverage for small businesses, contractors, fleets, and commercial property.</p>
+        <a href="services.html?type=commercial" class="btn-small">Learn More</a>
+      </div>
+
+      <div class="service-card">
+        <img src="icon-auto-aces.png" alt="Auto Insurance">
+        <h3>Auto Insurance</h3>
+        <p>Affordable and reliable auto coverage for personal and commercial vehicles.</p>
+        <a href="services.html?type=auto" class="btn-small">Learn More</a>
+      </div>
+
     </div>
+  </section>
 
-    <!-- PERSONAL -->
-    <div class="service-card" id="personal">
-      <h3>Personal Insurance</h3>
-      <img src="Aces-Spade.jpg" class="agent-photo" alt="Personal Insurance">
-
-      <p>
-        Safeguard your home, vehicles, and personal belongings with comprehensive coverage built to fit your lifestyle and budget.
-      </p>
-
-      <a href="applications.html#personal" class="btn-hero service-cta">Apply Now</a>
-    </div>
-
-    <!-- COMMERCIAL -->
-    <div class="service-card" id="commercial">
-      <h3>Commercial Insurance</h3>
-      <img src="Aces-Spade.jpg" class="agent-photo" alt="Commercial Insurance">
-
-      <p>
-        Protect your business with tailored commercial coverage that supports your operations, employees, and long-term growth.
-      </p>
-
-      <a href="applications.html#commercial" class="btn-hero service-cta">Apply Now</a>
-    </div>
-
-    <!-- AUTO -->
-    <div class="service-card" id="auto">
-      <h3>Auto Insurance</h3>
-      <img src="Aces-Spade.jpg" class="agent-photo" alt="Auto Insurance">
-
-      <p>
-        Get dependable, cost-effective auto coverage that keeps you protected on the road — whether personal or commercial.
-      </p>
-
-      <a href="applications.html#auto" class="btn-hero service-cta">Apply Now</a>
-    </div>
-
-  </div>
 </div>
 
-<!-- SPANISH PAGE -->
-<div class="page-wrapper" id="services-es" style="display:none;">
+<!-- ============================================================
+     SPANISH VERSION
+============================================================ -->
+<div id="spanish" style="display:none;">
 
-  <h1>Servicios</h1>
-  <p>Explore los tipos de cobertura que ofrecemos y encuentre la protección adecuada para usted o su negocio.</p>
+  <section class="hero-white">
+    <h1>Nuestros Servicios de Seguros</h1>
+    <p>Opciones de cobertura completas para familias, individuos y negocios en Texas.</p>
+  </section>
 
-  <p><a href="index.html" style="text-decoration:underline;">Regresar a todos los servicios</a></p>
+  <section class="section-dark">
+    <h2>Explore Nuestras Opciones de Cobertura</h2>
 
-  <div class="services-grid">
+    <div class="services-grid">
 
-    <!-- VIDA -->
-    <div class="service-card" id="life-es">
-      <h3>Seguro de Vida</h3>
-      <img src="Aces-Spade.jpg" class="agent-photo" alt="Seguro de Vida">
+      <div class="service-card">
+        <img src="icon-life-aces.png" alt="Seguro de Vida">
+        <h3>Seguro de Vida</h3>
+        <p>Proteja el futuro financiero de su familia con opciones de vida a término, total y universal.</p>
+        <a href="services.html?type=life" class="btn-small">Más Información</a>
+      </div>
 
-      <p>
-        Proteja el futuro de su familia con opciones de seguro de vida flexibles y accesibles diseñadas para brindar seguridad financiera cuando más se necesita.
-      </p>
+      <div class="service-card">
+        <img src="icon-property-aces.png" alt="Seguro Personal">
+        <h3>Seguro Personal</h3>
+        <p>Hogar, inquilinos, motocicleta, bote y más — adaptado a su estilo de vida.</p>
+        <a href="services.html?type=personal" class="btn-small">Más Información</a>
+      </div>
 
-      <a href="applications.html#life-es" class="btn-hero service-cta">Aplicar Ahora</a>
+      <div class="service-card">
+        <img src="icon-commercial-aces.png" alt="Seguro Comercial">
+        <h3>Seguro Comercial</h3>
+        <p>Cobertura para pequeños negocios, contratistas, flotas y propiedades comerciales.</p>
+        <a href="services.html?type=commercial" class="btn-small">Más Información</a>
+      </div>
+
+      <div class="service-card">
+        <img src="icon-auto-aces.png" alt="Seguro de Auto">
+        <h3>Seguro de Auto</h3>
+        <p>Cobertura confiable y económica para vehículos personales y comerciales.</p>
+        <a href="services.html?type=auto" class="btn-small">Más Información</a>
+      </div>
+
     </div>
+  </section>
 
-    <!-- PERSONAL -->
-    <div class="service-card" id="personal-es">
-      <h3>Seguro Personal</h3>
-      <img src="Aces-Spade.jpg" class="agent-photo" alt="Seguro Personal">
-
-      <p>
-        Proteja su hogar, vehículos y pertenencias personales con una cobertura integral diseñada para su estilo de vida y presupuesto.
-      </p>
-
-      <a href="applications.html#personal-es" class="btn-hero service-cta">Aplicar Ahora</a>
-    </div>
-
-    <!-- COMERCIAL -->
-    <div class="service-card" id="commercial-es">
-      <h3>Seguro Comercial</h3>
-      <img src="Aces-Spade.jpg" class="agent-photo" alt="Seguro Comercial">
-
-      <p>
-        Proteja su negocio con coberturas comerciales a la medida que respaldan sus operaciones, empleados y crecimiento a largo plazo.
-      </p>
-
-      <a href="applications.html#commercial-es" class="btn-hero service-cta">Aplicar Ahora</a>
-    </div>
-
-    <!-- AUTO -->
-    <div class="service-card" id="auto-es">
-      <h3>Seguro de Auto</h3>
-      <img src="Aces-Spade.jpg" class="agent-photo" alt="Seguro de Auto">
-
-      <p>
-        Obtenga una cobertura de auto confiable y accesible que lo mantenga protegido en el camino, ya sea personal o comercial.
-      </p>
-
-      <a href="applications.html#auto-es" class="btn-hero service-cta">Aplicar Ahora</a>
-    </div>
-
-  </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ============================================================
+     FOOTER
+============================================================ -->
 <footer class="footer">
-  <img src="image2.png" class="footer-logo" alt="ACES Insurance Logo">
+  <img src="image2.png" class="footer-logo">
   <p>© 2026 ACES Insurance Services</p>
 </footer>
 
-<!-- NAVIGATION TEMPLATES -->
+<!-- ============================================================
+     REQUIRED NAVIGATION TEMPLATES (GLOBAL)
+============================================================ -->
 <nav id="navEN" style="display:none;">
   <a class="nav-link" href="index.html">Home</a>
 
@@ -213,7 +196,7 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=102"></script>
+<script src="global.js?v=505"></script>
 
 </body>
 </html>
