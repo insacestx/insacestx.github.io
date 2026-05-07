@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Claims | ACES Insurance Services</title>
+  <title>Our Services | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=102">
+  <link rel="stylesheet" href="style.css?v=505">
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- ============================================================
+     GLOBAL HEADER (SHARED ACROSS ALL PAGES)
+============================================================ -->
 <header class="aces-header">
   <div class="header-inner">
+
     <a href="index.html">
       <img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo">
     </a>
@@ -23,82 +26,118 @@
 
     <nav id="navContainer" class="nav-menu"></nav>
     <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+
   </div>
 </header>
 
-<!-- ENGLISH PAGE -->
-<div class="page-wrapper" id="english">
+<!-- ============================================================
+     ENGLISH VERSION
+============================================================ -->
+<div id="english">
 
-  <h1>Claims</h1>
+  <section class="hero-white">
+    <h1>Our Insurance Services</h1>
+    <p>Comprehensive coverage options for families, individuals, and businesses across Texas.</p>
+  </section>
 
-  <p>
-    If you’ve experienced a loss, we’re here to help guide you through the claims process with clarity and support.
-  </p>
+  <!-- BLACK SECTION FOR SERVICES -->
+  <section class="section-dark">
+    <h2>Explore Our Coverage Options</h2>
 
-  <p>
-    To begin a claim, please contact your agent directly or call our office. We will walk you through the next steps and help you report the claim to your carrier.
-  </p>
+    <div class="services-grid">
 
-  <h2>What You Should Have Ready</h2>
-  <ul>
-    <li>Policy number (if available)</li>
-    <li>Date and time of the incident</li>
-    <li>Description of what happened</li>
-    <li>Photos or documentation (if applicable)</li>
-    <li>Any third-party information (if involved)</li>
-  </ul>
+      <div class="service-card">
+        <img src="icon-life-aces.png" alt="Life Insurance">
+        <h3>Life Insurance</h3>
+        <p>Protect your family’s financial future with term, whole, and universal life options.</p>
+        <a href="services.html?type=life" class="btn-small">Learn More</a>
+      </div>
 
-  <p>
-    <strong>Office Phone:</strong> (254) 227-6560<br>
-    <strong>Email:</strong> office@insaces.com
-  </p>
+      <div class="service-card">
+        <img src="icon-property-aces.png" alt="Personal Insurance">
+        <h3>Personal Insurance</h3>
+        <p>Home, renters, motorcycle, boat, and more — tailored to your lifestyle.</p>
+        <a href="services.html?type=personal" class="btn-small">Learn More</a>
+      </div>
 
-  <p>
-    Your agent will assist you in filing the claim and ensuring the carrier receives all required information.
-  </p>
+      <div class="service-card">
+        <img src="icon-commercial-aces.png" alt="Commercial Insurance">
+        <h3>Commercial Insurance</h3>
+        <p>Coverage for small businesses, contractors, fleets, and commercial property.</p>
+        <a href="services.html?type=commercial" class="btn-small">Learn More</a>
+      </div>
 
-</div>
+      <div class="service-card">
+        <img src="icon-auto-aces.png" alt="Auto Insurance">
+        <h3>Auto Insurance</h3>
+        <p>Affordable and reliable auto coverage for personal and commercial vehicles.</p>
+        <a href="services.html?type=auto" class="btn-small">Learn More</a>
+      </div>
 
-<!-- SPANISH PAGE -->
-<div class="page-wrapper" id="spanish" style="display:none;">
-
-  <h1>Reclamos</h1>
-
-  <p>
-    Si ha tenido una pérdida, estamos aquí para ayudarle y guiarle durante el proceso de reclamos con claridad y apoyo.
-  </p>
-
-  <p>
-    Para iniciar un reclamo, comuníquese directamente con su agente o llame a nuestra oficina. Le guiaremos en los siguientes pasos y le ayudaremos a reportar el reclamo a su aseguradora.
-  </p>
-
-  <h2>Información Útil para Tener Lista</h2>
-  <ul>
-    <li>Número de póliza (si lo tiene)</li>
-    <li>Fecha y hora del incidente</li>
-    <li>Descripción de lo ocurrido</li>
-    <li>Fotos o documentación (si aplica)</li>
-    <li>Información de terceros (si están involucrados)</li>
-  </ul>
-
-  <p>
-    <strong>Teléfono de la Oficina:</strong> (254) 227-6560<br>
-    <strong>Correo Electrónico:</strong> office@insaces.com
-  </p>
-
-  <p>
-    Su agente le ayudará a presentar el reclamo y asegurarse de que la aseguradora reciba toda la información necesaria.
-  </p>
+    </div>
+  </section>
 
 </div>
 
-<!-- FOOTER -->
+<!-- ============================================================
+     SPANISH VERSION
+============================================================ -->
+<div id="spanish" style="display:none;">
+
+  <section class="hero-white">
+    <h1>Nuestros Servicios de Seguros</h1>
+    <p>Opciones de cobertura completas para familias, individuos y negocios en Texas.</p>
+  </section>
+
+  <section class="section-dark">
+    <h2>Explore Nuestras Opciones de Cobertura</h2>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <img src="icon-life-aces.png" alt="Seguro de Vida">
+        <h3>Seguro de Vida</h3>
+        <p>Proteja el futuro financiero de su familia con opciones de vida a término, total y universal.</p>
+        <a href="services.html?type=life" class="btn-small">Más Información</a>
+      </div>
+
+      <div class="service-card">
+        <img src="icon-property-aces.png" alt="Seguro Personal">
+        <h3>Seguro Personal</h3>
+        <p>Hogar, inquilinos, motocicleta, bote y más — adaptado a su estilo de vida.</p>
+        <a href="services.html?type=personal" class="btn-small">Más Información</a>
+      </div>
+
+      <div class="service-card">
+        <img src="icon-commercial-aces.png" alt="Seguro Comercial">
+        <h3>Seguro Comercial</h3>
+        <p>Cobertura para pequeños negocios, contratistas, flotas y propiedades comerciales.</p>
+        <a href="services.html?type=commercial" class="btn-small">Más Información</a>
+      </div>
+
+      <div class="service-card">
+        <img src="icon-auto-aces.png" alt="Seguro de Auto">
+        <h3>Seguro de Auto</h3>
+        <p>Cobertura confiable y económica para vehículos personales y comerciales.</p>
+        <a href="services.html?type=auto" class="btn-small">Más Información</a>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
 <footer class="footer">
-  <img src="image2.png" class="footer-logo" alt="ACES Insurance Logo">
+  <img src="image2.png" class="footer-logo">
   <p>© 2026 ACES Insurance Services</p>
 </footer>
 
-<!-- NAVIGATION TEMPLATES -->
+<!-- ============================================================
+     REQUIRED NAVIGATION TEMPLATES (GLOBAL)
+============================================================ -->
 <nav id="navEN" style="display:none;">
   <a class="nav-link" href="index.html">Home</a>
 
@@ -157,7 +196,7 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=102"></script>
+<script src="global.js?v=505"></script>
 
 </body>
 </html>
