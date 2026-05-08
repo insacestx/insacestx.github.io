@@ -185,27 +185,83 @@ body {
 }
 
 /* ============================================================
-   FORMS
+   SERVICE CARDS (Homepage + Services Page)
 ============================================================ */
-.app-form {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
 }
 
-.app-form label {
+.service-card {
+  background: var(--aces-white);
+  padding: 25px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  transition: transform .3s ease, box-shadow .3s ease;
+  text-align: center;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(212, 0, 0, 0.25);
+  border-color: var(--aces-red);
+}
+
+.service-card img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin: 0 auto 15px;
   display: block;
-  margin: 15px 0 5px;
-  font-weight: bold;
 }
 
-.app-form input,
-.app-form textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #bbb;
+/* ============================================================
+   SERVICE TYPE SECTIONS (services.html)
+============================================================ */
+.service-type {
+  display: none;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.service-type h2 {
+  margin-bottom: 20px;
+}
+
+.service-type p {
+  margin-bottom: 25px;
+}
+
+/* ============================================================
+   APPLICATIONS PAGE
+============================================================ */
+.app-block {
+  background: var(--aces-white);
+  padding: 25px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  margin-bottom: 30px;
+}
+
+.vehicle-block {
+  background: var(--aces-light);
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.add-button {
+  background: var(--aces-red);
+  color: var(--aces-white);
+  padding: 10px 15px;
   border-radius: 4px;
-  margin-bottom: 10px;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 10px;
 }
 
 /* ============================================================
@@ -270,6 +326,20 @@ body {
 }
 
 /* ============================================================
+   ABOUT PAGE — DARK MODE AGENT CARDS
+============================================================ */
+.section-dark .agent-card {
+  background: #222;
+  border-color: #444;
+  color: #fff;
+}
+
+.section-dark .agent-card h3,
+.section-dark .agent-card p {
+  color: #fff;
+}
+
+/* ============================================================
    SLIDE-OUT PANEL
 ============================================================ */
 .agent-panel {
@@ -323,6 +393,55 @@ body {
   font-size: 1rem;
 }
 
+.panel-call {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 20px;
+  background: var(--aces-red);
+  color: var(--aces-white);
+  text-align: center;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* ============================================================
+   CLAIMS + COI — STEP CARDS
+============================================================ */
+.step-card {
+  background: var(--aces-white);
+  padding: 25px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* ============================================================
+   FLOATING MOBILE "CALL ACES" BUTTON
+============================================================ */
+.mobile-call-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--aces-red);
+  color: var(--aces-white);
+  padding: 14px 22px;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  z-index: 999999;
+  font-size: 1rem;
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .mobile-call-btn {
+    display: block;
+  }
+}
+
 /* ============================================================
    FOOTER
 ============================================================ */
@@ -359,6 +478,6 @@ body {
   }
 
   .team-grid.shift-left {
-    transform: translateX(0); /* Prevents mobile layout from breaking */
+    transform: translateX(0);
   }
 }
