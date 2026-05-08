@@ -1,381 +1,847 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Applications | ACES Insurance Services</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=600">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | ACES Insurance Services</title>
 
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            color: #222;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #222;
+        }
+
+        .page-wrapper {
+            padding: 40px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Language toggle (matches index.html style) */
+        .language-toggle {
+            text-align: right;
+            padding: 10px 20px 0;
+            font-size: 14px;
+        }
+        .language-toggle span {
+            cursor: pointer;
+        }
+
+        /* Main category cards */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .category-card {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, opacity 0.2s ease;
+        }
+
+        .category-card img.category-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 12px;
+        }
+
+        .category-card img.spade {
+            width: 32px;
+            height: 32px;
+            margin: 6px 0 10px;
+        }
+
+        .category-card h3 {
+            margin: 8px 0;
+            font-size: 18px;
+        }
+
+        .category-card p {
+            font-size: 14px;
+            color: #444;
+        }
+
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+            border-color: #d40000;
+        }
+
+        .category-card.dimmed {
+            opacity: 0.35;
+            transform: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .category-card.active {
+            border-color: #d40000;
+            box-shadow: 0 6px 16px rgba(212,0,0,0.18);
+            opacity: 1;
+        }
+
+        /* Subcategory section */
+        .subcategory-section {
+            margin-top: 40px;
+            display: none;
+        }
+
+        .subcategory-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .subcategory-header h2 {
+            margin-bottom: 6px;
+        }
+
+        .subcategory-header p {
+            margin: 0;
+            color: #555;
+        }
+
+        .back-row {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid #d40000;
+            color: #d40000;
+            background: #fff;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background: #d40000;
+            color: #fff;
+        }
+
+        /* Subcategory cards (Hybrid ACES cards) */
+        .subcategory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .subcategory-card {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 22px 16px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 260px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+
+        .subcategory-card img.spade {
+            width: 32px;
+            height: 32px;
+            margin: 6px auto 10px;
+        }
+
+        .subcategory-card img.category-icon {
+            width: 50px;
+            height: 50px;
+            margin: 4px auto 10px;
+        }
+
+        .subcategory-card h3 {
+            margin: 6px 0;
+            font-size: 17px;
+        }
+
+        .subcategory-card p {
+            font-size: 14px;
+            color: #444;
+            margin: 6px 0 14px;
+        }
+
+        .subcategory-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.14);
+            border-color: #d40000;
+        }
+
+        .btn-apply {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 6px;
+            background: #d40000;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .btn-apply:hover {
+            background: #a80000;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .subcategory-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            .subcategory-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
 <body>
 
-<!-- ============================================================
-     GLOBAL HEADER
-============================================================ -->
-<header class="aces-header">
-  <div class="header-inner">
+<!-- Language toggle -->
+<div class="language-toggle">
+    <span onclick="setLanguage('en')">EN 🇺🇸</span> |
+    <span onclick="setLanguage('es')">ES 🇲🇽</span>
+</div>
 
-    <a href="index.html">
-      <img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo">
-    </a>
+<div class="page-wrapper">
 
-    <div class="lang-switch">
-      <button class="lang-option" data-lang="english">EN 🇺🇸</button>
-      <button class="lang-option" data-lang="spanish">ES 🇲🇽</button>
-    </div>
+    <!-- ENGLISH CONTENT -->
+    <div class="lang-en">
+        <h1>Our Services</h1>
+        <p style="text-align:center; max-width:700px; margin:10px auto 30px;">
+            Explore our main lines of coverage. Select a category to see detailed options and start your application.
+        </p>
 
-    <nav id="navContainer" class="nav-menu"></nav>
-    <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+        <!-- Main category cards -->
+        <div class="category-grid" id="categoryGrid">
+            <div class="category-card" data-category="life">
+                <img src="icon-life-aces.png" alt="Life Insurance" class="category-icon">
+                <h3>Life Insurance</h3>
+                <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                <p>Protect your family’s future with flexible life insurance options tailored to your needs.</p>
+            </div>
 
-  </div>
-</header>
+            <div class="category-card" data-category="personal">
+                <img src="icon-property-aces.png" alt="Personal Insurance" class="category-icon">
+                <h3>Personal Insurance</h3>
+                <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                <p>Coverage for your home, belongings, and personal vehicles with trusted carriers.</p>
+            </div>
 
-<!-- ============================================================
-     ENGLISH VERSION
-============================================================ -->
-<div id="english">
+            <div class="category-card" data-category="commercial">
+                <img src="icon-commercial-aces.png" alt="Commercial Insurance" class="category-icon">
+                <h3>Commercial Insurance</h3>
+                <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                <p>Protect your business, employees, and assets with tailored commercial solutions.</p>
+            </div>
 
-  <section class="hero-white">
-    <h1>Insurance Applications</h1>
-    <p>Choose the type of insurance you want to apply for.</p>
-  </section>
-
-  <!-- ============================================================
-       COMMERCIAL APPLICATIONS
-  ============================================================ -->
-  <section class="section-light" id="commercial">
-    <h2>Commercial Insurance Applications</h2>
-
-    <div class="app-block">
-      <h3>General Business Information</h3>
-
-      <form class="app-form">
-        <label>Business Name</label>
-        <input type="text">
-
-        <label>Business Address</label>
-        <input type="text">
-
-        <label>Type of Business</label>
-        <input type="text">
-
-        <label>Years in Business</label>
-        <input type="number">
-
-        <label>Describe Your Operations</label>
-        <textarea rows="4"></textarea>
-      </form>
-    </div>
-
-    <a href="contact.html" class="btn-red">Submit Commercial Application</a>
-  </section>
-
-  <!-- ============================================================
-       PERSONAL APPLICATIONS
-  ============================================================ -->
-  <section class="section-light" id="personal">
-    <h2>Personal Insurance Applications</h2>
-
-    <div class="app-block">
-      <h3>Personal Information</h3>
-
-      <form class="app-form">
-        <label>Full Name</label>
-        <input type="text">
-
-        <label>Date of Birth</label>
-        <input type="date">
-
-        <label>Home Address</label>
-        <input type="text">
-
-        <label>Type of Coverage Needed</label>
-        <input type="text">
-      </form>
-    </div>
-
-    <a href="contact.html" class="btn-red">Submit Personal Application</a>
-  </section>
-
-  <!-- ============================================================
-       AUTO APPLICATIONS (MULTI‑VEHICLE)
-  ============================================================ -->
-  <section class="section-light" id="auto">
-    <h2>Auto Insurance Applications</h2>
-
-    <div class="app-block">
-      <h3>Driver Information</h3>
-
-      <form class="app-form">
-        <label>Primary Driver Name</label>
-        <input type="text">
-
-        <label>Driver License Number</label>
-        <input type="text">
-
-        <label>Date of Birth</label>
-        <input type="date">
-      </form>
-    </div>
-
-    <div class="app-block">
-      <h3>Vehicle Information</h3>
-
-      <div id="vehicleContainer">
-
-        <!-- VEHICLE BLOCK TEMPLATE -->
-        <div class="vehicle-block">
-          <label>Year</label>
-          <input type="number">
-
-          <label>Make</label>
-          <input type="text">
-
-          <label>Model</label>
-          <input type="text">
-
-          <label>VIN</label>
-          <input type="text">
+            <div class="category-card" data-category="auto">
+                <img src="icon-auto-aces.png" alt="Auto Insurance" class="category-icon">
+                <h3>Auto Insurance</h3>
+                <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                <p>Dependable coverage for your personal and specialty vehicles on the road.</p>
+            </div>
         </div>
 
-      </div>
-
-      <button id="addVehicle" class="add-button">+ Add Another Vehicle</button>
-    </div>
-
-    <a href="contact.html" class="btn-red">Submit Auto Application</a>
-  </section>
-
-  <!-- ============================================================
-       LIFE APPLICATIONS
-  ============================================================ -->
-  <section class="section-light" id="life">
-    <h2>Life Insurance Applications</h2>
-
-    <div class="app-block">
-      <h3>Applicant Information</h3>
-
-      <form class="app-form">
-        <label>Full Name</label>
-        <input type="text">
-
-        <label>Date of Birth</label>
-        <input type="date">
-
-        <label>Coverage Amount Requested</label>
-        <input type="text">
-
-        <label>Beneficiary Name</label>
-        <input type="text">
-      </form>
-    </div>
-
-    <a href="contact.html" class="btn-red">Submit Life Insurance Application</a>
-  </section>
-
-</div>
-
-<!-- ============================================================
-     SPANISH VERSION
-============================================================ -->
-<div id="spanish" style="display:none;">
-
-  <section class="hero-white">
-    <h1>Aplicaciones de Seguro</h1>
-    <p>Seleccione el tipo de seguro para iniciar su aplicación.</p>
-  </section>
-
-  <!-- COMMERCIAL -->
-  <section class="section-light" id="commercial-es">
-    <h2>Aplicaciones Comerciales</h2>
-
-    <div class="app-block">
-      <h3>Información del Negocio</h3>
-
-      <form class="app-form">
-        <label>Nombre del Negocio</label>
-        <input type="text">
-
-        <label>Dirección del Negocio</label>
-        <input type="text">
-
-        <label>Tipo de Negocio</label>
-        <input type="text">
-
-        <label>Años en Operación</label>
-        <input type="number">
-
-        <label>Descripción de Operaciones</label>
-        <textarea rows="4"></textarea>
-      </form>
-    </div>
-
-    <a href="contact.html" class="btn-red">Enviar Aplicación Comercial</a>
-  </section>
-
-  <!-- PERSONAL -->
-  <section class="section-light" id="personal-es">
-    <h2>Aplicaciones Personales</h2>
-
-    <div class="app-block">
-      <h3>Información Personal</h3>
-
-      <form class="app-form">
-        <label>Nombre Completo</label>
-        <input type="text">
-
-        <label>Fecha de Nacimiento</label>
-        <input type="date">
-
-        <label>Dirección</label>
-        <input type="text">
-
-        <label>Tipo de Cobertura Necesaria</label>
-        <input type="text">
-      </form>
-    </div>
-
-    <a href="contact.html" class="btn-red">Enviar Aplicación Personal</a>
-  </section>
-
-  <!-- AUTO -->
-  <section class="section-light" id="auto-es">
-    <h2>Aplicaciones de Seguro de Auto</h2>
-
-    <div class="app-block">
-      <h3>Información del Conductor</h3>
-
-      <form class="app-form">
-        <label>Nombre del Conductor</label>
-        <input type="text">
-
-        <label>Número de Licencia</label>
-        <input type="text">
-
-        <label>Fecha de Nacimiento</label>
-        <input type="date">
-      </form>
-    </div>
-
-    <div class="app-block">
-      <h3>Información del Vehículo</h3>
-
-      <div id="vehicleContainer-es">
-
-        <div class="vehicle-block">
-          <label>Año</label>
-          <input type="number">
-
-          <label>Marca</label>
-          <input type="text">
-
-          <label>Modelo</label>
-          <input type="text">
-
-          <label>VIN</label>
-          <input type="text">
+        <!-- LIFE subcategories -->
+        <div class="subcategory-section" id="sub-life">
+            <div class="back-row">
+                <button class="back-button" type="button" onclick="resetCategories()">← Back to all services</button>
+            </div>
+            <div class="subcategory-header">
+                <h2>Life Insurance Options</h2>
+                <p>Select a product to learn more and start your application.</p>
+            </div>
+            <div class="subcategory-grid">
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-life-aces.png" alt="Term Life" class="category-icon">
+                    <h3>Term Life</h3>
+                    <p>Affordable coverage for a set period to protect your family during key life stages.</p>
+                    <a href="applications.html#term-life" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-life-aces.png" alt="Whole Life" class="category-icon">
+                    <h3>Whole Life</h3>
+                    <p>Permanent coverage with potential cash value to support long‑term planning.</p>
+                    <a href="applications.html#whole-life" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-life-aces.png" alt="Final Expense" class="category-icon">
+                    <h3>Final Expense</h3>
+                    <p>Smaller policies designed to help cover funeral and final expenses.</p>
+                    <a href="applications.html#final-expense" class="btn-apply">Start Application</a>
+                </div>
+            </div>
         </div>
 
-      </div>
+        <!-- PERSONAL subcategories -->
+        <div class="subcategory-section" id="sub-personal">
+            <div class="back-row">
+                <button class="back-button" type="button" onclick="resetCategories()">← Back to all services</button>
+            </div>
+            <div class="subcategory-header">
+                <h2>Personal Insurance Options</h2>
+                <p>Property and vehicle coverage to protect what matters most at home.</p>
+            </div>
+            <div class="subcategory-grid">
+                <!-- Property lines -->
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Homeowners" class="category-icon">
+                    <h3>Homeowners</h3>
+                    <p>Coverage for your primary residence, personal property, and liability.</p>
+                    <a href="applications.html#homeowners" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Renters" class="category-icon">
+                    <h3>Renters</h3>
+                    <p>Protect your belongings and personal liability while renting a home or apartment.</p>
+                    <a href="applications.html#renters" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Condo" class="category-icon">
+                    <h3>Condo</h3>
+                    <p>Coverage designed for condo owners to complement your association policy.</p>
+                    <a href="applications.html#condo" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Landlord" class="category-icon">
+                    <h3>Landlord</h3>
+                    <p>Protect your rental properties, structures, and liability as a landlord.</p>
+                    <a href="applications.html#landlord" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Flood" class="category-icon">
+                    <h3>Flood</h3>
+                    <p>Specialized coverage for flood damage not included in standard policies.</p>
+                    <a href="applications.html#flood" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Windstorm" class="category-icon">
+                    <h3>Windstorm</h3>
+                    <p>Protection against wind and hail in high‑risk areas.</p>
+                    <a href="applications.html#windstorm" class="btn-apply">Start Application</a>
+                </div>
 
-      <button id="addVehicle-es" class="add-button">+ Agregar Otro Vehículo</button>
+                <!-- Auto lines under Personal -->
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Auto" class="category-icon">
+                    <h3>Auto</h3>
+                    <p>Personal auto coverage for everyday drivers and families.</p>
+                    <a href="applications.html#personal-auto" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Motorcycle" class="category-icon">
+                    <h3>Motorcycle</h3>
+                    <p>Coverage tailored for motorcycles and riders.</p>
+                    <a href="applications.html#motorcycle" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="RV" class="category-icon">
+                    <h3>RV</h3>
+                    <p>Protection for recreational vehicles, whether part‑time or full‑time use.</p>
+                    <a href="applications.html#rv" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="ATV" class="category-icon">
+                    <h3>ATV</h3>
+                    <p>Coverage for ATVs and off‑road recreational vehicles.</p>
+                    <a href="applications.html#atv" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Golf Cart" class="category-icon">
+                    <h3>Golf Cart</h3>
+                    <p>Specialized coverage for golf carts used on or off the course.</p>
+                    <a href="applications.html#golf-cart" class="btn-apply">Start Application</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMERCIAL subcategories -->
+        <div class="subcategory-section" id="sub-commercial">
+            <div class="back-row">
+                <button class="back-button" type="button" onclick="resetCategories()">← Back to all services</button>
+            </div>
+            <div class="subcategory-header">
+                <h2>Commercial Insurance Options</h2>
+                <p>Coverage designed to protect your business, employees, and assets.</p>
+            </div>
+            <div class="subcategory-grid">
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="General Liability" class="category-icon">
+                    <h3>General Liability</h3>
+                    <p>Core protection for third‑party bodily injury, property damage, and more.</p>
+                    <a href="applications.html#general-liability" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="BOP" class="category-icon">
+                    <h3>Business Owners Policy (BOP)</h3>
+                    <p>Bundled coverage for small to mid‑sized businesses, combining property and liability.</p>
+                    <a href="applications.html#bop" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="Commercial Auto" class="category-icon">
+                    <h3>Commercial Auto</h3>
+                    <p>Coverage for vehicles used in your business operations.</p>
+                    <a href="applications.html#commercial-auto" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="Workers Comp" class="category-icon">
+                    <h3>Workers’ Compensation</h3>
+                    <p>Protection for employees injured on the job, as required by law.</p>
+                    <a href="applications.html#workers-comp" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="Commercial Property" class="category-icon">
+                    <h3>Commercial Property</h3>
+                    <p>Coverage for your buildings, equipment, inventory, and more.</p>
+                    <a href="applications.html#commercial-property" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="Bonds" class="category-icon">
+                    <h3>Bonds</h3>
+                    <p>Surety and other bonds to meet contract and licensing requirements.</p>
+                    <a href="applications.html#bonds" class="btn-apply">Start Application</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AUTO subcategories (standalone view) -->
+        <div class="subcategory-section" id="sub-auto">
+            <div class="back-row">
+                <button class="back-button" type="button" onclick="resetCategories()">← Back to all services</button>
+            </div>
+            <div class="subcategory-header">
+                <h2>Auto & Specialty Vehicle Options</h2>
+                <p>Coverage for personal and specialty vehicles on the road.</p>
+            </div>
+            <div class="subcategory-grid">
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Auto" class="category-icon">
+                    <h3>Auto</h3>
+                    <p>Standard auto coverage for everyday drivers and families.</p>
+                    <a href="applications.html#auto" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Motorcycle" class="category-icon">
+                    <h3>Motorcycle</h3>
+                    <p>Coverage tailored for motorcycles and riders.</p>
+                    <a href="applications.html#motorcycle" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="RV" class="category-icon">
+                    <h3>RV</h3>
+                    <p>Protection for recreational vehicles, whether part‑time or full‑time use.</p>
+                    <a href="applications.html#rv" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="ATV" class="category-icon">
+                    <h3>ATV</h3>
+                    <p>Coverage for ATVs and off‑road recreational vehicles.</p>
+                    <a href="applications.html#atv" class="btn-apply">Start Application</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Golf Cart" class="category-icon">
+                    <h3>Golf Cart</h3>
+                    <p>Specialized coverage for golf carts used on or off the course.</p>
+                    <a href="applications.html#golf-cart" class="btn-apply">Start Application</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <a href="contact.html" class="btn-red">Enviar Aplicación de Auto</a>
-  </section>
+    <!-- SPANISH CONTENT -->
+    <div class="lang-es">
+        <h1>Nuestros Servicios</h1>
+        <p style="text-align:center; max-width:700px; margin:10px auto 30px;">
+            Explore nuestras principales líneas de cobertura. Seleccione una categoría para ver las opciones detalladas y comenzar su solicitud.
+        </p>
 
-  <!-- LIFE -->
-  <section class="section-light" id="life-es">
-    <h2>Aplicaciones de Seguro de Vida</h2>
+        <!-- Main category cards (ES text, same structure) -->
+        <div class="category-grid" id="categoryGridEs">
+            <div class="category-card" data-category="life">
+                <img src="icon-life-aces.png" alt="Seguro de Vida" class="category-icon">
+                <h3>Seguro de Vida</h3>
+                <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                <p>Proteja el futuro de su familia con opciones de seguro de vida flexibles.</p>
+            </div>
 
-    <div class="app-block">
-      <h3>Información del Solicitante</h3>
+            <div class="category-card" data-category="personal">
+                <img src="icon-property-aces.png" alt="Seguro Personal" class="category-icon">
+                <h3>Seguro Personal</h3>
+                <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                <p>Cobertura para su hogar, pertenencias y vehículos personales con aseguradoras confiables.</p>
+            </div>
 
-      <form class="app-form">
-        <label>Nombre Completo</label>
-        <input type="text">
+            <div class="category-card" data-category="commercial">
+                <img src="icon-commercial-aces.png" alt="Seguro Comercial" class="category-icon">
+                <h3>Seguro Comercial</h3>
+                <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                <p>Proteja su negocio, empleados y activos con soluciones comerciales a la medida.</p>
+            </div>
 
-        <label>Fecha de Nacimiento</label>
-        <input type="date">
+            <div class="category-card" data-category="auto">
+                <img src="icon-auto-aces.png" alt="Seguro de Auto" class="category-icon">
+                <h3>Seguro de Auto</h3>
+                <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                <p>Cobertura confiable para sus vehículos personales y especiales.</p>
+            </div>
+        </div>
 
-        <label>Cantidad de Cobertura Solicitada</label>
-        <input type="text">
+        <!-- LIFE ES -->
+        <div class="subcategory-section" id="sub-life-es">
+            <div class="back-row">
+                <button class="back-button" type="button" onclick="resetCategoriesEs()">← Volver a todos los servicios</button>
+            </div>
+            <div class="subcategory-header">
+                <h2>Opciones de Seguro de Vida</h2>
+                <p>Seleccione un producto para obtener más información y comenzar su solicitud.</p>
+            </div>
+            <div class="subcategory-grid">
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-life-aces.png" alt="Vida a Plazo" class="category-icon">
+                    <h3>Vida a Plazo</h3>
+                    <p>Cobertura accesible por un período específico para proteger a su familia.</p>
+                    <a href="applications.html#term-life" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-life-aces.png" alt="Vida Entera" class="category-icon">
+                    <h3>Vida Entera</h3>
+                    <p>Cobertura permanente con posible valor en efectivo para la planificación a largo plazo.</p>
+                    <a href="applications.html#whole-life" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-life-aces.png" alt="Gastos Finales" class="category-icon">
+                    <h3>Gastos Finales</h3>
+                    <p>Pólizas diseñadas para ayudar a cubrir gastos funerarios y finales.</p>
+                    <a href="applications.html#final-expense" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+            </div>
+        </div>
 
-        <label>Nombre del Beneficiario</label>
-        <input type="text">
-      </form>
+        <!-- PERSONAL ES -->
+        <div class="subcategory-section" id="sub-personal-es">
+            <div class="back-row">
+                <button class="back-button" type="button" onclick="resetCategoriesEs()">← Volver a todos los servicios</button>
+            </div>
+            <div class="subcategory-header">
+                <h2>Opciones de Seguro Personal</h2>
+                <p>Cobertura para su propiedad y vehículos para proteger lo que más importa.</p>
+            </div>
+            <div class="subcategory-grid">
+                <!-- Property lines -->
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Propietarios de Vivienda" class="category-icon">
+                    <h3>Propietarios de Vivienda</h3>
+                    <p>Cobertura para su residencia principal, pertenencias y responsabilidad civil.</p>
+                    <a href="applications.html#homeowners" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Inquilinos" class="category-icon">
+                    <h3>Inquilinos</h3>
+                    <p>Proteja sus pertenencias y responsabilidad civil mientras renta una casa o apartamento.</p>
+                    <a href="applications.html#renters" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Condominio" class="category-icon">
+                    <h3>Condominio</h3>
+                    <p>Cobertura diseñada para dueños de condominios que complementa la póliza de la asociación.</p>
+                    <a href="applications.html#condo" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Propietario de Alquiler" class="category-icon">
+                    <h3>Propietario de Alquiler</h3>
+                    <p>Proteja sus propiedades de renta, estructuras y responsabilidad como arrendador.</p>
+                    <a href="applications.html#landlord" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Inundación" class="category-icon">
+                    <h3>Inundación</h3>
+                    <p>Cobertura especializada para daños por inundación no incluidos en pólizas estándar.</p>
+                    <a href="applications.html#flood" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-property-aces.png" alt="Viento y Granizo" class="category-icon">
+                    <h3>Viento y Granizo</h3>
+                    <p>Protección contra viento y granizo en áreas de alto riesgo.</p>
+                    <a href="applications.html#windstorm" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+
+                <!-- Auto lines -->
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Auto" class="category-icon">
+                    <h3>Auto</h3>
+                    <p>Cobertura de auto personal para conductores y familias.</p>
+                    <a href="applications.html#personal-auto" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Motocicleta" class="category-icon">
+                    <h3>Motocicleta</h3>
+                    <p>Cobertura diseñada para motocicletas y motociclistas.</p>
+                    <a href="applications.html#motorcycle" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="RV" class="category-icon">
+                    <h3>RV</h3>
+                    <p>Protección para vehículos recreativos, ya sea uso parcial o de tiempo completo.</p>
+                    <a href="applications.html#rv" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="ATV" class="category-icon">
+                    <h3>ATV</h3>
+                    <p>Cobertura para vehículos todo terreno y recreativos.</p>
+                    <a href="applications.html#atv" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Carrito de Golf" class="category-icon">
+                    <h3>Carrito de Golf</h3>
+                    <p>Cobertura especializada para carritos de golf dentro o fuera del campo.</p>
+                    <a href="applications.html#golf-cart" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMERCIAL ES -->
+        <div class="subcategory-section" id="sub-commercial-es">
+            <div class="back-row">
+                <button class="back-button" type="button" onclick="resetCategoriesEs()">← Volver a todos los servicios</button>
+            </div>
+            <div class="subcategory-header">
+                <h2>Opciones de Seguro Comercial</h2>
+                <p>Cobertura diseñada para proteger su negocio, empleados y activos.</p>
+            </div>
+            <div class="subcategory-grid">
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="Responsabilidad General" class="category-icon">
+                    <h3>Responsabilidad General</h3>
+                    <p>Protección básica para lesiones corporales, daños a propiedad de terceros y más.</p>
+                    <a href="applications.html#general-liability" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="Póliza para Dueños de Negocio" class="category-icon">
+                    <h3>Póliza para Dueños de Negocio (BOP)</h3>
+                    <p>Cobertura combinada de propiedad y responsabilidad para pequeños y medianos negocios.</p>
+                    <a href="applications.html#bop" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="Auto Comercial" class="category-icon">
+                    <h3>Auto Comercial</h3>
+                    <p>Cobertura para vehículos utilizados en las operaciones de su negocio.</p>
+                    <a href="applications.html#commercial-auto" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="Compensación para Trabajadores" class="category-icon">
+                    <h3>Compensación para Trabajadores</h3>
+                    <p>Protección para empleados lesionados en el trabajo, según lo requiera la ley.</p>
+                    <a href="applications.html#workers-comp" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="Propiedad Comercial" class="category-icon">
+                    <h3>Propiedad Comercial</h3>
+                    <p>Cobertura para edificios, equipo, inventario y más.</p>
+                    <a href="applications.html#commercial-property" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-commercial-aces.png" alt="Fianzas" class="category-icon">
+                    <h3>Fianzas</h3>
+                    <p>Fianzas y otros bonos para cumplir requisitos de contratos y licencias.</p>
+                    <a href="applications.html#bonds" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AUTO ES -->
+        <div class="subcategory-section" id="sub-auto-es">
+            <div class="back-row">
+                <button class="back-button" type="button" onclick="resetCategoriesEs()">← Volver a todos los servicios</button>
+            </div>
+            <div class="subcategory-header">
+                <h2>Opciones de Auto y Vehículos Especiales</h2>
+                <p>Cobertura para vehículos personales y especiales en la carretera.</p>
+            </div>
+            <div class="subcategory-grid">
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Auto" class="category-icon">
+                    <h3>Auto</h3>
+                    <p>Cobertura estándar de auto para conductores y familias.</p>
+                    <a href="applications.html#auto" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Motocicleta" class="category-icon">
+                    <h3>Motocicleta</h3>
+                    <p>Cobertura diseñada para motocicletas y motociclistas.</p>
+                    <a href="applications.html#motorcycle" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="RV" class="category-icon">
+                    <h3>RV</h3>
+                    <p>Protección para vehículos recreativos, ya sea uso parcial o de tiempo completo.</p>
+                    <a href="applications.html#rv" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="ATV" class="category-icon">
+                    <h3>ATV</h3>
+                    <p>Cobertura para vehículos todo terreno y recreativos.</p>
+                    <a href="applications.html#atv" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+                <div class="subcategory-card">
+                    <img src="Aces-Spade.jpg" alt="ACES Spade" class="spade">
+                    <img src="icon-auto-aces.png" alt="Carrito de Golf" class="category-icon">
+                    <h3>Carrito de Golf</h3>
+                    <p>Cobertura especializada para carritos de golf dentro o fuera del campo.</p>
+                    <a href="applications.html#golf-cart" class="btn-apply">Comenzar Solicitud</a>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <a href="contact.html" class="btn-red">Enviar Aplicación de Vida</a>
-  </section>
 
 </div>
 
-<!-- ============================================================
-     SLIDE-OUT PANEL
-============================================================ -->
-<div class="agent-panel">
-  <button class="close-panel">&times;</button>
-  <img class="panel-photo" src="">
-  <h2></h2>
-  <p class="panel-title"></p>
-  <p><strong>Phone:</strong> <span class="panel-phone"></span></p>
-  <p><strong>Email:</strong> <span class="panel-email"></span></p>
-  <a class="panel-call" href="#">Call Now</a>
-</div>
+<script src="global.js"></script>
+<script>
+    // ENGLISH behavior
+    const categoryGrid = document.getElementById('categoryGrid');
+    const subSections = {
+        life: document.getElementById('sub-life'),
+        personal: document.getElementById('sub-personal'),
+        commercial: document.getElementById('sub-commercial'),
+        auto: document.getElementById('sub-auto')
+    };
 
-<!-- ============================================================
-     FOOTER
-============================================================ -->
-<footer class="footer">
-  <img src="image2.png" class="footer-logo">
-  <p>© 2026 ACES Insurance Services</p>
-</footer>
+    function resetCategories() {
+        const cards = categoryGrid.querySelectorAll('.category-card');
+        cards.forEach(card => {
+            card.classList.remove('dimmed', 'active');
+        });
+        Object.values(subSections).forEach(sec => sec.style.display = 'none');
+    }
 
-<!-- ============================================================
-     NAVIGATION TEMPLATES
-============================================================ -->
-<nav id="navEN" style="display:none;">
-  <a class="nav-link" href="index.html">Home</a>
+    categoryGrid.addEventListener('click', function (e) {
+        const card = e.target.closest('.category-card');
+        if (!card) return;
+        const cat = card.getAttribute('data-category');
+        if (!cat || !subSections[cat]) return;
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Services ▾</span>
-    <div class="dropdown-menu">
-      <a href="services.html?type=life">Life Insurance</a>
-      <a href="services.html?type=personal">Personal Insurance</a>
-      <a href="services.html?type=commercial">Commercial Insurance</a>
-      <a href="services.html?type=auto">Auto Insurance</a>
-    </div>
-  </div>
+        const cards = categoryGrid.querySelectorAll('.category-card');
+        cards.forEach(c => {
+            c.classList.add('dimmed');
+            c.classList.remove('active');
+        });
+        card.classList.add('active');
+        Object.values(subSections).forEach(sec => sec.style.display = 'none');
+        subSections[cat].style.display = 'block';
+        subSections[cat].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 
-  <a class="nav-link" href="applications.html">Applications</a>
-  <a class="nav-link" href="coi.html">COI Request</a>
-  <a class="nav-link" href="claims.html">Claims</a>
-  <a class="nav-link" href="about.html">About</a>
-  <a class="nav-link" href="contact.html">Contact</a>
-</nav>
+    // SPANISH behavior
+    const categoryGridEs = document.getElementById('categoryGridEs');
+    const subSectionsEs = {
+        life: document.getElementById('sub-life-es'),
+        personal: document.getElementById('sub-personal-es'),
+        commercial: document.getElementById('sub-commercial-es'),
+        auto: document.getElementById('sub-auto-es')
+    };
 
-<nav id="navES" style="display:none;">
-  <a class="nav-link" href="index.html">Inicio</a>
+    function resetCategoriesEs() {
+        const cards = categoryGridEs.querySelectorAll('.category-card');
+        cards.forEach(card => {
+            card.classList.remove('dimmed', 'active');
+        });
+        Object.values(subSectionsEs).forEach(sec => sec.style.display = 'none');
+    }
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Servicios ▾</span>
-    <div class="dropdown-menu">
-      <a href="services.html?type=life">Seguro de Vida</a>
-      <a href="services.html?type=personal">Seguro Personal</a>
-      <a href="services.html?type=commercial">Seguro Comercial</a>
-      <a href="services.html?type=auto">Seguro de Auto</a>
-    </div>
-  </div>
+    categoryGridEs.addEventListener('click', function (e) {
+        const card = e.target.closest('.category-card');
+        if (!card) return;
+        const cat = card.getAttribute('data-category');
+        if (!cat || !subSectionsEs[cat]) return;
 
-  <a class="nav-link" href="applications.html">Aplicaciones</a>
-  <a class="nav-link" href="coi.html">Solicitud de COI</a>
-  <a class="nav-link" href="claims.html">Reclamos</a>
-  <a class="nav-link" href="about.html">Acerca de</a>
-  <a class="nav-link" href="contact.html">Contacto</a>
-</nav>
-
-<script src="global.js?v=600"></script>
+        const cards = categoryGridEs.querySelectorAll('.category-card');
+        cards.forEach(c => {
+            c.classList.add('dimmed');
+            c.classList.remove('active');
+        });
+        card.classList.add('active');
+        Object.values(subSectionsEs).forEach(sec => sec.style.display = 'none');
+        subSectionsEs[cat].style.display = 'block';
+        subSectionsEs[cat].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+</script>
 
 </body>
 </html>
