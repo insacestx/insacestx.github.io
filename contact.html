@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Contact Us | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=508">
+  <link rel="stylesheet" href="style.css?v=600">
 </head>
 
 <body>
@@ -37,139 +37,102 @@
 
   <section class="hero-white">
     <h1>Contact ACES Insurance Services</h1>
-    <p>Our bilingual team is ready to help with all your insurance needs.</p>
+    <p>We're here to help with quotes, claims, COIs, and policy questions.</p>
   </section>
 
   <!-- CONTACT FORM -->
   <section class="section-light">
     <h2>Send Us a Message</h2>
 
-    <form class="app-form">
+    <form class="app-form" action="mailto:office@insaces.com" method="POST" enctype="text/plain">
+
       <label>Your Name</label>
-      <input type="text">
+      <input type="text" name="Name" required>
 
-      <label>Email</label>
-      <input type="email">
+      <label>Your Email</label>
+      <input type="email" name="Email" required>
 
-      <label>Phone Number</label>
-      <input type="text">
+      <label>Your Phone</label>
+      <input type="text" name="Phone">
 
-      <label>Your Message</label>
-      <textarea rows="5"></textarea>
+      <label>Message</label>
+      <textarea name="Message" rows="5" required></textarea>
 
-      <button class="btn-red" type="submit">Send Message</button>
+      <button type="submit" class="btn-red">Send Message</button>
     </form>
   </section>
 
-  <!-- OFFICE INFO -->
-  <section class="section-red">
-    <h2>Office Information</h2>
-
-    <p><strong>Address:</strong><br>
-      404 Sapphire Blvd.<br>
-      Hewitt, TX 76643
-    </p>
-
-    <p><strong>Phone:</strong> (254) 227‑6560</p>
-    <p><strong>Email:</strong> office@insaces.com</p>
-
-    <h3 style="margin-top:30px;">Business Hours</h3>
-    <p>
-      Monday – Friday: 9:00 AM – 5:00 PM<br>
-      Saturday – Sunday: Closed
-    </p>
-  </section>
-
-  <!-- MAP -->
+  <!-- TEAM CONTACT -->
   <section class="section-dark">
-    <h2>Find Us</h2>
-    <iframe 
-      src="https://www.google.com/maps?q=404+Sapphire+Blvd+Hewitt+TX&output=embed"
-      width="100%" height="350" style="border:0; border-radius:8px;">
-    </iframe>
-  </section>
-
-  <!-- TEAM GRID -->
-  <section class="section-light">
-    <h2>Contact a Team Member</h2>
+    <h2>Contact Our Team</h2>
+    <p>Click any team member to view their direct contact information.</p>
 
     <div class="team-grid">
 
       <div class="agent-card"
-        data-name="George J. Santibañez"
-        data-title="Commercial & Personal Lines Agent"
-        data-phone="(254) 709-6487"
-        data-email="george@insaces.com"
-        data-photo="george.jpg">
-        <img src="george.jpg" class="agent-photo">
-        <h3>George J. Santibañez</h3>
-        <p>Commercial & Personal Lines Agent</p>
-      </div>
-
-      <div class="agent-card"
-        data-name="Jimmy Rodriguez"
-        data-title="Commercial & Personal Lines Agent"
-        data-phone="(214) 498-6928"
-        data-email="jimmy@insaces.com"
-        data-photo="jimmy.jpg">
-        <img src="jimmy.jpg" class="agent-photo">
-        <h3>Jimmy Rodriguez</h3>
-        <p>Commercial & Personal Lines Agent</p>
-      </div>
-
-      <div class="agent-card"
-        data-name="Renee Ridling"
-        data-title="Commercial & Personal Lines Agent"
-        data-phone="(254) 227-6560"
-        data-email="office@insaces.com"
-        data-photo="renee.jpg">
-        <img src="renee.jpg" class="agent-photo">
-        <h3>Renee Ridling</h3>
-        <p>Commercial & Personal Lines Agent</p>
-      </div>
-
-      <div class="agent-card"
-        data-name="Jordan Jones"
-        data-title="Agency Co‑Owner"
-        data-phone="(254) 289-2423"
-        data-email="jordan@insaces.com"
-        data-photo="jordan.jpg">
-        <img src="jordan.jpg" class="agent-photo">
+           data-name="Jordan Jones"
+           data-title="Co-Owner"
+           data-phone="254-289-2423"
+           data-email="jordan@insaces.com"
+           data-photo="team/jordan.jpg">
+        <img src="team/jordan.jpg" class="agent-photo">
         <h3>Jordan Jones</h3>
-        <p>Agency Co‑Owner</p>
+        <p>Co-Owner</p>
       </div>
 
       <div class="agent-card"
-        data-name="Lanse Derrick"
-        data-title="Agency Co‑Owner"
-        data-phone="(214) 770-1488"
-        data-email="lanse@insaces.com"
-        data-photo="lanse.jpg">
-        <img src="lanse.jpg" class="agent-photo">
+           data-name="Lanse Derrick"
+           data-title="Co-Owner"
+           data-phone="214-770-1488"
+           data-email="lanse@insaces.com"
+           data-photo="team/lanse.jpg">
+        <img src="team/lanse.jpg" class="agent-photo">
         <h3>Lanse Derrick</h3>
-        <p>Agency Co‑Owner</p>
+        <p>Co-Owner</p>
       </div>
 
       <div class="agent-card"
-        data-name="Robert Hyde"
-        data-title="Agency Co‑Owner"
-        data-phone="(254) 292-0961"
-        data-email="robert@insaces.com"
-        data-photo="robert.jpg">
-        <img src="robert.jpg" class="agent-photo">
+           data-name="Robert Hyde"
+           data-title="Co-Owner"
+           data-phone="254-292-0961"
+           data-email="robert@insaces.com"
+           data-photo="team/robert.jpg">
+        <img src="team/robert.jpg" class="agent-photo">
         <h3>Robert Hyde</h3>
-        <p>Agency Co‑Owner</p>
+        <p>Co-Owner</p>
       </div>
 
       <div class="agent-card"
-        data-name="Bryan Carter"
-        data-title="Agency Co‑Owner"
-        data-phone="(254) 744-6600"
-        data-email="bryan@insaces.com"
-        data-photo="bryan.jpg">
-        <img src="bryan.jpg" class="agent-photo">
+           data-name="Bryan Carter"
+           data-title="Co-Owner"
+           data-phone="254-744-6600"
+           data-email="bryan@insaces.com"
+           data-photo="team/bryan.jpg">
+        <img src="team/bryan.jpg" class="agent-photo">
         <h3>Bryan Carter</h3>
-        <p>Agency Co‑Owner</p>
+        <p>Co-Owner</p>
+      </div>
+
+      <div class="agent-card"
+           data-name="Jimmy Rodriguez"
+           data-title="Agent"
+           data-phone="214-498-6928"
+           data-email="jimmy@insaces.com"
+           data-photo="team/jimmy.jpg">
+        <img src="team/jimmy.jpg" class="agent-photo">
+        <h3>Jimmy Rodriguez</h3>
+        <p>Agent</p>
+      </div>
+
+      <div class="agent-card"
+           data-name="Renee Ridling"
+           data-title="Agent"
+           data-phone="254-227-6560"
+           data-email="office@insaces.com"
+           data-photo="team/renee.jpg">
+        <img src="team/renee.jpg" class="agent-photo">
+        <h3>Renee Ridling</h3>
+        <p>Agent</p>
       </div>
 
     </div>
@@ -183,140 +146,73 @@
 <div id="spanish" style="display:none;">
 
   <section class="hero-white">
-    <h1>Contáctenos</h1>
-    <p>Nuestro equipo bilingüe está listo para ayudarle.</p>
+    <h1>Contacto ACES Insurance Services</h1>
+    <p>Estamos aquí para ayudarle con cotizaciones, reclamos, COIs y preguntas de pólizas.</p>
   </section>
 
   <!-- CONTACT FORM -->
   <section class="section-light">
     <h2>Envíenos un Mensaje</h2>
 
-    <form class="app-form">
+    <form class="app-form" action="mailto:office@insaces.com" method="POST" enctype="text/plain">
+
       <label>Su Nombre</label>
-      <input type="text">
+      <input type="text" name="Name" required>
 
-      <label>Correo Electrónico</label>
-      <input type="email">
+      <label>Su Correo Electrónico</label>
+      <input type="email" name="Email" required>
 
-      <label>Número de Teléfono</label>
-      <input type="text">
+      <label>Su Teléfono</label>
+      <input type="text" name="Phone">
 
-      <label>Su Mensaje</label>
-      <textarea rows="5"></textarea>
+      <label>Mensaje</label>
+      <textarea name="Message" rows="5" required></textarea>
 
-      <button class="btn-red" type="submit">Enviar Mensaje</button>
+      <button type="submit" class="btn-red">Enviar Mensaje</button>
     </form>
   </section>
 
-  <!-- OFFICE INFO -->
-  <section class="section-red">
-    <h2>Información de la Oficina</h2>
-
-    <p><strong>Dirección:</strong><br>
-      404 Sapphire Blvd.<br>
-      Hewitt, TX 76643
-    </p>
-
-    <p><strong>Teléfono:</strong> (254) 227‑6560</p>
-    <p><strong>Correo Electrónico:</strong> office@insaces.com</p>
-
-    <h3 style="margin-top:30px;">Horario</h3>
-    <p>
-      Lunes – Viernes: 9:00 AM – 5:00 PM<br>
-      Sábado – Domingo: Cerrado
-    </p>
-  </section>
-
-  <!-- MAP -->
+  <!-- TEAM CONTACT -->
   <section class="section-dark">
-    <h2>Encuéntrenos</h2>
-    <iframe 
-      src="https://www.google.com/maps?q=404+Sapphire+Blvd+Hewitt+TX&output=embed"
-      width="100%" height="350" style="border:0; border-radius:8px;">
-    </iframe>
-  </section>
-
-  <!-- TEAM GRID (SPANISH) -->
-  <section class="section-light">
-    <h2>Contacte a un Miembro del Equipo</h2>
+    <h2>Contacte a Nuestro Equipo</h2>
+    <p>Haga clic en cualquier miembro del equipo para ver su información directa.</p>
 
     <div class="team-grid">
 
-      <div class="agent-card"
-        data-name="George J. Santibañez"
-        data-title="Agente de Líneas Comerciales y Personales"
-        data-phone="(254) 709-6487"
-        data-email="george@insaces.com"
-        data-photo="george.jpg">
-        <img src="george.jpg" class="agent-photo">
-        <h3>George J. Santibañez</h3>
-        <p>Agente de Líneas Comerciales y Personales</p>
-      </div>
-
-      <div class="agent-card"
-        data-name="Jimmy Rodriguez"
-        data-title="Agente de Líneas Comerciales y Personales"
-        data-phone="(214) 498-6928"
-        data-email="jimmy@insaces.com"
-        data-photo="jimmy.jpg">
-        <img src="jimmy.jpg" class="agent-photo">
-        <h3>Jimmy Rodriguez</h3>
-        <p>Agente de Líneas Comerciales y Personales</p>
-      </div>
-
-      <div class="agent-card"
-        data-name="Renee Ridling"
-        data-title="Agente de Líneas Comerciales y Personales"
-        data-phone="(254) 227-6560"
-        data-email="office@insaces.com"
-        data-photo="renee.jpg">
-        <img src="renee.jpg" class="agent-photo">
-        <h3>Renee Ridling</h3>
-        <p>Agente de Líneas Comerciales y Personales</p>
-      </div>
-
-      <div class="agent-card"
-        data-name="Jordan Jones"
-        data-title="Co‑Propietario"
-        data-phone="(254) 289-2423"
-        data-email="jordan@insaces.com"
-        data-photo="jordan.jpg">
-        <img src="jordan.jpg" class="agent-photo">
+      <div class="agent-card" data-name="Jordan Jones" data-title="Co-Owner" data-phone="254-289-2423" data-email="jordan@insaces.com" data-photo="team/jordan.jpg">
+        <img src="team/jordan.jpg" class="agent-photo">
         <h3>Jordan Jones</h3>
-        <p>Co‑Propietario</p>
+        <p>Co-Owner</p>
       </div>
 
-      <div class="agent-card"
-        data-name="Lanse Derrick"
-        data-title="Co‑Propietario"
-        data-phone="(214) 770-1488"
-        data-email="lanse@insaces.com"
-        data-photo="lanse.jpg">
-        <img src="lanse.jpg" class="agent-photo">
+      <div class="agent-card" data-name="Lanse Derrick" data-title="Co-Owner" data-phone="214-770-1488" data-email="lanse@insaces.com" data-photo="team/lanse.jpg">
+        <img src="team/lanse.jpg" class="agent-photo">
         <h3>Lanse Derrick</h3>
-        <p>Co‑Propietario</p>
+        <p>Co-Owner</p>
       </div>
 
-      <div class="agent-card"
-        data-name="Robert Hyde"
-        data-title="Co‑Propietario"
-        data-phone="(254) 292-0961"
-        data-email="robert@insaces.com"
-        data-photo="robert.jpg">
-        <img src="robert.jpg" class="agent-photo">
+      <div class="agent-card" data-name="Robert Hyde" data-title="Co-Owner" data-phone="254-292-0961" data-email="robert@insaces.com" data-photo="team/robert.jpg">
+        <img src="team/robert.jpg" class="agent-photo">
         <h3>Robert Hyde</h3>
-        <p>Co‑Propietario</p>
+        <p>Co-Owner</p>
       </div>
 
-      <div class="agent-card"
-        data-name="Bryan Carter"
-        data-title="Co‑Propietario"
-        data-phone="(254) 744-6600"
-        data-email="bryan@insaces.com"
-        data-photo="bryan.jpg">
-        <img src="bryan.jpg" class="agent-photo">
+      <div class="agent-card" data-name="Bryan Carter" data-title="Co-Owner" data-phone="254-744-6600" data-email="bryan@insaces.com" data-photo="team/bryan.jpg">
+        <img src="team/bryan.jpg" class="agent-photo">
         <h3>Bryan Carter</h3>
-        <p>Co‑Propietario</p>
+        <p>Co-Owner</p>
+      </div>
+
+      <div class="agent-card" data-name="Jimmy Rodriguez" data-title="Agent" data-phone="214-498-6928" data-email="jimmy@insaces.com" data-photo="team/jimmy.jpg">
+        <img src="team/jimmy.jpg" class="agent-photo">
+        <h3>Jimmy Rodriguez</h3>
+        <p>Agent</p>
+      </div>
+
+      <div class="agent-card" data-name="Renee Ridling" data-title="Agent" data-phone="254-227-6560" data-email="office@insaces.com" data-photo="team/renee.jpg">
+        <img src="team/renee.jpg" class="agent-photo">
+        <h3>Renee Ridling</h3>
+        <p>Agent</p>
       </div>
 
     </div>
@@ -328,12 +224,13 @@
      SLIDE-OUT PANEL
 ============================================================ -->
 <div class="agent-panel">
-  <button class="close-panel">✖</button>
-  <img class="panel-photo" src="" alt="Agent Photo">
+  <button class="close-panel">&times;</button>
+  <img class="panel-photo" src="">
   <h2></h2>
   <p class="panel-title"></p>
   <p><strong>Phone:</strong> <span class="panel-phone"></span></p>
   <p><strong>Email:</strong> <span class="panel-email"></span></p>
+  <a class="panel-call" href="#">Call Now</a>
 </div>
 
 <!-- ============================================================
@@ -360,16 +257,7 @@
     </div>
   </div>
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Applications ▾</span>
-    <div class="dropdown-menu">
-      <a href="applications.html#commercial">Commercial Apps</a>
-      <a href="applications.html#personal">Personal Apps</a>
-      <a href="applications.html#auto">Auto Apps</a>
-      <a href="applications.html#life">Life Apps</a>
-    </div>
-  </div>
-
+  <a class="nav-link" href="applications.html">Applications</a>
   <a class="nav-link" href="coi.html">COI Request</a>
   <a class="nav-link" href="claims.html">Claims</a>
   <a class="nav-link" href="about.html">About</a>
@@ -389,23 +277,14 @@
     </div>
   </div>
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Aplicaciones ▾</span>
-    <div class="dropdown-menu">
-      <a href="applications.html#commercial-es">Aplicaciones Comerciales</a>
-      <a href="applications.html#personal-es">Aplicaciones Personales</a>
-      <a href="applications.html#auto-es">Aplicaciones de Auto</a>
-      <a href="applications.html#life-es">Aplicaciones de Vida</a>
-    </div>
-  </div>
-
+  <a class="nav-link" href="applications.html">Aplicaciones</a>
   <a class="nav-link" href="coi.html">Solicitud de COI</a>
   <a class="nav-link" href="claims.html">Reclamos</a>
   <a class="nav-link" href="about.html">Acerca de</a>
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=508"></script>
+<script src="global.js?v=600"></script>
 
 </body>
 </html>
