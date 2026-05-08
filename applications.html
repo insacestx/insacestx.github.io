@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Insurance Applications | ACES Insurance Services</title>
+  <title>Applications | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=505">
+  <link rel="stylesheet" href="style.css?v=600">
 </head>
 
 <body>
 
 <!-- ============================================================
-     GLOBAL HEADER (SHARED ACROSS ALL PAGES)
+     GLOBAL HEADER
 ============================================================ -->
 <header class="aces-header">
   <div class="header-inner">
@@ -37,116 +37,140 @@
 
   <section class="hero-white">
     <h1>Insurance Applications</h1>
-    <p>Select the application type below or use a direct link to auto‑load the correct form.</p>
+    <p>Choose the type of insurance you want to apply for.</p>
   </section>
 
-  <!-- COMMERCIAL APPLICATION -->
-  <section class="section-light app-section" id="commercial" style="display:none;">
-    <h2>Commercial Insurance Application</h2>
-    <p>Please complete the form below to begin your commercial insurance application.</p>
+  <!-- ============================================================
+       COMMERCIAL APPLICATIONS
+  ============================================================ -->
+  <section class="section-light" id="commercial">
+    <h2>Commercial Insurance Applications</h2>
 
-    <form class="app-form">
-      <label>Business Name</label>
-      <input type="text">
+    <div class="app-block">
+      <h3>General Business Information</h3>
 
-      <label>Owner Name</label>
-      <input type="text">
+      <form class="app-form">
+        <label>Business Name</label>
+        <input type="text">
 
-      <label>Type of Business</label>
-      <input type="text">
+        <label>Business Address</label>
+        <input type="text">
 
-      <label>Years in Business</label>
-      <input type="number">
+        <label>Type of Business</label>
+        <input type="text">
 
-      <label>Business Address</label>
-      <input type="text">
+        <label>Years in Business</label>
+        <input type="number">
 
-      <label>Phone Number</label>
-      <input type="text">
+        <label>Describe Your Operations</label>
+        <textarea rows="4"></textarea>
+      </form>
+    </div>
 
-      <label>Email</label>
-      <input type="email">
-
-      <button class="btn-red" type="submit">Submit Application</button>
-    </form>
+    <a href="contact.html" class="btn-red">Submit Commercial Application</a>
   </section>
 
-  <!-- PERSONAL APPLICATION -->
-  <section class="section-light app-section" id="personal" style="display:none;">
-    <h2>Personal Insurance Application</h2>
-    <p>Fill out the information below to begin your personal insurance application.</p>
+  <!-- ============================================================
+       PERSONAL APPLICATIONS
+  ============================================================ -->
+  <section class="section-light" id="personal">
+    <h2>Personal Insurance Applications</h2>
 
-    <form class="app-form">
-      <label>Full Name</label>
-      <input type="text">
+    <div class="app-block">
+      <h3>Personal Information</h3>
 
-      <label>Date of Birth</label>
-      <input type="date">
+      <form class="app-form">
+        <label>Full Name</label>
+        <input type="text">
 
-      <label>Home Address</label>
-      <input type="text">
+        <label>Date of Birth</label>
+        <input type="date">
 
-      <label>Phone Number</label>
-      <input type="text">
+        <label>Home Address</label>
+        <input type="text">
 
-      <label>Email</label>
-      <input type="email">
+        <label>Type of Coverage Needed</label>
+        <input type="text">
+      </form>
+    </div>
 
-      <button class="btn-red" type="submit">Submit Application</button>
-    </form>
+    <a href="contact.html" class="btn-red">Submit Personal Application</a>
   </section>
 
-  <!-- AUTO APPLICATION -->
-  <section class="section-light app-section" id="auto" style="display:none;">
-    <h2>Auto Insurance Application</h2>
-    <p>Provide your vehicle and driver information below.</p>
+  <!-- ============================================================
+       AUTO APPLICATIONS (MULTI‑VEHICLE)
+  ============================================================ -->
+  <section class="section-light" id="auto">
+    <h2>Auto Insurance Applications</h2>
 
-    <form class="app-form">
-      <label>Full Name</label>
-      <input type="text">
+    <div class="app-block">
+      <h3>Driver Information</h3>
 
-      <label>Driver License Number</label>
-      <input type="text">
+      <form class="app-form">
+        <label>Primary Driver Name</label>
+        <input type="text">
 
-      <label>Vehicle Year / Make / Model</label>
-      <input type="text">
+        <label>Driver License Number</label>
+        <input type="text">
 
-      <label>VIN Number</label>
-      <input type="text">
+        <label>Date of Birth</label>
+        <input type="date">
+      </form>
+    </div>
 
-      <label>Primary Use</label>
-      <input type="text">
+    <div class="app-block">
+      <h3>Vehicle Information</h3>
 
-      <button class="btn-red" type="submit">Submit Application</button>
-    </form>
+      <div id="vehicleContainer">
+
+        <!-- VEHICLE BLOCK TEMPLATE -->
+        <div class="vehicle-block">
+          <label>Year</label>
+          <input type="number">
+
+          <label>Make</label>
+          <input type="text">
+
+          <label>Model</label>
+          <input type="text">
+
+          <label>VIN</label>
+          <input type="text">
+        </div>
+
+      </div>
+
+      <button id="addVehicle" class="add-button">+ Add Another Vehicle</button>
+    </div>
+
+    <a href="contact.html" class="btn-red">Submit Auto Application</a>
   </section>
 
-  <!-- LIFE APPLICATION -->
-  <section class="section-light app-section" id="life" style="display:none;">
-    <h2>Life Insurance Application</h2>
-    <p>Complete the form below to begin your life insurance application.</p>
+  <!-- ============================================================
+       LIFE APPLICATIONS
+  ============================================================ -->
+  <section class="section-light" id="life">
+    <h2>Life Insurance Applications</h2>
 
-    <form class="app-form">
-      <label>Full Name</label>
-      <input type="text">
+    <div class="app-block">
+      <h3>Applicant Information</h3>
 
-      <label>Date of Birth</label>
-      <input type="date">
+      <form class="app-form">
+        <label>Full Name</label>
+        <input type="text">
 
-      <label>Height / Weight</label>
-      <input type="text">
+        <label>Date of Birth</label>
+        <input type="date">
 
-      <label>Smoker?</label>
-      <select>
-        <option>No</option>
-        <option>Yes</option>
-      </select>
+        <label>Coverage Amount Requested</label>
+        <input type="text">
 
-      <label>Coverage Amount Requested</label>
-      <input type="text">
+        <label>Beneficiary Name</label>
+        <input type="text">
+      </form>
+    </div>
 
-      <button class="btn-red" type="submit">Submit Application</button>
-    </form>
+    <a href="contact.html" class="btn-red">Submit Life Insurance Application</a>
   </section>
 
 </div>
@@ -158,118 +182,146 @@
 
   <section class="hero-white">
     <h1>Aplicaciones de Seguro</h1>
-    <p>Seleccione el tipo de aplicación o use un enlace directo para cargar el formulario correcto.</p>
+    <p>Seleccione el tipo de seguro para iniciar su aplicación.</p>
   </section>
 
-  <!-- COMMERCIAL (ES) -->
-  <section class="section-light app-section" id="commercial-es" style="display:none;">
-    <h2>Aplicación de Seguro Comercial</h2>
-    <p>Complete el formulario para comenzar su aplicación comercial.</p>
+  <!-- COMMERCIAL -->
+  <section class="section-light" id="commercial-es">
+    <h2>Aplicaciones Comerciales</h2>
 
-    <form class="app-form">
-      <label>Nombre del Negocio</label>
-      <input type="text">
+    <div class="app-block">
+      <h3>Información del Negocio</h3>
 
-      <label>Nombre del Propietario</label>
-      <input type="text">
+      <form class="app-form">
+        <label>Nombre del Negocio</label>
+        <input type="text">
 
-      <label>Tipo de Negocio</label>
-      <input type="text">
+        <label>Dirección del Negocio</label>
+        <input type="text">
 
-      <label>Años en Operación</label>
-      <input type="number">
+        <label>Tipo de Negocio</label>
+        <input type="text">
 
-      <label>Dirección del Negocio</label>
-      <input type="text">
+        <label>Años en Operación</label>
+        <input type="number">
 
-      <label>Teléfono</label>
-      <input type="text">
+        <label>Descripción de Operaciones</label>
+        <textarea rows="4"></textarea>
+      </form>
+    </div>
 
-      <label>Correo Electrónico</label>
-      <input type="email">
-
-      <button class="btn-red" type="submit">Enviar Aplicación</button>
-    </form>
+    <a href="contact.html" class="btn-red">Enviar Aplicación Comercial</a>
   </section>
 
-  <!-- PERSONAL (ES) -->
-  <section class="section-light app-section" id="personal-es" style="display:none;">
-    <h2>Aplicación de Seguro Personal</h2>
-    <p>Complete la información para comenzar su aplicación personal.</p>
+  <!-- PERSONAL -->
+  <section class="section-light" id="personal-es">
+    <h2>Aplicaciones Personales</h2>
 
-    <form class="app-form">
-      <label>Nombre Completo</label>
-      <input type="text">
+    <div class="app-block">
+      <h3>Información Personal</h3>
 
-      <label>Fecha de Nacimiento</label>
-      <input type="date">
+      <form class="app-form">
+        <label>Nombre Completo</label>
+        <input type="text">
 
-      <label>Dirección</label>
-      <input type="text">
+        <label>Fecha de Nacimiento</label>
+        <input type="date">
 
-      <label>Teléfono</label>
-      <input type="text">
+        <label>Dirección</label>
+        <input type="text">
 
-      <label>Correo Electrónico</label>
-      <input type="email">
+        <label>Tipo de Cobertura Necesaria</label>
+        <input type="text">
+      </form>
+    </div>
 
-      <button class="btn-red" type="submit">Enviar Aplicación</button>
-    </form>
+    <a href="contact.html" class="btn-red">Enviar Aplicación Personal</a>
   </section>
 
-  <!-- AUTO (ES) -->
-  <section class="section-light app-section" id="auto-es" style="display:none;">
-    <h2>Aplicación de Seguro de Auto</h2>
-    <p>Proporcione la información del vehículo y conductor.</p>
+  <!-- AUTO -->
+  <section class="section-light" id="auto-es">
+    <h2>Aplicaciones de Seguro de Auto</h2>
 
-    <form class="app-form">
-      <label>Nombre Completo</label>
-      <input type="text">
+    <div class="app-block">
+      <h3>Información del Conductor</h3>
 
-      <label>Número de Licencia</label>
-      <input type="text">
+      <form class="app-form">
+        <label>Nombre del Conductor</label>
+        <input type="text">
 
-      <label>Año / Marca / Modelo del Vehículo</label>
-      <input type="text">
+        <label>Número de Licencia</label>
+        <input type="text">
 
-      <label>VIN</label>
-      <input type="text">
+        <label>Fecha de Nacimiento</label>
+        <input type="date">
+      </form>
+    </div>
 
-      <label>Uso Principal</label>
-      <input type="text">
+    <div class="app-block">
+      <h3>Información del Vehículo</h3>
 
-      <button class="btn-red" type="submit">Enviar Aplicación</button>
-    </form>
+      <div id="vehicleContainer-es">
+
+        <div class="vehicle-block">
+          <label>Año</label>
+          <input type="number">
+
+          <label>Marca</label>
+          <input type="text">
+
+          <label>Modelo</label>
+          <input type="text">
+
+          <label>VIN</label>
+          <input type="text">
+        </div>
+
+      </div>
+
+      <button id="addVehicle-es" class="add-button">+ Agregar Otro Vehículo</button>
+    </div>
+
+    <a href="contact.html" class="btn-red">Enviar Aplicación de Auto</a>
   </section>
 
-  <!-- LIFE (ES) -->
-  <section class="section-light app-section" id="life-es" style="display:none;">
-    <h2>Aplicación de Seguro de Vida</h2>
-    <p>Complete el formulario para comenzar su aplicación de vida.</p>
+  <!-- LIFE -->
+  <section class="section-light" id="life-es">
+    <h2>Aplicaciones de Seguro de Vida</h2>
 
-    <form class="app-form">
-      <label>Nombre Completo</label>
-      <input type="text">
+    <div class="app-block">
+      <h3>Información del Solicitante</h3>
 
-      <label>Fecha de Nacimiento</label>
-      <input type="date">
+      <form class="app-form">
+        <label>Nombre Completo</label>
+        <input type="text">
 
-      <label>Estatura / Peso</label>
-      <input type="text">
+        <label>Fecha de Nacimiento</label>
+        <input type="date">
 
-      <label>¿Fumador?</label>
-      <select>
-        <option>No</option>
-        <option>Sí</option>
-      </select>
+        <label>Cantidad de Cobertura Solicitada</label>
+        <input type="text">
 
-      <label>Cantidad de Cobertura Solicitada</label>
-      <input type="text">
+        <label>Nombre del Beneficiario</label>
+        <input type="text">
+      </form>
+    </div>
 
-      <button class="btn-red" type="submit">Enviar Aplicación</button>
-    </form>
+    <a href="contact.html" class="btn-red">Enviar Aplicación de Vida</a>
   </section>
 
+</div>
+
+<!-- ============================================================
+     SLIDE-OUT PANEL
+============================================================ -->
+<div class="agent-panel">
+  <button class="close-panel">&times;</button>
+  <img class="panel-photo" src="">
+  <h2></h2>
+  <p class="panel-title"></p>
+  <p><strong>Phone:</strong> <span class="panel-phone"></span></p>
+  <p><strong>Email:</strong> <span class="panel-email"></span></p>
+  <a class="panel-call" href="#">Call Now</a>
 </div>
 
 <!-- ============================================================
@@ -281,7 +333,7 @@
 </footer>
 
 <!-- ============================================================
-     REQUIRED NAVIGATION TEMPLATES (GLOBAL)
+     NAVIGATION TEMPLATES
 ============================================================ -->
 <nav id="navEN" style="display:none;">
   <a class="nav-link" href="index.html">Home</a>
@@ -296,16 +348,7 @@
     </div>
   </div>
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Applications ▾</span>
-    <div class="dropdown-menu">
-      <a href="applications.html#commercial">Commercial Apps</a>
-      <a href="applications.html#personal">Personal Apps</a>
-      <a href="applications.html#auto">Auto Apps</a>
-      <a href="applications.html#life">Life Apps</a>
-    </div>
-  </div>
-
+  <a class="nav-link" href="applications.html">Applications</a>
   <a class="nav-link" href="coi.html">COI Request</a>
   <a class="nav-link" href="claims.html">Claims</a>
   <a class="nav-link" href="about.html">About</a>
@@ -325,46 +368,14 @@
     </div>
   </div>
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Aplicaciones ▾</span>
-    <div class="dropdown-menu">
-      <a href="applications.html#commercial-es">Aplicaciones Comerciales</a>
-      <a href="applications.html#personal-es">Aplicaciones Personales</a>
-      <a href="applications.html#auto-es">Aplicaciones de Auto</a>
-      <a href="applications.html#life-es">Aplicaciones de Vida</a>
-    </div>
-  </div>
-
+  <a class="nav-link" href="applications.html">Aplicaciones</a>
   <a class="nav-link" href="coi.html">Solicitud de COI</a>
   <a class="nav-link" href="claims.html">Reclamos</a>
   <a class="nav-link" href="about.html">Acerca de</a>
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=505"></script>
-
-<script>
-/* ============================================================
-   CONDITIONAL FORM LOADING BASED ON URL ANCHOR
-============================================================ */
-function loadApplicationFromAnchor() {
-  const anchor = window.location.hash.replace("#", "");
-
-  // Hide all forms first
-  document.querySelectorAll(".app-section").forEach(sec => sec.style.display = "none");
-
-  if (!anchor) return;
-
-  const section = document.getElementById(anchor);
-  if (section) section.style.display = "block";
-}
-
-// Run on load
-loadApplicationFromAnchor();
-
-// Run again if user changes hash
-window.addEventListener("hashchange", loadApplicationFromAnchor);
-</script>
+<script src="global.js?v=600"></script>
 
 </body>
 </html>
