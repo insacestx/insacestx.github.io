@@ -216,6 +216,12 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 25px;
   margin-top: 40px;
+  transition: transform .35s ease;
+}
+
+/* SHIFT GRID LEFT WHEN PANEL OPENS */
+.team-grid.shift-left {
+  transform: translateX(-350px);
 }
 
 /* Agent Card */
@@ -350,5 +356,9 @@ body {
 
   .mobile-nav-toggle {
     display: block;
+  }
+
+  .team-grid.shift-left {
+    transform: translateX(0); /* Prevents mobile layout from breaking */
   }
 }
