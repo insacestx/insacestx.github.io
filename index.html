@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <title>ACES Insurance Services | Texas Independent Insurance Agency</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=505">
+  <link rel="stylesheet" href="style.css?v=600">
 </head>
 
 <body>
 
 <!-- ============================================================
-     HEADER (GLOBAL, SHARED ACROSS ALL PAGES)
+     GLOBAL HEADER
 ============================================================ -->
 <header class="aces-header">
   <div class="header-inner">
@@ -35,76 +35,121 @@
 ============================================================ -->
 <div id="english">
 
-  <!-- 1. WHITE HERO -->
+  <!-- HERO -->
   <section class="hero-white">
-    <h1>Your Trusted Independent Insurance Agency</h1>
-    <p>Serving Central Texas with bilingual support and personalized insurance solutions.</p>
+    <h1>Protecting What Matters Most</h1>
+    <p>Your trusted Texas independent insurance agency — bilingual, local, and ready to help.</p>
     <a href="contact.html" class="btn-red">Get a Quote</a>
   </section>
 
-  <!-- 2. RED — WHO WE ARE -->
-  <section class="section-red">
-    <h2>Who We Are</h2>
-    <p>ACES Insurance Services is an independent agency serving Central Texas with a focus on personal relationships, clear communication, and tailored coverage.</p>
-    <p>We work with multiple carriers to find the best options for your needs and budget.</p>
-  </section>
-
-  <!-- 3. BLACK — OUR SERVICES -->
-  <section class="section-dark">
+  <!-- SERVICES -->
+  <section class="section-light">
     <h2>Our Services</h2>
+    <p>Select the type of insurance you need.</p>
 
     <div class="services-grid">
 
-      <div class="service-card">
-        <img src="icon-life-aces.png" alt="Life Insurance">
+      <a href="services.html?type=life" class="service-card">
+        <img src="icons/life.png" alt="Life Insurance">
         <h3>Life Insurance</h3>
-        <p>Protect your family’s future with flexible, affordable life insurance options.</p>
-        <a href="services.html?type=life" class="btn-small">Learn More</a>
-      </div>
+        <p>Protect your family’s future with affordable life coverage.</p>
+      </a>
 
-      <div class="service-card">
-        <img src="icon-property-aces.png" alt="Personal Insurance">
+      <a href="services.html?type=personal" class="service-card">
+        <img src="icons/personal.png" alt="Personal Insurance">
         <h3>Personal Insurance</h3>
-        <p>Safeguard your home, vehicles, and belongings with comprehensive coverage.</p>
-        <a href="services.html?type=personal" class="btn-small">Learn More</a>
-      </div>
+        <p>Home, renters, valuables, and more — we’ve got you covered.</p>
+      </a>
 
-      <div class="service-card">
-        <img src="icon-commercial-aces.png" alt="Commercial Insurance">
+      <a href="services.html?type=commercial" class="service-card">
+        <img src="icons/commercial.png" alt="Commercial Insurance">
         <h3>Commercial Insurance</h3>
-        <p>Protect your business with tailored commercial coverage.</p>
-        <a href="services.html?type=commercial" class="btn-small">Learn More</a>
-      </div>
+        <p>Protect your business with tailored commercial policies.</p>
+      </a>
 
-      <div class="service-card">
-        <img src="icon-auto-aces.png" alt="Auto Insurance">
+      <a href="services.html?type=auto" class="service-card">
+        <img src="icons/auto.png" alt="Auto Insurance">
         <h3>Auto Insurance</h3>
-        <p>Get dependable, cost-effective auto coverage for personal or commercial use.</p>
-        <a href="services.html?type=auto" class="btn-small">Learn More</a>
+        <p>Affordable coverage for you, your family, and your vehicles.</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- MEET OUR TEAM -->
+  <section class="section-dark">
+    <h2>Meet Our Team</h2>
+    <p>Local, experienced, and ready to help you find the right coverage.</p>
+
+    <div class="team-grid">
+
+      <div class="agent-card" 
+           data-name="Jordan Jones"
+           data-title="Co-Owner"
+           data-phone="254-289-2423"
+           data-email="jordan@insaces.com"
+           data-photo="team/jordan.jpg">
+        <img src="team/jordan.jpg" class="agent-photo">
+        <h3>Jordan Jones</h3>
+        <p>Co-Owner</p>
+      </div>
+
+      <div class="agent-card" 
+           data-name="Lanse Derrick"
+           data-title="Co-Owner"
+           data-phone="214-770-1488"
+           data-email="lanse@insaces.com"
+           data-photo="team/lanse.jpg">
+        <img src="team/lanse.jpg" class="agent-photo">
+        <h3>Lanse Derrick</h3>
+        <p>Co-Owner</p>
+      </div>
+
+      <div class="agent-card" 
+           data-name="Robert Hyde"
+           data-title="Co-Owner"
+           data-phone="254-292-0961"
+           data-email="robert@insaces.com"
+           data-photo="team/robert.jpg">
+        <img src="team/robert.jpg" class="agent-photo">
+        <h3>Robert Hyde</h3>
+        <p>Co-Owner</p>
+      </div>
+
+      <div class="agent-card" 
+           data-name="Bryan Carter"
+           data-title="Co-Owner"
+           data-phone="254-744-6600"
+           data-email="bryan@insaces.com"
+           data-photo="team/bryan.jpg">
+        <img src="team/bryan.jpg" class="agent-photo">
+        <h3>Bryan Carter</h3>
+        <p>Co-Owner</p>
+      </div>
+
+      <div class="agent-card" 
+           data-name="Jimmy Rodriguez"
+           data-title="Agent"
+           data-phone="214-498-6928"
+           data-email="jimmy@insaces.com"
+           data-photo="team/jimmy.jpg">
+        <img src="team/jimmy.jpg" class="agent-photo">
+        <h3>Jimmy Rodriguez</h3>
+        <p>Agent</p>
+      </div>
+
+      <div class="agent-card" 
+           data-name="Renee Ridling"
+           data-title="Agent"
+           data-phone="254-227-6560"
+           data-email="office@insaces.com"
+           data-photo="team/renee.jpg">
+        <img src="team/renee.jpg" class="agent-photo">
+        <h3>Renee Ridling</h3>
+        <p>Agent</p>
       </div>
 
     </div>
-  </section>
-
-  <!-- 4. RED — CONTACT US (WHITE BUTTON, RED TEXT, SHADOW) -->
-  <section class="section-red contact-section">
-    <h2>Contact Us & Meet Our Team</h2>
-    <p>Our bilingual team is ready to help with all your insurance needs.</p>
-
-    <a href="contact.html" class="btn-contact-white">Contact Us</a>
-    <a href="about.html#team" class="btn-dark">Meet Our Team</a>
-  </section>
-
-  <!-- 5. WHITE — CHAMBER BADGE -->
-  <section class="section-light">
-    <h2>Proud Member</h2>
-    <p>Central Texas Hispanic Chamber of Commerce</p>
-
-    <div class="badge-wrapper">
-      <img src="chamber-badge.png" alt="Chamber Badge">
-    </div>
-
-    <img src="chamber-qr.png" alt="Chamber QR Code" style="max-width:200px;margin:20px auto;display:block;">
   </section>
 
 </div>
@@ -114,77 +159,113 @@
 ============================================================ -->
 <div id="spanish" style="display:none;">
 
+  <!-- HERO -->
   <section class="hero-white">
-    <h1>Su Agencia Independiente de Seguros</h1>
-    <p>Sirviendo al Centro de Texas con apoyo bilingüe y soluciones personalizadas.</p>
+    <h1>Protegiendo Lo Que Más Importa</h1>
+    <p>Su agencia de seguros independiente en Texas — bilingüe, local y lista para ayudar.</p>
     <a href="contact.html" class="btn-red">Obtener una Cotización</a>
   </section>
 
-  <section class="section-red">
-    <h2>Quiénes Somos</h2>
-    <p>ACES Insurance Services es una agencia independiente que sirve al Centro de Texas con un enfoque en relaciones personales, comunicación clara y cobertura personalizada.</p>
-    <p>Trabajamos con múltiples aseguradoras para encontrar las mejores opciones para sus necesidades y presupuesto.</p>
-  </section>
-
-  <section class="section-dark">
+  <!-- SERVICES -->
+  <section class="section-light">
     <h2>Servicios</h2>
+    <p>Seleccione el tipo de seguro que necesita.</p>
 
     <div class="services-grid">
 
-      <div class="service-card">
-        <img src="icon-life-aces.png" alt="Seguro de Vida">
+      <a href="services.html?type=life" class="service-card">
+        <img src="icons/life.png" alt="Seguro de Vida">
         <h3>Seguro de Vida</h3>
-        <p>Proteja el futuro de su familia con opciones flexibles y asequibles.</p>
-        <a href="services.html?type=life" class="btn-small">Más Información</a>
-      </div>
+        <p>Proteja el futuro de su familia con cobertura accesible.</p>
+      </a>
 
-      <div class="service-card">
-        <img src="icon-property-aces.png" alt="Seguro Personal">
+      <a href="services.html?type=personal" class="service-card">
+        <img src="icons/personal.png" alt="Seguro Personal">
         <h3>Seguro Personal</h3>
-        <p>Proteja su hogar, vehículos y pertenencias con cobertura integral.</p>
-        <a href="services.html?type=personal" class="btn-small">Más Información</a>
-      </div>
+        <p>Hogar, inquilinos, artículos de valor y más.</p>
+      </a>
 
-      <div class="service-card">
-        <img src="icon-commercial-aces.png" alt="Seguro Comercial">
+      <a href="services.html?type=commercial" class="service-card">
+        <img src="icons/commercial.png" alt="Seguro Comercial">
         <h3>Seguro Comercial</h3>
-        <p>Proteja su negocio con cobertura comercial personalizada.</p>
-        <a href="services.html?type=commercial" class="btn-small">Más Información</a>
-      </div>
+        <p>Proteja su negocio con pólizas comerciales personalizadas.</p>
+      </a>
 
-      <div class="service-card">
-        <img src="icon-auto-aces.png" alt="Seguro de Auto">
+      <a href="services.html?type=auto" class="service-card">
+        <img src="icons/auto.png" alt="Seguro de Auto">
         <h3>Seguro de Auto</h3>
-        <p>Cobertura confiable y económica para uso personal o comercial.</p>
-        <a href="services.html?type=auto" class="btn-small">Más Información</a>
+        <p>Cobertura accesible para usted, su familia y sus vehículos.</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- MEET OUR TEAM -->
+  <section class="section-dark">
+    <h2>Conozca a Nuestro Equipo</h2>
+    <p>Locales, con experiencia y listos para ayudarle.</p>
+
+    <div class="team-grid">
+
+      <!-- Same agent cards as English version -->
+      <!-- (We keep names/titles in English for consistency) -->
+
+      <div class="agent-card" data-name="Jordan Jones" data-title="Co-Owner" data-phone="254-289-2423" data-email="jordan@insaces.com" data-photo="team/jordan.jpg">
+        <img src="team/jordan.jpg" class="agent-photo">
+        <h3>Jordan Jones</h3>
+        <p>Co-Owner</p>
+      </div>
+
+      <div class="agent-card" data-name="Lanse Derrick" data-title="Co-Owner" data-phone="214-770-1488" data-email="lanse@insaces.com" data-photo="team/lanse.jpg">
+        <img src="team/lanse.jpg" class="agent-photo">
+        <h3>Lanse Derrick</h3>
+        <p>Co-Owner</p>
+      </div>
+
+      <div class="agent-card" data-name="Robert Hyde" data-title="Co-Owner" data-phone="254-292-0961" data-email="robert@insaces.com" data-photo="team/robert.jpg">
+        <img src="team/robert.jpg" class="agent-photo">
+        <h3>Robert Hyde</h3>
+        <p>Co-Owner</p>
+      </div>
+
+      <div class="agent-card" data-name="Bryan Carter" data-title="Co-Owner" data-phone="254-744-6600" data-email="bryan@insaces.com" data-photo="team/bryan.jpg">
+        <img src="team/bryan.jpg" class="agent-photo">
+        <h3>Bryan Carter</h3>
+        <p>Co-Owner</p>
+      </div>
+
+      <div class="agent-card" data-name="Jimmy Rodriguez" data-title="Agent" data-phone="214-498-6928" data-email="jimmy@insaces.com" data-photo="team/jimmy.jpg">
+        <img src="team/jimmy.jpg" class="agent-photo">
+        <h3>Jimmy Rodriguez</h3>
+        <p>Agent</p>
+      </div>
+
+      <div class="agent-card" data-name="Renee Ridling" data-title="Agent" data-phone="254-227-6560" data-email="office@insaces.com" data-photo="team/renee.jpg">
+        <img src="team/renee.jpg" class="agent-photo">
+        <h3>Renee Ridling</h3>
+        <p>Agent</p>
       </div>
 
     </div>
-  </section>
-
-  <section class="section-red contact-section">
-    <h2>Contáctenos y Conozca a Nuestro Equipo</h2>
-    <p>Nuestro equipo bilingüe está listo para ayudarle.</p>
-
-    <a href="contact.html" class="btn-contact-white">Contáctenos</a>
-    <a href="about.html#team" class="btn-dark">Nuestro Equipo</a>
-  </section>
-
-  <section class="section-light">
-    <h2>Miembro Orgulloso</h2>
-    <p>Cámara Hispana de Comercio del Centro de Texas</p>
-
-    <div class="badge-wrapper">
-      <img src="chamber-badge.png" alt="Chamber Badge">
-    </div>
-
-    <img src="chamber-qr.png" alt="Chamber QR Code" style="max-width:200px;margin:20px auto;display:block;">
   </section>
 
 </div>
 
 <!-- ============================================================
-     FOOTER — BLACK
+     SLIDE-OUT PANEL (Shared Across Pages)
+============================================================ -->
+<div class="agent-panel">
+  <button class="close-panel">&times;</button>
+  <img class="panel-photo" src="">
+  <h2></h2>
+  <p class="panel-title"></p>
+  <p><strong>Phone:</strong> <span class="panel-phone"></span></p>
+  <p><strong>Email:</strong> <span class="panel-email"></span></p>
+  <a class="panel-call" href="#">Call Now</a>
+</div>
+
+<!-- ============================================================
+     FOOTER
 ============================================================ -->
 <footer class="footer">
   <img src="image2.png" class="footer-logo">
@@ -192,7 +273,7 @@
 </footer>
 
 <!-- ============================================================
-     REQUIRED NAVIGATION TEMPLATES (GLOBAL)
+     NAVIGATION TEMPLATES
 ============================================================ -->
 <nav id="navEN" style="display:none;">
   <a class="nav-link" href="index.html">Home</a>
@@ -252,7 +333,7 @@
   <a class="nav-link" href="contact.html">Contacto</a>
 </nav>
 
-<script src="global.js?v=505"></script>
+<script src="global.js?v=600"></script>
 
 </body>
 </html>
