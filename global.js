@@ -11,121 +11,76 @@
 /* ============================================================
    LANGUAGE SWITCHING
 ============================================================ */
-const englishDiv = document.getElementById("english");
-const spanishDiv = document.getElementById("spanish");
-const langButtons = document.querySelectorAll(".lang-option");
-
 function setLanguage(lang) {
-  if (!englishDiv || !spanishDiv) return;
-
-  if (lang === "spanish") {
-    englishDiv.style.display = "none";
-    spanishDiv.style.display = "block";
-    localStorage.setItem("aces-lang", "spanish");
-    injectNav("spanish");
-  } else {
-    englishDiv.style.display = "block";
-    spanishDiv.style.display = "none";
-    localStorage.setItem("aces-lang", "english");
-    injectNav("english");
-  }
+  document.getElementById("english").style.display = lang === "english" ? "block" : "none";
+  document.getElementById("spanish").style.display = lang === "spanish" ? "block" : "none";
+  localStorage.setItem("aces-lang", lang);
 }
 
-langButtons.forEach(btn => {
+document.querySelectorAll(".lang-option").forEach(btn => {
   btn.addEventListener("click", () => {
     setLanguage(btn.dataset.lang);
   });
 });
 
-// Load saved language
 const savedLang = localStorage.getItem("aces-lang") || "english";
 setLanguage(savedLang);
 
 /* ============================================================
    NAVIGATION INJECTION
 ============================================================ */
-function injectNav(lang) {
-  const navContainer = document.getElementById("navContainer");
-  const navEN = document.getElementById("navEN");
-  const navES = document.getElementById("navES");
-
-  if (!navContainer || !navEN || !navES) return;
-
-  navContainer.innerHTML = (lang === "spanish")
-    ? navES.innerHTML
-    : navEN.innerHTML;
-
-  enableDropdowns();
+function loadNav() {
+  const lang = localStorage.getItem("aces-lang") || "english";
+  const navHTML = document.getElementById(lang === "english" ? "navEN" : "navES").innerHTML;
+  document.getElementById("navContainer").innerHTML = navHTML;
 }
+loadNav();
+
+/* ============================================================
+   MOBILE NAV
+============================================================ */
+document.getElementById("mobileNavToggle").addEventListener("click", () => {
+  document.getElementById("navContainer").classList.toggle("open");
+});
 
 /* ============================================================
    DROPDOWN MENUS
 ============================================================ */
-function enableDropdowns() {
-  const dropdowns = document.querySelectorAll(".dropdown");
-
-  dropdowns.forEach(drop => {
-    const toggle = drop.querySelector(".dropdown-toggle");
-    const menu = drop.querySelector(".dropdown-menu");
-
-    if (!toggle || !menu) return;
-
-    toggle.addEventListener("click", () => {
-      const isOpen = menu.style.display === "block";
-      document.querySelectorAll(".dropdown-menu").forEach(m => m.style.display = "none");
-      menu.style.display = isOpen ? "none" : "block";
-    });
-  });
-
-  // Close dropdowns when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".dropdown")) {
-      document.querySelectorAll(".dropdown-menu").forEach(m => m.style.display = "none");
-    }
-  });
-}
+document.addEventListener("click", e => {
+  if (e.target.classList.contains("dropdown-toggle")) {
+    const menu = e.target.nextElementSibling;
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  } else {
+    document.querySelectorAll(".dropdown-menu").forEach(menu => menu.style.display = "none");
+  }
+});
 
 /* ============================================================
-   MOBILE NAV TOGGLE
+   AGENT PANEL + GRID SHIFT
 ============================================================ */
-const mobileToggle = document.getElementById("mobileNavToggle");
-const navMenu = document.querySelector(".nav-menu");
+const panel = document.querySelector(".agent-panel");
+const grid = document.querySelector(".team-grid");
 
-if (mobileToggle && navMenu) {
-  mobileToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("open");
+document.querySelectorAll(".agent-card").forEach(card => {
+  card.addEventListener("click", () => {
+
+    // Fill panel
+    panel.querySelector(".panel-photo").src = card.dataset.photo;
+    panel.querySelector("h2").textContent = card.dataset.name;
+    panel.querySelector(".panel-title").textContent = card.dataset.title;
+    panel.querySelector(".panel-phone").textContent = card.dataset.phone;
+    panel.querySelector(".panel-email").textContent = card.dataset.email;
+
+    // Open panel
+    panel.classList.add("open");
+
+    // Shift grid left
+    grid.classList.add("shift-left");
   });
-}
+});
 
-/* ============================================================
-   CONTACT PAGE — AGENT PANEL LOGIC
-============================================================ */
-const agentCards = document.querySelectorAll(".agent-card");
-const agentPanel = document.querySelector(".agent-panel");
-const closePanelBtn = document.querySelector(".close-panel");
-
-if (agentCards && agentPanel) {
-  agentCards.forEach(card => {
-    card.addEventListener("click", () => {
-      const name = card.dataset.name;
-      const title = card.dataset.title;
-      const phone = card.dataset.phone;
-      const email = card.dataset.email;
-      const photo = card.dataset.photo;
-
-      agentPanel.querySelector("h2").textContent = name;
-      agentPanel.querySelector(".panel-photo").src = photo;
-      agentPanel.querySelector(".panel-title").textContent = title;
-      agentPanel.querySelector(".panel-phone").textContent = phone;
-      agentPanel.querySelector(".panel-email").textContent = email;
-
-      agentPanel.classList.add("open");
-    });
-  });
-}
-
-if (closePanelBtn) {
-  closePanelBtn.addEventListener("click", () => {
-    agentPanel.classList.remove("open");
-  });
-}
+// Close panel
+document.querySelector(".close-panel").addEventListener("click", () => {
+  panel.classList.remove("open");
+  grid.classList.remove("shift-left");
+});
