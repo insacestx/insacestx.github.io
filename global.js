@@ -9,9 +9,6 @@
    - Application Category Switching
 ============================================================ */
 
-/* ------------------------------------------------------------
-   1. HEADER INJECTION — Option‑B Modern Header
------------------------------------------------------------- */
 function loadHeader() {
   const header = document.getElementById("aces-header");
   if (!header) return;
@@ -20,7 +17,7 @@ function loadHeader() {
     <div class="header-container">
       <div class="logo-area">
         <a href="index.html" class="logo-link">
-          <img src="aces-logo.png" alt="ACES Logo" class="aces-logo">
+          <img src="image2.png" alt="ACES Logo" class="aces-logo">
         </a>
       </div>
 
@@ -53,9 +50,7 @@ function loadHeader() {
   `;
 }
 
-/* ------------------------------------------------------------
-   2. FOOTER INJECTION
------------------------------------------------------------- */
+
 function loadFooter() {
   const footer = document.getElementById("aces-footer");
   if (!footer) return;
@@ -63,7 +58,7 @@ function loadFooter() {
   footer.innerHTML = `
     <div class="footer-container">
       <div class="footer-left">
-        <img src="aces-logo.png" alt="ACES Logo" class="footer-logo">
+        <img src="image2.png" alt="ACES Logo" class="footer-logo">
         <p>404 Sapphire Blvd, Hewitt, TX 76643</p>
         <p>(254) 227‑6560</p>
       </div>
