@@ -646,3 +646,13 @@ body {
     text-align: center;
   }
 }
+/* FIX: Ensure Learn More buttons are always visible */
+.btn-card {
+  background: var(--aces-red) !important;
+  color: var(--aces-white) !important;
+}
+
+/* FIX: Ensure team role text is always readable */
+.team-role {
+  color: #222 !important;
+}
