@@ -10,44 +10,42 @@
 
 <body>
 
-<header class="top-header">
-  <div class="logo-area">
-    <img src="/Aces-Spade.jpg" alt="ACES Logo" class="logo-img">
-    <div class="logo-text">
-      <h1>ACES Insurance Services</h1>
-      <p>404 Sapphire Blvd. Hewitt, TX 76643 • (254) 709-6487</p>
-    </div>
-  </div>
+<header class="aces-header">
+  <div class="header-inner">
+    <img src="/Aces-Spade.jpg" class="header-logo-img" alt="ACES Logo">
 
-  <nav class="main-nav">
-    <ul>
-      <li><a href="index.html" class="active">Home</a></li>
-      <li class="dropdown">
-        <a href="#">Services</a>
-        <div class="dropdown-content">
+    <nav class="nav-menu" id="navMenu">
+      <a href="index.html" class="nav-link">Home</a>
+
+      <div class="dropdown">
+        <span class="nav-link dropdown-toggle">Services</span>
+        <div class="dropdown-menu">
           <a href="services.html?type=auto">Auto Insurance</a>
           <a href="services.html?type=home">Homeowners</a>
           <a href="services.html?type=life">Life Insurance</a>
           <a href="services.html?type=commercial">Commercial</a>
           <a href="services.html?type=specialty">Specialty Lines</a>
         </div>
-      </li>
-      <li class="dropdown">
-        <a href="#">Applications</a>
-        <div class="dropdown-content">
+      </div>
+
+      <div class="dropdown">
+        <span class="nav-link dropdown-toggle">Applications</span>
+        <div class="dropdown-menu">
           <a href="applications.html?type=auto">Auto Application</a>
           <a href="applications.html?type=home">Homeowners Application</a>
           <a href="applications.html?type=life">Life Application</a>
           <a href="applications.html?type=commercial">Commercial Application</a>
         </div>
-      </li>
-      <li><a href="coi.html">COI Request</a></li>
-      <li><a href="claims.html">Claims</a></li>
-      <li><a href="about.html">Meet Our Team</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><button id="langToggle" class="lang-btn">EN</button></li>
-    </ul>
-  </nav>
+      </div>
+
+      <a href="coi.html" class="nav-link">COI Request</a>
+      <a href="claims.html" class="nav-link">Claims</a>
+      <a href="about.html" class="nav-link">Meet Our Team</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+  </div>
 </header>
 
 <section class="hero">
@@ -61,6 +59,7 @@
     </div>
   </div>
 </section>
+
 <section class="services-overview">
   <h2>Our Insurance Services</h2>
   <p class="services-intro">Comprehensive coverage options designed to protect you, your family, and your business.</p>
@@ -68,35 +67,35 @@
   <div class="services-grid">
 
     <div class="service-card">
-      <img src="/icon-auto-aces.png" alt="Auto Insurance" class="service-icon">
+      <img src="/icon-auto-aces.png" alt="Auto Insurance">
       <h3>Auto Insurance</h3>
       <p>Protect your vehicles with reliable coverage tailored to your needs.</p>
       <a href="services.html?type=auto" class="btn-card">Learn More</a>
     </div>
 
     <div class="service-card">
-      <img src="/icon-property-aces.png" alt="Home Insurance" class="service-icon">
+      <img src="/icon-property-aces.png" alt="Home Insurance">
       <h3>Homeowners Insurance</h3>
       <p>Coverage that safeguards your home, belongings, and peace of mind.</p>
       <a href="services.html?type=home" class="btn-card">Learn More</a>
     </div>
 
     <div class="service-card">
-      <img src="/icon-life-aces.png" alt="Life Insurance" class="service-icon">
+      <img src="/icon-life-aces.png" alt="Life Insurance">
       <h3>Life Insurance</h3>
       <p>Financial protection for your loved ones when it matters most.</p>
       <a href="services.html?type=life" class="btn-card">Learn More</a>
     </div>
 
     <div class="service-card">
-      <img src="/icon-commercial-aces.png" alt="Commercial Insurance" class="service-icon">
+      <img src="/icon-commercial-aces.png" alt="Commercial Insurance">
       <h3>Commercial Insurance</h3>
       <p>Customized coverage solutions for businesses of all sizes.</p>
       <a href="services.html?type=commercial" class="btn-card">Learn More</a>
     </div>
 
     <div class="service-card">
-      <img src="/icon-specialty-aces.png" alt="Specialty Insurance" class="service-icon">
+      <img src="/icon-specialty-aces.png" alt="Specialty Insurance">
       <h3>Specialty Lines</h3>
       <p>Unique coverage options for unique risks and special situations.</p>
       <a href="services.html?type=specialty" class="btn-card">Learn More</a>
@@ -104,13 +103,13 @@
 
   </div>
 </section>
+
 <section class="team-section">
   <h2>Meet Our Team</h2>
   <p class="team-intro">Local agents dedicated to serving our Texas communities with honesty and expertise.</p>
 
   <div class="team-grid">
 
-    <!-- (George) -->
     <div class="team-card">
       <img src="/image2.png" alt="George Santibañez" class="team-photo">
       <h3>George J. Santibañez</h3>
@@ -118,7 +117,6 @@
       <a href="about.html" class="btn-card">Learn More</a>
     </div>
 
-    <!-- Jordan -->
     <div class="team-card">
       <img src="/image2.png" alt="Jordan Jones" class="team-photo">
       <h3>Jordan Jones</h3>
@@ -126,7 +124,6 @@
       <a href="about.html" class="btn-card">Learn More</a>
     </div>
 
-    <!-- Lanse -->
     <div class="team-card">
       <img src="/image2.png" alt="Lanse Derrick" class="team-photo">
       <h3>Lanse Derrick</h3>
@@ -134,7 +131,6 @@
       <a href="about.html" class="btn-card">Learn More</a>
     </div>
 
-    <!-- Robert -->
     <div class="team-card">
       <img src="/image2.png" alt="Robert Hyde" class="team-photo">
       <h3>Robert Hyde</h3>
@@ -142,7 +138,6 @@
       <a href="about.html" class="btn-card">Learn More</a>
     </div>
 
-    <!-- Bryan -->
     <div class="team-card">
       <img src="/image2.png" alt="Bryan Carter" class="team-photo">
       <h3>Bryan Carter</h3>
@@ -150,7 +145,6 @@
       <a href="about.html" class="btn-card">Learn More</a>
     </div>
 
-    <!-- Jimmy -->
     <div class="team-card">
       <img src="/image2.png" alt="Jimmy Rodriguez" class="team-photo">
       <h3>Jimmy Rodriguez</h3>
@@ -158,7 +152,6 @@
       <a href="about.html" class="btn-card">Learn More</a>
     </div>
 
-    <!-- Renee -->
     <div class="team-card">
       <img src="/image2.png" alt="Renee Ridling" class="team-photo">
       <h3>Renee Ridling</h3>
@@ -173,6 +166,7 @@
     <a href="tel:2542276560" class="btn-outline-white">Call Our Office</a>
   </div>
 </section>
+
 <footer class="site-footer">
   <div class="footer-content">
 
@@ -184,8 +178,8 @@
     </div>
 
     <div class="footer-center">
-      <img src="/chamber-badge.png" alt="Chamber Badge" class="footer-badge">
-      <img src="/chamber-qr.png" alt="Chamber QR Code" class="footer-qr">
+      <img src="/chamber-badge.png" alt="Chamber Badge">
+      <img src="/chamber-qr.png" alt="Chamber QR Code">
     </div>
 
     <div class="footer-right">
@@ -199,7 +193,6 @@
   </div>
 </footer>
 
-<!-- Mobile Call Button -->
 <a href="tel:2542276560" class="mobile-call-btn">Call ACES</a>
 
 </body>
