@@ -1,23 +1,13 @@
-<div class="aces-footer" style="
-  background: linear-gradient(180deg, #000000 0%, #1a0000 50%, #330000 100%);
-  color:#fff; padding:70px 20px 40px; position:relative;">
+<div class="aces-footer">
 
-  <!-- TOP GRID -->
-  <div style="
-      max-width:1200px;
-      margin:auto;
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-      gap:50px;">
+  <div class="footer-grid">
 
     <!-- COLUMN 1: BRAND -->
     <div>
-      <img src="aces-logo.png" alt="ACES Logo"
-           style="width:150px; margin-bottom:20px; filter:drop-shadow(0 0 8px rgba(255,0,0,0.5));">
+      <img src="aces-logo.png" alt="ACES Logo" style="width:150px; margin-bottom:20px;">
 
       <p data-en="Independent. Bilingual. Local."
-         data-es="Independientes. Bilingües. Locales."
-         style="color:#ccc; margin-bottom:12px; font-size:1rem;">
+         data-es="Independientes. Bilingües. Locales.">
         Independent. Bilingual. Local.
       </p>
 
@@ -28,22 +18,11 @@
 
     <!-- COLUMN 2: CONTACT -->
     <div>
-      <h3 style="margin-bottom:18px; font-size:1.3rem; font-weight:700;"
-          data-en="Contact" data-es="Contacto">
-        Contact
-      </h3>
+      <h3 data-en="Contact" data-es="Contacto">Contact</h3>
 
-      <p style="margin-bottom:12px; color:#ddd; font-size:1rem;">
-        📍 404 Sapphire Blvd., Hewitt, TX 76643
-      </p>
-
-      <p style="margin-bottom:12px; color:#ddd; font-size:1rem;">
-        📞 <a href="tel:2542276560" class="footer-link">(254) 227‑6560</a>
-      </p>
-
-      <p style="margin-bottom:12px; color:#ddd; font-size:1rem;">
-        ✉️ <a href="mailto:office@insaces.com" class="footer-link">office@insaces.com</a>
-      </p>
+      <p>📍 404 Sapphire Blvd., Hewitt, TX 76643</p>
+      <p>📞 <a href="tel:2542276560" class="footer-link">(254) 227‑6560</a></p>
+      <p>✉️ <a href="mailto:office@insaces.com" class="footer-link">office@insaces.com</a></p>
 
       <div style="margin-top:20px; display:flex; gap:15px;">
         <a href="https://facebook.com/acesinsuranceservices" class="social-icon">📘</a>
@@ -54,10 +33,7 @@
 
     <!-- COLUMN 3: QUICK LINKS -->
     <div>
-      <h3 style="margin-bottom:18px; font-size:1.3rem; font-weight:700;"
-          data-en="Quick Links" data-es="Enlaces Rápidos">
-        Quick Links
-      </h3>
+      <h3 data-en="Quick Links" data-es="Enlaces Rápidos">Quick Links</h3>
 
       <p><a href="index.html" class="footer-link">Home</a></p>
       <p><a href="services.html" class="footer-link">Services</a></p>
@@ -68,27 +44,18 @@
 
     <!-- COLUMN 4: CHAMBER BADGE -->
     <div style="text-align:center;">
-      <h3 style="margin-bottom:12px; font-size:1.3rem; font-weight:700;"
-          data-en="Proud Member" data-es="Miembro Orgulloso">
-        Proud Member
-      </h3>
+      <h3 data-en="Proud Member" data-es="Miembro Orgulloso">Proud Member</h3>
 
-      <img src="chamber-badge.png" alt="Chamber Badge"
-           style="width:130px; margin:10px auto; display:block; filter:drop-shadow(0 0 6px rgba(255,0,0,0.5));">
-
-      <p style="margin-top:10px; color:#ccc; font-size:0.95rem;">
-        Central Texas Hispanic Chamber of Commerce
-      </p>
-
-      <img src="chamber-qr.png" alt="Chamber QR Code"
-           style="width:130px; margin:18px auto; display:block; filter:drop-shadow(0 0 4px rgba(255,0,0,0.5));">
+      <img src="chamber-badge.png" alt="Chamber Badge" style="width:130px;">
+      <p style="margin-top:10px;">Central Texas Hispanic Chamber of Commerce</p>
+      <img src="chamber-qr.png" alt="Chamber QR Code" style="width:130px;">
     </div>
 
   </div>
 
-  <!-- BILINGUAL LEGAL DISCLAIMER -->
-  <div style="text-align:center; margin-top:50px; padding-top:25px; border-top:1px solid #330000;">
-    <p style="color:#888; font-size:0.85rem; max-width:900px; margin:auto;">
+  <!-- LEGAL -->
+  <div class="footer-legal">
+    <p>
       <span data-en="ACES Insurance Services is an independent agency. Coverage availability and rates may vary by provider and location."
             data-es="ACES Insurance Services es una agencia independiente. La disponibilidad de cobertura y las tarifas pueden variar según el proveedor y la ubicación.">
         ACES Insurance Services is an independent agency. Coverage availability and rates may vary by provider and location.
@@ -96,15 +63,8 @@
     </p>
   </div>
 
-  <!-- BACK TO TOP BUTTON -->
-  <button onclick="window.scrollTo({top:0, behavior:'smooth'})"
-          style="
-            position:absolute; right:20px; bottom:20px;
-            background:#b30000; color:#fff; border:none;
-            padding:12px 18px; border-radius:6px;
-            cursor:pointer; font-weight:bold;
-            box-shadow:0 0 10px rgba(255,0,0,0.5);
-            transition:0.3s;">
+  <!-- BACK TO TOP -->
+  <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="back-to-top">
     ↑ Top
   </button>
 
