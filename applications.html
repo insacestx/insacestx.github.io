@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,103 +13,10 @@
 <link rel="stylesheet" href="style.css">
 <script src="global.js" defer></script>
 
-<style>
-  /* Section spacing */
-  .app-wrapper {
-    padding: 30px 20px;
-    max-width: 900px;
-    margin: auto;
-  }
-
-  .app-title {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-
-  .app-subtitle {
-    text-align: center;
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    color: #444;
-  }
-
-  /* Short Intake Form */
-  .short-intake {
-    background: #fff;
-    border: 2px solid #ddd;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
-
-  .short-intake h3 {
-    margin-bottom: 15px;
-  }
-
-  .form-row {
-    margin-bottom: 15px;
-  }
-
-  .form-row label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-
-  .form-row input,
-  .form-row select,
-  .form-row textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-  }
-
-  .expand-btn {
-    display: inline-block;
-    background: #d40000;
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-
-  /* Full Application (hidden by default) */
-  .full-form {
-    display: none;
-    background: #fafafa;
-    border: 2px solid #ddd;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-
-  .submit-btn {
-    background: #d40000;
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 6px;
-    border: none;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-
-  .submit-btn:hover {
-    opacity: .85;
-  }
-</style>
-
+<!-- ============================================================
+     ROUND ROBIN EMAIL ENGINE (PRESERVED)
+============================================================ -->
 <script>
-/* ============================================================
-   ROUND ROBIN EMAIL ENGINE
-============================================================ */
 const rrEmails = [
   "george@insaces.com",
   "jordan@insaces.com",
@@ -125,16 +33,12 @@ function getNextRecipient() {
 
   const email = rrEmails[index];
 
-  // Move to next index
   index = (index + 1) % rrEmails.length;
   localStorage.setItem("aces-rr-index", index);
 
   return email;
 }
 
-/* ============================================================
-   APPLY ROUND ROBIN EMAIL TO ALL FORMS
-============================================================ */
 function applyRoundRobin() {
   document.querySelectorAll("form").forEach(form => {
     const hiddenTo = form.querySelector("input[name='_to']");
@@ -142,9 +46,6 @@ function applyRoundRobin() {
   });
 }
 
-/* ============================================================
-   AUTO-SCROLL TO SELECTED APPLICATION
-============================================================ */
 function scrollToSelectedApp() {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type");
@@ -158,27 +59,18 @@ function scrollToSelectedApp() {
   }
 }
 
-/* ============================================================
-   EXPAND FULL APPLICATION
-============================================================ */
 function initExpandButtons() {
   document.querySelectorAll(".expand-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const fullForm = btn.nextElementSibling;
-      if (fullForm.style.display === "block") {
-        fullForm.style.display = "none";
-        btn.innerText = "Show Full Application";
-      } else {
-        fullForm.style.display = "block";
-        btn.innerText = "Hide Full Application";
-      }
+      const isOpen = fullForm.style.display === "block";
+
+      fullForm.style.display = isOpen ? "none" : "block";
+      btn.innerText = isOpen ? "Show Full Application" : "Hide Full Application";
     });
   });
 }
 
-/* ============================================================
-   INITIALIZE EVERYTHING
-============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
   applyRoundRobin();
   scrollToSelectedApp();
@@ -191,18 +83,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <header id="aces-header"></header>
 
-<section class="section-light">
-  <h2 class="app-title"
-      data-en="Insurance Applications"
-      data-es="Solicitudes de Seguro">
-    Insurance Applications
-  </h2>
+<!-- ============================================================
+     SMALL HERO — ACES 2026 VERSION
+============================================================ -->
+<section class="small-hero fade-in">
+  <div class="small-hero-content">
+    <h1 data-en="Insurance Applications"
+        data-es="Solicitudes de Seguro">
+      Insurance Applications
+    </h1>
 
-  <p class="app-subtitle"
-     data-en="Select the type of insurance below to begin your application."
-     data-es="Seleccione el tipo de seguro a continuación para comenzar su solicitud.">
-    Select the type of insurance below to begin your application.
-  </p>
+    <p data-en="Select the type of insurance below to begin your application."
+       data-es="Seleccione el tipo de seguro a continuación para comenzar su solicitud.">
+      Select the type of insurance below to begin your application.
+    </p>
+  </div>
 </section>
 
 <!-- ============================================================
@@ -213,13 +108,18 @@ document.addEventListener("DOMContentLoaded", () => {
 ============================================================ -->
 
 <!-- ===========================
-     1. BUSINESS OWNERS POLICY
+     1. BUSINESS OWNERS POLICY (BOP)
 =========================== -->
-<section id="bop" class="app-wrapper">
-  <h2 class="app-title">Business Owners Policy (BOP)</h2>
+<section id="bop" class="app-section fade-in">
+
+  <h2 class="app-category-title"
+      data-en="Business Owners Policy (BOP)"
+      data-es="Póliza para Dueños de Negocios (BOP)">
+    Business Owners Policy (BOP)
+  </h2>
 
   <!-- SHORT INTAKE FORM -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
 
     <input type="hidden" name="_to" value="">
     <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
@@ -260,13 +160,13 @@ document.addEventListener("DOMContentLoaded", () => {
   </form>
 
   <!-- EXPAND FULL FORM -->
-  <button class="expand-btn"
+  <button class="expand-btn fade-in"
           data-en="Show Full Application"
           data-es="Mostrar Solicitud Completa">
     Show Full Application
   </button>
 
-  <div class="full-form">
+  <div class="full-form app-card fade-in">
 
     <form action="https://formsubmit.co/office@insaces.com" method="POST">
 
@@ -315,11 +215,16 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- ===========================
      2. GENERAL LIABILITY
 =========================== -->
-<section id="gl" class="app-wrapper">
-  <h2 class="app-title">General Liability</h2>
+<section id="gl" class="app-section fade-in">
+
+  <h2 class="app-category-title"
+      data-en="General Liability"
+      data-es="Responsabilidad General">
+    General Liability
+  </h2>
 
   <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
 
     <input type="hidden" name="_to" value="">
     <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
@@ -361,13 +266,13 @@ document.addEventListener("DOMContentLoaded", () => {
   </form>
 
   <!-- EXPAND FULL FORM -->
-  <button class="expand-btn"
+  <button class="expand-btn fade-in"
           data-en="Show Full Application"
           data-es="Mostrar Solicitud Completa">
     Show Full Application
   </button>
 
-  <div class="full-form">
+  <div class="full-form app-card fade-in">
 
     <form action="https://formsubmit.co/office@insaces.com" method="POST">
 
@@ -415,11 +320,16 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- ===========================
      3. COMMERCIAL AUTO
 =========================== -->
-<section id="commercial-auto" class="app-wrapper">
-  <h2 class="app-title">Commercial Auto</h2>
+<section id="commercial-auto" class="app-section fade-in">
+
+  <h2 class="app-category-title"
+      data-en="Commercial Auto"
+      data-es="Auto Comercial">
+    Commercial Auto
+  </h2>
 
   <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
 
     <input type="hidden" name="_to" value="">
     <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
@@ -456,61 +366,65 @@ document.addEventListener("DOMContentLoaded", () => {
       Submit Intake
     </button>
   </form>
+<!-- EXPAND FULL FORM -->
+<button class="expand-btn fade-in"
+        data-en="Show Full Application"
+        data-es="Mostrar Solicitud Completa">
+  Show Full Application
+</button>
 
-  <!-- EXPAND FULL FORM -->
-  <button class="expand-btn"
-          data-en="Show Full Application"
-          data-es="Mostrar Solicitud Completa">
-    Show Full Application
-  </button>
+<div class="full-form app-card fade-in">
 
-  <div class="full-form">
+  <form action="https://formsubmit.co/office@insaces.com" method="POST">
 
-    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
 
-      <input type="hidden" name="_to" value="">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+    <h3 data-en="Full Commercial Auto Application"
+        data-es="Solicitud Completa de Auto Comercial">
+      Full Commercial Auto Application
+    </h3>
 
-      <h3 data-en="Full Commercial Auto Application"
-          data-es="Solicitud Completa de Auto Comercial">
-        Full Commercial Auto Application
-      </h3>
+    <div class="form-row">
+      <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
+      <input type="text" name="Business Address">
+    </div>
 
-      <div class="form-row">
-        <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
-        <input type="text" name="Business Address">
-      </div>
+    <div class="form-row">
+      <label data-en="Vehicle List" data-es="Lista de Vehículos">Vehicle List</label>
+      <textarea name="Vehicle List" rows="4"
+        placeholder="Year, Make, Model, VIN, Use"></textarea>
+    </div>
 
-      <div class="form-row">
-        <label data-en="Vehicle List" data-es="Lista de Vehículos">Vehicle List</label>
-        <textarea name="Vehicle List" rows="4"
-          placeholder="Year, Make, Model, VIN, Use"></textarea>
-      </div>
+    <div class="form-row">
+      <label data-en="Driver List" data-es="Lista de Conductores">Driver List</label>
+      <textarea name="Driver List" rows="4"
+        placeholder="Name, DOB, License #"></textarea>
+    </div>
 
-      <div class="form-row">
-        <label data-en="Driver List" data-es="Lista de Conductores">Driver List</label>
-        <textarea name="Driver List" rows="4"
-          placeholder="Name, DOB, License #"></textarea>
-      </div>
+    <button type="submit" class="submit-btn"
+      data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
+      Submit Full Application
+    </button>
 
-      <button type="submit" class="submit-btn"
-        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
-        Submit Full Application
-      </button>
-
-    </form>
-  </div>
+  </form>
+</div>
 </section>
 
 
 <!-- ===========================
      4. WORKERS COMPENSATION
 =========================== -->
-<section id="wc" class="app-wrapper">
-  <h2 class="app-title">Workers Compensation</h2>
+<section id="wc" class="app-section fade-in">
+
+  <h2 class="app-category-title"
+      data-en="Workers Compensation"
+      data-es="Compensación al Trabajador">
+    Workers Compensation
+  </h2>
 
   <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
 
     <input type="hidden" name="_to" value="">
     <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
@@ -549,13 +463,13 @@ document.addEventListener("DOMContentLoaded", () => {
   </form>
 
   <!-- EXPAND FULL FORM -->
-  <button class="expand-btn"
+  <button class="expand-btn fade-in"
           data-en="Show Full Application"
           data-es="Mostrar Solicitud Completa">
     Show Full Application
   </button>
 
-  <div class="full-form">
+  <div class="full-form app-card fade-in">
 
     <form action="https://formsubmit.co/office@insaces.com" method="POST">
 
@@ -601,11 +515,16 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- ===========================
      5. HOMEOWNERS INSURANCE
 =========================== -->
-<section id="homeowners" class="app-wrapper">
-  <h2 class="app-title">Homeowners Insurance</h2>
+<section id="homeowners" class="app-section fade-in">
+
+  <h2 class="app-category-title"
+      data-en="Homeowners Insurance"
+      data-es="Seguro de Casa">
+    Homeowners Insurance
+  </h2>
 
   <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
 
     <input type="hidden" name="_to" value="">
     <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
@@ -639,13 +558,14 @@ document.addEventListener("DOMContentLoaded", () => {
   </form>
 
   <!-- EXPAND FULL FORM -->
-  <button class="expand-btn"
+  <button class="expand-btn fade-in"
           data-en="Show Full Application"
           data-es="Mostrar Solicitud Completa">
     Show Full Application
   </button>
 
-  <div class="full-form">
+  <div class="full-form app-card fade-in">
+
     <form action="https://formsubmit.co/office@insaces.com" method="POST">
 
       <input type="hidden" name="_to" value="">
@@ -689,11 +609,16 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- ===========================
      6. RENTERS INSURANCE
 =========================== -->
-<section id="renters" class="app-wrapper">
-  <h2 class="app-title">Renters Insurance</h2>
+<section id="renters" class="app-section fade-in">
+
+  <h2 class="app-category-title"
+      data-en="Renters Insurance"
+      data-es="Seguro de Inquilinos">
+    Renters Insurance
+  </h2>
 
   <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
 
     <input type="hidden" name="_to" value="">
     <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
@@ -727,13 +652,14 @@ document.addEventListener("DOMContentLoaded", () => {
   </form>
 
   <!-- EXPAND FULL FORM -->
-  <button class="expand-btn"
+  <button class="expand-btn fade-in"
           data-en="Show Full Application"
           data-es="Mostrar Solicitud Completa">
     Show Full Application
   </button>
 
-  <div class="full-form">
+  <div class="full-form app-card fade-in">
+
     <form action="https://formsubmit.co/office@insaces.com" method="POST">
 
       <input type="hidden" name="_to" value="">
@@ -770,11 +696,16 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- ===========================
      7. PERSONAL UMBRELLA
 =========================== -->
-<section id="umbrella" class="app-wrapper">
-  <h2 class="app-title">Personal Umbrella</h2>
+<section id="umbrella" class="app-section fade-in">
+
+  <h2 class="app-category-title"
+      data-en="Personal Umbrella"
+      data-es="Seguro Umbrella Personal">
+    Personal Umbrella
+  </h2>
 
   <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
 
     <input type="hidden" name="_to" value="">
     <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
@@ -803,13 +734,14 @@ document.addEventListener("DOMContentLoaded", () => {
   </form>
 
   <!-- EXPAND FULL FORM -->
-  <button class="expand-btn"
+  <button class="expand-btn fade-in"
           data-en="Show Full Application"
           data-es="Mostrar Solicitud Completa">
     Show Full Application
   </button>
 
-  <div class="full-form">
+  <div class="full-form app-card fade-in">
+
     <form action="https://formsubmit.co/office@insaces.com" method="POST">
 
       <input type="hidden" name="_to" value="">
@@ -853,15 +785,19 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </section>
 
-
 <!-- ===========================
      8. PERSONAL AUTO INSURANCE
 =========================== -->
-<section id="auto" class="app-wrapper">
-  <h2 class="app-title">Auto Insurance</h2>
+<section id="auto" class="app-section fade-in">
+
+  <h2 class="app-category-title"
+      data-en="Auto Insurance"
+      data-es="Seguro de Auto">
+    Auto Insurance
+  </h2>
 
   <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
 
     <input type="hidden" name="_to" value="">
     <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
@@ -895,13 +831,14 @@ document.addEventListener("DOMContentLoaded", () => {
   </form>
 
   <!-- EXPAND FULL FORM -->
-  <button class="expand-btn"
+  <button class="expand-btn fade-in"
           data-en="Show Full Application"
           data-es="Mostrar Solicitud Completa">
     Show Full Application
   </button>
 
-  <div class="full-form">
+  <div class="full-form app-card fade-in">
+
     <form action="https://formsubmit.co/office@insaces.com" method="POST">
 
       <input type="hidden" name="_to" value="">
@@ -945,15 +882,21 @@ document.addEventListener("DOMContentLoaded", () => {
     </form>
   </div>
 </section>
+
+
 <!-- ============================================================
      LIFE INSURANCE APPLICATION
 ============================================================ -->
+<section id="life" class="app-section fade-in">
 
-<section id="life" class="app-wrapper">
-  <h2 class="app-title">Life Insurance</h2>
+  <h2 class="app-category-title"
+      data-en="Life Insurance"
+      data-es="Seguro de Vida">
+    Life Insurance
+  </h2>
 
   <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
 
     <input type="hidden" name="_to" value="">
     <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
@@ -990,13 +933,14 @@ document.addEventListener("DOMContentLoaded", () => {
   </form>
 
   <!-- EXPAND FULL FORM -->
-  <button class="expand-btn"
+  <button class="expand-btn fade-in"
           data-en="Show Full Application"
           data-es="Mostrar Solicitud Completa">
     Show Full Application
   </button>
 
-  <div class="full-form">
+  <div class="full-form app-card fade-in">
+
     <form action="https://formsubmit.co/office@insaces.com" method="POST">
 
       <input type="hidden" name="_to" value="">
@@ -1041,10 +985,10 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </section>
 
-<!-- ============================================================
-     FOOTER + CLOSE PAGE
-============================================================ -->
 
+<!-- ============================================================
+     FOOTER
+============================================================ -->
 <footer id="aces-footer"></footer>
 
 </body>
