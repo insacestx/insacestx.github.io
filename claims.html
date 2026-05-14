@@ -1,178 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Claims | ACES Insurance Services</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=600">
-</head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title data-en="Claims Assistance | ACES Insurance Services"
+        data-es="Asistencia de Reclamos | ACES Insurance Services">
+  Claims Assistance | ACES Insurance Services
+</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="global.js" defer></script>
+
+</head>
 <body>
 
 <!-- ============================================================
-     GLOBAL HEADER
+     HEADER (Injected by global.js)
 ============================================================ -->
-<header class="aces-header">
-  <div class="header-inner">
+<header id="aces-header"></header>
 
-    <a href="index.html">
-      <img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo">
-    </a>
+<!-- ============================================================
+     SMALL HERO — ACES 2026
+============================================================ -->
+<section class="small-hero fade-in">
+  <div class="small-hero-content">
+    <h1 data-en="Claims Assistance"
+        data-es="Asistencia de Reclamos">
+      Claims Assistance
+    </h1>
 
-    <div class="lang-switch">
-      <button class="lang-option" data-lang="english">EN 🇺🇸</button>
-      <button class="lang-option" data-lang="spanish">ES 🇲🇽</button>
+    <p data-en="We’re here to help you through every step of the claims process."
+       data-es="Estamos aquí para ayudarle en cada paso del proceso de reclamos.">
+      We’re here to help you through every step of the claims process.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     BEFORE YOU FILE A CLAIM
+============================================================ -->
+<section class="app-section fade-in">
+
+  <h2 class="app-category-title"
+      data-en="Before You File a Claim"
+      data-es="Antes de Presentar un Reclamo">
+    Before You File a Claim
+  </h2>
+
+  <p class="app-category-intro"
+     data-en="Review the steps below to ensure a smooth claims experience."
+     data-es="Revise los pasos a continuación para asegurar una experiencia de reclamo sin problemas.">
+    Review the steps below to ensure a smooth claims experience.
+  </p>
+
+  <div class="app-grid">
+
+    <div class="app-card fade-in">
+      <div class="app-icon">📸</div>
+      <h3 data-en="Take Photos" data-es="Tome Fotos">Take Photos</h3>
+      <p data-en="Document all damage or incidents clearly."
+         data-es="Documente claramente todos los daños o incidentes.">
+        Document all damage or incidents clearly.
+      </p>
     </div>
 
-    <nav id="navContainer" class="nav-menu"></nav>
-    <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+    <div class="app-card fade-in">
+      <div class="app-icon">📝</div>
+      <h3 data-en="Write Down Details" data-es="Anote los Detalles">Write Down Details</h3>
+      <p data-en="Include dates, times, and what happened."
+         data-es="Incluya fechas, horas y lo que ocurrió.">
+        Include dates, times, and what happened.
+      </p>
+    </div>
+
+    <div class="app-card fade-in">
+      <div class="app-icon">👥</div>
+      <h3 data-en="Gather Information" data-es="Reúna Información">Gather Information</h3>
+      <p data-en="Collect names, contact info, and any third-party details."
+         data-es="Recolecte nombres, contactos y cualquier información de terceros.">
+        Collect names, contact info, and any third-party details.
+      </p>
+    </div>
 
   </div>
-</header>
+</section>
 
 <!-- ============================================================
-     ENGLISH VERSION
+     WHAT TO HAVE READY
 ============================================================ -->
-<div id="english">
+<section class="app-section fade-in">
 
-  <section class="hero-white">
-    <h1>Claims Assistance</h1>
-    <p>If you’ve experienced a loss, we’re here to help you every step of the way.</p>
-  </section>
+  <h2 class="app-category-title"
+      data-en="What to Have Ready"
+      data-es="Qué Tener Listo">
+    What to Have Ready
+  </h2>
 
-  <section class="section-light">
-    <h2>How to File a Claim</h2>
-    <p>Follow these steps to begin your claim quickly and smoothly.</p>
+  <ul class="checklist">
+    <li data-en="Policy number" data-es="Número de póliza">Policy number</li>
+    <li data-en="Date and time of incident" data-es="Fecha y hora del incidente">Date and time of incident</li>
+    <li data-en="Photos or videos of damage" data-es="Fotos o videos del daño">Photos or videos of damage</li>
+    <li data-en="Description of what happened" data-es="Descripción de lo ocurrido">Description of what happened</li>
+    <li data-en="Third-party information (if applicable)" data-es="Información de terceros (si aplica)">Third-party information</li>
+  </ul>
 
-    <div class="step-card">
-      <h3>1. Stay Safe</h3>
-      <p>Make sure everyone involved is safe. Call emergency services if needed.</p>
-    </div>
-
-    <div class="step-card">
-      <h3>2. Document the Incident</h3>
-      <p>Take photos, gather details, and write down what happened.</p>
-    </div>
-
-    <div class="step-card">
-      <h3>3. Contact Your Agent</h3>
-      <p>Your ACES agent will guide you through the claims process and help you file correctly.</p>
-    </div>
-
-    <div class="step-card">
-      <h3>4. File Your Claim</h3>
-      <p>We’ll help you submit your claim to the carrier and follow up until it’s resolved.</p>
-    </div>
-
-    <a href="tel:2542276560" class="btn-red">📞 Call ACES for Claims Help</a>
-  </section>
-
-</div>
+</section>
 
 <!-- ============================================================
-     SPANISH VERSION
+     START A CLAIM — ROUND ROBIN ENABLED
 ============================================================ -->
-<div id="spanish" style="display:none;">
+<section class="app-section fade-in">
 
-  <section class="hero-white">
-    <h1>Asistencia de Reclamos</h1>
-    <p>Si ha tenido una pérdida, estamos aquí para ayudarle en cada paso.</p>
-  </section>
+  <h2 class="app-category-title"
+      data-en="Start a Claim"
+      data-es="Iniciar un Reclamo">
+    Start a Claim
+  </h2>
 
-  <section class="section-light">
-    <h2>Cómo Presentar un Reclamo</h2>
-    <p>Siga estos pasos para comenzar su reclamo de manera rápida y sencilla.</p>
+  <p class="app-category-intro"
+     data-en="Submit the form below and our team will assist you right away."
+     data-es="Envíe el formulario y nuestro equipo le ayudará de inmediato.">
+    Submit the form below and our team will assist you right away.
+  </p>
 
-    <div class="step-card">
-      <h3>1. Manténgase Seguro</h3>
-      <p>Asegúrese de que todos estén bien. Llame a emergencias si es necesario.</p>
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="app-card">
+
+    <!-- Round Robin -->
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
     </div>
 
-    <div class="step-card">
-      <h3>2. Documente el Incidente</h3>
-      <p>Tome fotos, recopile detalles y escriba lo que ocurrió.</p>
+    <div class="form-row">
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
     </div>
 
-    <div class="step-card">
-      <h3>3. Contacte a Su Agente</h3>
-      <p>Su agente de ACES lo guiará durante el proceso de reclamos.</p>
+    <div class="form-row">
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
     </div>
 
-    <div class="step-card">
-      <h3>4. Presente Su Reclamo</h3>
-      <p>Le ayudaremos a enviarlo a la aseguradora y darle seguimiento.</p>
+    <div class="form-row">
+      <label data-en="Policy Number" data-es="Número de Póliza">Policy Number</label>
+      <input type="text" name="Policy Number">
     </div>
 
-    <a href="tel:2542276560" class="btn-red">📞 Llamar a ACES para Ayuda con Reclamos</a>
-  </section>
+    <div class="form-row">
+      <label data-en="Describe the Incident"
+             data-es="Describa el Incidente">
+        Describe the Incident
+      </label>
+      <textarea name="Incident Description" rows="5" required></textarea>
+    </div>
 
-</div>
+    <button type="submit" class="submit-btn"
+      data-en="Submit Claim" data-es="Enviar Reclamo">
+      Submit Claim
+    </button>
+
+  </form>
+</section>
 
 <!-- ============================================================
-     SLIDE-OUT PANEL
+     CARRIER CLAIMS PHONE NUMBERS
 ============================================================ -->
-<div class="agent-panel">
-  <button class="close-panel">&times;</button>
-  <img class="panel-photo" src="">
-  <h2></h2>
-  <p class="panel-title"></p>
-  <p><strong>Phone:</strong> <span class="panel-phone"></span></p>
-  <p><strong>Email:</strong> <span class="panel-email"></span></p>
-  <a class="panel-call" href="#">Call Now</a>
-</div>
+<section class="app-section fade-in">
 
-<!-- ============================================================
-     FOOTER
-============================================================ -->
-<footer class="footer">
-  <img src="image2.png" class="footer-logo">
-  <p>© 2026 ACES Insurance Services</p>
-</footer>
+  <h2 class="app-category-title"
+      data-en="Carrier Claims Phone Numbers"
+      data-es="Números de Reclamos de Aseguradoras">
+    Carrier Claims Phone Numbers
+  </h2>
 
-<!-- ============================================================
-     NAVIGATION TEMPLATES
-============================================================ -->
-<nav id="navEN" style="display:none;">
-  <a class="nav-link" href="index.html">Home</a>
+  <div class="carrier-grid">
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Services ▾</span>
-    <div class="dropdown-menu">
-      <a href="services.html?type=life">Life Insurance</a>
-      <a href="services.html?type=personal">Personal Insurance</a>
-      <a href="services.html?type=commercial">Commercial Insurance</a>
-      <a href="services.html?type=auto">Auto Insurance</a>
+    <div class="carrier-card fade-in">
+      <h3>Progressive</h3>
+      <p>1‑800‑776‑4737</p>
     </div>
+
+    <div class="carrier-card fade-in">
+      <h3>Allstate</h3>
+      <p>1‑800‑255‑7828</p>
+    </div>
+
+    <div class="carrier-card fade-in">
+      <h3>State Farm</h3>
+      <p>1‑800‑732‑5246</p>
+    </div>
+
+    <div class="carrier-card fade-in">
+      <h3>Travelers</h3>
+      <p>1‑800‑252‑4633</p>
+    </div>
+
+    <div class="carrier-card fade-in">
+      <h3>Liberty Mutual</h3>
+      <p>1‑844‑825‑2467</p>
+    </div>
+
   </div>
+</section>
 
-  <a class="nav-link" href="applications.html">Applications</a>
-  <a class="nav-link" href="coi.html">COI Request</a>
-  <a class="nav-link" href="claims.html">Claims</a>
-  <a class="nav-link" href="about.html">About</a>
-  <a class="nav-link" href="contact.html">Contact</a>
-</nav>
+<!-- ============================================================
+     WE CAN HELP YOU FILE
+============================================================ -->
+<section class="app-section fade-in">
 
-<nav id="navES" style="display:none;">
-  <a class="nav-link" href="index.html">Inicio</a>
+  <h2 class="app-category-title"
+      data-en="Need Help Filing?"
+      data-es="¿Necesita Ayuda para Presentar un Reclamo?">
+    Need Help Filing?
+  </h2>
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Servicios ▾</span>
-    <div class="dropdown-menu">
-      <a href="services.html?type=life">Seguro de Vida</a>
-      <a href="services.html?type=personal">Seguro Personal</a>
-      <a href="services.html?type=commercial">Seguro Comercial</a>
-      <a href="services.html?type=auto">Seguro de Auto</a>
-    </div>
-  </div>
+  <p class="app-category-intro"
+     data-en="Call us anytime — we’ll walk you through the process and help you file correctly."
+     data-es="Llámenos en cualquier momento — le guiaremos en el proceso y le ayudaremos a presentar su reclamo correctamente.">
+    Call us anytime — we’ll walk you through the process and help you file correctly.
+  </p>
 
-  <a class="nav-link" href="applications.html">Aplicaciones</a>
-  <a class="nav-link" href="coi.html">Solicitud de COI</a>
-  <a class="nav-link" href="claims.html">Reclamos</a>
-  <a class="nav-link" href="about.html">Acerca de</a>
-  <a class="nav-link" href="contact.html">Contacto</a>
-</nav>
+  <a href="tel:2542276560" class="app-btn">
+    (254) 227‑6560
+  </a>
 
-<script src="global.js?v=600"></script>
+</section>
+
+<!-- ============================================================
+     FOOTER (Injected by global.js)
+============================================================ -->
+<footer id="aces-footer"></footer>
 
 </body>
 </html>
