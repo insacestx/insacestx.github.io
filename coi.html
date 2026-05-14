@@ -1,184 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>COI Request | ACES Insurance Services</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=600">
-</head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title data-en="COI Request | ACES Insurance Services"
+        data-es="Solicitud de COI | ACES Insurance Services">
+  COI Request | ACES Insurance Services
+</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="global.js" defer></script>
+
+</head>
 <body>
 
 <!-- ============================================================
-     GLOBAL HEADER
+     HEADER (Injected by global.js)
 ============================================================ -->
-<header class="aces-header">
-  <div class="header-inner">
-
-    <a href="index.html">
-      <img src="image2.png" class="header-logo-img" alt="ACES Insurance Logo">
-    </a>
-
-    <div class="lang-switch">
-      <button class="lang-option" data-lang="english">EN 🇺🇸</button>
-      <button class="lang-option" data-lang="spanish">ES 🇲🇽</button>
-    </div>
-
-    <nav id="navContainer" class="nav-menu"></nav>
-    <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
-
-  </div>
-</header>
+<header id="aces-header"></header>
 
 <!-- ============================================================
-     ENGLISH VERSION
+     SMALL HERO — ACES 2026
 ============================================================ -->
-<div id="english">
+<section class="small-hero fade-in">
+  <div class="small-hero-content">
+    <h1 data-en="Certificate of Insurance (COI) Request"
+        data-es="Solicitud de Certificado de Seguro (COI)">
+      Certificate of Insurance (COI) Request
+    </h1>
 
-  <section class="hero-white">
-    <h1>Certificate of Insurance (COI) Request</h1>
-    <p>Need a COI for a job, vendor, or contract? We’ve made the process simple.</p>
-  </section>
+    <p data-en="Need a COI for a job, vendor, or contract? We’ve made the process simple."
+       data-es="¿Necesita un COI para un trabajo, proveedor o contrato? Hemos simplificado el proceso.">
+      Need a COI for a job, vendor, or contract? We’ve made the process simple.
+    </p>
+  </div>
+</section>
 
-  <section class="section-light">
-    <h2>How to Request a COI</h2>
-    <p>Follow these steps to receive your Certificate of Insurance quickly.</p>
+<!-- ============================================================
+     HOW TO REQUEST A COI
+============================================================ -->
+<section class="app-section fade-in">
 
-    <div class="step-card">
-      <h3>1. Gather Required Information</h3>
-      <p>Please have the following ready:</p>
-      <p>
-        • Your business name<br>
-        • Policyholder name<br>
-        • Job or vendor name<br>
-        • Certificate holder information<br>
-        • Any special wording or requirements
+  <h2 class="app-category-title"
+      data-en="How to Request a COI"
+      data-es="Cómo Solicitar un COI">
+    How to Request a COI
+  </h2>
+
+  <p class="app-category-intro"
+     data-en="Follow these steps to receive your Certificate of Insurance quickly."
+     data-es="Siga estos pasos para recibir su Certificado de Seguro rápidamente.">
+    Follow these steps to receive your Certificate of Insurance quickly.
+  </p>
+
+  <div class="app-grid">
+
+    <!-- STEP 1 -->
+    <div class="app-card fade-in">
+      <div class="app-icon">📄</div>
+      <h3 data-en="1. Gather Required Information"
+          data-es="1. Reúna la Información Necesaria">
+        1. Gather Required Information
+      </h3>
+
+      <p data-en="Have the following ready:"
+         data-es="Tenga lo siguiente listo:">
+        Have the following ready:
+      </p>
+
+      <ul class="checklist">
+        <li data-en="Business name" data-es="Nombre del negocio">Business name</li>
+        <li data-en="Policyholder name" data-es="Nombre del titular de la póliza">Policyholder name</li>
+        <li data-en="Job or vendor name" data-es="Nombre del trabajo o proveedor">Job or vendor name</li>
+        <li data-en="Certificate holder info" data-es="Información del titular del certificado">Certificate holder info</li>
+        <li data-en="Special wording (if required)" data-es="Redacción especial (si aplica)">Special wording (if required)</li>
+      </ul>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="app-card fade-in">
+      <div class="app-icon">✉️</div>
+      <h3 data-en="2. Email Your Request"
+          data-es="2. Envíe Su Solicitud">
+        2. Email Your Request
+      </h3>
+
+      <p data-en="Send your COI request to:"
+         data-es="Envíe su solicitud de COI a:">
+        Send your COI request to:
+      </p>
+
+      <p><strong>office@insaces.com</strong></p>
+
+      <a href="mailto:office@insaces.com" class="app-btn"
+         data-en="Email COI Request"
+         data-es="Enviar Solicitud de COI">
+        📧 Email COI Request
+      </a>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="app-card fade-in">
+      <div class="app-icon">⏱️</div>
+      <h3 data-en="3. Allow Processing Time"
+          data-es="3. Tiempo de Procesamiento">
+        3. Allow Processing Time
+      </h3>
+
+      <p data-en="Most COIs are completed the same day. Requests with special wording may take longer."
+         data-es="La mayoría de los COIs se completan el mismo día. Las solicitudes con redacción especial pueden tardar más.">
+        Most COIs are completed the same day. Requests with special wording may take longer.
       </p>
     </div>
 
-    <div class="step-card">
-      <h3>2. Email Your Request</h3>
-      <p>Send your COI request to:</p>
-      <p><strong>office@insaces.com</strong></p>
-    </div>
-
-    <div class="step-card">
-      <h3>3. Allow Processing Time</h3>
-      <p>Most COIs are completed the same day. Requests with special wording may take longer.</p>
-    </div>
-
-    <a href="mailto:office@insaces.com" class="btn-red">📧 Email COI Request</a>
-  </section>
-
-</div>
-
-<!-- ============================================================
-     SPANISH VERSION
-============================================================ -->
-<div id="spanish" style="display:none;">
-
-  <section class="hero-white">
-    <h1>Solicitud de Certificado de Seguro (COI)</h1>
-    <p>¿Necesita un COI para un trabajo, proveedor o contrato? Hemos simplificado el proceso.</p>
-  </section>
-
-  <section class="section-light">
-    <h2>Cómo Solicitar un COI</h2>
-    <p>Siga estos pasos para recibir su Certificado de Seguro rápidamente.</p>
-
-    <div class="step-card">
-      <h3>1. Reúna la Información Necesaria</h3>
-      <p>Tenga lo siguiente listo:</p>
-      <p>
-        • Nombre del negocio<br>
-        • Nombre del titular de la póliza<br>
-        • Nombre del trabajo o proveedor<br>
-        • Información del certificado<br>
-        • Cualquier redacción especial requerida
-      </p>
-    </div>
-
-    <div class="step-card">
-      <h3>2. Envíe Su Solicitud por Correo</h3>
-      <p>Envíe su solicitud de COI a:</p>
-      <p><strong>office@insaces.com</strong></p>
-    </div>
-
-    <div class="step-card">
-      <h3>3. Tiempo de Procesamiento</h3>
-      <p>La mayoría de los COIs se completan el mismo día. Las solicitudes con redacción especial pueden tardar más.</p>
-    </div>
-
-    <a href="mailto:office@insaces.com" class="btn-red">📧 Enviar Solicitud de COI</a>
-  </section>
-
-</div>
-
-<!-- ============================================================
-     SLIDE-OUT PANEL
-============================================================ -->
-<div class="agent-panel">
-  <button class="close-panel">&times;</button>
-  <img class="panel-photo" src="">
-  <h2></h2>
-  <p class="panel-title"></p>
-  <p><strong>Phone:</strong> <span class="panel-phone"></span></p>
-  <p><strong>Email:</strong> <span class="panel-email"></span></p>
-  <a class="panel-call" href="#">Call Now</a>
-</div>
-
-<!-- ============================================================
-     FOOTER
-============================================================ -->
-<footer class="footer">
-  <img src="image2.png" class="footer-logo">
-  <p>© 2026 ACES Insurance Services</p>
-</footer>
-
-<!-- ============================================================
-     NAVIGATION TEMPLATES
-============================================================ -->
-<nav id="navEN" style="display:none;">
-  <a class="nav-link" href="index.html">Home</a>
-
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Services ▾</span>
-    <div class="dropdown-menu">
-      <a href="services.html?type=life">Life Insurance</a>
-      <a href="services.html?type=personal">Personal Insurance</a>
-      <a href="services.html?type=commercial">Commercial Insurance</a>
-      <a href="services.html?type=auto">Auto Insurance</a>
-    </div>
   </div>
+</section>
 
-  <a class="nav-link" href="applications.html">Applications</a>
-  <a class="nav-link" href="coi.html">COI Request</a>
-  <a class="nav-link" href="claims.html">Claims</a>
-  <a class="nav-link" href="about.html">About</a>
-  <a class="nav-link" href="contact.html">Contact</a>
-</nav>
+<!-- ============================================================
+     OPTIONAL: SUBMIT COI REQUEST FORM (ROUND ROBIN ENABLED)
+============================================================ -->
+<section class="app-section fade-in">
 
-<nav id="navES" style="display:none;">
-  <a class="nav-link" href="index.html">Inicio</a>
+  <h2 class="app-category-title"
+      data-en="Submit COI Request Online"
+      data-es="Enviar Solicitud de COI en Línea">
+    Submit COI Request Online
+  </h2>
 
-  <div class="dropdown">
-    <span class="nav-link dropdown-toggle">Servicios ▾</span>
-    <div class="dropdown-menu">
-      <a href="services.html?type=life">Seguro de Vida</a>
-      <a href="services.html?type=personal">Seguro Personal</a>
-      <a href="services.html?type=commercial">Seguro Comercial</a>
-      <a href="services.html?type=auto">Seguro de Auto</a>
+  <p class="app-category-intro"
+     data-en="Use the form below if you prefer not to email."
+     data-es="Use el formulario si prefiere no enviar un correo.">
+    Use the form below if you prefer not to email.
+  </p>
+
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="app-card">
+
+    <!-- Round Robin -->
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
     </div>
-  </div>
 
-  <a class="nav-link" href="applications.html">Aplicaciones</a>
-  <a class="nav-link" href="coi.html">Solicitud de COI</a>
-  <a class="nav-link" href="claims.html">Reclamos</a>
-  <a class="nav-link" href="about.html">Acerca de</a>
-  <a class="nav-link" href="contact.html">Contacto</a>
-</nav>
+    <div class="form-row">
+      <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
+      <input type="text" name="Business Name" required>
+    </div>
 
-<script src="global.js?v=600"></script>
+    <div class="form-row">
+      <label data-en="Certificate Holder" data-es="Titular del Certificado">Certificate Holder</label>
+      <textarea name="Certificate Holder" rows="3" required></textarea>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Special Wording (if any)"
+             data-es="Redacción Especial (si aplica)">
+        Special Wording (if any)
+      </label>
+      <textarea name="Special Wording" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn"
+      data-en="Submit COI Request"
+      data-es="Enviar Solicitud de COI">
+      Submit COI Request
+    </button>
+
+  </form>
+</section>
+
+<!-- ============================================================
+     FOOTER (Injected by global.js)
+============================================================ -->
+<footer id="aces-footer"></footer>
 
 </body>
 </html>
