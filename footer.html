@@ -1,76 +1,85 @@
-<footer class="aces-footer" style="background:#111; color:#fff; padding:50px 20px;">
+<footer class="aces-footer" style="background:#0a0a0a; color:#fff; padding:60px 20px 30px; border-top:4px solid #b30000;">
 
   <!-- TOP GRID -->
   <div style="
       max-width:1200px;
       margin:auto;
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-      gap:40px;">
+      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+      gap:50px;">
 
     <!-- COLUMN 1: BRAND -->
     <div>
-      <img src="aces-logo.png" alt="ACES Logo" style="width:140px; margin-bottom:15px;">
+      <img src="aces-logo.png" alt="ACES Logo" style="width:150px; margin-bottom:20px; filter:drop-shadow(0 0 6px rgba(255,0,0,0.4));">
+
       <p data-en="Independent. Bilingual. Local."
          data-es="Independientes. Bilingües. Locales."
-         style="color:#ccc; margin-bottom:10px;">
+         style="color:#ccc; margin-bottom:12px; font-size:1rem;">
         Independent. Bilingual. Local.
       </p>
-      <p style="color:#888; font-size:0.9rem;">
+
+      <p style="color:#777; font-size:0.9rem;">
         © 2026 ACES Insurance Services
       </p>
     </div>
 
     <!-- COLUMN 2: CONTACT -->
     <div>
-      <h3 style="margin-bottom:15px;" data-en="Contact" data-es="Contacto">Contact</h3>
+      <h3 style="margin-bottom:18px; font-size:1.3rem; font-weight:700;"
+          data-en="Contact" data-es="Contacto">
+        Contact
+      </h3>
 
-      <p style="margin-bottom:10px;">
+      <p style="margin-bottom:12px; color:#ddd; font-size:1rem;">
         📍 404 Sapphire Blvd., Hewitt, TX 76643
       </p>
 
-      <p style="margin-bottom:10px;">
+      <p style="margin-bottom:12px; color:#ddd; font-size:1rem;">
         📞 <a href="tel:2542276560" style="color:#fff; text-decoration:none;">(254) 227‑6560</a>
       </p>
 
-      <p style="margin-bottom:10px;">
+      <p style="margin-bottom:12px; color:#ddd; font-size:1rem;">
         ✉️ <a href="mailto:office@insaces.com" style="color:#fff; text-decoration:none;">office@insaces.com</a>
       </p>
     </div>
 
     <!-- COLUMN 3: QUICK LINKS -->
     <div>
-      <h3 style="margin-bottom:15px;" data-en="Quick Links" data-es="Enlaces Rápidos">Quick Links</h3>
+      <h3 style="margin-bottom:18px; font-size:1.3rem; font-weight:700;"
+          data-en="Quick Links" data-es="Enlaces Rápidos">
+        Quick Links
+      </h3>
 
-      <p><a href="index.html" style="color:#ccc; text-decoration:none;">Home</a></p>
-      <p><a href="services.html" style="color:#ccc; text-decoration:none;">Services</a></p>
-      <p><a href="applications.html" style="color:#ccc; text-decoration:none;">Applications</a></p>
-      <p><a href="about.html" style="color:#ccc; text-decoration:none;">About Us</a></p>
-      <p><a href="contact.html" style="color:#ccc; text-decoration:none;">Contact</a></p>
+      <p><a href="index.html" class="footer-link">Home</a></p>
+      <p><a href="services.html" class="footer-link">Services</a></p>
+      <p><a href="applications.html" class="footer-link">Applications</a></p>
+      <p><a href="about.html" class="footer-link">About Us</a></p>
+      <p><a href="contact.html" class="footer-link">Contact</a></p>
     </div>
 
     <!-- COLUMN 4: CHAMBER BADGE -->
     <div style="text-align:center;">
-      <h3 style="margin-bottom:10px;" data-en="Proud Member" data-es="Miembro Orgulloso">
+      <h3 style="margin-bottom:12px; font-size:1.3rem; font-weight:700;"
+          data-en="Proud Member" data-es="Miembro Orgulloso">
         Proud Member
       </h3>
 
       <img src="chamber-badge.png" alt="Chamber Badge"
-           style="width:120px; margin:10px auto; display:block;">
+           style="width:130px; margin:10px auto; display:block; filter:drop-shadow(0 0 6px rgba(255,0,0,0.4));">
 
-      <p style="margin-top:10px; color:#ccc;">
+      <p style="margin-top:10px; color:#ccc; font-size:0.95rem;">
         Central Texas Hispanic Chamber of Commerce
       </p>
 
       <img src="chamber-qr.png" alt="Chamber QR Code"
-           style="width:120px; margin:15px auto; display:block;">
+           style="width:130px; margin:18px auto; display:block; filter:drop-shadow(0 0 4px rgba(255,0,0,0.4));">
     </div>
 
   </div>
 
   <!-- BOTTOM BAR -->
-  <div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #333;">
-    <p style="color:#777; font-size:0.85rem;">
+  <div style="text-align:center; margin-top:50px; padding-top:25px; border-top:1px solid #222;">
+    <p style="color:#888; font-size:0.9rem;">
       <span data-en="Serving Texans with honesty and expertise."
             data-es="Sirviendo a los tejanos con honestidad y experiencia.">
         Serving Texans with honesty and expertise.
@@ -79,3 +88,16 @@
   </div>
 
 </footer>
+
+<style>
+  .footer-link {
+    color:#ccc;
+    text-decoration:none;
+    font-size:1rem;
+    transition:0.25s ease;
+  }
+  .footer-link:hover {
+    color:#ff4d4d;
+    padding-left:4px;
+  }
+</style>
