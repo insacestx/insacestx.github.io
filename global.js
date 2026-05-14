@@ -62,7 +62,7 @@ function injectFooter() {
     .then(res => res.text())
     .then(html => {
       footer.innerHTML = html;
-      setLanguage(localStorage.getItem("aces-lang") || "en"); // reapply bilingual text
+      setLanguage(localStorage.getItem("aces-lang") || "en");
     });
 }
 injectFooter();
