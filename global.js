@@ -1,16 +1,11 @@
-/* ============================================================
-   ACES GLOBAL.JS — 2026 MODERN SYSTEM
-   - Header Injection (Option‑B)
-   - Footer Injection
-   - Language Toggle (EN/ES)
-   - Theme Toggle (Dark/Light)
-   - Mobile Menu
-   - Scroll Animations
-   - Application Category Switching
-============================================================ */
+/* ------------------------------------------------------------
+   ACES 2026 — GLOBAL.JS (Optimized Final Version)
+   Header, Footer, Language, Mobile Menu, Animations,
+   Agent Panel, Round Robin, Application Switching
+------------------------------------------------------------ */
 
 /* ------------------------------------------------------------
-   1. HEADER INJECTION — Optimized ACES 2026 Header
+   1. HEADER INJECTION
 ------------------------------------------------------------ */
 function loadHeader() {
   const header = document.getElementById("aces-header");
@@ -40,7 +35,6 @@ function loadHeader() {
       <!-- CONTROLS -->
       <div class="header-controls">
         <button id="lang-toggle" class="lang-btn">ES</button>
-        <button id="theme-toggle" class="theme-btn">☀</button>
         <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
       </div>
     </div>
@@ -59,7 +53,7 @@ function loadHeader() {
 }
 
 /* ------------------------------------------------------------
-   2. FOOTER INJECTION — Optimized ACES 2026 Footer
+   2. FOOTER INJECTION
 ------------------------------------------------------------ */
 function loadFooter() {
   const footer = document.getElementById("aces-footer");
@@ -104,6 +98,7 @@ function loadFooter() {
 ------------------------------------------------------------ */
 function setupLanguageToggle() {
   const langBtn = document.getElementById("lang-toggle");
+  if (!langBtn) return;
 
   langBtn.addEventListener("click", () => {
     const current = document.documentElement.getAttribute("lang");
@@ -121,36 +116,19 @@ function setupLanguageToggle() {
 }
 
 function translatePage(lang) {
-  const elements = document.querySelectorAll("[data-en]");
-
-  elements.forEach(el => {
+  document.querySelectorAll("[data-en]").forEach(el => {
     el.textContent = el.getAttribute(`data-${lang}`);
   });
 }
 
 /* ------------------------------------------------------------
-   4. DARK / LIGHT MODE TOGGLE
------------------------------------------------------------- */
-function setupThemeToggle() {
-  const themeBtn = document.getElementById("theme-toggle");
-
-  themeBtn.addEventListener("click", () => {
-    document.body.classList.toggle("light-mode");
-
-    if (document.body.classList.contains("light-mode")) {
-      themeBtn.textContent = "🌙";
-    } else {
-      themeBtn.textContent = "☀";
-    }
-  });
-}
-
-/* ------------------------------------------------------------
-   5. MOBILE MENU
+   4. MOBILE MENU
 ------------------------------------------------------------ */
 function setupMobileMenu() {
   const btn = document.getElementById("mobile-menu-btn");
   const menu = document.getElementById("mobile-menu");
+
+  if (!btn || !menu) return;
 
   btn.addEventListener("click", () => {
     menu.classList.toggle("open");
@@ -158,14 +136,12 @@ function setupMobileMenu() {
 }
 
 /* ------------------------------------------------------------
-   6. SCROLL FADE-IN ANIMATIONS
+   5. SCROLL FADE-IN ANIMATIONS
 ------------------------------------------------------------ */
 function setupFadeInAnimations() {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
+      if (entry.isIntersecting) entry.target.classList.add("visible");
     });
   });
 
@@ -173,16 +149,14 @@ function setupFadeInAnimations() {
 }
 
 /* ------------------------------------------------------------
-   7. APPLICATION CATEGORY SWITCHING (?type=)
+   6. APPLICATION CATEGORY SWITCHING (?type=)
 ------------------------------------------------------------ */
 function setupApplicationSections() {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type");
-
   if (!type) return;
 
   const section = document.getElementById(type);
-
   if (section) {
     section.style.display = "block";
     window.scrollTo(0, section.offsetTop - 80);
@@ -190,14 +164,67 @@ function setupApplicationSections() {
 }
 
 /* ------------------------------------------------------------
-   8. INITIALIZE EVERYTHING
+   7. AGENT PANEL (Slide-Out)
+------------------------------------------------------------ */
+function setupAgentPanel() {
+  const panel = document.querySelector(".agent-panel");
+  const closeBtn = document.querySelector(".close-panel");
+  const cards = document.querySelectorAll(".agent-card");
+
+  if (!panel || !closeBtn || cards.length === 0) return;
+
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      panel.querySelector(".panel-photo").src = card.dataset.photo;
+      panel.querySelector("h2").textContent = card.dataset.name;
+      panel.querySelector(".panel-title").textContent = card.dataset.title;
+      panel.querySelector(".panel-phone").textContent = card.dataset.phone;
+      panel.querySelector(".panel-email").textContent = card.dataset.email;
+      panel.querySelector(".panel-call").href = `tel:${card.dataset.phone}`;
+      panel.classList.add("open");
+    });
+  });
+
+  closeBtn.addEventListener("click", () => {
+    panel.classList.remove("open");
+  });
+}
+
+/* ------------------------------------------------------------
+   8. ROUND ROBIN EMAIL ROUTING
+------------------------------------------------------------ */
+function setupRoundRobin() {
+  const forms = document.querySelectorAll("form[action*='formsubmit']");
+  if (forms.length === 0) return;
+
+  const agents = [
+    "office@insaces.com",
+    "jordan@insaces.com",
+    "lanse@insaces.com",
+    "robert@insaces.com",
+    "bryan@insaces.com",
+    "jimmy@insaces.com"
+  ];
+
+  let index = Math.floor(Math.random() * agents.length);
+
+  forms.forEach(form => {
+    const toField = form.querySelector("input[name='_to']");
+    if (toField) toField.value = agents[index];
+    index = (index + 1) % agents.length;
+  });
+}
+
+/* ------------------------------------------------------------
+   9. INITIALIZE EVERYTHING
 ------------------------------------------------------------ */
 document.addEventListener("DOMContentLoaded", () => {
   loadHeader();
   loadFooter();
   setupLanguageToggle();
-  setupThemeToggle();
   setupMobileMenu();
   setupFadeInAnimations();
   setupApplicationSections();
+  setupAgentPanel();
+  setupRoundRobin();
 });
