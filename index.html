@@ -10,168 +10,246 @@
 
 <body>
 
+<!-- ============================================================
+     HEADER
+============================================================ -->
 <header class="aces-header">
   <div class="header-inner">
-    <img src="/Aces-Spade.jpg" class="header-logo-img" alt="ACES Logo">
 
+    <!-- Full ACES Logo -->
+    <img src="/ACES-Logo.png" class="header-logo-img" alt="ACES Logo">
+
+    <!-- Language Toggle -->
+    <div class="lang-switch">
+      <button class="lang-option" data-lang="en" data-en="EN" data-es="EN">EN</button>
+      <button class="lang-option" data-lang="es" data-en="ES" data-es="ES">ES</button>
+    </div>
+
+    <!-- Navigation -->
     <nav class="nav-menu" id="navMenu">
-      <a href="index.html" class="nav-link">Home</a>
+
+      <a href="index.html" class="nav-link" data-en="Home" data-es="Inicio">Home</a>
 
       <div class="dropdown">
-        <span class="nav-link dropdown-toggle">Services</span>
+        <span class="nav-link dropdown-toggle" data-en="Services" data-es="Servicios">Services</span>
         <div class="dropdown-menu">
-          <a href="services.html?type=auto">Auto Insurance</a>
-          <a href="services.html?type=home">Homeowners</a>
-          <a href="services.html?type=life">Life Insurance</a>
-          <a href="services.html?type=commercial">Commercial</a>
-          <a href="services.html?type=specialty">Specialty Lines</a>
+          <a href="services.html?type=auto" data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</a>
+          <a href="services.html?type=home" data-en="Homeowners" data-es="Hogar">Homeowners</a>
+          <a href="services.html?type=life" data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</a>
+          <a href="services.html?type=commercial" data-en="Commercial" data-es="Comercial">Commercial</a>
+          <a href="services.html?type=specialty" data-en="Specialty Lines" data-es="Líneas Especiales">Specialty Lines</a>
         </div>
       </div>
 
       <div class="dropdown">
-        <span class="nav-link dropdown-toggle">Applications</span>
+        <span class="nav-link dropdown-toggle" data-en="Applications" data-es="Aplicaciones">Applications</span>
         <div class="dropdown-menu">
-          <a href="applications.html?type=auto">Auto Application</a>
-          <a href="applications.html?type=home">Homeowners Application</a>
-          <a href="applications.html?type=life">Life Application</a>
-          <a href="applications.html?type=commercial">Commercial Application</a>
+          <a href="applications.html?type=auto" data-en="Auto Application" data-es="Solicitud de Auto">Auto Application</a>
+          <a href="applications.html?type=home" data-en="Homeowners Application" data-es="Solicitud de Hogar">Homeowners Application</a>
+          <a href="applications.html?type=life" data-en="Life Application" data-es="Solicitud de Vida">Life Application</a>
+          <a href="applications.html?type=commercial" data-en="Commercial Application" data-es="Solicitud Comercial">Commercial Application</a>
         </div>
       </div>
 
-      <a href="coi.html" class="nav-link">COI Request</a>
-      <a href="claims.html" class="nav-link">Claims</a>
-      <a href="about.html" class="nav-link">Meet Our Team</a>
-      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="coi.html" class="nav-link" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+      <a href="claims.html" class="nav-link" data-en="Claims" data-es="Reclamos">Claims</a>
+      <a href="about.html" class="nav-link" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
+      <a href="contact.html" class="nav-link" data-en="Contact" data-es="Contacto">Contact</a>
+
     </nav>
 
     <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
   </div>
 </header>
 
+<!-- ============================================================
+     HERO SECTION
+============================================================ -->
 <section class="hero">
   <div class="hero-content">
-    <h2>Protecting What Matters Most</h2>
-    <p>Your trusted Texas independent insurance agency.</p>
+    <h2 data-en="Protecting What Matters Most" data-es="Protegiendo lo que Más Importa">
+      Protecting What Matters Most
+    </h2>
+
+    <p data-en="Your trusted Texas independent insurance agency."
+       data-es="Su agencia de seguros independiente de confianza en Texas.">
+       Your trusted Texas independent insurance agency.
+    </p>
 
     <div class="hero-buttons">
-      <a href="applications.html" class="btn-primary-red">Get a Quote</a>
-      <a href="tel:2542276560" class="btn-outline-white">Contact Us</a>
+      <a href="applications.html" class="btn-primary-red"
+         data-en="Get a Quote" data-es="Solicitar una Cotización">Get a Quote</a>
+
+      <a href="tel:2542276560" class="btn-outline-white"
+         data-en="Contact Us" data-es="Contáctenos">Contact Us</a>
     </div>
   </div>
 </section>
 
+<!-- ============================================================
+     SERVICES OVERVIEW
+============================================================ -->
 <section class="services-overview">
-  <h2>Our Insurance Services</h2>
-  <p class="services-intro">Comprehensive coverage options designed to protect you, your family, and your business.</p>
+  <h2 data-en="Our Insurance Services" data-es="Nuestros Servicios de Seguros">
+    Our Insurance Services
+  </h2>
+
+  <p class="services-intro"
+     data-en="Comprehensive coverage options designed to protect you, your family, and your business."
+     data-es="Opciones de cobertura diseñadas para protegerlo a usted, su familia y su negocio.">
+     Comprehensive coverage options designed to protect you, your family, and your business.
+  </p>
 
   <div class="services-grid">
 
     <div class="service-card">
       <img src="/icon-auto-aces.png" alt="Auto Insurance">
-      <h3>Auto Insurance</h3>
-      <p>Protect your vehicles with reliable coverage tailored to your needs.</p>
-      <a href="services.html?type=auto" class="btn-card">Learn More</a>
+      <h3 data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</h3>
+      <p data-en="Protect your vehicles with reliable coverage tailored to your needs."
+         data-es="Proteja sus vehículos con una cobertura confiable adaptada a sus necesidades.">
+         Protect your vehicles with reliable coverage tailored to your needs.
+      </p>
+      <a href="services.html?type=auto" class="btn-card"
+         data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="service-card">
       <img src="/icon-property-aces.png" alt="Home Insurance">
-      <h3>Homeowners Insurance</h3>
-      <p>Coverage that safeguards your home, belongings, and peace of mind.</p>
-      <a href="services.html?type=home" class="btn-card">Learn More</a>
+      <h3 data-en="Homeowners Insurance" data-es="Seguro de Hogar">Homeowners Insurance</h3>
+      <p data-en="Coverage that safeguards your home, belongings, and peace of mind."
+         data-es="Cobertura que protege su hogar, pertenencias y tranquilidad.">
+         Coverage that safeguards your home, belongings, and peace of mind.
+      </p>
+      <a href="services.html?type=home" class="btn-card"
+         data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="service-card">
       <img src="/icon-life-aces.png" alt="Life Insurance">
-      <h3>Life Insurance</h3>
-      <p>Financial protection for your loved ones when it matters most.</p>
-      <a href="services.html?type=life" class="btn-card">Learn More</a>
+      <h3 data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</h3>
+      <p data-en="Financial protection for your loved ones when it matters most."
+         data-es="Protección financiera para sus seres queridos cuando más importa.">
+         Financial protection for your loved ones when it matters most.
+      </p>
+      <a href="services.html?type=life" class="btn-card"
+         data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="service-card">
       <img src="/icon-commercial-aces.png" alt="Commercial Insurance">
-      <h3>Commercial Insurance</h3>
-      <p>Customized coverage solutions for businesses of all sizes.</p>
-      <a href="services.html?type=commercial" class="btn-card">Learn More</a>
+      <h3 data-en="Commercial Insurance" data-es="Seguro Comercial">Commercial Insurance</h3>
+      <p data-en="Customized coverage solutions for businesses of all sizes."
+         data-es="Soluciones de cobertura personalizadas para negocios de todos los tamaños.">
+         Customized coverage solutions for businesses of all sizes.
+      </p>
+      <a href="services.html?type=commercial" class="btn-card"
+         data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="service-card">
       <img src="/icon-specialty-aces.png" alt="Specialty Insurance">
-      <h3>Specialty Lines</h3>
-      <p>Unique coverage options for unique risks and special situations.</p>
-      <a href="services.html?type=specialty" class="btn-card">Learn More</a>
+      <h3 data-en="Specialty Lines" data-es="Líneas Especiales">Specialty Lines</h3>
+      <p data-en="Unique coverage options for unique risks and special situations."
+         data-es="Opciones de cobertura únicas para riesgos y situaciones especiales.">
+         Unique coverage options for unique risks and special situations.
+      </p>
+      <a href="services.html?type=specialty" class="btn-card"
+         data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
   </div>
 </section>
 
+<!-- ============================================================
+     TEAM SECTION
+============================================================ -->
 <section class="team-section">
-  <h2>Meet Our Team</h2>
-  <p class="team-intro">Local agents dedicated to serving our Texas communities with honesty and expertise.</p>
+  <h2 data-en="Meet Our Team" data-es="Conozca a Nuestro Equipo">Meet Our Team</h2>
+
+  <p class="team-intro"
+     data-en="Local agents dedicated to serving our Texas communities with honesty and expertise."
+     data-es="Agentes locales dedicados a servir a nuestras comunidades de Texas con honestidad y experiencia.">
+     Local agents dedicated to serving our Texas communities with honesty and expertise.
+  </p>
 
   <div class="team-grid">
 
     <div class="team-card">
       <img src="/image2.png" alt="George Santibañez" class="team-photo">
       <h3>George J. Santibañez</h3>
-      <p class="team-role">Independent Agent • Bilingual</p>
-      <a href="about.html" class="btn-card">Learn More</a>
+      <p class="team-role" data-en="Independent Agent • Bilingual" data-es="Agente Independiente • Bilingüe">
+        Independent Agent • Bilingual
+      </p>
+      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="team-card">
       <img src="/image2.png" alt="Jordan Jones" class="team-photo">
       <h3>Jordan Jones</h3>
-      <p class="team-role">Co‑Owner</p>
-      <a href="about.html" class="btn-card">Learn More</a>
+      <p class="team-role" data-en="Co‑Owner" data-es="Co‑Propietario">Co‑Owner</p>
+      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="team-card">
       <img src="/image2.png" alt="Lanse Derrick" class="team-photo">
       <h3>Lanse Derrick</h3>
-      <p class="team-role">Co‑Owner</p>
-      <a href="about.html" class="btn-card">Learn More</a>
+      <p class="team-role" data-en="Co‑Owner" data-es="Co‑Propietario">Co‑Owner</p>
+      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="team-card">
       <img src="/image2.png" alt="Robert Hyde" class="team-photo">
       <h3>Robert Hyde</h3>
-      <p class="team-role">Co‑Owner</p>
-      <a href="about.html" class="btn-card">Learn More</a>
+      <p class="team-role" data-en="Co‑Owner" data-es="Co‑Propietario">Co‑Owner</p>
+      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="team-card">
       <img src="/image2.png" alt="Bryan Carter" class="team-photo">
       <h3>Bryan Carter</h3>
-      <p class="team-role">Co‑Owner</p>
-      <a href="about.html" class="btn-card">Learn More</a>
+      <p class="team-role" data-en="Co‑Owner" data-es="Co‑Propietario">Co‑Owner</p>
+      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="team-card">
       <img src="/image2.png" alt="Jimmy Rodriguez" class="team-photo">
       <h3>Jimmy Rodriguez</h3>
-      <p class="team-role">Agent • Spanish‑Speaking</p>
-      <a href="about.html" class="btn-card">Learn More</a>
+      <p class="team-role" data-en="Agent • Spanish‑Speaking" data-es="Agente • Habla Español">
+        Agent • Spanish‑Speaking
+      </p>
+      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
     <div class="team-card">
       <img src="/image2.png" alt="Renee Ridling" class="team-photo">
       <h3>Renee Ridling</h3>
-      <p class="team-role">Agent</p>
-      <a href="about.html" class="btn-card">Learn More</a>
+      <p class="team-role" data-en="Agent" data-es="Agente">Agent</p>
+      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
     </div>
 
   </div>
 
   <div class="team-buttons">
-    <a href="about.html" class="btn-primary-red">Meet Our Full Team</a>
-    <a href="tel:2542276560" class="btn-outline-white">Call Our Office</a>
+    <a href="about.html" class="btn-primary-red"
+       data-en="Meet Our Full Team" data-es="Conozca a Todo Nuestro Equipo">
+       Meet Our Full Team
+    </a>
+
+    <a href="tel:2542276560" class="btn-outline-white"
+       data-en="Call Our Office" data-es="Llamar a la Oficina">
+       Call Our Office
+    </a>
   </div>
 </section>
 
+<!-- ============================================================
+     FOOTER (CLEAN VERSION — NO NAV)
+============================================================ -->
 <footer class="site-footer">
   <div class="footer-content">
 
     <div class="footer-left">
-      <img src="/Aces-Spade.jpg" alt="ACES Logo" class="footer-logo">
+      <img src="/ACES-Logo.png" alt="ACES Logo" class="footer-logo">
       <p>© 2026 ACES Insurance Services</p>
       <p>404 Sapphire Blvd, Hewitt, TX 76643</p>
       <p>(254) 709-6487</p>
@@ -182,17 +260,10 @@
       <img src="/chamber-qr.png" alt="Chamber QR Code">
     </div>
 
-    <div class="footer-right">
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="applications.html">Applications</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-
   </div>
 </footer>
 
+<!-- Mobile Call Button -->
 <a href="tel:2542276560" class="mobile-call-btn">Call ACES</a>
 
 </body>
