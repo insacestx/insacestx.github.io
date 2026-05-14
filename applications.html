@@ -1,913 +1,1052 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applications | ACES Insurance Services</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title data-en="Insurance Applications | ACES Insurance Services"
+        data-es="Solicitudes de Seguro | ACES Insurance Services">
+  Insurance Applications | ACES Insurance Services
+</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #ffffff;
-            color: #222;
-        }
+<link rel="stylesheet" href="style.css">
+<script src="global.js" defer></script>
 
-        h1, h2 {
-            text-align: center;
-            color: #222;
-        }
+<style>
+  /* Section spacing */
+  .app-wrapper {
+    padding: 30px 20px;
+    max-width: 900px;
+    margin: auto;
+  }
 
-        .page-wrapper {
-            padding: 40px 20px 60px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+  .app-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
 
-        .language-toggle {
-            text-align: right;
-            padding: 10px 20px 0;
-            font-size: 14px;
-        }
-        .language-toggle span {
-            cursor: pointer;
-        }
+  .app-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #444;
+  }
 
-        .app-card {
-            background: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 25px 20px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
+  /* Short Intake Form */
+  .short-intake {
+    background: #fff;
+    border: 2px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
 
-        .app-card img.spade {
-            width: 36px;
-            height: 36px;
-            display: block;
-            margin: 10px auto 15px;
-        }
+  .short-intake h3 {
+    margin-bottom: 15px;
+  }
 
-        .app-card p {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 20px;
-            color: #444;
-        }
+  .form-row {
+    margin-bottom: 15px;
+  }
 
-        .short-form {
-            max-width: 600px;
-            margin: 0 auto 20px;
-        }
+  .form-row label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
 
-        .short-form input,
-        .short-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 12px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 15px;
-        }
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+  }
 
-        .short-form button {
-            width: 100%;
-            padding: 12px;
-            background: #d40000;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+  .expand-btn {
+    display: inline-block;
+    background: #d40000;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
 
-        .short-form button:hover {
-            background: #a80000;
-        }
+  /* Full Application (hidden by default) */
+  .full-form {
+    display: none;
+    background: #fafafa;
+    border: 2px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
 
-        .full-app-btn {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-            padding: 12px 20px;
-            background: #222;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            max-width: 300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+  .submit-btn {
+    background: #d40000;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+  }
 
-        .full-app-btn:hover {
-            background: #000;
-        }
+  .submit-btn:hover {
+    opacity: .85;
+  }
+</style>
 
-        .anchor-spacer {
-            height: 80px;
-        }
-    </style>
+<script>
+/* ============================================================
+   ROUND ROBIN EMAIL ENGINE
+============================================================ */
+const rrEmails = [
+  "george@insaces.com",
+  "jordan@insaces.com",
+  "lanse@insaces.com",
+  "robert@insaces.com",
+  "bryan@insaces.com",
+  "jimmy@insaces.com",
+  "office@insaces.com"
+];
+
+function getNextRecipient() {
+  let index = localStorage.getItem("aces-rr-index");
+  index = index ? parseInt(index) : 0;
+
+  const email = rrEmails[index];
+
+  // Move to next index
+  index = (index + 1) % rrEmails.length;
+  localStorage.setItem("aces-rr-index", index);
+
+  return email;
+}
+
+/* ============================================================
+   APPLY ROUND ROBIN EMAIL TO ALL FORMS
+============================================================ */
+function applyRoundRobin() {
+  document.querySelectorAll("form").forEach(form => {
+    const hiddenTo = form.querySelector("input[name='_to']");
+    if (hiddenTo) hiddenTo.value = getNextRecipient();
+  });
+}
+
+/* ============================================================
+   AUTO-SCROLL TO SELECTED APPLICATION
+============================================================ */
+function scrollToSelectedApp() {
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get("type");
+  if (!type) return;
+
+  const target = document.getElementById(type);
+  if (target) {
+    setTimeout(() => {
+      target.scrollIntoView({ behavior: "smooth" });
+    }, 300);
+  }
+}
+
+/* ============================================================
+   EXPAND FULL APPLICATION
+============================================================ */
+function initExpandButtons() {
+  document.querySelectorAll(".expand-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const fullForm = btn.nextElementSibling;
+      if (fullForm.style.display === "block") {
+        fullForm.style.display = "none";
+        btn.innerText = "Show Full Application";
+      } else {
+        fullForm.style.display = "block";
+        btn.innerText = "Hide Full Application";
+      }
+    });
+  });
+}
+
+/* ============================================================
+   INITIALIZE EVERYTHING
+============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  applyRoundRobin();
+  scrollToSelectedApp();
+  initExpandButtons();
+});
+</script>
+
 </head>
-
 <body>
 
-<div class="language-toggle">
-    <span onclick="setLanguage('en')">EN 🇺🇸</span> |
-    <span onclick="setLanguage('es')">ES 🇲🇽</span>
-</div>
-
-<div class="page-wrapper">
-
-    <!-- ========================= -->
-    <!-- ENGLISH VERSION -->
-    <!-- ========================= -->
-
-    <div class="lang-en">
-
-        <h1>Start Your Application</h1>
-        <p style="text-align:center; max-width:700px; margin:10px auto 40px;">
-            Select your insurance type below. Each section includes a short form and a button for the full application.
-        </p>
-        <!-- ========================= -->
-        <!-- LIFE INSURANCE -->
-        <!-- ========================= -->
-
-        <div id="term-life" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Term Life Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Affordable coverage for a set period to protect your family during key life stages.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="whole-life" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Whole Life Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Permanent coverage with potential cash value to support long‑term planning.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="final-expense" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Final Expense Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Smaller policies designed to help cover funeral and final expenses.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-
-        <!-- ========================= -->
-        <!-- PERSONAL INSURANCE -->
-        <!-- ========================= -->
-
-        <div id="homeowners" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Homeowners Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Coverage for your primary residence, personal property, and liability.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="renters" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Renters Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Protect your belongings and personal liability while renting a home or apartment.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="condo" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Condo Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Coverage designed for condo owners to complement your association policy.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="landlord" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Landlord Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Protect your rental properties, structures, and liability as a landlord.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="flood" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Flood Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Specialized coverage for flood damage not included in standard policies.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="windstorm" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Windstorm Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Protection against wind and hail in high‑risk areas.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-
-        <!-- ========================= -->
-        <!-- AUTO & SPECIALTY VEHICLES -->
-        <!-- ========================= -->
-
-        <div id="personal-auto" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Auto Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Personal auto coverage for everyday drivers and families.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="motorcycle" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Motorcycle Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Coverage tailored for motorcycles and riders.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="rv" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>RV Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Protection for recreational vehicles, whether part‑time or full‑time use.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="atv" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>ATV Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Coverage for ATVs and off‑road recreational vehicles.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="golf-cart" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Golf Cart Insurance</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Specialized coverage for golf carts used on or off the course.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-
-        <!-- ========================= -->
-        <!-- COMMERCIAL INSURANCE -->
-        <!-- ========================= -->
-
-        <div id="general-liability" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>General Liability</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Core protection for third‑party bodily injury, property damage, and more.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="bop" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Business Owners Policy (BOP)</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Bundled coverage for small to mid‑sized businesses, combining property and liability.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="commercial-auto" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Commercial Auto</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Coverage for vehicles used in your business operations.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="workers-comp" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Workers’ Compensation</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Protection for employees injured on the job, as required by law.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="commercial-property" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Commercial Property</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Coverage for your buildings, equipment, inventory, and more.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-
-        <div id="bonds" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Bonds</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Surety and other bonds to meet contract and licensing requirements.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Email Address">
-                <textarea placeholder="Notes (optional)" rows="4"></textarea>
-                <button type="submit">Submit Short Form</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Full Application (Coming Soon)</a>
-        </div>
-
-    </div> <!-- END ENGLISH -->
-    <!-- ========================= -->
-    <!-- SPANISH VERSION -->
-    <!-- ========================= -->
-
-    <div class="lang-es">
-
-        <h1>Iniciar Solicitud</h1>
-        <p style="text-align:center; max-width:700px; margin:10px auto 40px;">
-            Seleccione su tipo de seguro. Cada sección incluye un formulario corto y un botón para la solicitud completa.
-        </p>
-
-
-        <!-- ========================= -->
-        <!-- SEGURO DE VIDA -->
-        <!-- ========================= -->
-
-        <div id="term-life" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de Vida a Plazo</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura accesible por un período específico para proteger a su familia.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="whole-life" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de Vida Entera</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura permanente con posible valor en efectivo para la planificación a largo plazo.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="final-expense" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de Gastos Finales</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Pólizas diseñadas para ayudar a cubrir gastos funerarios y finales.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-
-        <!-- ========================= -->
-        <!-- SEGURO PERSONAL -->
-        <!-- ========================= -->
-
-        <div id="homeowners" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de Propietarios de Vivienda</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura para su residencia principal, pertenencias y responsabilidad civil.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="renters" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de Inquilinos</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Proteja sus pertenencias y responsabilidad civil mientras renta una casa o apartamento.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="condo" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de Condominio</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura diseñada para dueños de condominios que complementa la póliza de la asociación.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="landlord" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro para Propietarios de Alquiler</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Proteja sus propiedades de renta, estructuras y responsabilidad como arrendador.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="flood" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro contra Inundación</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura especializada para daños por inundación no incluidos en pólizas estándar.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="windstorm" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro contra Viento y Granizo</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Protección contra viento y granizo en áreas de alto riesgo.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-
-        <!-- ========================= -->
-        <!-- AUTO Y VEHÍCULOS ESPECIALES -->
-        <!-- ========================= -->
-
-        <div id="personal-auto" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de Auto</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura de auto personal para conductores y familias.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="motorcycle" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de Motocicleta</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura diseñada para motocicletas y motociclistas.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="rv" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de RV</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Protección para vehículos recreativos, ya sea uso parcial o de tiempo completo.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="atv" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de ATV</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura para vehículos todo terreno y recreativos.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="golf-cart" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Seguro de Carrito de Golf</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura especializada para carritos de golf dentro o fuera del campo.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-
-        <!-- ========================= -->
-        <!-- SEGURO COMERCIAL -->
-        <!-- ========================= -->
-
-        <div id="general-liability" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Responsabilidad General</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Protección básica para lesiones corporales, daños a propiedad de terceros y más.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="bop" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Póliza para Dueños de Negocio (BOP)</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura combinada de propiedad y responsabilidad para pequeños y medianos negocios.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="commercial-auto" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Auto Comercial</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura para vehículos utilizados en las operaciones de su negocio.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="workers-comp" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Compensación para Trabajadores</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Protección para empleados lesionados en el trabajo, según lo requiera la ley.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="commercial-property" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Propiedad Comercial</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Cobertura para edificios, equipo, inventario y más.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-
-        <div id="bonds" class="anchor-spacer"></div>
-        <div class="app-card">
-            <h2>Fianzas</h2>
-            <img src="Aces-Spade.jpg" class="spade">
-            <p>Fianzas y otros bonos para cumplir requisitos de contratos y licencias.</p>
-
-            <form class="short-form">
-                <input type="text" placeholder="Nombre Completo">
-                <input type="text" placeholder="Número de Teléfono">
-                <input type="email" placeholder="Correo Electrónico">
-                <textarea placeholder="Notas (opcional)" rows="4"></textarea>
-                <button type="submit">Enviar Formulario Corto</button>
-            </form>
-
-            <a href="#" class="full-app-btn">Solicitud Completa (Próximamente)</a>
-        </div>
-
-    </div> <!-- END SPANISH -->
-
-
-</div> <!-- END PAGE WRAPPER -->
-
-<script src="global.js"></script>
+<header id="aces-header"></header>
+
+<section class="section-light">
+  <h2 class="app-title"
+      data-en="Insurance Applications"
+      data-es="Solicitudes de Seguro">
+    Insurance Applications
+  </h2>
+
+  <p class="app-subtitle"
+     data-en="Select the type of insurance below to begin your application."
+     data-es="Seleccione el tipo de seguro a continuación para comenzar su solicitud.">
+    Select the type of insurance below to begin your application.
+  </p>
+</section>
+
+<!-- ============================================================
+     APPLICATION SECTIONS BEGIN BELOW
+============================================================ -->
+<!-- ============================================================
+     COMMERCIAL APPLICATIONS
+============================================================ -->
+
+<!-- ===========================
+     1. BUSINESS OWNERS POLICY
+=========================== -->
+<section id="bop" class="app-wrapper">
+  <h2 class="app-title">Business Owners Policy (BOP)</h2>
+
+  <!-- SHORT INTAKE FORM -->
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
+
+    <div class="form-row">
+      <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
+      <input type="text" name="Business Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Brief Description of Business" data-es="Descripción Breve del Negocio">
+        Brief Description of Business
+      </label>
+      <textarea name="Business Description" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn"
+      data-en="Submit Intake" data-es="Enviar Formulario">
+      Submit Intake
+    </button>
+  </form>
+
+  <!-- EXPAND FULL FORM -->
+  <button class="expand-btn"
+          data-en="Show Full Application"
+          data-es="Mostrar Solicitud Completa">
+    Show Full Application
+  </button>
+
+  <div class="full-form">
+
+    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+
+      <input type="hidden" name="_to" value="">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+      <h3 data-en="Full BOP Application" data-es="Solicitud Completa BOP">
+        Full BOP Application
+      </h3>
+
+      <div class="form-row">
+        <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
+        <input type="text" name="Business Address">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Years in Business" data-es="Años en el Negocio">Years in Business</label>
+        <input type="number" name="Years in Business">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Annual Revenue" data-es="Ingresos Anuales">Annual Revenue</label>
+        <input type="text" name="Annual Revenue">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Number of Employees" data-es="Número de Empleados">Number of Employees</label>
+        <input type="number" name="Employees">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Business Operations" data-es="Operaciones del Negocio">Business Operations</label>
+        <textarea name="Business Operations" rows="4"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn"
+        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
+        Submit Full Application
+      </button>
+
+    </form>
+  </div>
+</section>
+
+
+<!-- ===========================
+     2. GENERAL LIABILITY
+=========================== -->
+<section id="gl" class="app-wrapper">
+  <h2 class="app-title">General Liability</h2>
+
+  <!-- SHORT INTAKE -->
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
+
+    <div class="form-row">
+      <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
+      <input type="text" name="Business Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Describe Your Business Operations"
+             data-es="Describa las Operaciones de su Negocio">
+        Describe Your Business Operations
+      </label>
+      <textarea name="Business Operations" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn"
+      data-en="Submit Intake" data-es="Enviar Formulario">
+      Submit Intake
+    </button>
+  </form>
+
+  <!-- EXPAND FULL FORM -->
+  <button class="expand-btn"
+          data-en="Show Full Application"
+          data-es="Mostrar Solicitud Completa">
+    Show Full Application
+  </button>
+
+  <div class="full-form">
+
+    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+
+      <input type="hidden" name="_to" value="">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+      <h3 data-en="Full General Liability Application"
+          data-es="Solicitud Completa de Responsabilidad General">
+        Full General Liability Application
+      </h3>
+
+      <div class="form-row">
+        <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
+        <input type="text" name="Business Address">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Years in Business" data-es="Años en el Negocio">Years in Business</label>
+        <input type="number" name="Years in Business">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Annual Revenue" data-es="Ingresos Anuales">Annual Revenue</label>
+        <input type="text" name="Annual Revenue">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Describe Liability Exposure"
+               data-es="Describa la Exposición a Responsabilidad">
+          Describe Liability Exposure
+        </label>
+        <textarea name="Liability Exposure" rows="4"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn"
+        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
+        Submit Full Application
+      </button>
+
+    </form>
+  </div>
+</section>
+
+
+<!-- ===========================
+     3. COMMERCIAL AUTO
+=========================== -->
+<section id="commercial-auto" class="app-wrapper">
+  <h2 class="app-title">Commercial Auto</h2>
+
+  <!-- SHORT INTAKE -->
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
+
+    <div class="form-row">
+      <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
+      <input type="text" name="Business Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Number of Vehicles" data-es="Número de Vehículos">Number of Vehicles</label>
+      <input type="number" name="Vehicle Count">
+    </div>
+
+    <button type="submit" class="submit-btn"
+      data-en="Submit Intake" data-es="Enviar Formulario">
+      Submit Intake
+    </button>
+  </form>
+
+  <!-- EXPAND FULL FORM -->
+  <button class="expand-btn"
+          data-en="Show Full Application"
+          data-es="Mostrar Solicitud Completa">
+    Show Full Application
+  </button>
+
+  <div class="full-form">
+
+    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+
+      <input type="hidden" name="_to" value="">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+      <h3 data-en="Full Commercial Auto Application"
+          data-es="Solicitud Completa de Auto Comercial">
+        Full Commercial Auto Application
+      </h3>
+
+      <div class="form-row">
+        <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
+        <input type="text" name="Business Address">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Vehicle List" data-es="Lista de Vehículos">Vehicle List</label>
+        <textarea name="Vehicle List" rows="4"
+          placeholder="Year, Make, Model, VIN, Use"></textarea>
+      </div>
+
+      <div class="form-row">
+        <label data-en="Driver List" data-es="Lista de Conductores">Driver List</label>
+        <textarea name="Driver List" rows="4"
+          placeholder="Name, DOB, License #"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn"
+        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
+        Submit Full Application
+      </button>
+
+    </form>
+  </div>
+</section>
+
+
+<!-- ===========================
+     4. WORKERS COMPENSATION
+=========================== -->
+<section id="wc" class="app-wrapper">
+  <h2 class="app-title">Workers Compensation</h2>
+
+  <!-- SHORT INTAKE -->
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
+
+    <div class="form-row">
+      <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
+      <input type="text" name="Business Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Number of Employees" data-es="Número de Empleados">Number of Employees</label>
+      <input type="number" name="Employees">
+    </div>
+
+    <button type="submit" class="submit-btn"
+      data-en="Submit Intake" data-es="Enviar Formulario">
+      Submit Intake
+    </button>
+  </form>
+
+  <!-- EXPAND FULL FORM -->
+  <button class="expand-btn"
+          data-en="Show Full Application"
+          data-es="Mostrar Solicitud Completa">
+    Show Full Application
+  </button>
+
+  <div class="full-form">
+
+    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+
+      <input type="hidden" name="_to" value="">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+      <h3 data-en="Full Workers Compensation Application"
+          data-es="Solicitud Completa de Compensación al Trabajador">
+        Full Workers Compensation Application
+      </h3>
+
+      <div class="form-row">
+        <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
+        <input type="text" name="Business Address">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Payroll Breakdown" data-es="Desglose de Nómina">Payroll Breakdown</label>
+        <textarea name="Payroll Breakdown" rows="4"
+          placeholder="Class Code, # of Employees, Annual Payroll"></textarea>
+      </div>
+
+      <div class="form-row">
+        <label data-en="Describe Work Performed"
+               data-es="Describa el Trabajo Realizado">
+          Describe Work Performed
+        </label>
+        <textarea name="Work Description" rows="4"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn"
+        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
+        Submit Full Application
+      </button>
+
+    </form>
+  </div>
+</section>
+<!-- ============================================================
+     PERSONAL APPLICATIONS
+============================================================ -->
+
+<!-- ===========================
+     5. HOMEOWNERS INSURANCE
+=========================== -->
+<section id="homeowners" class="app-wrapper">
+  <h2 class="app-title">Homeowners Insurance</h2>
+
+  <!-- SHORT INTAKE -->
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Property Address" data-es="Dirección de la Propiedad">Property Address</label>
+      <input type="text" name="Property Address" required>
+    </div>
+
+    <button type="submit" class="submit-btn"
+      data-en="Submit Intake" data-es="Enviar Formulario">
+      Submit Intake
+    </button>
+  </form>
+
+  <!-- EXPAND FULL FORM -->
+  <button class="expand-btn"
+          data-en="Show Full Application"
+          data-es="Mostrar Solicitud Completa">
+    Show Full Application
+  </button>
+
+  <div class="full-form">
+    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+
+      <input type="hidden" name="_to" value="">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+      <h3 data-en="Full Homeowners Application"
+          data-es="Solicitud Completa de Seguro de Casa">
+        Full Homeowners Application
+      </h3>
+
+      <div class="form-row">
+        <label data-en="Year Built" data-es="Año de Construcción">Year Built</label>
+        <input type="number" name="Year Built">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Square Footage" data-es="Pies Cuadrados">Square Footage</label>
+        <input type="number" name="Square Footage">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Roof Type" data-es="Tipo de Techo">Roof Type</label>
+        <input type="text" name="Roof Type">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Any Prior Claims?" data-es="¿Reclamos Previos?">Any Prior Claims?</label>
+        <textarea name="Prior Claims" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn"
+        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
+        Submit Full Application
+      </button>
+
+    </form>
+  </div>
+</section>
+
+
+<!-- ===========================
+     6. RENTERS INSURANCE
+=========================== -->
+<section id="renters" class="app-wrapper">
+  <h2 class="app-title">Renters Insurance</h2>
+
+  <!-- SHORT INTAKE -->
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Rental Address" data-es="Dirección de Renta">Rental Address</label>
+      <input type="text" name="Rental Address" required>
+    </div>
+
+    <button type="submit" class="submit-btn"
+      data-en="Submit Intake" data-es="Enviar Formulario">
+      Submit Intake
+    </button>
+  </form>
+
+  <!-- EXPAND FULL FORM -->
+  <button class="expand-btn"
+          data-en="Show Full Application"
+          data-es="Mostrar Solicitud Completa">
+    Show Full Application
+  </button>
+
+  <div class="full-form">
+    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+
+      <input type="hidden" name="_to" value="">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+      <h3 data-en="Full Renters Application"
+          data-es="Solicitud Completa de Seguro de Inquilinos">
+        Full Renters Application
+      </h3>
+
+      <div class="form-row">
+        <label data-en="Approximate Value of Personal Property"
+               data-es="Valor Aproximado de Propiedad Personal">
+          Approximate Value of Personal Property
+        </label>
+        <input type="text" name="Property Value">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Any Prior Claims?" data-es="¿Reclamos Previos?">Any Prior Claims?</label>
+        <textarea name="Prior Claims" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn"
+        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
+        Submit Full Application
+      </button>
+
+    </form>
+  </div>
+</section>
+
+
+<!-- ===========================
+     7. PERSONAL UMBRELLA
+=========================== -->
+<section id="umbrella" class="app-wrapper">
+  <h2 class="app-title">Personal Umbrella</h2>
+
+  <!-- SHORT INTAKE -->
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
+    </div>
+
+    <button type="submit" class="submit-btn"
+      data-en="Submit Intake" data-es="Enviar Formulario">
+      Submit Intake
+    </button>
+  </form>
+
+  <!-- EXPAND FULL FORM -->
+  <button class="expand-btn"
+          data-en="Show Full Application"
+          data-es="Mostrar Solicitud Completa">
+    Show Full Application
+  </button>
+
+  <div class="full-form">
+    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+
+      <input type="hidden" name="_to" value="">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+      <h3 data-en="Full Umbrella Application"
+          data-es="Solicitud Completa de Seguro Umbrella">
+        Full Umbrella Application
+      </h3>
+
+      <div class="form-row">
+        <label data-en="Current Auto Policy Limits"
+               data-es="Límites Actuales de Póliza de Auto">
+          Current Auto Policy Limits
+        </label>
+        <input type="text" name="Auto Limits">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Current Home Policy Limits"
+               data-es="Límites Actuales de Póliza de Casa">
+          Current Home Policy Limits
+        </label>
+        <input type="text" name="Home Limits">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Any Prior Liability Claims?"
+               data-es="¿Reclamos Previos de Responsabilidad?">
+          Any Prior Liability Claims?
+        </label>
+        <textarea name="Liability Claims" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn"
+        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
+        Submit Full Application
+      </button>
+
+    </form>
+  </div>
+</section>
+
+
+<!-- ===========================
+     8. PERSONAL AUTO INSURANCE
+=========================== -->
+<section id="auto" class="app-wrapper">
+  <h2 class="app-title">Auto Insurance</h2>
+
+  <!-- SHORT INTAKE -->
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Number of Vehicles" data-es="Número de Vehículos">Number of Vehicles</label>
+      <input type="number" name="Vehicle Count">
+    </div>
+
+    <button type="submit" class="submit-btn"
+      data-en="Submit Intake" data-es="Enviar Formulario">
+      Submit Intake
+    </button>
+  </form>
+
+  <!-- EXPAND FULL FORM -->
+  <button class="expand-btn"
+          data-en="Show Full Application"
+          data-es="Mostrar Solicitud Completa">
+    Show Full Application
+  </button>
+
+  <div class="full-form">
+    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+
+      <input type="hidden" name="_to" value="">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+      <h3 data-en="Full Auto Insurance Application"
+          data-es="Solicitud Completa de Seguro de Auto">
+        Full Auto Insurance Application
+      </h3>
+
+      <div class="form-row">
+        <label data-en="Driver List" data-es="Lista de Conductores">Driver List</label>
+        <textarea name="Driver List" rows="4"
+          placeholder="Name, DOB, License #"></textarea>
+      </div>
+
+      <div class="form-row">
+        <label data-en="Vehicle List" data-es="Lista de Vehículos">Vehicle List</label>
+        <textarea name="Vehicle List" rows="4"
+          placeholder="Year, Make, Model, VIN"></textarea>
+      </div>
+
+      <div class="form-row">
+        <label data-en="Current Insurance Carrier"
+               data-es="Aseguradora Actual">
+          Current Insurance Carrier
+        </label>
+        <input type="text" name="Current Carrier">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Any Prior Claims?" data-es="¿Reclamos Previos?">Any Prior Claims?</label>
+        <textarea name="Prior Claims" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn"
+        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
+        Submit Full Application
+      </button>
+
+    </form>
+  </div>
+</section>
+<!-- ============================================================
+     LIFE INSURANCE APPLICATION
+============================================================ -->
+
+<section id="life" class="app-wrapper">
+  <h2 class="app-title">Life Insurance</h2>
+
+  <!-- SHORT INTAKE -->
+  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake">
+
+    <input type="hidden" name="_to" value="">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
+
+    <div class="form-row">
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
+    </div>
+
+    <div class="form-row">
+      <label data-en="Coverage Amount Desired"
+             data-es="Monto de Cobertura Deseado">
+        Coverage Amount Desired
+      </label>
+      <input type="text" name="Coverage Amount">
+    </div>
+
+    <button type="submit" class="submit-btn"
+      data-en="Submit Intake" data-es="Enviar Formulario">
+      Submit Intake
+    </button>
+  </form>
+
+  <!-- EXPAND FULL FORM -->
+  <button class="expand-btn"
+          data-en="Show Full Application"
+          data-es="Mostrar Solicitud Completa">
+    Show Full Application
+  </button>
+
+  <div class="full-form">
+    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+
+      <input type="hidden" name="_to" value="">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+      <h3 data-en="Full Life Insurance Application"
+          data-es="Solicitud Completa de Seguro de Vida">
+        Full Life Insurance Application
+      </h3>
+
+      <div class="form-row">
+        <label data-en="Date of Birth" data-es="Fecha de Nacimiento">Date of Birth</label>
+        <input type="date" name="DOB">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Tobacco Use" data-es="Uso de Tabaco">Tobacco Use</label>
+        <select name="Tobacco Use">
+          <option value="No" data-en="No" data-es="No">No</option>
+          <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label data-en="Beneficiary Name" data-es="Nombre del Beneficiario">
+          Beneficiary Name
+        </label>
+        <input type="text" name="Beneficiary">
+      </div>
+
+      <div class="form-row">
+        <label data-en="Medical History" data-es="Historial Médico">Medical History</label>
+        <textarea name="Medical History" rows="4"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn"
+        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
+        Submit Full Application
+      </button>
+
+    </form>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER + CLOSE PAGE
+============================================================ -->
+
+<footer id="aces-footer"></footer>
 
 </body>
 </html>
