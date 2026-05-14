@@ -1,196 +1,194 @@
 /* ============================================================
-   ACES INSURANCE — GLOBAL JAVASCRIPT (2026 MASTER VERSION)
-   - Header + Footer Injection
-   - Bilingual text swap (formal Spanish)
-   - Dropdown menus
-   - Mobile nav toggle
-   - Services page filtering
-   - Applications multi-vehicle logic
-   - Agent slide-out panel
-   - Floating mobile Call ACES button
+   ACES GLOBAL.JS — 2026 MODERN SYSTEM
+   - Header Injection (Option‑B)
+   - Footer Injection
+   - Language Toggle (EN/ES)
+   - Theme Toggle (Dark/Light)
+   - Mobile Menu
+   - Scroll Animations
+   - Application Category Switching
 ============================================================ */
 
-/* ============================================================
-   INJECT HEADER + NAVIGATION
-============================================================ */
-function injectHeader() {
+/* ------------------------------------------------------------
+   1. HEADER INJECTION — Option‑B Modern Header
+------------------------------------------------------------ */
+function loadHeader() {
   const header = document.getElementById("aces-header");
   if (!header) return;
 
   header.innerHTML = `
-    <div class="aces-header">
-      <div class="header-inner">
-        <a href="index.html">
-          <img src="/image2.png" class="header-logo-img" alt="ACES Logo">
+    <div class="header-container">
+      <div class="logo-area">
+        <a href="index.html" class="logo-link">
+          <img src="aces-logo.png" alt="ACES Logo" class="aces-logo">
         </a>
-
-        <div class="lang-switch">
-          <button class="lang-option" data-lang="en">EN</button>
-          <button class="lang-option" data-lang="es">ES</button>
-        </div>
-
-        <nav class="nav-menu" id="navMenu">
-          <a href="index.html" class="nav-link" data-en="Home" data-es="Inicio">Home</a>
-
-          <div class="dropdown">
-            <span class="nav-link dropdown-toggle" data-en="Applications" data-es="Aplicaciones">Applications</span>
-            <div class="dropdown-menu">
-              <a href="services.html?type=commercial">Commercial</a>
-              <a href="services.html?type=personal">Personal</a>
-              <a href="services.html?type=life">Life</a>
-            </div>
-          </div>
-
-          <a href="contact.html" class="nav-link" data-en="Contact" data-es="Contacto">Contact</a>
-        </nav>
-
-        <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
       </div>
+
+      <nav class="nav-links">
+        <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+        <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
+        <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+        <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+        <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+        <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
+        <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+      </nav>
+
+      <div class="header-controls">
+        <button id="lang-toggle" class="lang-btn">ES</button>
+        <button id="theme-toggle" class="theme-btn">☀</button>
+        <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="mobile-menu">
+      <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+      <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
+      <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+      <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+      <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+      <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
+      <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </div>
   `;
 }
-injectHeader();
 
-/* ============================================================
-   INJECT FOOTER (Loads footer.html)
-============================================================ */
-function injectFooter() {
+/* ------------------------------------------------------------
+   2. FOOTER INJECTION
+------------------------------------------------------------ */
+function loadFooter() {
   const footer = document.getElementById("aces-footer");
   if (!footer) return;
 
-  fetch("footer.html")
-    .then(res => res.text())
-    .then(html => {
-      footer.innerHTML = html;
-      setLanguage(localStorage.getItem("aces-lang") || "en");
-    });
+  footer.innerHTML = `
+    <div class="footer-container">
+      <div class="footer-left">
+        <img src="aces-logo.png" alt="ACES Logo" class="footer-logo">
+        <p>404 Sapphire Blvd, Hewitt, TX 76643</p>
+        <p>(254) 227‑6560</p>
+      </div>
+
+      <div class="footer-center">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="applications.html">Applications</a>
+        <a href="claims.html">Claims</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="footer-right">
+        <h4>Follow Us</h4>
+        <a href="https://facebook.com/acesinsuranceservices" target="_blank">Facebook</a>
+        <a href="https://instagram.com/acesinsuranceservices" target="_blank">Instagram</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 ACES Insurance Services. All Rights Reserved.</p>
+    </div>
+  `;
 }
-injectFooter();
 
+/* ------------------------------------------------------------
+   3. LANGUAGE TOGGLE (EN / ES)
+------------------------------------------------------------ */
+function setupLanguageToggle() {
+  const langBtn = document.getElementById("lang-toggle");
 
-/* ============================================================
-   LANGUAGE SWITCHING — TEXT SWAP ONLY
-============================================================ */
-function setLanguage(lang) {
-  localStorage.setItem("aces-lang", lang);
+  langBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("lang");
 
-  document.querySelectorAll("[data-en]").forEach(el => {
-    el.innerText = lang === "es" ? el.dataset.es : el.dataset.en;
+    if (current === "en") {
+      document.documentElement.setAttribute("lang", "es");
+      langBtn.textContent = "EN";
+      translatePage("es");
+    } else {
+      document.documentElement.setAttribute("lang", "en");
+      langBtn.textContent = "ES";
+      translatePage("en");
+    }
   });
 }
 
-const savedLang = localStorage.getItem("aces-lang") || "en";
-setLanguage(savedLang);
+function translatePage(lang) {
+  const elements = document.querySelectorAll("[data-en]");
 
-/* Language buttons */
-document.addEventListener("click", e => {
-  if (e.target.classList.contains("lang-option")) {
-    setLanguage(e.target.dataset.lang);
-  }
-});
+  elements.forEach(el => {
+    el.textContent = el.getAttribute(`data-${lang}`);
+  });
+}
 
-/* ============================================================
-   MOBILE NAV
-============================================================ */
-document.addEventListener("click", e => {
-  const toggle = document.getElementById("mobileNavToggle");
-  const menu = document.getElementById("navMenu");
+/* ------------------------------------------------------------
+   4. DARK / LIGHT MODE TOGGLE
+------------------------------------------------------------ */
+function setupThemeToggle() {
+  const themeBtn = document.getElementById("theme-toggle");
 
-  if (e.target === toggle) {
+  themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    if (document.body.classList.contains("light-mode")) {
+      themeBtn.textContent = "🌙";
+    } else {
+      themeBtn.textContent = "☀";
+    }
+  });
+}
+
+/* ------------------------------------------------------------
+   5. MOBILE MENU
+------------------------------------------------------------ */
+function setupMobileMenu() {
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+
+  btn.addEventListener("click", () => {
     menu.classList.toggle("open");
-  }
-});
+  });
+}
 
-/* ============================================================
-   DROPDOWN MENUS
-============================================================ */
-document.addEventListener("click", e => {
-  if (e.target.classList.contains("dropdown-toggle")) {
-    const menu = e.target.nextElementSibling;
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-  } else {
-    document.querySelectorAll(".dropdown-menu").forEach(menu => {
-      menu.style.display = "none";
+/* ------------------------------------------------------------
+   6. SCROLL FADE-IN ANIMATIONS
+------------------------------------------------------------ */
+function setupFadeInAnimations() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
     });
-  }
-});
+  });
 
-/* ============================================================
-   SERVICES PAGE — SHOW TYPE BASED ON ?type=
-============================================================ */
-function showServiceFromQuery() {
-  if (!location.pathname.includes("services.html")) return;
+  document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+}
 
+/* ------------------------------------------------------------
+   7. APPLICATION CATEGORY SWITCHING (?type=)
+------------------------------------------------------------ */
+function setupApplicationSections() {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type");
 
-  document.querySelectorAll(".app-section").forEach(sec => sec.style.display = "none");
+  if (!type) return;
 
-  if (type) {
-    const active = document.getElementById(type);
-    if (active) active.style.display = "block";
+  const section = document.getElementById(type);
+
+  if (section) {
+    section.style.display = "block";
+    window.scrollTo(0, section.offsetTop - 80);
   }
 }
-showServiceFromQuery();
 
-/* ============================================================
-   APPLICATIONS PAGE — MULTI-VEHICLE LOGIC
-============================================================ */
-function initApplications() {
-  if (!location.pathname.includes("applications.html")) return;
-
-  const addBtn = document.getElementById("addVehicle");
-  const container = document.getElementById("vehicleContainer");
-
-  if (addBtn && container) {
-    addBtn.addEventListener("click", () => {
-      const clone = container.firstElementChild.cloneNode(true);
-      container.appendChild(clone);
-    });
-  }
-}
-initApplications();
-
-/* ============================================================
-   AGENT PANEL + GRID SHIFT
-============================================================ */
-const panel = document.querySelector(".agent-panel");
-const grid = document.querySelector(".team-grid");
-
-if (panel && grid) {
-  document.querySelectorAll(".agent-card").forEach(card => {
-    card.addEventListener("click", () => {
-      panel.querySelector(".panel-photo").src = card.dataset.photo;
-      panel.querySelector("h2").innerText = card.dataset.name;
-      panel.querySelector(".panel-title").innerText = card.dataset.title;
-      panel.querySelector(".panel-phone").innerText = card.dataset.phone;
-      panel.querySelector(".panel-email").innerText = card.dataset.email;
-
-      const cleanPhone = card.dataset.phone.replace(/[^0-9]/g, "");
-      panel.querySelector(".panel-call").href = "tel:" + cleanPhone;
-
-      panel.classList.add("open");
-      grid.classList.add("shift-left");
-    });
-  });
-
-  document.querySelector(".close-panel").addEventListener("click", () => {
-    panel.classList.remove("open");
-    grid.classList.remove("shift-left");
-  });
-}
-
-/* ============================================================
-   FLOATING MOBILE "CALL ACES" BUTTON
-============================================================ */
-function createMobileCallButton() {
-  if (window.innerWidth > 900) return;
-
-  const btn = document.createElement("a");
-  btn.href = "tel:2542276560";
-  btn.className = "mobile-call-btn";
-  btn.innerText = "📞 Call ACES";
-
-  document.body.appendChild(btn);
-}
-createMobileCallButton();
+/* ------------------------------------------------------------
+   8. INITIALIZE EVERYTHING
+------------------------------------------------------------ */
+document.addEventListener("DOMContentLoaded", () => {
+  loadHeader();
+  loadFooter();
+  setupLanguageToggle();
+  setupThemeToggle();
+  setupMobileMenu();
+  setupFadeInAnimations();
+  setupApplicationSections();
+});
