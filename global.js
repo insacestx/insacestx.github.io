@@ -1,7 +1,5 @@
 /* ------------------------------------------------------------
-   ACES 2026 — GLOBAL.JS (Optimized Final Version)
-   Header, Footer, Language, Mobile Menu, Animations,
-   Agent Panel, Round Robin, Application Switching
+   ACES 2026 — GLOBAL.JS (Optimized + Language Memory Fix)
 ------------------------------------------------------------ */
 
 /* ------------------------------------------------------------
@@ -14,14 +12,12 @@ function loadHeader() {
   header.innerHTML = `
     <div class="header-container">
 
-      <!-- LOGO -->
       <div class="logo-area">
         <a href="index.html" class="logo-link">
           <img src="image2.png" alt="ACES Insurance Logo" class="aces-logo">
         </a>
       </div>
 
-      <!-- DESKTOP NAV -->
       <nav class="nav-links">
         <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
         <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
@@ -32,14 +28,12 @@ function loadHeader() {
         <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
       </nav>
 
-      <!-- CONTROLS -->
       <div class="header-controls">
         <button id="lang-toggle" class="lang-btn">ES</button>
         <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
       </div>
     </div>
 
-    <!-- MOBILE MENU -->
     <div id="mobile-menu" class="mobile-menu">
       <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
       <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
@@ -61,15 +55,12 @@ function loadFooter() {
 
   footer.innerHTML = `
     <div class="footer-container">
-
-      <!-- LEFT -->
       <div class="footer-left">
         <img src="image2.png" alt="ACES Insurance Logo" class="footer-logo">
         <p>404 Sapphire Blvd, Hewitt, TX 76643</p>
         <p>(254) 227‑6560</p>
       </div>
 
-      <!-- CENTER -->
       <div class="footer-center">
         <h4>Quick Links</h4>
         <a href="index.html">Home</a>
@@ -79,7 +70,6 @@ function loadFooter() {
         <a href="contact.html">Contact</a>
       </div>
 
-      <!-- RIGHT -->
       <div class="footer-right">
         <h4>Follow Us</h4>
         <a href="https://facebook.com/acesinsuranceservices" target="_blank">Facebook</a>
@@ -94,24 +84,27 @@ function loadFooter() {
 }
 
 /* ------------------------------------------------------------
-   3. LANGUAGE TOGGLE (EN / ES)
+   3. LANGUAGE TOGGLE (Now remembers language)
 ------------------------------------------------------------ */
 function setupLanguageToggle() {
   const langBtn = document.getElementById("lang-toggle");
   if (!langBtn) return;
 
+  // Load saved language
+  const savedLang = localStorage.getItem("aces-lang") || "en";
+  document.documentElement.setAttribute("lang", savedLang);
+  langBtn.textContent = savedLang === "en" ? "ES" : "EN";
+  translatePage(savedLang);
+
   langBtn.addEventListener("click", () => {
     const current = document.documentElement.getAttribute("lang");
+    const newLang = current === "en" ? "es" : "en";
 
-    if (current === "en") {
-      document.documentElement.setAttribute("lang", "es");
-      langBtn.textContent = "EN";
-      translatePage("es");
-    } else {
-      document.documentElement.setAttribute("lang", "en");
-      langBtn.textContent = "ES";
-      translatePage("en");
-    }
+    document.documentElement.setAttribute("lang", newLang);
+    langBtn.textContent = newLang === "en" ? "ES" : "EN";
+    localStorage.setItem("aces-lang", newLang);
+
+    translatePage(newLang);
   });
 }
 
@@ -136,7 +129,7 @@ function setupMobileMenu() {
 }
 
 /* ------------------------------------------------------------
-   5. SCROLL FADE-IN ANIMATIONS
+   5. FADE-IN ANIMATIONS
 ------------------------------------------------------------ */
 function setupFadeInAnimations() {
   const observer = new IntersectionObserver(entries => {
@@ -149,22 +142,24 @@ function setupFadeInAnimations() {
 }
 
 /* ------------------------------------------------------------
-   6. APPLICATION CATEGORY SWITCHING (?type=)
+   6. APPLICATION CATEGORY SWITCHING (Fix for services.html)
 ------------------------------------------------------------ */
 function setupApplicationSections() {
-  const params = new URLSearchParams(window.location.search);
-  const type = params.get("type");
-  if (!type) return;
+  setTimeout(() => {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    if (!type) return;
 
-  const section = document.getElementById(type);
-  if (section) {
-    section.style.display = "block";
-    window.scrollTo(0, section.offsetTop - 80);
-  }
+    const section = document.getElementById(type);
+    if (section) {
+      section.style.display = "block";
+      window.scrollTo(0, section.offsetTop - 80);
+    }
+  }, 200);
 }
 
 /* ------------------------------------------------------------
-   7. AGENT PANEL (Slide-Out)
+   7. AGENT PANEL
 ------------------------------------------------------------ */
 function setupAgentPanel() {
   const panel = document.querySelector(".agent-panel");
@@ -221,10 +216,13 @@ function setupRoundRobin() {
 document.addEventListener("DOMContentLoaded", () => {
   loadHeader();
   loadFooter();
-  setupLanguageToggle();
-  setupMobileMenu();
-  setupFadeInAnimations();
-  setupApplicationSections();
-  setupAgentPanel();
-  setupRoundRobin();
+
+  setTimeout(() => {
+    setupLanguageToggle();
+    setupMobileMenu();
+    setupFadeInAnimations();
+    setupApplicationSections();
+    setupAgentPanel();
+    setupRoundRobin();
+  }, 150);
 });
