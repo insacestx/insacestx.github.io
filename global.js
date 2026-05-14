@@ -1,5 +1,6 @@
 /* ============================================================
-   ACES INSURANCE — GLOBAL JAVASCRIPT (2026 CLEAN VERSION)
+   ACES INSURANCE — GLOBAL JAVASCRIPT (2026 MASTER VERSION)
+   - Header + Footer Injection
    - Bilingual text swap (formal Spanish)
    - Dropdown menus
    - Mobile nav toggle
@@ -8,6 +9,82 @@
    - Agent slide-out panel
    - Floating mobile Call ACES button
 ============================================================ */
+
+/* ============================================================
+   INJECT HEADER + NAVIGATION
+============================================================ */
+function injectHeader() {
+  const header = document.getElementById("aces-header");
+  if (!header) return;
+
+  header.innerHTML = `
+    <div class="aces-header">
+      <div class="header-inner">
+        <a href="index.html">
+          <img src="/image2.png" class="header-logo-img" alt="ACES Logo">
+        </a>
+
+        <div class="lang-switch">
+          <button class="lang-option" data-lang="en">EN</button>
+          <button class="lang-option" data-lang="es">ES</button>
+        </div>
+
+        <nav class="nav-menu" id="navMenu">
+          <a href="index.html" class="nav-link" data-en="Home" data-es="Inicio">Home</a>
+
+          <div class="dropdown">
+            <span class="nav-link dropdown-toggle" data-en="Applications" data-es="Aplicaciones">Applications</span>
+            <div class="dropdown-menu">
+              <a href="services.html?type=commercial">Commercial</a>
+              <a href="services.html?type=personal">Personal</a>
+              <a href="services.html?type=life">Life</a>
+            </div>
+          </div>
+
+          <a href="contact.html" class="nav-link" data-en="Contact" data-es="Contacto">Contact</a>
+        </nav>
+
+        <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+      </div>
+    </div>
+  `;
+}
+injectHeader();
+
+/* ============================================================
+   INJECT FOOTER
+============================================================ */
+function injectFooter() {
+  const footer = document.getElementById("aces-footer");
+  if (!footer) return;
+
+  footer.innerHTML = `
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <img src="/image2.png" class="footer-logo" alt="ACES Logo">
+          <p>ACES Insurance Services</p>
+          <p>404 Sapphire Blvd, Hewitt, TX 76643</p>
+          <p>(254) 227-6560</p>
+        </div>
+
+        <div class="footer-center">
+          <img src="/image3.png" alt="Partner 1">
+          <img src="/image4.png" alt="Partner 2">
+        </div>
+
+        <div class="footer-right">
+          <a href="index.html">Home</a>
+          <a href="services.html?type=personal">Personal Insurance</a>
+          <a href="services.html?type=commercial">Commercial Insurance</a>
+          <a href="services.html?type=life">Life Insurance</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  `;
+}
+injectFooter();
 
 /* ============================================================
    LANGUAGE SWITCHING — TEXT SWAP ONLY
@@ -24,24 +101,23 @@ const savedLang = localStorage.getItem("aces-lang") || "en";
 setLanguage(savedLang);
 
 /* Language buttons */
-document.querySelectorAll(".lang-option").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const lang = btn.dataset.lang;
-    setLanguage(lang);
-  });
+document.addEventListener("click", e => {
+  if (e.target.classList.contains("lang-option")) {
+    setLanguage(e.target.dataset.lang);
+  }
 });
 
 /* ============================================================
    MOBILE NAV
 ============================================================ */
-const mobileToggle = document.getElementById("mobileNavToggle");
-const navMenu = document.getElementById("navMenu");
+document.addEventListener("click", e => {
+  const toggle = document.getElementById("mobileNavToggle");
+  const menu = document.getElementById("navMenu");
 
-if (mobileToggle && navMenu) {
-  mobileToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("open");
-  });
-}
+  if (e.target === toggle) {
+    menu.classList.toggle("open");
+  }
+});
 
 /* ============================================================
    DROPDOWN MENUS
@@ -64,12 +140,14 @@ function showServiceFromQuery() {
   if (!location.pathname.includes("services.html")) return;
 
   const params = new URLSearchParams(window.location.search);
-  const type = params.get("type") || "life";
+  const type = params.get("type");
 
-  document.querySelectorAll(".service-type").forEach(sec => sec.style.display = "none");
+  document.querySelectorAll(".app-section").forEach(sec => sec.style.display = "none");
 
-  const active = document.getElementById("service-" + type);
-  if (active) active.style.display = "block";
+  if (type) {
+    const active = document.getElementById(type);
+    if (active) active.style.display = "block";
+  }
 }
 showServiceFromQuery();
 
@@ -100,7 +178,6 @@ const grid = document.querySelector(".team-grid");
 if (panel && grid) {
   document.querySelectorAll(".agent-card").forEach(card => {
     card.addEventListener("click", () => {
-
       panel.querySelector(".panel-photo").src = card.dataset.photo;
       panel.querySelector("h2").innerText = card.dataset.name;
       panel.querySelector(".panel-title").innerText = card.dataset.title;
