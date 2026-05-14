@@ -2,276 +2,271 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title data-en="ACES Insurance Services | Texas Independent Insurance Agency"
         data-es="ACES Insurance Services | Agencia de Seguros Independiente en Texas">
-        ACES Insurance Services | Texas Independent Insurance Agency
+  ACES Insurance Services | Texas Independent Insurance Agency
 </title>
 
 <link rel="stylesheet" href="style.css">
 <script src="global.js" defer></script>
+
+<style>
+  /* HERO SECTION */
+  .hero {
+    background: linear-gradient(135deg, #000000 0%, #2b0000 50%, #5a0000 100%);
+    color: #fff;
+    padding: 120px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 70vh;
+  }
+
+  .hero-content {
+    max-width: 650px;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    text-shadow: 0 0 12px rgba(255,0,0,0.45);
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #f2f2f2;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .hero-btn {
+    background: #d40000;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.25s ease;
+  }
+
+  .hero-btn:hover {
+    background: #a30000;
+    transform: translateY(-2px);
+  }
+
+  @media(max-width: 768px) {
+    .hero {
+      padding: 80px 25px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+    }
+  }
+</style>
 </head>
 
 <body>
 
-<!-- ============================================================
-     HEADER
-============================================================ -->
-<header class="aces-header">
-  <div class="header-inner">
+<header id="aces-header"></header>
 
-    <!-- Correct ACES Logo -->
-    <img src="/image2.png" class="header-logo-img" alt="ACES Logo">
-
-    <!-- Language Toggle -->
-    <div class="lang-switch">
-      <button class="lang-option" data-lang="en" data-en="EN" data-es="EN">EN</button>
-      <button class="lang-option" data-lang="es" data-en="ES" data-es="ES">ES</button>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="nav-menu" id="navMenu">
-
-      <a href="index.html" class="nav-link" data-en="Home" data-es="Inicio">Home</a>
-
-      <div class="dropdown">
-        <span class="nav-link dropdown-toggle" data-en="Services" data-es="Servicios">Services</span>
-        <div class="dropdown-menu">
-          <a href="services.html?type=auto" data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</a>
-          <a href="services.html?type=home" data-en="Homeowners" data-es="Hogar">Homeowners</a>
-          <a href="services.html?type=life" data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</a>
-          <a href="services.html?type=commercial" data-en="Commercial" data-es="Comercial">Commercial</a>
-          <a href="services.html?type=specialty" data-en="Specialty Lines" data-es="Líneas Especiales">Specialty Lines</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <span class="nav-link dropdown-toggle" data-en="Applications" data-es="Aplicaciones">Applications</span>
-        <div class="dropdown-menu">
-          <a href="applications.html?type=auto" data-en="Auto Application" data-es="Solicitud de Auto">Auto Application</a>
-          <a href="applications.html?type=home" data-en="Homeowners Application" data-es="Solicitud de Hogar">Homeowners Application</a>
-          <a href="applications.html?type=life" data-en="Life Application" data-es="Solicitud de Vida">Life Application</a>
-          <a href="applications.html?type=commercial" data-en="Commercial Application" data-es="Solicitud Comercial">Commercial Application</a>
-        </div>
-      </div>
-
-      <a href="coi.html" class="nav-link" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-      <a href="claims.html" class="nav-link" data-en="Claims" data-es="Reclamos">Claims</a>
-      <a href="about.html" class="nav-link" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
-      <a href="contact.html" class="nav-link" data-en="Contact" data-es="Contacto">Contact</a>
-
-    </nav>
-
-    <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
-  </div>
-</header>
-
-<!-- ============================================================
-     HERO SECTION — OFF-WHITE
-============================================================ -->
-<section class="hero" style="background:#FAFAFA;">
+<section class="hero">
   <div class="hero-content">
-    <h2 data-en="Protecting What Matters Most" data-es="Protegiendo lo que Más Importa">
-      Protecting What Matters Most
-    </h2>
+    <h1 data-en="Your Trusted Texas Independent Insurance Agency."
+        data-es="Su Agencia de Seguros Independiente de Confianza en Texas.">
+      Your Trusted Texas Independent Insurance Agency.
+    </h1>
 
-    <p data-en="Your trusted Texas independent insurance agency."
-       data-es="Su agencia de seguros independiente de confianza en Texas.">
-       Your trusted Texas independent insurance agency.
+    <p data-en="Independent. Bilingual. Local. Serving Texans with honesty and expertise."
+       data-es="Independientes. Bilingües. Locales. Sirviendo a los tejanos con honestidad y experiencia.">
+      Independent. Bilingual. Local. Serving Texans with honesty and expertise.
     </p>
 
     <div class="hero-buttons">
-      <a href="applications.html" class="btn-primary-red"
-         data-en="Get a Quote" data-es="Solicitar una Cotización">Get a Quote</a>
+      <a href="contact.html" class="hero-btn"
+         data-en="Get a Quote" data-es="Obtener una Cotización">
+        Get a Quote
+      </a>
 
-      <a href="tel:2542276560" class="btn-outline-white"
-         data-en="Contact Us" data-es="Contáctenos">Contact Us</a>
+      <a href="applications.html" class="hero-btn"
+         data-en="Start an Application" data-es="Comenzar una Solicitud">
+        Start an Application
+      </a>
+
+      <a href="contact.html" class="hero-btn"
+         data-en="Contact Us" data-es="Contáctenos">
+        Contact Us
+      </a>
     </div>
   </div>
 </section>
-
 <!-- ============================================================
-     SERVICES OVERVIEW — CHARCOAL
+     SERVICES SECTION
 ============================================================ -->
-<section class="services-overview" style="background:#222;color:white;">
-  <h2 data-en="Our Insurance Services" data-es="Nuestros Servicios de Seguros">
-    Our Insurance Services
+<section class="services-section" style="padding:60px 30px; background:#f7f7f7;">
+  <h2 class="section-title" data-en="Our Services" data-es="Nuestros Servicios"
+      style="text-align:center; font-size:2.2rem; margin-bottom:40px; font-weight:800;">
+    Our Services
   </h2>
 
-  <p class="services-intro"
-     data-en="Comprehensive coverage options designed to protect you, your family, and your business."
-     data-es="Opciones de cobertura diseñadas para protegerlo a usted, su familia y su negocio.">
-     Comprehensive coverage options designed to protect you, your family, and your business.
-  </p>
+  <div class="services-grid" style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+      gap:25px;
+      max-width:1100px;
+      margin:auto;">
+    
+    <!-- AUTO -->
+    <a href="services.html?type=auto" class="service-card" style="
+        background:#fff; padding:25px; border-radius:10px; text-decoration:none;
+        color:#000; box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:0.25s;">
+      <img src="icon-auto-aces.png" alt="Auto Insurance" style="width:55px; margin-bottom:15px;">
+      <h3 data-en="Auto Insurance" data-es="Seguro de Auto" style="margin-bottom:10px;">Auto Insurance</h3>
+      <p style="color:#444;">Reliable coverage for your personal or commercial vehicles.</p>
+    </a>
 
-  <div class="services-grid">
+    <!-- HOMEOWNERS -->
+    <a href="services.html?type=home" class="service-card" style="
+        background:#fff; padding:25px; border-radius:10px; text-decoration:none;
+        color:#000; box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:0.25s;">
+      <img src="icon-property-aces.png" alt="Homeowners Insurance" style="width:55px; margin-bottom:15px;">
+      <h3 data-en="Homeowners Insurance" data-es="Seguro de Hogar" style="margin-bottom:10px;">Homeowners Insurance</h3>
+      <p style="color:#444;">Protecting your home, belongings, and peace of mind.</p>
+    </a>
 
-    <div class="service-card">
-      <img src="/icon-auto-aces.png" alt="Auto Insurance">
-      <h3 data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</h3>
-      <p data-en="Protect your vehicles with reliable coverage tailored to your needs."
-         data-es="Proteja sus vehículos con una cobertura confiable adaptada a sus necesidades.">
-         Protect your vehicles with reliable coverage tailored to your needs.
-      </p>
-      <a href="services.html?type=auto" class="btn-card"
-         data-en="Learn More" data-es="Más Información">Learn More</a>
+    <!-- LIFE -->
+    <a href="services.html?type=life" class="service-card" style="
+        background:#fff; padding:25px; border-radius:10px; text-decoration:none;
+        color:#000; box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:0.25s;">
+      <img src="icon-life-aces.png" alt="Life Insurance" style="width:55px; margin-bottom:15px;">
+      <h3 data-en="Life Insurance" data-es="Seguro de Vida" style="margin-bottom:10px;">Life Insurance</h3>
+      <p style="color:#444;">Coverage designed to protect your family’s future.</p>
+    </a>
+
+    <!-- COMMERCIAL -->
+    <a href="services.html?type=commercial" class="service-card" style="
+        background:#fff; padding:25px; border-radius:10px; text-decoration:none;
+        color:#000; box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:0.25s;">
+      <img src="icon-commercial-aces.png" alt="Commercial Insurance" style="width:55px; margin-bottom:15px;">
+      <h3 data-en="Commercial Insurance" data-es="Seguro Comercial" style="margin-bottom:10px;">Commercial Insurance</h3>
+      <p style="color:#444;">Customized protection for Texas businesses of all sizes.</p>
+    </a>
+
+    <!-- SPECIALTY -->
+    <a href="services.html?type=specialty" class="service-card" style="
+        background:#fff; padding:25px; border-radius:10px; text-decoration:none;
+        color:#000; box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:0.25s;">
+      <img src="icon-specialty-aces.png" alt="Specialty Lines" style="width:55px; margin-bottom:15px;">
+      <h3 data-en="Specialty Lines" data-es="Líneas Especiales" style="margin-bottom:10px;">Specialty Lines</h3>
+      <p style="color:#444;">Unique coverage options for unique insurance needs.</p>
+    </a>
+
+  </div>
+</section>
+
+<style>
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+</style>
+<!-- ============================================================
+     TEAM PREVIEW SECTION
+============================================================ -->
+<section class="team-section" style="padding:60px 30px; background:#ffffff;">
+  <h2 class="section-title" data-en="Meet Our Team" data-es="Nuestro Equipo"
+      style="text-align:center; font-size:2.2rem; margin-bottom:40px; font-weight:800;">
+    Meet Our Team
+  </h2>
+
+  <div class="team-grid" style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+      gap:25px;
+      max-width:1100px;
+      margin:auto;">
+
+    <!-- TEAM MEMBER 1 -->
+    <div class="team-card" style="
+        background:#fff; padding:25px; border-radius:10px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.08); text-align:center;
+        transition:0.25s;">
+      <img src="image2.png" alt="Team Member" style="width:90px; border-radius:50%; margin-bottom:15px;">
+      <h3 style="margin-bottom:5px;">George J. Santibañez</h3>
+      <p style="color:#666; margin-bottom:15px;">Independent Agent</p>
+      <a href="about.html" class="hero-btn"
+         data-en="Learn More" data-es="Más Información"
+         style="padding:10px 18px; display:inline-block;">
+        Learn More
+      </a>
     </div>
 
-    <div class="service-card">
-      <img src="/icon-property-aces.png" alt="Home Insurance">
-      <h3 data-en="Homeowners Insurance" data-es="Seguro de Hogar">Homeowners Insurance</h3>
-      <p data-en="Coverage that safeguards your home, belongings, and peace of mind."
-         data-es="Cobertura que protege su hogar, pertenencias y tranquilidad.">
-         Coverage that safeguards your home, belongings, and peace of mind.
-      </p>
-      <a href="services.html?type=home" class="btn-card"
-         data-en="Learn More" data-es="Más Información">Learn More</a>
+    <!-- TEAM MEMBER 2 -->
+    <div class="team-card" style="
+        background:#fff; padding:25px; border-radius:10px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.08); text-align:center;
+        transition:0.25s;">
+      <img src="image2.png" alt="Team Member" style="width:90px; border-radius:50%; margin-bottom:15px;">
+      <h3 style="margin-bottom:5px;">Jordan Jones</h3>
+      <p style="color:#666; margin-bottom:15px;">Co‑Owner</p>
+      <a href="about.html" class="hero-btn"
+         data-en="Learn More" data-es="Más Información"
+         style="padding:10px 18px; display:inline-block;">
+        Learn More
+      </a>
     </div>
 
-    <div class="service-card">
-      <img src="/icon-life-aces.png" alt="Life Insurance">
-      <h3 data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</h3>
-      <p data-en="Financial protection for your loved ones when it matters most."
-         data-es="Protección financiera para sus seres queridos cuando más importa.">
-         Financial protection for your loved ones when it matters most.
-      </p>
-      <a href="services.html?type=life" class="btn-card"
-         data-en="Learn More" data-es="Más Información">Learn More</a>
+    <!-- TEAM MEMBER 3 -->
+    <div class="team-card" style="
+        background:#fff; padding:25px; border-radius:10px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.08); text-align:center;
+        transition:0.25s;">
+      <img src="image2.png" alt="Team Member" style="width:90px; border-radius:50%; margin-bottom:15px;">
+      <h3 style="margin-bottom:5px;">Lanse Derrick</h3>
+      <p style="color:#666; margin-bottom:15px;">Co‑Owner</p>
+      <a href="about.html" class="hero-btn"
+         data-en="Learn More" data-es="Más Información"
+         style="padding:10px 18px; display:inline-block;">
+        Learn More
+      </a>
     </div>
 
-    <div class="service-card">
-      <img src="/icon-commercial-aces.png" alt="Commercial Insurance">
-      <h3 data-en="Commercial Insurance" data-es="Seguro Comercial">Commercial Insurance</h3>
-      <p data-en="Customized coverage solutions for businesses of all sizes."
-         data-es="Soluciones de cobertura personalizadas para negocios de todos los tamaños.">
-         Customized coverage solutions for businesses of all sizes.
-      </p>
-      <a href="services.html?type=commercial" class="btn-card"
-         data-en="Learn More" data-es="Más Información">Learn More</a>
-    </div>
-
-    <div class="service-card">
-      <img src="/icon-specialty-aces.png" alt="Specialty Insurance">
-      <h3 data-en="Specialty Lines" data-es="Líneas Especiales">Specialty Lines</h3>
-      <p data-en="Unique coverage options for unique risks and special situations."
-         data-es="Opciones de cobertura únicas para riesgos y situaciones especiales.">
-         Unique coverage options for unique risks and special situations.
-      </p>
-      <a href="services.html?type=specialty" class="btn-card"
-         data-en="Learn More" data-es="Más Información">Learn More</a>
+    <!-- TEAM MEMBER 4 -->
+    <div class="team-card" style="
+        background:#fff; padding:25px; border-radius:10px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.08); text-align:center;
+        transition:0.25s;">
+      <img src="image2.png" alt="Team Member" style="width:90px; border-radius:50%; margin-bottom:15px;">
+      <h3 style="margin-bottom:5px;">Robert Hyde</h3>
+      <p style="color:#666; margin-bottom:15px;">Co‑Owner</p>
+      <a href="about.html" class="hero-btn"
+         data-en="Learn More" data-es="Más Información"
+         style="padding:10px 18px; display:inline-block;">
+        Learn More
+      </a>
     </div>
 
   </div>
 </section>
 
+<style>
+  .team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+</style>
 <!-- ============================================================
-     TEAM SECTION — ACES RED
+     FOOTER + CLOSE PAGE
 ============================================================ -->
-<section class="team-section" style="background:#d40000;color:white;">
-  <h2 data-en="Meet Our Team" data-es="Conozca a Nuestro Equipo">Meet Our Team</h2>
 
-  <p class="team-intro"
-     data-en="Local agents dedicated to serving our Texas communities with honesty and expertise."
-     data-es="Agentes locales dedicados a servir a nuestras comunidades de Texas con honestidad y experiencia.">
-     Local agents dedicated to serving our Texas communities with honesty and expertise.
-  </p>
-
-  <div class="team-grid">
-
-    <div class="team-card">
-      <img src="/image2.png" alt="George Santibañez" class="team-photo">
-      <h3>George J. Santibañez</h3>
-      <p class="team-role" data-en="Independent Agent • Bilingual" data-es="Agente Independiente • Bilingüe">
-        Independent Agent • Bilingual
-      </p>
-      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
-    </div>
-
-    <div class="team-card">
-      <img src="/image2.png" alt="Jordan Jones" class="team-photo">
-      <h3>Jordan Jones</h3>
-      <p class="team-role" data-en="Co‑Owner" data-es="Co‑Propietario">Co‑Owner</p>
-      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
-    </div>
-
-    <div class="team-card">
-      <img src="/image2.png" alt="Lanse Derrick" class="team-photo">
-      <h3>Lanse Derrick</h3>
-      <p class="team-role" data-en="Co‑Owner" data-es="Co‑Propietario">Co‑Owner</p>
-      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
-    </div>
-
-    <div class="team-card">
-      <img src="/image2.png" alt="Robert Hyde" class="team-photo">
-      <h3>Robert Hyde</h3>
-      <p class="team-role" data-en="Co‑Owner" data-es="Co‑Propietario">Co‑Owner</p>
-      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
-    </div>
-
-    <div class="team-card">
-      <img src="/image2.png" alt="Bryan Carter" class="team-photo">
-      <h3>Bryan Carter</h3>
-      <p class="team-role" data-en="Co‑Owner" data-es="Co‑Propietario">Co‑Owner</p>
-      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
-    </div>
-
-    <div class="team-card">
-      <img src="/image2.png" alt="Jimmy Rodriguez" class="team-photo">
-      <h3>Jimmy Rodriguez</h3>
-      <p class="team-role" data-en="Agent • Spanish‑Speaking" data-es="Agente • Habla Español">
-        Agent • Spanish‑Speaking
-      </p>
-      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
-    </div>
-
-    <div class="team-card">
-      <img src="/image2.png" alt="Renee Ridling" class="team-photo">
-      <h3>Renee Ridling</h3>
-      <p class="team-role" data-en="Agent" data-es="Agente">Agent</p>
-      <a href="about.html" class="btn-card" data-en="Learn More" data-es="Más Información">Learn More</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============================================================
-     TEAM BUTTONS SECTION — WHITE (UNCHANGED)
-============================================================ -->
-<section class="team-buttons" style="background:white;color:#222;text-align:center;padding:40px 0;">
-  <a href="about.html" class="btn-primary-red"
-     data-en="Meet Our Full Team" data-es="Conozca a Todo Nuestro Equipo">
-     Meet Our Full Team
-  </a>
-
-  <a href="tel:2542276560" class="btn-outline-white"
-     data-en="Call Our Office" data-es="Llamar a la Oficina">
-     Call Our Office
-  </a>
-</section>
-
-<!-- ============================================================
-     FOOTER — CHARCOAL
-============================================================ -->
-<footer class="site-footer" style="background:#222;color:white;">
-  <div class="footer-content">
-
-    <div class="footer-left">
-      <img src="/image2.png" alt="ACES Logo" class="footer-logo">
-      <p>© 2026 ACES Insurance Services</p>
-      <p>404 Sapphire Blvd, Hewitt, TX 76643</p>
-      <p>(254) 709-6487</p>
-    </div>
-
-    <div class="footer-center">
-      <img src="/chamber-badge.png" alt="Chamber Badge">
-      <img src="/chamber-qr.png" alt="Chamber QR Code">
-    </div>
-
-  </div>
-</footer>
-
-<!-- Mobile Call Button -->
-<a href="tel:2542276560" class="mobile-call-btn">Call ACES</a>
+<footer id="aces-footer"></footer>
 
 </body>
 </html>
