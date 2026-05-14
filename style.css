@@ -1,33 +1,10 @@
 /* ============================================================
-   ACES INSURANCE — 2026 MODERN DESIGN SYSTEM (FULLY EXPANDED)
-   - Hybrid Red System (R3)
-   - Option‑B Header
-   - Modern Hero + Small Hero
-   - Services Grid
-   - Team Grid
-   - Application Cards
-   - Footer
-   - Animations
-   - Responsive Layout
+   ACES 2026 — GLOBAL STYLE SHEET (Optimized)
+   Typography, Layout, Header, Footer, Cards, Forms, Animations
 ============================================================ */
 
 /* ------------------------------------------------------------
-   ROOT VARIABLES — HYBRID RED SYSTEM (R3)
------------------------------------------------------------- */
-:root {
-  --aces-red: #d40000;          /* Bright red for buttons */
-  --aces-red-deep: #a00000;     /* Deep red for gradients */
-  --aces-black: #0a0a0a;
-  --aces-gray: #f5f5f5;
-  --aces-text: #ffffff;
-  --aces-dark-text: #222222;
-
-  --transition-fast: 0.25s ease;
-  --transition-medium: 0.4s ease;
-}
-
-/* ------------------------------------------------------------
-   GLOBAL RESET
+   1. RESET + BASE
 ------------------------------------------------------------ */
 * {
   margin: 0;
@@ -35,58 +12,57 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: "Segoe UI", sans-serif;
-  background: var(--aces-black);
-  color: var(--aces-text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f4f4;
+  color: #222;
   line-height: 1.6;
-  overflow-x: hidden;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
 }
 
 /* ------------------------------------------------------------
-   LIGHT MODE OVERRIDES
+   2. GLOBAL CONTAINERS
 ------------------------------------------------------------ */
-body.light-mode {
-  background: #ffffff;
-  color: var(--aces-dark-text);
+.app-section {
+  padding: 60px 20px;
+  max-width: 1100px;
+  margin: auto;
 }
 
-body.light-mode .hero,
-body.light-mode .small-hero {
-  background: linear-gradient(135deg, #ffffff, #dddddd);
+.app-category-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-body.light-mode .service-card,
-body.light-mode .team-card,
-body.light-mode .app-card {
-  background: #ffffff;
-  border-color: #cccccc;
+.app-category-intro {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #555;
 }
 
 /* ------------------------------------------------------------
-   HEADER — OPTION‑B MODERN
+   3. HEADER
 ------------------------------------------------------------ */
 .header-container {
-  width: 100%;
-  padding: 15px 40px;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 18px 25px;
+  background: #111;
+  color: #fff;
   position: sticky;
   top: 0;
   z-index: 999;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.logo-area img {
+.aces-logo {
   height: 55px;
+  width: auto;
 }
 
 .nav-links {
@@ -95,13 +71,13 @@ body.light-mode .app-card {
 }
 
 .nav-links a {
-  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
   font-weight: 500;
-  transition: var(--transition-fast);
 }
 
 .nav-links a:hover {
-  color: var(--aces-red);
+  color: #c62828;
 }
 
 .header-controls {
@@ -110,26 +86,18 @@ body.light-mode .app-card {
 }
 
 .lang-btn,
-.theme-btn,
 .mobile-menu-btn {
-  background: var(--aces-red);
+  background: #c62828;
+  color: #fff;
   border: none;
   padding: 8px 14px;
   border-radius: 6px;
-  color: #fff;
   cursor: pointer;
   font-weight: bold;
-  transition: var(--transition-fast);
-}
-
-.lang-btn:hover,
-.theme-btn:hover,
-.mobile-menu-btn:hover {
-  opacity: 0.85;
 }
 
 /* ------------------------------------------------------------
-   MOBILE MENU
+   4. MOBILE MENU
 ------------------------------------------------------------ */
 .mobile-menu {
   display: none;
@@ -143,265 +111,63 @@ body.light-mode .app-card {
 }
 
 .mobile-menu a {
+  color: #fff;
   padding: 10px 0;
   border-bottom: 1px solid #333;
+  text-decoration: none;
 }
 
 /* ------------------------------------------------------------
-   HERO — FULL WIDTH
------------------------------------------------------------- */
-.hero {
-  width: 100%;
-  padding: 120px 40px;
-  text-align: center;
-  background: linear-gradient(135deg, var(--aces-red-deep), #000000);
-  color: #ffffff;
-}
-
-.hero h1 {
-  font-size: 2.8rem;
-  margin-bottom: 15px;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-}
-
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.hero-btn {
-  background: var(--aces-red);
-  padding: 12px 22px;
-  border-radius: 6px;
-  color: #fff;
-  font-weight: bold;
-  transition: var(--transition-fast);
-}
-
-.hero-btn:hover {
-  opacity: 0.85;
-}
-
-/* ------------------------------------------------------------
-   SMALL HERO (SERVICES / APPLICATIONS)
+   5. SMALL HERO
 ------------------------------------------------------------ */
 .small-hero {
-  width: 100%;
-  padding: 80px 40px;
+  background: url('hero-dark.jpg') center/cover no-repeat;
+  padding: 80px 20px;
   text-align: center;
-  background: linear-gradient(135deg, var(--aces-red-deep), #000000);
-  color: #ffffff;
+  color: #fff;
 }
 
-.small-hero h1 {
+.small-hero-content h1 {
   font-size: 2.4rem;
   margin-bottom: 10px;
 }
 
-.small-hero p {
-  font-size: 1.1rem;
-}
-
 /* ------------------------------------------------------------
-   SERVICES SECTION
+   6. CONTACT CARDS
 ------------------------------------------------------------ */
-.services-section {
-  padding: 60px 40px;
-  background: #111;
-}
-
-.section-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 40px;
-}
-
-.services-grid {
+.contact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
 }
 
-.service-card {
-  background: #1a1a1a;
+.contact-card {
+  background: #fff;
   padding: 25px;
   border-radius: 12px;
   text-align: center;
-  transition: var(--transition-medium);
-  border: 2px solid transparent;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.service-card:hover {
-  border-color: var(--aces-red);
-  transform: translateY(-8px);
-}
-
-.service-card img {
-  height: 70px;
-  margin-bottom: 15px;
-}
-
-/* ------------------------------------------------------------
-   TEAM SECTION
------------------------------------------------------------- */
-.team-section {
-  padding: 60px 40px;
-  background: #0f0f0f;
-}
-
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-}
-
-.team-card {
-  background: #1a1a1a;
-  padding: 25px;
-  border-radius: 12px;
-  text-align: center;
-  transition: var(--transition-medium);
-  border: 2px solid transparent;
-}
-
-.team-card:hover {
-  border-color: var(--aces-red);
-  transform: translateY(-8px);
-}
-
-.team-img {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-/* ------------------------------------------------------------
-   APPLICATION CARDS
------------------------------------------------------------- */
-.app-section {
-  padding: 60px 40px;
-  display: none;
-}
-
-.app-category-title {
-  text-align: center;
-  font-size: 2rem;
+.contact-icon {
+  font-size: 2.5rem;
   margin-bottom: 10px;
-}
-
-.app-category-intro {
-  text-align: center;
-  margin-bottom: 40px;
-  color: #ccc;
-}
-
-.app-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-}
-
-.app-card {
-  background: #1a1a1a;
-  padding: 25px;
-  border-radius: 12px;
-  text-align: center;
-  border: 2px solid transparent;
-  transition: var(--transition-medium);
-}
-
-.app-card:hover {
-  border-color: var(--aces-red);
-  transform: translateY(-8px);
-}
-
-.app-icon {
-  font-size: 2.4rem;
-  margin-bottom: 10px;
-}
-
-.app-title {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.app-spade {
-  font-size: 1.6rem;
-  color: var(--aces-red);
-  margin-bottom: 10px;
-}
-
-.app-desc {
-  color: #ccc;
-  margin-bottom: 20px;
 }
 
 .app-btn {
-  background: var(--aces-red);
+  display: inline-block;
+  margin-top: 12px;
   padding: 10px 18px;
-  border-radius: 6px;
+  background: #c62828;
   color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
   font-weight: bold;
-  transition: var(--transition-fast);
-}
-
-.app-btn:hover {
-  opacity: 0.85;
 }
 
 /* ------------------------------------------------------------
-   FOOTER
+   7. GOOGLE MAP
 ------------------------------------------------------------ */
-.footer-container {
-  background: #111;
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.footer-logo {
-  height: 55px;
-  margin-bottom: 10px;
-}
-
-.footer-center h4,
-.footer-right h4 {
-  margin-bottom: 10px;
-}
-
-.footer-bottom {
-  text-align: center;
-  padding: 15px;
-  background: #0a0a0a;
-  font-size: 0.9rem;
-}
-
-/* ------------------------------------------------------------
-   FADE-IN ANIMATION
------------------------------------------------------------- */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 0.8s ease;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ============================================================
-   CONTACT PAGE — MAP CONTAINER
-============================================================ */
 .map-container {
   width: 100%;
   max-width: 900px;
@@ -411,9 +177,9 @@ body.light-mode .app-card {
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
-/* ============================================================
-   NOTEPAD FORM WRAPPER
-============================================================ */
+/* ------------------------------------------------------------
+   8. NOTEPAD FORM
+------------------------------------------------------------ */
 .notepad-wrapper {
   max-width: 900px;
   margin: 40px auto;
@@ -430,14 +196,10 @@ body.light-mode .app-card {
   );
 }
 
-/* ============================================================
-   NOTEPAD FORM FIELDS
-============================================================ */
 .notepad-form label {
   font-weight: bold;
   margin-bottom: 6px;
   display: block;
-  color: #333;
 }
 
 .notepad-form input,
@@ -447,24 +209,26 @@ body.light-mode .app-card {
   border: 1px solid #d8c9a8;
   border-radius: 6px;
   background: rgba(255,255,255,0.8);
-  font-size: 1rem;
   margin-bottom: 20px;
-  font-family: inherit;
 }
 
-.notepad-form textarea {
-  resize: vertical;
-  min-height: 140px;
+.submit-btn {
+  background: #c62828;
+  color: #fff;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-/* ============================================================
-   TEAM GRID (Matches About Page)
-============================================================ */
+/* ------------------------------------------------------------
+   9. TEAM GRID
+------------------------------------------------------------ */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
-  margin-top: 30px;
 }
 
 .team-img {
@@ -475,16 +239,13 @@ body.light-mode .app-card {
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* ============================================================
-   AGENT CARD
-============================================================ */
 .agent-card {
-  background: #ffffff;
+  background: #fff;
   padding: 18px;
   border-radius: 12px;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: 0.2s ease;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
@@ -493,9 +254,9 @@ body.light-mode .app-card {
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
-/* ============================================================
-   SLIDE-OUT PANEL (Matches About Page)
-============================================================ */
+/* ------------------------------------------------------------
+   10. AGENT PANEL (Slide-Out)
+------------------------------------------------------------ */
 .agent-panel {
   position: fixed;
   top: 0;
@@ -513,7 +274,7 @@ body.light-mode .app-card {
   right: 0;
 }
 
-.agent-panel img.panel-photo {
+.panel-photo {
   width: 100%;
   height: 260px;
   object-fit: cover;
@@ -521,7 +282,7 @@ body.light-mode .app-card {
   margin-bottom: 15px;
 }
 
-.agent-panel .close-panel {
+.close-panel {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -540,28 +301,77 @@ body.light-mode .app-card {
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.2s ease;
-}
-
-.panel-call:hover {
-  background: #a61f1f;
 }
 
 /* ------------------------------------------------------------
-   RESPONSIVE
+   11. CARDS + GRIDS (General)
 ------------------------------------------------------------ */
-@media (max-width: 900px) {
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.app-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.app-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+/* ------------------------------------------------------------
+   12. FADE-IN ANIMATIONS
+------------------------------------------------------------ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------
+   13. FOOTER
+------------------------------------------------------------ */
+.footer-container {
+  background: #111;
+  color: #fff;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.footer-logo {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.footer-bottom {
+  background: #000;
+  color: #ccc;
+  text-align: center;
+  padding: 12px;
+}
+
+/* ------------------------------------------------------------
+   14. RESPONSIVE BREAKPOINTS
+------------------------------------------------------------ */
+@media (max-width: 768px) {
   .nav-links {
     display: none;
   }
 
   .mobile-menu-btn {
     display: block;
-  }
-}
-
-@media (min-width: 901px) {
-  .mobile-menu-btn {
-    display: none;
   }
 }
