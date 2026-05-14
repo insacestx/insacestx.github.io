@@ -1,3 +1,14 @@
+/* ============================================================
+   ACES GLOBAL.JS — 2026 MODERN SYSTEM
+   - Header Injection (Option‑B)
+   - Footer Injection
+   - Language Toggle (EN/ES)
+   - Theme Toggle (Dark/Light)
+   - Mobile Menu
+   - Scroll Animations
+   - Application Category Switching
+============================================================ */
+
 /* ------------------------------------------------------------
    1. HEADER INJECTION — Optimized ACES 2026 Header
 ------------------------------------------------------------ */
@@ -83,7 +94,12 @@ function loadFooter() {
     </div>
 
     <div class="footer-bottom">
-    /* ------------------------------------------------------------
+      <p>© 2026 ACES Insurance Services. All Rights Reserved.</p>
+    </div>
+  `;
+}
+
+/* ------------------------------------------------------------
    3. LANGUAGE TOGGLE (EN / ES)
 ------------------------------------------------------------ */
 function setupLanguageToggle() {
@@ -185,7 +201,3 @@ document.addEventListener("DOMContentLoaded", () => {
   setupFadeInAnimations();
   setupApplicationSections();
 });
-      <p>© 2026 ACES Insurance Services. All Rights Reserved.</p>
-    </div>
-  `;
-}
