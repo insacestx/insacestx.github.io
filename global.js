@@ -83,6 +83,108 @@ function loadFooter() {
     </div>
 
     <div class="footer-bottom">
+    /* ------------------------------------------------------------
+   3. LANGUAGE TOGGLE (EN / ES)
+------------------------------------------------------------ */
+function setupLanguageToggle() {
+  const langBtn = document.getElementById("lang-toggle");
+
+  langBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("lang");
+
+    if (current === "en") {
+      document.documentElement.setAttribute("lang", "es");
+      langBtn.textContent = "EN";
+      translatePage("es");
+    } else {
+      document.documentElement.setAttribute("lang", "en");
+      langBtn.textContent = "ES";
+      translatePage("en");
+    }
+  });
+}
+
+function translatePage(lang) {
+  const elements = document.querySelectorAll("[data-en]");
+
+  elements.forEach(el => {
+    el.textContent = el.getAttribute(`data-${lang}`);
+  });
+}
+
+/* ------------------------------------------------------------
+   4. DARK / LIGHT MODE TOGGLE
+------------------------------------------------------------ */
+function setupThemeToggle() {
+  const themeBtn = document.getElementById("theme-toggle");
+
+  themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    if (document.body.classList.contains("light-mode")) {
+      themeBtn.textContent = "🌙";
+    } else {
+      themeBtn.textContent = "☀";
+    }
+  });
+}
+
+/* ------------------------------------------------------------
+   5. MOBILE MENU
+------------------------------------------------------------ */
+function setupMobileMenu() {
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("open");
+  });
+}
+
+/* ------------------------------------------------------------
+   6. SCROLL FADE-IN ANIMATIONS
+------------------------------------------------------------ */
+function setupFadeInAnimations() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  });
+
+  document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+}
+
+/* ------------------------------------------------------------
+   7. APPLICATION CATEGORY SWITCHING (?type=)
+------------------------------------------------------------ */
+function setupApplicationSections() {
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get("type");
+
+  if (!type) return;
+
+  const section = document.getElementById(type);
+
+  if (section) {
+    section.style.display = "block";
+    window.scrollTo(0, section.offsetTop - 80);
+  }
+}
+
+/* ------------------------------------------------------------
+   8. INITIALIZE EVERYTHING
+------------------------------------------------------------ */
+document.addEventListener("DOMContentLoaded", () => {
+  loadHeader();
+  loadFooter();
+  setupLanguageToggle();
+  setupThemeToggle();
+  setupMobileMenu();
+  setupFadeInAnimations();
+  setupApplicationSections();
+});
       <p>© 2026 ACES Insurance Services. All Rights Reserved.</p>
     </div>
   `;
