@@ -399,6 +399,154 @@ body.light-mode .app-card {
   transform: translateY(0);
 }
 
+/* ============================================================
+   CONTACT PAGE — MAP CONTAINER
+============================================================ */
+.map-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* ============================================================
+   NOTEPAD FORM WRAPPER
+============================================================ */
+.notepad-wrapper {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background: #fffef7;
+  border: 2px solid #e6d8b8;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #fffef7 0px,
+    #fffef7 28px,
+    #f2e9d2 29px
+  );
+}
+
+/* ============================================================
+   NOTEPAD FORM FIELDS
+============================================================ */
+.notepad-form label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  display: block;
+  color: #333;
+}
+
+.notepad-form input,
+.notepad-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d8c9a8;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.8);
+  font-size: 1rem;
+  margin-bottom: 20px;
+  font-family: inherit;
+}
+
+.notepad-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* ============================================================
+   TEAM GRID (Matches About Page)
+============================================================ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.team-img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ============================================================
+   AGENT CARD
+============================================================ */
+.agent-card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.agent-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* ============================================================
+   SLIDE-OUT PANEL (Matches About Page)
+============================================================ */
+.agent-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 350px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+  padding: 25px;
+  transition: right 0.35s ease;
+  z-index: 9999;
+}
+
+.agent-panel.open {
+  right: 0;
+}
+
+.agent-panel img.panel-photo {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.agent-panel .close-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.panel-call {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 18px;
+  background: #c62828;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.panel-call:hover {
+  background: #a61f1f;
+}
+
 /* ------------------------------------------------------------
    RESPONSIVE
 ------------------------------------------------------------ */
