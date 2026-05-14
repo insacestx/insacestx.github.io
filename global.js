@@ -52,39 +52,21 @@ function injectHeader() {
 injectHeader();
 
 /* ============================================================
-   INJECT FOOTER
+   INJECT FOOTER (Loads footer.html)
 ============================================================ */
 function injectFooter() {
   const footer = document.getElementById("aces-footer");
   if (!footer) return;
 
-  footer.innerHTML = `
-    <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-left">
-          <img src="/image2.png" class="footer-logo" alt="ACES Logo">
-          <p>ACES Insurance Services</p>
-          <p>404 Sapphire Blvd, Hewitt, TX 76643</p>
-          <p>(254) 227-6560</p>
-        </div>
-
-        <div class="footer-center">
-          <img src="/image3.png" alt="Partner 1">
-          <img src="/image4.png" alt="Partner 2">
-        </div>
-
-        <div class="footer-right">
-          <a href="index.html">Home</a>
-          <a href="services.html?type=personal">Personal Insurance</a>
-          <a href="services.html?type=commercial">Commercial Insurance</a>
-          <a href="services.html?type=life">Life Insurance</a>
-          <a href="contact.html">Contact</a>
-        </div>
-      </div>
-    </footer>
-  `;
+  fetch("footer.html")
+    .then(res => res.text())
+    .then(html => {
+      footer.innerHTML = html;
+      setLanguage(localStorage.getItem("aces-lang") || "en"); // reapply bilingual text
+    });
 }
 injectFooter();
+
 
 /* ============================================================
    LANGUAGE SWITCHING — TEXT SWAP ONLY
