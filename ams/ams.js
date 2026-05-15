@@ -158,3 +158,39 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadPolicies();
   }
 });
+function getPolicyFromURL(){
+  const params=new URLSearchParams(window.location.search);
+  const number=params.get("number");
+  return policies.find(p=>p.number===number);
+}
+
+function loadPolicyDetails(){
+  const p=getPolicyFromURL();
+  if(!p){alert("Policy not found");return;}
+
+  document.getElementById("policyNumber").innerText=p.number;
+  document.getElementById("policyClient").innerText=p.client;
+  document.getElementById("policyCarrier").innerText=p.carrier;
+  document.getElementById("policyLine").innerText=p.line;
+  document.getElementById("policyEffective").innerText=p.effective;
+  document.getElementById("policyRenewal").innerText=p.renewal;
+  document.getElementById("policyStatus").innerText=p.status;
+  document.getElementById("policyStatus").classList.add(p.status.toLowerCase());
+
+  // Placeholder lists
+  document.getElementById("policyCOIs").innerHTML="<li>No COIs yet</li>";
+  document.getElementById("policyClaims").innerHTML="<li>No claims yet</li>";
+  document.getElementById("endorsementList").innerHTML="<li>No endorsements yet</li>";
+  document.getElementById("policyDocs").innerHTML="<li>No documents uploaded</li>";
+}
+
+function editPolicy(){alert("Edit policy coming soon")}
+function addEndorsement(){alert("Add endorsement coming soon")}
+function savePolicyNotes(){alert("Notes saved")}
+function uploadPolicyDocs(){alert("Documents uploaded")}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("policy-details.html")){
+    loadPolicyDetails();
+  }
+});
