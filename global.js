@@ -1,369 +1,187 @@
-/* BASE */
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#050505;
-  color:#f5f5f5;
-  line-height:1.6;
-}
-a{color:inherit}
-img{max-width:100%;display:block}
-section{padding:60px 20px}
-@media(min-width:900px){section{padding:80px 40px}}
-.fade-in{animation:fadeIn .6s ease-in-out}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* ============================================================
+   ACES 2026 — GLOBAL JAVASCRIPT
+   (Header/Footer Injection, i18n, Mobile Menu)
+============================================================ */
 
-/* HEADER */
-#aces-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(0,0,0,0.9);
-  backdrop-filter:blur(10px);
-}
-.header-container{
-  max-width:1200px;
-  margin:0 auto;
-  padding:10px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.logo-area{display:flex;align-items:center}
-.aces-logo{height:42px}
-.nav-links{
-  display:flex;
-  gap:18px;
-  align-items:center;
-}
-.nav-links a{
-  font-size:0.95rem;
-  text-decoration:none;
-  color:#f5f5f5;
-  padding:6px 10px;
-  border-radius:4px;
-  transition:background .2s,color .2s;
-}
-.nav-links a:hover{
-  background:#d40000;
-  color:#000;
-}
-.nav-links a.active{
-  background:#ff4d4d;
-  color:#000;
-  font-weight:600;
-}
-.header-controls{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.lang-btn{
-  padding:6px 10px;
-  border-radius:20px;
-  border:1px solid #ff4d4d;
-  background:transparent;
-  color:#ff4d4d;
-  font-size:0.8rem;
-  cursor:pointer;
-  transition:background .2s,color .2s,border-color .2s;
-}
-.lang-btn:hover{
-  background:#ff4d4d;
-  color:#000;
-  border-color:#ff4d4d;
-}
-.mobile-menu-btn{
-  display:none;
-  background:none;
-  border:none;
-  color:#fff;
-  font-size:1.6rem;
-  cursor:pointer;
+// Language state
+let currentLang = localStorage.getItem('acesLang') || 'en';
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  injectHeader();
+  injectFooter();
+  setupLanguageSwitcher();
+  setupMobileMenu();
+  applyLanguage(currentLang);
+  setActiveNavLink();
+});
+
+/* ============================================================
+   HEADER INJECTION
+============================================================ */
+function injectHeader() {
+  const headerEl = document.getElementById('aces-header');
+  if (!headerEl) return;
+
+  const headerHTML = `
+    <div class="header-container">
+      <div class="logo-area">
+        <a href="index.html" style="display:flex;align-items:center;">
+          <div class="aces-logo" style="font-weight:bold;font-size:1.2rem;color:#ff4d4d;">
+            ACES
+          </div>
+        </a>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+        <a href="products.html" data-en="Products" data-es="Productos">Products</a>
+        <a href="about.html" data-en="About" data-es="Acerca de">About</a>
+        <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+      </nav>
+
+      <div class="header-controls">
+        <button class="lang-btn" id="lang-toggle" data-en="ES" data-es="EN">
+          ES
+        </button>
+        <button class="mobile-menu-btn" id="mobile-menu-toggle">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-menu" id="mobile-menu">
+      <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+      <a href="products.html" data-en="Products" data-es="Productos">Products</a>
+      <a href="about.html" data-en="About" data-es="Acerca de">About</a>
+      <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+    </nav>
+  `;
+
+  headerEl.innerHTML = headerHTML;
 }
 
-/* MOBILE MENU */
-.mobile-menu{
-  display:none;
-  flex-direction:column;
-  background:#111;
-  border-bottom:1px solid #333;
-}
-.mobile-menu a{
-  padding:10px 20px;
-  text-decoration:none;
-  font-size:0.95rem;
-  border-top:1px solid #222;
-}
-.mobile-menu a:hover{
-  background:#d40000;
-  color:#000;
-}
-.mobile-menu a.active{
-  background:#ff4d4d;
-  color:#000;
-  font-weight:600;
-}
-.mobile-menu.open{display:flex}
+/* ============================================================
+   FOOTER INJECTION
+============================================================ */
+function injectFooter() {
+  const footerEl = document.getElementById('aces-footer');
+  if (!footerEl) return;
 
-@media(max-width:900px){
-  .header-container{padding:10px 12px}
-  .nav-links{display:none}
-  .mobile-menu-btn{display:block}
-}
+  const footerHTML = `
+    <div class="footer-grid">
+      <div>
+        <h3 style="margin-bottom:12px;color:#ff4d4d;" data-en="Company" data-es="Empresa">Company</h3>
+        <a href="about.html" class="footer-link" data-en="About Us" data-es="Sobre Nosotros">About Us</a><br>
+        <a href="contact.html" class="footer-link" data-en="Contact" data-es="Contacto">Contact</a><br>
+        <a href="index.html" class="footer-link" data-en="Home" data-es="Inicio">Home</a>
+      </div>
 
-/* HERO */
-.small-hero{
-  background:radial-gradient(circle at top,#550000 0,#000 55%);
-  padding:70px 20px 50px;
-  text-align:center;
-}
-.small-hero-content{max-width:800px;margin:0 auto}
-.small-hero h1{font-size:2rem;margin-bottom:10px}
-.small-hero p{font-size:1.05rem;color:#ddd}
-@media(min-width:900px){
-  .small-hero{padding:90px 40px 60px}
-  .small-hero h1{font-size:2.4rem}
-}
+      <div>
+        <h3 style="margin-bottom:12px;color:#ff4d4d;" data-en="Services" data-es="Servicios">Services</h3>
+        <a href="products.html" class="footer-link" data-en="Products" data-es="Productos">Products</a><br>
+        <a href="#" class="footer-link" data-en="Insurance Plans" data-es="Planes de Seguro">Insurance Plans</a><br>
+        <a href="#" class="footer-link" data-en="Get a Quote" data-es="Obtener Cotización">Get a Quote</a>
+      </div>
 
-/* RED SECTION */
-.app-section{
-  background:linear-gradient(180deg,#2b0000 0,#5a0000 60%,#2b0000 100%);
-}
-.app-category-title,.section-title{
-  text-align:center;
-  font-size:1.6rem;
-  margin-bottom:10px;
-}
-.app-category-intro{
-  text-align:center;
-  max-width:700px;
-  margin:0 auto 30px;
-  color:#f0f0f0;
-  font-size:0.98rem;
+      <div>
+        <h3 style="margin-bottom:12px;color:#ff4d4d;" data-en="Connect" data-es="Conectar">Connect</h3>
+        <div class="footer-social">
+          <a href="https://facebook.com" class="social-icon" title="Facebook">f</a>
+          <a href="https://twitter.com" class="social-icon" title="Twitter">𝕏</a>
+          <a href="https://linkedin.com" class="social-icon" title="LinkedIn">in</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <p data-en="© 2026 ACES Insurance Services. All rights reserved."
+         data-es="© 2026 ACES Insurance Services. Todos los derechos reservados.">
+        © 2026 ACES Insurance Services. All rights reserved.
+      </p>
+    </div>
+
+    <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+            data-en="↑ Back to Top" data-es="↑ Volver Arriba">
+      ↑ Back to Top
+    </button>
+  `;
+
+  footerEl.classList.add('aces-footer');
+  footerEl.innerHTML = footerHTML;
 }
 
-/* DARK SECTION */
-.team-section{
-  background:#050505;
-}
-.team-section .section-title{margin-bottom:10px}
+/* ============================================================
+   LANGUAGE SWITCHER
+============================================================ */
+function setupLanguageSwitcher() {
+  const langBtn = document.getElementById('lang-toggle');
+  if (!langBtn) return;
 
-/* GRIDS */
-.app-grid,.contact-grid,.team-grid{
-  max-width:1200px;
-  margin:0 auto;
-  display:grid;
-  gap:24px;
-}
-.app-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.contact-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.team-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'es' : 'en';
+    localStorage.setItem('acesLang', currentLang);
+    applyLanguage(currentLang);
+    updateLangButton();
+  });
 
-/* CARDS */
-.app-card,.contact-card,.team-card,.agent-card{
-  background:rgba(0,0,0,0.7);
-  border-radius:12px;
-  padding:18px;
-  border:1px solid rgba(255,255,255,0.06);
-  box-shadow:0 10px 25px rgba(0,0,0,0.7);
-  transition:transform .2s,box-shadow .2s,border-color .2s;
-}
-.app-card:hover,.contact-card:hover,.team-card:hover,.agent-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 14px 30px rgba(0,0,0,0.9);
-  border-color:rgba(255,77,77,0.7);
-}
-.app-card h3,.contact-card h3,.team-card h3,.agent-card h3{
-  margin:10px 0 6px;
-  font-size:1.05rem;
-}
-.app-card p,.contact-card p,.team-card p,.agent-card p{
-  font-size:0.95rem;
-  color:#ddd;
+  updateLangButton();
 }
 
-/* ICONS */
-.app-icon{
-  width:52px;
-  height:52px;
-  margin-bottom:8px;
-}
-.contact-icon{
-  font-size:2rem;
-  margin-bottom:8px;
+function updateLangButton() {
+  const langBtn = document.getElementById('lang-toggle');
+  if (!langBtn) return;
+  langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
 }
 
-/* BUTTONS */
-.app-btn,.hero-btn,.submit-btn{
-  display:inline-block;
-  margin-top:10px;
-  padding:8px 16px;
-  border-radius:6px;
-  border:none;
-  background:#d40000;
-  color:#fff;
-  text-decoration:none;
-  font-size:0.95rem;
-  font-weight:600;
-  cursor:pointer;
-  transition:background .2s,transform .1s;
-}
-.app-btn:hover,.hero-btn:hover,.submit-btn:hover{
-  background:#ff0000;
-  transform:translateY(-1px);
+/* ============================================================
+   APPLY LANGUAGE (i18n)
+============================================================ */
+function applyLanguage(lang) {
+  const elements = document.querySelectorAll('[data-en][data-es]');
+  elements.forEach(el => {
+    if (lang === 'es') {
+      el.textContent = el.getAttribute('data-es');
+    } else {
+      el.textContent = el.getAttribute('data-en');
+    }
+  });
 }
 
-/* NOTEPAD FORM */
-.notepad-wrapper{
-  max-width:600px;
-  margin:0 auto;
-  background:rgba(0,0,0,0.8);
-  border-radius:12px;
-  padding:20px 20px 24px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.8);
-  border:1px solid rgba(255,255,255,0.06);
-}
-.notepad-form label{
-  display:block;
-  font-size:0.9rem;
-  margin-bottom:4px;
-}
-.notepad-form input,
-.notepad-form textarea{
-  width:100%;
-  padding:8px 10px;
-  margin-bottom:14px;
-  border-radius:6px;
-  border:1px solid #444;
-  background:#111;
-  color:#f5f5f5;
-  font-size:0.95rem;
-}
-.notepad-form input:focus,
-.notepad-form textarea:focus{
-  outline:none;
-  border-color:#ff4d4d;
+/* ============================================================
+   MOBILE MENU
+============================================================ */
+function setupMobileMenu() {
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (!toggleBtn || !mobileMenu) return;
+
+  toggleBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+
+  // Close menu when link is clicked
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+    });
+  });
 }
 
-/* TEAM IMAGES */
-.team-img{
-  width:100%;
-  border-radius:10px;
-  margin-bottom:10px;
-  object-fit:cover;
-}
+/* ============================================================
+   SET ACTIVE NAV LINK
+============================================================ */
+function setActiveNavLink() {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
 
-/* MAP */
-.map-container{
-  max-width:900px;
-  margin:0 auto;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 10px 25px rgba(0,0,0,0.8);
-}
-
-/* AGENT PANEL */
-.agent-panel{
-  position:fixed;
-  top:0;
-  right:-400px;
-  width:320px;
-  max-width:80%;
-  height:100%;
-  background:#050505;
-  box-shadow:-10px 0 25px rgba(0,0,0,0.9);
-  padding:20px;
-  z-index:2000;
-  transition:right .25s ease-out;
-}
-.agent-panel.open{right:0}
-.agent-panel .close-panel{
-  background:none;
-  border:none;
-  color:#fff;
-  font-size:1.8rem;
-  position:absolute;
-  top:10px;
-  right:10px;
-  cursor:pointer;
-}
-.agent-panel .panel-photo{
-  width:100%;
-  border-radius:10px;
-  margin-bottom:10px;
-  object-fit:cover;
-}
-.agent-panel h2{margin-top:30px;font-size:1.3rem}
-.agent-panel .panel-title{color:#ccc;margin-bottom:8px}
-.agent-panel p{font-size:0.95rem;margin-bottom:4px}
-.agent-panel .panel-call{
-  display:inline-block;
-  margin-top:10px;
-  padding:8px 14px;
-  border-radius:6px;
-  background:#d40000;
-  color:#fff;
-  text-decoration:none;
-  font-size:0.9rem;
-}
-
-/* FOOTER */
-.aces-footer{
-  background:linear-gradient(180deg,#000 0,#1a0000 40%,#5a0000 100%);
-  padding:60px 20px 40px;
-  color:#fff;
-}
-.footer-grid{
-  max-width:1200px;
-  margin:0 auto 30px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:30px;
-}
-.footer-link{
-  color:#ff4d4d;
-  text-decoration:none;
-  font-size:0.95rem;
-}
-.footer-link:hover{
-  color:#fff;
-  text-decoration:underline;
-}
-.footer-social{
-  margin-top:20px;
-  display:flex;
-  gap:15px;
-}
-.social-icon{
-  font-size:1.5rem;
-  text-decoration:none;
-  color:#ff4d4d;
-}
-.social-icon:hover{color:#fff}
-.footer-legal{
-  text-align:center;
-  font-size:0.85rem;
-  color:#ccc;
-  max-width:900px;
-  margin:0 auto;
-}
-.back-to-top{
-  margin:20px auto 0;
-  display:block;
-  background:#d40000;
-  color:#fff;
-  border:none;
-  padding:8px 16px;
-  border-radius:6px;
-  cursor:pointer;
-  font-size:0.9rem;
-}
-.back-to-top:hover{background:#ff0000}
-
-/* RESPONSIVE TWEAKS */
-@media(max-width:600px){
-  .small-hero h1{font-size:1.7rem}
-  .small-hero p{font-size:0.95rem}
-  .notepad-wrapper{padding:16px}
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
 }
