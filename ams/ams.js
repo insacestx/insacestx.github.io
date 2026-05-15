@@ -407,3 +407,62 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadClaimDetails();
   }
 });
+const tasks = [
+  {
+    task:"Send COI to ABC Construction",
+    client:"Maria Lopez",
+    due:"2024-05-12",
+    assigned:"George",
+    status:"Open"
+  },
+  {
+    task:"Follow up on claim CLM-002",
+    client:"John Carter",
+    due:"2024-05-10",
+    assigned:"Jordan",
+    status:"Done"
+  },
+  {
+    task:"Request loss runs",
+    client:"Rosa Martinez",
+    due:"2024-05-05",
+    assigned:"Jimmy",
+    status:"Overdue"
+  }
+];
+
+function loadTasks(){
+  const tbody=document.getElementById("taskRows");
+  tbody.innerHTML="";
+
+  tasks.forEach(t=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>${t.task}</td>
+      <td>${t.client}</td>
+      <td>${t.due}</td>
+      <td>${t.assigned}</td>
+      <td class="status-${t.status.toLowerCase()}">${t.status}</td>
+    `;
+    tr.onclick=()=>alert("Task details page coming soon");
+    tbody.appendChild(tr);
+  });
+}
+
+function filterTasks(){
+  const q=document.getElementById("taskSearch").value.toLowerCase();
+  const rows=document.querySelectorAll("#taskRows tr");
+  rows.forEach(r=>{
+    r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";
+  });
+}
+
+function addTask(){
+  alert("Add Task modal coming soon");
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("tasks.html")){
+    loadTasks();
+  }
+});
