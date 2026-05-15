@@ -68,6 +68,11 @@
         data-en="Life" data-es="Vida">Life</button>
     </div>
 
+    <button id="clearFiltersBtn" class="filter-clear-btn"
+            data-en="Clear Filters" data-es="Limpiar Filtros">
+      Clear Filters
+    </button>
+
   </div>
 
   <!-- ============================================================
@@ -76,9 +81,11 @@
   <div class="app-grid" id="applicationsList">
 
     <!-- PERSONAL -->
-    <a class="app-card fade-in app-item" data-category="personal" data-type="auto"
+    <a id="app-auto" class="app-card fade-in app-item"
+       data-category="personal" data-type="auto"
        href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-auto-aces.png" class="app-icon">
+      <img src="icon-auto-aces.png" class="app-icon" alt="Auto Insurance Application">
+      <span class="app-badge" data-en="Personal" data-es="Personal">Personal</span>
       <h3 data-en="Auto Insurance Application" data-es="Solicitud de Seguro de Auto">
         Auto Insurance Application
       </h3>
@@ -88,9 +95,11 @@
       </p>
     </a>
 
-    <a class="app-card fade-in app-item" data-category="personal" data-type="homeowners"
+    <a id="app-homeowners" class="app-card fade-in app-item"
+       data-category="personal" data-type="homeowners"
        href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-property-aces.png" class="app-icon">
+      <img src="icon-property-aces.png" class="app-icon" alt="Homeowners Insurance Application">
+      <span class="app-badge" data-en="Personal" data-es="Personal">Personal</span>
       <h3 data-en="Homeowners Insurance Application" data-es="Solicitud de Seguro de Hogar">
         Homeowners Insurance Application
       </h3>
@@ -100,9 +109,11 @@
       </p>
     </a>
 
-    <a class="app-card fade-in app-item" data-category="personal" data-type="renters"
+    <a id="app-renters" class="app-card fade-in app-item"
+       data-category="personal" data-type="renters"
        href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-property-aces.png" class="app-icon">
+      <img src="icon-property-aces.png" class="app-icon" alt="Renters Insurance Application">
+      <span class="app-badge" data-en="Personal" data-es="Personal">Personal</span>
       <h3 data-en="Renters Insurance Application" data-es="Solicitud de Inquilinos">
         Renters Insurance Application
       </h3>
@@ -113,9 +124,11 @@
     </a>
 
     <!-- COMMERCIAL -->
-    <a class="app-card fade-in app-item" data-category="commercial" data-type="general-liability"
+    <a id="app-general-liability" class="app-card fade-in app-item"
+       data-category="commercial" data-type="general-liability"
        href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-commercial-aces.png" class="app-icon">
+      <img src="icon-commercial-aces.png" class="app-icon" alt="General Liability Application">
+      <span class="app-badge" data-en="Commercial" data-es="Comercial">Commercial</span>
       <h3 data-en="General Liability Application" data-es="Solicitud de Responsabilidad General">
         General Liability Application
       </h3>
@@ -125,9 +138,11 @@
       </p>
     </a>
 
-    <a class="app-card fade-in app-item" data-category="commercial" data-type="commercial-auto"
+    <a id="app-commercial-auto" class="app-card fade-in app-item"
+       data-category="commercial" data-type="commercial-auto"
        href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-auto-aces.png" class="app-icon">
+      <img src="icon-auto-aces.png" class="app-icon" alt="Commercial Auto Application">
+      <span class="app-badge" data-en="Commercial" data-es="Comercial">Commercial</span>
       <h3 data-en="Commercial Auto Application" data-es="Solicitud de Auto Comercial">
         Commercial Auto Application
       </h3>
@@ -137,9 +152,11 @@
       </p>
     </a>
 
-    <a class="app-card fade-in app-item" data-category="commercial" data-type="workers-comp"
+    <a id="app-workers-comp" class="app-card fade-in app-item"
+       data-category="commercial" data-type="workers-comp"
        href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-commercial-aces.png" class="app-icon">
+      <img src="icon-commercial-aces.png" class="app-icon" alt="Workers Compensation Application">
+      <span class="app-badge" data-en="Commercial" data-es="Comercial">Commercial</span>
       <h3 data-en="Workers Compensation Application" data-es="Solicitud de Compensación Laboral">
         Workers Compensation Application
       </h3>
@@ -150,9 +167,11 @@
     </a>
 
     <!-- LIFE -->
-    <a class="app-card fade-in app-item" data-category="life" data-type="term-life"
+    <a id="app-term-life" class="app-card fade-in app-item"
+       data-category="life" data-type="term-life"
        href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-life-aces.png" class="app-icon">
+      <img src="icon-life-aces.png" class="app-icon" alt="Term Life Application">
+      <span class="app-badge" data-en="Life" data-es="Vida">Life</span>
       <h3 data-en="Term Life Application" data-es="Solicitud de Vida a Término">
         Term Life Application
       </h3>
@@ -162,9 +181,11 @@
       </p>
     </a>
 
-    <a class="app-card fade-in app-item" data-category="life" data-type="whole-life"
+    <a id="app-whole-life" class="app-card fade-in app-item"
+       data-category="life" data-type="whole-life"
        href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-life-aces.png" class="app-icon">
+      <img src="icon-life-aces.png" class="app-icon" alt="Whole Life Application">
+      <span class="app-badge" data-en="Life" data-es="Vida">Life</span>
       <h3 data-en="Whole Life Application" data-es="Solicitud de Vida Entera">
         Whole Life Application
       </h3>
