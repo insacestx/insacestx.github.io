@@ -10,9 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   applyURLFilter();
 });
 
-/* ------------------------------------------------------------
-   CATEGORY FILTER BUTTONS
------------------------------------------------------------- */
+/* CATEGORY FILTER BUTTONS */
 function initApplicationFilters() {
   const buttons = document.querySelectorAll(".filter-btn");
   const items = document.querySelectorAll(".app-item");
@@ -35,15 +33,12 @@ function initApplicationFilters() {
         }
       });
 
-      // Remove highlight when manually changing filters
       items.forEach(item => item.classList.remove("highlight"));
     });
   });
 }
 
-/* ------------------------------------------------------------
-   SEARCH BAR FILTERING
------------------------------------------------------------- */
+/* SEARCH BAR FILTERING */
 function initSearchFilter() {
   const searchInput = document.getElementById("appSearch");
   const items = document.querySelectorAll(".app-item");
@@ -62,14 +57,11 @@ function initSearchFilter() {
       }
     });
 
-    // Remove highlight when searching
     items.forEach(item => item.classList.remove("highlight"));
   });
 }
 
-/* ------------------------------------------------------------
-   CLEAR FILTERS BUTTON
------------------------------------------------------------- */
+/* CLEAR FILTERS BUTTON */
 function initClearFilters() {
   const clearBtn = document.getElementById("clearFiltersBtn");
   const buttons = document.querySelectorAll(".filter-btn");
@@ -100,10 +92,7 @@ function initClearFilters() {
   });
 }
 
-/* ------------------------------------------------------------
-   URL FILTERING (from Services Page) + HIGHLIGHT
-   Example: applications.html?type=general-liability
------------------------------------------------------------- */
+/* URL FILTERING (from Services Page) + HIGHLIGHT */
 function applyURLFilter() {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type");
@@ -144,6 +133,6 @@ function applyURLFilter() {
 
   if (matchedItem) {
     matchedItem.classList.add("highlight");
-    matchedItem.scrollIntoView({ behavior: "smooth", block: "center" });
+    matchedItem.scrollIntoView({ behavior:"smooth", block:"center" });
   }
 }
