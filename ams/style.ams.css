@@ -77,3 +77,7 @@ body{margin:0;font-family:Segoe UI,Arial;background:#f5f5f5;color:#111;display:f
 }
 .agent-card h3{margin:0;font-size:18px;color:#d40000}
 .agent-card p{margin:4px 0;font-size:14px}
+.agent-profile-photo{
+  width:140px;height:140px;border-radius:50%;
+  object-fit:cover;margin-bottom:15px;display:block
+}
