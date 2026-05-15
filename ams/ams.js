@@ -466,3 +466,70 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadTasks();
   }
 });
+const agents = [
+  {
+    name:"George Santibañez",
+    title:"Independent Agent",
+    phone:"254-289-2423",
+    email:"george@insaces.com",
+    photo:"/images/agents/george.jpg"
+  },
+  {
+    name:"Jordan Jones",
+    title:"Co-Owner",
+    phone:"254-289-2423",
+    email:"jordan@insaces.com",
+    photo:"/images/agents/jordan.jpg"
+  },
+  {
+    name:"Lanse Derrick",
+    title:"Co-Owner",
+    phone:"214-770-1488",
+    email:"lanse@insaces.com",
+    photo:"/images/agents/lanse.jpg"
+  },
+  {
+    name:"Jimmy Rodriguez",
+    title:"Agent",
+    phone:"214-498-6928",
+    email:"jimmy@insaces.com",
+    photo:"/images/agents/jimmy.jpg"
+  }
+];
+
+function loadAgents(){
+  const grid=document.getElementById("agentGrid");
+  grid.innerHTML="";
+
+  agents.forEach(a=>{
+    const card=document.createElement("div");
+    card.className="agent-card";
+    card.innerHTML=`
+      <img src="${a.photo}">
+      <h3>${a.name}</h3>
+      <p>${a.title}</p>
+      <p>${a.phone}</p>
+      <p>${a.email}</p>
+    `;
+    card.onclick=()=>window.location.href=`agent-profile.html?name=${encodeURIComponent(a.name)}`;
+    grid.appendChild(card);
+  });
+}
+
+function filterAgents(){
+  const q=document.getElementById("agentSearch").value.toLowerCase();
+  const cards=document.querySelectorAll(".agent-card");
+  cards.forEach(c=>{
+    c.style.display=c.innerText.toLowerCase().includes(q)?"":"none";
+  });
+}
+
+function addAgent(){
+  alert("Add Agent modal coming soon");
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("agents.html")){
+    loadAgents();
+  }
+});
