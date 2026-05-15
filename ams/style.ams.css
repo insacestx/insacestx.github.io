@@ -36,3 +36,6 @@ body{margin:0;font-family:Segoe UI,Arial;background:#f5f5f5;color:#111;display:f
   width:100%;height:120px;padding:12px;border:1px solid #ccc;
   border-radius:6px;font-size:14px;margin-bottom:10px
 }
+.data-table td.status-active{color:#0a8a0a;font-weight:bold}
+.data-table td.status-expired{color:#d40000;font-weight:bold}
+.data-table td.status-pending{color:#d48a00;font-weight:bold}
