@@ -1,187 +1,170 @@
-/* ============================================================
-   ACES 2026 — GLOBAL JAVASCRIPT
-   (Header/Footer Injection, i18n, Mobile Menu)
-============================================================ */
+// ACES 2026 — global.js (Full Rebuild, All Widgets Preserved)
 
-// Language state
-let currentLang = localStorage.getItem('acesLang') || 'en';
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-  injectHeader();
-  injectFooter();
-  setupLanguageSwitcher();
-  setupMobileMenu();
-  applyLanguage(currentLang);
-  setActiveNavLink();
+document.addEventListener("DOMContentLoaded", () => {
+  loadHeader();
+  loadFooter();
+  initLanguage();
+  initAgentPanel();
+  setActiveNav();
+  initMobileMenu();
 });
 
-/* ============================================================
+/* ------------------------------------------------------------
    HEADER INJECTION
-============================================================ */
-function injectHeader() {
-  const headerEl = document.getElementById('aces-header');
-  if (!headerEl) return;
+------------------------------------------------------------ */
+function loadHeader() {
+  const header = document.getElementById("aces-header");
+  if (!header) return;
 
-  const headerHTML = `
+  header.innerHTML = `
     <div class="header-container">
+
       <div class="logo-area">
-        <a href="index.html" style="display:flex;align-items:center;">
-          <div class="aces-logo" style="font-weight:bold;font-size:1.2rem;color:#ff4d4d;">
-            ACES
-          </div>
+        <a href="index.html" class="logo-link">
+          <img src="image2.png" alt="ACES Insurance Logo" class="aces-logo">
         </a>
       </div>
 
       <nav class="nav-links">
         <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-        <a href="products.html" data-en="Products" data-es="Productos">Products</a>
-        <a href="about.html" data-en="About" data-es="Acerca de">About</a>
+        <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
+        <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+        <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+        <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+        <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
         <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
       </nav>
 
       <div class="header-controls">
-        <button class="lang-btn" id="lang-toggle" data-en="ES" data-es="EN">
-          ES
-        </button>
-        <button class="mobile-menu-btn" id="mobile-menu-toggle">
-          ☰
-        </button>
+        <button id="lang-toggle" class="lang-btn">EN / ES</button>
+        <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
       </div>
     </div>
 
-    <nav class="mobile-menu" id="mobile-menu">
+    <div id="mobile-menu" class="mobile-menu">
       <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-      <a href="products.html" data-en="Products" data-es="Productos">Products</a>
-      <a href="about.html" data-en="About" data-es="Acerca de">About</a>
+      <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
+      <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+      <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+      <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+      <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
       <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
-    </nav>
+    </div>
   `;
 
-  headerEl.innerHTML = headerHTML;
+  const langBtn = document.getElementById("lang-toggle");
+  if (langBtn) {
+    langBtn.addEventListener("click", () => {
+      const current = localStorage.getItem("acesLang") || "en";
+      const next = current === "en" ? "es" : "en";
+      localStorage.setItem("acesLang", next);
+      applyLanguage(next);
+    });
+  }
 }
 
-/* ============================================================
+/* ------------------------------------------------------------
    FOOTER INJECTION
-============================================================ */
-function injectFooter() {
-  const footerEl = document.getElementById('aces-footer');
-  if (!footerEl) return;
+------------------------------------------------------------ */
+function loadFooter() {
+  const footer = document.getElementById("aces-footer");
+  if (!footer) return;
 
-  const footerHTML = `
-    <div class="footer-grid">
-      <div>
-        <h3 style="margin-bottom:12px;color:#ff4d4d;" data-en="Company" data-es="Empresa">Company</h3>
-        <a href="about.html" class="footer-link" data-en="About Us" data-es="Sobre Nosotros">About Us</a><br>
-        <a href="contact.html" class="footer-link" data-en="Contact" data-es="Contacto">Contact</a><br>
-        <a href="index.html" class="footer-link" data-en="Home" data-es="Inicio">Home</a>
-      </div>
-
-      <div>
-        <h3 style="margin-bottom:12px;color:#ff4d4d;" data-en="Services" data-es="Servicios">Services</h3>
-        <a href="products.html" class="footer-link" data-en="Products" data-es="Productos">Products</a><br>
-        <a href="#" class="footer-link" data-en="Insurance Plans" data-es="Planes de Seguro">Insurance Plans</a><br>
-        <a href="#" class="footer-link" data-en="Get a Quote" data-es="Obtener Cotización">Get a Quote</a>
-      </div>
-
-      <div>
-        <h3 style="margin-bottom:12px;color:#ff4d4d;" data-en="Connect" data-es="Conectar">Connect</h3>
-        <div class="footer-social">
-          <a href="https://facebook.com" class="social-icon" title="Facebook">f</a>
-          <a href="https://twitter.com" class="social-icon" title="Twitter">𝕏</a>
-          <a href="https://linkedin.com" class="social-icon" title="LinkedIn">in</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-legal">
-      <p data-en="© 2026 ACES Insurance Services. All rights reserved."
-         data-es="© 2026 ACES Insurance Services. Todos los derechos reservados.">
-        © 2026 ACES Insurance Services. All rights reserved.
-      </p>
-    </div>
-
-    <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
-            data-en="↑ Back to Top" data-es="↑ Volver Arriba">
-      ↑ Back to Top
-    </button>
-  `;
-
-  footerEl.classList.add('aces-footer');
-  footerEl.innerHTML = footerHTML;
+  fetch("footer.html")
+    .then((res) => res.text())
+    .then((html) => {
+      footer.innerHTML = html;
+      applyLanguage(localStorage.getItem("acesLang") || "en");
+    })
+    .catch(() => {});
 }
 
-/* ============================================================
-   LANGUAGE SWITCHER
-============================================================ */
-function setupLanguageSwitcher() {
-  const langBtn = document.getElementById('lang-toggle');
-  if (!langBtn) return;
+/* ------------------------------------------------------------
+   LANGUAGE SYSTEM
+------------------------------------------------------------ */
+function initLanguage() {
+  const saved = localStorage.getItem("acesLang") || "en";
+  applyLanguage(saved);
+}
 
-  langBtn.addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'es' : 'en';
-    localStorage.setItem('acesLang', currentLang);
-    applyLanguage(currentLang);
-    updateLangButton();
+function applyLanguage(lang) {
+  const isEs = lang === "es";
+  document.documentElement.lang = isEs ? "es" : "en";
+
+  document.querySelectorAll("[data-en]").forEach((el) => {
+    const en = el.getAttribute("data-en");
+    const es = el.getAttribute("data-es");
+    el.textContent = isEs ? es || en : en;
   });
 
-  updateLangButton();
+  const langBtn = document.getElementById("lang-toggle");
+  if (langBtn) langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
 }
 
-function updateLangButton() {
-  const langBtn = document.getElementById('lang-toggle');
-  if (!langBtn) return;
-  langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
+/* ------------------------------------------------------------
+   ACTIVE NAV LINK
+------------------------------------------------------------ */
+function setActiveNav() {
+  const path = window.location.pathname.split("/").pop() || "index.html";
+  const links = document.querySelectorAll(".nav-links a, #mobile-menu a");
+
+  links.forEach((link) => {
+    const file = link.getAttribute("href").split("/").pop();
+    if (file === path) link.classList.add("active");
+    else link.classList.remove("active");
+  });
 }
 
-/* ============================================================
-   APPLY LANGUAGE (i18n)
-============================================================ */
-function applyLanguage(lang) {
-  const elements = document.querySelectorAll('[data-en][data-es]');
-  elements.forEach(el => {
-    if (lang === 'es') {
-      el.textContent = el.getAttribute('data-es');
-    } else {
-      el.textContent = el.getAttribute('data-en');
+/* ------------------------------------------------------------
+   MOBILE MENU
+------------------------------------------------------------ */
+function initMobileMenu() {
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  if (!btn || !menu) return;
+
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("open");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!menu.classList.contains("open")) return;
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove("open");
     }
   });
 }
 
-/* ============================================================
-   MOBILE MENU
-============================================================ */
-function setupMobileMenu() {
-  const toggleBtn = document.getElementById('mobile-menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
+/* ------------------------------------------------------------
+   AGENT PANEL (kept exactly as your widget)
+------------------------------------------------------------ */
+function initAgentPanel() {
+  const cards = document.querySelectorAll(".agent-card");
+  const panel = document.querySelector(".agent-panel");
+  if (!cards.length || !panel) return;
 
-  if (!toggleBtn || !mobileMenu) return;
+  const photo = panel.querySelector(".panel-photo");
+  const nameEl = panel.querySelector("h2");
+  const titleEl = panel.querySelector(".panel-title");
+  const phoneEl = panel.querySelector(".panel-phone");
+  const emailEl = panel.querySelector(".panel-email");
+  const callBtn = panel.querySelector(".panel-call");
+  const closeBtn = panel.querySelector(".close-panel");
 
-  toggleBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
-
-  // Close menu when link is clicked
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      photo.src = card.getAttribute("data-photo");
+      nameEl.textContent = card.getAttribute("data-name");
+      titleEl.textContent = card.getAttribute("data-title");
+      phoneEl.textContent = card.getAttribute("data-phone");
+      emailEl.textContent = card.getAttribute("data-email");
+      callBtn.href = `tel:${card.getAttribute("data-phone").replace(/\D/g, "")}`;
+      panel.classList.add("open");
     });
   });
-}
 
-/* ============================================================
-   SET ACTIVE NAV LINK
-============================================================ */
-function setActiveNavLink() {
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
-
-  navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
+  closeBtn.addEventListener("click", () => panel.classList.remove("open"));
+  panel.addEventListener("click", (e) => {
+    if (e.target === panel) panel.classList.remove("open");
   });
 }
