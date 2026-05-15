@@ -12,23 +12,19 @@
 
 <link rel="stylesheet" href="style.css">
 <script src="global.js" defer></script>
+<script src="services.js" defer></script>
 
 </head>
 <body>
 
-<!-- HEADER INJECTED BY global.js -->
 <header id="aces-header"></header>
 
-<!-- ============================================================
-     SMALL HERO — MATCHES INDEX
-============================================================ -->
 <section class="small-hero fade-in">
   <div class="small-hero-content">
     <h1 data-en="Our Insurance Services"
         data-es="Nuestros Servicios de Seguros">
       Our Insurance Services
     </h1>
-
     <p data-en="Personalized coverage options for every need."
        data-es="Opciones de cobertura personalizadas para cada necesidad.">
       Personalized coverage options for every need.
@@ -36,155 +32,113 @@
   </div>
 </section>
 
-<!-- ============================================================
-     CATEGORY SELECTOR — ACES RED/WHITE CARDS
-============================================================ -->
 <section class="services-category-section fade-in">
-
   <h2 class="app-category-title" data-en="Choose a Category" data-es="Elija una Categoría">
     Choose a Category
   </h2>
 
   <div class="services-category-grid">
-
     <div class="service-category-card" data-category="personal">
       <h3 data-en="Personal Insurance" data-es="Seguros Personales">Personal Insurance</h3>
     </div>
-
     <div class="service-category-card" data-category="commercial">
       <h3 data-en="Commercial Insurance" data-es="Seguros Comerciales">Commercial Insurance</h3>
     </div>
-
     <div class="service-category-card" data-category="life">
       <h3 data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</h3>
     </div>
-
   </div>
-
 </section>
 
-<!-- ============================================================
-     SUBCATEGORY GRID — ANIMATED SCALE + FADE
-============================================================ -->
 <section class="subcategory-section fade-in">
 
   <!-- PERSONAL -->
   <div class="subcategory-group" id="group-personal">
-
     <div class="subcategory-card" data-type="auto">
       <p data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</p>
     </div>
-
     <div class="subcategory-card" data-type="homeowners">
       <p data-en="Homeowners" data-es="Seguro de Hogar">Homeowners</p>
     </div>
-
     <div class="subcategory-card" data-type="renters">
       <p data-en="Renters" data-es="Inquilinos">Renters</p>
     </div>
-
     <div class="subcategory-card" data-type="condo">
       <p data-en="Condo" data-es="Condominio">Condo</p>
     </div>
-
     <div class="subcategory-card" data-type="motorcycle">
       <p data-en="Motorcycle" data-es="Motocicleta">Motorcycle</p>
     </div>
-
     <div class="subcategory-card" data-type="boat">
       <p data-en="Boat" data-es="Barco">Boat</p>
     </div>
-
     <div class="subcategory-card" data-type="rv">
       <p data-en="RV" data-es="Casa Rodante">RV</p>
     </div>
-
     <div class="subcategory-card" data-type="umbrella">
       <p data-en="Umbrella" data-es="Sombrilla">Umbrella</p>
     </div>
-
   </div>
 
   <!-- COMMERCIAL -->
   <div class="subcategory-group" id="group-commercial">
-
     <div class="subcategory-card" data-type="general-liability">
       <p data-en="General Liability" data-es="Responsabilidad General">General Liability</p>
     </div>
-
     <div class="subcategory-card" data-type="commercial-auto">
       <p data-en="Commercial Auto" data-es="Auto Comercial">Commercial Auto</p>
     </div>
-
     <div class="subcategory-card" data-type="workers-comp">
       <p data-en="Workers Compensation" data-es="Compensación Laboral">Workers Compensation</p>
     </div>
-
     <div class="subcategory-card" data-type="commercial-property">
       <p data-en="Commercial Property" data-es="Propiedad Comercial">Commercial Property</p>
     </div>
-
     <div class="subcategory-card" data-type="bop">
       <p data-en="Business Owners Policy (BOP)" data-es="Póliza para Dueños de Negocio">Business Owners Policy (BOP)</p>
     </div>
-
     <div class="subcategory-card" data-type="professional-liability">
       <p data-en="Professional Liability" data-es="Responsabilidad Profesional">Professional Liability</p>
     </div>
-
     <div class="subcategory-card" data-type="cyber">
       <p data-en="Cyber Liability" data-es="Responsabilidad Cibernética">Cyber Liability</p>
     </div>
-
     <div class="subcategory-card" data-type="bonding">
       <p data-en="Bonding" data-es="Fianzas">Bonding</p>
     </div>
-
     <div class="subcategory-card" data-type="inland-marine">
       <p data-en="Inland Marine" data-es="Equipo y Herramientas">Inland Marine</p>
     </div>
-
     <div class="subcategory-card" data-type="commercial-umbrella">
       <p data-en="Commercial Umbrella" data-es="Sombrilla Comercial">Commercial Umbrella</p>
     </div>
-
   </div>
 
   <!-- LIFE -->
   <div class="subcategory-group" id="group-life">
-
     <div class="subcategory-card" data-type="term-life">
       <p data-en="Term Life" data-es="Vida a Término">Term Life</p>
     </div>
-
     <div class="subcategory-card" data-type="whole-life">
       <p data-en="Whole Life" data-es="Vida Entera">Whole Life</p>
     </div>
-
     <div class="subcategory-card" data-type="final-expense">
       <p data-en="Final Expense" data-es="Gastos Finales">Final Expense</p>
     </div>
-
     <div class="subcategory-card" data-type="mortgage-protection">
       <p data-en="Mortgage Protection" data-es="Protección Hipotecaria">Mortgage Protection</p>
     </div>
-
     <div class="subcategory-card" data-type="iul">
       <p data-en="IUL / UL" data-es="IUL / UL">IUL / UL</p>
     </div>
-
     <div class="subcategory-card" data-type="annuities">
       <p data-en="Annuities" data-es="Anualidades">Annuities</p>
     </div>
-
   </div>
 
 </section>
 
-<!-- FOOTER INJECTED BY global.js -->
 <footer id="aces-footer"></footer>
-
-<script src="services.js"></script>
 
 </body>
 </html>
