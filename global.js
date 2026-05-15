@@ -1,197 +1,369 @@
-// ACES 2026 — global.js
+/* BASE */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#050505;
+  color:#f5f5f5;
+  line-height:1.6;
+}
+a{color:inherit}
+img{max-width:100%;display:block}
+section{padding:60px 20px}
+@media(min-width:900px){section{padding:80px 40px}}
+.fade-in{animation:fadeIn .6s ease-in-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadHeader();
-  loadFooter();
-  initLanguage();
-  initAgentPanel();
-  setActiveNav();
-  initMobileMenu();
-});
-
-/* ------------------------------------------------------------
-   HEADER INJECTION
------------------------------------------------------------- */
-function loadHeader() {
-  const header = document.getElementById('aces-header');
-  if (!header) return;
-
-  header.innerHTML = `
-    <div class="header-container">
-
-      <div class="logo-area">
-        <a href="index.html" class="logo-link">
-          <img src="image2.png" alt="ACES Insurance Logo" class="aces-logo">
-        </a>
-      </div>
-
-      <nav class="nav-links">
-        <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-        <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
-        <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-        <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-        <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-        <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
-        <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
-      </nav>
-
-      <div class="header-controls">
-        <button id="lang-toggle" class="lang-btn">EN / ES</button>
-        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation">☰</button>
-      </div>
-    </div>
-
-    <div id="mobile-menu" class="mobile-menu">
-      <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-      <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
-      <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-      <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-      <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-      <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
-      <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
-    </div>
-  `;
-
-  const langBtn = document.getElementById('lang-toggle');
-  if (langBtn) {
-    langBtn.addEventListener('click', () => {
-      const current = localStorage.getItem('acesLang') || 'en';
-      const next = current === 'en' ? 'es' : 'en';
-      localStorage.setItem('acesLang', next);
-      applyLanguage(next);
-    });
-  }
+/* HEADER */
+#aces-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(0,0,0,0.9);
+  backdrop-filter:blur(10px);
+}
+.header-container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:10px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo-area{display:flex;align-items:center}
+.aces-logo{height:42px}
+.nav-links{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+.nav-links a{
+  font-size:0.95rem;
+  text-decoration:none;
+  color:#f5f5f5;
+  padding:6px 10px;
+  border-radius:4px;
+  transition:background .2s,color .2s;
+}
+.nav-links a:hover{
+  background:#d40000;
+  color:#000;
+}
+.nav-links a.active{
+  background:#ff4d4d;
+  color:#000;
+  font-weight:600;
+}
+.header-controls{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.lang-btn{
+  padding:6px 10px;
+  border-radius:20px;
+  border:1px solid #ff4d4d;
+  background:transparent;
+  color:#ff4d4d;
+  font-size:0.8rem;
+  cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.lang-btn:hover{
+  background:#ff4d4d;
+  color:#000;
+  border-color:#ff4d4d;
+}
+.mobile-menu-btn{
+  display:none;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:1.6rem;
+  cursor:pointer;
 }
 
-/* ------------------------------------------------------------
-   FOOTER INJECTION (uses footer.html)
------------------------------------------------------------- */
-function loadFooter() {
-  const footer = document.getElementById('aces-footer');
-  if (!footer) return;
+/* MOBILE MENU */
+.mobile-menu{
+  display:none;
+  flex-direction:column;
+  background:#111;
+  border-bottom:1px solid #333;
+}
+.mobile-menu a{
+  padding:10px 20px;
+  text-decoration:none;
+  font-size:0.95rem;
+  border-top:1px solid #222;
+}
+.mobile-menu a:hover{
+  background:#d40000;
+  color:#000;
+}
+.mobile-menu a.active{
+  background:#ff4d4d;
+  color:#000;
+  font-weight:600;
+}
+.mobile-menu.open{display:flex}
 
-  fetch('footer.html')
-    .then(r => r.text())
-    .then(html => {
-      footer.innerHTML = html;
-      // re-apply language after footer loads
-      const saved = localStorage.getItem('acesLang') || 'en';
-      applyLanguage(saved);
-    })
-    .catch(() => {});
+@media(max-width:900px){
+  .header-container{padding:10px 12px}
+  .nav-links{display:none}
+  .mobile-menu-btn{display:block}
 }
 
-/* ------------------------------------------------------------
-   LANGUAGE HANDLING
------------------------------------------------------------- */
-function initLanguage() {
-  const saved = localStorage.getItem('acesLang') || 'en';
-  applyLanguage(saved);
+/* HERO */
+.small-hero{
+  background:radial-gradient(circle at top,#550000 0,#000 55%);
+  padding:70px 20px 50px;
+  text-align:center;
+}
+.small-hero-content{max-width:800px;margin:0 auto}
+.small-hero h1{font-size:2rem;margin-bottom:10px}
+.small-hero p{font-size:1.05rem;color:#ddd}
+@media(min-width:900px){
+  .small-hero{padding:90px 40px 60px}
+  .small-hero h1{font-size:2.4rem}
 }
 
-function applyLanguage(lang) {
-  const isEs = lang === 'es';
-  document.documentElement.lang = isEs ? 'es' : 'en';
-
-  document.querySelectorAll('[data-en]').forEach(el => {
-    const en = el.getAttribute('data-en');
-    const es = el.getAttribute('data-es');
-    const text = isEs ? (es || en) : en;
-    if (text) el.textContent = text;
-  });
-
-  const langBtn = document.getElementById('lang-toggle');
-  if (langBtn) {
-    langBtn.textContent = isEs ? 'ES / EN' : 'EN / ES';
-  }
+/* RED SECTION */
+.app-section{
+  background:linear-gradient(180deg,#2b0000 0,#5a0000 60%,#2b0000 100%);
+}
+.app-category-title,.section-title{
+  text-align:center;
+  font-size:1.6rem;
+  margin-bottom:10px;
+}
+.app-category-intro{
+  text-align:center;
+  max-width:700px;
+  margin:0 auto 30px;
+  color:#f0f0f0;
+  font-size:0.98rem;
 }
 
-/* ------------------------------------------------------------
-   ACTIVE NAV LINK (desktop + mobile)
------------------------------------------------------------- */
-function setActiveNav() {
-  const path = window.location.pathname.split('/').pop() || 'index.html';
-  const desktopLinks = document.querySelectorAll('.nav-links a');
-  const mobileLinks = document.querySelectorAll('#mobile-menu a');
+/* DARK SECTION */
+.team-section{
+  background:#050505;
+}
+.team-section .section-title{margin-bottom:10px}
 
-  [...desktopLinks, ...mobileLinks].forEach(link => {
-    const href = link.getAttribute('href');
-    if (!href) return;
-    const file = href.split('/').pop();
-    if (file === path) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
-  });
+/* GRIDS */
+.app-grid,.contact-grid,.team-grid{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  gap:24px;
+}
+.app-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.contact-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.team-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+
+/* CARDS */
+.app-card,.contact-card,.team-card,.agent-card{
+  background:rgba(0,0,0,0.7);
+  border-radius:12px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 10px 25px rgba(0,0,0,0.7);
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+.app-card:hover,.contact-card:hover,.team-card:hover,.agent-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 30px rgba(0,0,0,0.9);
+  border-color:rgba(255,77,77,0.7);
+}
+.app-card h3,.contact-card h3,.team-card h3,.agent-card h3{
+  margin:10px 0 6px;
+  font-size:1.05rem;
+}
+.app-card p,.contact-card p,.team-card p,.agent-card p{
+  font-size:0.95rem;
+  color:#ddd;
 }
 
-/* ------------------------------------------------------------
-   MOBILE MENU
------------------------------------------------------------- */
-function initMobileMenu() {
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  if (!btn || !menu) return;
-
-  btn.addEventListener('click', () => {
-    menu.classList.toggle('open');
-  });
-
-  document.addEventListener('click', e => {
-    if (!menu.classList.contains('open')) return;
-    const withinMenu = menu.contains(e.target);
-    const withinBtn = btn.contains(e.target);
-    if (!withinMenu && !withinBtn) {
-      menu.classList.remove('open');
-    }
-  });
+/* ICONS */
+.app-icon{
+  width:52px;
+  height:52px;
+  margin-bottom:8px;
+}
+.contact-icon{
+  font-size:2rem;
+  margin-bottom:8px;
 }
 
-/* ------------------------------------------------------------
-   AGENT SLIDE-OUT PANEL (kept exactly as a widget)
------------------------------------------------------------- */
-function initAgentPanel() {
-  const cards = document.querySelectorAll('.agent-card');
-  const panel = document.querySelector('.agent-panel');
-  if (!cards.length || !panel) return;
+/* BUTTONS */
+.app-btn,.hero-btn,.submit-btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 16px;
+  border-radius:6px;
+  border:none;
+  background:#d40000;
+  color:#fff;
+  text-decoration:none;
+  font-size:0.95rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:background .2s,transform .1s;
+}
+.app-btn:hover,.hero-btn:hover,.submit-btn:hover{
+  background:#ff0000;
+  transform:translateY(-1px);
+}
 
-  const photo = panel.querySelector('.panel-photo');
-  const nameEl = panel.querySelector('h2');
-  const titleEl = panel.querySelector('.panel-title');
-  const phoneEl = panel.querySelector('.panel-phone');
-  const emailEl = panel.querySelector('.panel-email');
-  const callBtn = panel.querySelector('.panel-call');
-  const closeBtn = panel.querySelector('.close-panel');
+/* NOTEPAD FORM */
+.notepad-wrapper{
+  max-width:600px;
+  margin:0 auto;
+  background:rgba(0,0,0,0.8);
+  border-radius:12px;
+  padding:20px 20px 24px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.8);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.notepad-form label{
+  display:block;
+  font-size:0.9rem;
+  margin-bottom:4px;
+}
+.notepad-form input,
+.notepad-form textarea{
+  width:100%;
+  padding:8px 10px;
+  margin-bottom:14px;
+  border-radius:6px;
+  border:1px solid #444;
+  background:#111;
+  color:#f5f5f5;
+  font-size:0.95rem;
+}
+.notepad-form input:focus,
+.notepad-form textarea:focus{
+  outline:none;
+  border-color:#ff4d4d;
+}
 
-  cards.forEach(card => {
-    card.addEventListener('click', () => {
-      const name = card.getAttribute('data-name') || '';
-      const title = card.getAttribute('data-title') || '';
-      const phone = card.getAttribute('data-phone') || '';
-      const email = card.getAttribute('data-email') || '';
-      const photoSrc = card.getAttribute('data-photo') || '';
+/* TEAM IMAGES */
+.team-img{
+  width:100%;
+  border-radius:10px;
+  margin-bottom:10px;
+  object-fit:cover;
+}
 
-      if (photo) photo.src = photoSrc;
-      if (nameEl) nameEl.textContent = name;
-      if (titleEl) titleEl.textContent = title;
-      if (phoneEl) phoneEl.textContent = phone;
-      if (emailEl) emailEl.textContent = email;
-      if (callBtn) callBtn.href = phone ? `tel:${phone.replace(/\D/g, '')}` : '#';
+/* MAP */
+.map-container{
+  max-width:900px;
+  margin:0 auto;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.8);
+}
 
-      panel.classList.add('open');
-    });
-  });
+/* AGENT PANEL */
+.agent-panel{
+  position:fixed;
+  top:0;
+  right:-400px;
+  width:320px;
+  max-width:80%;
+  height:100%;
+  background:#050505;
+  box-shadow:-10px 0 25px rgba(0,0,0,0.9);
+  padding:20px;
+  z-index:2000;
+  transition:right .25s ease-out;
+}
+.agent-panel.open{right:0}
+.agent-panel .close-panel{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:1.8rem;
+  position:absolute;
+  top:10px;
+  right:10px;
+  cursor:pointer;
+}
+.agent-panel .panel-photo{
+  width:100%;
+  border-radius:10px;
+  margin-bottom:10px;
+  object-fit:cover;
+}
+.agent-panel h2{margin-top:30px;font-size:1.3rem}
+.agent-panel .panel-title{color:#ccc;margin-bottom:8px}
+.agent-panel p{font-size:0.95rem;margin-bottom:4px}
+.agent-panel .panel-call{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 14px;
+  border-radius:6px;
+  background:#d40000;
+  color:#fff;
+  text-decoration:none;
+  font-size:0.9rem;
+}
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      panel.classList.remove('open');
-    });
-  }
+/* FOOTER */
+.aces-footer{
+  background:linear-gradient(180deg,#000 0,#1a0000 40%,#5a0000 100%);
+  padding:60px 20px 40px;
+  color:#fff;
+}
+.footer-grid{
+  max-width:1200px;
+  margin:0 auto 30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+}
+.footer-link{
+  color:#ff4d4d;
+  text-decoration:none;
+  font-size:0.95rem;
+}
+.footer-link:hover{
+  color:#fff;
+  text-decoration:underline;
+}
+.footer-social{
+  margin-top:20px;
+  display:flex;
+  gap:15px;
+}
+.social-icon{
+  font-size:1.5rem;
+  text-decoration:none;
+  color:#ff4d4d;
+}
+.social-icon:hover{color:#fff}
+.footer-legal{
+  text-align:center;
+  font-size:0.85rem;
+  color:#ccc;
+  max-width:900px;
+  margin:0 auto;
+}
+.back-to-top{
+  margin:20px auto 0;
+  display:block;
+  background:#d40000;
+  color:#fff;
+  border:none;
+  padding:8px 16px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:0.9rem;
+}
+.back-to-top:hover{background:#ff0000}
 
-  panel.addEventListener('click', e => {
-    if (e.target === panel) {
-      panel.classList.remove('open');
-    }
-  });
+/* RESPONSIVE TWEAKS */
+@media(max-width:600px){
+  .small-hero h1{font-size:1.7rem}
+  .small-hero p{font-size:0.95rem}
+  .notepad-wrapper{padding:16px}
 }
