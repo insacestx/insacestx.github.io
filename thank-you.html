@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,8 +13,8 @@
 <link rel="stylesheet" href="style.css">
 <script src="global.js" defer></script>
 
+<!-- Auto‑redirect to Contact page after 5 seconds -->
 <script>
-  // Auto-redirect to contact page after 5 seconds
   setTimeout(() => {
     window.location.href = "contact.html";
   }, 5000);
@@ -54,39 +55,66 @@
   .thankyou-note {
     margin-top: 15px;
     font-size: 0.95rem;
-    color: #555;
+    color: #ccc;
   }
 </style>
+
 </head>
 <body>
 
+<!-- HEADER -->
 <header id="aces-header"></header>
 
-<section class="thankyou-wrapper">
-  <h1 data-en="Thank you for your submission."
-      data-es="Gracias por su solicitud.">
-    Thank you for your submission.
-  </h1>
+<!-- ============================================================
+     SMALL HERO — ACES 2026
+============================================================ -->
+<section class="small-hero fade-in">
+  <div class="small-hero-content">
+    <h1 data-en="Thank You"
+        data-es="Gracias">
+      Thank You
+    </h1>
 
-  <p data-en="We have received your information and someone from our team will be in touch with you as soon as possible."
-     data-es="Hemos recibido su información y alguien de nuestro equipo se pondrá en contacto con usted lo antes posible.">
-    We have received your information and someone from our team will be in touch with you as soon as possible.
-  </p>
-
-  <a href="contact.html"
-     class="thankyou-btn"
-     data-en="Go to Contact Page"
-     data-es="Ir a la página de contacto">
-    Go to Contact Page
-  </a>
-
-  <p class="thankyou-note"
-     data-en="You will be redirected to our Contact page shortly."
-     data-es="En unos momentos será redirigido a nuestra página de contacto.">
-    You will be redirected to our Contact page shortly.
-  </p>
+    <p data-en="Your submission has been received."
+       data-es="Su solicitud ha sido recibida.">
+      Your submission has been received.
+    </p>
+  </div>
 </section>
 
+<!-- ============================================================
+     THANK YOU CONTENT (DARK SECTION)
+============================================================ -->
+<section class="team-section fade-in">
+  <div class="thankyou-wrapper">
+
+    <h1 data-en="Thank you for your submission."
+        data-es="Gracias por su solicitud.">
+      Thank you for your submission.
+    </h1>
+
+    <p data-en="Someone from our team will be in touch with you as soon as possible."
+       data-es="Alguien de nuestro equipo se pondrá en contacto con usted lo antes posible.">
+      Someone from our team will be in touch with you as soon as possible.
+    </p>
+
+    <a href="contact.html"
+       class="thankyou-btn"
+       data-en="Go to Contact Page"
+       data-es="Ir a la Página de Contacto">
+      Go to Contact Page
+    </a>
+
+    <p class="thankyou-note"
+       data-en="You will be redirected shortly."
+       data-es="Será redirigido en unos momentos.">
+      You will be redirected shortly.
+    </p>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer id="aces-footer"></footer>
 
 </body>
