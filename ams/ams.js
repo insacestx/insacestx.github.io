@@ -57,3 +57,37 @@ function openAddClient(){
 }
 
 document.addEventListener("DOMContentLoaded",loadClients);
+function getClientFromURL(){
+  const params=new URLSearchParams(window.location.search);
+  const name=params.get("name");
+  return clients.find(c=>c.name===name);
+}
+
+function loadClientProfile(){
+  const c=getClientFromURL();
+  if(!c){alert("Client not found");return;}
+
+  document.getElementById("clientName").innerText=c.name;
+  document.getElementById("clientPhone").innerText=c.phone;
+  document.getElementById("clientEmail").innerText=c.email;
+  document.getElementById("clientAgent").innerText=c.agent;
+
+  // Placeholder lists
+  document.getElementById("policyList").innerHTML="<li>No policies yet</li>";
+  document.getElementById("coiList").innerHTML="<li>No COIs yet</li>";
+  document.getElementById("claimList").innerHTML="<li>No claims yet</li>";
+  document.getElementById("docList").innerHTML="<li>No documents uploaded</li>";
+}
+
+function editClient(){alert("Edit client coming soon")}
+function addPolicy(){alert("Add policy coming soon")}
+function addCOI(){alert("Add COI coming soon")}
+function addClaim(){alert("Add claim coming soon")}
+function saveNotes(){alert("Notes saved")}
+function uploadDocs(){alert("Documents uploaded")}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("client-profile.html")){
+    loadClientProfile();
+  }
+});
