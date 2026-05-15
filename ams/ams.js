@@ -91,3 +91,70 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadClientProfile();
   }
 });
+const policies = [
+  {
+    number:"GL-10293",
+    client:"Maria Lopez",
+    carrier:"Travelers",
+    line:"General Liability",
+    effective:"2024-06-01",
+    renewal:"2025-06-01",
+    status:"Active"
+  },
+  {
+    number:"CA-55210",
+    client:"John Carter",
+    carrier:"Progressive",
+    line:"Commercial Auto",
+    effective:"2024-02-15",
+    renewal:"2025-02-15",
+    status:"Active"
+  },
+  {
+    number:"WC-88321",
+    client:"Rosa Martinez",
+    carrier:"Texas Mutual",
+    line:"Workers Comp",
+    effective:"2023-11-01",
+    renewal:"2024-11-01",
+    status:"Expired"
+  }
+];
+
+function loadPolicies(){
+  const tbody=document.getElementById("policyRows");
+  tbody.innerHTML="";
+
+  policies.forEach(p=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>${p.number}</td>
+      <td>${p.client}</td>
+      <td>${p.carrier}</td>
+      <td>${p.line}</td>
+      <td>${p.effective}</td>
+      <td>${p.renewal}</td>
+      <td class="status-${p.status.toLowerCase()}">${p.status}</td>
+    `;
+    tr.onclick=()=>window.location.href=`policy-details.html?number=${encodeURIComponent(p.number)}`;
+    tbody.appendChild(tr);
+  });
+}
+
+function filterPolicies(){
+  const q=document.getElementById("policySearch").value.toLowerCase();
+  const rows=document.querySelectorAll("#policyRows tr");
+  rows.forEach(r=>{
+    r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";
+  });
+}
+
+function addPolicy(){
+  alert("Add Policy modal coming soon");
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("policies.html")){
+    loadPolicies();
+  }
+});
