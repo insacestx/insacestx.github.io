@@ -194,3 +194,70 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadPolicyDetails();
   }
 });
+const cois = [
+  {
+    id:"COI-001",
+    client:"Maria Lopez",
+    holder:"ABC Construction",
+    policy:"GL-10293",
+    requested:"2024-05-10",
+    completed:"—",
+    status:"Pending"
+  },
+  {
+    id:"COI-002",
+    client:"John Carter",
+    holder:"City of Waco",
+    policy:"CA-55210",
+    requested:"2024-05-08",
+    completed:"2024-05-09",
+    status:"Completed"
+  },
+  {
+    id:"COI-003",
+    client:"Rosa Martinez",
+    holder:"Blue Star Electric",
+    policy:"WC-88321",
+    requested:"2024-04-28",
+    completed:"—",
+    status:"Delayed"
+  }
+];
+
+function loadCOIs(){
+  const tbody=document.getElementById("coiRows");
+  tbody.innerHTML="";
+
+  cois.forEach(c=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>${c.id}</td>
+      <td>${c.client}</td>
+      <td>${c.holder}</td>
+      <td>${c.policy}</td>
+      <td>${c.requested}</td>
+      <td>${c.completed}</td>
+      <td class="status-${c.status.toLowerCase()}">${c.status}</td>
+    `;
+    tr.onclick=()=>window.location.href=`coi-details.html?id=${encodeURIComponent(c.id)}`;
+    tbody.appendChild(tr);
+  });
+}
+
+function filterCOIs(){
+  const q=document.getElementById("coiSearch").value.toLowerCase();
+  const rows=document.querySelectorAll("#coiRows tr");
+  rows.forEach(r=>{
+    r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";
+  });
+}
+
+function addCOI(){
+  alert("Add COI modal coming soon");
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("cois.html")){
+    loadCOIs();
+  }
+});
