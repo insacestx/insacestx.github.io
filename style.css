@@ -374,16 +374,18 @@ section{padding:60px 20px}
   background:#d40000;
   color:#fff;
   border:none;
-  padding:10px 18
-/* Center contact cards */
-.contact-card {
-  text-align: center;
+  padding:10px 18px;
+  border-radius:6px;
+  cursor:pointer;
 }
 
-.contact-icon {
-  margin: 0 auto 12px;
-  display: block;
+/* Center contact cards */
+.contact-card{text-align:center}
+.contact-icon{
+  margin:0 auto 12px;
+  display:block;
 }
+
 /* ============================================================
    SERVICES PAGE — CATEGORY SELECTORS (ACES RED/WHITE CARDS)
 ============================================================ */
@@ -391,7 +393,6 @@ section{padding:60px 20px}
   padding:60px 20px;
   text-align:center;
 }
-
 .services-category-grid{
   max-width:900px;
   margin:30px auto 0;
@@ -400,7 +401,6 @@ section{padding:60px 20px}
   justify-content:center;
   gap:24px;
 }
-
 .service-category-card{
   background:#111;
   border:2px solid #d40000;
@@ -411,20 +411,17 @@ section{padding:60px 20px}
   transition:transform .25s ease, opacity .25s ease, box-shadow .25s ease;
   box-shadow:0 10px 25px rgba(0,0,0,0.7);
 }
-
 .service-category-card:hover{
   transform:scale(1.05);
   box-shadow:0 14px 30px rgba(0,0,0,0.9);
   border-color:#ff4d4d;
 }
-
 .service-category-card.active{
   transform:scale(1.12);
   opacity:1;
   border-color:#ff4d4d;
   box-shadow:0 18px 40px rgba(255,0,0,0.35);
 }
-
 .service-category-card.inactive{
   transform:scale(0.88);
   opacity:0.35;
@@ -438,7 +435,6 @@ section{padding:60px 20px}
   margin:40px auto;
   padding:20px;
 }
-
 .subcategory-group{
   display:none;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -448,13 +444,11 @@ section{padding:60px 20px}
   transform:translateY(20px);
   transition:opacity .35s ease, transform .35s ease;
 }
-
 .subcategory-group.active{
   display:grid;
   opacity:1;
   transform:translateY(0);
 }
-
 .subcategory-card{
   background:#111;
   border:1px solid rgba(255,255,255,0.08);
@@ -465,7 +459,6 @@ section{padding:60px 20px}
   transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
   box-shadow:0 10px 25px rgba(0,0,0,0.7);
 }
-
 .subcategory-card:hover{
   transform:translateY(-4px) scale(1.03);
   border-color:#ff4d4d;
@@ -473,18 +466,6 @@ section{padding:60px 20px}
 }
 
 /* ============================================================
-   MOBILE RESPONSIVE TWEAKS
-============================================================ */
-@media(max-width:700px){
-  .service-category-card{
-    min-width:100%;
-    text-align:center;
-  }
-  .subcategory-group{
-    grid-template-columns:1fr;
-  }
-}
-/* ============================================================
    APPLICATIONS PAGE — FILTER BAR + SEARCH
 ============================================================ */
 .application-filter-bar{
@@ -495,7 +476,6 @@ section{padding:60px 20px}
   gap:20px;
   align-items:center;
 }
-
 #appSearch{
   width:100%;
   max-width:600px;
@@ -507,22 +487,18 @@ section{padding:60px 20px}
   font-size:1rem;
   transition:border-color .2s;
 }
-
 #appSearch:focus{
   outline:none;
   border-color:#ff4d4d;
 }
 
-/* ============================================================
-   FILTER BUTTONS
-============================================================ */
+/* FILTER BUTTONS */
 .filter-buttons{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
   justify-content:center;
 }
-
 .filter-btn{
   padding:8px 16px;
   border-radius:20px;
@@ -533,120 +509,21 @@ section{padding:60px 20px}
   font-size:0.9rem;
   transition:background .2s,color .2s,border-color .2s;
 }
-
 .filter-btn:hover{
   background:#ff4d4d;
   color:#000;
 }
-
 .filter-btn.active{
   background:#ff4d4d;
   color:#000;
   border-color:#ff4d4d;
   font-weight:600;
 }
+.filter-btn[data-filter="personal"]::before{content:"👤 "}
+.filter-btn[data-filter="commercial"]::before{content:"🏢 "}
+.filter-btn[data-filter="life"]::before{content:"❤️ "}
 
-/* ============================================================
-   APPLICATION CARDS — CATEGORY HIGHLIGHTING
-============================================================ */
-.app-item{
-  transition:opacity .25s ease, transform .25s ease;
-}
-
-.app-item.hidden{
-  opacity:0.15;
-  pointer-events:none;
-  transform:scale(0.96);
-}
-
-/* ============================================================
-   MOBILE RESPONSIVE
-============================================================ */
-@media(max-width:700px){
-  .application-filter-bar{
-    gap:16px;
-  }
-  .filter-buttons{
-    gap:8px;
-  }
-  #appSearch{
-    max-width:100%;
-  }
-}
-/* ============================================================
-   APPLICATIONS PAGE — FILTER BAR + SEARCH
-============================================================ */
-.application-filter-bar{
-  max-width:900px;
-  margin:0 auto 40px;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  align-items:center;
-}
-
-#appSearch{
-  width:100%;
-  max-width:600px;
-  padding:12px 16px;
-  border-radius:8px;
-  border:1px solid #444;
-  background:#111;
-  color:#fff;
-  font-size:1rem;
-  transition:border-color .2s;
-}
-
-#appSearch:focus{
-  outline:none;
-  border-color:#ff4d4d;
-}
-
-/* ============================================================
-   FILTER BUTTONS
-============================================================ */
-.filter-buttons{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-.filter-btn{
-  padding:8px 16px;
-  border-radius:20px;
-  border:1px solid #ff4d4d;
-  background:transparent;
-  color:#ff4d4d;
-  cursor:pointer;
-  font-size:0.9rem;
-  transition:background .2s,color .2s,border-color .2s;
-}
-
-.filter-btn:hover{
-  background:#ff4d4d;
-  color:#000;
-}
-
-.filter-btn.active{
-  background:#ff4d4d;
-  color:#000;
-  border-color:#ff4d4d;
-  font-weight:600;
-}
-
-/* Icons on filter buttons */
-.filter-btn[data-filter="personal"]::before{
-  content:"👤 ";
-}
-.filter-btn[data-filter="commercial"]::before{
-  content:"🏢 ";
-}
-.filter-btn[data-filter="life"]::before{
-  content:"❤️ ";
-}
-
-/* Clear filters button */
+/* CLEAR FILTERS BUTTON */
 .filter-clear-btn{
   margin-top:8px;
   padding:6px 14px;
@@ -664,25 +541,19 @@ section{padding:60px 20px}
   border-color:#aaa;
 }
 
-/* ============================================================
-   APPLICATION CARDS — CATEGORY HIGHLIGHTING
-============================================================ */
+/* APPLICATION CARDS — CATEGORY HIGHLIGHTING */
 .app-item{
   transition:opacity .25s ease, transform .25s ease, box-shadow .25s ease;
 }
-
 .app-item.hidden{
   opacity:0.15;
   pointer-events:none;
   transform:scale(0.96);
 }
-
 .app-item.highlight{
   box-shadow:0 0 0 2px #ff4d4d, 0 16px 40px rgba(0,0,0,0.9);
   transform:translateY(-4px) scale(1.03);
 }
-
-/* Icon emphasis */
 .app-item .app-icon{
   filter:drop-shadow(0 0 6px rgba(255,77,77,0.4));
   transition:transform .2s ease;
@@ -705,10 +576,15 @@ section{padding:60px 20px}
   letter-spacing:0.04em;
 }
 
-/* ============================================================
-   MOBILE RESPONSIVE
-============================================================ */
+/* MOBILE RESPONSIVE */
 @media(max-width:700px){
+  .service-category-card{
+    min-width:100%;
+    text-align:center;
+  }
+  .subcategory-group{
+    grid-template-columns:1fr;
+  }
   .application-filter-bar{
     gap:16px;
   }
