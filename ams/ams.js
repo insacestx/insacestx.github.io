@@ -533,3 +533,49 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadAgents();
   }
 });
+function getAgentFromURL(){
+  const params=new URLSearchParams(window.location.search);
+  const name=params.get("name");
+  return agents.find(a=>a.name===name);
+}
+
+function loadAgentProfile(){
+  const a=getAgentFromURL();
+  if(!a){alert("Agent not found");return;}
+
+  document.getElementById("agentName").innerText=a.name;
+  document.getElementById("agentTitle").innerText=a.title;
+  document.getElementById("agentPhone").innerText=a.phone;
+  document.getElementById("agentEmail").innerText=a.email;
+  document.getElementById("agentPhoto").src=a.photo;
+
+  // Assigned clients
+  const clientList=document.getElementById("agentClients");
+  clientList.innerHTML="";
+  clients.filter(c=>c.agent===a.name).forEach(c=>{
+    const li=document.createElement("li");
+    li.innerText=c.name;
+    li.onclick=()=>window.location.href=`client-profile.html?name=${encodeURIComponent(c.name)}`;
+    clientList.appendChild(li);
+  });
+  if(clientList.innerHTML==="") clientList.innerHTML="<li>No clients assigned</li>";
+
+  // Assigned tasks
+  const taskList=document.getElementById("agentTasks");
+  taskList.innerHTML="";
+  tasks.filter(t=>t.assigned===a.name).forEach(t=>{
+    const li=document.createElement("li");
+    li.innerText=`${t.task} (Due: ${t.due})`;
+    taskList.appendChild(li);
+  });
+  if(taskList.innerHTML==="") taskList.innerHTML="<li>No tasks assigned</li>";
+}
+
+function editAgent(){alert("Edit agent coming soon")}
+function saveAgentNotes(){alert("Notes saved")}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("agent-profile.html")){
+    loadAgentProfile();
+  }
+});
