@@ -39,3 +39,6 @@ body{margin:0;font-family:Segoe UI,Arial;background:#f5f5f5;color:#111;display:f
 .data-table td.status-active{color:#0a8a0a;font-weight:bold}
 .data-table td.status-expired{color:#d40000;font-weight:bold}
 .data-table td.status-pending{color:#d48a00;font-weight:bold}
+#policyStatus.active{color:#0a8a0a;font-weight:bold}
+#policyStatus.expired{color:#d40000;font-weight:bold}
+#policyStatus.pending{color:#d48a00;font-weight:bold}
