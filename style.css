@@ -1,6 +1,5 @@
 /* ============================================================
-   ACES 2026 — GLOBAL STYLE SHEET (Optimized)
-   Typography, Layout, Header, Footer, Cards, Forms, Animations
+   ACES 2026 — GLOBAL STYLE SHEET (Restored Dark Version)
 ============================================================ */
 
 /* ------------------------------------------------------------
@@ -18,8 +17,8 @@ html {
 
 body {
   font-family: "Segoe UI", Arial, sans-serif;
-  background: #f4f4f4;
-  color: #222;
+  background: #000; /* DARK BASE */
+  color: #fff;
   line-height: 1.6;
 }
 
@@ -42,7 +41,7 @@ body {
 .app-category-intro {
   text-align: center;
   margin-bottom: 30px;
-  color: #555;
+  color: #ddd;
 }
 
 /* ------------------------------------------------------------
@@ -53,7 +52,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 18px 25px;
-  background: #111;
+  background: #000;
   color: #fff;
   position: sticky;
   top: 0;
@@ -102,7 +101,7 @@ body {
 .mobile-menu {
   display: none;
   flex-direction: column;
-  background: #111;
+  background: #000;
   padding: 20px;
 }
 
@@ -118,18 +117,37 @@ body {
 }
 
 /* ------------------------------------------------------------
-   5. SMALL HERO
+   5. SMALL HERO (FULL BACKGROUND IMAGE)
 ------------------------------------------------------------ */
 .small-hero {
-  background: url('hero-dark.jpg') center/cover no-repeat;
-  padding: 80px 20px;
+  background: url('hero.jpg') center/cover no-repeat;
+  padding: 120px 20px;
   text-align: center;
   color: #fff;
+  position: relative;
+}
+
+.small-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.small-hero-content {
+  position: relative;
+  z-index: 2;
 }
 
 .small-hero-content h1 {
-  font-size: 2.4rem;
+  font-size: 2.8rem;
+  font-weight: 700;
   margin-bottom: 10px;
+}
+
+.small-hero-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
 }
 
 /* ------------------------------------------------------------
@@ -142,11 +160,12 @@ body {
 }
 
 .contact-card {
-  background: #fff;
+  background: #111;
   padding: 25px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  color: #fff;
 }
 
 .contact-icon {
@@ -174,7 +193,7 @@ body {
   margin: 0 auto;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
 /* ------------------------------------------------------------
@@ -187,7 +206,7 @@ body {
   background: #fffef7;
   border: 2px solid #e6d8b8;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
   background-image: repeating-linear-gradient(
     to bottom,
     #fffef7 0px,
@@ -236,22 +255,23 @@ body {
   height: 240px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
 .agent-card {
-  background: #fff;
+  background: #111;
   padding: 18px;
   border-radius: 12px;
   text-align: center;
   cursor: pointer;
   transition: 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  color: #fff;
 }
 
 .agent-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
 }
 
 /* ------------------------------------------------------------
@@ -263,8 +283,9 @@ body {
   right: -400px;
   width: 350px;
   height: 100%;
-  background: #ffffff;
-  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+  background: #111;
+  color: #fff;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.6);
   padding: 25px;
   transition: right 0.35s ease;
   z-index: 9999;
@@ -290,6 +311,7 @@ body {
   border: none;
   font-size: 28px;
   cursor: pointer;
+  color: #fff;
 }
 
 .panel-call {
@@ -313,11 +335,12 @@ body {
 }
 
 .app-card {
-  background: #fff;
+  background: #111;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   text-align: center;
+  color: #fff;
 }
 
 .app-icon {
@@ -343,7 +366,7 @@ body {
    13. FOOTER
 ------------------------------------------------------------ */
 .footer-container {
-  background: #111;
+  background: #000;
   color: #fff;
   padding: 40px 20px;
   display: grid;
@@ -364,7 +387,16 @@ body {
 }
 
 /* ------------------------------------------------------------
-   14. RESPONSIVE BREAKPOINTS
+   14. ACES 2026 COLOR RHYTHM
+------------------------------------------------------------ */
+section:nth-of-type(1) { background: #000; color: #fff; }
+section:nth-of-type(2) { background: #b40000; color: #fff; }
+section:nth-of-type(3) { background: #111; color: #fff; }
+section:nth-of-type(4) { background: #b40000; color: #fff; }
+section:nth-of-type(5) { background: #111; color: #fff; }
+
+/* ------------------------------------------------------------
+   15. RESPONSIVE BREAKPOINTS
 ------------------------------------------------------------ */
 @media (max-width: 768px) {
   .nav-links {
