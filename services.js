@@ -8,9 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSubcategoryRouting();
 });
 
-/* ------------------------------------------------------------
-   CATEGORY SWITCHING (Scale + Fade)
------------------------------------------------------------- */
+/* CATEGORY SWITCHING (Scale + Fade) */
 function initServiceCategories() {
   const cards = document.querySelectorAll(".service-category-card");
   const groups = {
@@ -25,7 +23,6 @@ function initServiceCategories() {
     card.addEventListener("click", () => {
       const selected = card.getAttribute("data-category");
 
-      // Activate selected card
       cards.forEach(c => {
         if (c === card) {
           c.classList.add("active");
@@ -36,7 +33,6 @@ function initServiceCategories() {
         }
       });
 
-      // Show correct subcategory group
       Object.keys(groups).forEach(key => {
         if (key === selected) {
           groups[key].classList.add("active");
@@ -45,18 +41,15 @@ function initServiceCategories() {
         }
       });
 
-      // Smooth scroll to subcategories
-      document.querySelector(".subcategory-section").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+      const section = document.querySelector(".subcategory-section");
+      if (section) {
+        section.scrollIntoView({ behavior:"smooth", block:"start" });
+      }
     });
   });
 }
 
-/* ------------------------------------------------------------
-   SUBCATEGORY CLICK → APPLICATIONS PAGE
------------------------------------------------------------- */
+/* SUBCATEGORY CLICK → APPLICATIONS PAGE */
 function initSubcategoryRouting() {
   const subCards = document.querySelectorAll(".subcategory-card");
   if (!subCards.length) return;
@@ -65,7 +58,6 @@ function initSubcategoryRouting() {
     card.addEventListener("click", () => {
       const type = card.getAttribute("data-type");
       if (!type) return;
-
       window.location.href = `applications.html?type=${encodeURIComponent(type)}`;
     });
   });
