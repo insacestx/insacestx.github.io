@@ -1,6 +1,6 @@
-/* ------------------------------------------------------------
-   ACES 2026 — GLOBAL.JS (Optimized + Language Memory Fix)
------------------------------------------------------------- */
+/* ============================================================
+   ACES 2026 — GLOBAL.JS (Final Optimized Version)
+============================================================ */
 
 /* ------------------------------------------------------------
    1. HEADER INJECTION
@@ -84,13 +84,12 @@ function loadFooter() {
 }
 
 /* ------------------------------------------------------------
-   3. LANGUAGE TOGGLE (Now remembers language)
+   3. LANGUAGE TOGGLE (with memory)
 ------------------------------------------------------------ */
 function setupLanguageToggle() {
   const langBtn = document.getElementById("lang-toggle");
   if (!langBtn) return;
 
-  // Load saved language
   const savedLang = localStorage.getItem("aces-lang") || "en";
   document.documentElement.setAttribute("lang", savedLang);
   langBtn.textContent = savedLang === "en" ? "ES" : "EN";
@@ -142,7 +141,7 @@ function setupFadeInAnimations() {
 }
 
 /* ------------------------------------------------------------
-   6. APPLICATION CATEGORY SWITCHING (Fix for services.html)
+   6. APPLICATION CATEGORY SWITCHING
 ------------------------------------------------------------ */
 function setupApplicationSections() {
   setTimeout(() => {
@@ -159,7 +158,7 @@ function setupApplicationSections() {
 }
 
 /* ------------------------------------------------------------
-   7. AGENT PANEL
+   7. AGENT PANEL (Slide-Out)
 ------------------------------------------------------------ */
 function setupAgentPanel() {
   const panel = document.querySelector(".agent-panel");
