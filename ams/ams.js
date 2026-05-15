@@ -301,3 +301,66 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadCOIDetails();
   }
 });
+const claims = [
+  {
+    id:"CLM-001",
+    client:"Maria Lopez",
+    loss:"2024-05-01",
+    type:"Auto",
+    carrier:"Progressive",
+    status:"Open"
+  },
+  {
+    id:"CLM-002",
+    client:"John Carter",
+    loss:"2024-04-18",
+    type:"Liability",
+    carrier:"Travelers",
+    status:"Closed"
+  },
+  {
+    id:"CLM-003",
+    client:"Rosa Martinez",
+    loss:"2024-03-22",
+    type:"Workers Comp",
+    carrier:"Texas Mutual",
+    status:"Pending"
+  }
+];
+
+function loadClaims(){
+  const tbody=document.getElementById("claimRows");
+  tbody.innerHTML="";
+
+  claims.forEach(c=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>${c.id}</td>
+      <td>${c.client}</td>
+      <td>${c.loss}</td>
+      <td>${c.type}</td>
+      <td>${c.carrier}</td>
+      <td class="status-${c.status.toLowerCase()}">${c.status}</td>
+    `;
+    tr.onclick=()=>window.location.href=`claim-details.html?id=${encodeURIComponent(c.id)}`;
+    tbody.appendChild(tr);
+  });
+}
+
+function filterClaims(){
+  const q=document.getElementById("claimSearch").value.toLowerCase();
+  const rows=document.querySelectorAll("#claimRows tr");
+  rows.forEach(r=>{
+    r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";
+  });
+}
+
+function addClaim(){
+  alert("Add Claim modal coming soon");
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("claims.html")){
+    loadClaims();
+  }
+});
