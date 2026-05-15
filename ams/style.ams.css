@@ -57,3 +57,23 @@ body{margin:0;font-family:Segoe UI,Arial;background:#f5f5f5;color:#111;display:f
 .data-table td.status-open{color:#d48a00;font-weight:bold}
 .data-table td.status-done{color:#0a8a0a;font-weight:bold}
 .data-table td.status-overdue{color:#d40000;font-weight:bold}
+.agent-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:20px
+}
+.agent-card{
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+  text-align:center;
+  cursor:pointer;
+  transition:.2s
+}
+.agent-card:hover{transform:translateY(-3px)}
+.agent-card img{
+  width:90px;height:90px;border-radius:50%;object-fit:cover;margin-bottom:10px
+}
+.agent-card h3{margin:0;font-size:18px;color:#d40000}
+.agent-card p{margin:4px 0;font-size:14px}
