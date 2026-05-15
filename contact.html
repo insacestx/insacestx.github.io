@@ -16,9 +16,7 @@
 </head>
 <body>
 
-<!-- ============================================================
-     HEADER (Injected by global.js)
-============================================================ -->
+<!-- HEADER (Injected by global.js) -->
 <header id="aces-header"></header>
 
 <!-- ============================================================
@@ -39,7 +37,7 @@
 </section>
 
 <!-- ============================================================
-     CONTACT CARDS
+     CONTACT OPTIONS (RED SECTION)
 ============================================================ -->
 <section class="app-section fade-in">
 
@@ -95,10 +93,11 @@
 </section>
 
 <!-- ============================================================
-     GOOGLE MAP EMBED
+     MAP (DARK SECTION)
 ============================================================ -->
-<section class="app-section fade-in">
-  <h2 class="app-category-title"
+<section class="team-section fade-in">
+
+  <h2 class="section-title"
       data-en="Our Location"
       data-es="Nuestra Ubicación">
     Our Location
@@ -113,7 +112,7 @@
 </section>
 
 <!-- ============================================================
-     MESSAGE FORM — NOTEPAD STYLE
+     MESSAGE FORM (RED SECTION)
 ============================================================ -->
 <section class="app-section fade-in">
 
@@ -132,31 +131,22 @@
   <div class="notepad-wrapper fade-in">
     <form action="https://formsubmit.co/office@insaces.com" method="POST" class="notepad-form">
 
-      <!-- Round Robin -->
-      <input type="hidden" name="_to" value="">
       <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+      <input type="hidden" name="_captcha" value="false">
 
-      <div class="form-row">
-        <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-        <input type="text" name="Client Name" required>
-      </div>
+      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
+      <input type="text" name="Client Name" required>
 
-      <div class="form-row">
-        <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-        <input type="text" name="Phone" required>
-      </div>
+      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+      <input type="text" name="Phone" required>
 
-      <div class="form-row">
-        <label data-en="Email" data-es="Correo Electrónico">Email</label>
-        <input type="email" name="Email" required>
-      </div>
+      <label data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" name="Email" required>
 
-      <div class="form-row">
-        <label data-en="How Can We Help?" data-es="¿Cómo Podemos Ayudarle?">
-          How Can We Help?
-        </label>
-        <textarea name="Message" rows="6" required></textarea>
-      </div>
+      <label data-en="How Can We Help?" data-es="¿Cómo Podemos Ayudarle?">
+        How Can We Help?
+      </label>
+      <textarea name="Message" rows="6" required></textarea>
 
       <button type="submit" class="submit-btn"
         data-en="Send Message" data-es="Enviar Mensaje">
@@ -168,11 +158,11 @@
 </section>
 
 <!-- ============================================================
-     TEAM DIRECTORY (Owners + Agents)
+     TEAM DIRECTORY (DARK SECTION)
 ============================================================ -->
-<section class="app-section fade-in">
+<section class="team-section fade-in">
 
-  <h2 class="app-category-title"
+  <h2 class="section-title"
       data-en="Meet Our Team"
       data-es="Conozca a Nuestro Equipo">
     Meet Our Team
@@ -232,7 +222,7 @@
     </div>
 
     <!-- AGENTS -->
-        <div class="agent-card"
+    <div class="agent-card"
          data-name="George Santibanez"
          data-title="Agent"
          data-phone="254-709-6487"
@@ -242,7 +232,7 @@
       <h3>George Santibanez</h3>
       <p>Agent</p>
     </div>
-    
+
     <div class="agent-card"
          data-name="Jimmy Rodriguez"
          data-title="Agent"
@@ -253,7 +243,7 @@
       <h3>Jimmy Rodriguez</h3>
       <p>Agent</p>
     </div>
-    
+
     <div class="agent-card"
          data-name="Renee Ridling"
          data-title="Agent"
@@ -268,9 +258,7 @@
   </div>
 </section>
 
-<!-- ============================================================
-     SLIDE-OUT PANEL (global.js controls this)
-============================================================ -->
+<!-- SLIDE-OUT PANEL -->
 <div class="agent-panel">
   <button class="close-panel">&times;</button>
   <img class="panel-photo" src="">
@@ -281,9 +269,7 @@
   <a class="panel-call" href="#">Call Now</a>
 </div>
 
-<!-- ============================================================
-     FOOTER (Injected by global.js)
-============================================================ -->
+<!-- FOOTER -->
 <footer id="aces-footer"></footer>
 
 </body>
