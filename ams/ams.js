@@ -261,3 +261,43 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadCOIs();
   }
 });
+function getCOIFromURL(){
+  const params=new URLSearchParams(window.location.search);
+  const id=params.get("id");
+  return cois.find(c=>c.id===id);
+}
+
+function loadCOIDetails(){
+  const c=getCOIFromURL();
+  if(!c){alert("COI not found");return;}
+
+  document.getElementById("coiId").innerText=c.id;
+  document.getElementById("coiClient").innerText=c.client;
+  document.getElementById("coiHolder").innerText=c.holder;
+  document.getElementById("coiPolicy").innerText=c.policy;
+  document.getElementById("coiRequested").innerText=c.requested;
+  document.getElementById("coiCompleted").innerText=c.completed;
+  document.getElementById("coiStatus").innerText=c.status;
+  document.getElementById("coiStatus").classList.add(c.status.toLowerCase());
+
+  // Placeholder docs
+  document.getElementById("coiDocs").innerHTML="<li>No documents uploaded</li>";
+}
+
+function markCOICompleted(){
+  alert("COI marked as completed");
+}
+
+function saveCOINotes(){
+  alert("Notes saved");
+}
+
+function uploadCOIDocs(){
+  alert("Documents uploaded");
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("coi-details.html")){
+    loadCOIDetails();
+  }
+});
