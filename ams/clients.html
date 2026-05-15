@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ACES AMS | Clients</title>
+  <link rel="stylesheet" href="style-ams.css">
+</head>
+
+<body>
+  <aside class="sidebar">
+    <div class="logo"><img src="/images/image2.png"></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="clients.html" class="active">Clients</a>
+      <a href="policies.html">Policies</a>
+      <a href="cois.html">COIs</a>
+      <a href="claims.html">Claims</a>
+      <a href="tasks.html">Tasks</a>
+      <a href="agents.html">Agents</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="page-header">
+      <h1>Clients</h1>
+      <button class="btn-red" onclick="openAddClient()">+ Add Client</button>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="clientSearch" placeholder="Search clients..." onkeyup="filterClients()">
+    </div>
+
+    <table class="data-table" id="clientTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Policies</th>
+          <th>Agent</th>
+        </tr>
+      </thead>
+      <tbody id="clientRows">
+      </tbody>
+    </table>
+  </main>
+
+  <script src="ams.js"></script>
+</body>
+</html>
