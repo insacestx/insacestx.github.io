@@ -579,3 +579,28 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadAgentProfile();
   }
 });
+function saveAgencySettings(){
+  alert("Agency settings saved");
+}
+
+function uploadLogo(){
+  alert("Logo uploaded");
+}
+
+function saveNotifications(){
+  alert("Notification settings saved");
+}
+
+function exportData(){
+  alert("Data export coming soon");
+}
+
+function importData(){
+  alert("Data import coming soon");
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("settings.html")){
+    console.log("Settings page loaded");
+  }
+});
