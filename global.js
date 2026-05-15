@@ -1,12 +1,19 @@
-/* ============================================================
-   ACES 2026 — GLOBAL.JS (Final Optimized Version)
-============================================================ */
+// ACES 2026 — global.js
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadHeader();
+  loadFooter();
+  initLanguage();
+  initAgentPanel();
+  setActiveNav();
+  initMobileMenu();
+});
 
 /* ------------------------------------------------------------
-   1. HEADER INJECTION
+   HEADER INJECTION
 ------------------------------------------------------------ */
 function loadHeader() {
-  const header = document.getElementById("aces-header");
+  const header = document.getElementById('aces-header');
   if (!header) return;
 
   header.innerHTML = `
@@ -29,8 +36,8 @@ function loadHeader() {
       </nav>
 
       <div class="header-controls">
-        <button id="lang-toggle" class="lang-btn">ES</button>
-        <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
+        <button id="lang-toggle" class="lang-btn">EN / ES</button>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation">☰</button>
       </div>
     </div>
 
@@ -44,184 +51,147 @@ function loadHeader() {
       <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </div>
   `;
+
+  const langBtn = document.getElementById('lang-toggle');
+  if (langBtn) {
+    langBtn.addEventListener('click', () => {
+      const current = localStorage.getItem('acesLang') || 'en';
+      const next = current === 'en' ? 'es' : 'en';
+      localStorage.setItem('acesLang', next);
+      applyLanguage(next);
+    });
+  }
 }
 
 /* ------------------------------------------------------------
-   2. FOOTER INJECTION
+   FOOTER INJECTION (uses footer.html)
 ------------------------------------------------------------ */
 function loadFooter() {
-  const footer = document.getElementById("aces-footer");
+  const footer = document.getElementById('aces-footer');
   if (!footer) return;
 
-  footer.innerHTML = `
-    <div class="footer-container">
-      <div class="footer-left">
-        <img src="image2.png" alt="ACES Insurance Logo" class="footer-logo">
-        <p>404 Sapphire Blvd, Hewitt, TX 76643</p>
-        <p>(254) 227‑6560</p>
-      </div>
-
-      <div class="footer-center">
-        <h4>Quick Links</h4>
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="applications.html">Applications</a>
-        <a href="claims.html">Claims</a>
-        <a href="contact.html">Contact</a>
-      </div>
-
-      <div class="footer-right">
-        <h4>Follow Us</h4>
-        <a href="https://facebook.com/acesinsuranceservices" target="_blank">Facebook</a>
-        <a href="https://instagram.com/acesinsuranceservices" target="_blank">Instagram</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2026 ACES Insurance Services. All Rights Reserved.</p>
-    </div>
-  `;
+  fetch('footer.html')
+    .then(r => r.text())
+    .then(html => {
+      footer.innerHTML = html;
+      // re-apply language after footer loads
+      const saved = localStorage.getItem('acesLang') || 'en';
+      applyLanguage(saved);
+    })
+    .catch(() => {});
 }
 
 /* ------------------------------------------------------------
-   3. LANGUAGE TOGGLE (with memory)
+   LANGUAGE HANDLING
 ------------------------------------------------------------ */
-function setupLanguageToggle() {
-  const langBtn = document.getElementById("lang-toggle");
-  if (!langBtn) return;
-
-  const savedLang = localStorage.getItem("aces-lang") || "en";
-  document.documentElement.setAttribute("lang", savedLang);
-  langBtn.textContent = savedLang === "en" ? "ES" : "EN";
-  translatePage(savedLang);
-
-  langBtn.addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("lang");
-    const newLang = current === "en" ? "es" : "en";
-
-    document.documentElement.setAttribute("lang", newLang);
-    langBtn.textContent = newLang === "en" ? "ES" : "EN";
-    localStorage.setItem("aces-lang", newLang);
-
-    translatePage(newLang);
-  });
+function initLanguage() {
+  const saved = localStorage.getItem('acesLang') || 'en';
+  applyLanguage(saved);
 }
 
-function translatePage(lang) {
-  document.querySelectorAll("[data-en]").forEach(el => {
-    el.textContent = el.getAttribute(`data-${lang}`);
+function applyLanguage(lang) {
+  const isEs = lang === 'es';
+  document.documentElement.lang = isEs ? 'es' : 'en';
+
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const en = el.getAttribute('data-en');
+    const es = el.getAttribute('data-es');
+    const text = isEs ? (es || en) : en;
+    if (text) el.textContent = text;
+  });
+
+  const langBtn = document.getElementById('lang-toggle');
+  if (langBtn) {
+    langBtn.textContent = isEs ? 'ES / EN' : 'EN / ES';
+  }
+}
+
+/* ------------------------------------------------------------
+   ACTIVE NAV LINK (desktop + mobile)
+------------------------------------------------------------ */
+function setActiveNav() {
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const desktopLinks = document.querySelectorAll('.nav-links a');
+  const mobileLinks = document.querySelectorAll('#mobile-menu a');
+
+  [...desktopLinks, ...mobileLinks].forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href) return;
+    const file = href.split('/').pop();
+    if (file === path) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
   });
 }
 
 /* ------------------------------------------------------------
-   4. MOBILE MENU
+   MOBILE MENU
 ------------------------------------------------------------ */
-function setupMobileMenu() {
-  const btn = document.getElementById("mobile-menu-btn");
-  const menu = document.getElementById("mobile-menu");
-
+function initMobileMenu() {
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
   if (!btn || !menu) return;
 
-  btn.addEventListener("click", () => {
-    menu.classList.toggle("open");
-  });
-}
-
-/* ------------------------------------------------------------
-   5. FADE-IN ANIMATIONS
------------------------------------------------------------- */
-function setupFadeInAnimations() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add("visible");
-    });
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('open');
   });
 
-  document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-}
-
-/* ------------------------------------------------------------
-   6. APPLICATION CATEGORY SWITCHING
------------------------------------------------------------- */
-function setupApplicationSections() {
-  setTimeout(() => {
-    const params = new URLSearchParams(window.location.search);
-    const type = params.get("type");
-    if (!type) return;
-
-    const section = document.getElementById(type);
-    if (section) {
-      section.style.display = "block";
-      window.scrollTo(0, section.offsetTop - 80);
+  document.addEventListener('click', e => {
+    if (!menu.classList.contains('open')) return;
+    const withinMenu = menu.contains(e.target);
+    const withinBtn = btn.contains(e.target);
+    if (!withinMenu && !withinBtn) {
+      menu.classList.remove('open');
     }
-  }, 200);
+  });
 }
 
 /* ------------------------------------------------------------
-   7. AGENT PANEL (Slide-Out)
+   AGENT SLIDE-OUT PANEL (kept exactly as a widget)
 ------------------------------------------------------------ */
-function setupAgentPanel() {
-  const panel = document.querySelector(".agent-panel");
-  const closeBtn = document.querySelector(".close-panel");
-  const cards = document.querySelectorAll(".agent-card");
+function initAgentPanel() {
+  const cards = document.querySelectorAll('.agent-card');
+  const panel = document.querySelector('.agent-panel');
+  if (!cards.length || !panel) return;
 
-  if (!panel || !closeBtn || cards.length === 0) return;
+  const photo = panel.querySelector('.panel-photo');
+  const nameEl = panel.querySelector('h2');
+  const titleEl = panel.querySelector('.panel-title');
+  const phoneEl = panel.querySelector('.panel-phone');
+  const emailEl = panel.querySelector('.panel-email');
+  const callBtn = panel.querySelector('.panel-call');
+  const closeBtn = panel.querySelector('.close-panel');
 
   cards.forEach(card => {
-    card.addEventListener("click", () => {
-      panel.querySelector(".panel-photo").src = card.dataset.photo;
-      panel.querySelector("h2").textContent = card.dataset.name;
-      panel.querySelector(".panel-title").textContent = card.dataset.title;
-      panel.querySelector(".panel-phone").textContent = card.dataset.phone;
-      panel.querySelector(".panel-email").textContent = card.dataset.email;
-      panel.querySelector(".panel-call").href = `tel:${card.dataset.phone}`;
-      panel.classList.add("open");
+    card.addEventListener('click', () => {
+      const name = card.getAttribute('data-name') || '';
+      const title = card.getAttribute('data-title') || '';
+      const phone = card.getAttribute('data-phone') || '';
+      const email = card.getAttribute('data-email') || '';
+      const photoSrc = card.getAttribute('data-photo') || '';
+
+      if (photo) photo.src = photoSrc;
+      if (nameEl) nameEl.textContent = name;
+      if (titleEl) titleEl.textContent = title;
+      if (phoneEl) phoneEl.textContent = phone;
+      if (emailEl) emailEl.textContent = email;
+      if (callBtn) callBtn.href = phone ? `tel:${phone.replace(/\D/g, '')}` : '#';
+
+      panel.classList.add('open');
     });
   });
 
-  closeBtn.addEventListener("click", () => {
-    panel.classList.remove("open");
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      panel.classList.remove('open');
+    });
+  }
+
+  panel.addEventListener('click', e => {
+    if (e.target === panel) {
+      panel.classList.remove('open');
+    }
   });
 }
-
-/* ------------------------------------------------------------
-   8. ROUND ROBIN EMAIL ROUTING
------------------------------------------------------------- */
-function setupRoundRobin() {
-  const forms = document.querySelectorAll("form[action*='formsubmit']");
-  if (forms.length === 0) return;
-
-  const agents = [
-    "office@insaces.com",
-    "jordan@insaces.com",
-    "lanse@insaces.com",
-    "robert@insaces.com",
-    "bryan@insaces.com",
-    "jimmy@insaces.com"
-  ];
-
-  let index = Math.floor(Math.random() * agents.length);
-
-  forms.forEach(form => {
-    const toField = form.querySelector("input[name='_to']");
-    if (toField) toField.value = agents[index];
-    index = (index + 1) % agents.length;
-  });
-}
-
-/* ------------------------------------------------------------
-   9. INITIALIZE EVERYTHING
------------------------------------------------------------- */
-document.addEventListener("DOMContentLoaded", () => {
-  loadHeader();
-  loadFooter();
-
-  setTimeout(() => {
-    setupLanguageToggle();
-    setupMobileMenu();
-    setupFadeInAnimations();
-    setupApplicationSections();
-    setupAgentPanel();
-    setupRoundRobin();
-  }, 150);
-});
