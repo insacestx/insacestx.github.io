@@ -364,3 +364,46 @@ document.addEventListener("DOMContentLoaded",()=>{
     loadClaims();
   }
 });
+function getClaimFromURL(){
+  const params=new URLSearchParams(window.location.search);
+  const id=params.get("id");
+  return claims.find(c=>c.id===id);
+}
+
+function loadClaimDetails(){
+  const c=getClaimFromURL();
+  if(!c){alert("Claim not found");return;}
+
+  document.getElementById("claimId").innerText=c.id;
+  document.getElementById("claimClient").innerText=c.client;
+  document.getElementById("claimLoss").innerText=c.loss;
+  document.getElementById("claimType").innerText=c.type;
+  document.getElementById("claimCarrier").innerText=c.carrier;
+  document.getElementById("claimStatus").innerText=c.status;
+  document.getElementById("claimStatus").classList.add(c.status.toLowerCase());
+
+  // Placeholder docs
+  document.getElementById("claimDocs").innerHTML="<li>No documents uploaded</li>";
+}
+
+function closeClaim(){
+  alert("Claim marked as closed");
+}
+
+function editAdjuster(){
+  alert("Adjuster edit coming soon");
+}
+
+function saveClaimNotes(){
+  alert("Notes saved");
+}
+
+function uploadClaimDocs(){
+  alert("Documents uploaded");
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(window.location.pathname.includes("claim-details.html")){
+    loadClaimDetails();
+  }
+});
