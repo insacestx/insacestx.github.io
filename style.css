@@ -375,3 +375,12 @@ section{padding:60px 20px}
   color:#fff;
   border:none;
   padding:10px 18
+/* Center contact cards */
+.contact-card {
+  text-align: center;
+}
+
+.contact-icon {
+  margin: 0 auto 12px;
+  display: block;
+}
