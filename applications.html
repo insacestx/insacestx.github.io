@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" href="style.css">
 <script src="global.js" defer></script>
+<script src="applications.js" defer></script>
 
 </head>
 <body>
@@ -20,7 +21,7 @@
 <header id="aces-header"></header>
 
 <!-- ============================================================
-     SMALL HERO — MATCHES ALL OTHER PAGES
+     SMALL HERO
 ============================================================ -->
 <section class="small-hero fade-in">
   <div class="small-hero-content">
@@ -37,26 +38,47 @@
 </section>
 
 <!-- ============================================================
-     APPLICATION OPTIONS
+     FILTER BAR
 ============================================================ -->
 <section class="app-section fade-in">
 
-  <h2 class="app-category-title" data-en="Choose an Application Type"
-      data-es="Elija un Tipo de Solicitud">
-    Choose an Application Type
+  <h2 class="app-category-title" data-en="Find Your Application"
+      data-es="Encuentre su Solicitud">
+    Find Your Application
   </h2>
 
-  <p class="app-category-intro"
-     data-en="Select the type of insurance application you want to start."
-     data-es="Seleccione el tipo de solicitud de seguro que desea comenzar.">
-    Select the type of insurance application you want to start.
-  </p>
+  <div class="application-filter-bar">
 
-  <div class="app-grid">
+    <input id="appSearch" type="text"
+      placeholder="Search applications..."
+      data-en="Search applications..."
+      data-es="Buscar solicitudes...">
 
-    <!-- AUTO APPLICATION -->
-    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
-      <img src="icon-auto-aces.png" alt="Auto Application" class="app-icon">
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all"
+        data-en="All" data-es="Todos">All</button>
+
+      <button class="filter-btn" data-filter="personal"
+        data-en="Personal" data-es="Personal">Personal</button>
+
+      <button class="filter-btn" data-filter="commercial"
+        data-en="Commercial" data-es="Comercial">Commercial</button>
+
+      <button class="filter-btn" data-filter="life"
+        data-en="Life" data-es="Vida">Life</button>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       APPLICATION GRID
+  ============================================================ -->
+  <div class="app-grid" id="applicationsList">
+
+    <!-- PERSONAL -->
+    <a class="app-card fade-in app-item" data-category="personal" data-type="auto"
+       href="https://formsubmit.co/office@insaces.com" target="_blank">
+      <img src="icon-auto-aces.png" class="app-icon">
       <h3 data-en="Auto Insurance Application" data-es="Solicitud de Seguro de Auto">
         Auto Insurance Application
       </h3>
@@ -66,9 +88,9 @@
       </p>
     </a>
 
-    <!-- HOME APPLICATION -->
-    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
-      <img src="icon-property-aces.png" alt="Home Insurance Application" class="app-icon">
+    <a class="app-card fade-in app-item" data-category="personal" data-type="homeowners"
+       href="https://formsubmit.co/office@insaces.com" target="_blank">
+      <img src="icon-property-aces.png" class="app-icon">
       <h3 data-en="Homeowners Insurance Application" data-es="Solicitud de Seguro de Hogar">
         Homeowners Insurance Application
       </h3>
@@ -78,39 +100,77 @@
       </p>
     </a>
 
-    <!-- LIFE APPLICATION -->
-    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
-      <img src="icon-life-aces.png" alt="Life Insurance Application" class="app-icon">
-      <h3 data-en="Life Insurance Application" data-es="Solicitud de Seguro de Vida">
-        Life Insurance Application
+    <a class="app-card fade-in app-item" data-category="personal" data-type="renters"
+       href="https://formsubmit.co/office@insaces.com" target="_blank">
+      <img src="icon-property-aces.png" class="app-icon">
+      <h3 data-en="Renters Insurance Application" data-es="Solicitud de Inquilinos">
+        Renters Insurance Application
       </h3>
-      <p data-en="Start your life insurance application."
-         data-es="Comience su solicitud de seguro de vida.">
-        Start your life insurance application.
+      <p data-en="Start your renters insurance application."
+         data-es="Comience su solicitud de seguro de inquilinos.">
+        Start your renters insurance application.
       </p>
     </a>
 
-    <!-- COMMERCIAL APPLICATION -->
-    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
-      <img src="icon-commercial-aces.png" alt="Commercial Insurance Application" class="app-icon">
-      <h3 data-en="Commercial Insurance Application" data-es="Solicitud de Seguro Comercial">
-        Commercial Insurance Application
+    <!-- COMMERCIAL -->
+    <a class="app-card fade-in app-item" data-category="commercial" data-type="general-liability"
+       href="https://formsubmit.co/office@insaces.com" target="_blank">
+      <img src="icon-commercial-aces.png" class="app-icon">
+      <h3 data-en="General Liability Application" data-es="Solicitud de Responsabilidad General">
+        General Liability Application
       </h3>
-      <p data-en="Start your commercial insurance application."
-         data-es="Comience su solicitud de seguro comercial.">
-        Start your commercial insurance application.
+      <p data-en="Start your general liability application."
+         data-es="Comience su solicitud de responsabilidad general.">
+        Start your general liability application.
       </p>
     </a>
 
-    <!-- SPECIALTY APPLICATION -->
-    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
-      <img src="icon-specialty-aces.png" alt="Specialty Lines Application" class="app-icon">
-      <h3 data-en="Specialty Lines Application" data-es="Solicitud de Líneas Especiales">
-        Specialty Lines Application
+    <a class="app-card fade-in app-item" data-category="commercial" data-type="commercial-auto"
+       href="https://formsubmit.co/office@insaces.com" target="_blank">
+      <img src="icon-auto-aces.png" class="app-icon">
+      <h3 data-en="Commercial Auto Application" data-es="Solicitud de Auto Comercial">
+        Commercial Auto Application
       </h3>
-      <p data-en="Start your specialty insurance application."
-         data-es="Comience su solicitud de líneas especiales.">
-        Start your specialty insurance application.
+      <p data-en="Start your commercial auto application."
+         data-es="Comience su solicitud de auto comercial.">
+        Start your commercial auto application.
+      </p>
+    </a>
+
+    <a class="app-card fade-in app-item" data-category="commercial" data-type="workers-comp"
+       href="https://formsubmit.co/office@insaces.com" target="_blank">
+      <img src="icon-commercial-aces.png" class="app-icon">
+      <h3 data-en="Workers Compensation Application" data-es="Solicitud de Compensación Laboral">
+        Workers Compensation Application
+      </h3>
+      <p data-en="Start your workers comp application."
+         data-es="Comience su solicitud de compensación laboral.">
+        Start your workers comp application.
+      </p>
+    </a>
+
+    <!-- LIFE -->
+    <a class="app-card fade-in app-item" data-category="life" data-type="term-life"
+       href="https://formsubmit.co/office@insaces.com" target="_blank">
+      <img src="icon-life-aces.png" class="app-icon">
+      <h3 data-en="Term Life Application" data-es="Solicitud de Vida a Término">
+        Term Life Application
+      </h3>
+      <p data-en="Start your term life application."
+         data-es="Comience su solicitud de vida a término.">
+        Start your term life application.
+      </p>
+    </a>
+
+    <a class="app-card fade-in app-item" data-category="life" data-type="whole-life"
+       href="https://formsubmit.co/office@insaces.com" target="_blank">
+      <img src="icon-life-aces.png" class="app-icon">
+      <h3 data-en="Whole Life Application" data-es="Solicitud de Vida Entera">
+        Whole Life Application
+      </h3>
+      <p data-en="Start your whole life application."
+         data-es="Comience su solicitud de vida entera.">
+        Start your whole life application.
       </p>
     </a>
 
