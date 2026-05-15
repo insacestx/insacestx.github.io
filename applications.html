@@ -5,990 +5,119 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title data-en="Insurance Applications | ACES Insurance Services"
-        data-es="Solicitudes de Seguro | ACES Insurance Services">
-  Insurance Applications | ACES Insurance Services
+<title data-en="Start an Application | ACES Insurance Services"
+        data-es="Comenzar una Solicitud | ACES Insurance Services">
+  Start an Application | ACES Insurance Services
 </title>
 
 <link rel="stylesheet" href="style.css">
 <script src="global.js" defer></script>
 
-<!-- ============================================================
-     ROUND ROBIN EMAIL ENGINE (PRESERVED)
-============================================================ -->
-<script>
-const rrEmails = [
-  "george@insaces.com",
-  "jordan@insaces.com",
-  "lanse@insaces.com",
-  "robert@insaces.com",
-  "bryan@insaces.com",
-  "jimmy@insaces.com",
-  "office@insaces.com"
-];
-
-function getNextRecipient() {
-  let index = localStorage.getItem("aces-rr-index");
-  index = index ? parseInt(index) : 0;
-
-  const email = rrEmails[index];
-
-  index = (index + 1) % rrEmails.length;
-  localStorage.setItem("aces-rr-index", index);
-
-  return email;
-}
-
-function applyRoundRobin() {
-  document.querySelectorAll("form").forEach(form => {
-    const hiddenTo = form.querySelector("input[name='_to']");
-    if (hiddenTo) hiddenTo.value = getNextRecipient();
-  });
-}
-
-function scrollToSelectedApp() {
-  const params = new URLSearchParams(window.location.search);
-  const type = params.get("type");
-  if (!type) return;
-
-  const target = document.getElementById(type);
-  if (target) {
-    setTimeout(() => {
-      target.scrollIntoView({ behavior: "smooth" });
-    }, 300);
-  }
-}
-
-function initExpandButtons() {
-  document.querySelectorAll(".expand-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const fullForm = btn.nextElementSibling;
-      const isOpen = fullForm.style.display === "block";
-
-      fullForm.style.display = isOpen ? "none" : "block";
-      btn.innerText = isOpen ? "Show Full Application" : "Hide Full Application";
-    });
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  applyRoundRobin();
-  scrollToSelectedApp();
-  initExpandButtons();
-});
-</script>
-
 </head>
 <body>
 
+<!-- HEADER INJECTED BY global.js -->
 <header id="aces-header"></header>
 
 <!-- ============================================================
-     SMALL HERO — ACES 2026 VERSION
+     SMALL HERO — MATCHES ALL OTHER PAGES
 ============================================================ -->
 <section class="small-hero fade-in">
   <div class="small-hero-content">
-    <h1 data-en="Insurance Applications"
-        data-es="Solicitudes de Seguro">
-      Insurance Applications
+    <h1 data-en="Start an Application"
+        data-es="Comenzar una Solicitud">
+      Start an Application
     </h1>
 
-    <p data-en="Select the type of insurance below to begin your application."
-       data-es="Seleccione el tipo de seguro a continuación para comenzar su solicitud.">
-      Select the type of insurance below to begin your application.
+    <p data-en="Begin your insurance application quickly and easily."
+       data-es="Comience su solicitud de seguro rápida y fácilmente.">
+      Begin your insurance application quickly and easily.
     </p>
   </div>
 </section>
 
 <!-- ============================================================
-     APPLICATION SECTIONS BEGIN BELOW
+     APPLICATION OPTIONS
 ============================================================ -->
-<!-- ============================================================
-     COMMERCIAL APPLICATIONS
-============================================================ -->
+<section class="app-section fade-in">
 
-<!-- ===========================
-     1. BUSINESS OWNERS POLICY (BOP)
-=========================== -->
-<section id="bop" class="app-section fade-in">
-
-  <h2 class="app-category-title"
-      data-en="Business Owners Policy (BOP)"
-      data-es="Póliza para Dueños de Negocios (BOP)">
-    Business Owners Policy (BOP)
+  <h2 class="app-category-title" data-en="Choose an Application Type"
+      data-es="Elija un Tipo de Solicitud">
+    Choose an Application Type
   </h2>
 
-  <!-- SHORT INTAKE FORM -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
+  <p class="app-category-intro"
+     data-en="Select the type of insurance application you want to start."
+     data-es="Seleccione el tipo de solicitud de seguro que desea comenzar.">
+    Select the type of insurance application you want to start.
+  </p>
 
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+  <div class="app-grid">
 
-    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
-
-    <div class="form-row">
-      <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
-      <input type="text" name="Business Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-      <input type="text" name="Client Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-      <input type="text" name="Phone" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Email" data-es="Correo Electrónico">Email</label>
-      <input type="email" name="Email" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Brief Description of Business" data-es="Descripción Breve del Negocio">
-        Brief Description of Business
-      </label>
-      <textarea name="Business Description" rows="3"></textarea>
-    </div>
-
-    <button type="submit" class="submit-btn"
-      data-en="Submit Intake" data-es="Enviar Formulario">
-      Submit Intake
-    </button>
-  </form>
-
-  <!-- EXPAND FULL FORM -->
-  <button class="expand-btn fade-in"
-          data-en="Show Full Application"
-          data-es="Mostrar Solicitud Completa">
-    Show Full Application
-  </button>
-
-  <div class="full-form app-card fade-in">
-
-    <form action="https://formsubmit.co/office@insaces.com" method="POST">
-
-      <input type="hidden" name="_to" value="">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-      <h3 data-en="Full BOP Application" data-es="Solicitud Completa BOP">
-        Full BOP Application
+    <!-- AUTO APPLICATION -->
+    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
+      <img src="icon-auto-aces.png" alt="Auto Application" class="app-icon">
+      <h3 data-en="Auto Insurance Application" data-es="Solicitud de Seguro de Auto">
+        Auto Insurance Application
       </h3>
+      <p data-en="Start your auto insurance application."
+         data-es="Comience su solicitud de seguro de auto.">
+        Start your auto insurance application.
+      </p>
+    </a>
 
-      <div class="form-row">
-        <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
-        <input type="text" name="Business Address">
-      </div>
+    <!-- HOME APPLICATION -->
+    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
+      <img src="icon-property-aces.png" alt="Home Insurance Application" class="app-icon">
+      <h3 data-en="Homeowners Insurance Application" data-es="Solicitud de Seguro de Hogar">
+        Homeowners Insurance Application
+      </h3>
+      <p data-en="Start your homeowners insurance application."
+         data-es="Comience su solicitud de seguro de hogar.">
+        Start your homeowners insurance application.
+      </p>
+    </a>
 
-      <div class="form-row">
-        <label data-en="Years in Business" data-es="Años en el Negocio">Years in Business</label>
-        <input type="number" name="Years in Business">
-      </div>
+    <!-- LIFE APPLICATION -->
+    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
+      <img src="icon-life-aces.png" alt="Life Insurance Application" class="app-icon">
+      <h3 data-en="Life Insurance Application" data-es="Solicitud de Seguro de Vida">
+        Life Insurance Application
+      </h3>
+      <p data-en="Start your life insurance application."
+         data-es="Comience su solicitud de seguro de vida.">
+        Start your life insurance application.
+      </p>
+    </a>
 
-      <div class="form-row">
-        <label data-en="Annual Revenue" data-es="Ingresos Anuales">Annual Revenue</label>
-        <input type="text" name="Annual Revenue">
-      </div>
+    <!-- COMMERCIAL APPLICATION -->
+    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
+      <img src="icon-commercial-aces.png" alt="Commercial Insurance Application" class="app-icon">
+      <h3 data-en="Commercial Insurance Application" data-es="Solicitud de Seguro Comercial">
+        Commercial Insurance Application
+      </h3>
+      <p data-en="Start your commercial insurance application."
+         data-es="Comience su solicitud de seguro comercial.">
+        Start your commercial insurance application.
+      </p>
+    </a>
 
-      <div class="form-row">
-        <label data-en="Number of Employees" data-es="Número de Empleados">Number of Employees</label>
-        <input type="number" name="Employees">
-      </div>
+    <!-- SPECIALTY APPLICATION -->
+    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
+      <img src="icon-specialty-aces.png" alt="Specialty Lines Application" class="app-icon">
+      <h3 data-en="Specialty Lines Application" data-es="Solicitud de Líneas Especiales">
+        Specialty Lines Application
+      </h3>
+      <p data-en="Start your specialty insurance application."
+         data-es="Comience su solicitud de líneas especiales.">
+        Start your specialty insurance application.
+      </p>
+    </a>
 
-      <div class="form-row">
-        <label data-en="Business Operations" data-es="Operaciones del Negocio">Business Operations</label>
-        <textarea name="Business Operations" rows="4"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn"
-        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
-        Submit Full Application
-      </button>
-
-    </form>
   </div>
 </section>
 
-
-<!-- ===========================
-     2. GENERAL LIABILITY
-=========================== -->
-<section id="gl" class="app-section fade-in">
-
-  <h2 class="app-category-title"
-      data-en="General Liability"
-      data-es="Responsabilidad General">
-    General Liability
-  </h2>
-
-  <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
-
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
-
-    <div class="form-row">
-      <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
-      <input type="text" name="Business Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-      <input type="text" name="Client Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-      <input type="text" name="Phone" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Email" data-es="Correo Electrónico">Email</label>
-      <input type="email" name="Email" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Describe Your Business Operations"
-             data-es="Describa las Operaciones de su Negocio">
-        Describe Your Business Operations
-      </label>
-      <textarea name="Business Operations" rows="3"></textarea>
-    </div>
-
-    <button type="submit" class="submit-btn"
-      data-en="Submit Intake" data-es="Enviar Formulario">
-      Submit Intake
-    </button>
-  </form>
-
-  <!-- EXPAND FULL FORM -->
-  <button class="expand-btn fade-in"
-          data-en="Show Full Application"
-          data-es="Mostrar Solicitud Completa">
-    Show Full Application
-  </button>
-
-  <div class="full-form app-card fade-in">
-
-    <form action="https://formsubmit.co/office@insaces.com" method="POST">
-
-      <input type="hidden" name="_to" value="">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-      <h3 data-en="Full General Liability Application"
-          data-es="Solicitud Completa de Responsabilidad General">
-        Full General Liability Application
-      </h3>
-
-      <div class="form-row">
-        <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
-        <input type="text" name="Business Address">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Years in Business" data-es="Años en el Negocio">Years in Business</label>
-        <input type="number" name="Years in Business">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Annual Revenue" data-es="Ingresos Anuales">Annual Revenue</label>
-        <input type="text" name="Annual Revenue">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Describe Liability Exposure"
-               data-es="Describa la Exposición a Responsabilidad">
-          Describe Liability Exposure
-        </label>
-        <textarea name="Liability Exposure" rows="4"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn"
-        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
-        Submit Full Application
-      </button>
-
-    </form>
-  </div>
-</section>
-
-
-<!-- ===========================
-     3. COMMERCIAL AUTO
-=========================== -->
-<section id="commercial-auto" class="app-section fade-in">
-
-  <h2 class="app-category-title"
-      data-en="Commercial Auto"
-      data-es="Auto Comercial">
-    Commercial Auto
-  </h2>
-
-  <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
-
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
-
-    <div class="form-row">
-      <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
-      <input type="text" name="Business Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-      <input type="text" name="Client Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-      <input type="text" name="Phone" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Email" data-es="Correo Electrónico">Email</label>
-      <input type="email" name="Email" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Number of Vehicles" data-es="Número de Vehículos">Number of Vehicles</label>
-      <input type="number" name="Vehicle Count">
-    </div>
-
-    <button type="submit" class="submit-btn"
-      data-en="Submit Intake" data-es="Enviar Formulario">
-      Submit Intake
-    </button>
-  </form>
-<!-- EXPAND FULL FORM -->
-<button class="expand-btn fade-in"
-        data-en="Show Full Application"
-        data-es="Mostrar Solicitud Completa">
-  Show Full Application
-</button>
-
-<div class="full-form app-card fade-in">
-
-  <form action="https://formsubmit.co/office@insaces.com" method="POST">
-
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-    <h3 data-en="Full Commercial Auto Application"
-        data-es="Solicitud Completa de Auto Comercial">
-      Full Commercial Auto Application
-    </h3>
-
-    <div class="form-row">
-      <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
-      <input type="text" name="Business Address">
-    </div>
-
-    <div class="form-row">
-      <label data-en="Vehicle List" data-es="Lista de Vehículos">Vehicle List</label>
-      <textarea name="Vehicle List" rows="4"
-        placeholder="Year, Make, Model, VIN, Use"></textarea>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Driver List" data-es="Lista de Conductores">Driver List</label>
-      <textarea name="Driver List" rows="4"
-        placeholder="Name, DOB, License #"></textarea>
-    </div>
-
-    <button type="submit" class="submit-btn"
-      data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
-      Submit Full Application
-    </button>
-
-  </form>
-</div>
-</section>
-
-
-<!-- ===========================
-     4. WORKERS COMPENSATION
-=========================== -->
-<section id="wc" class="app-section fade-in">
-
-  <h2 class="app-category-title"
-      data-en="Workers Compensation"
-      data-es="Compensación al Trabajador">
-    Workers Compensation
-  </h2>
-
-  <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
-
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
-
-    <div class="form-row">
-      <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
-      <input type="text" name="Business Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-      <input type="text" name="Client Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-      <input type="text" name="Phone" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Email" data-es="Correo Electrónico">Email</label>
-      <input type="email" name="Email" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Number of Employees" data-es="Número de Empleados">Number of Employees</label>
-      <input type="number" name="Employees">
-    </div>
-
-    <button type="submit" class="submit-btn"
-      data-en="Submit Intake" data-es="Enviar Formulario">
-      Submit Intake
-    </button>
-  </form>
-
-  <!-- EXPAND FULL FORM -->
-  <button class="expand-btn fade-in"
-          data-en="Show Full Application"
-          data-es="Mostrar Solicitud Completa">
-    Show Full Application
-  </button>
-
-  <div class="full-form app-card fade-in">
-
-    <form action="https://formsubmit.co/office@insaces.com" method="POST">
-
-      <input type="hidden" name="_to" value="">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-      <h3 data-en="Full Workers Compensation Application"
-          data-es="Solicitud Completa de Compensación al Trabajador">
-        Full Workers Compensation Application
-      </h3>
-
-      <div class="form-row">
-        <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
-        <input type="text" name="Business Address">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Payroll Breakdown" data-es="Desglose de Nómina">Payroll Breakdown</label>
-        <textarea name="Payroll Breakdown" rows="4"
-          placeholder="Class Code, # of Employees, Annual Payroll"></textarea>
-      </div>
-
-      <div class="form-row">
-        <label data-en="Describe Work Performed"
-               data-es="Describa el Trabajo Realizado">
-          Describe Work Performed
-        </label>
-        <textarea name="Work Description" rows="4"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn"
-        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
-        Submit Full Application
-      </button>
-
-    </form>
-  </div>
-</section>
-<!-- ============================================================
-     PERSONAL APPLICATIONS
-============================================================ -->
-
-<!-- ===========================
-     5. HOMEOWNERS INSURANCE
-=========================== -->
-<section id="homeowners" class="app-section fade-in">
-
-  <h2 class="app-category-title"
-      data-en="Homeowners Insurance"
-      data-es="Seguro de Casa">
-    Homeowners Insurance
-  </h2>
-
-  <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
-
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
-
-    <div class="form-row">
-      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-      <input type="text" name="Client Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-      <input type="text" name="Phone" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Email" data-es="Correo Electrónico">Email</label>
-      <input type="email" name="Email" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Property Address" data-es="Dirección de la Propiedad">Property Address</label>
-      <input type="text" name="Property Address" required>
-    </div>
-
-    <button type="submit" class="submit-btn"
-      data-en="Submit Intake" data-es="Enviar Formulario">
-      Submit Intake
-    </button>
-  </form>
-
-  <!-- EXPAND FULL FORM -->
-  <button class="expand-btn fade-in"
-          data-en="Show Full Application"
-          data-es="Mostrar Solicitud Completa">
-    Show Full Application
-  </button>
-
-  <div class="full-form app-card fade-in">
-
-    <form action="https://formsubmit.co/office@insaces.com" method="POST">
-
-      <input type="hidden" name="_to" value="">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-      <h3 data-en="Full Homeowners Application"
-          data-es="Solicitud Completa de Seguro de Casa">
-        Full Homeowners Application
-      </h3>
-
-      <div class="form-row">
-        <label data-en="Year Built" data-es="Año de Construcción">Year Built</label>
-        <input type="number" name="Year Built">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Square Footage" data-es="Pies Cuadrados">Square Footage</label>
-        <input type="number" name="Square Footage">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Roof Type" data-es="Tipo de Techo">Roof Type</label>
-        <input type="text" name="Roof Type">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Any Prior Claims?" data-es="¿Reclamos Previos?">Any Prior Claims?</label>
-        <textarea name="Prior Claims" rows="3"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn"
-        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
-        Submit Full Application
-      </button>
-
-    </form>
-  </div>
-</section>
-
-
-<!-- ===========================
-     6. RENTERS INSURANCE
-=========================== -->
-<section id="renters" class="app-section fade-in">
-
-  <h2 class="app-category-title"
-      data-en="Renters Insurance"
-      data-es="Seguro de Inquilinos">
-    Renters Insurance
-  </h2>
-
-  <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
-
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
-
-    <div class="form-row">
-      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-      <input type="text" name="Client Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-      <input type="text" name="Phone" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Email" data-es="Correo Electrónico">Email</label>
-      <input type="email" name="Email" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Rental Address" data-es="Dirección de Renta">Rental Address</label>
-      <input type="text" name="Rental Address" required>
-    </div>
-
-    <button type="submit" class="submit-btn"
-      data-en="Submit Intake" data-es="Enviar Formulario">
-      Submit Intake
-    </button>
-  </form>
-
-  <!-- EXPAND FULL FORM -->
-  <button class="expand-btn fade-in"
-          data-en="Show Full Application"
-          data-es="Mostrar Solicitud Completa">
-    Show Full Application
-  </button>
-
-  <div class="full-form app-card fade-in">
-
-    <form action="https://formsubmit.co/office@insaces.com" method="POST">
-
-      <input type="hidden" name="_to" value="">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-      <h3 data-en="Full Renters Application"
-          data-es="Solicitud Completa de Seguro de Inquilinos">
-        Full Renters Application
-      </h3>
-
-      <div class="form-row">
-        <label data-en="Approximate Value of Personal Property"
-               data-es="Valor Aproximado de Propiedad Personal">
-          Approximate Value of Personal Property
-        </label>
-        <input type="text" name="Property Value">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Any Prior Claims?" data-es="¿Reclamos Previos?">Any Prior Claims?</label>
-        <textarea name="Prior Claims" rows="3"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn"
-        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
-        Submit Full Application
-      </button>
-
-    </form>
-  </div>
-</section>
-
-
-<!-- ===========================
-     7. PERSONAL UMBRELLA
-=========================== -->
-<section id="umbrella" class="app-section fade-in">
-
-  <h2 class="app-category-title"
-      data-en="Personal Umbrella"
-      data-es="Seguro Umbrella Personal">
-    Personal Umbrella
-  </h2>
-
-  <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
-
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
-
-    <div class="form-row">
-      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-      <input type="text" name="Client Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-      <input type="text" name="Phone" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Email" data-es="Correo Electrónico">Email</label>
-      <input type="email" name="Email" required>
-    </div>
-
-    <button type="submit" class="submit-btn"
-      data-en="Submit Intake" data-es="Enviar Formulario">
-      Submit Intake
-    </button>
-  </form>
-
-  <!-- EXPAND FULL FORM -->
-  <button class="expand-btn fade-in"
-          data-en="Show Full Application"
-          data-es="Mostrar Solicitud Completa">
-    Show Full Application
-  </button>
-
-  <div class="full-form app-card fade-in">
-
-    <form action="https://formsubmit.co/office@insaces.com" method="POST">
-
-      <input type="hidden" name="_to" value="">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-      <h3 data-en="Full Umbrella Application"
-          data-es="Solicitud Completa de Seguro Umbrella">
-        Full Umbrella Application
-      </h3>
-
-      <div class="form-row">
-        <label data-en="Current Auto Policy Limits"
-               data-es="Límites Actuales de Póliza de Auto">
-          Current Auto Policy Limits
-        </label>
-        <input type="text" name="Auto Limits">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Current Home Policy Limits"
-               data-es="Límites Actuales de Póliza de Casa">
-          Current Home Policy Limits
-        </label>
-        <input type="text" name="Home Limits">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Any Prior Liability Claims?"
-               data-es="¿Reclamos Previos de Responsabilidad?">
-          Any Prior Liability Claims?
-        </label>
-        <textarea name="Liability Claims" rows="3"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn"
-        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
-        Submit Full Application
-      </button>
-
-    </form>
-  </div>
-</section>
-
-<!-- ===========================
-     8. PERSONAL AUTO INSURANCE
-=========================== -->
-<section id="auto" class="app-section fade-in">
-
-  <h2 class="app-category-title"
-      data-en="Auto Insurance"
-      data-es="Seguro de Auto">
-    Auto Insurance
-  </h2>
-
-  <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
-
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
-
-    <div class="form-row">
-      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-      <input type="text" name="Client Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-      <input type="text" name="Phone" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Email" data-es="Correo Electrónico">Email</label>
-      <input type="email" name="Email" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Number of Vehicles" data-es="Número de Vehículos">Number of Vehicles</label>
-      <input type="number" name="Vehicle Count">
-    </div>
-
-    <button type="submit" class="submit-btn"
-      data-en="Submit Intake" data-es="Enviar Formulario">
-      Submit Intake
-    </button>
-  </form>
-
-  <!-- EXPAND FULL FORM -->
-  <button class="expand-btn fade-in"
-          data-en="Show Full Application"
-          data-es="Mostrar Solicitud Completa">
-    Show Full Application
-  </button>
-
-  <div class="full-form app-card fade-in">
-
-    <form action="https://formsubmit.co/office@insaces.com" method="POST">
-
-      <input type="hidden" name="_to" value="">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-      <h3 data-en="Full Auto Insurance Application"
-          data-es="Solicitud Completa de Seguro de Auto">
-        Full Auto Insurance Application
-      </h3>
-
-      <div class="form-row">
-        <label data-en="Driver List" data-es="Lista de Conductores">Driver List</label>
-        <textarea name="Driver List" rows="4"
-          placeholder="Name, DOB, License #"></textarea>
-      </div>
-
-      <div class="form-row">
-        <label data-en="Vehicle List" data-es="Lista de Vehículos">Vehicle List</label>
-        <textarea name="Vehicle List" rows="4"
-          placeholder="Year, Make, Model, VIN"></textarea>
-      </div>
-
-      <div class="form-row">
-        <label data-en="Current Insurance Carrier"
-               data-es="Aseguradora Actual">
-          Current Insurance Carrier
-        </label>
-        <input type="text" name="Current Carrier">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Any Prior Claims?" data-es="¿Reclamos Previos?">Any Prior Claims?</label>
-        <textarea name="Prior Claims" rows="3"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn"
-        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
-        Submit Full Application
-      </button>
-
-    </form>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     LIFE INSURANCE APPLICATION
-============================================================ -->
-<section id="life" class="app-section fade-in">
-
-  <h2 class="app-category-title"
-      data-en="Life Insurance"
-      data-es="Seguro de Vida">
-    Life Insurance
-  </h2>
-
-  <!-- SHORT INTAKE -->
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="short-intake app-card">
-
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-    <h3 data-en="Quick Intake" data-es="Formulario Rápido">Quick Intake</h3>
-
-    <div class="form-row">
-      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-      <input type="text" name="Client Name" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-      <input type="text" name="Phone" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Email" data-es="Correo Electrónico">Email</label>
-      <input type="email" name="Email" required>
-    </div>
-
-    <div class="form-row">
-      <label data-en="Coverage Amount Desired"
-             data-es="Monto de Cobertura Deseado">
-        Coverage Amount Desired
-      </label>
-      <input type="text" name="Coverage Amount">
-    </div>
-
-    <button type="submit" class="submit-btn"
-      data-en="Submit Intake" data-es="Enviar Formulario">
-      Submit Intake
-    </button>
-  </form>
-
-  <!-- EXPAND FULL FORM -->
-  <button class="expand-btn fade-in"
-          data-en="Show Full Application"
-          data-es="Mostrar Solicitud Completa">
-    Show Full Application
-  </button>
-
-  <div class="full-form app-card fade-in">
-
-    <form action="https://formsubmit.co/office@insaces.com" method="POST">
-
-      <input type="hidden" name="_to" value="">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-
-      <h3 data-en="Full Life Insurance Application"
-          data-es="Solicitud Completa de Seguro de Vida">
-        Full Life Insurance Application
-      </h3>
-
-      <div class="form-row">
-        <label data-en="Date of Birth" data-es="Fecha de Nacimiento">Date of Birth</label>
-        <input type="date" name="DOB">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Tobacco Use" data-es="Uso de Tabaco">Tobacco Use</label>
-        <select name="Tobacco Use">
-          <option value="No" data-en="No" data-es="No">No</option>
-          <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
-        </select>
-      </div>
-
-      <div class="form-row">
-        <label data-en="Beneficiary Name" data-es="Nombre del Beneficiario">
-          Beneficiary Name
-        </label>
-        <input type="text" name="Beneficiary">
-      </div>
-
-      <div class="form-row">
-        <label data-en="Medical History" data-es="Historial Médico">Medical History</label>
-        <textarea name="Medical History" rows="4"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn"
-        data-en="Submit Full Application" data-es="Enviar Solicitud Completa">
-        Submit Full Application
-      </button>
-
-    </form>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     FOOTER
-============================================================ -->
+<!-- FOOTER INJECTED BY global.js -->
 <footer id="aces-footer"></footer>
 
 </body>
