@@ -484,3 +484,92 @@ section{padding:60px 20px}
     grid-template-columns:1fr;
   }
 }
+/* ============================================================
+   APPLICATIONS PAGE — FILTER BAR + SEARCH
+============================================================ */
+.application-filter-bar{
+  max-width:900px;
+  margin:0 auto 40px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  align-items:center;
+}
+
+#appSearch{
+  width:100%;
+  max-width:600px;
+  padding:12px 16px;
+  border-radius:8px;
+  border:1px solid #444;
+  background:#111;
+  color:#fff;
+  font-size:1rem;
+  transition:border-color .2s;
+}
+
+#appSearch:focus{
+  outline:none;
+  border-color:#ff4d4d;
+}
+
+/* ============================================================
+   FILTER BUTTONS
+============================================================ */
+.filter-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.filter-btn{
+  padding:8px 16px;
+  border-radius:20px;
+  border:1px solid #ff4d4d;
+  background:transparent;
+  color:#ff4d4d;
+  cursor:pointer;
+  font-size:0.9rem;
+  transition:background .2s,color .2s,border-color .2s;
+}
+
+.filter-btn:hover{
+  background:#ff4d4d;
+  color:#000;
+}
+
+.filter-btn.active{
+  background:#ff4d4d;
+  color:#000;
+  border-color:#ff4d4d;
+  font-weight:600;
+}
+
+/* ============================================================
+   APPLICATION CARDS — CATEGORY HIGHLIGHTING
+============================================================ */
+.app-item{
+  transition:opacity .25s ease, transform .25s ease;
+}
+
+.app-item.hidden{
+  opacity:0.15;
+  pointer-events:none;
+  transform:scale(0.96);
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE
+============================================================ */
+@media(max-width:700px){
+  .application-filter-bar{
+    gap:16px;
+  }
+  .filter-buttons{
+    gap:8px;
+  }
+  #appSearch{
+    max-width:100%;
+  }
+}
