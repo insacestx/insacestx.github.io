@@ -595,3 +595,182 @@ section{padding:60px 20px}
     max-width:100%;
   }
 }
+/* ============================================================
+   GENERAL LIABILITY APPLICATION — MULTI-STEP FORM
+============================================================ */
+.gl-app-wrapper{
+  max-width:1000px;
+  margin:0 auto;
+  background:rgba(0,0,0,0.8);
+  border-radius:16px;
+  padding:30px 20px 40px;
+  box-shadow:0 18px 45px rgba(0,0,0,0.9);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.gl-form{margin-top:20px}
+
+/* STEPS BAR */
+.gl-steps{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:10px;
+}
+.gl-step{
+  flex:1;
+  min-width:120px;
+  text-align:center;
+  color:#ccc;
+  opacity:0.6;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+.gl-step span{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:2px solid #555;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:0.9rem;
+}
+.gl-step.active{
+  opacity:1;
+  color:#fff;
+}
+.gl-step.active span{
+  border-color:#ff4d4d;
+  background:#ff4d4d;
+  color:#000;
+}
+.gl-step.completed{
+  opacity:0.9;
+}
+.gl-step.completed span{
+  border-color:#4caf50;
+  background:#4caf50;
+  color:#000;
+}
+
+/* PANELS */
+.gl-step-panel{margin-top:30px}
+
+/* GRID */
+.gl-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+.gl-field label{
+  display:block;
+  font-size:0.9rem;
+  margin-bottom:4px;
+}
+.gl-field input,
+.gl-field select,
+.gl-field textarea{
+  width:100%;
+  padding:9px 11px;
+  border-radius:6px;
+  border:1px solid #444;
+  background:#111;
+  color:#f5f5f5;
+  font-size:0.95rem;
+}
+.gl-field input:focus,
+.gl-field select:focus,
+.gl-field textarea:focus{
+  outline:none;
+  border-color:#ff4d4d;
+}
+.gl-field-full{grid-column:1/-1}
+
+/* ERROR FLASH */
+.gl-field-error{
+  border-color:#ff4d4d !important;
+  box-shadow:0 0 0 1px #ff4d4d;
+}
+
+/* DYNAMIC CARDS */
+.gl-dynamic-group{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  margin-top:16px;
+}
+.gl-card{
+  background:rgba(0,0,0,0.7);
+  border-radius:12px;
+  padding:18px 16px 20px;
+  border:1px solid rgba(255,255,255,0.06);
+}
+.gl-card h3{
+  font-size:1rem;
+  margin-bottom:10px;
+}
+
+/* SUBCONTRACTOR EXTRA FIELDS */
+.gl-subcontractor-extra{
+  display:none;
+}
+
+/* ADD BUTTONS */
+.gl-add-btn{
+  margin-top:16px;
+}
+
+/* NAV BUTTONS */
+.gl-nav-row{
+  margin-top:26px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+.gl-nav-btn{
+  min-width:120px;
+  justify-content:center;
+}
+
+/* REVIEW LIST */
+.gl-review-list{
+  margin:16px 0 18px;
+  padding-left:18px;
+  font-size:0.95rem;
+}
+.gl-review-list li{margin-bottom:6px}
+
+/* CONSENT */
+.gl-consent{
+  margin-bottom:20px;
+  font-size:0.9rem;
+}
+.gl-consent input{margin-right:8px}
+
+/* SUBMIT ROW */
+.gl-submit-row{
+  display:flex;
+  justify-content:flex-end;
+}
+
+/* STATUS MESSAGE */
+.gl-status-message{
+  margin-top:12px;
+  font-size:0.9rem;
+  color:#ccc;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .gl-app-wrapper{
+    padding:22px 14px 30px;
+  }
+  .gl-steps{
+    gap:6px;
+  }
+  .gl-step p{
+    font-size:0.75rem;
+  }
+}
