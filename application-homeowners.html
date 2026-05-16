@@ -206,7 +206,6 @@
           </div>
         </div>
       </div>
-
       <!-- STEP 2: APPLICANT -->
       <div class="ho-step-panel" data-step="2">
         <h2 class="section-title"
@@ -296,7 +295,6 @@
           </div>
         </div>
       </div>
-
       <!-- STEP 3: COVERAGE -->
       <div class="ho-step-panel" data-step="3">
         <h2 class="section-title"
@@ -425,7 +423,6 @@
           </div>
         </div>
       </div>
-
       <!-- STEP 4: FEATURES -->
       <div class="ho-step-panel" data-step="4">
         <h2 class="section-title"
@@ -440,35 +437,40 @@
               Dogs on Premises?
             </label>
             <select name="Dogs on Premises">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
+              <option value="No" data-en="No" data-es="No">No</option>
+              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
             </select>
           </div>
 
           <div class="ho-field">
-            <label data-en="Trampoline?" data-es="¿Trampolín?">Trampoline?</label>
+            <label data-en="Trampoline?" data-es="¿Trampolín?">
+              Trampoline?
+            </label>
             <select name="Trampoline">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
+              <option value="No" data-en="No" data-es="No">No</option>
+              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
             </select>
           </div>
 
           <div class="ho-field">
-            <label data-en="Pool?" data-es="¿Piscina?">Pool?</label>
+            <label data-en="Pool?" data-es="¿Piscina?">
+              Pool?
+            </label>
             <select name="Pool" id="hasPool">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
+              <option value="No" data-en="No" data-es="No">No</option>
+              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
             </select>
           </div>
 
+          <!-- Pool fenced (conditional) -->
           <div class="ho-field ho-pool-extra">
             <label data-en="Is the pool fenced?"
                    data-es="¿La piscina está cercada?">
               Is the pool fenced?
             </label>
             <select name="Pool Fenced">
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
+              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
+              <option value="No" data-en="No" data-es="No">No</option>
             </select>
           </div>
 
@@ -478,10 +480,200 @@
               Security System?
             </label>
             <select name="Security System">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
+              <option value="No" data-en="No" data-es="No">No</option>
+              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
             </select>
           </div>
 
           <div class="ho-field">
-            <label data
+            <label data-en="Fire Alarms?"
+                   data-es="¿Alarmas Contra Incendios?">
+              Fire Alarms?
+            </label>
+            <select name="Fire Alarms">
+              <option value="No" data-en="No" data-es="No">No</option>
+              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
+            </select>
+          </div>
+
+          <div class="ho-field ho-field-full">
+            <label data-en="Recent Updates (Roof, Plumbing, Electrical, HVAC)"
+                   data-es="Actualizaciones Recientes (Techo, Plomería, Eléctrico, HVAC)">
+              Recent Updates (Roof, Plumbing, Electrical, HVAC)
+            </label>
+            <textarea name="Recent Updates" rows="3"
+              placeholder="Example: Roof replaced 2021, plumbing updated 2019, etc."></textarea>
+          </div>
+        </div>
+      </div>
+      <!-- STEP 5: CLAIMS & SUBMIT -->
+      <div class="ho-step-panel" data-step="5">
+        <h2 class="section-title"
+            data-en="Claims History & Submit"
+            data-es="Historial de Reclamos y Envío">
+          Claims History & Submit
+        </h2>
+
+        <div class="ho-grid">
+          <div class="ho-field">
+            <label data-en="Any claims in the last 5 years?"
+                   data-es="¿Algún reclamo en los últimos 5 años?">
+              Any claims in the last 5 years?
+            </label>
+            <select name="Any Claims Last 5 Years" id="anyClaimsHO">
+              <option value="No" data-en="No" data-es="No">No</option>
+              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- CLAIMS DYNAMIC SECTION -->
+        <div id="claimsContainerHO" class="ho-dynamic-group">
+          <div class="claim-card ho-card">
+            <h3 data-en="Claim 1" data-es="Reclamo 1">Claim 1</h3>
+
+            <div class="ho-grid">
+              <div class="ho-field">
+                <label data-en="Date of Loss" data-es="Fecha de Pérdida">
+                  Date of Loss
+                </label>
+                <input type="date" name="Claim 1 - Date">
+              </div>
+
+              <div class="ho-field">
+                <label data-en="Type of Claim"
+                       data-es="Tipo de Reclamo">
+                  Type of Claim
+                </label>
+                <select name="Claim 1 - Type">
+                  <option value="Fire">Fire</option>
+                  <option value="Water">Water</option>
+                  <option value="Wind">Wind</option>
+                  <option value="Liability">Liability</option>
+                  <option value="Theft">Theft</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="ho-field">
+                <label data-en="Amount Paid"
+                       data-es="Monto Pagado">
+                  Amount Paid
+                </label>
+                <input type="text" name="Claim 1 - Amount Paid">
+              </div>
+
+              <div class="ho-field">
+                <label data-en="Status" data-es="Estado">
+                  Status
+                </label>
+                <select name="Claim 1 - Status">
+                  <option value="Open">Open</option>
+                  <option value="Closed">Closed</option>
+                </select>
+              </div>
+
+              <div class="ho-field ho-field-full">
+                <label data-en="Description"
+                       data-es="Descripción">
+                  Description
+                </label>
+                <textarea name="Claim 1 - Description" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" id="addClaimBtnHO" class="app-btn ho-add-btn"
+                data-en="Add Another Claim"
+                data-es="Agregar Otro Reclamo">
+          Add Another Claim
+        </button>
+
+        <hr class="ho-divider">
+
+        <!-- DOCUMENT UPLOADS -->
+        <div class="ho-grid">
+          <div class="ho-field ho-field-full">
+            <label data-en="Upload Prior Policy Declarations"
+                   data-es="Cargar Declaraciones de Pólizas Anteriores">
+              Upload Prior Policy Declarations
+            </label>
+            <input type="file" name="Prior Policy Declarations" multiple>
+          </div>
+
+          <div class="ho-field ho-field-full">
+            <label data-en="Upload Inspection Reports (if any)"
+                   data-es="Cargar Reportes de Inspección (si aplica)">
+              Upload Inspection Reports (if any)
+            </label>
+            <input type="file" name="Inspection Reports" multiple>
+          </div>
+
+          <div class="ho-field ho-field-full">
+            <label data-en="Upload Photos (optional)"
+                   data-es="Cargar Fotos (opcional)">
+              Upload Photos (optional)
+            </label>
+            <input type="file" name="Property Photos" multiple>
+          </div>
+
+          <div class="ho-field ho-field-full">
+            <label data-en="Additional Notes"
+                   data-es="Notas Adicionales">
+              Additional Notes
+            </label>
+            <textarea name="Additional Notes" rows="4"></textarea>
+          </div>
+        </div>
+
+        <ul class="ho-review-list">
+          <li data-en="Submitting this form does not bind coverage."
+              data-es="Enviar este formulario no garantiza ni emite cobertura.">
+            Submitting this form does not bind coverage.
+          </li>
+          <li data-en="Coverage is not in effect until confirmed in writing by an ACES agent."
+              data-es="La cobertura no entra en vigor hasta que un agente de ACES lo confirme por escrito.">
+            Coverage is not in effect until confirmed in writing by an ACES agent.
+          </li>
+        </ul>
+
+        <div class="ho-consent">
+          <label>
+            <input type="checkbox" name="Consent" required>
+            <span data-en="I understand and agree to the terms above."
+                  data-es="Entiendo y acepto los términos anteriores.">
+              I understand and agree to the terms above.
+            </span>
+          </label>
+        </div>
+
+        <div class="ho-submit-row">
+          <button type="submit" class="submit-btn"
+                  data-en="Submit Application"
+                  data-es="Enviar Solicitud">
+            Submit Application
+          </button>
+        </div>
+
+        <p id="hoFormStatus" class="ho-status-message"></p>
+      </div>
+
+      <!-- NAV BUTTONS -->
+      <div class="ho-nav-row">
+        <button type="button" id="hoPrevBtn" class="hero-btn ho-nav-btn">
+          ‹ <span data-en="Back" data-es="Atrás">Back</span>
+        </button>
+        <button type="button" id="hoNextBtn" class="hero-btn ho-nav-btn">
+          <span data-en="Next" data-es="Siguiente">Next</span> ›
+        </button>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+<footer id="aces-footer"></footer>
+
+</body>
+</html>
