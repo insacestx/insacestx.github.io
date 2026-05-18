@@ -1155,3 +1155,18 @@ section{padding:60px 20px}
   margin-bottom: 1rem;
   box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
 }
+/* CONDO APPLICATION */
+
+.condo-hero {
+  background: linear-gradient(135deg, #334155, #1e293b);
+}
+
+.condo-app-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.condo-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
