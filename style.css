@@ -1231,3 +1231,19 @@ section{padding:60px 20px}
 .umbrella-add-btn {
   margin-top: 0.5rem;
 }
+
+/* BOP APPLICATION */
+
+.bop-hero {
+  background: linear-gradient(135deg, #1e3a8a, #1e40af);
+}
+
+.bop-app-form {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.bop-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
