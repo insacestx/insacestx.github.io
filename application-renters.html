@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title data-en="Renters Insurance Application | ACES Insurance Services"
+        data-es="Solicitud de Seguro de Renters | ACES Insurance Services">
+  Renters Insurance Application | ACES Insurance Services
+</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="global.js" defer></script>
+<script src="application-renters.js" defer></script>
+
+</head>
+<body>
+
+<header id="aces-header"></header>
+
+<section class="small-hero renters-hero fade-in">
+  <div class="small-hero-content">
+    <h1 data-en="Renters Insurance Application"
+        data-es="Solicitud de Seguro de Renters">
+      Renters Insurance Application
+    </h1>
+    <p data-en="Provide your information to receive a personalized renters insurance quote."
+       data-es="Proporcione su información para recibir una cotización personalizada de seguro de renters.">
+      Provide your information to receive a personalized renters insurance quote.
+    </p>
+  </div>
+</section>
+
+<section class="app-section fade-in">
+
+  <!-- STEP INDICATOR -->
+  <div class="wizard-steps renters-wizard-steps">
+    <div class="wizard-step active" data-step="1">
+      <span class="wizard-step-icon">👤</span>
+      <span data-en="Applicant" data-es="Solicitante">Applicant</span>
+    </div>
+    <div class="wizard-step" data-step="2">
+      <span class="wizard-step-icon">🏠</span>
+      <span data-en="Property" data-es="Propiedad">Property</span>
+    </div>
+    <div class="wizard-step" data-step="3">
+      <span class="wizard-step-icon">🛡️</span>
+      <span data-en="Coverage" data-es="Cobertura">Coverage</span>
+    </div>
+    <div class="wizard-step" data-step="4">
+      <span class="wizard-step-icon">📄</span>
+      <span data-en="Details" data-es="Detalles">Details</span>
+    </div>
+    <div class="wizard-step" data-step="5">
+      <span class="wizard-step-icon">✔️</span>
+      <span data-en="Submit" data-es="Enviar">Submit</span>
+    </div>
+  </div>
+
+  <form id="rentersApplicationForm"
+        action="https://formsubmit.co/office@insaces.com"
+        method="POST"
+        enctype="multipart/form-data"
+        class="app-form renters-app-form">
+
+    <!-- Round Robin -->
+    <input type="hidden" name="_to" id="rrEmail">
+    <input type="hidden" name="_subject" value="New Renters Insurance Application - ACES">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none">
+
+    <!-- STEP 1: APPLICANT INFO -->
+    <div class="form-step active" data-step="1">
+
+      <h2 data-en="Applicant Information" data-es="Información del Solicitante">
+        Applicant Information
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label data-en="First Name" data-es="Nombre">First Name</label>
+          <input type="text" name="first_name" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Last Name" data-es="Apellido">Last Name</label>
+          <input type="text" name="last_name" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Date of Birth" data-es="Fecha de Nacimiento">Date of Birth</label>
+          <input type="date" name="dob" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Email" data-es="Correo Electrónico">Email</label>
+          <input type="email" name="email" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+          <input type="tel" name="phone" required>
+        </div>
+
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-primary next-step"
+                data-next="2"
+                data-en="Next: Property"
+                data-es="Siguiente: Propiedad">
+          Next: Property
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 2: PROPERTY INFO -->
+    <div class="form-step" data-step="2">
+
+      <h2 data-en="Property Information" data-es="Información de la Propiedad">
+        Property Information
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label data-en="Rental Address" data-es="Dirección de Renta">Rental Address</label>
+          <input type="text" name="rental_address" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="City" data-es="Ciudad">City</label>
+          <input type="text" name="rental_city" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="State" data-es="Estado">State</label>
+          <input type="text" name="rental_state" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label>
+          <input type="text" name="rental_zip" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Type of Residence" data-es="Tipo de Residencia">
+            Type of Residence
+          </label>
+          <select name="residence_type">
+            <option value="">Select...</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Condo">Condo</option>
+            <option value="Townhome">Townhome</option>
+            <option value="Single-Family Home">Single-Family Home</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Year Built" data-es="Año de Construcción">Year Built</label>
+          <input type="text" name="year_built">
+        </div>
+
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="1"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="3"
+                data-en="Next: Coverage"
+                data-es="Siguiente: Cobertura">
+          Next: Coverage
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 3: COVERAGE OPTIONS -->
+    <div class="form-step" data-step="3">
+
+      <h2 data-en="Coverage Options" data-es="Opciones de Cobertura">
+        Coverage Options
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label data-en="Personal Property Amount"
+                 data-es="Monto de Propiedad Personal">
+            Personal Property Amount
+          </label>
+          <select name="personal_property">
+            <option value="">Select...</option>
+            <option value="15000">$15,000</option>
+            <option value="25000">$25,000</option>
+            <option value="50000">$50,000</option>
+            <option value="75000">$75,000</option>
+            <option value="100000">$100,000</option>
+            <option value="Other">Other / Unsure</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Liability Limit"
+                 data-es="Límite de Responsabilidad">
+            Liability Limit
+          </label>
+          <select name="liability_limit">
+            <option value="">Select...</option>
+            <option value="100000">$100,000</option>
+            <option value="300000">$300,000</option>
+            <option value="500000">$500,000</option>
+            <option value="Unsure">Unsure</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Deductible"
+                 data-es="Deducible">
+            Deductible
+          </label>
+          <select name="deductible">
+            <option value="">Select...</option>
+            <option value="500">$500</option>
+            <option value="1000">$1,000</option>
+            <option value="Other">Other / Unsure</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="2"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="4"
+                data-en="Next: Details"
+                data-es="Siguiente: Detalles">
+          Next: Details
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 4: ADDITIONAL DETAILS -->
+    <div class="form-step" data-step="4">
+
+      <h2 data-en="Additional Details" data-es="Detalles Adicionales">
+        Additional Details
+      </h2>
+
+      <div class="form-field">
+        <label data-en="Any prior claims?"
+               data-es="¿Algún reclamo previo?">
+          Any prior claims?
+        </label>
+        <textarea name="prior_claims" rows="3"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label data-en="Additional Notes"
+               data-es="Notas Adicionales">
+          Additional Notes
+        </label>
+        <textarea name="notes" rows="4"></textarea>
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="3"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="5"
+                data-en="Next: Submit"
+                data-es="Siguiente: Enviar">
+          Next: Submit
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 5: SUBMIT -->
+    <div class="form-step" data-step="5">
+
+      <h2 data-en="Submit Application" data-es="Enviar Solicitud">
+        Submit Application
+      </h2>
+
+      <div class="form-field">
+        <label data-en="Upload Documents (Optional)"
+               data-es="Cargar Documentos (Opcional)">
+          Upload Documents (Optional)
+        </label>
+        <input type="file" name="documents" multiple>
+      </div>
+
+      <div class="form-field checkbox-field">
+        <label>
+          <input type="checkbox" name="consent" required>
+          <span data-en="I confirm the information provided is accurate."
+                data-es="Confirmo que la información proporcionada es correcta.">
+            I confirm the information provided is accurate.
+          </span>
+        </label>
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="4"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="submit" class="btn-primary"
+                data-en="Submit Application"
+                data-es="Enviar Solicitud">
+          Submit Application
+        </button>
+      </div>
+
+    </div>
+
+  </form>
+
+</section>
+
+<footer id="aces-footer"></footer>
+
+</body>
+</html>
