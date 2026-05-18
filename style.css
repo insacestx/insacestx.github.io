@@ -1325,3 +1325,19 @@ section{padding:60px 20px}
   font-size: 1.2rem;
   margin-bottom: 0.25rem;
 }
+
+/* CYBER LIABILITY APPLICATION */
+
+.cyber-hero {
+  background: linear-gradient(135deg, #0ea5e9, #1e3a8a);
+}
+
+.cyber-app-form {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.cyber-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
