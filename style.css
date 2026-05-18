@@ -1170,3 +1170,18 @@ section{padding:60px 20px}
   font-size: 1.2rem;
   margin-bottom: 0.25rem;
 }
+/* FLOOD APPLICATION */
+
+.flood-hero {
+  background: linear-gradient(135deg, #0ea5e9, #0369a1);
+}
+
+.flood-app-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.flood-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
