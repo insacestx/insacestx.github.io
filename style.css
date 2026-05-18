@@ -1026,3 +1026,19 @@ section{padding:60px 20px}
   margin-bottom: 1rem;
   color: #4b5563;
 }
+
+/* RENTERS APPLICATION */
+
+.renters-hero {
+  background: linear-gradient(135deg, #374151, #1f2937);
+}
+
+.renters-app-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.renters-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
