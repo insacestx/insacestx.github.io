@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title data-en="Errors & Omissions Application | ACES Insurance Services"
+        data-es="Solicitud de Seguro de Errores y Omisiones | ACES Insurance Services">
+  Errors & Omissions Application | ACES Insurance Services
+</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="global.js" defer></script>
+<script src="application-eo.js" defer></script>
+
+</head>
+<body>
+
+<header id="aces-header"></header>
+
+<section class="small-hero eo-hero fade-in">
+  <div class="small-hero-content">
+    <h1 data-en="Errors & Omissions Application"
+        data-es="Solicitud de Seguro de Errores y Omisiones">
+      Errors & Omissions Application
+    </h1>
+    <p data-en="Provide your business information to receive an E&O insurance quote."
+       data-es="Proporcione la información de su negocio para recibir una cotización de seguro E&O.">
+      Provide your business information to receive an E&O insurance quote.
+    </p>
+  </div>
+</section>
+
+<section class="app-section fade-in">
+
+  <!-- STEP INDICATOR -->
+  <div class="wizard-steps eo-wizard-steps">
+    <div class="wizard-step active" data-step="1">
+      <span class="wizard-step-icon">🏢</span>
+      <span data-en="Business" data-es="Negocio">Business</span>
+    </div>
+    <div class="wizard-step" data-step="2">
+      <span class="wizard-step-icon">📋</span>
+      <span data-en="Services" data-es="Servicios">Services</span>
+    </div>
+    <div class="wizard-step" data-step="3">
+      <span class="wizard-step-icon">📄</span>
+      <span data-en="Claims" data-es="Reclamos">Claims</span>
+    </div>
+    <div class="wizard-step" data-step="4">
+      <span class="wizard-step-icon">🛡️</span>
+      <span data-en="Coverage" data-es="Cobertura">Coverage</span>
+    </div>
+    <div class="wizard-step" data-step="5">
+      <span class="wizard-step-icon">✔️</span>
+      <span data-en="Submit" data-es="Enviar">Submit</span>
+    </div>
+  </div>
+
+  <form id="eoApplicationForm"
+        action="https://formsubmit.co/office@insaces.com"
+        method="POST"
+        enctype="multipart/form-data"
+        class="app-form eo-app-form">
+
+    <!-- Round Robin -->
+    <input type="hidden" name="_to" id="rrEmail">
+    <input type="hidden" name="_subject" value="New E&O Application - ACES">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none">
+
+    <!-- STEP 1: BUSINESS INFO -->
+    <div class="form-step active" data-step="1">
+
+      <h2 data-en="Business Information" data-es="Información del Negocio">
+        Business Information
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
+          <input type="text" name="business_name" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
+          <input type="text" name="business_address" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="City" data-es="Ciudad">City</label>
+          <input type="text" name="business_city" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="State" data-es="Estado">State</label>
+          <input type="text" name="business_state" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label>
+          <input type="text" name="business_zip" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Business Type" data-es="Tipo de Negocio">Business Type</label>
+          <input type="text" name="business_type" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Years in Business" data-es="Años en el Negocio">Years in Business</label>
+          <input type="number" name="years_in_business">
+        </div>
+
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-primary next-step"
+                data-next="2"
+                data-en="Next: Services"
+                data-es="Siguiente: Servicios">
+          Next: Services
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 2: SERVICES -->
+    <div class="form-step" data-step="2">
+
+      <h2 data-en="Professional Services" data-es="Servicios Profesionales">
+        Professional Services
+      </h2>
+
+      <div class="form-field">
+        <label data-en="Describe the services your business provides"
+               data-es="Describa los servicios que ofrece su negocio">
+          Describe the services your business provides
+        </label>
+        <textarea name="services" rows="4"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label data-en="Annual Revenue"
+               data-es="Ingresos Anuales">
+          Annual Revenue
+        </label>
+        <input type="number" name="annual_revenue">
+      </div>
+
+      <div class="form-field">
+        <label data-en="Number of Employees"
+               data-es="Número de Empleados">
+          Number of Employees
+        </label>
+        <input type="number" name="employees">
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="1"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="3"
+                data-en="Next: Claims"
+                data-es="Siguiente: Reclamos">
+          Next: Claims
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 3: CLAIMS -->
+    <div class="form-step" data-step="3">
+
+      <h2 data-en="Claims History" data-es="Historial de Reclamos">
+        Claims History
+      </h2>
+
+      <div class="form-field">
+        <label data-en="Any prior E&O claims?"
+               data-es="¿Algún reclamo previo de E&O?">
+          Any prior E&O claims?
+        </label>
+        <textarea name="prior_claims" rows="3"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label data-en="Any pending disputes or complaints?"
+               data-es="¿Alguna disputa o queja pendiente?">
+          Any pending disputes or complaints?
+        </label>
+        <textarea name="pending_disputes" rows="3"></textarea>
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="2"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="4"
+                data-en="Next: Coverage"
+                data-es="Siguiente: Cobertura">
+          Next: Coverage
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 4: COVERAGE -->
+    <div class="form-step" data-step="4">
+
+      <h2 data-en="Coverage Options" data-es="Opciones de Cobertura">
+        Coverage Options
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label data-en="E&O Liability Limit"
+                 data-es="Límite de Responsabilidad E&O">
+            E&O Liability Limit
+          </label>
+          <select name="eo_limit">
+            <option value="">Select...</option>
+            <option value="250000">$250,000</option>
+            <option value="500000">$500,000</option>
+            <option value="1000000">$1,000,000</option>
+            <option value="2000000">$2,000,000</option>
+            <option value="Unsure">Unsure</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Defense Costs"
+                 data-es="Costos de Defensa">
+            Defense Costs
+          </label>
+          <select name="defense_costs">
+            <option value="">Select...</option>
+            <option value="Inside">Inside Limits</option>
+            <option value="Outside">Outside Limits</option>
+            <option value="Unsure">Unsure</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="3"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="5"
+                data-en="Next: Submit"
+                data-es="Siguiente: Enviar">
+          Next: Submit
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 5: SUBMIT -->
+    <div class="form-step" data-step="5">
+
+      <h2 data-en="Submit Application" data-es="Enviar Solicitud">
+        Submit Application
+      </h2>
+
+      <div class="form-field">
+        <label data-en="Upload Documents (Optional)"
+               data-es="Cargar Documentos (Opcional)">
+          Upload Documents (Optional)
+        </label>
+        <input type="file" name="documents" multiple>
+      </div>
+
+      <div class="form-field checkbox-field">
+        <label>
+          <input type="checkbox" name="consent" required>
+          <span data-en="I confirm the information provided is accurate."
+                data-es="Confirmo que la información proporcionada es correcta.">
+            I confirm the information provided is accurate.
+          </span>
+        </label>
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="4"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="submit" class="btn-primary"
+                data-en="Submit Application"
+                data-es="Enviar Solicitud">
+          Submit Application
+        </button>
+      </div>
+
+    </div>
+
+  </form>
+
+</section>
+
+<footer id="aces-footer"></footer>
+
+</body>
+</html>
