@@ -1105,3 +1105,53 @@ section{padding:60px 20px}
   font-size: 1.2rem;
   margin-bottom: 0.25rem;
 }
+
+/* BUNDLE APPLICATION */
+
+.bundle-hero {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+.bundle-app-form {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.bundle-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.bundle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.bundle-option {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  transition: 0.2s;
+  font-size: 1rem;
+}
+
+.bundle-option:hover {
+  background: #f3f4f6;
+}
+
+.bundle-option input {
+  margin-right: 0.5rem;
+}
+
+.bundle-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
