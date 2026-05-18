@@ -1089,3 +1089,19 @@ section{padding:60px 20px}
 .wc-add-btn {
   margin-top: 0.5rem;
 }
+
+/* LIFE APPLICATION */
+
+.life-hero {
+  background: linear-gradient(135deg, #6b21a8, #4c1d95);
+}
+
+.life-app-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.life-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
