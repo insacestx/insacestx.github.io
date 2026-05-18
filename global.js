@@ -168,3 +168,15 @@ function initAgentPanel() {
     if (e.target === panel) panel.classList.remove("open");
   });
 }
+
+/* Header scroll shadow */
+window.addEventListener("scroll", () => {
+  const header = document.getElementById("aces-header");
+  if (!header) return;
+
+  if (window.scrollY > 20) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+});
