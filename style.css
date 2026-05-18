@@ -1247,3 +1247,50 @@ section{padding:60px 20px}
   font-size: 1.2rem;
   margin-bottom: 0.25rem;
 }
+
+/* COMMERCIAL AUTO APPLICATION */
+
+.ca-hero {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+.ca-app-form {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.ca-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.ca-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+.ca-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.ca-remove-btn {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.ca-remove-btn:hover {
+  color: #ef4444;
+}
+
+.ca-add-btn {
+  margin-top: 0.5rem;
+}
