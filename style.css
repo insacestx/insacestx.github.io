@@ -1185,3 +1185,49 @@ section{padding:60px 20px}
   font-size: 1.2rem;
   margin-bottom: 0.25rem;
 }
+/* UMBRELLA APPLICATION */
+
+.umbrella-hero {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+}
+
+.umbrella-app-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.umbrella-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.umbrella-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+.umbrella-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.umbrella-remove-btn {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.umbrella-remove-btn:hover {
+  color: #ef4444;
+}
+
+.umbrella-add-btn {
+  margin-top: 0.5rem;
+}
