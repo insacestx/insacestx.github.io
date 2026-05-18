@@ -961,3 +961,68 @@ section{padding:60px 20px}
     font-size:0.75rem;
   }
 }
+/* AUTO APPLICATION SPECIFIC */
+
+.auto-hero {
+  background: linear-gradient(135deg, #1f2933, #111827);
+}
+
+.auto-app-form {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.auto-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.auto-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+.auto-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.auto-card-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.auto-remove-btn {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.auto-remove-btn:hover {
+  color: #ef4444;
+}
+
+.auto-add-btn {
+  margin-top: 0.5rem;
+}
+
+.coapp-section {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.step-intro {
+  margin-bottom: 1rem;
+  color: #4b5563;
+}
