@@ -5,125 +5,168 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title data-en="File a Claim | ACES Insurance Services"
-        data-es="Presentar un Reclamo | ACES Insurance Services">
-  File a Claim | ACES Insurance Services
+<title data-en="Claims Assistance | ACES Insurance Services"
+        data-es="Asistencia de Reclamos | ACES Insurance Services">
+  Claims Assistance | ACES Insurance Services
 </title>
 
 <link rel="stylesheet" href="style.css">
 <script src="global.js" defer></script>
+<script src="claims.js" defer></script>
 
 </head>
 <body>
 
-<!-- HEADER INJECTED BY global.js -->
 <header id="aces-header"></header>
 
-<!-- ============================================================
-     SMALL HERO — MATCHES INDEX + SERVICES
-============================================================ -->
-<section class="small-hero fade-in">
+<section class="small-hero claims-hero fade-in">
   <div class="small-hero-content">
-    <h1 data-en="File a Claim"
-        data-es="Presentar un Reclamo">
-      File a Claim
+    <h1 data-en="Claims Assistance"
+        data-es="Asistencia de Reclamos">
+      Claims Assistance
     </h1>
-
-    <p data-en="We’re here to help you every step of the way."
-       data-es="Estamos aquí para ayudarle en cada paso.">
-      We’re here to help you every step of the way.
+    <p data-en="We’re here to guide you through every step of the claims process."
+       data-es="Estamos aquí para guiarlo en cada paso del proceso de reclamos.">
+      We’re here to guide you through every step of the claims process.
     </p>
   </div>
 </section>
 
-<!-- ============================================================
-     CLAIMS OPTIONS
-============================================================ -->
 <section class="app-section fade-in">
 
-  <h2 class="app-category-title" data-en="Choose a Claim Type"
-      data-es="Elija un Tipo de Reclamo">
-    Choose a Claim Type
+  <!-- HOW CLAIMS WORK -->
+  <h2 class="section-title"
+      data-en="How Claims Work"
+      data-es="Cómo Funciona un Reclamo">
+    How Claims Work
   </h2>
 
-  <p class="app-category-intro"
-     data-en="Select the type of claim you need to file."
-     data-es="Seleccione el tipo de reclamo que necesita presentar.">
-    Select the type of claim you need to file.
-  </p>
+  <div class="claims-steps">
 
-  <div class="app-grid">
-
-    <!-- AUTO CLAIM -->
-    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
-      <img src="icon-auto-aces.png" alt="Auto Claim" class="app-icon">
-      <h3 data-en="Auto Claim" data-es="Reclamo de Auto">Auto Claim</h3>
-      <p data-en="Accidents, damage, or vehicle-related losses."
-         data-es="Accidentes, daños o pérdidas relacionadas con vehículos.">
-        Accidents, damage, or vehicle-related losses.
+    <div class="claims-step-card fade-in">
+      <div class="claims-step-icon">📞</div>
+      <h3 data-en="1. Report the Claim" data-es="1. Reporte el Reclamo">1. Report the Claim</h3>
+      <p data-en="Contact your carrier or your ACES agent to begin the process."
+         data-es="Comuníquese con su aseguradora o su agente de ACES para comenzar el proceso.">
+        Contact your carrier or your ACES agent to begin the process.
       </p>
-    </a>
+    </div>
 
-    <!-- PROPERTY CLAIM -->
-    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
-      <img src="icon-property-aces.png" alt="Property Claim" class="app-icon">
-      <h3 data-en="Property Claim" data-es="Reclamo de Propiedad">Property Claim</h3>
-      <p data-en="Home damage, storms, theft, or other losses."
-         data-es="Daños al hogar, tormentas, robos u otras pérdidas.">
-        Home damage, storms, theft, or other losses.
+    <div class="claims-step-card fade-in">
+      <div class="claims-step-icon">📸</div>
+      <h3 data-en="2. Gather Documentation" data-es="2. Reúna Documentación">2. Gather Documentation</h3>
+      <p data-en="Photos, receipts, and details help speed up your claim."
+         data-es="Fotos, recibos y detalles ayudan a agilizar su reclamo.">
+        Photos, receipts, and details help speed up your claim.
       </p>
-    </a>
+    </div>
 
-    <!-- COMMERCIAL CLAIM -->
-    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
-      <img src="icon-commercial-aces.png" alt="Commercial Claim" class="app-icon">
-      <h3 data-en="Commercial Claim" data-es="Reclamo Comercial">Commercial Claim</h3>
-      <p data-en="Business-related losses or incidents."
-         data-es="Pérdidas o incidentes relacionados con negocios.">
-        Business-related losses or incidents.
+    <div class="claims-step-card fade-in">
+      <div class="claims-step-icon">🧑‍💼</div>
+      <h3 data-en="3. Adjuster Assigned" data-es="3. Ajustador Asignado">3. Adjuster Assigned</h3>
+      <p data-en="A licensed adjuster will review your loss and guide next steps."
+         data-es="Un ajustador autorizado revisará su pérdida y guiará los siguientes pasos.">
+        A licensed adjuster will review your loss and guide next steps.
       </p>
-    </a>
+    </div>
 
-    <!-- SPECIALTY CLAIM -->
-    <a href="https://formsubmit.co/office@insaces.com" class="app-card fade-in" target="_blank">
-      <img src="icon-specialty-aces.png" alt="Specialty Claim" class="app-icon">
-      <h3 data-en="Specialty Claim" data-es="Reclamo Especial">Specialty Claim</h3>
-      <p data-en="Unique or specialized coverage claims."
-         data-es="Reclamos de coberturas únicas o especializadas.">
-        Unique or specialized coverage claims.
+    <div class="claims-step-card fade-in">
+      <div class="claims-step-icon">✔️</div>
+      <h3 data-en="4. Claim Resolution" data-es="4. Resolución del Reclamo">4. Claim Resolution</h3>
+      <p data-en="Once approved, your claim will be settled according to your policy."
+         data-es="Una vez aprobado, su reclamo se resolverá según su póliza.">
+        Once approved, your claim will be settled according to your policy.
       </p>
-    </a>
-
-  </div>
-</section>
-
-<!-- ============================================================
-     CLAIMS SUPPORT SECTION
-============================================================ -->
-<section class="team-section fade-in">
-
-  <h2 class="section-title" data-en="Need Help?"
-      data-es="¿Necesita Ayuda?">
-    Need Help?
-  </h2>
-
-  <div class="team-grid">
-
-    <div class="team-card fade-in">
-      <img src="image2.png" alt="Claims Support" class="team-img">
-      <h3 data-en="Claims Support Team" data-es="Equipo de Reclamos">Claims Support Team</h3>
-      <p data-en="We’ll guide you through the entire process."
-         data-es="Le guiaremos durante todo el proceso.">
-        We’ll guide you through the entire process.
-      </p>
-      <a href="contact.html" class="hero-btn"
-         data-en="Contact Us" data-es="Contáctenos">Contact Us</a>
     </div>
 
   </div>
+
+  <!-- DOWNLOAD CHECKLIST -->
+  <div class="claims-download fade-in">
+    <a href="claims-checklist.pdf" class="btn-primary"
+       data-en="Download Claims Checklist"
+       data-es="Descargar Lista de Reclamos">
+      Download Claims Checklist
+    </a>
+  </div>
+
+  <!-- CARRIER DIRECTORY -->
+  <h2 class="section-title"
+      data-en="Carrier Claims Directory"
+      data-es="Directorio de Reclamos de Aseguradoras">
+    Carrier Claims Directory
+  </h2>
+
+  <div class="carrier-grid fade-in">
+
+    <div class="carrier-card">
+      <h3>Progressive</h3>
+      <p><strong data-en="Phone" data-es="Teléfono">Phone:</strong> 1-800-776-4737</p>
+      <p><strong>24/7</strong></p>
+      <a href="https://www.progressive.com/claims" target="_blank"
+         data-en="File Online"
+         data-es="Presentar en Línea">
+        File Online
+      </a>
+    </div>
+
+    <div class="carrier-card">
+      <h3>Travelers</h3>
+      <p><strong data-en="Phone" data-es="Teléfono">Phone:</strong> 1-800-252-4633</p>
+      <p><strong>24/7</strong></p>
+      <a href="https://www.travelers.com/claims" target="_blank"
+         data-en="File Online"
+         data-es="Presentar en Línea">
+        File Online
+      </a>
+    </div>
+
+    <div class="carrier-card">
+      <h3>Liberty Mutual</h3>
+      <p><strong data-en="Phone" data-es="Teléfono">Phone:</strong> 1-844-325-2467</p>
+      <p><strong>24/7</strong></p>
+      <a href="https://www.libertymutual.com/claims" target="_blank"
+         data-en="File Online"
+         data-es="Presentar en Línea">
+        File Online
+      </a>
+    </div>
+
+    <div class="carrier-card">
+      <h3>State Auto</h3>
+      <p><strong data-en="Phone" data-es="Teléfono">Phone:</strong> 1-800-766-1853</p>
+      <p><strong>24/7</strong></p>
+      <a href="https://www.stateauto.com/claims" target="_blank"
+         data-en="File Online"
+         data-es="Presentar en Línea">
+        File Online
+      </a>
+    </div>
+
+    <div class="carrier-card">
+      <h3>Texas Mutual (Workers Comp)</h3>
+      <p><strong data-en="Phone" data-es="Teléfono">Phone:</strong> 1-800-859-5995</p>
+      <p><strong>24/7</strong></p>
+      <a href="https://www.texasmutual.com/claims" target="_blank"
+         data-en="File Online"
+         data-es="Presentar en Línea">
+        File Online
+      </a>
+    </div>
+
+  </div>
+
+  <!-- CALL AGENT NOW -->
+  <div class="claims-agent-cta fade-in">
+    <button id="callAgentBtn" class="btn-primary"
+            data-en="Call Your Agent Now"
+            data-es="Llame a su Agente Ahora">
+      Call Your Agent Now
+    </button>
+  </div>
+
 </section>
 
-<!-- FOOTER INJECTED BY global.js -->
 <footer id="aces-footer"></footer>
 
 </body>
