@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title data-en="Workers Compensation Application | ACES Insurance Services"
+        data-es="Solicitud de Compensación al Trabajador | ACES Insurance Services">
+  Workers Compensation Application | ACES Insurance Services
+</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="global.js" defer></script>
+<script src="application-workerscomp.js" defer></script>
+
+</head>
+<body>
+
+<header id="aces-header"></header>
+
+<section class="small-hero wc-hero fade-in">
+  <div class="small-hero-content">
+    <h1 data-en="Workers Compensation Application"
+        data-es="Solicitud de Compensación al Trabajador">
+      Workers Compensation Application
+    </h1>
+    <p data-en="Provide your business information to receive a Workers Compensation quote."
+       data-es="Proporcione la información de su negocio para recibir una cotización de Compensación al Trabajador.">
+      Provide your business information to receive a Workers Compensation quote.
+    </p>
+  </div>
+</section>
+
+<section class="app-section fade-in">
+
+  <!-- STEP INDICATOR -->
+  <div class="wizard-steps wc-wizard-steps">
+    <div class="wizard-step active" data-step="1">
+      <span class="wizard-step-icon">🏢</span>
+      <span data-en="Business" data-es="Negocio">Business</span>
+    </div>
+    <div class="wizard-step" data-step="2">
+      <span class="wizard-step-icon">👥</span>
+      <span data-en="Employees" data-es="Empleados">Employees</span>
+    </div>
+    <div class="wizard-step" data-step="3">
+      <span class="wizard-step-icon">💼</span>
+      <span data-en="Payroll" data-es="Nómina">Payroll</span>
+    </div>
+    <div class="wizard-step" data-step="4">
+      <span class="wizard-step-icon">📄</span>
+      <span data-en="Details" data-es="Detalles">Details</span>
+    </div>
+    <div class="wizard-step" data-step="5">
+      <span class="wizard-step-icon">✔️</span>
+      <span data-en="Submit" data-es="Enviar">Submit</span>
+    </div>
+  </div>
+
+  <form id="wcApplicationForm"
+        action="https://formsubmit.co/office@insaces.com"
+        method="POST"
+        enctype="multipart/form-data"
+        class="app-form wc-app-form">
+
+    <!-- Round Robin -->
+    <input type="hidden" name="_to" id="rrEmail">
+    <input type="hidden" name="_subject" value="New Workers Compensation Application - ACES">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none">
+
+    <!-- STEP 1: BUSINESS INFO -->
+    <div class="form-step active" data-step="1">
+
+      <h2 data-en="Business Information" data-es="Información del Negocio">
+        Business Information
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
+          <input type="text" name="business_name" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
+          <input type="text" name="business_address" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="City" data-es="Ciudad">City</label>
+          <input type="text" name="business_city" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="State" data-es="Estado">State</label>
+          <input type="text" name="business_state" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label>
+          <input type="text" name="business_zip" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Business Type" data-es="Tipo de Negocio">Business Type</label>
+          <input type="text" name="business_type" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Years in Business" data-es="Años en el Negocio">Years in Business</label>
+          <input type="number" name="years_in_business">
+        </div>
+
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-primary next-step"
+                data-next="2"
+                data-en="Next: Employees"
+                data-es="Siguiente: Empleados">
+          Next: Employees
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 2: EMPLOYEES -->
+    <div class="form-step" data-step="2">
+
+      <h2 data-en="Employee Information" data-es="Información de Empleados">
+        Employee Information
+      </h2>
+
+      <p class="step-intro"
+         data-en="Add all employee classes and number of employees in each class."
+         data-es="Agregue todas las clases de empleados y el número de empleados en cada clase.">
+        Add all employee classes and number of employees in each class.
+      </p>
+
+      <div id="employeeClassesContainer"></div>
+
+      <button type="button" class="btn-secondary wc-add-btn" id="addEmployeeClassBtn"
+              data-en="Add Employee Class"
+              data-es="Agregar Clase de Empleado">
+        Add Employee Class
+      </button>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="1"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="3"
+                data-en="Next: Payroll"
+                data-es="Siguiente: Nómina">
+          Next: Payroll
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 3: PAYROLL -->
+    <div class="form-step" data-step="3">
+
+      <h2 data-en="Payroll Breakdown" data-es="Desglose de Nómina">
+        Payroll Breakdown
+      </h2>
+
+      <p class="step-intro"
+         data-en="Enter estimated annual payroll for each employee class."
+         data-es="Ingrese la nómina anual estimada para cada clase de empleado.">
+        Enter estimated annual payroll for each employee class.
+      </p>
+
+      <div id="payrollContainer"></div>
+
+      <button type="button" class="btn-secondary wc-add-btn" id="addPayrollRowBtn"
+              data-en="Add Payroll Row"
+              data-es="Agregar Fila de Nómina">
+        Add Payroll Row
+      </button>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="2"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="4"
+                data-en="Next: Details"
+                data-es="Siguiente: Detalles">
+          Next: Details
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 4: DETAILS -->
+    <div class="form-step" data-step="4">
+
+      <h2 data-en="Additional Details" data-es="Detalles Adicionales">
+        Additional Details
+      </h2>
+
+      <div class="form-field">
+        <label data-en="Describe Work Performed"
+               data-es="Describa el Trabajo Realizado">
+          Describe Work Performed
+        </label>
+        <textarea name="work_description" rows="4"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label data-en="Any prior Workers Comp claims?"
+               data-es="¿Algún reclamo previo de Compensación al Trabajador?">
+          Any prior Workers Comp claims?
+        </label>
+        <textarea name="prior_claims" rows="3"></textarea>
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="3"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="5"
+                data-en="Next: Submit"
+                data-es="Siguiente: Enviar">
+          Next: Submit
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 5: SUBMIT -->
+    <div class="form-step" data-step="5">
+
+      <h2 data-en="Submit Application" data-es="Enviar Solicitud">
+        Submit Application
+      </h2>
+
+      <div class="form-field">
+        <label data-en="Upload Documents (Optional)"
+               data-es="Cargar Documentos (Opcional)">
+          Upload Documents (Optional)
+        </label>
+        <input type="file" name="documents" multiple>
+      </div>
+
+      <div class="form-field checkbox-field">
+        <label>
+          <input type="checkbox" name="consent" required>
+          <span data-en="I confirm the information provided is accurate."
+                data-es="Confirmo que la información proporcionada es correcta.">
+            I confirm the information provided is accurate.
+          </span>
+        </label>
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="4"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="submit" class="btn-primary"
+                data-en="Submit Application"
+                data-es="Enviar Solicitud">
+          Submit Application
+        </button>
+      </div>
+
+    </div>
+
+  </form>
+
+</section>
+
+<footer id="aces-footer"></footer>
+
+</body>
+</html>
