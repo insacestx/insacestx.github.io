@@ -1294,3 +1294,19 @@ section{padding:60px 20px}
 .ca-add-btn {
   margin-top: 0.5rem;
 }
+
+/* COMMERCIAL PROPERTY APPLICATION */
+
+.cp-hero {
+  background: linear-gradient(135deg, #334155, #1e293b);
+}
+
+.cp-app-form {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.cp-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
