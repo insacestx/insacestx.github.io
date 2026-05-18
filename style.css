@@ -1310,3 +1310,18 @@ section{padding:60px 20px}
   font-size: 1.2rem;
   margin-bottom: 0.25rem;
 }
+/* E&O APPLICATION */
+
+.eo-hero {
+  background: linear-gradient(135deg, #475569, #1e293b);
+}
+
+.eo-app-form {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.eo-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
