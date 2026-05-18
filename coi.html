@@ -5,177 +5,242 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title data-en="COI Request | ACES Insurance Services"
-        data-es="Solicitud de COI | ACES Insurance Services">
-  COI Request | ACES Insurance Services
+<title data-en="Certificate of Insurance Request | ACES Insurance Services"
+        data-es="Solicitud de Certificado de Seguro | ACES Insurance Services">
+  Certificate of Insurance Request | ACES Insurance Services
 </title>
 
 <link rel="stylesheet" href="style.css">
 <script src="global.js" defer></script>
+<script src="coi.js" defer></script>
 
 </head>
 <body>
 
-<!-- ============================================================
-     HEADER (Injected by global.js)
-============================================================ -->
+<!-- GLOBAL HEADER -->
 <header id="aces-header"></header>
 
-<!-- ============================================================
-     SMALL HERO — ACES 2026
-============================================================ -->
-<section class="small-hero fade-in">
+<section class="small-hero coi-hero fade-in">
   <div class="small-hero-content">
-    <h1 data-en="Certificate of Insurance (COI) Request"
-        data-es="Solicitud de Certificado de Seguro (COI)">
-      Certificate of Insurance (COI) Request
+    <h1 data-en="Certificate of Insurance Request"
+        data-es="Solicitud de Certificado de Seguro">
+      Certificate of Insurance Request
     </h1>
-
-    <p data-en="Need a COI for a job, vendor, or contract? We’ve made the process simple."
-       data-es="¿Necesita un COI para un trabajo, proveedor o contrato? Hemos simplificado el proceso.">
-      Need a COI for a job, vendor, or contract? We’ve made the process simple.
+    <p data-en="Submit your COI request using the steps below."
+       data-es="Envíe su solicitud de COI utilizando los pasos a continuación.">
+      Submit your COI request using the steps below.
     </p>
   </div>
 </section>
 
-<!-- ============================================================
-     HOW TO REQUEST A COI
-============================================================ -->
 <section class="app-section fade-in">
 
-  <h2 class="app-category-title"
-      data-en="How to Request a COI"
-      data-es="Cómo Solicitar un COI">
-    How to Request a COI
-  </h2>
-
-  <p class="app-category-intro"
-     data-en="Follow these steps to receive your Certificate of Insurance quickly."
-     data-es="Siga estos pasos para recibir su Certificado de Seguro rápidamente.">
-    Follow these steps to receive your Certificate of Insurance quickly.
-  </p>
-
-  <div class="app-grid">
-
-    <!-- STEP 1 -->
-    <div class="app-card fade-in">
-      <div class="app-icon">📄</div>
-      <h3 data-en="1. Gather Required Information"
-          data-es="1. Reúna la Información Necesaria">
-        1. Gather Required Information
-      </h3>
-
-      <p data-en="Have the following ready:"
-         data-es="Tenga lo siguiente listo:">
-        Have the following ready:
-      </p>
-
-      <ul class="checklist">
-        <li data-en="Business name" data-es="Nombre del negocio">Business name</li>
-        <li data-en="Policyholder name" data-es="Nombre del titular de la póliza">Policyholder name</li>
-        <li data-en="Job or vendor name" data-es="Nombre del trabajo o proveedor">Job or vendor name</li>
-        <li data-en="Certificate holder info" data-es="Información del titular del certificado">Certificate holder info</li>
-        <li data-en="Special wording (if required)" data-es="Redacción especial (si aplica)">Special wording (if required)</li>
-      </ul>
+  <!-- STEP INDICATOR -->
+  <div class="wizard-steps coi-wizard-steps">
+    <div class="wizard-step active" data-step="1">
+      <span class="wizard-step-icon">🏢</span>
+      <span data-en="Business Info" data-es="Información del Negocio">Business Info</span>
     </div>
-
-    <!-- STEP 2 -->
-    <div class="app-card fade-in">
-      <div class="app-icon">✉️</div>
-      <h3 data-en="2. Email Your Request"
-          data-es="2. Envíe Su Solicitud">
-        2. Email Your Request
-      </h3>
-
-      <p data-en="Send your COI request to:"
-         data-es="Envíe su solicitud de COI a:">
-        Send your COI request to:
-      </p>
-
-      <p><strong>office@insaces.com</strong></p>
-
-      <a href="mailto:office@insaces.com" class="app-btn"
-         data-en="Email COI Request"
-         data-es="Enviar Solicitud de COI">
-        📧 Email COI Request
-      </a>
+    <div class="wizard-step" data-step="2">
+      <span class="wizard-step-icon">📄</span>
+      <span data-en="Certificate Holder" data-es="Titular del Certificado">Certificate Holder</span>
     </div>
-
-    <!-- STEP 3 -->
-    <div class="app-card fade-in">
-      <div class="app-icon">⏱️</div>
-      <h3 data-en="3. Allow Processing Time"
-          data-es="3. Tiempo de Procesamiento">
-        3. Allow Processing Time
-      </h3>
-
-      <p data-en="Most COIs are completed the same day. Requests with special wording may take longer."
-         data-es="La mayoría de los COIs se completan el mismo día. Las solicitudes con redacción especial pueden tardar más.">
-        Most COIs are completed the same day. Requests with special wording may take longer.
-      </p>
+    <div class="wizard-step" data-step="3">
+      <span class="wizard-step-icon">📎</span>
+      <span data-en="Upload Documents" data-es="Cargar Documentos">Upload Documents</span>
     </div>
-
+    <div class="wizard-step" data-step="4">
+      <span class="wizard-step-icon">✔️</span>
+      <span data-en="Submit" data-es="Enviar">Submit</span>
+    </div>
   </div>
-</section>
 
-<!-- ============================================================
-     OPTIONAL: SUBMIT COI REQUEST FORM (ROUND ROBIN ENABLED)
-============================================================ -->
-<section class="app-section fade-in">
+  <form id="coiForm"
+        action="https://formsubmit.co/office@insaces.com"
+        method="POST"
+        enctype="multipart/form-data"
+        class="app-form coi-app-form">
 
-  <h2 class="app-category-title"
-      data-en="Submit COI Request Online"
-      data-es="Enviar Solicitud de COI en Línea">
-    Submit COI Request Online
-  </h2>
+    <!-- ROUND ROBIN -->
+    <input type="hidden" name="_to" id="rrEmail">
+    <input type="hidden" name="_subject" value="New COI Request - ACES Insurance Services">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none">
 
-  <p class="app-category-intro"
-     data-en="Use the form below if you prefer not to email."
-     data-es="Use el formulario si prefiere no enviar un correo.">
-    Use the form below if you prefer not to email.
-  </p>
+    <!-- STEP 1: BUSINESS INFO -->
+    <div class="form-step active" data-step="1">
 
-  <form action="https://formsubmit.co/office@insaces.com" method="POST" class="app-card">
+      <h2 data-en="Business Information" data-es="Información del Negocio">
+        Business Information
+      </h2>
 
-    <!-- Round Robin -->
-    <input type="hidden" name="_to" value="">
-    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+      <div class="form-grid">
 
-    <div class="form-row">
-      <label data-en="Your Name" data-es="Su Nombre">Your Name</label>
-      <input type="text" name="Client Name" required>
+        <div class="form-field">
+          <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
+          <input type="text" name="business_name" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Contact Name" data-es="Nombre del Contacto">Contact Name</label>
+          <input type="text" name="contact_name" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Email" data-es="Correo Electrónico">Email</label>
+          <input type="email" name="email" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+          <input type="tel" name="phone" required>
+        </div>
+
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-primary next-step"
+                data-next="2"
+                data-en="Next: Certificate Holder"
+                data-es="Siguiente: Titular del Certificado">
+          Next: Certificate Holder
+        </button>
+      </div>
+
     </div>
 
-    <div class="form-row">
-      <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
-      <input type="text" name="Business Name" required>
+    <!-- STEP 2: CERTIFICATE HOLDER -->
+    <div class="form-step" data-step="2">
+
+      <h2 data-en="Certificate Holder Information" data-es="Información del Titular del Certificado">
+        Certificate Holder Information
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label data-en="Holder Name" data-es="Nombre del Titular">Holder Name</label>
+          <input type="text" name="holder_name" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Address" data-es="Dirección">Address</label>
+          <input type="text" name="holder_address" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="City" data-es="Ciudad">City</label>
+          <input type="text" name="holder_city" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="State" data-es="Estado">State</label>
+          <input type="text" name="holder_state" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label>
+          <input type="text" name="holder_zip" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Special Requirements (Optional)"
+                 data-es="Requisitos Especiales (Opcional)">
+            Special Requirements (Optional)
+          </label>
+          <textarea name="requirements" rows="3"></textarea>
+        </div>
+
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="1"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="3"
+                data-en="Next: Upload Documents"
+                data-es="Siguiente: Cargar Documentos">
+          Next: Upload Documents
+        </button>
+      </div>
+
     </div>
 
-    <div class="form-row">
-      <label data-en="Certificate Holder" data-es="Titular del Certificado">Certificate Holder</label>
-      <textarea name="Certificate Holder" rows="3" required></textarea>
+    <!-- STEP 3: UPLOAD DOCUMENTS -->
+    <div class="form-step" data-step="3">
+
+      <h2 data-en="Upload Documents (Optional)" data-es="Cargar Documentos (Opcional)">
+        Upload Documents (Optional)
+      </h2>
+
+      <p data-en="You may upload contracts, requirements, or sample COIs."
+         data-es="Puede cargar contratos, requisitos o COIs de ejemplo.">
+        You may upload contracts, requirements, or sample COIs.
+      </p>
+
+      <div class="form-field">
+        <input type="file" name="documents" multiple>
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="2"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="4"
+                data-en="Next: Submit"
+                data-es="Siguiente: Enviar">
+          Next: Submit
+        </button>
+      </div>
+
     </div>
 
-    <div class="form-row">
-      <label data-en="Special Wording (if any)"
-             data-es="Redacción Especial (si aplica)">
-        Special Wording (if any)
-      </label>
-      <textarea name="Special Wording" rows="3"></textarea>
-    </div>
+    <!-- STEP 4: SUBMIT -->
+    <div class="form-step" data-step="4">
 
-    <button type="submit" class="submit-btn"
-      data-en="Submit COI Request"
-      data-es="Enviar Solicitud de COI">
-      Submit COI Request
-    </button>
+      <h2 data-en="Submit Request" data-es="Enviar Solicitud">
+        Submit Request
+      </h2>
+
+      <div class="form-field checkbox-field">
+        <label>
+          <input type="checkbox" name="consent" required>
+          <span data-en="I confirm the information provided is accurate."
+                data-es="Confirmo que la información proporcionada es correcta.">
+            I confirm the information provided is accurate.
+          </span>
+        </label>
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="3"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="submit" class="btn-primary"
+                data-en="Submit Request"
+                data-es="Enviar Solicitud">
+          Submit Request
+        </button>
+      </div>
+
+    </div>
 
   </form>
+
 </section>
 
-<!-- ============================================================
-     FOOTER (Injected by global.js)
-============================================================ -->
+<!-- GLOBAL FOOTER -->
 <footer id="aces-footer"></footer>
 
 </body>
