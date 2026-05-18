@@ -1042,3 +1042,50 @@ section{padding:60px 20px}
   font-size: 1.2rem;
   margin-bottom: 0.25rem;
 }
+
+/* WORKERS COMP APPLICATION */
+
+.wc-hero {
+  background: linear-gradient(135deg, #1e3a8a, #1e40af);
+}
+
+.wc-app-form {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.wc-wizard-steps .wizard-step-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.wc-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+.wc-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.wc-remove-btn {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.wc-remove-btn:hover {
+  color: #ef4444;
+}
+
+.wc-add-btn {
+  margin-top: 0.5rem;
+}
