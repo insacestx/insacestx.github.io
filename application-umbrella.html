@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title data-en="Umbrella Insurance Application | ACES Insurance Services"
+        data-es="Solicitud de Seguro Umbrella | ACES Insurance Services">
+  Umbrella Insurance Application | ACES Insurance Services
+</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="global.js" defer></script>
+<script src="application-umbrella.js" defer></script>
+
+</head>
+<body>
+
+<header id="aces-header"></header>
+
+<section class="small-hero umbrella-hero fade-in">
+  <div class="small-hero-content">
+    <h1 data-en="Umbrella Insurance Application"
+        data-es="Solicitud de Seguro Umbrella">
+      Umbrella Insurance Application
+    </h1>
+    <p data-en="Provide your information to receive a personalized umbrella insurance quote."
+       data-es="Proporcione su información para recibir una cotización personalizada de seguro umbrella.">
+      Provide your information to receive a personalized umbrella insurance quote.
+    </p>
+  </div>
+</section>
+
+<section class="app-section fade-in">
+
+  <!-- STEP INDICATOR -->
+  <div class="wizard-steps umbrella-wizard-steps">
+    <div class="wizard-step active" data-step="1">
+      <span class="wizard-step-icon">👤</span>
+      <span data-en="Applicant" data-es="Solicitante">Applicant</span>
+    </div>
+    <div class="wizard-step" data-step="2">
+      <span class="wizard-step-icon">🏠</span>
+      <span data-en="Underlying Policies" data-es="Pólizas Base">Underlying Policies</span>
+    </div>
+    <div class="wizard-step" data-step="3">
+      <span class="wizard-step-icon">🛡️</span>
+      <span data-en="Coverage" data-es="Cobertura">Coverage</span>
+    </div>
+    <div class="wizard-step" data-step="4">
+      <span class="wizard-step-icon">📄</span>
+      <span data-en="Details" data-es="Detalles">Details</span>
+    </div>
+    <div class="wizard-step" data-step="5">
+      <span class="wizard-step-icon">✔️</span>
+      <span data-en="Submit" data-es="Enviar">Submit</span>
+    </div>
+  </div>
+
+  <form id="umbrellaApplicationForm"
+        action="https://formsubmit.co/office@insaces.com"
+        method="POST"
+        enctype="multipart/form-data"
+        class="app-form umbrella-app-form">
+
+    <!-- Round Robin -->
+    <input type="hidden" name="_to" id="rrEmail">
+    <input type="hidden" name="_subject" value="New Umbrella Insurance Application - ACES">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none">
+
+    <!-- STEP 1: APPLICANT INFO -->
+    <div class="form-step active" data-step="1">
+
+      <h2 data-en="Applicant Information" data-es="Información del Solicitante">
+        Applicant Information
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label data-en="First Name" data-es="Nombre">First Name</label>
+          <input type="text" name="first_name" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Last Name" data-es="Apellido">Last Name</label>
+          <input type="text" name="last_name" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Date of Birth" data-es="Fecha de Nacimiento">Date of Birth</label>
+          <input type="date" name="dob" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Email" data-es="Correo Electrónico">Email</label>
+          <input type="email" name="email" required>
+        </div>
+
+        <div class="form-field">
+          <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+          <input type="tel" name="phone" required>
+        </div>
+
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-primary next-step"
+                data-next="2"
+                data-en="Next: Underlying Policies"
+                data-es="Siguiente: Pólizas Base">
+          Next: Underlying Policies
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 2: UNDERLYING POLICIES -->
+    <div class="form-step" data-step="2">
+
+      <h2 data-en="Underlying Policies" data-es="Pólizas Base">
+        Underlying Policies
+      </h2>
+
+      <p class="step-intro"
+         data-en="List all active underlying policies (Auto, Home, Renters, etc.)."
+         data-es="Enumere todas las pólizas base activas (Auto, Casa, Renters, etc.).">
+        List all active underlying policies (Auto, Home, Renters, etc.).
+      </p>
+
+      <div id="underlyingContainer"></div>
+
+      <button type="button" class="btn-secondary umbrella-add-btn" id="addUnderlyingBtn"
+              data-en="Add Policy"
+              data-es="Agregar Póliza">
+        Add Policy
+      </button>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="1"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="3"
+                data-en="Next: Coverage"
+                data-es="Siguiente: Cobertura">
+          Next: Coverage
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 3: COVERAGE -->
+    <div class="form-step" data-step="3">
+
+      <h2 data-en="Coverage Options" data-es="Opciones de Cobertura">
+        Coverage Options
+      </h2>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label data-en="Umbrella Limit"
+                 data-es="Límite Umbrella">
+            Umbrella Limit
+          </label>
+          <select name="umbrella_limit">
+            <option value="">Select...</option>
+            <option value="1000000">$1,000,000</option>
+            <option value="2000000">$2,000,000</option>
+            <option value="3000000">$3,000,000</option>
+            <option value="5000000">$5,000,000</option>
+            <option value="Unsure">Unsure</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="2"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="4"
+                data-en="Next: Details"
+                data-es="Siguiente: Detalles">
+          Next: Details
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 4: DETAILS -->
+    <div class="form-step" data-step="4">
+
+      <h2 data-en="Additional Details" data-es="Detalles Adicionales">
+        Additional Details
+      </h2>
+
+      <div class="form-field">
+        <label data-en="Any prior liability claims?"
+               data-es="¿Algún reclamo previo de responsabilidad?">
+          Any prior liability claims?
+        </label>
+        <textarea name="prior_claims" rows="3"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label data-en="Additional Notes"
+               data-es="Notas Adicionales">
+          Additional Notes
+        </label>
+        <textarea name="notes" rows="4"></textarea>
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="3"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="button" class="btn-primary next-step"
+                data-next="5"
+                data-en="Next: Submit"
+                data-es="Siguiente: Enviar">
+          Next: Submit
+        </button>
+      </div>
+
+    </div>
+
+    <!-- STEP 5: SUBMIT -->
+    <div class="form-step" data-step="5">
+
+      <h2 data-en="Submit Application" data-es="Enviar Solicitud">
+        Submit Application
+      </h2>
+
+      <div class="form-field">
+        <label data-en="Upload Documents (Optional)"
+               data-es="Cargar Documentos (Opcional)">
+          Upload Documents (Optional)
+        </label>
+        <input type="file" name="documents" multiple>
+      </div>
+
+      <div class="form-field checkbox-field">
+        <label>
+          <input type="checkbox" name="consent" required>
+          <span data-en="I confirm the information provided is accurate."
+                data-es="Confirmo que la información proporcionada es correcta.">
+            I confirm the information provided is accurate.
+          </span>
+        </label>
+      </div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-secondary prev-step"
+                data-prev="4"
+                data-en="Back"
+                data-es="Atrás">
+          Back
+        </button>
+        <button type="submit" class="btn-primary"
+                data-en="Submit Application"
+                data-es="Enviar Solicitud">
+          Submit Application
+        </button>
+      </div>
+
+    </div>
+
+  </form>
+
+</section>
+
+<footer id="aces-footer"></footer>
+
+</body>
+</html>
