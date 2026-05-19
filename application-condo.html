@@ -1,339 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title data-en="Condo Insurance Application | ACES Insurance Services"
-        data-es="Solicitud de Seguro de Condominio | ACES Insurance Services">
-  Condo Insurance Application | ACES Insurance Services
-</title>
-
-<link rel="stylesheet" href="style.css">
-<script src="global.js" defer></script>
-<script src="application-condo.js" defer></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Condo Insurance Application | ACES Insurance Services</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="global.js" defer></script>
 </head>
+
 <body>
 
 <header id="aces-header"></header>
 
-<section class="small-hero condo-hero fade-in">
-  <div class="small-hero-content">
-    <h1 data-en="Condo Insurance Application"
-        data-es="Solicitud de Seguro de Condominio">
-      Condo Insurance Application
-    </h1>
-    <p data-en="Provide your information to receive a personalized condo insurance quote."
-       data-es="Proporcione su información para recibir una cotización personalizada de seguro de condominio.">
-      Provide your information to receive a personalized condo insurance quote.
-    </p>
-  </div>
-</section>
+<main class="fade-in">
 
-<section class="app-section fade-in">
+  <!-- HERO -->
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
+      <h1 data-en="Condo Insurance Application" data-es="Solicitud de Seguro de Condominio">
+        Condo Insurance Application
+      </h1>
 
-  <!-- STEP INDICATOR -->
-  <div class="wizard-steps condo-wizard-steps">
-    <div class="wizard-step active" data-step="1">
-      <span class="wizard-step-icon">👤</span>
-      <span data-en="Applicant" data-es="Solicitante">Applicant</span>
+      <p data-en="Tell us about your condo and coverage needs. An ACES agent will review and follow up with tailored options."
+         data-es="Cuéntenos sobre su condominio y sus necesidades de cobertura. Un agente de ACES revisará y le dará opciones personalizadas.">
+        Tell us about your condo and coverage needs. An ACES agent will review and follow up with tailored options.
+      </p>
+
+      <!-- Wizard Steps -->
+      <div class="auto-wizard-steps" id="condoWizardSteps">
+        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Applicant</div>
+        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Property</div>
+        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Coverages</div>
+        <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span>Features</div>
+        <div class="auto-wizard-step" data-step="5"><span class="step-index">5</span>Review</div>
+      </div>
     </div>
-    <div class="wizard-step" data-step="2">
-      <span class="wizard-step-icon">🏢</span>
-      <span data-en="Property" data-es="Propiedad">Property</span>
-    </div>
-    <div class="wizard-step" data-step="3">
-      <span class="wizard-step-icon">🛡️</span>
-      <span data-en="Coverage" data-es="Cobertura">Coverage</span>
-    </div>
-    <div class="wizard-step" data-step="4">
-      <span class="wizard-step-icon">📄</span>
-      <span data-en="Details" data-es="Detalles">Details</span>
-    </div>
-    <div class="wizard-step" data-step="5">
-      <span class="wizard-step-icon">✔️</span>
-      <span data-en="Submit" data-es="Enviar">Submit</span>
-    </div>
-  </div>
+  </section>
 
-  <form id="condoApplicationForm"
-        action="https://formsubmit.co/office@insaces.com"
-        method="POST"
-        enctype="multipart/form-data"
-        class="app-form condo-app-form">
+  <!-- FORM -->
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
 
-    <!-- Round Robin -->
-    <input type="hidden" name="_to" id="rrEmail">
-    <input type="hidden" name="_subject" value="New Condo Insurance Application - ACES">
-    <input type="hidden" name="_template" value="table">
-    <input type="text" name="_honey" style="display:none">
+      <form id="condoAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New Condo Insurance Application - ACES" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
+        <input type="hidden" id="rrEmail" name="rrEmail" />
 
-    <!-- STEP 1: APPLICANT INFO -->
-    <div class="form-step active" data-step="1">
+        <!-- STEP 1 -->
+        <div class="form-step active" data-step="1">
+          <h2>Applicant Information</h2>
+          <p class="section-subtitle">Tell us about yourself.</p>
 
-      <h2 data-en="Applicant Information" data-es="Información del Solicitante">
-        Applicant Information
-      </h2>
+          <div class="auto-grid-2">
+            <div class="auto-field"><label>Full Name</label><input name="full_name" required /></div>
+            <div class="auto-field"><label>Date of Birth</label><input type="date" name="dob" required /></div>
 
-      <div class="form-grid">
+            <div class="auto-field"><label>Phone Number</label><input name="phone" required /></div>
+            <div class="auto-field"><label>Email Address</label><input type="email" name="email" required /></div>
 
-        <div class="form-field">
-          <label data-en="First Name" data-es="Nombre">First Name</label>
-          <input type="text" name="first_name" required>
+            <div class="auto-field auto-field-full"><label>Current Address</label><input name="current_address" required /></div>
+
+            <div class="auto-field"><label>City</label><input name="current_city" required /></div>
+            <div class="auto-field"><label>State</label><input name="current_state" value="TX" required /></div>
+            <div class="auto-field"><label>ZIP Code</label><input name="current_zip" required /></div>
+
+            <div class="auto-field auto-field-full">
+              <label>Preferred Contact Method</label>
+              <select name="contact_method">
+                <option value="">Select</option>
+                <option>Phone</option>
+                <option>Email</option>
+                <option>Text Message</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <div></div>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 2 -->
+        <div class="form-step" data-step="2">
+          <h2>Property Details</h2>
+          <p class="section-subtitle">Tell us about the condo you want to insure.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Condo Address</label>
+              <input name="condo_address" required />
+            </div>
+
+            <div class="auto-field">
+              <label>City</label>
+              <input name="condo_city" required />
+            </div>
+
+            <div class="auto-field">
+              <label>State</label>
+              <input name="condo_state" value="TX" required />
+            </div>
+
+            <div class="auto-field">
+              <label>ZIP Code</label>
+              <input name="condo_zip" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Year Built</label>
+              <input name="year_built" placeholder="Example: 2010" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Square Footage</label>
+              <input name="square_feet" placeholder="Example: 1200" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Is this your primary residence?</label>
+              <select name="primary_residence" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No — Secondary Home</option>
+                <option>No — Tenant Occupied</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Floor Level</label>
+              <input name="floor_level" placeholder="Example: 3" />
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Property Notes (optional)</label>
+              <textarea name="property_notes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
         </div>
 
-        <div class="form-field">
-          <label data-en="Last Name" data-es="Apellido">Last Name</label>
-          <input type="text" name="last_name" required>
+        <!-- STEP 3 -->
+        <div class="form-step" data-step="3">
+          <h2>Coverage Options</h2>
+          <p class="section-subtitle">Choose the coverages you want quoted.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Dwelling Coverage (HO-6)</label>
+              <input name="dwelling_limit" placeholder="Example: 50000" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Personal Property Limit</label>
+              <input name="personal_property_limit" placeholder="Example: 30000" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Loss of Use</label>
+              <select name="loss_of_use">
+                <option value="">Select</option>
+                <option>$5,000</option>
+                <option>$10,000</option>
+                <option>$20,000</option>
+                <option>$30,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Personal Liability</label>
+              <select name="liability_limit" required>
+                <option value="">Select</option>
+                <option>$100,000</option>
+                <option>$300,000</option>
+                <option>$500,000</option>
+                <option>$1,000,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Medical Payments</label>
+              <select name="medical_payments">
+                <option value="">Select</option>
+                <option>$1,000</option>
+                <option>$2,000</option>
+                <option>$5,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Deductible</label>
+              <select name="deductible">
+                <option value="">Select</option>
+                <option>$500</option>
+                <option>$1,000</option>
+                <option>$2,500</option>
+                <option>$5,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Coverage Notes (optional)</label>
+              <textarea name="coverage_notes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 4 -->
+        <div class="form-step" data-step="4">
+          <h2>Condo Features</h2>
+          <p class="section-subtitle">Tell us about the interior features and updates.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Flooring Type</label>
+              <select name="flooring_type">
+                <option value="">Select</option>
+                <option>Carpet</option>
+                <option>Tile</option>
+                <option>Hardwood</option>
+                <option>Laminate</option>
+                <option>Vinyl</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Kitchen Updated?</label>
+              <select name="kitchen_updated">
+                <option value="">Select</option>
+                <option>Yes — Recently Updated</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Bathroom Updated?</label>
+              <select name="bath_updated">
+                <option value="">Select</option>
+                <option>Yes — Recently Updated</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Security Features</label>
+              <select name="security_features">
+                <option value="">Select</option>
+                <option>Gated Community</option>
+                <option>Security Patrol</option>
+                <option>Doorman</option>
+                <option>Controlled Access</option>
+                <option>None</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Feature Notes (optional)</label>
+              <textarea name="feature_notes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
         </div>
 
-        <div class="form-field">
-          <label data-en="Date of Birth" data-es="Fecha de Nacimiento">Date of Birth</label>
-          <input type="date" name="dob" required>
+        <!-- STEP 5 -->
+        <div class="form-step" data-step="5">
+          <h2>Review & Submit</h2>
+          <p class="section-subtitle">Review your details below.</p>
+
+          <div class="review-section">
+            <div class="review-block"><h3>Applicant</h3><ul id="reviewApplicant"></ul></div>
+            <div class="review-block"><h3>Property</h3><ul id="reviewProperty"></ul></div>
+            <div class="review-block"><h3>Coverages</h3><ul id="reviewCoverages"></ul></div>
+            <div class="review-block"><h3>Features</h3><ul id="reviewFeatures"></ul></div>
+          </div>
+
+          <div class="upload-row">
+            <label>Upload Prior Policy, Photos, or Documents (optional)</label>
+            <input type="file" name="supporting_documents" />
+          </div>
+
+          <div class="consent-row">
+            <input type="checkbox" id="consentCheckbox" required />
+            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="submit" class="btn-primary">Submit Application</button>
+            </div>
+          </div>
         </div>
 
-        <div class="form-field">
-          <label data-en="Email" data-es="Correo Electrónico">Email</label>
-          <input type="email" name="email" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-          <input type="tel" name="phone" required>
-        </div>
-
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-primary next-step"
-                data-next="2"
-                data-en="Next: Property"
-                data-es="Siguiente: Propiedad">
-          Next: Property
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 2: PROPERTY INFO -->
-    <div class="form-step" data-step="2">
-
-      <h2 data-en="Property Information" data-es="Información de la Propiedad">
-        Property Information
-      </h2>
-
-      <div class="form-grid">
-
-        <div class="form-field">
-          <label data-en="Condo Address" data-es="Dirección del Condominio">Condo Address</label>
-          <input type="text" name="condo_address" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="City" data-es="Ciudad">City</label>
-          <input type="text" name="condo_city" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="State" data-es="Estado">State</label>
-          <input type="text" name="condo_state" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label>
-          <input type="text" name="condo_zip" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Year Built" data-es="Año de Construcción">Year Built</label>
-          <input type="text" name="year_built">
-        </div>
-
-        <div class="form-field">
-          <label data-en="Square Footage" data-es="Pies Cuadrados">Square Footage</label>
-          <input type="text" name="sqft">
-        </div>
-
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="1"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="3"
-                data-en="Next: Coverage"
-                data-es="Siguiente: Cobertura">
-          Next: Coverage
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 3: COVERAGE -->
-    <div class="form-step" data-step="3">
-
-      <h2 data-en="Coverage Options" data-es="Opciones de Cobertura">
-        Coverage Options
-      </h2>
-
-      <div class="form-grid">
-
-        <div class="form-field">
-          <label data-en="Dwelling Coverage (Interior)"
-                 data-es="Cobertura de Vivienda (Interior)">
-            Dwelling Coverage (Interior)
-          </label>
-          <select name="dwelling_coverage">
-            <option value="">Select...</option>
-            <option value="25000">$25,000</option>
-            <option value="50000">$50,000</option>
-            <option value="75000">$75,000</option>
-            <option value="100000">$100,000</option>
-            <option value="Other">Other / Unsure</option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Personal Property"
-                 data-es="Propiedad Personal">
-            Personal Property
-          </label>
-          <select name="personal_property">
-            <option value="">Select...</option>
-            <option value="15000">$15,000</option>
-            <option value="25000">$25,000</option>
-            <option value="50000">$50,000</option>
-            <option value="75000">$75,000</option>
-            <option value="100000">$100,000</option>
-            <option value="Other">Other / Unsure</option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Liability Limit"
-                 data-es="Límite de Responsabilidad">
-            Liability Limit
-          </label>
-          <select name="liability_limit">
-            <option value="">Select...</option>
-            <option value="100000">$100,000</option>
-            <option value="300000">$300,000</option>
-            <option value="500000">$500,000</option>
-            <option value="Unsure">Unsure</option>
-          </select>
-        </div>
-
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="2"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="4"
-                data-en="Next: Details"
-                data-es="Siguiente: Detalles">
-          Next: Details
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 4: DETAILS -->
-    <div class="form-step" data-step="4">
-
-      <h2 data-en="Additional Details" data-es="Detalles Adicionales">
-        Additional Details
-      </h2>
-
-      <div class="form-field">
-        <label data-en="Any prior claims?"
-               data-es="¿Algún reclamo previo?">
-          Any prior claims?
-        </label>
-        <textarea name="prior_claims" rows="3"></textarea>
-      </div>
-
-      <div class="form-field">
-        <label data-en="Additional Notes"
-               data-es="Notas Adicionales">
-          Additional Notes
-        </label>
-        <textarea name="notes" rows="4"></textarea>
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="3"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="5"
-                data-en="Next: Submit"
-                data-es="Siguiente: Enviar">
-          Next: Submit
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 5: SUBMIT -->
-    <div class="form-step" data-step="5">
-
-      <h2 data-en="Submit Application" data-es="Enviar Solicitud">
-        Submit Application
-      </h2>
-
-      <div class="form-field">
-        <label data-en="Upload Documents (Optional)"
-               data-es="Cargar Documentos (Opcional)">
-          Upload Documents (Optional)
-        </label>
-        <input type="file" name="documents" multiple>
-      </div>
-
-      <div class="form-field checkbox-field">
-        <label>
-          <input type="checkbox" name="consent" required>
-          <span data-en="I confirm the information provided is accurate."
-                data-es="Confirmo que la información proporcionada es correcta.">
-            I confirm the information provided is accurate.
-          </span>
-        </label>
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="4"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="submit" class="btn-primary"
-                data-en="Submit Application"
-                data-es="Enviar Solicitud">
-          Submit Application
-        </button>
-      </div>
+      </form>
 
     </div>
+  </section>
 
-  </form>
-
-</section>
+</main>
 
 <footer id="aces-footer"></footer>
+
+<script src="application-condo.js"></script>
 
 </body>
 </html>
