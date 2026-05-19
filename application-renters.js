@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fillList("reviewClaims", sections.claims);
   }
 
-  // Basic submit guard (HTML required + consent already handle most)
+  // Basic submit guard
   if (form) {
     form.addEventListener("submit", e => {
       if (consentCheckbox && !consentCheckbox.checked) {
@@ -147,7 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Please confirm that the information provided is accurate before submitting.");
         return;
       }
-      // Ensure review is up to date on submit
       buildReview();
     });
   }
