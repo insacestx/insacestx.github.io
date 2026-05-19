@@ -1,348 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title data-en="Commercial Property Application | ACES Insurance Services"
-        data-es="Solicitud de Seguro de Propiedad Comercial | ACES Insurance Services">
-  Commercial Property Application | ACES Insurance Services
-</title>
-
-<link rel="stylesheet" href="style.css">
-<script src="global.js" defer></script>
-<script src="application-commercial-property.js" defer></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commercial Property Application | ACES Insurance Services</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="global.js" defer></script>
 </head>
+
 <body>
 
 <header id="aces-header"></header>
 
-<section class="small-hero cp-hero fade-in">
-  <div class="small-hero-content">
-    <h1 data-en="Commercial Property Application"
-        data-es="Solicitud de Seguro de Propiedad Comercial">
-      Commercial Property Application
-    </h1>
-    <p data-en="Provide your business and building information to receive a commercial property quote."
-       data-es="Proporcione la información de su negocio y edificio para recibir una cotización de propiedad comercial.">
-      Provide your business and building information to receive a commercial property quote.
-    </p>
-  </div>
-</section>
+<main class="fade-in">
 
-<section class="app-section fade-in">
+  <!-- HERO -->
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
+      <h1 data-en="Commercial Property Insurance Application" data-es="Solicitud de Seguro de Propiedad Comercial">
+        Commercial Property Insurance Application
+      </h1>
 
-  <!-- STEP INDICATOR -->
-  <div class="wizard-steps cp-wizard-steps">
-    <div class="wizard-step active" data-step="1">
-      <span class="wizard-step-icon">🏢</span>
-      <span data-en="Business" data-es="Negocio">Business</span>
-    </div>
-    <div class="wizard-step" data-step="2">
-      <span class="wizard-step-icon">🏬</span>
-      <span data-en="Building" data-es="Edificio">Building</span>
-    </div>
-    <div class="wizard-step" data-step="3">
-      <span class="wizard-step-icon">📦</span>
-      <span data-en="Property" data-es="Propiedad">Property</span>
-    </div>
-    <div class="wizard-step" data-step="4">
-      <span class="wizard-step-icon">🛡️</span>
-      <span data-en="Coverage" data-es="Cobertura">Coverage</span>
-    </div>
-    <div class="wizard-step" data-step="5">
-      <span class="wizard-step-icon">✔️</span>
-      <span data-en="Submit" data-es="Enviar">Submit</span>
-    </div>
-  </div>
+      <p data-en="Tell us about your business and property. An ACES agent will review and follow up with tailored options."
+         data-es="Cuéntenos sobre su negocio y propiedad. Un agente de ACES revisará y le dará opciones personalizadas.">
+        Tell us about your business and property. An ACES agent will review and follow up with tailored options.
+      </p>
 
-  <form id="commercialPropertyForm"
-        action="https://formsubmit.co/office@insaces.com"
-        method="POST"
-        enctype="multipart/form-data"
-        class="app-form cp-app-form">
-
-    <!-- Round Robin -->
-    <input type="hidden" name="_to" id="rrEmail">
-    <input type="hidden" name="_subject" value="New Commercial Property Application - ACES">
-    <input type="hidden" name="_template" value="table">
-    <input type="text" name="_honey" style="display:none">
-
-    <!-- STEP 1: BUSINESS INFO -->
-    <div class="form-step active" data-step="1">
-
-      <h2 data-en="Business Information" data-es="Información del Negocio">
-        Business Information
-      </h2>
-
-      <div class="form-grid">
-
-        <div class="form-field">
-          <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
-          <input type="text" name="business_name" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
-          <input type="text" name="business_address" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="City" data-es="Ciudad">City</label>
-          <input type="text" name="business_city" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="State" data-es="Estado">State</label>
-          <input type="text" name="business_state" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label>
-          <input type="text" name="business_zip" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Business Type" data-es="Tipo de Negocio">Business Type</label>
-          <input type="text" name="business_type" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Years in Business" data-es="Años en el Negocio">Years in Business</label>
-          <input type="number" name="years_in_business">
-        </div>
-
+      <!-- Wizard Steps -->
+      <div class="auto-wizard-steps" id="cpWizardSteps">
+        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
+        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Property</div>
+        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Coverages</div>
+        <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span>Review</div>
       </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-primary next-step"
-                data-next="2"
-                data-en="Next: Building"
-                data-es="Siguiente: Edificio">
-          Next: Building
-        </button>
-      </div>
-
     </div>
+  </section>
 
-    <!-- STEP 2: BUILDING INFO -->
-    <div class="form-step" data-step="2">
+  <!-- FORM -->
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
 
-      <h2 data-en="Building Information" data-es="Información del Edificio">
-        Building Information
-      </h2>
+      <form id="cpAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New Commercial Property Application - ACES" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
 
-      <div class="form-grid">
+        <!-- STEP 1 -->
+        <div class="form-step active" data-step="1">
+          <h2>Business Information</h2>
+          <p class="section-subtitle">Tell us about your company.</p>
 
-        <div class="form-field">
-          <label data-en="Building Address" data-es="Dirección del Edificio">Building Address</label>
-          <input type="text" name="building_address" required>
+          <div class="auto-grid-2">
+            <div class="auto-field"><label>Business Name</label><input name="business_name" required /></div>
+            <div class="auto-field"><label>DBA (if applicable)</label><input name="dba" /></div>
+
+            <div class="auto-field">
+              <label>Business Type</label>
+              <select name="business_type" required>
+                <option value="">Select</option>
+                <option>LLC</option>
+                <option>Corporation</option>
+                <option>Sole Proprietor</option>
+                <option>Partnership</option>
+                <option>Non-Profit</option>
+              </select>
+            </div>
+
+            <div class="auto-field"><label>EIN</label><input name="ein" /></div>
+
+            <div class="auto-field"><label>Business Phone</label><input name="business_phone" required /></div>
+            <div class="auto-field"><label>Business Email</label><input type="email" name="business_email" required /></div>
+
+            <div class="auto-field auto-field-full"><label>Business Address</label><input name="business_address" required /></div>
+            <div class="auto-field"><label>City</label><input name="city" required /></div>
+            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
+            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+
+            <div class="auto-field auto-field-full">
+              <label>Describe Your Business Operations</label>
+              <textarea name="business_description" rows="3" placeholder="Retail, office, restaurant, warehouse, etc." required></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <div></div>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 2 -->
+        <div class="form-step" data-step="2">
+          <h2>Property Details</h2>
+          <p class="section-subtitle">Tell us about the building you want to insure.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Property Address</label>
+              <input name="property_address" required />
+            </div>
+
+            <div class="auto-field">
+              <label>City</label>
+              <input name="property_city" required />
+            </div>
+
+            <div class="auto-field">
+              <label>State</label>
+              <input name="property_state" value="TX" required />
+            </div>
+
+            <div class="auto-field">
+              <label>ZIP Code</label>
+              <input name="property_zip" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Year Built</label>
+              <input name="year_built" placeholder="Example: 1998" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Square Footage</label>
+              <input name="square_feet" placeholder="Example: 5000" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Construction Type</label>
+              <select name="construction_type" required>
+                <option value="">Select</option>
+                <option>Frame</option>
+                <option>Masonry</option>
+                <option>Joisted Masonry</option>
+                <option>Non-Combustible</option>
+                <option>Masonry Non-Combustible</option>
+                <option>Fire Resistive</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Roof Type</label>
+              <select name="roof_type">
+                <option value="">Select</option>
+                <option>Shingle</option>
+                <option>Metal</option>
+                <option>TPO</option>
+                <option>Modified Bitumen</option>
+                <option>Tile</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Roof Age (years)</label>
+              <input name="roof_age" placeholder="Example: 5" />
+            </div>
+
+            <div class="auto-field">
+              <label>Building Use</label>
+              <input name="building_use" placeholder="Retail, office, warehouse, restaurant, etc." required />
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Property Notes (optional)</label>
+              <textarea name="property_notes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
         </div>
 
-        <div class="form-field">
-          <label data-en="City" data-es="Ciudad">City</label>
-          <input type="text" name="building_city" required>
+        <!-- STEP 3 -->
+        <div class="form-step" data-step="3">
+          <h2>Coverage Options</h2>
+          <p class="section-subtitle">Choose the coverages you want quoted.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Building Coverage Limit</label>
+              <input name="building_limit" placeholder="Example: 500000" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Business Personal Property Limit</label>
+              <input name="bpp_limit" placeholder="Example: 75000" />
+            </div>
+
+            <div class="auto-field">
+              <label>Deductible</label>
+              <select name="deductible">
+                <option value="">Select</option>
+                <option>$1,000</option>
+                <option>$2,500</option>
+                <option>$5,000</option>
+                <option>$10,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Business Income Coverage</label>
+              <select name="business_income">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — 12 Months</option>
+                <option>Yes — 18 Months</option>
+                <option>Yes — 24 Months</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Equipment Breakdown</label>
+              <select name="equipment_breakdown">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — Add Coverage</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Coverage Notes (optional)</label>
+              <textarea name="coverage_notes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 4 -->
+        <div class="form-step" data-step="4">
+          <h2>Review & Submit</h2>
+          <p class="section-subtitle">Review your details below.</p>
+
+          <div class="review-section">
+            <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
+            <div class="review-block"><h3>Property</h3><ul id="reviewProperty"></ul></div>
+            <div class="review-block"><h3>Coverages</h3><ul id="reviewCoverages"></ul></div>
+          </div>
+
+          <div class="upload-row">
+            <label>Upload Prior Policy, Photos, or Inspection Reports (optional)</label>
+            <input type="file" name="supporting_documents" />
+          </div>
+
+          <div class="consent-row">
+            <input type="checkbox" id="consentCheckbox" required />
+            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="submit" class="btn-primary">Submit Application</button>
+            </div>
+          </div>
         </div>
 
-        <div class="form-field">
-          <label data-en="State" data-es="Estado">State</label>
-          <input type="text" name="building_state" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label>
-          <input type="text" name="building_zip" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Year Built" data-es="Año de Construcción">Year Built</label>
-          <input type="text" name="year_built">
-        </div>
-
-        <div class="form-field">
-          <label data-en="Construction Type" data-es="Tipo de Construcción">Construction Type</label>
-          <select name="construction_type">
-            <option value="">Select...</option>
-            <option value="Frame">Frame</option>
-            <option value="Masonry">Masonry</option>
-            <option value="Metal">Metal</option>
-            <option value="Concrete">Concrete</option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Square Footage" data-es="Pies Cuadrados">Square Footage</label>
-          <input type="text" name="sqft">
-        </div>
-
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="1"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="3"
-                data-en="Next: Property"
-                data-es="Siguiente: Propiedad">
-          Next: Property
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 3: PROPERTY DETAILS -->
-    <div class="form-step" data-step="3">
-
-      <h2 data-en="Property Details" data-es="Detalles de la Propiedad">
-        Property Details
-      </h2>
-
-      <div class="form-grid">
-
-        <div class="form-field">
-          <label data-en="Business Personal Property Amount"
-                 data-es="Monto de Propiedad Personal del Negocio">
-            Business Personal Property Amount
-          </label>
-          <input type="number" name="bpp_amount">
-        </div>
-
-        <div class="form-field">
-          <label data-en="Inventory Value"
-                 data-es="Valor del Inventario">
-            Inventory Value
-          </label>
-          <input type="number" name="inventory_value">
-        </div>
-
-        <div class="form-field">
-          <label data-en="Any prior property claims?"
-                 data-es="¿Algún reclamo previo de propiedad?">
-            Any prior property claims?
-          </label>
-          <textarea name="prior_claims" rows="3"></textarea>
-        </div>
-
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="2"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="4"
-                data-en="Next: Coverage"
-                data-es="Siguiente: Cobertura">
-          Next: Coverage
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 4: COVERAGE -->
-    <div class="form-step" data-step="4">
-
-      <h2 data-en="Coverage Options" data-es="Opciones de Cobertura">
-        Coverage Options
-      </h2>
-
-      <div class="form-grid">
-
-        <div class="form-field">
-          <label data-en="Building Coverage Amount"
-                 data-es="Monto de Cobertura del Edificio">
-            Building Coverage Amount
-          </label>
-          <input type="number" name="building_coverage">
-        </div>
-
-        <div class="form-field">
-          <label data-en="Business Income Coverage"
-                 data-es="Cobertura de Ingresos del Negocio">
-            Business Income Coverage
-          </label>
-          <select name="business_income">
-            <option value="">Select...</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-            <option value="Unsure">Unsure</option>
-          </select>
-        </div>
-
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="3"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="5"
-                data-en="Next: Submit"
-                data-es="Siguiente: Enviar">
-          Next: Submit
-        </button>
-      </div>
+      </form>
 
     </div>
+  </section>
 
-    <!-- STEP 5: SUBMIT -->
-    <div class="form-step" data-step="5">
-
-      <h2 data-en="Submit Application" data-es="Enviar Solicitud">
-        Submit Application
-      </h2>
-
-      <div class="form-field">
-        <label data-en="Upload Documents (Optional)"
-               data-es="Cargar Documentos (Opcional)">
-          Upload Documents (Optional)
-        </label>
-        <input type="file" name="documents" multiple>
-      </div>
-
-      <div class="form-field checkbox-field">
-        <label>
-          <input type="checkbox" name="consent" required>
-          <span data-en="I confirm the information provided is accurate."
-                data-es="Confirmo que la información proporcionada es correcta.">
-            I confirm the information provided is accurate.
-          </span>
-        </label>
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="4"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="submit" class="btn-primary"
-                data-en="Submit Application"
-                data-es="Enviar Solicitud">
-          Submit Application
-        </button>
-      </div>
-
-    </div>
-
-  </form>
-
-</section>
+</main>
 
 <footer id="aces-footer"></footer>
+
+<script src="application-commercial-property.js"></script>
 
 </body>
 </html>
