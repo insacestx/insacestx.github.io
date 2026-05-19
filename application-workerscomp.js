@@ -1,200 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workers Compensation Application | ACES Insurance Services</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="global.js" defer></script>
-</head>
+// application-workerscomp.js
+document.addEventListener("DOMContentLoaded", () => {
+  initRoundRobinEmail();
+  initWizardNav();
+  initLossToggle();
+});
 
-<body>
+/* -----------------------------------
+   ROUND ROBIN EMAIL ROUTING
+----------------------------------- */
 
-<header id="aces-header"></header>
+function getRoundRobinList() {
+  return [
+    "bryan@insaces.com",
+    "jordan@insaces.com",
+    "lanse@insaces.com",
+    "robert@insaces.com",
+    "george@insaces.com",
+    "jimmy@insaces.com",
+    "office@insaces.com"
+  ];
+}
 
-<main class="fade-in">
+function getNextRoundRobinEmail() {
+  const key = "aces_rr_index";
+  const list = getRoundRobinList();
+  let index = parseInt(localStorage.getItem(key) || "0", 10);
 
-  <!-- HERO -->
-  <section class="auto-hero">
-    <div class="auto-hero-inner">
-      <h1 data-en="Workers Compensation Application" data-es="Solicitud de Compensación para Trabajadores">
-        Workers Compensation Application
-      </h1>
+  if (isNaN(index) || index < 0 || index >= list.length) index = 0;
 
-      <p data-en="Tell us about your business and payroll. An ACES agent will review and follow up with tailored options."
-         data-es="Cuéntenos sobre su negocio y nómina. Un agente de ACES revisará y le dará opciones personalizadas.">
-        Tell us about your business and payroll. An ACES agent will review and follow up with tailored options.
-      </p>
+  const email = list[index];
+  const nextIndex = (index + 1) % list.length;
+  localStorage.setItem(key, nextIndex.toString());
 
-      <!-- Wizard Steps -->
-      <div class="auto-wizard-steps" id="wcWizardSteps">
-        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
-        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Payroll</div>
-        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Losses</div>
-        <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span>Review</div>
-      </div>
-    </div>
-  </section>
+  return email;
+}
 
-  <!-- FORM -->
-  <section class="auto-app-wrapper">
-    <div class="auto-app-card">
+function initRoundRobinEmail() {
+  const rrField = document.getElementById("rrEmail");
+  if (rrField) rrField.value = getNextRoundRobinEmail();
+}
 
-      <form id="wcAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="New Workers Comp Application - ACES" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="_honey" style="display:none" />
+/* -----------------------------------
+   LOSS TOGGLE
+----------------------------------- */
 
-        <!-- STEP 1 -->
-        <div class="form-step active" data-step="1">
-          <h2>Business Information</h2>
-          <p class="section-subtitle">Tell us about your company.</p>
+function initLossToggle() {
+  const toggle = document.getElementById("hasLossesToggle");
+  const details = document.getElementById("lossDetails");
 
-          <div class="auto-grid-2">
-            <div class="auto-field"><label>Business Name</label><input name="business_name" required /></div>
-            <div class="auto-field"><label>DBA (if applicable)</label><input name="dba" /></div>
+  if (!toggle || !details) return;
 
-            <div class="auto-field">
-              <label>Business Type</label>
-              <select name="business_type" required>
-                <option value="">Select</option>
-                <option>LLC</option>
-                <option>Corporation</option>
-                <option>Sole Proprietor</option>
-                <option>Partnership</option>
-                <option>Non-Profit</option>
-              </select>
-            </div>
+  details.disabled = true;
 
-            <div class="auto-field"><label>EIN</label><input name="ein" /></div>
+  toggle.addEventListener("change", () => {
+    details.disabled = !toggle.checked;
+    if (!toggle.checked) details.value = "";
+  });
+}
 
-            <div class="auto-field"><label>Business Phone</label><input name="business_phone" required /></div>
-            <div class="auto-field"><label>Business Email</label><input type="email" name="business_email" required /></div>
+/* -----------------------------------
+   ACES 2026 WIZARD NAVIGATION ENGINE
+----------------------------------- */
 
-            <div class="auto-field auto-field-full"><label>Business Address</label><input name="business_address" required /></div>
-            <div class="auto-field"><label>City</label><input name="city" required /></div>
-            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
-            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+function initWizardNav() {
+  const form = document.getElementById("wcAppForm");
+  const steps = Array.from(document.querySelectorAll(".form-step"));
+  const indicators = Array.from(document.querySelectorAll("#wcWizardSteps .auto-wizard-step"));
+  const consentCheckbox = document.getElementById("consentCheckbox");
 
-            <div class="auto-field auto-field-full">
-              <label>Describe Your Business Operations</label>
-              <textarea name="business_description" rows="3" placeholder="Construction, retail, restaurant, contracting, etc." required></textarea>
-            </div>
-          </div>
+  let currentStep = 0;
 
-          <div class="app-actions">
-            <div></div>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
-          </div>
-        </div>
-        <!-- STEP 2 -->
-        <div class="form-step" data-step="2">
-          <h2>Payroll Breakdown</h2>
-          <p class="section-subtitle">Tell us about your payroll for the upcoming policy period.</p>
+  function showStep(index) {
+    steps.forEach((step, i) => step.classList.toggle("active", i === index));
+    indicators.forEach((ind, i) => {
+      ind.classList.toggle("active", i === index);
+      ind.classList.toggle("completed", i < index);
+    });
 
-          <div class="auto-grid-2">
-            <div class="auto-field">
-              <label>Total Annual Payroll</label>
-              <input name="total_payroll" placeholder="Example: 250000" required />
-            </div>
+    currentStep = index;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
-            <div class="auto-field">
-              <label>Number of Employees</label>
-              <input name="employee_count" placeholder="Example: 8" required />
-            </div>
+  function goNext() {
+    if (currentStep < steps.length - 1) {
+      showStep(currentStep + 1);
+      if (currentStep === 3) buildReview();
+    }
+  }
 
-            <div class="auto-field auto-field-full">
-              <label>Primary Job Duties</label>
-              <textarea name="job_duties" rows="3" placeholder="Construction labor, clerical, sales, restaurant staff, etc." required></textarea>
-            </div>
+  function goPrev() {
+    if (currentStep > 0) showStep(currentStep - 1);
+  }
 
-            <div class="auto-field auto-field-full">
-              <label>Do you use subcontractors?</label>
-              <select name="subcontractors">
-                <option value="">Select</option>
-                <option>No</option>
-                <option>Yes — With Certificates</option>
-                <option>Yes — Without Certificates</option>
-              </select>
-            </div>
+  document.querySelectorAll("[data-next-step]").forEach(btn => btn.addEventListener("click", goNext));
+  document.querySelectorAll("[data-prev-step]").forEach(btn => btn.addEventListener("click", goPrev));
 
-            <div class="auto-field auto-field-full">
-              <label>Additional Payroll Notes (optional)</label>
-              <textarea name="payroll_notes" rows="3"></textarea>
-            </div>
-          </div>
+  indicators.forEach((ind, index) => {
+    ind.addEventListener("click", () => {
+      if (index <= currentStep) showStep(index);
+    });
+  });
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
-          </div>
-        </div>
+  /* -----------------------------------
+     REVIEW BUILDER
+  ----------------------------------- */
 
-        <!-- STEP 3 -->
-        <div class="form-step" data-step="3">
-          <h2>Loss History</h2>
-          <p class="section-subtitle">Tell us about any prior Workers Comp claims.</p>
+  function getVal(name) {
+    return form.elements[name] ? form.elements[name].value.trim() : "";
+  }
 
-          <div class="auto-toggle-row">
-            <label>I have losses to report</label>
-            <input type="checkbox" id="hasLossesToggle" />
-          </div>
+  function fillList(id, items) {
+    const ul = document.getElementById(id);
+    if (!ul) return;
+    ul.innerHTML = "";
+    items.forEach(item => {
+      if (item.value) {
+        const li = document.createElement("li");
+        li.textContent = `${item.label}: ${item.value}`;
+        ul.appendChild(li);
+      }
+    });
+  }
 
-          <div class="auto-field">
-            <label>Loss Details</label>
-            <textarea id="lossDetails" name="loss_details" rows="4" placeholder="Type of loss, date, amount paid, injured employee, etc."></textarea>
-          </div>
+  function buildReview() {
+    fillList("reviewBusiness", [
+      { label: "Business Name", value: getVal("business_name") },
+      { label: "DBA", value: getVal("dba") },
+      { label: "Business Type", value: getVal("business_type") },
+      { label: "EIN", value: getVal("ein") },
+      { label: "Business Phone", value: getVal("business_phone") },
+      { label: "Business Email", value: getVal("business_email") },
+      { label: "Address", value: getVal("business_address") },
+      { label: "City", value: getVal("city") },
+      { label: "State", value: getVal("state") },
+      { label: "ZIP", value: getVal("zip") },
+      { label: "Business Description", value: getVal("business_description") }
+    ]);
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
-          </div>
-        </div>
-        <!-- STEP 4 -->
-        <div class="form-step" data-step="4">
-          <h2>Review & Submit</h2>
-          <p class="section-subtitle">Review your details below.</p>
+    fillList("reviewPayroll", [
+      { label: "Total Annual Payroll", value: getVal("total_payroll") },
+      { label: "Number of Employees", value: getVal("employee_count") },
+      { label: "Primary Job Duties", value: getVal("job_duties") },
+      { label: "Subcontractors", value: getVal("subcontractors") },
+      { label: "Payroll Notes", value: getVal("payroll_notes") }
+    ]);
 
-          <div class="review-section">
-            <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
-            <div class="review-block"><h3>Payroll</h3><ul id="reviewPayroll"></ul></div>
-            <div class="review-block"><h3>Losses</h3><ul id="reviewLosses"></ul></div>
-          </div>
+    fillList("reviewLosses", [
+      { label: "Loss Details", value: getVal("loss_details") }
+    ]);
+  }
 
-          <div class="upload-row">
-            <label>Upload Prior Policy, Loss Runs, or Payroll Reports (optional)</label>
-            <input type="file" name="supporting_documents" />
-          </div>
+  /* -----------------------------------
+     SUBMIT VALIDATION
+  ----------------------------------- */
 
-          <div class="consent-row">
-            <input type="checkbox" id="consentCheckbox" required />
-            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
-          </div>
+  form.addEventListener("submit", e => {
+    if (!consentCheckbox.checked) {
+      e.preventDefault();
+      alert("Please confirm that the information provided is accurate before submitting.");
+      return;
+    }
+    buildReview();
+  });
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="submit" class="btn-primary">Submit Application</button>
-            </div>
-          </div>
-        </div>
-
-      </form>
-
-    </div>
-  </section>
-
-</main>
-
-<footer id="aces-footer"></footer>
-
-<script src="application-workerscomp.js"></script>
-
-</body>
-</html>
+  showStep(0);
+}
