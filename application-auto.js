@@ -199,6 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
       incidentDetails.value = "";
     }
   });
+  
   // -----------------------------
   // BUILD REVIEW STEP
   // -----------------------------
@@ -288,29 +289,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // -----------------------------
-    // COVERAGE SUMMARY
-    // -----------------------------
-    const coverageFields = [
-      ["liability_limits", "Liability Limits"],
-      ["comp_collision", "Comp & Collision"],
-      ["deductible", "Deductible"],
-      ["rental", "Rental"],
-      ["roadside", "Roadside"],
-      ["um_uim", "UM/UIM"],
-      ["incident_details", "Incidents"],
-      ["additional_notes", "Notes"]
-    ];
-
-    coverageFields.forEach(([name, label]) => {
-      const value = form.elements[name]?.value;
-      if (value && value.trim() !== "") {
-        const li = document.createElement("li");
-        li.textContent = `${label}: ${value}`;
-        reviewCoverage.appendChild(li);
-      }
-    });
-  }
     // -----------------------------
     // COVERAGE SUMMARY
     // -----------------------------
