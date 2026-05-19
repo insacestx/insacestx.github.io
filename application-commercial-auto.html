@@ -1,298 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <title>Commercial Auto Application | ACES Insurance Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 
-<title data-en="Commercial Auto Application | ACES Insurance Services"
-        data-es="Solicitud de Seguro Comercial de Auto | ACES Insurance Services">
-  Commercial Auto Application | ACES Insurance Services
-</title>
+  <!-- Global header/footer + language toggle -->
+  <script src="global.js" defer></script>
 
-<link rel="stylesheet" href="style.css">
-<script src="global.js" defer></script>
-<script src="application-commercial-auto.js" defer></script>
-
+  <!-- Page-specific logic -->
+  <script src="application-commercial-auto.js" defer></script>
 </head>
-<body>
 
-<header id="aces-header"></header>
+<body class="dark-theme">
 
-<section class="small-hero ca-hero fade-in">
-  <div class="small-hero-content">
-    <h1 data-en="Commercial Auto Application"
-        data-es="Solicitud de Seguro Comercial de Auto">
-      Commercial Auto Application
-    </h1>
-    <p data-en="Provide your business and vehicle information to receive a commercial auto quote."
-       data-es="Proporcione la información de su negocio y vehículos para recibir una cotización de auto comercial.">
-      Provide your business and vehicle information to receive a commercial auto quote.
-    </p>
-  </div>
-</section>
+  <!-- Header injected by global.js -->
+  <header id="aces-header"></header>
 
-<section class="app-section fade-in">
+  <main id="main-content">
 
-  <!-- STEP INDICATOR -->
-  <div class="wizard-steps ca-wizard-steps">
-    <div class="wizard-step active" data-step="1">
-      <span class="wizard-step-icon">🏢</span>
-      <span data-en="Business" data-es="Negocio">Business</span>
-    </div>
-    <div class="wizard-step" data-step="2">
-      <span class="wizard-step-icon">🚚</span>
-      <span data-en="Vehicles" data-es="Vehículos">Vehicles</span>
-    </div>
-    <div class="wizard-step" data-step="3">
-      <span class="wizard-step-icon">👥</span>
-      <span data-en="Drivers" data-es="Conductores">Drivers</span>
-    </div>
-    <div class="wizard-step" data-step="4">
-      <span class="wizard-step-icon">🛡️</span>
-      <span data-en="Coverage" data-es="Cobertura">Coverage</span>
-    </div>
-    <div class="wizard-step" data-step="5">
-      <span class="wizard-step-icon">✔️</span>
-      <span data-en="Submit" data-es="Enviar">Submit</span>
-    </div>
-  </div>
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <h1 data-en="Commercial Auto Application" data-es="Solicitud de Auto Comercial">
+          Commercial Auto Application
+        </h1>
+        <p data-en="A quick application to help us insure your business vehicles."
+           data-es="Una solicitud rápida para ayudarle a asegurar los vehículos de su negocio.">
+          A quick application to help us insure your business vehicles.
+        </p>
+      </div>
+    </section>
 
-  <form id="commercialAutoForm"
-        action="https://formsubmit.co/office@insaces.com"
-        method="POST"
-        enctype="multipart/form-data"
-        class="app-form ca-app-form">
+    <!-- FORM SECTION -->
+    <section class="form-section">
+      <div class="form-container">
 
-    <!-- Round Robin -->
-    <input type="hidden" name="_to" id="rrEmail">
-    <input type="hidden" name="_subject" value="New Commercial Auto Application - ACES">
-    <input type="hidden" name="_template" value="table">
-    <input type="text" name="_honey" style="display:none">
+        <!-- BUSINESS INFO -->
+        <h2 data-en="Business Information" data-es="Información del Negocio">Business Information</h2>
 
-    <!-- STEP 1: BUSINESS INFO -->
-    <div class="form-step active" data-step="1">
+        <form id="commercialAutoForm">
 
-      <h2 data-en="Business Information" data-es="Información del Negocio">
-        Business Information
-      </h2>
+          <div class="form-group">
+            <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
+            <input type="text" name="businessName" required>
+          </div>
 
-      <div class="form-grid">
+          <div class="form-group">
+            <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
+            <input type="text" name="businessAddress" required>
+          </div>
 
-        <div class="form-field">
-          <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
-          <input type="text" name="business_name" required>
-        </div>
+          <div class="form-group">
+            <label data-en="Business Type" data-es="Tipo de Negocio">Business Type</label>
+            <select name="businessType" required>
+              <option value="contractor" data-en="Contractor" data-es="Contratista">Contractor</option>
+              <option value="delivery" data-en="Delivery" data-es="Entrega">Delivery</option>
+              <option value="transport" data-en="Transport" data-es="Transporte">Transport</option>
+              <option value="sales" data-en="Sales" data-es="Ventas">Sales</option>
+              <option value="other" data-en="Other" data-es="Otro">Other</option>
+            </select>
+          </div>
 
-        <div class="form-field">
-          <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
-          <input type="text" name="business_address" required>
-        </div>
+          <!-- CONTACT INFO -->
+          <h2 data-en="Contact Information" data-es="Información de Contacto">Contact Information</h2>
 
-        <div class="form-field">
-          <label data-en="City" data-es="Ciudad">City</label>
-          <input type="text" name="business_city" required>
-        </div>
+          <div class="form-group">
+            <label data-en="Full Name" data-es="Nombre Completo">Full Name</label>
+            <input type="text" name="fullName" required>
+          </div>
 
-        <div class="form-field">
-          <label data-en="State" data-es="Estado">State</label>
-          <input type="text" name="business_state" required>
-        </div>
+          <div class="form-group">
+            <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+            <input type="tel" name="phone" required>
+          </div>
 
-        <div class="form-field">
-          <label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label>
-          <input type="text" name="business_zip" required>
-        </div>
+          <div class="form-group">
+            <label data-en="Email Address" data-es="Correo Electrónico">Email Address</label>
+            <input type="email" name="email" required>
+          </div>
 
-        <div class="form-field">
-          <label data-en="Business Type" data-es="Tipo de Negocio">Business Type</label>
-          <input type="text" name="business_type" required>
-        </div>
+          <!-- VEHICLE INFO -->
+          <h2 data-en="Vehicle Information" data-es="Información del Vehículo">Vehicle Information</h2>
 
-        <div class="form-field">
-          <label data-en="Years in Business" data-es="Años en el Negocio">Years in Business</label>
-          <input type="number" name="years_in_business">
-        </div>
+          <div class="form-group">
+            <label data-en="Number of Vehicles" data-es="Número de Vehículos">Number of Vehicles</label>
+            <select name="vehicleCount" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3-5">3 - 5</option>
+              <option value="6-10">6 - 10</option>
+              <option value="10plus">10+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label data-en="Primary Vehicle Use" data-es="Uso Principal del Vehículo">
+              Primary Vehicle Use
+            </label>
+            <select name="vehicleUse" required>
+              <option value="service" data-en="Service" data-es="Servicio">Service</option>
+              <option value="delivery" data-en="Delivery" data-es="Entrega">Delivery</option>
+              <option value="transport" data-en="Transport" data-es="Transporte">Transport</option>
+              <option value="sales" data-en="Sales" data-es="Ventas">Sales</option>
+            </select>
+          </div>
+
+          <!-- DRIVERS -->
+          <h2 data-en="Driver Information" data-es="Información del Conductor">Driver Information</h2>
+
+          <div class="form-group">
+            <label data-en="Number of Drivers" data-es="Número de Conductores">Number of Drivers</label>
+            <select name="driverCount" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3-5">3 - 5</option>
+              <option value="6-10">6 - 10</option>
+              <option value="10plus">10+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label data-en="Any drivers under 25?"
+                   data-es="¿Algún conductor menor de 25 años?">
+              Any drivers under 25?
+            </label>
+            <select name="under25">
+              <option value="no" data-en="No" data-es="No">No</option>
+              <option value="yes" data-en="Yes" data-es="Sí">Yes</option>
+            </select>
+          </div>
+
+          <!-- COVERAGE -->
+          <h2 data-en="Coverage Details" data-es="Detalles de Cobertura">Coverage Details</h2>
+
+          <div class="form-group">
+            <label data-en="Do you currently have commercial auto insurance?"
+                   data-es="¿Actualmente tiene seguro de auto comercial?">
+              Do you currently have commercial auto insurance?
+            </label>
+            <select name="currentPolicy">
+              <option value="yes" data-en="Yes" data-es="Sí">Yes</option>
+              <option value="no" data-en="No" data-es="No">No</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label data-en="What level of coverage are you looking for?"
+                   data-es="¿Qué nivel de cobertura está buscando?">
+              What level of coverage are you looking for?
+            </label>
+            <select name="coverageLevel">
+              <option value="basic" data-en="Basic Liability" data-es="Responsabilidad Básica">Basic Liability</option>
+              <option value="standard" data-en="Standard Coverage" data-es="Cobertura Estándar">Standard Coverage</option>
+              <option value="full" data-en="Full Coverage" data-es="Cobertura Completa">Full Coverage</option>
+            </select>
+          </div>
+
+          <!-- SUBMIT -->
+          <button type="submit" class="btn-primary"
+            data-en="Submit Application"
+            data-es="Enviar Solicitud">
+            Submit Application
+          </button>
+
+        </form>
 
       </div>
+    </section>
 
-      <div class="wizard-nav">
-        <button type="button" class="btn-primary next-step"
-                data-next="2"
-                data-en="Next: Vehicles"
-                data-es="Siguiente: Vehículos">
-          Next: Vehicles
-        </button>
-      </div>
+  </main>
 
-    </div>
-
-    <!-- STEP 2: VEHICLES -->
-    <div class="form-step" data-step="2">
-
-      <h2 data-en="Vehicle List" data-es="Lista de Vehículos">
-        Vehicle List
-      </h2>
-
-      <div id="vehicleContainer"></div>
-
-      <button type="button" class="btn-secondary ca-add-btn" id="addVehicleBtn"
-              data-en="Add Vehicle"
-              data-es="Agregar Vehículo">
-        Add Vehicle
-      </button>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="1"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="3"
-                data-en="Next: Drivers"
-                data-es="Siguiente: Conductores">
-          Next: Drivers
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 3: DRIVERS -->
-    <div class="form-step" data-step="3">
-
-      <h2 data-en="Driver List" data-es="Lista de Conductores">
-        Driver List
-      </h2>
-
-      <div id="driverContainer"></div>
-
-      <button type="button" class="btn-secondary ca-add-btn" id="addDriverBtn"
-              data-en="Add Driver"
-              data-es="Agregar Conductor">
-        Add Driver
-      </button>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="2"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="4"
-                data-en="Next: Coverage"
-                data-es="Siguiente: Cobertura">
-          Next: Coverage
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 4: COVERAGE -->
-    <div class="form-step" data-step="4">
-
-      <h2 data-en="Coverage Options" data-es="Opciones de Cobertura">
-        Coverage Options
-      </h2>
-
-      <div class="form-grid">
-
-        <div class="form-field">
-          <label data-en="Liability Limit"
-                 data-es="Límite de Responsabilidad">
-            Liability Limit
-          </label>
-          <select name="liability_limit">
-            <option value="">Select...</option>
-            <option value="300000">$300,000</option>
-            <option value="500000">$500,000</option>
-            <option value="1000000">$1,000,000</option>
-            <option value="2000000">$2,000,000</option>
-            <option value="Unsure">Unsure</option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Physical Damage Coverage"
-                 data-es="Cobertura de Daños Físicos">
-            Physical Damage Coverage
-          </label>
-          <select name="physical_damage">
-            <option value="">Select...</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-            <option value="Unsure">Unsure</option>
-          </select>
-        </div>
-
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="3"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="5"
-                data-en="Next: Submit"
-                data-es="Siguiente: Enviar">
-          Next: Submit
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 5: SUBMIT -->
-    <div class="form-step" data-step="5">
-
-      <h2 data-en="Submit Application" data-es="Enviar Solicitud">
-        Submit Application
-      </h2>
-
-      <div class="form-field">
-        <label data-en="Upload Documents (Optional)"
-               data-es="Cargar Documentos (Opcional)">
-          Upload Documents (Optional)
-        </label>
-        <input type="file" name="documents" multiple>
-      </div>
-
-      <div class="form-field checkbox-field">
-        <label>
-          <input type="checkbox" name="consent" required>
-          <span data-en="I confirm the information provided is accurate."
-                data-es="Confirmo que la información proporcionada es correcta.">
-            I confirm the information provided is accurate.
-          </span>
-        </label>
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="4"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="submit" class="btn-primary"
-                data-en="Submit Application"
-                data-es="Enviar Solicitud">
-          Submit Application
-        </button>
-      </div>
-
-    </div>
-
-  </form>
-
-</section>
-
-<footer id="aces-footer"></footer>
+  <!-- Footer injected by global.js -->
+  <footer id="aces-footer"></footer>
 
 </body>
 </html>
