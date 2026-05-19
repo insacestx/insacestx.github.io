@@ -1,180 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Commercial Auto Application | ACES Insurance Services</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Global header/footer + language toggle -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commercial Auto Insurance Application | ACES Insurance Services</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="global.js" defer></script>
-
-  <!-- Page-specific logic -->
-  <script src="application-commercial-auto.js" defer></script>
 </head>
 
-<body class="dark-theme">
+<body>
 
-  <!-- Header injected by global.js -->
-  <header id="aces-header"></header>
+<header id="aces-header"></header>
 
-  <main id="main-content">
+<main class="fade-in">
 
-    <!-- HERO -->
-    <section class="page-hero">
-      <div class="page-hero-inner">
-        <h1 data-en="Commercial Auto Application" data-es="Solicitud de Auto Comercial">
-          Commercial Auto Application
-        </h1>
-        <p data-en="A quick application to help us insure your business vehicles."
-           data-es="Una solicitud rápida para ayudarle a asegurar los vehículos de su negocio.">
-          A quick application to help us insure your business vehicles.
-        </p>
+  <!-- HERO -->
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
+      <h1 data-en="Commercial Auto Insurance Application" data-es="Solicitud de Seguro Comercial de Autos">
+        Commercial Auto Insurance Application
+      </h1>
+
+      <p data-en="Tell us about your business vehicles, drivers, and operations. An ACES agent will review and follow up with tailored options."
+         data-es="Cuéntenos sobre los vehículos comerciales, conductores y operaciones de su negocio. Un agente de ACES revisará y le dará opciones personalizadas.">
+        Tell us about your business vehicles, drivers, and operations. An ACES agent will review and follow up with tailored options.
+      </p>
+
+      <!-- Wizard Steps -->
+      <div class="auto-wizard-steps" id="caWizardSteps">
+        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
+        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Operations</div>
+        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Vehicles</div>
+        <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span>Drivers</div>
+        <div class="auto-wizard-step" data-step="5"><span class="step-index">5</span>Coverage</div>
+        <div class="auto-wizard-step" data-step="6"><span class="step-index">6</span>Losses</div>
+        <div class="auto-wizard-step" data-step="7"><span class="step-index">7</span>Review</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FORM SECTION -->
-    <section class="form-section">
-      <div class="form-container">
+  <!-- FORM -->
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
 
-        <!-- BUSINESS INFO -->
-        <h2 data-en="Business Information" data-es="Información del Negocio">Business Information</h2>
+      <form id="caAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New Commercial Auto Application - ACES" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
 
-        <form id="commercialAutoForm">
+        <!-- STEP 1 -->
+        <div class="form-step active" data-step="1">
+          <h2>Business Information</h2>
+          <p class="section-subtitle">Tell us about your company.</p>
 
-          <div class="form-group">
-            <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
-            <input type="text" name="businessName" required>
+          <div class="auto-grid-2">
+            <div class="auto-field"><label>Business Name</label><input name="business_name" required /></div>
+            <div class="auto-field"><label>DBA (if applicable)</label><input name="dba" /></div>
+
+            <div class="auto-field"><label>Business Type</label>
+              <select name="business_type" required>
+                <option value="">Select</option>
+                <option>LLC</option>
+                <option>Corporation</option>
+                <option>Sole Proprietor</option>
+                <option>Partnership</option>
+                <option>Non-Profit</option>
+              </select>
+            </div>
+
+            <div class="auto-field"><label>EIN</label><input name="ein" /></div>
+
+            <div class="auto-field"><label>USDOT Number</label><input name="usdot" /></div>
+            <div class="auto-field"><label>MC Number</label><input name="mc_number" /></div>
+
+            <div class="auto-field"><label>Business Phone</label><input name="business_phone" required /></div>
+            <div class="auto-field"><label>Business Email</label><input type="email" name="business_email" required /></div>
+
+            <div class="auto-field auto-field-full"><label>Business Address</label><input name="business_address" required /></div>
+            <div class="auto-field"><label>City</label><input name="city" required /></div>
+            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
+            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+
+            <div class="auto-field auto-field-full">
+              <label>Describe Your Business Operations</label>
+              <textarea name="business_description" rows="3" placeholder="Construction, delivery, contracting, transportation, etc." required></textarea>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
-            <input type="text" name="businessAddress" required>
+          <div class="app-actions">
+            <div></div>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="form-step" data-step="2">
+          <h2>Operations & Radius</h2>
+          <p class="section-subtitle">Tell us how and where your vehicles operate.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Radius of Operation</label>
+              <select name="radius" required>
+                <option value="">Select</option>
+                <option>0–50 miles</option>
+                <option>50–100 miles</option>
+                <option>100–200 miles</option>
+                <option>200+ miles</option>
+                <option>Interstate / Multi-State</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Primary Operating States</label>
+              <input name="operating_states" placeholder="TX, OK, LA, etc." />
+            </div>
+
+            <div class="auto-field">
+              <label>Type of Cargo / Hauling</label>
+              <select name="cargo_type" required>
+                <option value="">Select</option>
+                <option>Construction Materials</option>
+                <option>Tools & Equipment</option>
+                <option>General Freight</option>
+                <option>Household Goods</option>
+                <option>Food / Refrigerated</option>
+                <option>Auto Transport</option>
+                <option>Hazmat</option>
+                <option>Passenger Transport</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Do You Tow Trailers?</label>
+              <select name="tow_trailers">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — Company-Owned</option>
+                <option>Yes — Personal or Rented</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Operational Notes (optional)</label>
+              <textarea name="operations_notes" rows="3"></textarea>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label data-en="Business Type" data-es="Tipo de Negocio">Business Type</label>
-            <select name="businessType" required>
-              <option value="contractor" data-en="Contractor" data-es="Contratista">Contractor</option>
-              <option value="delivery" data-en="Delivery" data-es="Entrega">Delivery</option>
-              <option value="transport" data-en="Transport" data-es="Transporte">Transport</option>
-              <option value="sales" data-en="Sales" data-es="Ventas">Sales</option>
-              <option value="other" data-en="Other" data-es="Otro">Other</option>
-            </select>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
           </div>
+        </div>
+        <!-- STEP 3 -->
+        <div class="form-step" data-step="3">
+          <h2>Vehicles</h2>
+          <p class="section-subtitle">List all business vehicles you want covered.</p>
 
-          <!-- CONTACT INFO -->
-          <h2 data-en="Contact Information" data-es="Información de Contacto">Contact Information</h2>
+          <div id="vehicleList" class="auto-dynamic-list"></div>
 
-          <div class="form-group">
-            <label data-en="Full Name" data-es="Nombre Completo">Full Name</label>
-            <input type="text" name="fullName" required>
-          </div>
-
-          <div class="form-group">
-            <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-            <input type="tel" name="phone" required>
-          </div>
-
-          <div class="form-group">
-            <label data-en="Email Address" data-es="Correo Electrónico">Email Address</label>
-            <input type="email" name="email" required>
-          </div>
-
-          <!-- VEHICLE INFO -->
-          <h2 data-en="Vehicle Information" data-es="Información del Vehículo">Vehicle Information</h2>
-
-          <div class="form-group">
-            <label data-en="Number of Vehicles" data-es="Número de Vehículos">Number of Vehicles</label>
-            <select name="vehicleCount" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3-5">3 - 5</option>
-              <option value="6-10">6 - 10</option>
-              <option value="10plus">10+</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label data-en="Primary Vehicle Use" data-es="Uso Principal del Vehículo">
-              Primary Vehicle Use
-            </label>
-            <select name="vehicleUse" required>
-              <option value="service" data-en="Service" data-es="Servicio">Service</option>
-              <option value="delivery" data-en="Delivery" data-es="Entrega">Delivery</option>
-              <option value="transport" data-en="Transport" data-es="Transporte">Transport</option>
-              <option value="sales" data-en="Sales" data-es="Ventas">Sales</option>
-            </select>
-          </div>
-
-          <!-- DRIVERS -->
-          <h2 data-en="Driver Information" data-es="Información del Conductor">Driver Information</h2>
-
-          <div class="form-group">
-            <label data-en="Number of Drivers" data-es="Número de Conductores">Number of Drivers</label>
-            <select name="driverCount" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3-5">3 - 5</option>
-              <option value="6-10">6 - 10</option>
-              <option value="10plus">10+</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label data-en="Any drivers under 25?"
-                   data-es="¿Algún conductor menor de 25 años?">
-              Any drivers under 25?
-            </label>
-            <select name="under25">
-              <option value="no" data-en="No" data-es="No">No</option>
-              <option value="yes" data-en="Yes" data-es="Sí">Yes</option>
-            </select>
-          </div>
-
-          <!-- COVERAGE -->
-          <h2 data-en="Coverage Details" data-es="Detalles de Cobertura">Coverage Details</h2>
-
-          <div class="form-group">
-            <label data-en="Do you currently have commercial auto insurance?"
-                   data-es="¿Actualmente tiene seguro de auto comercial?">
-              Do you currently have commercial auto insurance?
-            </label>
-            <select name="currentPolicy">
-              <option value="yes" data-en="Yes" data-es="Sí">Yes</option>
-              <option value="no" data-en="No" data-es="No">No</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label data-en="What level of coverage are you looking for?"
-                   data-es="¿Qué nivel de cobertura está buscando?">
-              What level of coverage are you looking for?
-            </label>
-            <select name="coverageLevel">
-              <option value="basic" data-en="Basic Liability" data-es="Responsabilidad Básica">Basic Liability</option>
-              <option value="standard" data-en="Standard Coverage" data-es="Cobertura Estándar">Standard Coverage</option>
-              <option value="full" data-en="Full Coverage" data-es="Cobertura Completa">Full Coverage</option>
-            </select>
-          </div>
-
-          <!-- SUBMIT -->
-          <button type="submit" class="btn-primary"
-            data-en="Submit Application"
-            data-es="Enviar Solicitud">
-            Submit Application
+          <button type="button" class="btn-secondary auto-add-btn" id="addVehicleBtn">
+            + Add Vehicle
           </button>
 
-        </form>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
 
-      </div>
-    </section>
+        <!-- STEP 4 -->
+        <div class="form-step" data-step="4">
+          <h2>Drivers</h2>
+          <p class="section-subtitle">List all drivers who operate your business vehicles.</p>
 
-  </main>
+          <div id="driverList" class="auto-dynamic-list"></div>
 
-  <!-- Footer injected by global.js -->
-  <footer id="aces-footer"></footer>
+          <button type="button" class="btn-secondary auto-add-btn" id="addDriverBtn">
+            + Add Driver
+          </button>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="form-step" data-step="5">
+          <h2>Coverage Options</h2>
+          <p class="section-subtitle">Choose the coverages you want quoted.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Liability Limit</label>
+              <select name="liability_limit" required>
+                <option value="">Select</option>
+                <option>$300,000 CSL</option>
+                <option>$500,000 CSL</option>
+                <option>$1,000,000 CSL</option>
+                <option>$2,000,000 CSL</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Uninsured / Underinsured Motorist</label>
+              <select name="um_uim">
+                <option value="">Select</option>
+                <option>Reject</option>
+                <option>$30,000 / $60,000</option>
+                <option>$50,000 / $100,000</option>
+                <option>$100,000 / $300,000</option>
+                <option>$300,000 CSL</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Medical Payments</label>
+              <select name="med_pay">
+                <option value="">Select</option>
+                <option>Reject</option>
+                <option>$1,000</option>
+                <option>$2,500</option>
+                <option>$5,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Hired & Non-Owned Auto</label>
+              <select name="hnoa">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — Add Coverage</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Comprehensive & Collision</label>
+              <select name="comp_collision">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — Quote with Deductibles</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Trailer Interchange</label>
+              <select name="trailer_interchange">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — Add Coverage</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Coverage Notes (optional)</label>
+              <textarea name="coverage_notes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 6 -->
+        <div class="form-step" data-step="6">
+          <h2>Loss History</h2>
+          <p class="section-subtitle">Tell us about any prior commercial auto claims.</p>
+
+          <div class="auto-toggle-row">
+            <label>I have losses to report</label>
+            <input type="checkbox" id="hasLossesToggle" />
+          </div>
+
+          <div class="auto-field">
+            <label>Loss Details</label>
+            <textarea id="lossDetails" name="loss_details" rows="4" placeholder="Type of loss, date, amount paid, etc."></textarea>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 7 -->
+        <div class="form-step" data-step="7">
+          <h2>Review & Submit</h2>
+          <p class="section-subtitle">Review your details below.</p>
+
+          <div class="review-section">
+            <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
+            <div class="review-block"><h3>Operations</h3><ul id="reviewOperations"></ul></div>
+            <div class="review-block"><h3>Vehicles</h3><ul id="reviewVehicles"></ul></div>
+            <div class="review-block"><h3>Drivers</h3><ul id="reviewDrivers"></ul></div>
+            <div class="review-block"><h3>Coverage</h3><ul id="reviewCoverage"></ul></div>
+            <div class="review-block"><h3>Losses</h3><ul id="reviewLosses"></ul></div>
+          </div>
+
+          <div class="upload-row">
+            <label>Upload Prior Policy, MVRs, or Fleet List (optional)</label>
+            <input type="file" name="supporting_documents" />
+          </div>
+
+          <div class="consent-row">
+            <input type="checkbox" id="consentCheckbox" required />
+            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="submit" class="btn-primary">Submit Application</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<footer id="aces-footer"></footer>
+
+<script src="application-commercial-auto.js"></script>
 
 </body>
 </html>
