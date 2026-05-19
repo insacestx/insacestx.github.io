@@ -1,136 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Renters Insurance Application | ACES Insurance Services</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Global header/footer + language toggle -->
+  <link rel="stylesheet" href="style.css" />
   <script src="global.js" defer></script>
-
-  <!-- Page-specific logic -->
-  <script src="application-renters.js" defer></script>
 </head>
 
-<body class="dark-theme">
+<body>
 
-  <!-- Header injected by global.js -->
-  <header id="aces-header"></header>
+<header id="aces-header"></header>
 
-  <main id="main-content">
+<main class="fade-in">
 
-    <!-- HERO -->
-    <section class="page-hero">
-      <div class="page-hero-inner">
-        <h1 data-en="Renters Insurance Application" data-es="Solicitud de Seguro de Inquilinos">
-          Renters Insurance Application
-        </h1>
-        <p data-en="A quick application to help us find the best renters policy for you."
-           data-es="Una solicitud rápida para ayudarle a encontrar la mejor póliza de inquilinos.">
-          A quick application to help us find the best renters policy for you.
-        </p>
+  <!-- HERO -->
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
+      <h1 data-en="Renters Insurance Application" data-es="Solicitud de Seguro de Inquilinos">
+        Renters Insurance Application
+      </h1>
+
+      <p data-en="Tell us about your rental property, belongings, and coverage needs. An ACES agent will review and follow up with tailored options."
+         data-es="Cuéntenos sobre su propiedad de alquiler, sus pertenencias y sus necesidades de cobertura. Un agente de ACES revisará y le dará opciones personalizadas.">
+        Tell us about your rental property, belongings, and coverage needs. An ACES agent will review and follow up with tailored options.
+      </p>
+
+      <!-- Wizard Steps -->
+      <div class="auto-wizard-steps" id="rentersWizardSteps">
+        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Applicant</div>
+        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Property</div>
+        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Personal Property</div>
+        <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span>Liability &amp; Add-Ons</div>
+        <div class="auto-wizard-step" data-step="5"><span class="step-index">5</span>Claims History</div>
+        <div class="auto-wizard-step" data-step="6"><span class="step-index">6</span>Review &amp; Submit</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FORM SECTION -->
-    <section class="form-section">
-      <div class="form-container">
+  <!-- FORM -->
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
 
-        <h2 data-en="Your Information" data-es="Su Información">Your Information</h2>
+      <form id="rentersAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New Renters Insurance Application - ACES" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
 
-        <form id="rentersAppForm">
+        <!-- STEP 1 -->
+        <div class="form-step active" data-step="1">
+          <h2>Applicant Information</h2>
+          <p class="section-subtitle">Tell us who this policy is for.</p>
 
-          <!-- CONTACT INFO -->
-          <div class="form-group">
-            <label data-en="Full Name" data-es="Nombre Completo">Full Name</label>
-            <input type="text" name="fullName" required>
+          <div class="auto-grid-2">
+            <div class="auto-field"><label>First Name</label><input name="first_name" required /></div>
+            <div class="auto-field"><label>Last Name</label><input name="last_name" required /></div>
+            <div class="auto-field"><label>Date of Birth</label><input type="date" name="dob" required /></div>
+            <div class="auto-field"><label>Email</label><input type="email" name="email" required /></div>
+            <div class="auto-field"><label>Phone</label><input type="tel" name="phone" required /></div>
+
+            <div class="auto-field">
+              <label>Preferred Contact</label>
+              <select name="contact_method">
+                <option value="phone">Phone Call</option>
+                <option value="text">Text Message</option>
+                <option value="email">Email</option>
+              </select>
+            </div>
+
+            <div class="auto-field"><label>Street Address</label><input name="address" required /></div>
+            <div class="auto-field"><label>City</label><input name="city" required /></div>
+            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
+            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
           </div>
 
-          <div class="form-group">
-            <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-            <input type="tel" name="phone" required>
+          <div class="app-actions">
+            <div></div>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="form-step" data-step="2">
+          <h2>Property Details</h2>
+          <p class="section-subtitle">Tell us about the place you rent.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Residence Type</label>
+              <select name="residence_type" required>
+                <option value="">Select</option>
+                <option>Apartment</option>
+                <option>Townhome</option>
+                <option>Duplex</option>
+                <option>Single-Family Home</option>
+                <option>Condo</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="auto-field"><label>Year Built (approx.)</label><input name="year_built" /></div>
+
+            <div class="auto-field">
+              <label>Floor Level</label>
+              <select name="floor_level">
+                <option value="">Select</option>
+                <option>1st Floor</option>
+                <option>2nd Floor</option>
+                <option>3rd Floor</option>
+                <option>4th Floor or Higher</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Security Features</label>
+              <select name="security">
+                <option value="">None</option>
+                <option>Gated Community</option>
+                <option>Security System</option>
+                <option>Smart Locks</option>
+                <option>On-Site Security</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Pets</label>
+              <select name="pets">
+                <option value="">None</option>
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Multiple Pets</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Landlord Requirements (optional upload)</label>
+              <input type="file" name="landlord_requirements" />
+            </div>
           </div>
 
-          <div class="form-group">
-            <label data-en="Email Address" data-es="Correo Electrónico">Email Address</label>
-            <input type="email" name="email" required>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 3 -->
+        <div class="form-step" data-step="3">
+          <h2>Personal Property Coverage</h2>
+          <p class="section-subtitle">Tell us about the value of your belongings.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Estimated Value of Personal Property</label>
+              <select name="property_value" required>
+                <option value="">Select</option>
+                <option>Under $10,000</option>
+                <option>$10,000 - $20,000</option>
+                <option>$20,000 - $30,000</option>
+                <option>$30,000 - $50,000</option>
+                <option>Over $50,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>High-Value Items (Jewelry, Electronics, etc.)</label>
+              <select name="high_value_items">
+                <option value="">None</option>
+                <option>Yes — I have items over $1,500</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>List High-Value Items (optional)</label>
+              <textarea name="high_value_list" rows="3" placeholder="Jewelry, cameras, collectibles, etc."></textarea>
+            </div>
+
+            <div class="auto-field">
+              <label>Storage Unit Coverage Needed?</label>
+              <select name="storage_unit">
+                <option value="">No</option>
+                <option>Yes — I store belongings off-site</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Coverage Type</label>
+              <select name="coverage_type">
+                <option value="">Select</option>
+                <option>Replacement Cost (Recommended)</option>
+                <option>Actual Cash Value</option>
+              </select>
+            </div>
           </div>
 
-          <!-- PROPERTY INFO -->
-          <h2 data-en="Property Details" data-es="Detalles de la Propiedad">Property Details</h2>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
 
-          <div class="form-group">
-            <label data-en="Rental Address" data-es="Dirección de la Propiedad">Rental Address</label>
-            <input type="text" name="address" required>
+        <!-- STEP 4 -->
+        <div class="form-step" data-step="4">
+          <h2>Liability & Add-Ons</h2>
+          <p class="section-subtitle">Choose your liability limits and optional protections.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Personal Liability Limit</label>
+              <select name="liability_limit" required>
+                <option value="">Select</option>
+                <option>$100,000</option>
+                <option>$300,000</option>
+                <option>$500,000</option>
+                <option>$1,000,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Medical Payments</label>
+              <select name="medical_payments">
+                <option value="">Select</option>
+                <option>$1,000</option>
+                <option>$2,000</option>
+                <option>$5,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Loss of Use Coverage</label>
+              <select name="loss_of_use">
+                <option value="">Select</option>
+                <option>Yes — Include</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Water Backup Coverage</label>
+              <select name="water_backup">
+                <option value="">Select</option>
+                <option>Yes — Add Coverage</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Identity Theft Protection</label>
+              <select name="identity_theft">
+                <option value="">Select</option>
+                <option>Yes — Add Coverage</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Insured (Landlord Name)</label>
+              <input name="additional_insured" placeholder="Landlord or property management company" />
+            </div>
           </div>
 
-          <div class="form-group">
-            <label data-en="Type of Residence" data-es="Tipo de Residencia">Type of Residence</label>
-            <select name="residenceType" required>
-              <option value="apartment" data-en="Apartment" data-es="Apartamento">Apartment</option>
-              <option value="house" data-en="House" data-es="Casa">House</option>
-              <option value="townhome" data-en="Townhome" data-es="Casa Adosada">Townhome</option>
-            </select>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="form-step" data-step="5">
+          <h2>Claims History</h2>
+          <p class="section-subtitle">Tell us about any past renters or home claims.</p>
+
+          <div class="auto-toggle-row">
+            <label>I have claims to report</label>
+            <input type="checkbox" id="hasClaimsToggle" />
           </div>
 
-          <div class="form-group">
-            <label data-en="Do you currently have renters insurance?"
-                   data-es="¿Actualmente tiene seguro de inquilinos?">
-              Do you currently have renters insurance?
-            </label>
-            <select name="currentPolicy">
-              <option value="yes" data-en="Yes" data-es="Sí">Yes</option>
-              <option value="no" data-en="No" data-es="No">No</option>
-            </select>
+          <div class="auto-field">
+            <label>Claim Details</label>
+            <textarea id="claimDetails" name="claim_details" rows="4" placeholder="Type of loss, date, amount paid, etc."></textarea>
           </div>
 
-          <!-- HYBRID COVERAGE QUESTIONS -->
-          <h2 data-en="Coverage Details" data-es="Detalles de Cobertura">Coverage Details</h2>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 6 -->
+        <div class="form-step" data-step="6">
+          <h2>Review & Submit</h2>
+          <p class="section-subtitle">Review your details below.</p>
 
-          <div class="form-group">
-            <label data-en="Estimated value of your belongings"
-                   data-es="Valor estimado de sus pertenencias">
-              Estimated value of your belongings
-            </label>
-            <select name="propertyValue">
-              <option value="under10k" data-en="Under $10,000" data-es="Menos de $10,000">Under $10,000</option>
-              <option value="10k-20k" data-en="$10,000 - $20,000" data-es="$10,000 - $20,000">$10,000 - $20,000</option>
-              <option value="20k-30k" data-en="$20,000 - $30,000" data-es="$20,000 - $30,000">$20,000 - $30,000</option>
-              <option value="over30k" data-en="Over $30,000" data-es="Más de $30,000">Over $30,000</option>
-            </select>
+          <div class="review-section">
+            <div class="review-block"><h3>Applicant</h3><ul id="reviewApplicant"></ul></div>
+            <div class="review-block"><h3>Property</h3><ul id="reviewProperty"></ul></div>
+            <div class="review-block"><h3>Personal Property</h3><ul id="reviewPersonalProperty"></ul></div>
+            <div class="review-block"><h3>Liability & Add-Ons</h3><ul id="reviewLiability"></ul></div>
+            <div class="review-block"><h3>Claims</h3><ul id="reviewClaims"></ul></div>
           </div>
 
-          <div class="form-group">
-            <label data-en="Any prior claims in the last 3 years?"
-                   data-es="¿Algún reclamo en los últimos 3 años?">
-              Any prior claims in the last 3 years?
-            </label>
-            <select name="claims">
-              <option value="none" data-en="No claims" data-es="Sin reclamos">No claims</option>
-              <option value="theft" data-en="Theft" data-es="Robo">Theft</option>
-              <option value="fire" data-en="Fire" data-es="Incendio">Fire</option>
-              <option value="water" data-en="Water Damage" data-es="Daño por Agua">Water Damage</option>
-            </select>
+          <div class="upload-row">
+            <label>Upload Lease Agreement or Prior Policy (optional)</label>
+            <input type="file" name="supporting_documents" />
           </div>
 
-          <!-- SUBMIT -->
-          <button type="submit" class="btn-primary"
-            data-en="Submit Application"
-            data-es="Enviar Solicitud">
-            Submit Application
-          </button>
+          <div class="consent-row">
+            <input type="checkbox" id="consentCheckbox" required />
+            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
+          </div>
 
-        </form>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="submit" class="btn-primary">Submit Application</button>
+            </div>
+          </div>
+        </div>
 
-      </div>
-    </section>
+      </form>
 
-  </main>
+    </div>
+  </section>
 
-  <!-- Footer injected by global.js -->
-  <footer id="aces-footer"></footer>
+</main>
+
+<footer id="aces-footer"></footer>
+
+<script src="application-renters.js"></script>
 
 </body>
 </html>
