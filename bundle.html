@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ACES Bundle Quote Builder | ACES Insurance Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="global.js" defer></script>
+  <script src="bundle.js" defer></script>
+</head>
+
+<body class="dark-theme">
+  <header id="aces-header"></header>
+
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <h1 data-en="ACES Bundle Quote Builder" data-es="Constructor de Cotizaciones de Paquetes ACES">
+          ACES Bundle Quote Builder
+        </h1>
+        <p data-en="Build a custom multi-policy quote and let our team shop the best options for you."
+           data-es="Cree una cotización de múltiples pólizas y deje que nuestro equipo busque las mejores opciones para usted.">
+          Build a custom multi-policy quote and let our team shop the best options for you.
+        </p>
+      </div>
+    </section>
+
+    <!-- WIZARD -->
+    <section class="form-section">
+      <div class="form-container">
+
+        <!-- Wizard Steps Indicator -->
+        <div class="wizard-steps">
+          <div class="wizard-step active" data-step="1"
+               data-en="Policies" data-es="Pólizas">Policies</div>
+          <div class="wizard-step" data-step="2"
+               data-en="Details" data-es="Detalles">Details</div>
+          <div class="wizard-step" data-step="3"
+               data-en="Coverage" data-es="Cobertura">Coverage</div>
+          <div class="wizard-step" data-step="4"
+               data-en="Contact" data-es="Contacto">Contact</div>
+        </div>
+
+        <form id="bundleForm">
+
+          <!-- STEP 1: SELECT POLICIES -->
+          <div class="form-step active" data-step="1">
+            <h2 data-en="Select the policies you want to bundle"
+                data-es="Seleccione las pólizas que desea agrupar">
+              Select the policies you want to bundle
+            </h2>
+
+            <div class="form-grid">
+              <label class="checkbox-card">
+                <input type="checkbox" class="bundle-check" value="auto">
+                <span data-en="Auto" data-es="Auto">Auto</span>
+              </label>
+
+              <label class="checkbox-card">
+                <input type="checkbox" class="bundle-check" value="home">
+                <span data-en="Homeowners" data-es="Propietarios">Homeowners</span>
+              </label>
+
+              <label class="checkbox-card">
+                <input type="checkbox" class="bundle-check" value="renters">
+                <span data-en="Renters" data-es="Inquilinos">Renters</span>
+              </label>
+
+              <label class="checkbox-card">
+                <input type="checkbox" class="bundle-check" value="condo">
+                <span data-en="Condo" data-es="Condominio">Condo</span>
+              </label>
+
+              <label class="checkbox-card">
+                <input type="checkbox" class="bundle-check" value="umbrella">
+                <span data-en="Umbrella" data-es="Umbrella">Umbrella</span>
+              </label>
+
+              <label class="checkbox-card">
+                <input type="checkbox" class="bundle-check" value="flood">
+                <span data-en="Flood" data-es="Inundación">Flood</span>
+              </label>
+            </div>
+
+            <div class="wizard-nav">
+              <button type="button" class="btn-primary next-step" data-next="2"
+                data-en="Next: Details" data-es="Siguiente: Detalles">
+                Next: Details
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: DETAILS -->
+          <div class="form-step" data-step="2">
+            <h2 data-en="Tell us a bit more about each policy"
+                data-es="Cuéntenos un poco más sobre cada póliza">
+              Tell us a bit more about each policy
+            </h2>
+
+            <div id="bundleDetailsContainer"></div>
+
+            <div class="wizard-nav">
+              <button type="button" class="btn-secondary prev-step" data-prev="1"
+                data-en="Back" data-es="Atrás">
+                Back
+              </button>
+              <button type="button" class="btn-primary next-step" data-next="3"
+                data-en="Next: Coverage" data-es="Siguiente: Cobertura">
+                Next: Coverage
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 3: COVERAGE -->
+          <div class="form-step" data-step="3">
+            <h2 data-en="Coverage preferences"
+                data-es="Preferencias de cobertura">
+              Coverage preferences
+            </h2>
+
+            <div id="bundleCoverageContainer"></div>
+
+            <div class="wizard-nav">
+              <button type="button" class="btn-secondary prev-step" data-prev="2"
+                data-en="Back" data-es="Atrás">
+                Back
+              </button>
+              <button type="button" class="btn-primary next-step" data-next="4"
+                data-en="Next: Contact" data-es="Siguiente: Contacto">
+                Next: Contact
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 4: CONTACT -->
+          <div class="form-step" data-step="4">
+            <h2 data-en="Your contact information"
+                data-es="Su información de contacto">
+              Your contact information
+            </h2>
+
+            <div class="form-grid">
+              <div class="form-field">
+                <label data-en="Full Name" data-es="Nombre Completo">Full Name</label>
+                <input type="text" name="fullName" required>
+              </div>
+
+              <div class="form-field">
+                <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+                <input type="tel" name="phone" required>
+              </div>
+
+              <div class="form-field">
+                <label data-en="Email Address" data-es="Correo Electrónico">Email Address</label>
+                <input type="email" name="email" required>
+              </div>
+
+              <div class="form-field">
+                <label data-en="Primary Address" data-es="Dirección Principal">Primary Address</label>
+                <input type="text" name="address">
+              </div>
+
+              <div class="form-field">
+                <label data-en="Additional Notes" data-es="Notas Adicionales">Additional Notes</label>
+                <textarea name="notes" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="wizard-nav">
+              <button type="button" class="btn-secondary prev-step" data-prev="3"
+                data-en="Back" data-es="Atrás">
+                Back
+              </button>
+              <button type="submit" class="btn-primary"
+                data-en="Submit Bundle Quote" data-es="Enviar Cotización de Paquete">
+                Submit Bundle Quote
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="aces-footer"></footer>
+</body>
+</html>
