@@ -1,10 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
+// application-umbrella.js
+document.addEventListener("DOMContentLoaded", () => {
   initRoundRobinEmail();
   initWizardNav();
-  initUnderlyingPolicies();
 });
 
-/* ---------- ROUND ROBIN ---------- */
+/* -----------------------------------
+   ROUND ROBIN EMAIL ROUTING
+----------------------------------- */
 
 function getRoundRobinList() {
   return [
@@ -14,7 +16,7 @@ function getRoundRobinList() {
     "robert@insaces.com",
     "george@insaces.com",
     "jimmy@insaces.com",
-    "office@insaces.com" // Renee
+    "office@insaces.com"
   ];
 }
 
@@ -41,87 +43,123 @@ function initRoundRobinEmail() {
   }
 }
 
-/* ---------- UNDERLYING POLICIES ---------- */
-
-let underlyingCount = 0;
-
-function initUnderlyingPolicies() {
-  const container = document.getElementById("underlyingContainer");
-  const addBtn = document.getElementById("addUnderlyingBtn");
-
-  addBtn.addEventListener("click", () => addUnderlyingPolicy(container));
-  addUnderlyingPolicy(container);
-}
-
-function addUnderlyingPolicy(container) {
-  underlyingCount++;
-  const idx = underlyingCount;
-
-  const card = document.createElement("div");
-  card.className = "umbrella-card fade-in";
-  card.dataset.index = idx;
-
-  card.innerHTML = `
-    <div class="umbrella-card-header">
-      <h3>Policy #${idx}</h3>
-      <button type="button" class="umbrella-remove-btn" data-remove="policy">×</button>
-    </div>
-    <div class="form-grid">
-      <div class="form-field">
-        <label>Policy Type</label>
-        <select name="policy_${idx}_type" required>
-          <option value="">Select...</option>
-          <option value="Auto">Auto</option>
-          <option value="Homeowners">Homeowners</option>
-          <option value="Renters">Renters</option>
-          <option value="Condo">Condo</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div class="form-field">
-        <label>Carrier</label>
-        <input type="text" name="policy_${idx}_carrier" required>
-      </div>
-      <div class="form-field">
-        <label>Liability Limit</label>
-        <input type="text" name="policy_${idx}_limit" required>
-      </div>
-    </div>
-  `;
-
-  container.appendChild(card);
-
-  card.querySelector("[data-remove='policy']").addEventListener("click", () => {
-    container.removeChild(card);
-  });
-}
-
-/* ---------- WIZARD NAV ---------- */
+/* -----------------------------------
+   ACES 2026 WIZARD NAVIGATION ENGINE
+----------------------------------- */
 
 function initWizardNav() {
-  const steps = document.querySelectorAll(".form-step");
-  const indicators = document.querySelectorAll(".wizard-step");
+  const form = document.getElementById("umbrellaAppForm");
+  const steps = Array.from(document.querySelectorAll(".form-step"));
+  const indicators = Array.from(document.querySelectorAll("#umbrellaWizardSteps .auto-wizard-step"));
+  const consentCheckbox = document.getElementById("consentCheckbox");
 
-  function showStep(stepNumber) {
-    steps.forEach(step => {
-      step.classList.toggle("active", step.dataset.step === String(stepNumber));
+  let currentStep = 0;
+
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.classList.toggle("active", i === index);
     });
-    indicators.forEach(ind => {
-      ind.classList.toggle("active", ind.dataset.step === String(stepNumber));
+
+    indicators.forEach((ind, i) => {
+      ind.classList.toggle("active", i === index);
+      ind.classList.toggle("completed", i < index);
+    });
+
+    currentStep = index;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function goNext() {
+    if (currentStep < steps.length - 1) {
+      showStep(currentStep + 1);
+      if (currentStep === 2) buildReview();
+    }
+  }
+
+  function goPrev() {
+    if (currentStep > 0) showStep(currentStep - 1);
+  }
+
+  document.querySelectorAll("[data-next-step]").forEach(btn => {
+    btn.addEventListener("click", goNext);
+  });
+
+  document.querySelectorAll("[data-prev-step]").forEach(btn => {
+    btn.addEventListener("click", goPrev);
+  });
+
+  indicators.forEach((ind, index) => {
+    ind.addEventListener("click", () => {
+      if (index <= currentStep) showStep(index);
+    });
+  });
+
+  /* -----------------------------------
+     REVIEW BUILDER
+  ----------------------------------- */
+
+  function getVal(name) {
+    return form.elements[name] ? form.elements[name].value.trim() : "";
+  }
+
+  function fillList(id, items) {
+    const ul = document.getElementById(id);
+    if (!ul) return;
+    ul.innerHTML = "";
+    items.forEach(item => {
+      if (item.value) {
+        const li = document.createElement("li");
+        li.textContent = `${item.label}: ${item.value}`;
+        ul.appendChild(li);
+      }
     });
   }
 
-  document.querySelectorAll(".next-step").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const next = btn.getAttribute("data-next");
-      if (next) showStep(next);
-    });
+  function buildReview() {
+    /* PERSONAL */
+    fillList("reviewPersonal", [
+      { label: "First Name", value: getVal("first_name") },
+      { label: "Last Name", value: getVal("last_name") },
+      { label: "Phone", value: getVal("phone") },
+      { label: "Email", value: getVal("email") },
+      { label: "Address", value: getVal("address") },
+      { label: "City", value: getVal("city") },
+      { label: "State", value: getVal("state") },
+      { label: "ZIP", value: getVal("zip") }
+    ]);
+
+    /* EXISTING POLICIES */
+    fillList("reviewPolicies", [
+      { label: "Auto Policy", value: getVal("auto_policy") },
+      { label: "Home/Renters Policy", value: getVal("home_policy") },
+      { label: "Other Policies", value: getVal("other_policies") }
+    ]);
+
+    /* COVERAGE */
+    fillList("reviewCoverage", [
+      { label: "Umbrella Limit", value: getVal("umbrella_limit") },
+      { label: "Young Drivers", value: getVal("young_drivers") },
+      { label: "Rental Properties", value: getVal("rental_properties") },
+      { label: "Recreational Vehicles", value: getVal("recreational_vehicles") },
+      { label: "Prior Claims", value: getVal("prior_claims") },
+      { label: "Claim Description", value: getVal("claim_description") },
+      { label: "Coverage Notes", value: getVal("coverage_notes") }
+    ]);
+  }
+
+  /* -----------------------------------
+     SUBMIT VALIDATION
+  ----------------------------------- */
+
+  form.addEventListener("submit", e => {
+    if (!consentCheckbox.checked) {
+      e.preventDefault();
+      alert("Please confirm that the information provided is accurate before submitting.");
+      return;
+    }
+    buildReview();
   });
 
-  document.querySelectorAll(".prev-step").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const prev = btn.getAttribute("data-prev");
-      if (prev) showStep(prev);
-    });
-  });
+  /* INIT */
+  showStep(0);
 }
