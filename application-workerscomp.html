@@ -26,7 +26,6 @@
         Tell us about your business and payroll. An ACES agent will review and follow up with tailored options.
       </p>
 
-      <!-- Wizard Steps -->
       <div class="auto-wizard-steps" id="wcWizardSteps">
         <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
         <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Payroll</div>
@@ -44,6 +43,7 @@
         <input type="hidden" name="_subject" value="New Workers Comp Application - ACES" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="_honey" style="display:none" />
+        <input type="hidden" id="rrEmail" name="rrEmail" />
 
         <!-- STEP 1 -->
         <div class="form-step active" data-step="1">
@@ -78,36 +78,28 @@
 
             <div class="auto-field auto-field-full">
               <label>Describe Your Business Operations</label>
-              <textarea name="business_description" rows="3" placeholder="Construction, retail, restaurant, contracting, etc." required></textarea>
+              <textarea name="business_description" rows="3" required></textarea>
             </div>
           </div>
 
           <div class="app-actions">
             <div></div>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
+            <div class="app-actions-right"><button type="button" class="btn-primary" data-next-step>Next</button></div>
           </div>
         </div>
+
         <!-- STEP 2 -->
         <div class="form-step" data-step="2">
           <h2>Payroll Breakdown</h2>
           <p class="section-subtitle">Tell us about your payroll for the upcoming policy period.</p>
 
           <div class="auto-grid-2">
-            <div class="auto-field">
-              <label>Total Annual Payroll</label>
-              <input name="total_payroll" placeholder="Example: 250000" required />
-            </div>
-
-            <div class="auto-field">
-              <label>Number of Employees</label>
-              <input name="employee_count" placeholder="Example: 8" required />
-            </div>
+            <div class="auto-field"><label>Total Annual Payroll</label><input name="total_payroll" required /></div>
+            <div class="auto-field"><label>Number of Employees</label><input name="employee_count" required /></div>
 
             <div class="auto-field auto-field-full">
               <label>Primary Job Duties</label>
-              <textarea name="job_duties" rows="3" placeholder="Construction labor, clerical, sales, restaurant staff, etc." required></textarea>
+              <textarea name="job_duties" rows="3" required></textarea>
             </div>
 
             <div class="auto-field auto-field-full">
@@ -128,9 +120,7 @@
 
           <div class="app-actions">
             <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
+            <div class="app-actions-right"><button type="button" class="btn-primary" data-next-step>Next</button></div>
           </div>
         </div>
 
@@ -151,11 +141,10 @@
 
           <div class="app-actions">
             <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
+            <div class="app-actions-right"><button type="button" class="btn-primary" data-next-step>Next</button></div>
           </div>
         </div>
+
         <!-- STEP 4 -->
         <div class="form-step" data-step="4">
           <h2>Review & Submit</h2>
@@ -179,9 +168,7 @@
 
           <div class="app-actions">
             <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="submit" class="btn-primary">Submit Application</button>
-            </div>
+            <div class="app-actions-right"><button type="submit" class="btn-primary">Submit Application</button></div>
           </div>
         </div>
 
