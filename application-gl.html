@@ -1,618 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title data-en="General Liability Application | ACES Insurance Services"
-        data-es="Solicitud de Responsabilidad General | ACES Insurance Services">
-  General Liability Application | ACES Insurance Services
-</title>
-
-<link rel="stylesheet" href="style.css">
-<script src="global.js" defer></script>
-<script src="application-gl.js" defer></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>General Liability Application | ACES Insurance Services</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="global.js" defer></script>
 </head>
+
 <body>
 
 <header id="aces-header"></header>
 
-<section class="small-hero fade-in">
-  <div class="small-hero-content">
-    <h1 data-en="General Liability Application"
-        data-es="Solicitud de Responsabilidad General">
-      General Liability Application
-    </h1>
-    <p data-en="Provide your business details to receive a tailored general liability quote."
-       data-es="Proporcione los datos de su negocio para recibir una cotización de responsabilidad general.">
-      Provide your business details to receive a tailored general liability quote.
-    </p>
-  </div>
-</section>
+<main class="fade-in">
 
-<section class="app-section fade-in">
-  <div class="gl-app-wrapper">
+  <!-- HERO -->
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
+      <h1 data-en="General Liability Insurance Application" data-es="Solicitud de Seguro de Responsabilidad General">
+        General Liability Insurance Application
+      </h1>
 
-    <!-- PROGRESS STEPS -->
-    <div class="gl-steps">
-      <div class="gl-step" data-step="1">
-        <span>1</span>
-        <p data-en="Business" data-es="Negocio">Business</p>
-      </div>
-      <div class="gl-step" data-step="2">
-        <span>2</span>
-        <p data-en="Coverage" data-es="Cobertura">Coverage</p>
-      </div>
-      <div class="gl-step" data-step="3">
-        <span>3</span>
-        <p data-en="Operations" data-es="Operaciones">Operations</p>
-      </div>
-      <div class="gl-step" data-step="4">
-        <span>4</span>
-        <p data-en="Claims" data-es="Reclamos">Claims</p>
-      </div>
-      <div class="gl-step" data-step="5">
-        <span>5</span>
-        <p data-en="Documents & Submit" data-es="Documentos y Envío">Documents & Submit</p>
+      <p data-en="Tell us about your business operations and liability needs. An ACES agent will review and follow up with tailored options."
+         data-es="Cuéntenos sobre su negocio y necesidades de responsabilidad. Un agente de ACES revisará y le dará opciones personalizadas.">
+        Tell us about your business operations and liability needs. An ACES agent will review and follow up with tailored options.
+      </p>
+
+      <!-- Wizard Steps -->
+      <div class="auto-wizard-steps" id="glWizardSteps">
+        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
+        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Operations</div>
+        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Review</div>
       </div>
     </div>
+  </section>
 
-    <!-- FORM -->
-    <form id="glAppForm"
-          class="gl-form"
-          method="POST"
-          action="https://formsubmit.co/office@insaces.com"
-          enctype="multipart/form-data">
+  <!-- FORM -->
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
 
-      <!-- FormSubmit basics -->
-      <input type="hidden" name="_subject" value="New General Liability Application - ACES">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="Application Type" value="General Liability">
+      <form id="glAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New General Liability Application - ACES" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
+        <input type="hidden" id="rrEmail" name="rrEmail" />
 
-      <!-- STEP 1: BUSINESS INFO -->
-      <div class="gl-step-panel" data-step="1">
-        <h2 class="section-title"
-            data-en="Business Information"
-            data-es="Información del Negocio">
-          Business Information
-        </h2>
+        <!-- STEP 1 -->
+        <div class="form-step active" data-step="1">
+          <h2>Business Information</h2>
+          <p class="section-subtitle">Tell us about your company.</p>
 
-        <div class="gl-grid">
-          <div class="gl-field gl-field-full">
-            <label data-en="Legal Business Name" data-es="Nombre Legal del Negocio">
-              Legal Business Name
-            </label>
-            <input type="text" name="Legal Business Name" required>
+          <div class="auto-grid-2">
+
+            <div class="auto-field"><label>Business Name</label><input name="business_name" required /></div>
+            <div class="auto-field"><label>DBA (if applicable)</label><input name="dba" /></div>
+
+            <div class="auto-field">
+              <label>Business Type</label>
+              <select name="business_type" required>
+                <option value="">Select</option>
+                <option>LLC</option>
+                <option>Corporation</option>
+                <option>Sole Proprietor</option>
+                <option>Partnership</option>
+                <option>Non-Profit</option>
+              </select>
+            </div>
+
+            <div class="auto-field"><label>EIN</label><input name="ein" /></div>
+
+            <div class="auto-field"><label>Business Phone</label><input name="business_phone" required /></div>
+            <div class="auto-field"><label>Business Email</label><input type="email" name="business_email" required /></div>
+
+            <div class="auto-field auto-field-full"><label>Business Address</label><input name="business_address" required /></div>
+            <div class="auto-field"><label>City</label><input name="city" required /></div>
+            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
+            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+
+            <div class="auto-field auto-field-full">
+              <label>Describe Your Business Operations</label>
+              <textarea name="business_description" rows="3" placeholder="Construction, retail, consulting, contracting, etc." required></textarea>
+            </div>
+
           </div>
 
-          <div class="gl-field gl-field-full">
-            <label data-en="DBA (if any)" data-es="DBA (si aplica)">
-              DBA (if any)
-            </label>
-            <input type="text" name="DBA">
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Business Address" data-es="Dirección del Negocio">
-              Business Address
-            </label>
-            <input type="text" name="Business Address" required>
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Mailing Address (if different)"
-                   data-es="Dirección Postal (si es diferente)">
-              Mailing Address (if different)
-            </label>
-            <input type="text" name="Mailing Address">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="City" data-es="Ciudad">City</label>
-            <input type="text" name="City" required>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="State" data-es="Estado">State</label>
-            <input type="text" name="State" value="TX" required>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label>
-            <input type="text" name="ZIP" required>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="FEIN or SSN" data-es="FEIN o SSN">
-              FEIN or SSN
-            </label>
-            <input type="text" name="FEIN or SSN">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Business Type" data-es="Tipo de Negocio">
-              Business Type
-            </label>
-            <select name="Business Type">
-              <option value="LLC">LLC</option>
-              <option value="Corporation" data-en="Corporation" data-es="Corporación">Corporation</option>
-              <option value="Sole Proprietor" data-en="Sole Proprietor" data-es="Propietario Único">Sole Proprietor</option>
-              <option value="Partnership" data-en="Partnership" data-es="Sociedad">Partnership</option>
-              <option value="Nonprofit" data-en="Nonprofit" data-es="Sin Fines de Lucro">Nonprofit</option>
-              <option value="Other" data-en="Other" data-es="Otro">Other</option>
-            </select>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Years in Business" data-es="Años en el Negocio">
-              Years in Business
-            </label>
-            <input type="number" min="0" max="100" name="Years in Business">
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Website" data-es="Sitio Web">Website</label>
-            <input type="url" name="Website">
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Description of Operations"
-                   data-es="Descripción de Operaciones">
-              Description of Operations
-            </label>
-            <textarea name="Description of Operations" rows="4"
-              placeholder="Briefly describe what your business does day-to-day."></textarea>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Annual Gross Revenue"
-                   data-es="Ingresos Brutos Anuales">
-              Annual Gross Revenue
-            </label>
-            <input type="text" name="Annual Gross Revenue">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Annual Payroll"
-                   data-es="Nómina Anual">
-              Annual Payroll
-            </label>
-            <input type="text" name="Annual Payroll">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Number of Employees"
-                   data-es="Número de Empleados">
-              Number of Employees
-            </label>
-            <input type="number" min="0" name="Number of Employees">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Do you use subcontractors?"
-                   data-es="¿Utiliza subcontratistas?">
-              Do you use subcontractors?
-            </label>
-            <select name="Uses Subcontractors" id="usesSubcontractors">
-              <option value="No" data-en="No" data-es="No">No</option>
-              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
-            </select>
-          </div>
-
-          <div class="gl-field gl-subcontractor-extra">
-            <label data-en="% of work subcontracted"
-                   data-es="% del trabajo subcontratado">
-              % of work subcontracted
-            </label>
-            <input type="text" name="% of Work Subcontracted">
-          </div>
-
-          <div class="gl-field gl-subcontractor-extra">
-            <label data-en="Certificates required for subcontractors?"
-                   data-es="¿Requiere certificados de seguro a subcontratistas?">
-              Certificates required for subcontractors?
-            </label>
-            <select name="Certificates Required for Subs">
-              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
-              <option value="No" data-en="No" data-es="No">No</option>
-            </select>
+          <div class="app-actions">
+            <div></div>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
           </div>
         </div>
-      </div>
+        <!-- STEP 2 -->
+        <div class="form-step" data-step="2">
+          <h2>Operations & Coverage Options</h2>
+          <p class="section-subtitle">Tell us about your operations, exposures, and coverage needs.</p>
 
-      <!-- STEP 2: COVERAGE -->
-      <div class="gl-step-panel" data-step="2">
-        <h2 class="section-title"
-            data-en="Coverage Details"
-            data-es="Detalles de Cobertura">
-          Coverage Details
-        </h2>
+          <div class="auto-grid-2">
 
-        <div class="gl-grid">
-          <div class="gl-field">
-            <label data-en="Desired Effective Date"
-                   data-es="Fecha de Inicio Deseada">
-              Desired Effective Date
-            </label>
-            <input type="date" name="Desired Effective Date">
+            <!-- OPERATIONS -->
+            <div class="auto-field">
+              <label>Annual Gross Revenue</label>
+              <input name="annual_revenue" placeholder="Example: 250000" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Number of Employees</label>
+              <input name="num_employees" placeholder="Example: 5" />
+            </div>
+
+            <div class="auto-field">
+              <label>Do you perform work at customer locations?</label>
+              <select name="work_on_site" required>
+                <option value="">Select</option>
+                <option>Yes — Frequently</option>
+                <option>Yes — Occasionally</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Any subcontractors used?</label>
+              <select name="subcontractors">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — Less than 25%</option>
+                <option>Yes — More than 25%</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Describe any hazardous or high‑risk operations (optional)</label>
+              <textarea name="hazard_ops" rows="3"></textarea>
+            </div>
+
+            <!-- COVERAGE OPTIONS -->
+            <div class="auto-field">
+              <label>Requested General Liability Limit</label>
+              <select name="gl_limit" required>
+                <option value="">Select</option>
+                <option>$300,000</option>
+                <option>$500,000</option>
+                <option>$1,000,000</option>
+                <option>$2,000,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Products & Completed Operations Coverage?</label>
+              <select name="products_completed_ops">
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Not Applicable</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Any prior liability claims?</label>
+              <select name="prior_claims">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — 1 Claim</option>
+                <option>Yes — Multiple Claims</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>If yes, briefly describe the claim(s) (optional)</label>
+              <textarea name="claim_description" rows="3"></textarea>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Coverage Notes (optional)</label>
+              <textarea name="coverage_notes" rows="3"></textarea>
+            </div>
+
           </div>
 
-          <div class="gl-field">
-            <label data-en="Currently Insured?"
-                   data-es="¿Actualmente Asegurado?">
-              Currently Insured?
-            </label>
-            <select name="Currently Insured">
-              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
-              <option value="No" data-en="No" data-es="No">No</option>
-            </select>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Current Carrier"
-                   data-es="Aseguradora Actual">
-              Current Carrier
-            </label>
-            <input type="text" name="Current Carrier">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Current Annual Premium"
-                   data-es="Prima Anual Actual">
-              Current Annual Premium
-            </label>
-            <input type="text" name="Current Premium">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Policy Expiration Date"
-                   data-es="Fecha de Vencimiento de la Póliza">
-              Policy Expiration Date
-            </label>
-            <input type="date" name="Policy Expiration Date">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Requested General Liability Limits"
-                   data-es="Límites de Responsabilidad General Solicitados">
-              Requested General Liability Limits
-            </label>
-            <select name="Requested GL Limits">
-              <option value="$1M / $2M">$1M / $2M</option>
-              <option value="$2M / $4M">$2M / $4M</option>
-              <option value="Other" data-en="Other" data-es="Otro">Other</option>
-            </select>
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="If Other, please describe"
-                   data-es="Si es Otro, describa">
-              If Other, please describe
-            </label>
-            <input type="text" name="Requested GL Limits - Other">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Additional Insureds Needed?"
-                   data-es="¿Se requieren Asegurados Adicionales?">
-              Additional Insureds Needed?
-            </label>
-            <select name="Additional Insureds Needed">
-              <option value="No" data-en="No" data-es="No">No</option>
-              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
-            </select>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Waiver of Subrogation Needed?"
-                   data-es="¿Se requiere Renuncia de Subrogación?">
-              Waiver of Subrogation Needed?
-            </label>
-            <select name="Waiver of Subrogation Needed">
-              <option value="No" data-en="No" data-es="No">No</option>
-              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
-            </select>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Primary / Non-Contributory Needed?"
-                   data-es="¿Se requiere Primario / No Contributivo?">
-              Primary / Non-Contributory Needed?
-            </label>
-            <select name="Primary Non-Contributory Needed">
-              <option value="No" data-en="No" data-es="No">No</option>
-              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
-            </select>
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Additional Coverage Notes or Requests"
-                   data-es="Notas o Solicitudes Adicionales de Cobertura">
-              Additional Coverage Notes or Requests
-            </label>
-            <textarea name="Coverage Notes" rows="4"
-              placeholder="List any specific certificate wording, landlords, project owners, etc."></textarea>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
           </div>
         </div>
-      </div>
+        <!-- STEP 3 -->
+        <div class="form-step" data-step="3">
+          <h2>Review & Submit</h2>
+          <p class="section-subtitle">Review your details below.</p>
 
-      <!-- STEP 3: OPERATIONS -->
-      <div class="gl-step-panel" data-step="3">
-        <h2 class="section-title"
-            data-en="Operations Breakdown"
-            data-es="Desglose de Operaciones">
-          Operations Breakdown
-        </h2>
-
-        <div class="gl-grid">
-          <div class="gl-field">
-            <label data-en="% Residential" data-es="% Residencial">% Residential</label>
-            <input type="text" name="% Residential">
+          <div class="review-section">
+            <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
+            <div class="review-block"><h3>Operations</h3><ul id="reviewOperations"></ul></div>
+            <div class="review-block"><h3>Coverages</h3><ul id="reviewCoverages"></ul></div>
           </div>
 
-          <div class="gl-field">
-            <label data-en="% Commercial" data-es="% Comercial">% Commercial</label>
-            <input type="text" name="% Commercial">
+          <div class="upload-row">
+            <label>Upload Prior Policy, Contracts, or Documents (optional)</label>
+            <input type="file" name="supporting_documents" />
           </div>
 
-          <div class="gl-field">
-            <label data-en="% New Construction" data-es="% Obra Nueva">% New Construction</label>
-            <input type="text" name="% New Construction">
+          <div class="consent-row">
+            <input type="checkbox" id="consentCheckbox" required />
+            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
           </div>
 
-          <div class="gl-field">
-            <label data-en="% Remodel" data-es="% Remodelación">% Remodel</label>
-            <input type="text" name="% Remodel">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="% Service / Repair" data-es="% Servicio / Reparación">
-              % Service / Repair
-            </label>
-            <input type="text" name="% Service/Repair">
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Any work over 3 stories?"
-                   data-es="¿Algún trabajo sobre 3 pisos?">
-              Any work over 3 stories?
-            </label>
-            <select name="Work Over 3 Stories">
-              <option value="No" data-en="No" data-es="No">No</option>
-              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
-            </select>
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Any hazardous work? (roofing, electrical, concrete, etc.)"
-                   data-es="¿Algún trabajo peligroso? (techos, eléctrico, concreto, etc.)">
-              Any hazardous work? (roofing, electrical, concrete, etc.)
-            </label>
-            <textarea name="Hazardous Work" rows="3"></textarea>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Any out-of-state work?"
-                   data-es="¿Algún trabajo fuera del estado?">
-              Any out-of-state work?
-            </label>
-            <select name="Out of State Work">
-              <option value="No" data-en="No" data-es="No">No</option>
-              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
-            </select>
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="States where you operate (if not only TX)"
-                   data-es="Estados donde opera (si no solo TX)">
-              States where you operate (if not only TX)
-            </label>
-            <input type="text" name="Other States of Operation">
-          </div>
-        </div>
-      </div>
-
-      <!-- STEP 4: CLAIMS -->
-      <div class="gl-step-panel" data-step="4">
-        <h2 class="section-title"
-            data-en="Claims History (Last 5 Years)"
-            data-es="Historial de Reclamos (Últimos 5 Años)">
-          Claims History (Last 5 Years)
-        </h2>
-
-        <div class="gl-grid">
-          <div class="gl-field">
-            <label data-en="Any claims in the last 5 years?"
-                   data-es="¿Algún reclamo en los últimos 5 años?">
-              Any claims in the last 5 years?
-            </label>
-            <select name="Any Claims Last 5 Years" id="anyClaims">
-              <option value="No" data-en="No" data-es="No">No</option>
-              <option value="Yes" data-en="Yes" data-es="Sí">Yes</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="claimsContainer" class="gl-dynamic-group">
-          <div class="claim-card gl-card">
-            <h3 data-en="Claim 1" data-es="Reclamo 1">Claim 1</h3>
-
-            <div class="gl-grid">
-              <div class="gl-field">
-                <label data-en="Date of Loss" data-es="Fecha de Pérdida">
-                  Date of Loss
-                </label>
-                <input type="date" name="Claim 1 - Date">
-              </div>
-
-              <div class="gl-field">
-                <label data-en="Amount Paid" data-es="Monto Pagado">
-                  Amount Paid
-                </label>
-                <input type="text" name="Claim 1 - Amount Paid">
-              </div>
-
-              <div class="gl-field">
-                <label data-en="Status" data-es="Estado">
-                  Status
-                </label>
-                <select name="Claim 1 - Status">
-                  <option value="Open" data-en="Open" data-es="Abierto">Open</option>
-                  <option value="Closed" data-en="Closed" data-es="Cerrado">Closed</option>
-                </select>
-              </div>
-
-              <div class="gl-field gl-field-full">
-                <label data-en="Description" data-es="Descripción">
-                  Description
-                </label>
-                <textarea name="Claim 1 - Description" rows="3"></textarea>
-              </div>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="submit" class="btn-primary">Submit Application</button>
             </div>
           </div>
         </div>
 
-        <button type="button" id="addClaimBtn" class="app-btn gl-add-btn"
-                data-en="Add Another Claim"
-                data-es="Agregar Otro Reclamo">
-          Add Another Claim
-        </button>
-      </div>
+      </form>
 
-      <!-- STEP 5: DOCUMENTS & SUBMIT -->
-      <div class="gl-step-panel" data-step="5">
-        <h2 class="section-title"
-            data-en="Documents & Submit"
-            data-es="Documentos y Envío">
-          Documents & Submit
-        </h2>
+    </div>
+  </section>
 
-        <div class="gl-grid">
-          <div class="gl-field gl-field-full">
-            <label data-en="Upload Prior Policy Declarations"
-                   data-es="Cargar Declaraciones de Pólizas Anteriores">
-              Upload Prior Policy Declarations
-            </label>
-            <input type="file" name="Prior Policy Declarations" multiple>
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Upload Loss Runs"
-                   data-es="Cargar Historial de Pérdidas (Loss Runs)">
-              Upload Loss Runs
-            </label>
-            <input type="file" name="Loss Runs" multiple>
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Upload Business License"
-                   data-es="Cargar Licencia de Negocio">
-              Upload Business License
-            </label>
-            <input type="file" name="Business License">
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Upload Subcontractor Agreements (if any)"
-                   data-es="Cargar Contratos de Subcontratistas (si aplica)">
-              Upload Subcontractor Agreements (if any)
-            </label>
-            <input type="file" name="Subcontractor Agreements" multiple>
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Additional Documents or Notes"
-                   data-es="Documentos o Notas Adicionales">
-              Additional Documents or Notes
-            </label>
-            <textarea name="Additional Documents Notes" rows="4"></textarea>
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Primary Contact Person"
-                   data-es="Persona de Contacto Principal">
-              Primary Contact Person
-            </label>
-            <input type="text" name="Primary Contact Person" required>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Contact Email" data-es="Correo Electrónico de Contacto">
-              Contact Email
-            </label>
-            <input type="email" name="Contact Email" required>
-          </div>
-
-          <div class="gl-field">
-            <label data-en="Contact Phone" data-es="Teléfono de Contacto">
-              Contact Phone
-            </label>
-            <input type="tel" name="Contact Phone" required>
-          </div>
-
-          <div class="gl-field gl-field-full">
-            <label data-en="Preferred Contact Method"
-                   data-es="Método de Contacto Preferido">
-              Preferred Contact Method
-            </label>
-            <select name="Preferred Contact Method">
-              <option value="Phone" data-en="Phone" data-es="Teléfono">Phone</option>
-              <option value="Email" data-en="Email" data-es="Correo Electrónico">Email</option>
-              <option value="Text" data-en="Text" data-es="Mensaje de Texto">Text</option>
-            </select>
-          </div>
-        </div>
-
-        <ul class="gl-review-list">
-          <li data-en="Submitting this form does not bind coverage."
-              data-es="Enviar este formulario no garantiza ni emite cobertura.">
-            Submitting this form does not bind coverage.
-          </li>
-          <li data-en="Coverage is not in effect until confirmed in writing by an ACES agent."
-              data-es="La cobertura no entra en vigor hasta que un agente de ACES lo confirme por escrito.">
-            Coverage is not in effect until confirmed in writing by an ACES agent.
-          </li>
-        </ul>
-
-        <div class="gl-consent">
-          <label>
-            <input type="checkbox" name="Consent" required>
-            <span data-en="I understand and agree to the terms above."
-                  data-es="Entiendo y acepto los términos anteriores.">
-              I understand and agree to the terms above.
-            </span>
-          </label>
-        </div>
-
-        <div class="gl-submit-row">
-          <button type="submit" class="submit-btn"
-                  data-en="Submit Application"
-                  data-es="Enviar Solicitud">
-            Submit Application
-          </button>
-        </div>
-
-        <p id="glFormStatus" class="gl-status-message"></p>
-      </div>
-
-      <!-- NAV BUTTONS -->
-      <div class="gl-nav-row">
-        <button type="button" id="glPrevBtn" class="hero-btn gl-nav-btn">
-          ‹ <span data-en="Back" data-es="Atrás">Back</span>
-        </button>
-        <button type="button" id="glNextBtn" class="hero-btn gl-nav-btn">
-          <span data-en="Next" data-es="Siguiente">Next</span> ›
-        </button>
-      </div>
-
-    </form>
-  </div>
-</section>
+</main>
 
 <footer id="aces-footer"></footer>
+
+<script src="application-gl.js"></script>
 
 </body>
 </html>
