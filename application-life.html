@@ -1,350 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title data-en="Life Insurance Application | ACES Insurance Services"
-        data-es="Solicitud de Seguro de Vida | ACES Insurance Services">
-  Life Insurance Application | ACES Insurance Services
-</title>
-
-<link rel="stylesheet" href="style.css">
-<script src="global.js" defer></script>
-<script src="application-life.js" defer></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Insurance Application | ACES Insurance Services</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="global.js" defer></script>
 </head>
+
 <body>
 
 <header id="aces-header"></header>
 
-<section class="small-hero life-hero fade-in">
-  <div class="small-hero-content">
-    <h1 data-en="Life Insurance Application"
-        data-es="Solicitud de Seguro de Vida">
-      Life Insurance Application
-    </h1>
-    <p data-en="Provide your information to receive a personalized life insurance quote."
-       data-es="Proporcione su información para recibir una cotización personalizada de seguro de vida.">
-      Provide your information to receive a personalized life insurance quote.
-    </p>
-  </div>
-</section>
+<main class="fade-in">
 
-<section class="app-section fade-in">
+  <!-- HERO -->
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
+      <h1 data-en="Life Insurance Application" data-es="Solicitud de Seguro de Vida">
+        Life Insurance Application
+      </h1>
 
-  <!-- STEP INDICATOR -->
-  <div class="wizard-steps life-wizard-steps">
-    <div class="wizard-step active" data-step="1">
-      <span class="wizard-step-icon">👤</span>
-      <span data-en="Applicant" data-es="Solicitante">Applicant</span>
-    </div>
-    <div class="wizard-step" data-step="2">
-      <span class="wizard-step-icon">❤️</span>
-      <span data-en="Health" data-es="Salud">Health</span>
-    </div>
-    <div class="wizard-step" data-step="3">
-      <span class="wizard-step-icon">🛡️</span>
-      <span data-en="Coverage" data-es="Cobertura">Coverage</span>
-    </div>
-    <div class="wizard-step" data-step="4">
-      <span class="wizard-step-icon">📄</span>
-      <span data-en="Details" data-es="Detalles">Details</span>
-    </div>
-    <div class="wizard-step" data-step="5">
-      <span class="wizard-step-icon">✔️</span>
-      <span data-en="Submit" data-es="Enviar">Submit</span>
-    </div>
-  </div>
+      <p data-en="Tell us about yourself and the coverage you need. An ACES agent will review and follow up with tailored options."
+         data-es="Cuéntenos sobre usted y la cobertura que necesita. Un agente de ACES revisará y le dará opciones personalizadas.">
+        Tell us about yourself and the coverage you need. An ACES agent will review and follow up with tailored options.
+      </p>
 
-  <form id="lifeApplicationForm"
-        action="https://formsubmit.co/office@insaces.com"
-        method="POST"
-        enctype="multipart/form-data"
-        class="app-form life-app-form">
-
-    <!-- Round Robin -->
-    <input type="hidden" name="_to" id="rrEmail">
-    <input type="hidden" name="_subject" value="New Life Insurance Application - ACES">
-    <input type="hidden" name="_template" value="table">
-    <input type="text" name="_honey" style="display:none">
-
-    <!-- STEP 1: APPLICANT INFO -->
-    <div class="form-step active" data-step="1">
-
-      <h2 data-en="Applicant Information" data-es="Información del Solicitante">
-        Applicant Information
-      </h2>
-
-      <div class="form-grid">
-
-        <div class="form-field">
-          <label data-en="First Name" data-es="Nombre">First Name</label>
-          <input type="text" name="first_name" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Last Name" data-es="Apellido">Last Name</label>
-          <input type="text" name="last_name" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Date of Birth" data-es="Fecha de Nacimiento">Date of Birth</label>
-          <input type="date" name="dob" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Gender" data-es="Género">Gender</label>
-          <select name="gender">
-            <option value="">Select...</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Email" data-es="Correo Electrónico">Email</label>
-          <input type="email" name="email" required>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-          <input type="tel" name="phone" required>
-        </div>
-
+      <!-- Wizard Steps -->
+      <div class="auto-wizard-steps" id="lifeWizardSteps">
+        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Personal</div>
+        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Health & Coverage</div>
+        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Review</div>
       </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-primary next-step"
-                data-next="2"
-                data-en="Next: Health"
-                data-es="Siguiente: Salud">
-          Next: Health
-        </button>
-      </div>
-
     </div>
+  </section>
 
-    <!-- STEP 2: HEALTH -->
-    <div class="form-step" data-step="2">
+  <!-- FORM -->
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
 
-      <h2 data-en="Health Information" data-es="Información de Salud">
-        Health Information
-      </h2>
+      <form id="lifeAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New Life Insurance Application - ACES" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
+        <input type="hidden" id="rrEmail" name="rrEmail" />
 
-      <div class="form-grid">
+        <!-- STEP 1 -->
+        <div class="form-step active" data-step="1">
+          <h2>Personal Information</h2>
+          <p class="section-subtitle">Tell us about yourself.</p>
 
-        <div class="form-field">
-          <label data-en="Height" data-es="Estatura">Height</label>
-          <input type="text" name="height">
+          <div class="auto-grid-2">
+
+            <div class="auto-field"><label>First Name</label><input name="first_name" required /></div>
+            <div class="auto-field"><label>Last Name</label><input name="last_name" required /></div>
+
+            <div class="auto-field">
+              <label>Date of Birth</label>
+              <input type="date" name="dob" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Gender</label>
+              <select name="gender" required>
+                <option value="">Select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Prefer Not to Say</option>
+              </select>
+            </div>
+
+            <div class="auto-field"><label>Phone Number</label><input name="phone" required /></div>
+            <div class="auto-field"><label>Email Address</label><input type="email" name="email" required /></div>
+
+            <div class="auto-field auto-field-full"><label>Home Address</label><input name="address" required /></div>
+            <div class="auto-field"><label>City</label><input name="city" required /></div>
+            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
+            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+
+            <div class="auto-field auto-field-full">
+              <label>Occupation</label>
+              <input name="occupation" placeholder="Teacher, contractor, engineer, etc." required />
+            </div>
+
+          </div>
+
+          <div class="app-actions">
+            <div></div>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 2 -->
+        <div class="form-step" data-step="2">
+          <h2>Health & Coverage Details</h2>
+          <p class="section-subtitle">Tell us about your health background and desired coverage.</p>
+
+          <div class="auto-grid-2">
+
+            <!-- HEALTH -->
+            <div class="auto-field">
+              <label>Height</label>
+              <input name="height" placeholder="Example: 5'10&quot;" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Weight</label>
+              <input name="weight" placeholder="Example: 180 lbs" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Tobacco Use</label>
+              <select name="tobacco_use" required>
+                <option value="">Select</option>
+                <option>Never</option>
+                <option>Former User</option>
+                <option>Current User</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Any major medical conditions?</label>
+              <select name="medical_conditions">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — Minor</option>
+                <option>Yes — Significant</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>If yes, briefly describe (optional)</label>
+              <textarea name="medical_description" rows="3"></textarea>
+            </div>
+
+            <!-- COVERAGE -->
+            <div class="auto-field">
+              <label>Coverage Type</label>
+              <select name="coverage_type" required>
+                <option value="">Select</option>
+                <option>Term Life</option>
+                <option>Whole Life</option>
+                <option>Universal Life</option>
+                <option>Final Expense</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Desired Coverage Amount</label>
+              <select name="coverage_amount" required>
+                <option value="">Select</option>
+                <option>$50,000</option>
+                <option>$100,000</option>
+                <option>$250,000</option>
+                <option>$500,000</option>
+                <option>$1,000,000+</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Term Length (if applicable)</label>
+              <select name="term_length">
+                <option value="">Select</option>
+                <option>10 Years</option>
+                <option>20 Years</option>
+                <option>30 Years</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Beneficiary Name(s)</label>
+              <input name="beneficiaries" placeholder="Primary and/or contingent beneficiaries" required />
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Notes (optional)</label>
+              <textarea name="coverage_notes" rows="3"></textarea>
+            </div>
+
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 3 -->
+        <div class="form-step" data-step="3">
+          <h2>Review & Submit</h2>
+          <p class="section-subtitle">Review your details below.</p>
+
+          <div class="review-section">
+            <div class="review-block"><h3>Personal</h3><ul id="reviewPersonal"></ul></div>
+            <div class="review-block"><h3>Health</h3><ul id="reviewHealth"></ul></div>
+            <div class="review-block"><h3>Coverage</h3><ul id="reviewCoverage"></ul></div>
+          </div>
+
+          <div class="upload-row">
+            <label>Upload Documents (optional)</label>
+            <input type="file" name="supporting_documents" />
+          </div>
+
+          <div class="consent-row">
+            <input type="checkbox" id="consentCheckbox" required />
+            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="submit" class="btn-primary">Submit Application</button>
+            </div>
+          </div>
         </div>
 
-        <div class="form-field">
-          <label data-en="Weight" data-es="Peso">Weight</label>
-          <input type="text" name="weight">
-        </div>
-
-        <div class="form-field">
-          <label data-en="Tobacco Use" data-es="Uso de Tabaco">Tobacco Use</label>
-          <select name="tobacco">
-            <option value="">Select...</option>
-            <option value="No">No</option>
-            <option value="Yes - Cigarettes">Yes - Cigarettes</option>
-            <option value="Yes - Vape">Yes - Vape</option>
-            <option value="Yes - Other">Yes - Other</option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Any major medical conditions?"
-                 data-es="¿Alguna condición médica importante?">
-            Any major medical conditions?
-          </label>
-          <textarea name="medical_conditions" rows="3"></textarea>
-        </div>
-
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="1"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="3"
-                data-en="Next: Coverage"
-                data-es="Siguiente: Cobertura">
-          Next: Coverage
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 3: COVERAGE -->
-    <div class="form-step" data-step="3">
-
-      <h2 data-en="Coverage Options" data-es="Opciones de Cobertura">
-        Coverage Options
-      </h2>
-
-      <div class="form-grid">
-
-        <div class="form-field">
-          <label data-en="Type of Life Insurance"
-                 data-es="Tipo de Seguro de Vida">
-            Type of Life Insurance
-          </label>
-          <select name="life_type">
-            <option value="">Select...</option>
-            <option value="Term Life">Term Life</option>
-            <option value="Whole Life">Whole Life</option>
-            <option value="Final Expense">Final Expense</option>
-            <option value="Mortgage Protection">Mortgage Protection</option>
-            <option value="Indexed Universal Life">Indexed Universal Life</option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Coverage Amount"
-                 data-es="Monto de Cobertura">
-            Coverage Amount
-          </label>
-          <select name="coverage_amount">
-            <option value="">Select...</option>
-            <option value="25000">$25,000</option>
-            <option value="50000">$50,000</option>
-            <option value="100000">$100,000</option>
-            <option value="250000">$250,000</option>
-            <option value="500000">$500,000</option>
-            <option value="1000000">$1,000,000</option>
-            <option value="Other">Other / Unsure</option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label data-en="Desired Term Length (if Term Life)"
-                 data-es="Duración Deseada (si es Term Life)">
-            Desired Term Length (if Term Life)
-          </label>
-          <select name="term_length">
-            <option value="">Select...</option>
-            <option value="10">10 Years</option>
-            <option value="15">15 Years</option>
-            <option value="20">20 Years</option>
-            <option value="30">30 Years</option>
-            <option value="Unsure">Unsure</option>
-          </select>
-        </div>
-
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="2"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="4"
-                data-en="Next: Details"
-                data-es="Siguiente: Detalles">
-          Next: Details
-        </button>
-      </div>
+      </form>
 
     </div>
+  </section>
 
-    <!-- STEP 4: DETAILS -->
-    <div class="form-step" data-step="4">
-
-      <h2 data-en="Additional Details" data-es="Detalles Adicionales">
-        Additional Details
-      </h2>
-
-      <div class="form-field">
-        <label data-en="Beneficiaries"
-               data-es="Beneficiarios">
-          Beneficiaries
-        </label>
-        <textarea name="beneficiaries" rows="3"></textarea>
-      </div>
-
-      <div class="form-field">
-        <label data-en="Notes or Special Requests"
-               data-es="Notas o Solicitudes Especiales">
-          Notes or Special Requests
-        </label>
-        <textarea name="notes" rows="4"></textarea>
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="3"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="button" class="btn-primary next-step"
-                data-next="5"
-                data-en="Next: Submit"
-                data-es="Siguiente: Enviar">
-          Next: Submit
-        </button>
-      </div>
-
-    </div>
-
-    <!-- STEP 5: SUBMIT -->
-    <div class="form-step" data-step="5">
-
-      <h2 data-en="Submit Application" data-es="Enviar Solicitud">
-        Submit Application
-      </h2>
-
-      <div class="form-field">
-        <label data-en="Upload Documents (Optional)"
-               data-es="Cargar Documentos (Opcional)">
-          Upload Documents (Optional)
-        </label>
-        <input type="file" name="documents" multiple>
-      </div>
-
-      <div class="form-field checkbox-field">
-        <label>
-          <input type="checkbox" name="consent" required>
-          <span data-en="I confirm the information provided is accurate."
-                data-es="Confirmo que la información proporcionada es correcta.">
-            I confirm the information provided is accurate.
-          </span>
-        </label>
-      </div>
-
-      <div class="wizard-nav">
-        <button type="button" class="btn-secondary prev-step"
-                data-prev="4"
-                data-en="Back"
-                data-es="Atrás">
-          Back
-        </button>
-        <button type="submit" class="btn-primary"
-                data-en="Submit Application"
-                data-es="Enviar Solicitud">
-          Submit Application
-        </button>
-      </div>
-
-    </div>
-
-  </form>
-
-</section>
+</main>
 
 <footer id="aces-footer"></footer>
+
+<script src="application-life.js"></script>
 
 </body>
 </html>
