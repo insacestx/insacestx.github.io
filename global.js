@@ -1,4 +1,4 @@
-// ACES 2026 — global.js (Full Rebuild, All Widgets Preserved)
+// ACES 2026 — global.js (Optimized & Verified)
 
 document.addEventListener("DOMContentLoaded", () => {
   loadHeader();
@@ -71,12 +71,17 @@ function loadFooter() {
   if (!footer) return;
 
   fetch("footer.html")
-    .then((res) => res.text())
+    .then((res) => {
+      if (!res.ok) throw new Error(`Footer fetch failed: ${res.status}`);
+      return res.text();
+    })
     .then((html) => {
       footer.innerHTML = html;
       applyLanguage(localStorage.getItem("acesLang") || "en");
     })
-    .catch(() => {});
+    .catch((err) => {
+      console.warn("Footer failed to load:", err);
+    });
 }
 
 /* ------------------------------------------------------------
@@ -109,9 +114,15 @@ function setActiveNav() {
   const links = document.querySelectorAll(".nav-links a, #mobile-menu a");
 
   links.forEach((link) => {
-    const file = link.getAttribute("href").split("/").pop();
-    if (file === path) link.classList.add("active");
-    else link.classList.remove("active");
+    const href = link.getAttribute("href");
+    const file = href.split("/").pop();
+    
+    // Match exact filename or root (index.html matches "/")
+    if (file === path || (path === "" && file === "index.html")) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
   });
 }
 
@@ -150,6 +161,12 @@ function initAgentPanel() {
   const emailEl = panel.querySelector(".panel-email");
   const callBtn = panel.querySelector(".panel-call");
   const closeBtn = panel.querySelector(".close-panel");
+
+  // Verify all elements exist before attaching events
+  if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) {
+    console.warn("Agent panel: Missing required elements");
+    return;
+  }
 
   cards.forEach((card) => {
     card.addEventListener("click", () => {
