@@ -973,3 +973,24 @@ section{padding:60px 20px}
     font-size:0.75rem;
   }
 }
+.bundle-cta-wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.bundle-cta {
+  display: inline-block;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  background: #d40000;
+  border: 1px solid #ff4d4d;
+  color: #fff;
+  border-radius: 6px;
+  transition: 0.25s ease;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.35);
+}
+
+.bundle-cta:hover {
+  background: #ff1a1a;
+  transform: translateY(-2px);
+}
