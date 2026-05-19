@@ -1,151 +1,168 @@
-/* ============================================================
-   ACES 2026 — GENERAL LIABILITY APPLICATION LOGIC
-   Multi-step wizard, dynamic claims, subcontractor toggles
-============================================================ */
-
+// application-gl.js
 document.addEventListener("DOMContentLoaded", () => {
-  initGLWizard();
-  initGLClaims();
-  initGLSubcontractors();
+  initRoundRobinEmail();
+  initWizardNav();
 });
 
-function initGLWizard() {
-  const panels = document.querySelectorAll(".gl-step-panel");
-  const steps = document.querySelectorAll(".gl-step");
-  const nextBtn = document.getElementById("glNextBtn");
-  const prevBtn = document.getElementById("glPrevBtn");
+/* -----------------------------------
+   ROUND ROBIN EMAIL ROUTING
+----------------------------------- */
+
+function getRoundRobinList() {
+  return [
+    "bryan@insaces.com",
+    "jordan@insaces.com",
+    "lanse@insaces.com",
+    "robert@insaces.com",
+    "george@insaces.com",
+    "jimmy@insaces.com",
+    "office@insaces.com"
+  ];
+}
+
+function getNextRoundRobinEmail() {
+  const key = "aces_rr_index";
+  const list = getRoundRobinList();
+  let index = parseInt(localStorage.getItem(key) || "0", 10);
+
+  if (isNaN(index) || index < 0 || index >= list.length) {
+    index = 0;
+  }
+
+  const email = list[index];
+  const nextIndex = (index + 1) % list.length;
+  localStorage.setItem(key, nextIndex.toString());
+
+  return email;
+}
+
+function initRoundRobinEmail() {
+  const rrField = document.getElementById("rrEmail");
+  if (rrField) {
+    rrField.value = getNextRoundRobinEmail();
+  }
+}
+
+/* -----------------------------------
+   ACES 2026 WIZARD NAVIGATION ENGINE
+----------------------------------- */
+
+function initWizardNav() {
   const form = document.getElementById("glAppForm");
+  const steps = Array.from(document.querySelectorAll(".form-step"));
+  const indicators = Array.from(document.querySelectorAll("#glWizardSteps .auto-wizard-step"));
+  const consentCheckbox = document.getElementById("consentCheckbox");
 
-  if (!panels.length || !steps.length || !nextBtn || !prevBtn || !form) return;
+  let currentStep = 0;
 
-  let currentStep = 1;
-  const maxStep = panels.length;
-
-  function showStep(step) {
-    panels.forEach(panel => {
-      const s = Number(panel.getAttribute("data-step"));
-      panel.style.display = s === step ? "block" : "none";
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.classList.toggle("active", i === index);
     });
 
-    steps.forEach(stepEl => {
-      const s = Number(stepEl.getAttribute("data-step"));
-      stepEl.classList.toggle("active", s === step);
-      stepEl.classList.toggle("completed", s < step);
+    indicators.forEach((ind, i) => {
+      ind.classList.toggle("active", i === index);
+      ind.classList.toggle("completed", i < index);
     });
 
-    prevBtn.style.visibility = step === 1 ? "hidden" : "visible";
-    nextBtn.style.display = step === maxStep ? "none" : "inline-flex";
+    currentStep = index;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function validateStep(step) {
-    const panel = document.querySelector(`.gl-step-panel[data-step="${step}"]`);
-    if (!panel) return true;
-
-    const requiredFields = panel.querySelectorAll("input[required], select[required], textarea[required]");
-    for (const field of requiredFields) {
-      if (!field.value || (field.type === "checkbox" && !field.checked)) {
-        field.focus();
-        field.classList.add("gl-field-error");
-        setTimeout(() => field.classList.remove("gl-field-error"), 1200);
-        return false;
-      }
+  function goNext() {
+    if (currentStep < steps.length - 1) {
+      showStep(currentStep + 1);
+      if (currentStep === 2) buildReview();
     }
-    return true;
   }
 
-  nextBtn.addEventListener("click", () => {
-    if (!validateStep(currentStep)) return;
-    if (currentStep < maxStep) {
-      currentStep++;
-      showStep(currentStep);
-      scrollToTopOfGLForm();
-    }
+  function goPrev() {
+    if (currentStep > 0) showStep(currentStep - 1);
+  }
+
+  document.querySelectorAll("[data-next-step]").forEach(btn => {
+    btn.addEventListener("click", goNext);
   });
 
-  prevBtn.addEventListener("click", () => {
-    if (currentStep > 1) {
-      currentStep--;
-      showStep(currentStep);
-      scrollToTopOfGLForm();
-    }
+  document.querySelectorAll("[data-prev-step]").forEach(btn => {
+    btn.addEventListener("click", goPrev);
   });
 
-  form.addEventListener("submit", () => {
-    const status = document.getElementById("glFormStatus");
-    if (status) status.textContent = "";
-  });
-
-  showStep(currentStep);
-}
-
-function scrollToTopOfGLForm() {
-  const wrapper = document.querySelector(".gl-app-wrapper");
-  if (!wrapper) return;
-  wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-/* ------------------------------------------------------------
-   SUBCONTRACTOR TOGGLE
------------------------------------------------------------- */
-function initGLSubcontractors() {
-  const select = document.getElementById("usesSubcontractors");
-  const extraFields = document.querySelectorAll(".gl-subcontractor-extra");
-  if (!select || !extraFields.length) return;
-
-  function updateVisibility() {
-    const val = select.value;
-    extraFields.forEach(f => {
-      f.style.display = val === "Yes" ? "block" : "none";
+  indicators.forEach((ind, index) => {
+    ind.addEventListener("click", () => {
+      if (index <= currentStep) showStep(index);
     });
+  });
+
+  /* -----------------------------------
+     REVIEW BUILDER
+  ----------------------------------- */
+
+  function getVal(name) {
+    return form.elements[name] ? form.elements[name].value.trim() : "";
   }
 
-  select.addEventListener("change", updateVisibility);
-  updateVisibility();
-}
-
-/* ------------------------------------------------------------
-   DYNAMIC CLAIMS
------------------------------------------------------------- */
-function initGLClaims() {
-  const anyClaimsSelect = document.getElementById("anyClaims");
-  const container = document.getElementById("claimsContainer");
-  const addBtn = document.getElementById("addClaimBtn");
-
-  if (!anyClaimsSelect || !container || !addBtn) return;
-
-  let claimCount = 1;
-
-  function updateClaimsVisibility() {
-    const val = anyClaimsSelect.value;
-    container.style.display = val === "Yes" ? "flex" : "none";
-    addBtn.style.display = val === "Yes" ? "inline-flex" : "none";
-  }
-
-  anyClaimsSelect.addEventListener("change", updateClaimsVisibility);
-  updateClaimsVisibility();
-
-  addBtn.addEventListener("click", () => {
-    claimCount++;
-    const template = container.querySelector(".claim-card");
-    if (!template) return;
-
-    const clone = template.cloneNode(true);
-    clone.querySelectorAll("input, textarea, select").forEach(input => {
-      const oldName = input.getAttribute("name") || "";
-      const newName = oldName.replace("Claim 1", `Claim ${claimCount}`);
-      input.setAttribute("name", newName);
-      if (input.tagName === "INPUT" || input.tagName === "TEXTAREA") {
-        input.value = "";
+  function fillList(id, items) {
+    const ul = document.getElementById(id);
+    if (!ul) return;
+    ul.innerHTML = "";
+    items.forEach(item => {
+      if (item.value) {
+        const li = document.createElement("li");
+        li.textContent = `${item.label}: ${item.value}`;
+        ul.appendChild(li);
       }
     });
+  }
 
-    const title = clone.querySelector("h3");
-    if (title) {
-      title.textContent = `Claim ${claimCount}`;
-      title.setAttribute("data-en", `Claim ${claimCount}`);
-      title.setAttribute("data-es", `Reclamo ${claimCount}`);
+  function buildReview() {
+    /* BUSINESS */
+    fillList("reviewBusiness", [
+      { label: "Business Name", value: getVal("business_name") },
+      { label: "DBA", value: getVal("dba") },
+      { label: "Business Type", value: getVal("business_type") },
+      { label: "EIN", value: getVal("ein") },
+      { label: "Business Phone", value: getVal("business_phone") },
+      { label: "Business Email", value: getVal("business_email") },
+      { label: "Business Address", value: getVal("business_address") },
+      { label: "City", value: getVal("city") },
+      { label: "State", value: getVal("state") },
+      { label: "ZIP", value: getVal("zip") },
+      { label: "Business Description", value: getVal("business_description") }
+    ]);
+
+    /* OPERATIONS */
+    fillList("reviewOperations", [
+      { label: "Annual Revenue", value: getVal("annual_revenue") },
+      { label: "Number of Employees", value: getVal("num_employees") },
+      { label: "Work at Customer Locations", value: getVal("work_on_site") },
+      { label: "Subcontractors", value: getVal("subcontractors") },
+      { label: "Hazardous Operations", value: getVal("hazard_ops") }
+    ]);
+
+    /* COVERAGES */
+    fillList("reviewCoverages", [
+      { label: "GL Limit", value: getVal("gl_limit") },
+      { label: "Products & Completed Ops", value: getVal("products_completed_ops") },
+      { label: "Prior Claims", value: getVal("prior_claims") },
+      { label: "Claim Description", value: getVal("claim_description") },
+      { label: "Coverage Notes", value: getVal("coverage_notes") }
+    ]);
+  }
+
+  /* -----------------------------------
+     SUBMIT VALIDATION
+  ----------------------------------- */
+
+  form.addEventListener("submit", e => {
+    if (!consentCheckbox.checked) {
+      e.preventDefault();
+      alert("Please confirm that the information provided is accurate before submitting.");
+      return;
     }
-
-    container.appendChild(clone);
+    buildReview();
   });
+
+  /* INIT */
+  showStep(0);
 }
