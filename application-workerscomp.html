@@ -1,151 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Workers Compensation Application | ACES Insurance Services</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Global header/footer + language toggle -->
+  <link rel="stylesheet" href="style.css" />
   <script src="global.js" defer></script>
-
-  <!-- Page-specific logic -->
-  <script src="application-workerscomp.js" defer></script>
 </head>
 
-<body class="dark-theme">
+<body>
 
-  <!-- Header injected by global.js -->
-  <header id="aces-header"></header>
+<header id="aces-header"></header>
 
-  <main id="main-content">
+<main class="fade-in">
 
-    <!-- HERO -->
-    <section class="page-hero">
-      <div class="page-hero-inner">
-        <h1 data-en="Workers Compensation Application" data-es="Solicitud de Compensación al Trabajador">
-          Workers Compensation Application
-        </h1>
-        <p data-en="A quick application to help us find the right Workers Comp policy for your business."
-           data-es="Una solicitud rápida para ayudarle a encontrar la póliza adecuada de Compensación al Trabajador.">
-          A quick application to help us find the right Workers Comp policy for your business.
-        </p>
+  <!-- HERO -->
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
+      <h1 data-en="Workers Compensation Application" data-es="Solicitud de Compensación para Trabajadores">
+        Workers Compensation Application
+      </h1>
+
+      <p data-en="Tell us about your business and payroll. An ACES agent will review and follow up with tailored options."
+         data-es="Cuéntenos sobre su negocio y nómina. Un agente de ACES revisará y le dará opciones personalizadas.">
+        Tell us about your business and payroll. An ACES agent will review and follow up with tailored options.
+      </p>
+
+      <!-- Wizard Steps -->
+      <div class="auto-wizard-steps" id="wcWizardSteps">
+        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
+        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Payroll</div>
+        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Losses</div>
+        <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span>Review</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FORM SECTION -->
-    <section class="form-section">
-      <div class="form-container">
+  <!-- FORM -->
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
 
-        <form id="workersCompForm">
+      <form id="wcAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New Workers Comp Application - ACES" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
 
-          <!-- BUSINESS INFO -->
-          <h2 data-en="Business Information" data-es="Información del Negocio">Business Information</h2>
+        <!-- STEP 1 -->
+        <div class="form-step active" data-step="1">
+          <h2>Business Information</h2>
+          <p class="section-subtitle">Tell us about your company.</p>
 
-          <div class="form-group">
-            <label data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
-            <input type="text" name="businessName" required>
+          <div class="auto-grid-2">
+            <div class="auto-field"><label>Business Name</label><input name="business_name" required /></div>
+            <div class="auto-field"><label>DBA (if applicable)</label><input name="dba" /></div>
+
+            <div class="auto-field">
+              <label>Business Type</label>
+              <select name="business_type" required>
+                <option value="">Select</option>
+                <option>LLC</option>
+                <option>Corporation</option>
+                <option>Sole Proprietor</option>
+                <option>Partnership</option>
+                <option>Non-Profit</option>
+              </select>
+            </div>
+
+            <div class="auto-field"><label>EIN</label><input name="ein" /></div>
+
+            <div class="auto-field"><label>Business Phone</label><input name="business_phone" required /></div>
+            <div class="auto-field"><label>Business Email</label><input type="email" name="business_email" required /></div>
+
+            <div class="auto-field auto-field-full"><label>Business Address</label><input name="business_address" required /></div>
+            <div class="auto-field"><label>City</label><input name="city" required /></div>
+            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
+            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+
+            <div class="auto-field auto-field-full">
+              <label>Describe Your Business Operations</label>
+              <textarea name="business_description" rows="3" placeholder="Construction, retail, restaurant, contracting, etc." required></textarea>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label data-en="Business Address" data-es="Dirección del Negocio">Business Address</label>
-            <input type="text" name="businessAddress" required>
+          <div class="app-actions">
+            <div></div>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 2 -->
+        <div class="form-step" data-step="2">
+          <h2>Payroll Breakdown</h2>
+          <p class="section-subtitle">Tell us about your payroll for the upcoming policy period.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Total Annual Payroll</label>
+              <input name="total_payroll" placeholder="Example: 250000" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Number of Employees</label>
+              <input name="employee_count" placeholder="Example: 8" required />
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Primary Job Duties</label>
+              <textarea name="job_duties" rows="3" placeholder="Construction labor, clerical, sales, restaurant staff, etc." required></textarea>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Do you use subcontractors?</label>
+              <select name="subcontractors">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — With Certificates</option>
+                <option>Yes — Without Certificates</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Payroll Notes (optional)</label>
+              <textarea name="payroll_notes" rows="3"></textarea>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label data-en="Type of Business" data-es="Tipo de Negocio">Type of Business</label>
-            <input type="text" name="businessType" placeholder="Construction, Retail, Restaurant, etc." required>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="form-step" data-step="3">
+          <h2>Loss History</h2>
+          <p class="section-subtitle">Tell us about any prior Workers Comp claims.</p>
+
+          <div class="auto-toggle-row">
+            <label>I have losses to report</label>
+            <input type="checkbox" id="hasLossesToggle" />
           </div>
 
-          <!-- CONTACT INFO -->
-          <h2 data-en="Contact Information" data-es="Información de Contacto">Contact Information</h2>
-
-          <div class="form-group">
-            <label data-en="Full Name" data-es="Nombre Completo">Full Name</label>
-            <input type="text" name="fullName" required>
+          <div class="auto-field">
+            <label>Loss Details</label>
+            <textarea id="lossDetails" name="loss_details" rows="4" placeholder="Type of loss, date, amount paid, injured employee, etc."></textarea>
           </div>
 
-          <div class="form-group">
-            <label data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
-            <input type="tel" name="phone" required>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 4 -->
+        <div class="form-step" data-step="4">
+          <h2>Review & Submit</h2>
+          <p class="section-subtitle">Review your details below.</p>
+
+          <div class="review-section">
+            <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
+            <div class="review-block"><h3>Payroll</h3><ul id="reviewPayroll"></ul></div>
+            <div class="review-block"><h3>Losses</h3><ul id="reviewLosses"></ul></div>
           </div>
 
-          <div class="form-group">
-            <label data-en="Email Address" data-es="Correo Electrónico">Email Address</label>
-            <input type="email" name="email" required>
+          <div class="upload-row">
+            <label>Upload Prior Policy, Loss Runs, or Payroll Reports (optional)</label>
+            <input type="file" name="supporting_documents" />
           </div>
 
-          <!-- PAYROLL INFO -->
-          <h2 data-en="Payroll & Employees" data-es="Nómina y Empleados">Payroll & Employees</h2>
-
-          <div class="form-group">
-            <label data-en="Number of Employees" data-es="Número de Empleados">Number of Employees</label>
-            <input type="number" name="employees" min="1" required>
+          <div class="consent-row">
+            <input type="checkbox" id="consentCheckbox" required />
+            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
           </div>
 
-          <div class="form-group">
-            <label data-en="Annual Payroll Estimate" data-es="Estimado de Nómina Anual">
-              Annual Payroll Estimate
-            </label>
-            <select name="payroll" required>
-              <option value="under50k" data-en="Under $50,000" data-es="Menos de $50,000">Under $50,000</option>
-              <option value="50k-150k" data-en="$50,000 - $150,000" data-es="$50,000 - $150,000">$50,000 - $150,000</option>
-              <option value="150k-300k" data-en="$150,000 - $300,000" data-es="$150,000 - $300,000">$150,000 - $300,000</option>
-              <option value="300kplus" data-en="Over $300,000" data-es="Más de $300,000">Over $300,000</option>
-            </select>
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="submit" class="btn-primary">Submit Application</button>
+            </div>
           </div>
+        </div>
 
-          <div class="form-group">
-            <label data-en="Describe the type of work performed"
-                   data-es="Describa el tipo de trabajo realizado">
-              Describe the type of work performed
-            </label>
-            <textarea name="workDescription" rows="3" required></textarea>
-          </div>
+      </form>
 
-          <!-- COVERAGE -->
-          <h2 data-en="Coverage Details" data-es="Detalles de Cobertura">Coverage Details</h2>
+    </div>
+  </section>
 
-          <div class="form-group">
-            <label data-en="Do you currently have Workers Comp insurance?"
-                   data-es="¿Actualmente tiene seguro de Compensación al Trabajador?">
-              Do you currently have Workers Comp insurance?
-            </label>
-            <select name="currentPolicy">
-              <option value="yes" data-en="Yes" data-es="Sí">Yes</option>
-              <option value="no" data-en="No" data-es="No">No</option>
-            </select>
-          </div>
+</main>
 
-          <div class="form-group">
-            <label data-en="Any claims in the last 3 years?"
-                   data-es="¿Algún reclamo en los últimos 3 años?">
-              Any claims in the last 3 years?
-            </label>
-            <select name="claims">
-              <option value="none" data-en="No claims" data-es="Sin reclamos">No claims</option>
-              <option value="minor" data-en="Minor Injury" data-es="Lesión Menor">Minor Injury</option>
-              <option value="major" data-en="Major Injury" data-es="Lesión Grave">Major Injury</option>
-            </select>
-          </div>
+<footer id="aces-footer"></footer>
 
-          <!-- SUBMIT -->
-          <button type="submit" class="btn-primary"
-            data-en="Submit Application"
-            data-es="Enviar Solicitud">
-            Submit Application
-          </button>
-
-        </form>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer injected by global.js -->
-  <footer id="aces-footer"></footer>
+<script src="application-workerscomp.js"></script>
 
 </body>
 </html>
