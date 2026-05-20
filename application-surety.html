@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surety Bond Application | ACES Insurance Services</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="global.js" defer></script>
+</head>
+
+<body>
+
+<header id="aces-header"></header>
+
+<main class="fade-in">
+
+  <!-- HERO -->
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
+      <h1 data-en="Surety Bond Application" data-es="Solicitud de Fianza (Surety Bond)">
+        Surety Bond Application
+      </h1>
+
+      <p data-en="Tell us about your business and bond needs. An ACES agent will review and follow up with tailored options."
+         data-es="Cuéntenos sobre su negocio y necesidades de fianza. Un agente de ACES revisará y le dará opciones personalizadas.">
+        Tell us about your business and bond needs. An ACES agent will review and follow up with tailored options.
+      </p>
+
+      <div class="auto-wizard-steps" id="suretyWizardSteps">
+        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
+        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Bond</div>
+        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Financial</div>
+        <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span>Review</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
+
+      <form id="suretyAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New Surety Bond Application - ACES" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
+        <input type="hidden" id="rrEmail" name="rrEmail" />
+
+        <!-- STEP 1 -->
+        <div class="form-step active" data-step="1">
+          <h2>Business Information</h2>
+          <p class="section-subtitle">Tell us about your company.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field"><label>Business Name</label><input name="business_name" required /></div>
+            <div class="auto-field"><label>DBA</label><input name="dba" /></div>
+
+            <div class="auto-field">
+              <label>Business Type</label>
+              <select name="business_type" required>
+                <option value="">Select</option>
+                <option>LLC</option>
+                <option>Corporation</option>
+                <option>Sole Proprietor</option>
+                <option>Partnership</option>
+              </select>
+            </div>
+
+            <div class="auto-field"><label>EIN</label><input name="ein" /></div>
+
+            <div class="auto-field"><label>Business Phone</label><input name="business_phone" required /></div>
+            <div class="auto-field"><label>Business Email</label><input type="email" name="business_email" required /></div>
+
+            <div class="auto-field auto-field-full"><label>Business Address</label><input name="business_address" required /></div>
+            <div class="auto-field"><label>City</label><input name="city" required /></div>
+            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
+            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+
+            <div class="auto-field auto-field-full">
+              <label>Describe Your Business</label>
+              <textarea name="business_description" rows="3" required></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <div></div>
+            <div class="app-actions-right"><button type="button" class="btn-primary" data-next-step>Next</button></div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="form-step" data-step="2">
+          <h2>Bond Details</h2>
+          <p class="section-subtitle">Tell us what type of bond you need.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Bond Type</label>
+              <select name="bond_type" required>
+                <option value="">Select</option>
+                <option>Contractor License Bond</option>
+                <option>Performance Bond</option>
+                <option>Payment Bond</option>
+                <option>Bid Bond</option>
+                <option>Notary Bond</option>
+                <option>Auto Dealer Bond</option>
+                <option>Other (describe below)</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Bond Amount</label>
+              <input name="bond_amount" required />
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Bond Description / Additional Details</label>
+              <textarea name="bond_description" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right"><button type="button" class="btn-primary" data-next-step>Next</button></div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="form-step" data-step="3">
+          <h2>Financial / Credit Questions</h2>
+          <p class="section-subtitle">These questions help determine bond eligibility.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Estimated Annual Revenue</label>
+              <input name="annual_revenue" required />
+            </div>
+
+            <div class="auto-field">
+              <label>Years in Business</label>
+              <input name="years_in_business" required />
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Any bankruptcies in the past 7 years?</label>
+              <select name="bankruptcy">
+                <option value="">Select</option>
+                <option>No</option>
+                <option>Yes — Details Below</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Bankruptcy Details (if applicable)</label>
+              <textarea name="bankruptcy_details" rows="3"></textarea>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Financial Notes (optional)</label>
+              <textarea name="financial_notes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right"><button type="button" class="btn-primary" data-next-step>Next</button></div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="form-step" data-step="4">
+          <h2>Review & Submit</h2>
+          <p class="section-subtitle">Review your details below.</p>
+
+          <div class="review-section">
+            <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
+            <div class="review-block"><h3>Bond</h3><ul id="reviewBond"></ul></div>
+            <div class="review-block"><h3>Financial</h3><ul id="reviewFinancial"></ul></div>
+          </div>
+
+          <div class="upload-row">
+            <label>Upload Supporting Documents (optional)</label>
+            <input type="file" name="supporting_documents" />
+          </div>
+
+          <div class="consent-row">
+            <input type="checkbox" id="consentCheckbox" required />
+            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right"><button type="submit" class="btn-primary">Submit Application</button></div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<footer id="aces-footer"></footer>
+
+<script src="application-surety.js"></script>
+
+</body>
+</html>
