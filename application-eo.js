@@ -25,9 +25,7 @@ function getNextRoundRobinEmail() {
   const list = getRoundRobinList();
   let index = parseInt(localStorage.getItem(key) || "0", 10);
 
-  if (isNaN(index) || index < 0 || index >= list.length) {
-    index = 0;
-  }
+  if (isNaN(index) || index < 0 || index >= list.length) index = 0;
 
   const email = list[index];
   const nextIndex = (index + 1) % list.length;
@@ -38,9 +36,7 @@ function getNextRoundRobinEmail() {
 
 function initRoundRobinEmail() {
   const rrField = document.getElementById("rrEmail");
-  if (rrField) {
-    rrField.value = getNextRoundRobinEmail();
-  }
+  if (rrField) rrField.value = getNextRoundRobinEmail();
 }
 
 /* -----------------------------------
@@ -56,10 +52,7 @@ function initWizardNav() {
   let currentStep = 0;
 
   function showStep(index) {
-    steps.forEach((step, i) => {
-      step.classList.toggle("active", i === index);
-    });
-
+    steps.forEach((step, i) => step.classList.toggle("active", i === index));
     indicators.forEach((ind, i) => {
       ind.classList.toggle("active", i === index);
       ind.classList.toggle("completed", i < index);
@@ -72,7 +65,7 @@ function initWizardNav() {
   function goNext() {
     if (currentStep < steps.length - 1) {
       showStep(currentStep + 1);
-      if (currentStep === 2) buildReview();
+      if (currentStep === 4) buildReview();
     }
   }
 
@@ -80,13 +73,8 @@ function initWizardNav() {
     if (currentStep > 0) showStep(currentStep - 1);
   }
 
-  document.querySelectorAll("[data-next-step]").forEach(btn => {
-    btn.addEventListener("click", goNext);
-  });
-
-  document.querySelectorAll("[data-prev-step]").forEach(btn => {
-    btn.addEventListener("click", goPrev);
-  });
+  document.querySelectorAll("[data-next-step]").forEach(btn => btn.addEventListener("click", goNext));
+  document.querySelectorAll("[data-prev-step]").forEach(btn => btn.addEventListener("click", goPrev));
 
   indicators.forEach((ind, index) => {
     ind.addEventListener("click", () => {
@@ -133,20 +121,22 @@ function initWizardNav() {
 
     /* SERVICES */
     fillList("reviewServices", [
-      { label: "Primary Services", value: getVal("primary_services") },
-      { label: "Years in Business", value: getVal("years_in_business") },
-      { label: "Number of Employees", value: getVal("num_employees") },
-      { label: "Written Contracts", value: getVal("written_contracts") },
-      { label: "Subcontracting", value: getVal("subcontracting") },
-      { label: "Special Services", value: getVal("special_services") }
+      { label: "Primary Professional Services", value: getVal("services_description") },
+      { label: "Years Providing Services", value: getVal("years_in_services") },
+      { label: "Annual Gross Revenue", value: getVal("annual_revenue") },
+      { label: "High-Risk Activities", value: getVal("high_risk_activities") }
     ]);
 
-    /* COVERAGES */
-    fillList("reviewCoverages", [
-      { label: "E&O Liability Limit", value: getVal("eo_limit") },
-      { label: "Deductible", value: getVal("deductible") },
-      { label: "Prior Claims", value: getVal("prior_claims") },
-      { label: "Claim Description", value: getVal("claim_description") },
+    /* CLAIMS */
+    fillList("reviewClaims", [
+      { label: "Prior Claims (5 Years)", value: getVal("prior_claims") },
+      { label: "Claim Details", value: getVal("claim_details") }
+    ]);
+
+    /* COVERAGE */
+    fillList("reviewCoverage", [
+      { label: "Requested E&O Limit", value: getVal("eo_limit") },
+      { label: "Requested Deductible", value: getVal("deductible") },
       { label: "Coverage Notes", value: getVal("coverage_notes") }
     ]);
   }
