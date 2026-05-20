@@ -1476,3 +1476,13 @@ section{padding:60px 20px}
   transform: scale(1.08);
   filter: drop-shadow(0 0 4px rgba(255,255,255,0.6));
 }
+.app-icon img {
+  width: 64px;
+  height: 64px;
+  filter: drop-shadow(0 0 4px rgba(212,0,0,0.4));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.app-card:hover .app-icon img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 6px rgba(212,0,0,0.6));
+}
