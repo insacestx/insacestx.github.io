@@ -52,7 +52,7 @@
     <div class="application-filter-bar">
       <input id="appSearch" type="text" placeholder="Search applications..." data-en="Search applications..." data-es="Buscar solicitudes...">
       <div class="filter-buttons">
-        <button class="filter-btn" data-filter="all" data-en="All" data-es="Todos">All</button>
+        <button class="filter-btn active" data-filter="all" data-en="All" data-es="Todos">All</button>
         <button class="filter-btn" data-filter="Personal" data-en="Personal" data-es="Personal">Personal</button>
         <button class="filter-btn" data-filter="Commercial" data-en="Commercial" data-es="Comercial">Commercial</button>
         <button class="filter-btn" data-filter="Life" data-en="Life" data-es="Vida">Life</button>
@@ -62,7 +62,7 @@
 
     <div class="application-grid">
       <!-- Commercial Applications -->
-      <div class="application-card" data-category="Commercial">
+      <div class="app-item application-card" data-category="Commercial" data-type="bop">
         <div class="icon-circle">
           <img src="Icons/icon-bop-aces.png" class="application-icon" alt="Business Owners Policy">
         </div>
@@ -70,7 +70,7 @@
         <a href="application-bop.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Commercial">
+      <div class="app-item application-card" data-category="Commercial" data-type="general-liability">
         <div class="icon-circle">
           <img src="Icons/icon-gl-aces.png" class="application-icon" alt="General Liability">
         </div>
@@ -78,7 +78,7 @@
         <a href="application-gl.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Commercial">
+      <div class="app-item application-card" data-category="Commercial" data-type="commercial-auto">
         <div class="icon-circle">
           <img src="Icons/icon-commauto-aces.png" class="application-icon" alt="Commercial Auto">
         </div>
@@ -86,7 +86,7 @@
         <a href="application-commercial-auto.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Commercial">
+      <div class="app-item application-card" data-category="Commercial" data-type="workers-comp">
         <div class="icon-circle">
           <img src="Icons/icon-workerscomp-aces.png" class="application-icon" alt="Workers Compensation">
         </div>
@@ -94,15 +94,15 @@
         <a href="application-workerscomp.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Commercial">
+      <div class="app-item application-card" data-category="Commercial" data-type="commercial-property">
         <div class="icon-circle">
-          <img src="Icons/icon-commprop-aces.png" class="application-icon" alt="Commercial Property">
+          <img src="Icons/icon-commprop_aces.png" class="application-icon" alt="Commercial Property">
         </div>
         <h3>Commercial Property</h3>
         <a href="application-commercial-property.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Commercial">
+      <div class="app-item application-card" data-category="Commercial" data-type="errors-omissions">
         <div class="icon-circle">
           <img src="Icons/icon-e&o-aces.png" class="application-icon" alt="Errors & Omissions">
         </div>
@@ -110,7 +110,7 @@
         <a href="application-eo.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Commercial">
+      <div class="app-item application-card" data-category="Commercial" data-type="cyber-liability">
         <div class="icon-circle">
           <img src="Icons/icon-cyber-aces.png" class="application-icon" alt="Cyber Liability">
         </div>
@@ -118,7 +118,7 @@
         <a href="application-cyber.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Commercial">
+      <div class="app-item application-card" data-category="Commercial" data-type="surety-bond">
         <div class="icon-circle">
           <img src="Icons/icon-surety-aces.png" class="application-icon" alt="Surety Bond">
         </div>
@@ -127,7 +127,7 @@
       </div>
 
       <!-- Personal Applications -->
-      <div class="application-card" data-category="Personal">
+      <div class="app-item application-card" data-category="Personal" data-type="auto">
         <div class="icon-circle">
           <img src="Icons/icon-auto-aces.png" class="application-icon" alt="Auto Insurance">
         </div>
@@ -135,15 +135,15 @@
         <a href="application-auto.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Personal">
+      <div class="app-item application-card" data-category="Personal" data-type="home">
         <div class="icon-circle">
-          <img src="Icons/icon-homeowners-aces.png" class="application-icon" alt="Homeowners Insurance">
+          <img src="Icons/icon-property-ace.png" class="application-icon" alt="Homeowners Insurance">
         </div>
         <h3>Homeowners Insurance</h3>
         <a href="application-homeowners.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Personal">
+      <div class="app-item application-card" data-category="Personal" data-type="renters">
         <div class="icon-circle">
           <img src="Icons/icon-renters-aces.png" class="application-icon" alt="Renters Insurance">
         </div>
@@ -151,7 +151,7 @@
         <a href="application-renters.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Personal">
+      <div class="app-item application-card" data-category="Personal" data-type="condo">
         <div class="icon-circle">
           <img src="Icons/icon-condo-aces.png" class="application-icon" alt="Condo Insurance">
         </div>
@@ -159,7 +159,7 @@
         <a href="application-condo.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Personal">
+      <div class="app-item application-card" data-category="Personal" data-type="flood">
         <div class="icon-circle">
           <img src="Icons/icon-flood-aces.png" class="application-icon" alt="Flood Insurance">
         </div>
@@ -167,7 +167,7 @@
         <a href="application-flood.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Personal">
+      <div class="app-item application-card" data-category="Personal" data-type="umbrella">
         <div class="icon-circle">
           <img src="Icons/icon-umbrella-aces.png" class="application-icon" alt="Personal Umbrella">
         </div>
@@ -175,7 +175,7 @@
         <a href="application-umbrella.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Personal">
+      <div class="app-item application-card" data-category="Personal" data-type="atv">
         <div class="icon-circle">
           <img src="Icons/icon-atv-aces.png" class="application-icon" alt="ATV Insurance">
         </div>
@@ -183,7 +183,7 @@
         <a href="application-atv.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Personal">
+      <div class="app-item application-card" data-category="Personal" data-type="boat">
         <div class="icon-circle">
           <img src="Icons/icon-boat-aces.png" class="application-icon" alt="Boat Insurance">
         </div>
@@ -191,15 +191,15 @@
         <a href="application-boat.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Personal">
+      <div class="app-item application-card" data-category="Personal" data-type="motorcycle">
         <div class="icon-circle">
-          <img src="Icons/icon-motorcycle-ace.png" class="application-icon" alt="Motorcycle Insurance">
+          <img src="Icons/icon-motorcycle.ace.png" class="application-icon" alt="Motorcycle Insurance">
         </div>
         <h3>Motorcycle Insurance</h3>
         <a href="application-motorcycle.html" class="apply-button">Start Application</a>
       </div>
 
-      <div class="application-card" data-category="Personal">
+      <div class="app-item application-card" data-category="Personal" data-type="rv">
         <div class="icon-circle">
           <img src="Icons/icon-rv-aces.png" class="application-icon" alt="RV Insurance">
         </div>
@@ -208,7 +208,7 @@
       </div>
 
       <!-- Life Applications -->
-      <div class="application-card" data-category="Life">
+      <div class="app-item application-card" data-category="Life" data-type="life">
         <div class="icon-circle">
           <img src="Icons/icon-life-aces.png" class="application-icon" alt="Life Insurance">
         </div>
@@ -217,14 +217,13 @@
       </div>
 
       <!-- Bundle & Save -->
-      <div class="application-card" data-category="Commercial">
+      <div class="app-item application-card" data-category="Commercial" data-type="bundle">
         <div class="icon-circle">
           <img src="Icons/icon-bundle-aces.png" class="application-icon" alt="Bundle & Save Quote">
         </div>
         <h3>Bundle & Save Quote</h3>
         <a href="bundle.html" class="apply-button">Start Quote</a>
       </div>
-
     </div>
   </section>
 
