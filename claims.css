@@ -1,0 +1,195 @@
+/* ============================
+   CLAIMS PAGE — ACES INSURANCE
+   ============================ */
+
+/* HERO SECTION */
+.claims-hero {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.55)
+    ),
+    url('Images/claims-hero.jpg') center/cover no-repeat;
+  padding: 80px 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.claims-hero .small-hero-content h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.claims-hero .small-hero-content p {
+  font-size: 1.15rem;
+  opacity: 0.9;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+
+/* SECTION TITLES */
+.section-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 50px 0 25px;
+  text-align: center;
+  color: #fff;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* CLAIMS STEPS GRID */
+.claims-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin: 20px 0 40px;
+  padding: 20px 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 12px;
+}
+
+/* INDIVIDUAL STEP CARD */
+.claims-step-card {
+  background: rgba(0, 0, 0, 0.65);
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+  transition: 0.25s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+}
+
+.claims-step-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 0, 0, 0.6);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.75);
+}
+
+/* STEP ICON */
+.claims-step-icon {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+  transition: transform 0.25s ease;
+}
+
+.claims-step-card:hover .claims-step-icon {
+  transform: scale(1.15);
+}
+
+/* STEP TITLES */
+.claims-step-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+/* STEP TEXT */
+.claims-step-card p {
+  font-size: 0.95rem;
+  color: #ddd;
+  line-height: 1.55;
+}
+
+/* DOWNLOAD CHECKLIST BUTTON */
+.claims-download {
+  text-align: center;
+  margin: 40px 0 20px;
+}
+
+.claims-download .btn-primary {
+  background: #d40000;
+  padding: 12px 22px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: 0.25s ease;
+  box-shadow: 0 0 12px rgba(212, 0, 0, 0.4);
+}
+
+.claims-download .btn-primary:hover {
+  background: #ff0000;
+  box-shadow: 0 0 18px rgba(255, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+/* CARRIER DIRECTORY GRID */
+.carrier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin: 20px 0 40px;
+}
+
+/* CARRIER CARD */
+.carrier-card {
+  background: rgba(0, 0, 0, 0.65);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: 0.25s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+}
+
+.carrier-card:hover {
+  border-color: rgba(212, 0, 0, 0.6);
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.75);
+}
+
+.carrier-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.carrier-card p {
+  font-size: 0.95rem;
+  color: #ddd;
+  margin: 6px 0;
+}
+
+.carrier-card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #d40000;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.carrier-card a:hover {
+  color: #ff0000;
+  text-decoration: underline;
+}
+
+/* CALL AGENT CTA */
+.claims-agent-cta {
+  text-align: center;
+  margin: 40px 0 60px;
+}
+
+.claims-agent-cta .btn-primary {
+  background: #d40000;
+  padding: 14px 26px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  transition: 0.25s ease;
+  box-shadow: 0 0 12px rgba(212, 0, 0, 0.4);
+}
+
+.claims-agent-cta .btn-primary:hover {
+  background: #ff0000;
+  box-shadow: 0 0 18px rgba(255, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
