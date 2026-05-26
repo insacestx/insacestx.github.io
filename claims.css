@@ -3,32 +3,62 @@
    FIXED VERSION (NO MORE BLACKOUT)
    ============================================ */
 
-/* HERO SECTION */
+/* ============================================================
+   CLAIMS HERO — FULL BACKGROUND + CENTERED CONTENT
+============================================================ */
 .claims-hero {
   background:
     linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url('Images/claims-hero.jpg'),
-    linear-gradient(to bottom, #1a1a1a, #000); /* Fallback if image missing */
+    url('Icons/hero-claims-aces.png'),
+    linear-gradient(to bottom, #1a1a1a, #000); /* fallback */
   background-size: cover;
   background-position: center;
-  padding: 80px 20px;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 140px 20px 120px;
   text-align: center;
   color: #fff;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.7);
 }
 
 .claims-hero .small-hero-content h1 {
-  font-size: 2.4rem;
+  font-size: 2.8rem;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .claims-hero .small-hero-content p {
-  font-size: 1.15rem;
-  opacity: 0.9;
-  max-width: 650px;
+  font-size: 1.2rem;
+  max-width: 700px;
   margin: 0 auto;
   line-height: 1.55;
+  opacity: 0.95;
 }
+
+/* ============================
+   MOBILE RESPONSIVE
+============================ */
+@media (max-width: 768px) {
+  .claims-hero {
+    padding: 100px 20px 80px;
+    background-position: center top;
+  }
+
+  .claims-hero .small-hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .claims-hero .small-hero-content p {
+    font-size: 1rem;
+  }
+}
+
 
 /* SECTION TITLES */
 .section-title {
