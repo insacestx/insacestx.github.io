@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="ACES Insurance Services is your trusted Texas independent insurance agency, offering bilingual support and personalized coverage for auto, home, life, commercial, and specialty insurance.">
+<meta name="description" content="ACES Insurance Services is your trusted Texas independent insurance agency, offering bilingual support and personalized coverage for auto, home, life, commercial, and specialty lines insurance.">
 <meta name="keywords" content="Texas insurance, auto insurance, home insurance, life insurance, commercial insurance, bilingual insurance, Hewitt TX insurance, Waco TX insurance, independent insurance agency">
 <meta name="author" content="ACES Insurance Services">
 
@@ -68,6 +68,25 @@
 <link rel="stylesheet" href="style.css">
 <script src="global.js" defer></script>
 
+<style>
+  /* Off‑white circle behind icons (matches applications page) */
+  .icon-circle {
+    width: 90px;
+    height: 90px;
+    background: #f7f7f7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+  }
+  .application-icon {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+  }
+</style>
+
 </head>
 <body>
 
@@ -113,25 +132,33 @@
   <div class="app-grid">
 
     <a href="services.html?type=auto" class="app-card fade-in">
-      <img src="Icons/icon-auto-aces.png" alt="Auto Insurance" class="app-icon">
+      <div class="icon-circle">
+        <img src="Icons/icon-auto-aces.png" alt="Auto Insurance" class="application-icon">
+      </div>
       <h3 data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</h3>
       <p>Reliable coverage for your personal or commercial vehicles.</p>
     </a>
 
     <a href="services.html?type=home" class="app-card fade-in">
-      <img src="Icons/icon-property-ace.png" alt="Homeowners Insurance" class="app-icon">
+      <div class="icon-circle">
+        <img src="Icons/icon-property-ace.png" alt="Homeowners Insurance" class="application-icon">
+      </div>
       <h3 data-en="Homeowners Insurance" data-es="Seguro de Hogar">Homeowners Insurance</h3>
       <p>Protecting your home, belongings, and peace of mind.</p>
     </a>
 
     <a href="services.html?type=life" class="app-card fade-in">
-      <img src="Icons/icon-life-aces.png" alt="Life Insurance" class="app-icon">
+      <div class="icon-circle">
+        <img src="Icons/icon-life-aces.png" alt="Life Insurance" class="application-icon">
+      </div>
       <h3 data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</h3>
       <p>Coverage designed to protect your family's future.</p>
     </a>
 
     <a href="services.html?type=commercial" class="app-card fade-in">
-      <img src="Icons/icon-bop-aces.png" alt="Commercial Insurance" class="app-icon">
+      <div class="icon-circle">
+        <img src="Icons/icon-bop-aces.png" alt="Commercial Insurance" class="application-icon">
+      </div>
       <h3 data-en="Commercial Insurance" data-es="Seguro Comercial">Commercial Insurance</h3>
       <p>Customized protection for Texas businesses of all sizes.</p>
     </a>
