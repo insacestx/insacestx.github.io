@@ -28,6 +28,63 @@
       height: 55px;
       object-fit: contain;
     }
+
+    /* Application Card Styling */
+    .application-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .application-card {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .application-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.9);
+      border-color: rgba(255, 77, 77, 0.7);
+    }
+
+    .application-card h3 {
+      margin: 12px 0 8px;
+      font-size: 1.1rem;
+      color: #f0f0f0;
+    }
+
+    .application-card p {
+      font-size: 0.9rem;
+      color: #ddd;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .apply-button {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 6px;
+      background: #d40000;
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .apply-button:hover {
+      background: #ff0000;
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 
@@ -67,6 +124,7 @@
           <img src="Icons/icon-bop-aces.png" class="application-icon" alt="Business Owners Policy">
         </div>
         <h3>Business Owners Policy (BOP)</h3>
+        <p>Comprehensive coverage for small to medium-sized businesses.</p>
         <a href="application-bop.html" class="apply-button">Start Application</a>
       </div>
 
@@ -75,6 +133,7 @@
           <img src="Icons/icon-gl-aces.png" class="application-icon" alt="General Liability">
         </div>
         <h3>General Liability</h3>
+        <p>Protection against third-party bodily injury and property damage.</p>
         <a href="application-gl.html" class="apply-button">Start Application</a>
       </div>
 
@@ -83,6 +142,7 @@
           <img src="Icons/icon-commauto-aces.png" class="application-icon" alt="Commercial Auto">
         </div>
         <h3>Commercial Auto</h3>
+        <p>Coverage for vehicles used in business operations.</p>
         <a href="application-commercial-auto.html" class="apply-button">Start Application</a>
       </div>
 
@@ -91,6 +151,7 @@
           <img src="Icons/icon-workerscomp-aces.png" class="application-icon" alt="Workers Compensation">
         </div>
         <h3>Workers Compensation</h3>
+        <p>Statutory coverage for employee injuries and illnesses.</p>
         <a href="application-workerscomp.html" class="apply-button">Start Application</a>
       </div>
 
@@ -99,6 +160,7 @@
           <img src="Icons/icon-commprop_aces.png" class="application-icon" alt="Commercial Property">
         </div>
         <h3>Commercial Property</h3>
+        <p>Protection for your business building, equipment, and inventory.</p>
         <a href="application-commercial-property.html" class="apply-button">Start Application</a>
       </div>
 
@@ -107,6 +169,7 @@
           <img src="Icons/icon-e&o-aces.png" class="application-icon" alt="Errors & Omissions">
         </div>
         <h3>Errors & Omissions</h3>
+        <p>Professional liability coverage for service providers and consultants.</p>
         <a href="application-eo.html" class="apply-button">Start Application</a>
       </div>
 
@@ -115,6 +178,7 @@
           <img src="Icons/icon-cyber-aces.png" class="application-icon" alt="Cyber Liability">
         </div>
         <h3>Cyber Liability</h3>
+        <p>Defense against data breaches, ransomware, and cyber attacks.</p>
         <a href="application-cyber.html" class="apply-button">Start Application</a>
       </div>
 
@@ -123,6 +187,7 @@
           <img src="Icons/icon-surety-aces.png" class="application-icon" alt="Surety Bond">
         </div>
         <h3>Surety Bond</h3>
+        <p>Financial guarantees for contract and license requirements.</p>
         <a href="application-surety.html" class="apply-button">Start Application</a>
       </div>
 
@@ -132,6 +197,7 @@
           <img src="Icons/icon-auto-aces.png" class="application-icon" alt="Auto Insurance">
         </div>
         <h3>Auto Insurance</h3>
+        <p>Reliable coverage for your personal or commercial vehicles.</p>
         <a href="application-auto.html" class="apply-button">Start Application</a>
       </div>
 
@@ -140,6 +206,7 @@
           <img src="Icons/icon-property-ace.png" class="application-icon" alt="Homeowners Insurance">
         </div>
         <h3>Homeowners Insurance</h3>
+        <p>Protecting your home, belongings, and peace of mind.</p>
         <a href="application-homeowners.html" class="apply-button">Start Application</a>
       </div>
 
@@ -148,6 +215,7 @@
           <img src="Icons/icon-renters-aces.png" class="application-icon" alt="Renters Insurance">
         </div>
         <h3>Renters Insurance</h3>
+        <p>Coverage for your personal belongings and liability as a renter.</p>
         <a href="application-renters.html" class="apply-button">Start Application</a>
       </div>
 
@@ -156,6 +224,7 @@
           <img src="Icons/icon-condo-aces.png" class="application-icon" alt="Condo Insurance">
         </div>
         <h3>Condo Insurance</h3>
+        <p>Specialized coverage tailored to condo ownership needs.</p>
         <a href="application-condo.html" class="apply-button">Start Application</a>
       </div>
 
@@ -164,6 +233,7 @@
           <img src="Icons/icon-flood-aces.png" class="application-icon" alt="Flood Insurance">
         </div>
         <h3>Flood Insurance</h3>
+        <p>Protection against flooding and water damage to your property.</p>
         <a href="application-flood.html" class="apply-button">Start Application</a>
       </div>
 
@@ -172,6 +242,7 @@
           <img src="Icons/icon-umbrella-aces.png" class="application-icon" alt="Personal Umbrella">
         </div>
         <h3>Personal Umbrella</h3>
+        <p>Extra liability protection beyond your standard policies.</p>
         <a href="application-umbrella.html" class="apply-button">Start Application</a>
       </div>
 
@@ -180,6 +251,7 @@
           <img src="Icons/icon-atv-aces.png" class="application-icon" alt="ATV Insurance">
         </div>
         <h3>ATV Insurance</h3>
+        <p>Coverage for your all-terrain vehicle adventures.</p>
         <a href="application-atv.html" class="apply-button">Start Application</a>
       </div>
 
@@ -188,6 +260,7 @@
           <img src="Icons/icon-boat-aces.png" class="application-icon" alt="Boat Insurance">
         </div>
         <h3>Boat Insurance</h3>
+        <p>Comprehensive watercraft protection and liability coverage.</p>
         <a href="application-boat.html" class="apply-button">Start Application</a>
       </div>
 
@@ -196,6 +269,7 @@
           <img src="Icons/icon-motorcycle.ace.png" class="application-icon" alt="Motorcycle Insurance">
         </div>
         <h3>Motorcycle Insurance</h3>
+        <p>Specialized coverage for your motorcycle or scooter.</p>
         <a href="application-motorcycle.html" class="apply-button">Start Application</a>
       </div>
 
@@ -204,6 +278,7 @@
           <img src="Icons/icon-rv-aces.png" class="application-icon" alt="RV Insurance">
         </div>
         <h3>RV Insurance</h3>
+        <p>Protection for your recreational vehicle and adventures.</p>
         <a href="application-rv.html" class="apply-button">Start Application</a>
       </div>
 
@@ -213,6 +288,7 @@
           <img src="Icons/icon-life-aces.png" class="application-icon" alt="Life Insurance">
         </div>
         <h3>Life Insurance</h3>
+        <p>Coverage designed to protect your family's future.</p>
         <a href="application-life.html" class="apply-button">Start Application</a>
       </div>
 
@@ -222,6 +298,7 @@
           <img src="Icons/icon-bundle-aces.png" class="application-icon" alt="Bundle & Save Quote">
         </div>
         <h3>Bundle & Save Quote</h3>
+        <p>Combine multiple policies and save on your insurance today.</p>
         <a href="bundle.html" class="apply-button">Start Quote</a>
       </div>
     </div>
