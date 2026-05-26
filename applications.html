@@ -1,255 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title data-en="Start an Application | ACES Insurance Services"
-        data-es="Comenzar una Solicitud | ACES Insurance Services">
-  Start an Application | ACES Insurance Services
-</title>
-
-<link rel="stylesheet" href="style.css">
-<script src="global.js" defer></script>
-<script src="applications.js" defer></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-en="Start an Application | ACES Insurance Services"
+          data-es="Comenzar una Solicitud | ACES Insurance Services">
+    Start an Application | ACES Insurance Services
+  </title>
+  <link rel="stylesheet" href="style.css">
+  <script src="global.js" defer></script>
+  <script src="applications.js" defer></script>
 </head>
+
 <body>
+  <header id="aces-header"></header>
 
-<header id="aces-header"></header>
+  <section class="small-hero fade-in">
+    <div class="small-hero-content">
+      <h1 data-en="Start an Application" data-es="Comenzar una Solicitud">Start an Application</h1>
+      <p data-en="Begin your insurance application quickly and easily."
+         data-es="Comience su solicitud de seguro rápida y fácilmente.">
+         Begin your insurance application quickly and easily.
+      </p>
+    </div>
+  </section>
 
-<section class="small-hero fade-in">
-  <div class="small-hero-content">
-    <h1 data-en="Start an Application"
-        data-es="Comenzar una Solicitud">
-      Start an Application
-    </h1>
-    <p data-en="Begin your insurance application quickly and easily."
-       data-es="Comience su solicitud de seguro rápida y fácilmente.">
-      Begin your insurance application quickly and easily.
-    </p>
-  </div>
-</section>
+  <section class="app-section fade-in">
+    <h2 class="app-category-title" data-en="Find Your Application" data-es="Encuentre su Solicitud">
+      Find Your Application
+    </h2>
 
-<section class="app-section fade-in">
-
-  <h2 class="app-category-title" data-en="Find Your Application"
-      data-es="Encuentre su Solicitud">
-    Find Your Application
-  </h2>
-
-  <div class="application-filter-bar">
-
-    <input id="appSearch" type="text"
-      placeholder="Search applications..."
-      data-en="Search applications..."
-      data-es="Buscar solicitudes...">
-
-    <div class="filter-buttons">
-      <button class="filter-btn active" data-filter="all"
-        data-en="All" data-es="Todos">All</button>
-      <button class="filter-btn" data-filter="personal"
-        data-en="Personal" data-es="Personal">Personal</button>
-      <button class="filter-btn" data-filter="commercial"
-        data-en="Commercial" data-es="Comercial">Commercial</button>
-      <button class="filter-btn" data-filter="life"
-        data-en="Life" data-es="Vida">Life</button>
+    <div class="application-filter-bar">
+      <input id="appSearch" type="text" placeholder="Search applications..." data-en="Search applications..." data-es="Buscar solicitudes...">
+      <div class="filter-buttons">
+        <button class="filter-btn" data-filter="all" data-en="All" data-es="Todos">All</button>
+        <button class="filter-btn" data-filter="Personal" data-en="Personal" data-es="Personal">Personal</button>
+        <button class="filter-btn" data-filter="Commercial" data-en="Commercial" data-es="Comercial">Commercial</button>
+        <button class="filter-btn" data-filter="Life" data-en="Life" data-es="Vida">Life</button>
+      </div>
+      <button id="clearFiltersBtn" class="filter-clear-btn" data-en="Clear Filters" data-es="Limpiar Filtros">Clear Filters</button>
     </div>
 
-    <button id="clearFiltersBtn" class="filter-clear-btn"
-            data-en="Clear Filters" data-es="Limpiar Filtros">
-      Clear Filters
-    </button>
+    <div class="application-grid">
+      <!-- Commercial Applications -->
+      <div class="application-card" data-category="Commercial">
+        <img src="Icons/icon-bop-aces.png.png" alt="Business Owners Policy" class="application-icon">
+        <h3>Business Owners Policy (BOP)</h3>
+        <a href="application-bop.html" class="apply-button">Start Application</a>
+      </div>
 
-  </div>
+      <div class="application-card" data-category="Commercial">
+        <img src="Icons/icon-gl-aces.png.png" alt="General Liability" class="application-icon">
+        <h3>General Liability</h3>
+        <a href="application-gl.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="app-grid" id="applicationsList">
+      <div class="application-card" data-category="Commercial">
+        <img src="Icons/icon-commauto-aces.png.png" alt="Commercial Auto" class="application-icon">
+        <h3>Commercial Auto</h3>
+        <a href="application-commercial-auto.html" class="apply-button">Start Application</a>
+      </div>
 
-    <!-- ⭐ NEW BUNDLE TILE (Personal Category) -->
-    <a id="app-bundle" class="app-card fade-in app-item"
-       data-category="personal" data-type="bundle"
-       href="bundle.html">
-      <img src="icon-bundle-aces.png" class="app-icon" alt="Bundle & Save Application">
-      <span class="app-badge" data-en="Personal" data-es="Personal">Personal</span>
-      <h3 data-en="Bundle & Save Quote" data-es="Cotización de Paquete y Ahorro">
-        Bundle & Save Quote
-      </h3>
-      <p data-en="Combine Auto, Home, Renters, Condo, Umbrella, or Flood for the best savings."
-         data-es="Combine Auto, Hogar, Inquilinos, Condominio, Umbrella o Inundación para obtener los mejores ahorros.">
-        Combine Auto, Home, Renters, Condo, Umbrella, or Flood for the best savings.
-      </p>
-    </a>
+      <div class="application-card" data-category="Commercial">
+        <img src="Icons/icon-workerscomp-aces.png.png" alt="Workers Compensation" class="application-icon">
+        <h3>Workers Compensation</h3>
+        <a href="application-workerscomp.html" class="apply-button">Start Application</a>
+      </div>
 
-    <!-- PERSONAL -->
-    <a id="app-auto" class="app-card fade-in app-item"
-       data-category="personal" data-type="auto"
-       href="application-auto.html">
-      <img src="icon-auto-aces.png" class="app-icon" alt="Auto Insurance Application">
-      <span class="app-badge" data-en="Personal" data-es="Personal">Personal</span>
-      <h3 data-en="Auto Insurance Application" data-es="Solicitud de Seguro de Auto">
-        Auto Insurance Application
-      </h3>
-      <p data-en="Start your auto insurance application."
-         data-es="Comience su solicitud de seguro de auto.">
-        Start your auto insurance application.
-      </p>
-    </a>
+      <div class="application-card" data-category="Commercial">
+        <img src="Icons/icon-commprop-aces.png.png" alt="Commercial Property" class="application-icon">
+        <h3>Commercial Property</h3>
+        <a href="application-commercial-property.html" class="apply-button">Start Application</a>
+      </div>
 
-    <a id="app-homeowners" class="app-card fade-in app-item"
-       data-category="personal" data-type="homeowners"
-       href="application-homeowners.html">
-      <img src="icon-property-aces.png" class="app-icon" alt="Homeowners Insurance Application">
-      <span class="app-badge" data-en="Personal" data-es="Personal">Personal</span>
-      <h3 data-en="Homeowners Insurance Application" data-es="Solicitud de Seguro de Hogar">
-        Homeowners Insurance Application
-      </h3>
-      <p data-en="Start your homeowners insurance application."
-         data-es="Comience su solicitud de seguro de hogar.">
-        Start your homeowners insurance application.
-      </p>
-    </a>
+      <div class="application-card" data-category="Commercial">
+        <img src="Icons/icon-e&o-aces.png.png" alt="Errors & Omissions" class="application-icon">
+        <h3>Errors & Omissions</h3>
+        <a href="application-eo.html" class="apply-button">Start Application</a>
+      </div>
 
-    <a id="app-renters" class="app-card fade-in app-item"
-       data-category="personal" data-type="renters"
-       href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-property-aces.png" class="app-icon" alt="Renters Insurance Application">
-      <span class="app-badge" data-en="Personal" data-es="Personal">Personal</span>
-      <h3 data-en="Renters Insurance Application" data-es="Solicitud de Inquilinos">
-        Renters Insurance Application
-      </h3>
-      <p data-en="Start your renters insurance application."
-         data-es="Comience su solicitud de seguro de inquilinos.">
-        Start your renters insurance application.
-      </p>
-    </a>
+      <div class="application-card" data-category="Commercial">
+        <img src="Icons/icon-cyber-aces.png.png" alt="Cyber Liability" class="application-icon">
+        <h3>Cyber Liability</h3>
+        <a href="application-cyber.html" class="apply-button">Start Application</a>
+      </div>
 
-    <!-- COMMERCIAL -->
-    <a id="app-general-liability" class="app-card fade-in app-item"
-       data-category="commercial" data-type="general-liability"
-       href="application-gl.html">
-      <img src="icon-commercial-aces.png" class="app-icon" alt="General Liability Application">
-      <span class="app-badge" data-en="Commercial" data-es="Comercial">Commercial</span>
-      <h3 data-en="General Liability Application" data-es="Solicitud de Responsabilidad General">
-        General Liability Application
-      </h3>
-      <p data-en="Start your general liability application."
-         data-es="Comience su solicitud de responsabilidad general.">
-        Start your general liability application.
-      </p>
-    </a>
+      <div class="application-card" data-category="Commercial">
+        <img src="Icons/icon-surety-aces.png.png" alt="Surety Bond" class="application-icon">
+        <h3>Surety Bond</h3>
+        <a href="application-surety.html" class="apply-button">Start Application</a>
+      </div>
 
-    <a id="app-commercial-auto" class="app-card fade-in app-item"
-       data-category="commercial" data-type="commercial-auto"
-       href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-auto-aces.png" class="app-icon" alt="Commercial Auto Application">
-      <span class="app-badge" data-en="Commercial" data-es="Comercial">Commercial</span>
-      <h3 data-en="Commercial Auto Application" data-es="Solicitud de Auto Comercial">
-        Commercial Auto Application
-      </h3>
-      <p data-en="Start your commercial auto application."
-         data-es="Comience su solicitud de auto comercial.">
-        Start your commercial auto application.
-      </p>
-    </a>
+      <!-- Personal Applications -->
+      <div class="application-card" data-category="Personal">
+        <img src="Icons/icon-auto-aces.png.png" alt="Auto Insurance" class="application-icon">
+        <h3>Auto Insurance</h3>
+        <a href="application-auto.html" class="apply-button">Start Application</a>
+      </div>
 
-    <a id="app-workers-comp" class="app-card fade-in app-item"
-       data-category="commercial" data-type="workers-comp"
-       href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-commercial-aces.png" class="app-icon" alt="Workers Compensation Application">
-      <span class="app-badge" data-en="Commercial" data-es="Comercial">Commercial</span>
-      <h3 data-en="Workers Compensation Application" data-es="Solicitud de Compensación Laboral">
-        Workers Compensation Application
-      </h3>
-      <p data-en="Start your workers comp application."
-         data-es="Comience su solicitud de compensación laboral.">
-        Start your workers comp application.
-      </p>
-    </a>
+      <div class="application-card" data-category="Personal">
+        <img src="Icons/icon-homeowners-aces.png.png" alt="Homeowners Insurance" class="application-icon">
+        <h3>Homeowners Insurance</h3>
+        <a href="application-homeowners.html" class="apply-button">Start Application</a>
+      </div>
 
-    <!-- LIFE -->
-    <a id="app-term-life" class="app-card fade-in app-item"
-       data-category="life" data-type="term-life"
-       href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-life-aces.png" class="app-icon" alt="Term Life Application">
-      <span class="app-badge" data-en="Life" data-es="Vida">Life</span>
-      <h3 data-en="Term Life Application" data-es="Solicitud de Vida a Término">
-        Term Life Application
-      </h3>
-      <p data-en="Start your term life application."
-         data-es="Comience su solicitud de vida a término.">
-        Start your term life application.
-      </p>
-    </a>
+      <div class="application-card" data-category="Personal">
+        <img src="Icons/icon-renters-aces.png.png" alt="Renters Insurance" class="application-icon">
+        <h3>Renters Insurance</h3>
+        <a href="application-renters.html" class="apply-button">Start Application</a>
+      </div>
 
-    <a id="app-whole-life" class="app-card fade-in app-item"
-       data-category="life" data-type="whole-life"
-       href="https://formsubmit.co/office@insaces.com" target="_blank">
-      <img src="icon-life-aces.png" class="app-icon" alt="Whole Life Application">
-      <span class="app-badge" data-en="Life" data-es="Vida">Life</span>
-      <h3 data-en="Whole Life Application" data-es="Solicitud de Vida Entera">
-        Whole Life Application
-      </h3>
-      <p data-en="Start your whole life application."
-         data-es="Comience su solicitud de vida entera.">
-        Start your whole life application.
-      </p>
-    </a>
-<!-- BOP -->
-<a href="application-bop.html" class="app-card">
-  <div class="app-icon">
-    <span class="material-symbols-rounded">business_center</span>
-  </div>
-  <h3 data-en="Business Owners Policy (BOP)" data-es="Póliza para Dueños de Negocios (BOP)">
-    Business Owners Policy (BOP)
-  </h3>
-  <p data-en="Protect your business property and liability in one package." 
-     data-es="Proteja la propiedad y responsabilidad de su negocio en un solo paquete.">
-    Protect your business property and liability in one package.
-  </p>
-  <button class="btn-primary" data-en="Start Application" data-es="Comenzar Solicitud">
-    Start Application
-  </button>
-</a>
+      <div class="application-card" data-category="Personal">
+        <img src="Icons/icon-condo-aces.png.png" alt="Condo Insurance" class="application-icon">
+        <h3>Condo Insurance</h3>
+        <a href="application-condo.html" class="apply-button">Start Application</a>
+      </div>
 
-<!-- E&O -->
-<a href="application-eo.html" class="app-card">
-  <div class="app-icon">
-    <span class="material-symbols-rounded">verified_user</span>
-  </div>
-  <h3 data-en="Errors & Omissions (E&O)" data-es="Errores y Omisiones (E&O)">
-    Errors & Omissions (E&O)
-  </h3>
-  <p data-en="Coverage for professional mistakes, negligence, or service errors." 
-     data-es="Cobertura para errores profesionales, negligencia o fallas en servicios.">
-    Coverage for professional mistakes, negligence, or service errors.
-  </p>
-  <button class="btn-primary" data-en="Start Application" data-es="Comenzar Solicitud">
-    Start Application
-  </button>
-</a>
+      <div class="application-card" data-category="Personal">
+        <img src="Icons/icon-flood-aces.png.png" alt="Flood Insurance" class="application-icon">
+        <h3>Flood Insurance</h3>
+        <a href="application-flood.html" class="apply-button">Start Application</a>
+      </div>
 
-<!-- Surety Bonds -->
-<a href="application-surety.html" class="app-card">
-  <div class="app-icon">
-    <span class="material-symbols-rounded">gavel</span>
-  </div>
-  <h3 data-en="Surety Bonds" data-es="Fianzas (Surety Bonds)">
-    Surety Bonds
-  </h3>
-  <p data-en="Contractor, license, performance, and other bond types." 
-     data-es="Fianzas de contratista, licencia, cumplimiento y más.">
-    Contractor, license, performance, and other bond types.
-  </p>
-  <button class="btn-primary" data-en="Start Application" data-es="Comenzar Solicitud">
-    Start Application
-  </button>
-</a>
+      <div class="application-card" data-category="Personal">
+        <img src="Icons/icon-umbrella-aces.png.png" alt="Personal Umbrella" class="application-icon">
+        <h3>Personal Umbrella</h3>
+        <a href="application-umbrella.html" class="apply-button">Start Application</a>
+      </div>
 
-  </div>
-</section>
+      <div class="application-card" data-category="Personal">
+        <img src="Icons/icon-atv-aces.png.png" alt="ATV Insurance" class="application-icon">
+        <h3>ATV Insurance</h3>
+        <a href="application-atv.html" class="apply-button">Start Application</a>
+      </div>
 
-<footer id="aces-footer"></footer>
+      <div class="application-card" data-category="Personal">
+        <img src="Icons/icon-boat-aces.png.png" alt="Boat Insurance" class="application-icon">
+        <h3>Boat Insurance</h3>
+        <a href="application-boat.html" class="apply-button">Start Application</a>
+      </div>
 
+      <div class="application-card" data-category="Personal">
+        <img src="Icons/icon-motorcycle-ace.png.png" alt="Motorcycle Insurance" class="application-icon">
+        <h3>Motorcycle Insurance</h3>
+        <a href="application-motorcycle.html" class="apply-button">Start Application</a>
+      </div>
+
+      <div class="application-card" data-category="Personal">
+        <img src="Icons/icon-rv-aces.png.png" alt="RV Insurance" class="application-icon">
+        <h3>RV Insurance</h3>
+        <a href="application-rv.html" class="apply-button">Start Application</a>
+      </div>
+
+      <!-- Life Applications -->
+      <div class="application-card" data-category="Life">
+        <img src="Icons/icon-life-aces.png.png" alt="Life Insurance" class="application-icon">
+        <h3>Life Insurance</h3>
+        <a href="application-life.html" class="apply-button">Start Application</a>
+      </div>
+
+      <!-- Bundle & Save -->
+      <div class="application-card" data-category="Commercial">
+        <img src="Icons/icon-bundle-aces.png" alt="Bundle & Save Quote" class="application-icon">
+        <h3>Bundle & Save Quote</h3>
+        <a href="bundle.html" class="apply-button">Start Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="aces-footer"></footer>
 </body>
 </html>
