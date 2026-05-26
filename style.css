@@ -1717,3 +1717,10 @@ section{padding:60px 20px}
   box-shadow: 0 0 18px rgba(255, 0, 0, 0.6);
   transform: translateY(-2px);
 }
+.claims-hero {
+  background-image: url('Images/claims-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
