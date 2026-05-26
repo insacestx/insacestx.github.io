@@ -1,14 +1,16 @@
-/* ============================
-   CLAIMS PAGE — ACES INSURANCE
-   ============================ */
+/* ============================================
+   CLAIMS PAGE — ACES INSURANCE SERVICES
+   FIXED VERSION (NO MORE BLACKOUT)
+   ============================================ */
 
 /* HERO SECTION */
 .claims-hero {
-  background: linear-gradient(
-      rgba(0, 0, 0, 0.55),
-      rgba(0, 0, 0, 0.55)
-    ),
-    url('Images/claims-hero.jpg') center/cover no-repeat;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url('Images/claims-hero.jpg'),
+    linear-gradient(to bottom, #1a1a1a, #000); /* Fallback if image missing */
+  background-size: cover;
+  background-position: center;
   padding: 80px 20px;
   text-align: center;
   color: #fff;
@@ -56,10 +58,10 @@
 
 /* INDIVIDUAL STEP CARD */
 .claims-step-card {
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(255, 255, 255, 0.06); /* FIXED: No more black cards */
   padding: 22px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12); /* Improved contrast */
   text-align: center;
   transition: 0.25s ease;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
@@ -131,10 +133,10 @@
 
 /* CARRIER CARD */
 .carrier-card {
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(255, 255, 255, 0.06); /* FIXED: Lightened */
   padding: 20px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12); /* FIXED: Visible borders */
   transition: 0.25s ease;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
 }
