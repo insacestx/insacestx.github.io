@@ -61,6 +61,13 @@
         ACES Insurance Services is an independent agency. Coverage availability and rates may vary by provider and location.
       </span>
     </p>
+
+    <!-- TEXT MESSAGING PRIVACY POLICY LINK -->
+    <p>
+      <a href="#" id="openTextPolicy" class="footer-link">
+        Text Messaging Privacy Policy
+      </a>
+    </p>
   </div>
 
   <!-- BACK TO TOP -->
@@ -69,3 +76,70 @@
   </button>
 
 </div>
+
+
+<!-- ============================================================
+     TEXT MESSAGING PRIVACY POLICY MODAL
+============================================================ -->
+<div id="textPolicyModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+    <h2>Text Messaging Privacy Policy</h2>
+    <p><strong>Last Updated: May 2026</strong></p>
+
+    <p>At ACES Insurance Services, we value your privacy and are committed to protecting your personal information. This Text Messaging Privacy Policy explains how we collect, use, and safeguard the information you provide when you opt in to receive SMS/text messages from us.</p>
+
+    <h3>1. Information We Collect</h3>
+    <p>We may collect your mobile phone number, your name (if provided), message content you send to us, and delivery/interaction data. We do not collect sensitive personal information through text messaging.</p>
+
+    <h3>2. How We Use Your Information</h3>
+    <p>We use your information to send appointment reminders, policy updates, claims assistance, customer service responses, and important service notifications. We do not send unsolicited marketing messages.</p>
+
+    <h3>3. How We Protect Your Information</h3>
+    <p>We use secure systems, encrypted platforms, and access controls. We do not sell or share your phone number with third parties for marketing.</p>
+
+    <h3>4. Message Frequency</h3>
+    <p>Message frequency varies based on your interactions with us. Standard message and data rates may apply.</p>
+
+    <h3>5. Opt-Out Instructions</h3>
+    <p>You may opt out at any time by replying <strong>STOP</strong>. For help, reply <strong>HELP</strong>.</p>
+
+    <h3>6. Third-Party Messaging Providers</h3>
+    <p>We may use trusted third-party platforms to deliver messages. These providers must protect your information and follow all applicable privacy laws.</p>
+
+    <h3>7. Your Rights</h3>
+    <p>You may request access to your data, ask for deletion, or update your contact information by contacting us at office@insaces.com or (254) 709‑6487.</p>
+
+    <h3>8. Changes to This Policy</h3>
+    <p>We may update this policy periodically. Updates will be posted on our website.</p>
+
+    <h3>9. Contact Us</h3>
+    <p>ACES Insurance Services<br>
+    404 Sapphire Blvd., Hewitt, TX 76643<br>
+    Phone: (254) 709‑6487<br>
+    Email: office@insaces.com</p>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+     MODAL SCRIPT
+============================================================ -->
+<script>
+document.getElementById("openTextPolicy").onclick = function(e) {
+  e.preventDefault();
+  document.getElementById("textPolicyModal").style.display = "block";
+};
+
+document.querySelector("#textPolicyModal .close").onclick = function() {
+  document.getElementById("textPolicyModal").style.display = "none";
+};
+
+window.onclick = function(event) {
+  if (event.target === document.getElementById("textPolicyModal")) {
+    document.getElementById("textPolicyModal").style.display = "none";
+  }
+};
+</script>
