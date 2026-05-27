@@ -198,33 +198,40 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// ===============================
-// TEXT POLICY MODAL LOGIC
-// ===============================
+// =====================================================
+// TEXT POLICY MODAL (WORKS WITH DYNAMIC FOOTER)
+// =====================================================
 document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("textPolicyModal");
-  const openBtn = document.getElementById("openTextPolicy");
-  const closeBtn = document.querySelector("#textPolicyModal .close");
 
-  if (openBtn) {
+  function attachModalEvents() {
+    const modal = document.getElementById("textPolicyModal");
+    const openBtn = document.getElementById("openTextPolicy");
+    const closeBtn = document.querySelector("#textPolicyModal .close");
+
+    if (!modal || !openBtn || !closeBtn) {
+      // Footer not loaded yet — try again shortly
+      setTimeout(attachModalEvents, 200);
+      return;
+    }
+
     openBtn.addEventListener("click", (e) => {
       e.preventDefault();
       modal.style.display = "block";
       setTimeout(() => modal.classList.add("show"), 10);
     });
-  }
 
-  if (closeBtn) {
     closeBtn.addEventListener("click", () => {
       modal.classList.remove("show");
       setTimeout(() => modal.style.display = "none", 300);
     });
+
+    window.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.classList.remove("show");
+        setTimeout(() => modal.style.display = "none", 300);
+      }
+    });
   }
 
-  window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      modal.classList.remove("show");
-      setTimeout(() => modal.style.display = "none", 300);
-    }
-  });
+  attachModalEvents();
 });
