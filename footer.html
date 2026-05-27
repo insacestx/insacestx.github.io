@@ -128,18 +128,25 @@
      MODAL SCRIPT
 ============================================================ -->
 <script>
-document.getElementById("openTextPolicy").onclick = function(e) {
+const modal = document.getElementById("textPolicyModal");
+const openBtn = document.getElementById("openTextPolicy");
+const closeBtn = document.querySelector("#textPolicyModal .close");
+
+openBtn.onclick = (e) => {
   e.preventDefault();
-  document.getElementById("textPolicyModal").style.display = "block";
+  modal.classList.add("show");
 };
 
-document.querySelector("#textPolicyModal .close").onclick = function() {
-  document.getElementById("textPolicyModal").style.display = "none";
+closeBtn.onclick = () => {
+  modal.classList.remove("show");
+  setTimeout(() => modal.style.display = "none", 300);
 };
 
-window.onclick = function(event) {
-  if (event.target === document.getElementById("textPolicyModal")) {
-    document.getElementById("textPolicyModal").style.display = "none";
+window.onclick = (event) => {
+  if (event.target === modal) {
+    modal.classList.remove("show");
+    setTimeout(() => modal.style.display = "none", 300);
   }
 };
 </script>
+
