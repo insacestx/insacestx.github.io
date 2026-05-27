@@ -201,37 +201,34 @@ window.addEventListener("scroll", () => {
 // =====================================================
 // TEXT POLICY MODAL (WORKS WITH DYNAMIC FOOTER)
 // =====================================================
-document.addEventListener("DOMContentLoaded", () => {
+function attachTextPolicyModal() {
+  const modal = document.getElementById("textPolicyModal");
+  const openBtn = document.getElementById("openTextPolicy");
+  const closeBtn = document.querySelector("#textPolicyModal .close");
 
-  function attachModalEvents() {
-    const modal = document.getElementById("textPolicyModal");
-    const openBtn = document.getElementById("openTextPolicy");
-    const closeBtn = document.querySelector("#textPolicyModal .close");
-
-    if (!modal || !openBtn || !closeBtn) {
-      // Footer not loaded yet — try again shortly
-      setTimeout(attachModalEvents, 200);
-      return;
-    }
-
-    openBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      modal.style.display = "block";
-      setTimeout(() => modal.classList.add("show"), 10);
-    });
-
-    closeBtn.addEventListener("click", () => {
-      modal.classList.remove("show");
-      setTimeout(() => modal.style.display = "none", 300);
-    });
-
-    window.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        modal.classList.remove("show");
-        setTimeout(() => modal.style.display = "none", 300);
-      }
-    });
+  // Footer not loaded yet — retry
+  if (!modal || !openBtn || !closeBtn) {
+    setTimeout(attachTextPolicyModal, 200);
+    return;
   }
 
-  attachModalEvents();
-});
+  openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal.style.display = "block";
+    setTimeout(() => modal.classList.add("show"), 10);
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("show");
+    setTimeout(() => modal.style.display = "none", 300);
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.classList.remove("show");
+      setTimeout(() => modal.style.display = "none", 300);
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", attachTextPolicyModal);
