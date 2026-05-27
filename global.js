@@ -197,3 +197,29 @@ window.addEventListener("scroll", () => {
     header.classList.remove("scrolled");
   }
 });
+
+<!-- ============================================================
+     MODAL SCRIPT
+============================================================ -->
+<script>
+const modal = document.getElementById("textPolicyModal");
+const openBtn = document.getElementById("openTextPolicy");
+const closeBtn = document.querySelector("#textPolicyModal .close");
+
+openBtn.onclick = (e) => {
+  e.preventDefault();
+  modal.classList.add("show");
+};
+
+closeBtn.onclick = () => {
+  modal.classList.remove("show");
+  setTimeout(() => modal.style.display = "none", 300);
+};
+
+window.onclick = (event) => {
+  if (event.target === modal) {
+    modal.classList.remove("show");
+    setTimeout(() => modal.style.display = "none", 300);
+  }
+};
+</script>
