@@ -1787,20 +1787,29 @@ section{padding:60px 20px}
   background-repeat: no-repeat;
   position: relative;
 }
+
 /* ============================================================
-   TEXT POLICY MODAL (GLOBAL STYLES)
+   TEXT POLICY MODAL — ACES REFINED VERSION
 ============================================================ */
 .modal {
   display: none;
   position: fixed;
   z-index: 9999;
-  left: 0;
-  top: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   overflow-y: auto;
   background: rgba(0,0,0,0.75);
   padding: 40px 20px;
+
+  /* Smooth fade-in */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  display: block;
+  opacity: 1;
 }
 
 .modal-content {
@@ -1808,40 +1817,66 @@ section{padding:60px 20px}
   color: #fff;
   max-width: 800px;
   margin: 40px auto;
-  padding: 30px;
-  border-radius: 10px;
+  padding: 35px;
+  border-radius: 12px;
   border: 1px solid #333;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  box-shadow: 0 0 25px rgba(0,0,0,0.55);
+
+  /* Slide-up animation */
+  transform: translateY(20px);
+  animation: modalSlideUp 0.35s ease forwards;
 }
 
-.modal-content h2,
+@keyframes modalSlideUp {
+  to {
+    transform: translateY(0);
+  }
+}
+
+.modal-content h2 {
+  color: #ff4d4d;
+  font-size: 1.9rem;
+  margin-bottom: 10px;
+}
+
 .modal-content h3 {
-  color: #ff4d4d; /* ACES red */
-  margin-top: 20px;
+  color: #ff4d4d;
+  margin-top: 25px;
+  margin-bottom: 8px;
+  font-size: 1.25rem;
 }
 
 .modal-content p {
-  line-height: 1.6;
-  margin-bottom: 15px;
+  line-height: 1.65;
+  margin-bottom: 14px;
   color: #ddd;
 }
 
 .modal .close {
   float: right;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: bold;
   cursor: pointer;
   color: #ff4d4d;
+  transition: color 0.2s ease;
 }
 
 .modal .close:hover {
   color: #fff;
 }
 
-/* Mobile adjustments */
+/* Mobile refinement */
 @media (max-width: 768px) {
   .modal-content {
-    padding: 20px;
+    padding: 22px;
     margin: 20px auto;
+  }
+
+  .modal-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .modal-content h3 {
+    font-size: 1.15rem;
   }
 }
