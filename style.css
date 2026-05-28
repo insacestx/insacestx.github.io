@@ -2045,3 +2045,59 @@ edge_all_open_tabs = [
   box-shadow: 0 0 18px rgba(255, 0, 0, 0.6);
   transform: translateY(-2px);
 }
+/* ============================================================
+   GLOBAL MOBILE OPTIMIZATION (PATCH)
+============================================================ */
+@media (max-width: 768px) {
+
+  /* Global spacing */
+  section, .section, .content-wrapper {
+    padding: 50px 20px !important;
+  }
+
+  /* Global text scaling */
+  h1 { font-size: 2rem !important; }
+  h2 { font-size: 1.6rem !important; }
+  h3 { font-size: 1.3rem !important; }
+  p  { font-size: 1rem !important; line-height: 1.6 !important; }
+
+  /* Hero sections (all pages) */
+  .hero, .small-hero, .page-hero, .claims-hero {
+    padding: 80px 20px !important;
+    text-align: center !important;
+    background-position: center top !important;
+  }
+
+  .hero h1, .page-hero h1, .small-hero h1 {
+    font-size: 2rem !important;
+  }
+
+  /* Buttons */
+  .btn, .cta, .hero-btn, .bundle-cta, button {
+    padding: 14px 24px !important;
+    font-size: 1rem !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 10px auto !important;
+    display: block !important;
+  }
+
+  /* Images */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Layout stacking */
+  .flex, .row, .two-col, .three-col, .grid {
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center !important;
+  }
+}
+
