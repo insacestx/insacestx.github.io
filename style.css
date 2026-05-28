@@ -179,6 +179,64 @@ section{padding:60px 20px}
     font-size: 1rem;
   }
 }
+/* Hide desktop nav on mobile */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none !important;
+  }
+  #mobileNavToggle {
+    display: block !important;
+  }
+}
+
+/* Mobile Menu Container */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #111;
+  border-bottom: 1px solid #333;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.mobile-menu.open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu a,
+.mobile-dropdown-toggle {
+  padding: 14px 20px;
+  border-top: 1px solid #222;
+  font-size: 1rem;
+  color: #fff;
+  display: block;
+}
+
+/* Mobile Dropdown */
+.mobile-dropdown-menu {
+  display: none;
+  flex-direction: column;
+  background: #181818;
+}
+
+.mobile-dropdown.open .mobile-dropdown-menu {
+  display: flex;
+}
+
+.mobile-dropdown-toggle {
+  cursor: pointer;
+}
+
+/* Mobile Language Buttons */
+.mobile-lang {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 0;
+}
 
 /* ============================================================
    HERO
