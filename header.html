@@ -1,39 +1,47 @@
-<div class="aces-header">
-  <div class="header-inner">
+<div class="header-container">
 
-    <a href="index.html" class="header-logo">
-      <img src="/image2.png" alt="ACES Logo">
+  <!-- LOGO -->
+  <div class="logo-area">
+    <a href="index.html" class="logo-link">
+      <img src="image2.png" alt="ACES Insurance Logo" class="aces-logo">
     </a>
+  </div>
 
-    <nav class="nav-menu" id="navMenu">
-      <a href="index.html" class="nav-link" data-en="Home" data-es="Inicio">Home</a>
+  <!-- DESKTOP NAV -->
+  <nav class="nav-links">
+    <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+    <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
 
-      <div class="dropdown">
-        <span class="nav-link dropdown-toggle" data-en="Applications" data-es="Aplicaciones">Applications</span>
-        <div class="dropdown-menu">
-          <a href="services.html?type=commercial">Commercial</a>
-          <a href="services.html?type=personal">Personal</a>
-          <a href="services.html?type=life">Life</a>
-        </div>
+    <div class="dropdown">
+      <span class="dropdown-toggle" data-en="Applications" data-es="Solicitudes">Applications</span>
+      <div class="dropdown-menu">
+        <a href="services.html?type=commercial">Commercial</a>
+        <a href="services.html?type=personal">Personal</a>
+        <a href="services.html?type=life">Life</a>
       </div>
-
-      <a href="contact.html" class="nav-link" data-en="Contact" data-es="Contacto">Contact</a>
-    </nav>
-
-    <div class="lang-switch">
-      <button class="lang-option" data-lang="en">EN</button>
-      <button class="lang-option" data-lang="es">ES</button>
     </div>
 
-    <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+    <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+    <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+    <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
+    <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+  </nav>
+
+  <!-- CONTROLS (LANG + MOBILE BUTTON) -->
+  <div class="header-controls">
+    <button id="lang-toggle" class="lang-btn">EN / ES</button>
+    <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
   </div>
 </div>
-<!-- MOBILE DROPDOWN MENU -->
-<nav class="mobile-menu" id="mobileMenu">
+
+<!-- MOBILE MENU -->
+<nav id="mobile-menu" class="mobile-menu">
+
   <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+  <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
 
   <div class="mobile-dropdown">
-    <span class="mobile-dropdown-toggle" data-en="Applications" data-es="Aplicaciones">Applications</span>
+    <span class="mobile-dropdown-toggle" data-en="Applications" data-es="Solicitudes">Applications</span>
     <div class="mobile-dropdown-menu">
       <a href="services.html?type=commercial">Commercial</a>
       <a href="services.html?type=personal">Personal</a>
@@ -41,6 +49,9 @@
     </div>
   </div>
 
+  <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+  <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+  <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
   <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
 
   <div class="mobile-lang">
