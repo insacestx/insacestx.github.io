@@ -4,22 +4,21 @@
 ============================================================ */
 
 /* BASE */
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#050505;
-  color:#f5f5f5;
-  line-height:1.6;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #050505;
+  color: #f5f5f5;
+  line-height: 1.6;
 }
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-section{padding:60px 20px}
-@media(min-width:900px){section{padding:80px 40px}}
-.fade-in{animation:fadeIn .6s ease-in-out}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+section { padding: 60px 28px; }
+@media (min-width: 900px) { section { padding: 80px 40px; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ============================================================
-   HEADER (POLISHED)
+   HEADER (POLISHED, NO DROPDOWN)
 ============================================================ */
 #aces-header {
   position: sticky;
@@ -30,164 +29,66 @@ section{padding:60px 20px}
   border-bottom: 1px solid rgba(255,255,255,0.05);
   transition: background 0.25s ease, box-shadow 0.25s ease;
 }
-
 #aces-header.scrolled {
   background: rgba(0,0,0,0.85);
   box-shadow: 0 4px 14px rgba(0,0,0,0.35);
 }
-
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 12px 20px;
+  padding: 12px 22px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-}
-
-.logo-area {
-  display: flex;
   align-items: center;
 }
+.logo-area img { height: 48px; }
 
-.aces-logo {
-  height: 42px;
-}
-
-/* ============================================================
-   NAV (DESKTOP)
-============================================================ */
+/* NAV (DESKTOP) */
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: 28px;
   align-items: center;
 }
-
 .nav-links a {
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
+  color: #eee;
+  font-size: 1rem;
+  transition: color .25s ease;
 }
-
-.nav-links a:hover {
-  background: #d40000;
-  color: #000;
-  transform: translateY(-2px);
-}
-
+.nav-links a:hover,
 .nav-links a.active {
-  background: #ff4d4d;
-  color: #000;
+  color: #ff4d4d;
   font-weight: 600;
-  position: relative;
 }
 
-.nav-links a.active::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: #ff4d4d;
-  border-radius: 2px;
-}
-
-/* ============================================================
-   HEADER CONTROLS
-============================================================ */
+/* HEADER CONTROLS */
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
-
 .lang-btn {
-  padding: 6px 12px;
-  border-radius: 20px;
-  border: 1px solid #ff4d4d;
-  background: transparent;
-  color: #ff4d4d;
-  font-size: 0.8rem;
+  background: #d40000;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
+  font-size: .9rem;
+  transition: background .25s ease;
 }
-
-.lang-btn:hover {
-  background: #ff4d4d;
-  color: #000;
-  transform: translateY(-2px);
-}
-
+.lang-btn:hover { background: #ff1a1a; }
 .mobile-menu-btn {
   display: none;
   background: none;
   border: none;
+  font-size: 32px;
   color: #fff;
-  font-size: 1.7rem;
   cursor: pointer;
 }
 
 /* ============================================================
-   MOBILE MENU (POLISHED)
+   MOBILE MENU — ACES 2026 (CLEAN + MERGED + FIXED)
 ============================================================ */
-.mobile-menu {
-  display: none;
-  flex-direction: column;
-  background: #111;
-  border-bottom: 1px solid #333;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
-}
-
-.mobile-menu.open {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.mobile-menu a {
-  padding: 12px 20px;
-  border-top: 1px solid #222;
-  font-size: 1rem;
-  transition: background 0.2s, color 0.2s;
-}
-
-.mobile-menu a:hover {
-  background: #d40000;
-  color: #000;
-}
-
-.mobile-menu a.active {
-  background: #ff4d4d;
-  color: #000;
-  font-weight: 600;
-}
-@media (max-width: 768px) {
-  .claims-hero {
-    padding: 80px 20px;
-    background-position: center top;
-  }
-
-  .claims-hero .small-hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .claims-hero .small-hero-content p {
-    font-size: 1rem;
-  }
-}
-/* Hide desktop nav on mobile */
-@media (max-width: 768px) {
-  .nav-menu {
-    display: none !important;
-  }
-  #mobileNavToggle {
-    display: block !important;
-  }
-}
 
 /* Mobile Menu Container */
 .mobile-menu {
@@ -206,16 +107,28 @@ section{padding:60px 20px}
   transform: translateY(0);
 }
 
-.mobile-menu a,
-.mobile-dropdown-toggle {
+/* Mobile Menu Links */
+.mobile-menu a {
   padding: 14px 20px;
   border-top: 1px solid #222;
   font-size: 1rem;
   color: #fff;
   display: block;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-/* Mobile Dropdown */
+.mobile-menu a:hover {
+  background: #d40000;
+  color: #000;
+}
+
+.mobile-menu a.active {
+  background: #ff4d4d;
+  color: #000;
+  font-weight: 600;
+}
+
+/* Mobile Dropdown (NO LONGER USED, BUT KEPT FOR FUTURE EXPANSION) */
 .mobile-dropdown-menu {
   display: none;
   flex-direction: column;
@@ -227,10 +140,15 @@ section{padding:60px 20px}
 }
 
 .mobile-dropdown-toggle {
+  padding: 14px 20px;
+  border-top: 1px solid #222;
+  font-size: 1rem;
+  color: #fff;
   cursor: pointer;
+  display: block;
 }
 
-/* Mobile Language Buttons */
+/* Mobile Language Buttons (Optional) */
 .mobile-lang {
   display: flex;
   justify-content: center;
@@ -238,57 +156,78 @@ section{padding:60px 20px}
   padding: 14px 0;
 }
 
+/* Hide desktop nav on mobile */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: block !important;
+  }
+}
+
 /* ============================================================
-   HERO
+   HERO — ACES 2026 (Merged + Clean)
 ============================================================ */
-.small-hero{
-  background:radial-gradient(circle at top,#550000 0,#000 55%);
-  padding:80px 20px 60px;
-  text-align:center;
-}
-.small-hero-content{max-width:800px;margin:0 auto}
-.small-hero h1{font-size:2.3rem;margin-bottom:10px}
-.small-hero p{font-size:1.1rem;color:#ddd}
 
-.auto-hero {
-  background: radial-gradient(circle at top, #550000 0, #000 55%);
-  padding: 60px 20px;
+/* Base Hero Wrapper */
+.aces-hero {
+  background: radial-gradient(circle at top, #550000 0%, #000 55%);
+  padding: 80px 20px 60px;
   text-align: center;
+  animation: fadeIn 0.6s ease forwards;
 }
-.auto-hero-inner {
+
+/* Inner Container */
+.aces-hero-inner {
   max-width: 900px;
   margin: 0 auto;
 }
-.auto-hero-inner h1 {
-  font-size: 2.3rem;
-  margin-bottom: 10px;
-}
-.auto-hero-inner p {
-  font-size: 1.1rem;
-  color: #ddd;
-  margin-bottom: 30px;
+
+/* Headline */
+.aces-hero-inner h1 {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+  color: #fff;
 }
 
-.page-hero {
-  background: radial-gradient(circle at top, #550000 0, #000 55%);
-  padding: 60px 20px;
-  text-align: center;
-}
-.page-hero-inner {
-  max-width: 900px;
-  margin: 0 auto;
-}
-.page-hero-inner h1 {
-  font-size: 2.3rem;
-  margin-bottom: 10px;
-}
-.page-hero-inner p {
-  font-size: 1.1rem;
+/* Subtext */
+.aces-hero-inner p {
+  font-size: 1.15rem;
   color: #ddd;
+  margin-bottom: 20px;
 }
-/* ================================================
-   CLAIMS HERO — CENTERED BACKGROUND IMAGE
-   ================================================ */
+
+/* Optional: Smaller Hero Variant */
+.aces-hero.small {
+  padding: 60px 20px;
+}
+.aces-hero.small h1 {
+  font-size: 2.1rem;
+}
+
+/* Optional: Page Hero Variant */
+.aces-hero.page {
+  padding: 70px 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .aces-hero {
+    padding: 70px 20px 50px;
+  }
+  .aces-hero-inner h1 {
+    font-size: 2rem;
+  }
+  .aces-hero-inner p {
+    font-size: 1rem;
+  }
+}
+
+/* ============================================================
+   CLAIMS HERO — ACES 2026 (Unified with ACES Hero System)
+============================================================ */
+
 .claims-hero {
   background-image: url('Icons/hero-claims-aces.png');
   background-size: cover;
@@ -296,43 +235,53 @@ section{padding:60px 20px}
   background-repeat: no-repeat;
 
   display: flex;
-  justify-content: center;   /* centers horizontally */
-  align-items: center;       /* centers vertically */
+  justify-content: center;
+  align-items: center;
   text-align: center;
 
-  padding: 120px 20px;
+  padding: 140px 20px;
   position: relative;
 
   color: #fff;
   text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+
+  animation: fadeIn 0.6s ease forwards;
 }
 
-
-.claims-hero .small-hero-content h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.claims-hero .small-hero-content p {
-  font-size: 1.2rem;
-  max-width: 700px;
+/* Inner container (matches .aces-hero-inner) */
+.claims-hero-inner {
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* Responsive adjustments */
+/* Headline */
+.claims-hero-inner h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/* Subtext */
+.claims-hero-inner p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #eee;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .claims-hero {
-    padding: 80px 20px;
+    padding: 100px 20px;
     background-position: center top;
   }
 
-  .claims-hero .small-hero-content h1 {
-    font-size: 2rem;
+  .claims-hero-inner h1 {
+    font-size: 2.2rem;
   }
 
-  .claims-hero .small-hero-content p {
-    font-size: 1rem;
+  .claims-hero-inner p {
+    font-size: 1.05rem;
   }
 }
 
@@ -1531,43 +1480,97 @@ section{padding:60px 20px}
 }
 
 /* ============================================================
-   MOBILE RESPONSIVE
+   MOBILE RESPONSIVE — ACES 2026 (Merged + Organized + Clean)
 ============================================================ */
-@media(max-width:700px){
-  .service-category-card{
-    min-width:100%;
-    text-align:center;
+
+/* ---------- GLOBAL LAYOUT ---------- */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none !important;
   }
-  .subcategory-group{
-    grid-template-columns:1fr;
+  .mobile-menu-btn {
+    display: block !important;
   }
-  .application-filter-bar{
-    gap:16px;
+}
+
+/* ---------- HERO SECTIONS ---------- */
+@media (max-width: 768px) {
+  /* Global Hero */
+  .aces-hero {
+    padding: 70px 20px 50px;
   }
-  .filter-buttons{
-    gap:8px;
+  .aces-hero-inner h1 {
+    font-size: 2rem;
   }
-  #appSearch{
-    max-width:100%;
+  .aces-hero-inner p {
+    font-size: 1rem;
   }
-  .gl-app-wrapper{
-    padding:22px 14px 30px;
+
+  /* Claims Hero */
+  .claims-hero {
+    padding: 100px 20px;
+    background-position: center top;
   }
-  .gl-steps{
-    gap:6px;
+  .claims-hero-inner h1 {
+    font-size: 2.2rem;
   }
-  .gl-step p{
-    font-size:0.75rem;
+  .claims-hero-inner p {
+    font-size: 1.05rem;
   }
-  .ho-app-wrapper{
-    padding:22px 14px 30px;
+}
+
+/* ---------- SERVICES PAGE ---------- */
+@media (max-width: 700px) {
+  .service-category-card {
+    min-width: 100%;
+    text-align: center;
   }
-  .ho-steps{
-    gap:6px;
+  .subcategory-group {
+    grid-template-columns: 1fr;
   }
-  .ho-step p{
-    font-size:0.75rem;
+}
+
+/* ---------- APPLICATIONS PAGE ---------- */
+@media (max-width: 700px) {
+  .application-filter-bar {
+    gap: 16px;
   }
+  .filter-buttons {
+    gap: 8px;
+  }
+  #appSearch {
+    max-width: 100%;
+  }
+}
+
+/* ---------- GL APPLICATION ---------- */
+@media (max-width: 700px) {
+  .gl-app-wrapper {
+    padding: 22px 14px 30px;
+  }
+  .gl-steps {
+    gap: 6px;
+  }
+  .gl-step p {
+    font-size: 0.75rem;
+  }
+}
+
+/* ---------- HOMEOWNERS APPLICATION ---------- */
+@media (max-width: 700px) {
+  .ho-app-wrapper {
+    padding: 22px 14px 30px;
+  }
+  .ho-steps {
+    gap: 6px;
+  }
+  .ho-step p {
+    font-size: 0.75rem;
+  }
+}
+
+/* ---------- AUTO WIZARD (Legacy Support) ---------- */
+@media (max-width: 700px) {
   .auto-wizard-steps {
     gap: 6px;
   }
@@ -1576,11 +1579,25 @@ section{padding:60px 20px}
     font-size: 0.75rem;
   }
 }
+
+/* ---------- UNIVERSAL WIZARD STEPS (ACES 2026) ---------- */
+@media (max-width: 600px) {
+  .wizard-step {
+    padding: 7px 12px;
+    font-size: 0.85rem;
+  }
+  .wizard-step .step-index {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+  }
+}
+
+/* ---------- BUNDLE CTA ---------- */
 .bundle-cta-wrapper {
   text-align: center;
   margin-top: 30px;
 }
-
 .bundle-cta {
   display: inline-block;
   padding: 14px 28px;
@@ -1592,14 +1609,14 @@ section{padding:60px 20px}
   transition: 0.25s ease;
   box-shadow: 0 0 12px rgba(255, 0, 0, 0.35);
 }
-
 .bundle-cta:hover {
   background: #ff1a1a;
   transform: translateY(-2px);
 }
-/* Icon Badge Container */
+
+/* ---------- APPLICATION ICON BADGES ---------- */
 .app-icon {
-  background: rgba(255, 255, 255, 0.12); /* faint off-white */
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 50%;
   padding: 14px;
   display: flex;
@@ -1610,8 +1627,6 @@ section{padding:60px 20px}
   margin: 0 auto 12px auto;
   transition: transform 0.3s ease, background 0.3s ease;
 }
-
-/* Icon Image */
 .app-icon img,
 .app-icon svg {
   width: 42px;
@@ -1620,13 +1635,10 @@ section{padding:60px 20px}
   filter: drop-shadow(0 0 2px rgba(255,255,255,0.4));
   transition: transform 0.3s ease, filter 0.3s ease;
 }
-
-/* Hover Effect */
 .app-card:hover .app-icon {
   transform: scale(1.06);
   background: rgba(255, 255, 255, 0.18);
 }
-
 .app-card:hover .app-icon img,
 .app-card:hover .app-icon svg {
   transform: scale(1.08);
