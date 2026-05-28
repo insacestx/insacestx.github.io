@@ -32,15 +32,6 @@ function loadHeader() {
 
         <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
 
-        <div class="dropdown">
-          <span class="dropdown-toggle" data-en="Insurance Types" data-es="Tipos de Seguro">Insurance Types</span>
-          <div class="dropdown-menu">
-            <a href="services.html?type=commercial">Commercial</a>
-            <a href="services.html?type=personal">Personal</a>
-            <a href="services.html?type=life">Life</a>
-          </div>
-        </div>
-
         <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
         <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
         <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
@@ -61,15 +52,6 @@ function loadHeader() {
       <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
 
       <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-
-      <div class="mobile-dropdown">
-        <span class="mobile-dropdown-toggle" data-en="Insurance Types" data-es="Tipos de Seguro">Insurance Types</span>
-        <div class="mobile-dropdown-menu">
-          <a href="services.html?type=commercial">Commercial</a>
-          <a href="services.html?type=personal">Personal</a>
-          <a href="services.html?type=life">Life</a>
-        </div>
-      </div>
 
       <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
       <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
