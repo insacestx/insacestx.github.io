@@ -1859,18 +1859,18 @@ edge_all_open_tabs = [
 ============================================================ */
 .claims-hero {
   background: url('Icons/hero-claims-aces.png');
-  background-size: contain;       /* full image, no zoom */
+  background-size: 100% auto;     /* <-- WIDENS image without increasing height */
   background-position: center top;
   background-repeat: no-repeat;
-  background-color: #000;         /* fills space behind image */
+  background-color: #000;
 
-  min-height: 320px;
+  min-height: 320px;              /* keep your current height */
   padding: 60px 20px;
 }
 
 @media (max-width: 768px) {
   .claims-hero {
-    background-size: contain;
+    background-size: 100% auto;   /* same behavior on mobile */
     background-position: center top;
     min-height: 260px;
     padding: 50px 20px;
