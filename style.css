@@ -1588,23 +1588,26 @@ section{padding:60px 20px}
 /* ============================================================
    CLAIMS HERO — FIXED, VISIBLE, NON-DISTORTED
 ============================================================ */
+/* CLAIMS HERO — FULL IMAGE, NO CROPPING */
 .claims-hero {
-  background: url('Icons/hero-claims-aces.png');
-  background-size: contain;       /* full image, no zoom */
-  background-position: center top;
+  width: 100%;
+  height: 600px; /* matches your 1920×600 image */
+  background-image: url("images/claims-hero-1920x600.jpg");
+  background-size: contain;        /* shows full image */
   background-repeat: no-repeat;
-  background-color: #000;
-
-  min-height: 520px;   /* increased height for proper display */
-  padding: 80px 20px;
+  background-position: center bottom; /* keeps logo visible */
+  background-color: #000;          /* fills any empty space */
 }
 
 @media (max-width: 768px) {
   .claims-hero {
-    background-size: contain;
-    background-position: center top;
-    min-height: 420px;
-    padding: 60px 20px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .claims-hero {
+    height: 220px;
   }
 }
 
