@@ -1594,13 +1594,21 @@ section{padding:60px 20px}
     url('Icons/hero-claims-aces.png'),
     linear-gradient(to bottom, #1a1a1a, #000);
 
-  background-size: cover;          /* full width, no distortion */
-  background-position: center 25%; /* pull subject upward */
+  background-size: cover;
+  background-position: center 25%;
   background-repeat: no-repeat;
   background-blend-mode: overlay;
 
-  min-height: 320px;               /* consistent hero height */
-  padding: 60px 20px;              /* reduced padding */
+  min-height: 320px;
+  padding: 60px 20px;
+}
+
+@media (max-width: 768px) {
+  .claims-hero {
+    min-height: 260px;
+    background-position: center 20%;
+    padding: 50px 20px;
+  }
 }
 
 /* ============================
