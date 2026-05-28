@@ -25,12 +25,15 @@ function loadHeader() {
         </a>
       </div>
 
+      <!-- DESKTOP NAV -->
       <nav class="nav-links">
         <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
         <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
 
+        <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+
         <div class="dropdown">
-          <span class="dropdown-toggle" data-en="Applications" data-es="Solicitudes">Applications</span>
+          <span class="dropdown-toggle" data-en="Insurance Types" data-es="Tipos de Seguro">Insurance Types</span>
           <div class="dropdown-menu">
             <a href="services.html?type=commercial">Commercial</a>
             <a href="services.html?type=personal">Personal</a>
@@ -44,6 +47,7 @@ function loadHeader() {
         <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
       </nav>
 
+      <!-- CONTROLS -->
       <div class="header-controls">
         <button id="lang-toggle" class="lang-btn">EN / ES</button>
         <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
@@ -52,11 +56,14 @@ function loadHeader() {
 
     <!-- MOBILE MENU -->
     <nav id="mobile-menu" class="mobile-menu">
+
       <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
       <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
 
+      <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+
       <div class="mobile-dropdown">
-        <span class="mobile-dropdown-toggle" data-en="Applications" data-es="Solicitudes">Applications</span>
+        <span class="mobile-dropdown-toggle" data-en="Insurance Types" data-es="Tipos de Seguro">Insurance Types</span>
         <div class="mobile-dropdown-menu">
           <a href="services.html?type=commercial">Commercial</a>
           <a href="services.html?type=personal">Personal</a>
@@ -69,10 +76,6 @@ function loadHeader() {
       <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
       <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
 
-      <div class="mobile-lang">
-        <button class="lang-option" data-lang="en">EN</button>
-        <button class="lang-option" data-lang="es">ES</button>
-      </div>
     </nav>
   `;
 
