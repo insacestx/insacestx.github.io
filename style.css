@@ -1865,35 +1865,34 @@ section{padding:60px 20px}
     margin: 20px auto;
   }
 }
+/* ============================================================
+   CLAIMS HERO — FIXED, VISIBLE, NON-DISTORTED
+============================================================ */
 .claims-hero {
   background:
-    linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)),
+    linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
     url('Icons/hero-claims-aces.png'),
     linear-gradient(to bottom, #1a1a1a, #000);
 
-  background-size: contain;       /* <-- CONSISTENT ACROSS DEVICES */
-  background-position: center top;
+  background-size: cover;
+  background-position: center 25%;
   background-repeat: no-repeat;
-  background-color: #000;
+  background-blend-mode: overlay;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  padding: 80px 20px 60px;        /* reduced height so more image shows */
-  text-align: center;
-  color: #fff;
-  text-shadow: 0 3px 8px rgba(0,0,0,0.7);
+  min-height: 320px;   /* REQUIRED — this is why your hero disappeared */
+  width: 100%;         /* ensures full width */
+  display: block;      /* ensures the section renders */
+  padding: 60px 20px;  /* balanced hero height */
 }
 
 @media (max-width: 768px) {
   .claims-hero {
-    padding: 60px 20px 50px;
-    background-size: contain;     /* <-- SAME ON MOBILE */
-    background-position: center top;
+    min-height: 260px;
+    background-position: center 20%;
+    padding: 50px 20px;
   }
 }
+
 
 /* SECTION TITLES */
 .section-title {
