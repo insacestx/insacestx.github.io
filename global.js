@@ -127,24 +127,37 @@ function setActiveNav() {
 }
 
 /* ------------------------------------------------------------
-   MOBILE MENU
+   MOBILE MENU (UPGRADED)
 ------------------------------------------------------------ */
 function initMobileMenu() {
   const btn = document.getElementById("mobile-menu-btn");
   const menu = document.getElementById("mobile-menu");
+
   if (!btn || !menu) return;
 
+  // Open/close main mobile menu
   btn.addEventListener("click", () => {
     menu.classList.toggle("open");
   });
 
+  // Close menu when clicking outside
   document.addEventListener("click", (e) => {
     if (!menu.classList.contains("open")) return;
     if (!menu.contains(e.target) && !btn.contains(e.target)) {
       menu.classList.remove("open");
     }
   });
+
+  // Mobile dropdown for Applications
+  const mobileDropdownToggles = menu.querySelectorAll(".mobile-dropdown-toggle");
+
+  mobileDropdownToggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      toggle.parentElement.classList.toggle("open");
+    });
+  });
 }
+
 
 /* ------------------------------------------------------------
    AGENT PANEL (kept exactly as your widget)
