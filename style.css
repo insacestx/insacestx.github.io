@@ -1870,29 +1870,25 @@ section{padding:60px 20px}
 ============================================================ */
 .claims-hero {
   background:
-    linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
-    url('Icons/hero-claims-aces.png'),
-    linear-gradient(to bottom, #1a1a1a, #000);
+    url('Icons/hero-claims-aces.png');
 
-  background-size: cover;
-  background-position: center 25%;
+  background-size: contain;       /* full image, no zoom */
+  background-position: center top;
   background-repeat: no-repeat;
-  background-blend-mode: overlay;
+  background-color: #000;         /* fills space behind image */
 
-  min-height: 320px;   /* REQUIRED — this is why your hero disappeared */
-  width: 100%;         /* ensures full width */
-  display: block;      /* ensures the section renders */
-  padding: 60px 20px;  /* balanced hero height */
+  min-height: 320px;
+  padding: 60px 20px;
 }
 
 @media (max-width: 768px) {
   .claims-hero {
+    background-size: contain;
+    background-position: center top;
     min-height: 260px;
-    background-position: center 20%;
     padding: 50px 20px;
   }
 }
-
 
 /* SECTION TITLES */
 .section-title {
