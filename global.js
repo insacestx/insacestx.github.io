@@ -29,9 +29,7 @@ function loadHeader() {
       <nav class="nav-links">
         <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
         <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
-
         <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-
         <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
         <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
         <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
@@ -50,9 +48,7 @@ function loadHeader() {
 
       <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
       <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
-
       <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-
       <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
       <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
       <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
@@ -135,12 +131,6 @@ function initMobileMenu() {
   document.addEventListener("click", e => {
     if (!menu.classList.contains("open")) return;
     if (!menu.contains(e.target) && !btn.contains(e.target)) menu.classList.remove("open");
-  });
-
-  document.querySelectorAll(".mobile-dropdown-toggle").forEach(toggle => {
-    toggle.addEventListener("click", () => {
-      toggle.parentElement.classList.toggle("open");
-    });
   });
 }
 
@@ -246,3 +236,5 @@ function attachTextPolicyModal() {
     }
   });
 }
+
+document.addEventListener("DOMContentLoaded", attachTextPolicyModal);
