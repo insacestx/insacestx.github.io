@@ -1869,9 +1869,7 @@ section{padding:60px 20px}
    CLAIMS HERO — FIXED, VISIBLE, NON-DISTORTED
 ============================================================ */
 .claims-hero {
-  background:
-    url('Icons/hero-claims-aces.png');
-
+  background: url('Icons/hero-claims-aces.png');
   background-size: contain;       /* full image, no zoom */
   background-position: center top;
   background-repeat: no-repeat;
@@ -1918,10 +1916,10 @@ section{padding:60px 20px}
 
 /* INDIVIDUAL STEP CARD */
 .claims-step-card {
-  background: rgba(255, 255, 255, 0.06); /* FIXED: No more black cards */
+  background: rgba(255, 255, 255, 0.06);
   padding: 22px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12); /* Improved contrast */
+  border: 1px solid rgba(255, 255, 255, 0.12);
   text-align: center;
   transition: 0.25s ease;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
@@ -1993,10 +1991,10 @@ section{padding:60px 20px}
 
 /* CARRIER CARD */
 .carrier-card {
-  background: rgba(255, 255, 255, 0.06); /* FIXED: Lightened */
+  background: rgba(255, 255, 255, 0.06);
   padding: 20px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12); /* FIXED: Visible borders */
+  border: 1px solid rgba(255, 255, 255, 0.12);
   transition: 0.25s ease;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
 }
