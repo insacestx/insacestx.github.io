@@ -1864,15 +1864,15 @@ section{padding:60px 20px}
    ============================================ */
 
 /* ============================================================
-   CLAIMS HERO — FULL BACKGROUND + CENTERED CONTENT
+   CLAIMS HERO — LIGHTER + BETTER FRAMED
 ============================================================ */
 .claims-hero {
   background:
-    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
     url('Icons/hero-claims-aces.png'),
-    linear-gradient(to bottom, #1a1a1a, #000); /* fallback */
+    linear-gradient(to bottom, #1a1a1a, #000);
   background-size: cover;
-  background-position: center;
+  background-position: center 20%;
   background-repeat: no-repeat;
   background-blend-mode: overlay;
 
@@ -1881,7 +1881,7 @@ section{padding:60px 20px}
   align-items: center;
   flex-direction: column;
 
-  padding: 140px 20px 120px;
+  padding: 110px 20px 90px;
   text-align: center;
   color: #fff;
   text-shadow: 0 3px 8px rgba(0,0,0,0.7);
@@ -1906,8 +1906,8 @@ section{padding:60px 20px}
 ============================ */
 @media (max-width: 768px) {
   .claims-hero {
-    padding: 100px 20px 80px;
-    background-position: center top;
+    padding: 90px 20px 70px;
+    background-position: center 15%;
   }
 
   .claims-hero .small-hero-content h1 {
