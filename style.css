@@ -2158,4 +2158,13 @@ edge_all_open_tabs = [
     text-align: center !important;
   }
 }
+/* Hide desktop nav on mobile */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: block !important;
+  }
+}
 
