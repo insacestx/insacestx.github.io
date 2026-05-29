@@ -20,9 +20,6 @@ section { padding: 60px 28px; }
 /* ============================================================
    HERO
 ============================================================ */
-/* ============================================================
-   HERO
-============================================================ */
 .small-hero {
   background: radial-gradient(circle at top, #550000 0, #000 55%);
   padding: 80px 20px 60px;
@@ -95,14 +92,6 @@ section { padding: 60px 28px; }
 }
 .logo-area img { height: 48px; }
 
-
-
-
-
-
-
-
-
 /* NAV (DESKTOP) */
 .nav-links {
   display: flex;
@@ -119,11 +108,7 @@ section { padding: 60px 28px; }
 .nav-links a.active {
   color: #ff4d4d;
   font-weight: 600;
-
-
 }
-
-
 
 /* HEADER CONTROLS */
 .header-controls {
