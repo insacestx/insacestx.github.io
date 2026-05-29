@@ -333,7 +333,7 @@ section { padding: 60px 28px; }
 ============================================================ */
 
 .home-hero {
-  background-image: url('Icons/home-hero-aces.png'); /* your uploaded image */
+  background-image: url('Icons/home-hero-aces.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -349,7 +349,7 @@ section { padding: 60px 28px; }
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.55); /* soft white overlay */
+  background: rgba(255,255,255,0.55);
   backdrop-filter: blur(2px);
 }
 
@@ -363,7 +363,7 @@ section { padding: 60px 28px; }
 .home-hero-inner h1 {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #d40000; /* ACES red title */
+  color: #d40000;
   margin-bottom: 14px;
 }
 
