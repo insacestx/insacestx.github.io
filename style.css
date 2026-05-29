@@ -358,7 +358,7 @@ section {
 .claims-hero {
   background-image: url('Icons/hero-claims-aces.png');
   background-size: cover;
-  background-position: center top;
+  background-position: center 25%; /* ← raises the visible area to show the logo */
   background-repeat: no-repeat;
 
   display: flex;
@@ -372,6 +372,7 @@ section {
   color: #222;
   overflow: hidden;
 }
+
 
 /* Light overlay for readability */
 .claims-hero::before {
