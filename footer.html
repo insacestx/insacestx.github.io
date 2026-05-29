@@ -79,24 +79,39 @@
 
 
 <!-- ============================================================
-     TEXT MESSAGING PRIVACY POLICY MODAL — ACES PREMIUM VERSION
+     TEXT MESSAGING PRIVACY POLICY MODAL — FIXED & RESPONSIVE
 ============================================================ -->
+
+<!-- OPEN BUTTON (ensure this exists somewhere in footer) -->
+<a id="openTextPolicy" class="footer-link"
+   data-en="Text Messaging Privacy Policy"
+   data-es="Política de Privacidad de Mensajes de Texto">
+  Text Messaging Privacy Policy
+</a>
+
+<!-- MODAL OVERLAY -->
+<div id="modalOverlay" class="modal-overlay"></div>
+
+<!-- MODAL -->
 <div id="textPolicyModal" class="modal">
+
   <div class="modal-content">
 
-    <!-- ACES RED HEADER BAR -->
+    <!-- HEADER -->
     <div class="modal-header">
-      <h2 data-en="Text Messaging Privacy Policy" data-es="Política de Privacidad de Mensajes de Texto">
+      <h2 data-en="Text Messaging Privacy Policy"
+          data-es="Política de Privacidad de Mensajes de Texto">
         Text Messaging Privacy Policy
       </h2>
       <span class="close">&times;</span>
     </div>
 
-    <!-- MODAL BODY -->
+    <!-- BODY -->
     <div class="modal-body">
 
       <p>
-        <strong data-en="Last Updated: May 2026" data-es="Última Actualización: Mayo 2026">
+        <strong data-en="Last Updated: May 2026"
+                data-es="Última Actualización: Mayo 2026">
           Last Updated: May 2026
         </strong>
       </p>
@@ -173,9 +188,10 @@
 
     </div>
 
-    <!-- FOOTER CLOSE BUTTON -->
+    <!-- FOOTER -->
     <div class="modal-footer">
-      <button id="modalCloseBtn" class="modal-close-btn" data-en="Close" data-es="Cerrar">
+      <button id="modalCloseBtn" class="modal-close-btn"
+              data-en="Close" data-es="Cerrar">
         Close
       </button>
     </div>
