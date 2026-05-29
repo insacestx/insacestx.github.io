@@ -227,50 +227,61 @@ window.addEventListener("scroll", () => {
 });
 
 /* ------------------------------------------------------------
-   MODAL SYSTEM (FIXED)
+   TEXT POLICY MODAL — FINAL STABLE VERSION
 ------------------------------------------------------------ */
-function initModalSystem() {
+document.addEventListener("DOMContentLoaded", () => {
+
   const modal = document.getElementById("textPolicyModal");
   const overlay = document.getElementById("modalOverlay");
-  const openBtn = document.getElementById("openTextPolicy");
-  const closeX = document.querySelector("#textPolicyModal .close");
-  const closeBtn = document.getElementById("modalCloseBtn");
 
   if (!modal || !overlay) return;
 
+  const openBtn = document.getElementById("openTextPolicy");
+  const closeX = modal.querySelector(".close");
+  const closeBtn = document.getElementById("modalCloseBtn");
+
+  /* OPEN */
   function openModal() {
 
-    /* FLEX matches CSS architecture */
-    modal.style.display = "flex";
     overlay.style.display = "block";
 
-    document.body.classList.add("modal-open");
+    modal.style.display = "flex";
 
     requestAnimationFrame(() => {
       modal.classList.add("show");
     });
 
+    document.body.classList.add("modal-open");
+
+    /* language refresh */
     if (typeof applyLanguage === "function") {
-      applyLanguage(
-        localStorage.getItem("acesLang") || "en"
-      );
+      applyLanguage(localStorage.getItem("acesLang") || "en");
     }
   }
 
+  /* CLOSE */
   function closeModal() {
+
     modal.classList.remove("show");
+
     document.body.classList.remove("modal-open");
 
     setTimeout(() => {
+
       modal.style.display = "none";
+
       overlay.style.display = "none";
+
     }, 250);
   }
 
   /* OPEN BUTTON */
   if (openBtn) {
+
     openBtn.addEventListener("click", e => {
+
       e.preventDefault();
+
       openModal();
     });
   }
@@ -284,23 +295,15 @@ function initModalSystem() {
     closeBtn.addEventListener("click", closeModal);
   }
 
-  /* CLICK OUTSIDE */
+  /* CLICK BACKDROP */
   overlay.addEventListener("click", closeModal);
 
-  /* ESC KEY SUPPORT */
+  /* ESC KEY */
   document.addEventListener("keydown", e => {
-    if (
-      e.key === "Escape" &&
-      modal.classList.contains("show")
-    ) {
+
+    if (e.key === "Escape" && modal.classList.contains("show")) {
       closeModal();
     }
   });
 
-  /* AUTO OPEN ONCE PER SESSION */
-  if (!sessionStorage.getItem("policySeen")) {
-    openModal();
-    sessionStorage.setItem("policySeen", "1");
-  }
-}
-```
+});
