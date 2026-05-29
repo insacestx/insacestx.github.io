@@ -20,60 +20,87 @@ section { padding: 60px 28px; }
 /* ============================================================
    HERO
 ============================================================ */
-.small-hero{
-  background:radial-gradient(circle at top,#550000 0,#000 55%);
-  padding:80px 20px 60px;
-  text-align:center;
+/* ============================================================
+   HEADER (POLISHED, NO DROPDOWN)
+============================================================ */
+#aces-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
-.small-hero-content{max-width:800px;margin:0 auto}
-.small-hero h1{font-size:2.3rem;margin-bottom:10px}
-.small-hero p{font-size:1.1rem;color:#ddd}
-
-.auto-hero {
-  background: radial-gradient(circle at top, #550000 0, #000 55%);
-  padding: 60px 20px;
-
-  text-align: center;
-
+#aces-header.scrolled {
+  background: rgba(0,0,0,0.85);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
 }
-.auto-hero-inner {
-
-
-  max-width: 900px;
+.header-container {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 12px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.auto-hero-inner h1 {
-  font-size: 2.3rem;
-  margin-bottom: 10px;
+.logo-area img { height: 48px; }
 
 
 
+
+
+
+
+
+
+/* NAV (DESKTOP) */
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
 }
-.auto-hero-inner p {
-  font-size: 1.1rem;
-
-
-  color: #ddd;
-  margin-bottom: 30px;
-}
-
-.page-hero {
-  background: radial-gradient(circle at top, #550000 0, #000 55%);
-  padding: 60px 20px;
-  text-align: center;
-}
-.page-hero-inner {
-  max-width: 900px;
-  margin: 0 auto;
-}
-.page-hero-inner h1 {
-  font-size: 2.3rem;
-  margin-bottom: 10px;
+.nav-links a {
+  color: #eee;
+  font-size: 1rem;
+  transition: color .25s ease;
 
 }
-.page-hero-inner p {
-  font-size: 1.1rem;
-  color: #ddd;
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ff4d4d;
+  font-weight: 600;
+
+
+}
+
+
+
+/* HEADER CONTROLS */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.lang-btn {
+  background: #d40000;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .9rem;
+  transition: background .25s ease;
+}
+.lang-btn:hover { background: #ff1a1a; }
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+}
 
 /* ============================================================
    MOBILE MENU — ACES 2026 (CLEAN + MERGED + FIXED)
