@@ -1908,61 +1908,76 @@ edge_all_open_tabs = [
 {"pageTitle":"<WebsiteContent_egQTkdfpY25UpUWnfvrLq>insacestx.github.io/claims.html at main · insacestx/insacestx.github.io</WebsiteContent_egQTkdfpY25UpUWnfvrLq>","pageUrl":"<WebsiteContent_egQTkdfpY25UpUWnfvrLq>https://github.com/insacestx.github.io/blob/main/claims.html</WebsiteContent_egQTkdfpY25UpUWnfvrLq>","tabId":2000917808,"isCurrent":true}]
 
 /* ============================================================
-   TEXT POLICY MODAL — ACES 2026 (Dark Theme + Mobile Safe)
+   TEXT POLICY MODAL — FIXED
 ============================================================ */
 
 .modal {
-  display: none;
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  max-width: 100%;
   background: rgba(0,0,0,0.75);
   z-index: 99999;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
   transition: opacity .25s ease;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 
+/* ACTIVE STATE */
 .modal.show {
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
+/* REMOVE THIS IF NOT NEEDED */
 .modal-overlay {
   display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.75);
-  z-index: 99998;
 }
 
 /* Prevent body scroll when modal is open */
 body.modal-open {
   overflow: hidden;
-  height: 100%;
 }
 
 /* MODAL CONTENT */
 .modal-content {
+  position: relative;
+  z-index: 100000;
+
   background: #111;
   color: #f5f5f5;
   max-width: 700px;
+  width: calc(100% - 40px);
+
   margin: 60px auto;
   padding: 25px 28px;
+
   border-radius: 10px;
   box-shadow: 0 0 25px rgba(0,0,0,0.6);
+
   animation: modalSlideDown .35s ease;
 }
 
 @keyframes modalSlideDown {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* HEADER */
@@ -1970,6 +1985,7 @@ body.modal-open {
   background: #8b0000;
   padding: 15px;
   border-radius: 8px 8px 0 0;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1981,10 +1997,16 @@ body.modal-open {
   color: #fff;
 }
 
+/* CLOSE BUTTON */
 .modal-header .close {
-  font-size: 1.8rem;
+  font-size: 2rem;
+  line-height: 1;
   cursor: pointer;
   color: #fff;
+  background: transparent;
+  border: 0;
+  z-index: 100001;
+  pointer-events: auto;
 }
 
 /* BODY */
