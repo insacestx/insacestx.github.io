@@ -234,3 +234,45 @@ document.addEventListener("DOMContentLoaded", () => {
   /* AUTO OPEN */
   openModal();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("textPolicyModal");
+  const overlay = document.getElementById("modalOverlay");
+  const openBtn = document.getElementById("openTextPolicy");
+  const closeX = document.querySelector("#textPolicyModal .close");
+  const closeBtn = document.getElementById("modalCloseBtn");
+
+  if (!modal || !overlay || !openBtn) return;
+
+  openBtn.addEventListener("click", e => {
+    e.preventDefault();
+
+    modal.classList.add("show");
+    overlay.style.display = "block";
+    document.body.classList.add("modal-open");
+
+    /* SAFE LANGUAGE CALL */
+    if (typeof applyLanguage === "function") {
+      applyLanguage(localStorage.getItem("acesLang") || "en");
+    }
+  });
+
+  function closeModal() {
+    modal.classList.remove("show");
+    document.body.classList.remove("modal-open");
+
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 250);
+  }
+
+  if (closeX) {
+    closeX.addEventListener("click", closeModal);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeModal);
+  }
+
+  overlay.addEventListener("click", closeModal);
+});
