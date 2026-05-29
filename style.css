@@ -2350,3 +2350,28 @@ edge_all_open_tabs = [
 .carrier-card[data-brand="bristolwest"] { border-left: 6px solid #4b0082; }
 .carrier-card[data-brand="gainsco"] { border-left: 6px solid #c8102e; }
 .carrier-card[data-brand="geico"] { border-left: 6px solid #ffcc00; }
+/* FIX MOBILE MODAL LOCKING */
+#textPolicyModal {
+  position: fixed;        /* prevents scroll lock issues */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;       /* allows scrolling inside modal */
+  -webkit-overflow-scrolling: touch;
+  z-index: 9999;
+}
+
+.modal-open {
+  overflow: hidden;       /* applied when modal opens */
+}
+
+#modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 9998;
+}
