@@ -328,6 +328,63 @@ section { padding: 60px 28px; }
     font-size: 1.05rem;
   }
 }
+/* ============================================================
+   HOME HERO — LIGHT THEME WITH IMAGE
+============================================================ */
+
+.home-hero {
+  background-image: url('Icons/home-hero-aces.png'); /* your uploaded image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+  padding: 140px 20px;
+  text-align: center;
+  color: #222;
+}
+
+/* Light overlay for readability */
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.55); /* soft white overlay */
+  backdrop-filter: blur(2px);
+}
+
+.home-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.home-hero-inner h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #d40000; /* ACES red title */
+  margin-bottom: 14px;
+}
+
+.home-hero-inner p {
+  font-size: 1.25rem;
+  color: #333;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .home-hero {
+    padding: 100px 20px;
+  }
+  .home-hero-inner h1 {
+    font-size: 2.2rem;
+  }
+  .home-hero-inner p {
+    font-size: 1.05rem;
+  }
+}
 
 /* ============================================================
    WIZARD STEPS
