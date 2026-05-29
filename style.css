@@ -275,13 +275,13 @@ section { padding: 60px 28px; }
 }
 
 /* ============================================================
-   CLAIMS HERO — ACES 2026 (Unified with ACES Hero System)
+   CLAIMS HERO — ACES 2026 (Correct, Responsive, Non-Distorted)
 ============================================================ */
 
 .claims-hero {
   background-image: url('Icons/hero-claims-aces.png');
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
 
   display: flex;
@@ -294,24 +294,19 @@ section { padding: 60px 28px; }
 
   color: #fff;
   text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-
-  animation: fadeIn 0.6s ease forwards;
 }
 
-/* Inner container (matches .aces-hero-inner) */
 .claims-hero-inner {
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* Headline */
 .claims-hero-inner h1 {
   font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 14px;
 }
 
-/* Subtext */
 .claims-hero-inner p {
   font-size: 1.25rem;
   max-width: 700px;
@@ -319,7 +314,6 @@ section { padding: 60px 28px; }
   color: #eee;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .claims-hero {
     padding: 100px 20px;
