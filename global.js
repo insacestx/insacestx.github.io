@@ -1,178 +1,420 @@
-```js
-// ACES 2026 — global.js (Patched + Modal Fixed)
+// ACES 2026 — global.js (Final Stable Build)
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  /* CORE */
   loadHeader();
   loadFooter();
-  initLanguage();
-  initAgentPanel();
-  setActiveNav();
-  initMobileMenu();
-  initModalSystem();
+
+  /* WAIT FOR HEADER INJECTION */
+  setTimeout(() => {
+
+    initLanguage();
+    setActiveNav();
+    initMobileMenu();
+    initAgentPanel();
+    initModalSystem();
+
+  }, 0);
+
 });
 
-/* ------------------------------------------------------------
+/* ============================================================
    HEADER INJECTION
------------------------------------------------------------- */
+============================================================ */
 function loadHeader() {
+
   const header = document.getElementById("aces-header");
+
   if (!header) return;
 
   header.innerHTML = `
     <div class="header-container">
 
+      <!-- LOGO -->
       <div class="logo-area">
         <a href="index.html" class="logo-link">
-          <img src="image2.png" alt="ACES Insurance Logo" class="aces-logo">
+          <img
+            src="image2.png"
+            alt="ACES Insurance Logo"
+            class="aces-logo"
+          >
         </a>
       </div>
 
       <!-- DESKTOP NAV -->
       <nav class="nav-links">
-        <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-        <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
-        <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-        <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-        <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-        <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
-        <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+
+        <a
+          href="index.html"
+          data-en="Home"
+          data-es="Inicio"
+        >
+          Home
+        </a>
+
+        <a
+          href="services.html"
+          data-en="Services"
+          data-es="Servicios"
+        >
+          Services
+        </a>
+
+        <a
+          href="applications.html"
+          data-en="Applications"
+          data-es="Solicitudes"
+        >
+          Applications
+        </a>
+
+        <a
+          href="coi.html"
+          data-en="COI Request"
+          data-es="Solicitud de COI"
+        >
+          COI Request
+        </a>
+
+        <a
+          href="claims.html"
+          data-en="Claims"
+          data-es="Reclamos"
+        >
+          Claims
+        </a>
+
+        <a
+          href="about.html"
+          data-en="Meet Our Team"
+          data-es="Nuestro Equipo"
+        >
+          Meet Our Team
+        </a>
+
+        <a
+          href="contact.html"
+          data-en="Contact"
+          data-es="Contacto"
+        >
+          Contact
+        </a>
+
       </nav>
 
-      <!-- CONTROLS -->
+      <!-- HEADER CONTROLS -->
       <div class="header-controls">
-        <button id="lang-toggle" class="lang-btn">EN / ES</button>
-        <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
+
+        <button
+          id="lang-toggle"
+          class="lang-btn"
+        >
+          EN / ES
+        </button>
+
+        <button
+          id="mobile-menu-btn"
+          class="mobile-menu-btn"
+          aria-label="Open Menu"
+        >
+          ☰
+        </button>
+
       </div>
+
     </div>
 
     <!-- MOBILE MENU -->
     <nav id="mobile-menu" class="mobile-menu">
-      <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-      <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
-      <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-      <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-      <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-      <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
-      <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+
+      <a
+        href="index.html"
+        data-en="Home"
+        data-es="Inicio"
+      >
+        Home
+      </a>
+
+      <a
+        href="services.html"
+        data-en="Services"
+        data-es="Servicios"
+      >
+        Services
+      </a>
+
+      <a
+        href="applications.html"
+        data-en="Applications"
+        data-es="Solicitudes"
+      >
+        Applications
+      </a>
+
+      <a
+        href="coi.html"
+        data-en="COI Request"
+        data-es="Solicitud de COI"
+      >
+        COI Request
+      </a>
+
+      <a
+        href="claims.html"
+        data-en="Claims"
+        data-es="Reclamos"
+      >
+        Claims
+      </a>
+
+      <a
+        href="about.html"
+        data-en="Meet Our Team"
+        data-es="Nuestro Equipo"
+      >
+        Meet Our Team
+      </a>
+
+      <a
+        href="contact.html"
+        data-en="Contact"
+        data-es="Contacto"
+      >
+        Contact
+      </a>
+
     </nav>
   `;
 
+  /* LANGUAGE TOGGLE */
   const langBtn = document.getElementById("lang-toggle");
 
   if (langBtn) {
+
     langBtn.addEventListener("click", () => {
-      const current = localStorage.getItem("acesLang") || "en";
-      const next = current === "en" ? "es" : "en";
+
+      const current =
+        localStorage.getItem("acesLang") || "en";
+
+      const next =
+        current === "en" ? "es" : "en";
 
       localStorage.setItem("acesLang", next);
+
       applyLanguage(next);
+
     });
+
   }
+
 }
 
-/* ------------------------------------------------------------
+/* ============================================================
    FOOTER INJECTION
------------------------------------------------------------- */
+============================================================ */
 function loadFooter() {
-  const footer = document.getElementById("aces-footer");
+
+  const footer =
+    document.getElementById("aces-footer");
+
   if (!footer) return;
 
   fetch("footer.html")
-    .then(res => res.ok ? res.text() : Promise.reject(res.status))
-    .then(html => {
-      footer.innerHTML = html;
-      applyLanguage(localStorage.getItem("acesLang") || "en");
+
+    .then(res => {
+
+      if (!res.ok) {
+        throw new Error(
+          `Footer failed: ${res.status}`
+        );
+      }
+
+      return res.text();
+
     })
-    .catch(err => console.warn("Footer failed to load:", err));
+
+    .then(html => {
+
+      footer.innerHTML = html;
+
+      applyLanguage(
+        localStorage.getItem("acesLang") || "en"
+      );
+
+    })
+
+    .catch(err => {
+
+      console.warn(
+        "Footer failed to load:",
+        err
+      );
+
+    });
+
 }
 
-/* ------------------------------------------------------------
+/* ============================================================
    LANGUAGE SYSTEM
------------------------------------------------------------- */
+============================================================ */
 function initLanguage() {
-  applyLanguage(localStorage.getItem("acesLang") || "en");
+
+  applyLanguage(
+    localStorage.getItem("acesLang") || "en"
+  );
+
 }
 
 function applyLanguage(lang) {
+
   const isEs = lang === "es";
 
-  document.documentElement.lang = isEs ? "es" : "en";
+  document.documentElement.lang =
+    isEs ? "es" : "en";
 
-  document.querySelectorAll("[data-en]").forEach(el => {
-    const en = el.getAttribute("data-en");
-    const es = el.getAttribute("data-es");
+  document.querySelectorAll("[data-en]")
+    .forEach(el => {
 
-    el.textContent = isEs ? (es || en) : en;
-  });
+      const en =
+        el.getAttribute("data-en");
 
-  const langBtn = document.getElementById("lang-toggle");
+      const es =
+        el.getAttribute("data-es");
+
+      el.textContent =
+        isEs ? (es || en) : en;
+
+    });
+
+  const langBtn =
+    document.getElementById("lang-toggle");
 
   if (langBtn) {
-    langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
+
+    langBtn.textContent =
+      isEs ? "ES / EN" : "EN / ES";
+
   }
+
 }
 
-/* ------------------------------------------------------------
+/* ============================================================
    ACTIVE NAV LINK
------------------------------------------------------------- */
+============================================================ */
 function setActiveNav() {
+
   const path =
-    window.location.pathname.split("/").pop() || "index.html";
+    window.location.pathname
+      .split("/")
+      .pop() || "index.html";
 
   const links =
-    document.querySelectorAll(".nav-links a, #mobile-menu a");
+    document.querySelectorAll(
+      ".nav-links a, #mobile-menu a"
+    );
 
   links.forEach(link => {
-    const file = link.getAttribute("href").split("/").pop();
+
+    const file =
+      link.getAttribute("href")
+        .split("/")
+        .pop();
 
     link.classList.toggle(
       "active",
-      file === path || (path === "" && file === "index.html")
+      file === path ||
+      (path === "" && file === "index.html")
     );
+
   });
+
 }
 
-/* ------------------------------------------------------------
+/* ============================================================
    MOBILE MENU
------------------------------------------------------------- */
+============================================================ */
 function initMobileMenu() {
-  const btn = document.getElementById("mobile-menu-btn");
-  const menu = document.getElementById("mobile-menu");
+
+  const btn =
+    document.getElementById("mobile-menu-btn");
+
+  const menu =
+    document.getElementById("mobile-menu");
 
   if (!btn || !menu) return;
 
-  btn.addEventListener("click", () => {
+  /* TOGGLE */
+  btn.addEventListener("click", e => {
+
+    e.stopPropagation();
+
     menu.classList.toggle("open");
+
   });
 
+  /* CLOSE OUTSIDE */
   document.addEventListener("click", e => {
-    if (!menu.classList.contains("open")) return;
 
     if (
+      menu.classList.contains("open") &&
       !menu.contains(e.target) &&
       !btn.contains(e.target)
     ) {
+
       menu.classList.remove("open");
+
     }
+
   });
+
+  /* CLOSE WHEN LINK CLICKED */
+  menu.querySelectorAll("a")
+    .forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        menu.classList.remove("open");
+
+      });
+
+    });
+
 }
 
-/* ------------------------------------------------------------
+/* ============================================================
    AGENT PANEL
------------------------------------------------------------- */
+============================================================ */
 function initAgentPanel() {
-  const cards = document.querySelectorAll(".agent-card");
-  const panel = document.querySelector(".agent-panel");
+
+  const cards =
+    document.querySelectorAll(".agent-card");
+
+  const panel =
+    document.querySelector(".agent-panel");
 
   if (!cards.length || !panel) return;
 
-  const photo = panel.querySelector(".panel-photo");
-  const nameEl = panel.querySelector("h2");
-  const titleEl = panel.querySelector(".panel-title");
-  const phoneEl = panel.querySelector(".panel-phone");
-  const emailEl = panel.querySelector(".panel-email");
-  const callBtn = panel.querySelector(".panel-call");
-  const closeBtn = panel.querySelector(".close-panel");
+  const photo =
+    panel.querySelector(".panel-photo");
+
+  const nameEl =
+    panel.querySelector("h2");
+
+  const titleEl =
+    panel.querySelector(".panel-title");
+
+  const phoneEl =
+    panel.querySelector(".panel-phone");
+
+  const emailEl =
+    panel.querySelector(".panel-email");
+
+  const callBtn =
+    panel.querySelector(".panel-call");
+
+  const closeBtn =
+    panel.querySelector(".close-panel");
 
   if (
     !photo ||
@@ -187,58 +429,92 @@ function initAgentPanel() {
   }
 
   cards.forEach(card => {
+
     card.addEventListener("click", () => {
-      photo.src = card.dataset.photo;
-      nameEl.textContent = card.dataset.name;
-      titleEl.textContent = card.dataset.title;
-      phoneEl.textContent = card.dataset.phone;
-      emailEl.textContent = card.dataset.email;
+
+      photo.src =
+        card.dataset.photo || "";
+
+      nameEl.textContent =
+        card.dataset.name || "";
+
+      titleEl.textContent =
+        card.dataset.title || "";
+
+      phoneEl.textContent =
+        card.dataset.phone || "";
+
+      emailEl.textContent =
+        card.dataset.email || "";
 
       callBtn.href =
-        `tel:${card.dataset.phone.replace(/\D/g, "")}`;
+        `tel:${(card.dataset.phone || "")
+          .replace(/\D/g, "")}`;
 
       panel.classList.add("open");
+
     });
+
   });
 
+  /* CLOSE BUTTON */
   closeBtn.addEventListener("click", () => {
+
     panel.classList.remove("open");
+
   });
 
+  /* CLOSE BACKDROP */
   panel.addEventListener("click", e => {
+
     if (e.target === panel) {
+
       panel.classList.remove("open");
+
     }
+
   });
+
 }
 
-/* ------------------------------------------------------------
-   HEADER SHADOW ON SCROLL
------------------------------------------------------------- */
+/* ============================================================
+   HEADER SHADOW
+============================================================ */
 window.addEventListener("scroll", () => {
-  const header = document.getElementById("aces-header");
 
-  if (header) {
-    header.classList.toggle(
-      "scrolled",
-      window.scrollY > 20
-    );
-  }
+  const header =
+    document.getElementById("aces-header");
+
+  if (!header) return;
+
+  header.classList.toggle(
+    "scrolled",
+    window.scrollY > 20
+  );
+
 });
 
-/* ------------------------------------------------------------
-   TEXT POLICY MODAL — FINAL STABLE VERSION
------------------------------------------------------------- */
-document.addEventListener("DOMContentLoaded", () => {
+/* ============================================================
+   TEXT POLICY MODAL SYSTEM
+============================================================ */
+function initModalSystem() {
 
-  const modal = document.getElementById("textPolicyModal");
-  const overlay = document.getElementById("modalOverlay");
+  const modal =
+    document.getElementById("textPolicyModal");
+
+  const overlay =
+    document.getElementById("modalOverlay");
 
   if (!modal || !overlay) return;
 
-  const openBtn = document.getElementById("openTextPolicy");
-  const closeX = modal.querySelector(".close");
-  const closeBtn = document.getElementById("modalCloseBtn");
+  const openBtn =
+    document.getElementById("openTextPolicy");
+
+  const closeX =
+    modal.querySelector(".close");
+
+  const closeBtn =
+    document.getElementById("modalCloseBtn");
 
   /* OPEN */
   function openModal() {
@@ -248,15 +524,18 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "flex";
 
     requestAnimationFrame(() => {
+
       modal.classList.add("show");
+
     });
 
     document.body.classList.add("modal-open");
 
-    /* language refresh */
-    if (typeof applyLanguage === "function") {
-      applyLanguage(localStorage.getItem("acesLang") || "en");
-    }
+    /* REFRESH LANGUAGE */
+    applyLanguage(
+      localStorage.getItem("acesLang") || "en"
+    );
+
   }
 
   /* CLOSE */
@@ -273,6 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
       overlay.style.display = "none";
 
     }, 250);
+
   }
 
   /* OPEN BUTTON */
@@ -283,27 +563,66 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       openModal();
+
     });
+
   }
 
-  /* CLOSE BUTTONS */
+  /* CLOSE X */
   if (closeX) {
-    closeX.addEventListener("click", closeModal);
+
+    closeX.addEventListener(
+      "click",
+      closeModal
+    );
+
   }
 
+  /* CLOSE BUTTON */
   if (closeBtn) {
-    closeBtn.addEventListener("click", closeModal);
+
+    closeBtn.addEventListener(
+      "click",
+      closeModal
+    );
+
   }
 
-  /* CLICK BACKDROP */
-  overlay.addEventListener("click", closeModal);
+  /* CLICK OUTSIDE */
+  overlay.addEventListener(
+    "click",
+    closeModal
+  );
 
-  /* ESC KEY */
-  document.addEventListener("keydown", e => {
+  /* ESC SUPPORT */
+  document.addEventListener(
+    "keydown",
+    e => {
 
-    if (e.key === "Escape" && modal.classList.contains("show")) {
-      closeModal();
+      if (
+        e.key === "Escape" &&
+        modal.classList.contains("show")
+      ) {
+
+        closeModal();
+
+      }
+
     }
-  });
+  );
 
-});
+  /* AUTO OPEN ONCE */
+  if (
+    !sessionStorage.getItem("policySeen")
+  ) {
+
+    openModal();
+
+    sessionStorage.setItem(
+      "policySeen",
+      "1"
+    );
+
+  }
+
+}
