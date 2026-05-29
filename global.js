@@ -8,13 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* WAIT FOR HEADER INJECTION */
   setTimeout(() => {
-
     initLanguage();
     setActiveNav();
     initMobileMenu();
     initAgentPanel();
     initModalSystem();
-
   }, 0);
 
 });
@@ -25,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadHeader() {
 
   const header = document.getElementById("aces-header");
-
   if (!header) return;
 
   header.innerHTML = `
@@ -45,82 +42,20 @@ function loadHeader() {
       <!-- DESKTOP NAV -->
       <nav class="nav-links">
 
-        <a
-          href="index.html"
-          data-en="Home"
-          data-es="Inicio"
-        >
-          Home
-        </a>
-
-        <a
-          href="services.html"
-          data-en="Services"
-          data-es="Servicios"
-        >
-          Services
-        </a>
-
-        <a
-          href="applications.html"
-          data-en="Applications"
-          data-es="Solicitudes"
-        >
-          Applications
-        </a>
-
-        <a
-          href="coi.html"
-          data-en="COI Request"
-          data-es="Solicitud de COI"
-        >
-          COI Request
-        </a>
-
-        <a
-          href="claims.html"
-          data-en="Claims"
-          data-es="Reclamos"
-        >
-          Claims
-        </a>
-
-        <a
-          href="about.html"
-          data-en="Meet Our Team"
-          data-es="Nuestro Equipo"
-        >
-          Meet Our Team
-        </a>
-
-        <a
-          href="contact.html"
-          data-en="Contact"
-          data-es="Contacto"
-        >
-          Contact
-        </a>
+        <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+        <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
+        <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+        <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+        <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+        <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
+        <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
 
       </nav>
 
       <!-- HEADER CONTROLS -->
       <div class="header-controls">
-
-        <button
-          id="lang-toggle"
-          class="lang-btn"
-        >
-          EN / ES
-        </button>
-
-        <button
-          id="mobile-menu-btn"
-          class="mobile-menu-btn"
-          aria-label="Open Menu"
-        >
-          ☰
-        </button>
-
+        <button id="lang-toggle" class="lang-btn">EN / ES</button>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open Menu">☰</button>
       </div>
 
     </div>
@@ -128,86 +63,29 @@ function loadHeader() {
     <!-- MOBILE MENU -->
     <nav id="mobile-menu" class="mobile-menu">
 
-      <a
-        href="index.html"
-        data-en="Home"
-        data-es="Inicio"
-      >
-        Home
-      </a>
-
-      <a
-        href="services.html"
-        data-en="Services"
-        data-es="Servicios"
-      >
-        Services
-      </a>
-
-      <a
-        href="applications.html"
-        data-en="Applications"
-        data-es="Solicitudes"
-      >
-        Applications
-      </a>
-
-      <a
-        href="coi.html"
-        data-en="COI Request"
-        data-es="Solicitud de COI"
-      >
-        COI Request
-      </a>
-
-      <a
-        href="claims.html"
-        data-en="Claims"
-        data-es="Reclamos"
-      >
-        Claims
-      </a>
-
-      <a
-        href="about.html"
-        data-en="Meet Our Team"
-        data-es="Nuestro Equipo"
-      >
-        Meet Our Team
-      </a>
-
-      <a
-        href="contact.html"
-        data-en="Contact"
-        data-es="Contacto"
-      >
-        Contact
-      </a>
+      <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+      <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
+      <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+      <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+      <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+      <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
+      <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
 
     </nav>
   `;
 
-  /* LANGUAGE TOGGLE */
-  const langBtn = document.getElementById("lang-toggle");
+}
+/* LANGUAGE TOGGLE */
+const langBtn = document.getElementById("lang-toggle");
 
-  if (langBtn) {
+if (langBtn) {
+  langBtn.addEventListener("click", () => {
+    const current = localStorage.getItem("acesLang") || "en";
+    const next = current === "en" ? "es" : "en";
 
-    langBtn.addEventListener("click", () => {
-
-      const current =
-        localStorage.getItem("acesLang") || "en";
-
-      const next =
-        current === "en" ? "es" : "en";
-
-      localStorage.setItem("acesLang", next);
-
-      applyLanguage(next);
-
-    });
-
-  }
-
+    localStorage.setItem("acesLang", next);
+    applyLanguage(next);
+  });
 }
 
 /* ============================================================
@@ -215,42 +93,23 @@ function loadHeader() {
 ============================================================ */
 function loadFooter() {
 
-  const footer =
-    document.getElementById("aces-footer");
-
+  const footer = document.getElementById("aces-footer");
   if (!footer) return;
 
   fetch("footer.html")
-
     .then(res => {
-
       if (!res.ok) {
-        throw new Error(
-          `Footer failed: ${res.status}`
-        );
+        throw new Error(`Footer failed: ${res.status}`);
       }
-
       return res.text();
-
     })
-
     .then(html => {
-
       footer.innerHTML = html;
 
-      applyLanguage(
-        localStorage.getItem("acesLang") || "en"
-      );
-
+      applyLanguage(localStorage.getItem("acesLang") || "en");
     })
-
     .catch(err => {
-
-      console.warn(
-        "Footer failed to load:",
-        err
-      );
-
+      console.warn("Footer failed to load:", err);
     });
 
 }
@@ -259,42 +118,24 @@ function loadFooter() {
    LANGUAGE SYSTEM
 ============================================================ */
 function initLanguage() {
-
-  applyLanguage(
-    localStorage.getItem("acesLang") || "en"
-  );
-
+  applyLanguage(localStorage.getItem("acesLang") || "en");
 }
 
 function applyLanguage(lang) {
 
   const isEs = lang === "es";
 
-  document.documentElement.lang =
-    isEs ? "es" : "en";
+  document.documentElement.lang = isEs ? "es" : "en";
 
-  document.querySelectorAll("[data-en]")
-    .forEach(el => {
+  document.querySelectorAll("[data-en]").forEach(el => {
+    const en = el.getAttribute("data-en");
+    const es = el.getAttribute("data-es");
+    el.textContent = isEs ? (es || en) : en;
+  });
 
-      const en =
-        el.getAttribute("data-en");
-
-      const es =
-        el.getAttribute("data-es");
-
-      el.textContent =
-        isEs ? (es || en) : en;
-
-    });
-
-  const langBtn =
-    document.getElementById("lang-toggle");
-
+  const langBtn = document.getElementById("lang-toggle");
   if (langBtn) {
-
-    langBtn.textContent =
-      isEs ? "ES / EN" : "EN / ES";
-
+    langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
   }
 
 }
@@ -304,81 +145,52 @@ function applyLanguage(lang) {
 ============================================================ */
 function setActiveNav() {
 
-  const path =
-    window.location.pathname
-      .split("/")
-      .pop() || "index.html";
+  const path = window.location.pathname.split("/").pop() || "index.html";
 
-  const links =
-    document.querySelectorAll(
-      ".nav-links a, #mobile-menu a"
-    );
+  const links = document.querySelectorAll(".nav-links a, #mobile-menu a");
 
   links.forEach(link => {
-
-    const file =
-      link.getAttribute("href")
-        .split("/")
-        .pop();
-
+    const file = link.getAttribute("href").split("/").pop();
     link.classList.toggle(
       "active",
-      file === path ||
-      (path === "" && file === "index.html")
+      file === path || (path === "" && file === "index.html")
     );
-
   });
 
 }
-
 /* ============================================================
    MOBILE MENU
 ============================================================ */
 function initMobileMenu() {
 
-  const btn =
-    document.getElementById("mobile-menu-btn");
-
-  const menu =
-    document.getElementById("mobile-menu");
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
 
   if (!btn || !menu) return;
 
   /* TOGGLE */
   btn.addEventListener("click", e => {
-
     e.stopPropagation();
-
     menu.classList.toggle("open");
-
   });
 
   /* CLOSE OUTSIDE */
   document.addEventListener("click", e => {
-
     if (
       menu.classList.contains("open") &&
       !menu.contains(e.target) &&
       !btn.contains(e.target)
     ) {
-
       menu.classList.remove("open");
-
     }
-
   });
 
   /* CLOSE WHEN LINK CLICKED */
-  menu.querySelectorAll("a")
-    .forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        menu.classList.remove("open");
-
-      });
-
+  menu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      menu.classList.remove("open");
     });
+  });
 
 }
 
@@ -387,92 +199,48 @@ function initMobileMenu() {
 ============================================================ */
 function initAgentPanel() {
 
-  const cards =
-    document.querySelectorAll(".agent-card");
-
-  const panel =
-    document.querySelector(".agent-panel");
+  const cards = document.querySelectorAll(".agent-card");
+  const panel = document.querySelector(".agent-panel");
 
   if (!cards.length || !panel) return;
 
-  const photo =
-    panel.querySelector(".panel-photo");
+  const photo = panel.querySelector(".panel-photo");
+  const nameEl = panel.querySelector("h2");
+  const titleEl = panel.querySelector(".panel-title");
+  const phoneEl = panel.querySelector(".panel-phone");
+  const emailEl = panel.querySelector(".panel-email");
+  const callBtn = panel.querySelector(".panel-call");
+  const closeBtn = panel.querySelector(".close-panel");
 
-  const nameEl =
-    panel.querySelector("h2");
-
-  const titleEl =
-    panel.querySelector(".panel-title");
-
-  const phoneEl =
-    panel.querySelector(".panel-phone");
-
-  const emailEl =
-    panel.querySelector(".panel-email");
-
-  const callBtn =
-    panel.querySelector(".panel-call");
-
-  const closeBtn =
-    panel.querySelector(".close-panel");
-
-  if (
-    !photo ||
-    !nameEl ||
-    !titleEl ||
-    !phoneEl ||
-    !emailEl ||
-    !callBtn ||
-    !closeBtn
-  ) {
+  if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) {
     return;
   }
 
   cards.forEach(card => {
-
     card.addEventListener("click", () => {
 
-      photo.src =
-        card.dataset.photo || "";
+      photo.src = card.dataset.photo || "";
+      nameEl.textContent = card.dataset.name || "";
+      titleEl.textContent = card.dataset.title || "";
+      phoneEl.textContent = card.dataset.phone || "";
+      emailEl.textContent = card.dataset.email || "";
 
-      nameEl.textContent =
-        card.dataset.name || "";
-
-      titleEl.textContent =
-        card.dataset.title || "";
-
-      phoneEl.textContent =
-        card.dataset.phone || "";
-
-      emailEl.textContent =
-        card.dataset.email || "";
-
-      callBtn.href =
-        `tel:${(card.dataset.phone || "")
-          .replace(/\D/g, "")}`;
+      callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
 
       panel.classList.add("open");
-
     });
-
   });
 
   /* CLOSE BUTTON */
   closeBtn.addEventListener("click", () => {
-
     panel.classList.remove("open");
-
   });
 
   /* CLOSE BACKDROP */
   panel.addEventListener("click", e => {
-
     if (e.target === panel) {
-
       panel.classList.remove("open");
-
     }
-
   });
 
 }
@@ -482,15 +250,10 @@ function initAgentPanel() {
 ============================================================ */
 window.addEventListener("scroll", () => {
 
-  const header =
-    document.getElementById("aces-header");
-
+  const header = document.getElementById("aces-header");
   if (!header) return;
 
-  header.classList.toggle(
-    "scrolled",
-    window.scrollY > 20
-  );
+  header.classList.toggle("scrolled", window.scrollY > 20);
 
 });
 
@@ -499,130 +262,76 @@ window.addEventListener("scroll", () => {
 ============================================================ */
 function initModalSystem() {
 
-  const modal =
-    document.getElementById("textPolicyModal");
-
-  const overlay =
-    document.getElementById("modalOverlay");
+  const modal = document.getElementById("textPolicyModal");
+  const overlay = document.getElementById("modalOverlay");
 
   if (!modal || !overlay) return;
 
-  const openBtn =
-    document.getElementById("openTextPolicy");
-
-  const closeX =
-    modal.querySelector(".close");
-
-  const closeBtn =
-    document.getElementById("modalCloseBtn");
+  const openBtn = document.getElementById("openTextPolicy");
+  const closeX = modal.querySelector(".close");
+  const closeBtn = document.getElementById("modalCloseBtn");
 
   /* OPEN */
   function openModal() {
 
     overlay.style.display = "block";
-
     modal.style.display = "flex";
 
     requestAnimationFrame(() => {
-
       modal.classList.add("show");
-
     });
 
     document.body.classList.add("modal-open");
 
     /* REFRESH LANGUAGE */
-    applyLanguage(
-      localStorage.getItem("acesLang") || "en"
-    );
-
+    applyLanguage(localStorage.getItem("acesLang") || "en");
   }
 
   /* CLOSE */
   function closeModal() {
 
     modal.classList.remove("show");
-
     document.body.classList.remove("modal-open");
 
     setTimeout(() => {
-
       modal.style.display = "none";
-
       overlay.style.display = "none";
-
     }, 250);
 
   }
 
   /* OPEN BUTTON */
   if (openBtn) {
-
     openBtn.addEventListener("click", e => {
-
       e.preventDefault();
-
       openModal();
-
     });
-
   }
 
   /* CLOSE X */
   if (closeX) {
-
-    closeX.addEventListener(
-      "click",
-      closeModal
-    );
-
+    closeX.addEventListener("click", closeModal);
   }
 
   /* CLOSE BUTTON */
   if (closeBtn) {
-
-    closeBtn.addEventListener(
-      "click",
-      closeModal
-    );
-
+    closeBtn.addEventListener("click", closeModal);
   }
 
   /* CLICK OUTSIDE */
-  overlay.addEventListener(
-    "click",
-    closeModal
-  );
+  overlay.addEventListener("click", closeModal);
 
   /* ESC SUPPORT */
-  document.addEventListener(
-    "keydown",
-    e => {
-
-      if (
-        e.key === "Escape" &&
-        modal.classList.contains("show")
-      ) {
-
-        closeModal();
-
-      }
-
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && modal.classList.contains("show")) {
+      closeModal();
     }
-  );
+  });
 
   /* AUTO OPEN ONCE */
-  if (
-    !sessionStorage.getItem("policySeen")
-  ) {
-
+  if (!sessionStorage.getItem("policySeen")) {
     openModal();
-
-    sessionStorage.setItem(
-      "policySeen",
-      "1"
-    );
-
+    sessionStorage.setItem("policySeen", "1");
   }
 
 }
