@@ -1,4 +1,5 @@
-// ACES 2026 — global.js (Optimized, Patched, Semi‑Minified)
+```js
+// ACES 2026 — global.js (Patched + Modal Fixed)
 
 document.addEventListener("DOMContentLoaded", () => {
   loadHeader();
@@ -7,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initAgentPanel();
   setActiveNav();
   initMobileMenu();
+  initModalSystem();
 });
 
 /* ------------------------------------------------------------
@@ -45,7 +47,6 @@ function loadHeader() {
 
     <!-- MOBILE MENU -->
     <nav id="mobile-menu" class="mobile-menu">
-
       <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
       <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
       <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
@@ -53,15 +54,16 @@ function loadHeader() {
       <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
       <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
       <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
-
     </nav>
   `;
 
   const langBtn = document.getElementById("lang-toggle");
+
   if (langBtn) {
     langBtn.addEventListener("click", () => {
       const current = localStorage.getItem("acesLang") || "en";
       const next = current === "en" ? "es" : "en";
+
       localStorage.setItem("acesLang", next);
       applyLanguage(next);
     });
@@ -93,44 +95,65 @@ function initLanguage() {
 
 function applyLanguage(lang) {
   const isEs = lang === "es";
+
   document.documentElement.lang = isEs ? "es" : "en";
 
   document.querySelectorAll("[data-en]").forEach(el => {
     const en = el.getAttribute("data-en");
     const es = el.getAttribute("data-es");
+
     el.textContent = isEs ? (es || en) : en;
   });
 
   const langBtn = document.getElementById("lang-toggle");
-  if (langBtn) langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
+
+  if (langBtn) {
+    langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
+  }
 }
 
 /* ------------------------------------------------------------
    ACTIVE NAV LINK
 ------------------------------------------------------------ */
 function setActiveNav() {
-  const path = window.location.pathname.split("/").pop() || "index.html";
-  const links = document.querySelectorAll(".nav-links a, #mobile-menu a");
+  const path =
+    window.location.pathname.split("/").pop() || "index.html";
+
+  const links =
+    document.querySelectorAll(".nav-links a, #mobile-menu a");
 
   links.forEach(link => {
     const file = link.getAttribute("href").split("/").pop();
-    link.classList.toggle("active", file === path || (path === "" && file === "index.html"));
+
+    link.classList.toggle(
+      "active",
+      file === path || (path === "" && file === "index.html")
+    );
   });
 }
 
 /* ------------------------------------------------------------
-   MOBILE MENU (UPGRADED)
+   MOBILE MENU
 ------------------------------------------------------------ */
 function initMobileMenu() {
   const btn = document.getElementById("mobile-menu-btn");
   const menu = document.getElementById("mobile-menu");
+
   if (!btn || !menu) return;
 
-  btn.addEventListener("click", () => menu.classList.toggle("open"));
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("open");
+  });
 
   document.addEventListener("click", e => {
     if (!menu.classList.contains("open")) return;
-    if (!menu.contains(e.target) && !btn.contains(e.target)) menu.classList.remove("open");
+
+    if (
+      !menu.contains(e.target) &&
+      !btn.contains(e.target)
+    ) {
+      menu.classList.remove("open");
+    }
   });
 }
 
@@ -140,6 +163,7 @@ function initMobileMenu() {
 function initAgentPanel() {
   const cards = document.querySelectorAll(".agent-card");
   const panel = document.querySelector(".agent-panel");
+
   if (!cards.length || !panel) return;
 
   const photo = panel.querySelector(".panel-photo");
@@ -150,7 +174,17 @@ function initAgentPanel() {
   const callBtn = panel.querySelector(".panel-call");
   const closeBtn = panel.querySelector(".close-panel");
 
-  if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) return;
+  if (
+    !photo ||
+    !nameEl ||
+    !titleEl ||
+    !phoneEl ||
+    !emailEl ||
+    !callBtn ||
+    !closeBtn
+  ) {
+    return;
+  }
 
   cards.forEach(card => {
     card.addEventListener("click", () => {
@@ -159,32 +193,70 @@ function initAgentPanel() {
       titleEl.textContent = card.dataset.title;
       phoneEl.textContent = card.dataset.phone;
       emailEl.textContent = card.dataset.email;
-      callBtn.href = `tel:${card.dataset.phone.replace(/\D/g, "")}`;
+
+      callBtn.href =
+        `tel:${card.dataset.phone.replace(/\D/g, "")}`;
+
       panel.classList.add("open");
     });
   });
 
-  closeBtn.addEventListener("click", () => panel.classList.remove("open"));
-  panel.addEventListener("click", e => { if (e.target === panel) panel.classList.remove("open"); });
+  closeBtn.addEventListener("click", () => {
+    panel.classList.remove("open");
+  });
+
+  panel.addEventListener("click", e => {
+    if (e.target === panel) {
+      panel.classList.remove("open");
+    }
+  });
 }
 
-/* Header scroll shadow */
+/* ------------------------------------------------------------
+   HEADER SHADOW ON SCROLL
+------------------------------------------------------------ */
 window.addEventListener("scroll", () => {
   const header = document.getElementById("aces-header");
-  if (header) header.classList.toggle("scrolled", window.scrollY > 20);
+
+  if (header) {
+    header.classList.toggle(
+      "scrolled",
+      window.scrollY > 20
+    );
+  }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+/* ------------------------------------------------------------
+   MODAL SYSTEM (FIXED)
+------------------------------------------------------------ */
+function initModalSystem() {
   const modal = document.getElementById("textPolicyModal");
   const overlay = document.getElementById("modalOverlay");
   const openBtn = document.getElementById("openTextPolicy");
   const closeX = document.querySelector("#textPolicyModal .close");
   const closeBtn = document.getElementById("modalCloseBtn");
 
-  /* ONLY require modal + overlay */
   if (!modal || !overlay) return;
 
-  /* CLOSE FUNCTION */
+  function openModal() {
+
+    /* FLEX matches CSS architecture */
+    modal.style.display = "flex";
+    overlay.style.display = "block";
+
+    document.body.classList.add("modal-open");
+
+    requestAnimationFrame(() => {
+      modal.classList.add("show");
+    });
+
+    if (typeof applyLanguage === "function") {
+      applyLanguage(
+        localStorage.getItem("acesLang") || "en"
+      );
+    }
+  }
+
   function closeModal() {
     modal.classList.remove("show");
     document.body.classList.remove("modal-open");
@@ -195,23 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 250);
   }
 
-  /* OPEN FUNCTION */
-  function openModal() {
-    modal.style.display = "block";
-    overlay.style.display = "block";
-
-    document.body.classList.add("modal-open");
-
-    setTimeout(() => {
-      modal.classList.add("show");
-    }, 10);
-
-    if (typeof applyLanguage === "function") {
-      applyLanguage(localStorage.getItem("acesLang") || "en");
-    }
-  }
-
-  /* OPEN BUTTON (optional now) */
+  /* OPEN BUTTON */
   if (openBtn) {
     openBtn.addEventListener("click", e => {
       e.preventDefault();
@@ -231,48 +287,20 @@ document.addEventListener("DOMContentLoaded", () => {
   /* CLICK OUTSIDE */
   overlay.addEventListener("click", closeModal);
 
-  /* AUTO OPEN */
-  openModal();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("textPolicyModal");
-  const overlay = document.getElementById("modalOverlay");
-  const openBtn = document.getElementById("openTextPolicy");
-  const closeX = document.querySelector("#textPolicyModal .close");
-  const closeBtn = document.getElementById("modalCloseBtn");
-
-  if (!modal || !overlay || !openBtn) return;
-
-  openBtn.addEventListener("click", e => {
-    e.preventDefault();
-
-    modal.classList.add("show");
-    overlay.style.display = "block";
-    document.body.classList.add("modal-open");
-
-    /* SAFE LANGUAGE CALL */
-    if (typeof applyLanguage === "function") {
-      applyLanguage(localStorage.getItem("acesLang") || "en");
+  /* ESC KEY SUPPORT */
+  document.addEventListener("keydown", e => {
+    if (
+      e.key === "Escape" &&
+      modal.classList.contains("show")
+    ) {
+      closeModal();
     }
   });
 
-  function closeModal() {
-    modal.classList.remove("show");
-    document.body.classList.remove("modal-open");
-
-    setTimeout(() => {
-      overlay.style.display = "none";
-    }, 250);
+  /* AUTO OPEN ONCE PER SESSION */
+  if (!sessionStorage.getItem("policySeen")) {
+    openModal();
+    sessionStorage.setItem("policySeen", "1");
   }
-
-  if (closeX) {
-    closeX.addEventListener("click", closeModal);
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", closeModal);
-  }
-
-  overlay.addEventListener("click", closeModal);
-});
+}
+```
