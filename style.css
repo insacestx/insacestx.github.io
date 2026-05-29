@@ -1939,8 +1939,14 @@ edge_all_open_tabs = [
   pointer-events: auto;
 }
 
-/* REMOVE THIS IF NOT NEEDED */
+/* OVERLAY */
 .modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  z-index: 99998;
   display: none;
 }
 
@@ -2006,7 +2012,6 @@ body.modal-open {
   background: transparent;
   border: 0;
   z-index: 100001;
-  pointer-events: auto;
 }
 
 /* BODY */
@@ -2046,6 +2051,7 @@ body.modal-open {
     padding: 20px;
   }
 }
+
 /* ============================================================
    CLAIMS HERO — FIXED, VISIBLE, NON-DISTORTED
 ============================================================ */
