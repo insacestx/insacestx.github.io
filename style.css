@@ -2398,10 +2398,11 @@ section { padding: 60px 28px; }
 }
 
 /* ============================================================
-   TEXT POLICY MODAL — ACES 2026 (FINAL STABLE VERSION)
+   TEXT POLICY MODAL — ACES 2026 (FINAL VERIFIED VERSION)
+   Safe for widgets / overlays / floating elements
 ============================================================ */
 
-/* MODAL CONTAINER */
+/* MODAL ROOT */
 .modal {
   display: none;
 
@@ -2411,27 +2412,27 @@ section { padding: 60px 28px; }
   width: 100%;
   height: 100%;
 
-  background: rgba(0,0,0,0.75);
-
   z-index: 99999;
 
   justify-content: center;
   align-items: flex-start;
 
+  overflow-x: hidden;
   overflow-y: auto;
+
   -webkit-overflow-scrolling: touch;
 
   opacity: 0;
   transition: opacity .25s ease;
 }
 
-/* ACTIVE MODAL */
+/* ACTIVE STATE */
 .modal.show {
   display: flex;
   opacity: 1;
 }
 
-/* OVERLAY */
+/* DARK BACKDROP */
 .modal-overlay {
   display: none;
 
@@ -2441,17 +2442,18 @@ section { padding: 60px 28px; }
   width: 100%;
   height: 100%;
 
-  background: rgba(0,0,0,0.75);
+  background: rgba(0,0,0,0.72);
 
   z-index: 99998;
 }
 
-/* PREVENT PAGE SCROLL */
+/* LOCK BODY SCROLL */
 body.modal-open {
   overflow: hidden;
+  touch-action: none;
 }
 
-/* MODAL BOX */
+/* MODAL CONTENT BOX */
 .modal-content {
   position: relative;
   z-index: 100000;
@@ -2459,23 +2461,33 @@ body.modal-open {
   background: #111;
   color: #f5f5f5;
 
-  max-width: 700px;
   width: calc(100% - 40px);
+  max-width: 720px;
 
   margin: 60px auto;
-  padding: 25px 28px;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
-  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  box-shadow:
+    0 12px 40px rgba(0,0,0,.45),
+    0 0 0 1px rgba(255,255,255,.04);
 
   animation: modalSlideDown .35s ease;
+
+  overflow: hidden;
+}
+
+/* INNER PADDING */
+.modal-body {
+  padding: 24px 28px;
+  color: #ddd;
+  line-height: 1.7;
 }
 
 /* ANIMATION */
 @keyframes modalSlideDown {
   from {
-    transform: translateY(-20px);
+    transform: translateY(-24px);
     opacity: 0;
   }
 
@@ -2487,57 +2499,87 @@ body.modal-open {
 
 /* HEADER */
 .modal-header {
+  position: sticky;
+  top: 0;
+
+  z-index: 2;
+
   background: #8b0000;
 
-  padding: 15px;
-
-  border-radius: 8px 8px 0 0;
+  padding: 16px 22px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
+/* TITLE */
 .modal-header h2 {
   margin: 0;
 
-  font-size: 1.4rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+
   color: #fff;
 }
 
 /* CLOSE X */
 .modal-header .close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
   position: relative;
   z-index: 100001;
 
   font-size: 2rem;
   line-height: 1;
 
-  cursor: pointer;
-
   color: #fff;
 
+  cursor: pointer;
+
   background: transparent;
-  border: 0;
+  border: none;
+
+  border-radius: 8px;
+
+  transition:
+    background .2s ease,
+    transform .2s ease;
 
   user-select: none;
 }
 
-/* BODY */
-.modal-body {
-  padding: 20px 10px;
-  color: #ddd;
+.modal-header .close:hover {
+  background: rgba(255,255,255,.12);
+  transform: scale(1.05);
 }
 
+/* BODY HEADINGS */
 .modal-body h3 {
-  margin-top: 20px;
+  margin-top: 24px;
+  margin-bottom: 10px;
+
   color: #fff;
+
+  font-size: 1.05rem;
+}
+
+/* PARAGRAPHS */
+.modal-body p {
+  margin-bottom: 14px;
 }
 
 /* FOOTER */
 .modal-footer {
+  padding: 0 28px 24px;
   text-align: right;
-  padding-top: 15px;
 }
 
 /* CLOSE BUTTON */
@@ -2548,34 +2590,82 @@ body.modal-open {
   background: #8b0000;
   color: #fff;
 
-  padding: 10px 18px;
+  padding: 12px 20px;
 
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+
+  font-size: .95rem;
+  font-weight: 600;
 
   cursor: pointer;
 
-  transition: background .2s ease;
+  transition:
+    background .2s ease,
+    transform .2s ease;
 }
 
 .modal-close-btn:hover {
   background: #a30000;
+  transform: translateY(-1px);
+}
+
+/* LINKS INSIDE MODAL */
+.modal a {
+  color: #ffb3b3;
+  text-decoration: underline;
+}
+
+/* SCROLLBAR */
+.modal-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.15);
+  border-radius: 10px;
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .modal-content {
-    width: calc(100% - 20px);
 
-    margin: 20px auto;
-    padding: 20px;
+  .modal {
+    align-items: flex-start;
+  }
+
+  .modal-content {
+    width: calc(100% - 16px);
+
+    margin: 10px auto 30px;
+
+    border-radius: 10px;
+  }
+
+  .modal-body {
+    padding: 20px 18px;
+  }
+
+  .modal-footer {
+    padding: 0 18px 20px;
+  }
+
+  .modal-header {
+    padding: 14px 18px;
   }
 
   .modal-header h2 {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
+    padding-right: 10px;
   }
 
   .modal-header .close {
-    font-size: 1.8rem;
+    width: 38px;
+    height: 38px;
+
+    font-size: 1.7rem;
+  }
+
+  .modal-close-btn {
+    width: 100%;
   }
 }
