@@ -196,10 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.classList.add("modal-open");
 
-    // Fade-in animation
     setTimeout(() => modal.classList.add("show"), 10);
 
-    // Apply bilingual text
     applyLanguage(localStorage.getItem("acesLang") || "en");
   });
 
