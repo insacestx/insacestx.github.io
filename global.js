@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setActiveNav();
     initMobileMenu();
     initAgentPanel();
+    initQuotePanel();   // ⭐ ADDED FOR SLIDE‑OUT QUOTE PANEL
   }, 0);
 
 });
@@ -196,6 +197,35 @@ function initAgentPanel() {
     if (e.target === panel) panel.classList.remove("open");
   });
 
+}
+
+/* ============================================================
+   SLIDE‑OUT QUOTE PANEL — OPEN/CLOSE + AUTO LANGUAGE APPLY
+============================================================ */
+function initQuotePanel() {
+
+  const openBtns = document.querySelectorAll("#openQuotePanel");
+  const closeBtn = document.getElementById("closeQuotePanel");
+  const savedLang = localStorage.getItem("acesLang") || "en";
+
+  if (openBtns.length) {
+    openBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.body.classList.add("quote-panel-open");
+
+        // Re-apply language so the panel matches current selection
+        if (typeof applyLanguage === "function") {
+          applyLanguage(savedLang);
+        }
+      });
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      document.body.classList.remove("quote-panel-open");
+    });
+  }
 }
 
 /* ============================================================
