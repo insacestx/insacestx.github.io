@@ -2288,3 +2288,15 @@ edge_all_open_tabs = [
   box-shadow:0 2px 10px rgba(0,0,0,.25);
 }
 
+/* BRAND COLORS FOR CARRIER CARDS */
+.carrier-card[data-brand="allstate"] { border-left: 6px solid #0033a0; }
+.carrier-card[data-brand="natgen"] { border-left: 6px solid #d71920; }
+.carrier-card[data-brand="wellington"] { border-left: 6px solid #006747; }
+.carrier-card[data-brand="safeco"] { border-left: 6px solid #00263a; }
+.carrier-card[data-brand="foremost"] { border-left: 6px solid #005596; }
+.carrier-card[data-brand="rhp"] { border-left: 6px solid #6c1d45; }
+.carrier-card[data-brand="conifer"] { border-left: 6px solid #2e7d32; }
+.carrier-card[data-brand="progressive"] { border-left: 6px solid #0078d7; }
+.carrier-card[data-brand="bristolwest"] { border-left: 6px solid #4b0082; }
+.carrier-card[data-brand="gainsco"] { border-left: 6px solid #c8102e; }
+.carrier-card[data-brand="geico"] { border-left: 6px solid #ffcc00; }
