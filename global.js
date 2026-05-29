@@ -174,10 +174,6 @@ window.addEventListener("scroll", () => {
   if (header) header.classList.toggle("scrolled", window.scrollY > 20);
 });
 
-/* ------------------------------------------------------------
-   TEXT POLICY MODAL — FIXED (Mobile + Desktop + Scroll Unlock)
------------------------------------------------------------- */
-
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("textPolicyModal");
   const overlay = document.getElementById("modalOverlay");
@@ -185,21 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeX = document.querySelector("#textPolicyModal .close");
   const closeBtn = document.getElementById("modalCloseBtn");
 
-  if (!modal || !overlay || !openBtn) return;
-
-  /* OPEN MODAL */
-  openBtn.addEventListener("click", e => {
-    e.preventDefault();
-
-    modal.style.display = "block";
-    overlay.style.display = "block";
-
-    document.body.classList.add("modal-open");
-
-    setTimeout(() => modal.classList.add("show"), 10);
-
-    applyLanguage(localStorage.getItem("acesLang") || "en");
-  });
+  /* ONLY require modal + overlay */
+  if (!modal || !overlay) return;
 
   /* CLOSE FUNCTION */
   function closeModal() {
@@ -212,10 +195,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 250);
   }
 
-  /* CLOSE BUTTONS */
-  if (closeX) closeX.addEventListener("click", closeModal);
-  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  /* OPEN FUNCTION */
+  function openModal() {
+    modal.style.display = "block";
+    overlay.style.display = "block";
 
-  /* CLICK OUTSIDE TO CLOSE */
+    document.body.classList.add("modal-open");
+
+    setTimeout(() => {
+      modal.classList.add("show");
+    }, 10);
+
+    if (typeof applyLanguage === "function") {
+      applyLanguage(localStorage.getItem("acesLang") || "en");
+    }
+  }
+
+  /* OPEN BUTTON (optional now) */
+  if (openBtn) {
+    openBtn.addEventListener("click", e => {
+      e.preventDefault();
+      openModal();
+    });
+  }
+
+  /* CLOSE BUTTONS */
+  if (closeX) {
+    closeX.addEventListener("click", closeModal);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeModal);
+  }
+
+  /* CLICK OUTSIDE */
   overlay.addEventListener("click", closeModal);
+
+  /* AUTO OPEN */
+  openModal();
 });
