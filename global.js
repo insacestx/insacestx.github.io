@@ -1,4 +1,4 @@
-// ACES 2026 — global.js (Final Stable Build)
+// ACES 2026 — global.js (Stable Build, No Modal)
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setActiveNav();
     initMobileMenu();
     initAgentPanel();
-    initModalSystem();
   }, 0);
 
 });
@@ -31,17 +30,12 @@ function loadHeader() {
       <!-- LOGO -->
       <div class="logo-area">
         <a href="index.html" class="logo-link">
-          <img
-            src="image2.png"
-            alt="ACES Insurance Logo"
-            class="aces-logo"
-          >
+          <img src="image2.png" alt="ACES Insurance Logo" class="aces-logo">
         </a>
       </div>
 
       <!-- DESKTOP NAV -->
       <nav class="nav-links">
-
         <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
         <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
         <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
@@ -49,7 +43,6 @@ function loadHeader() {
         <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
         <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
         <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
-
       </nav>
 
       <!-- HEADER CONTROLS -->
@@ -62,7 +55,6 @@ function loadHeader() {
 
     <!-- MOBILE MENU -->
     <nav id="mobile-menu" class="mobile-menu">
-
       <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
       <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
       <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
@@ -70,22 +62,9 @@ function loadHeader() {
       <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
       <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
       <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
-
     </nav>
   `;
 
-}
-/* LANGUAGE TOGGLE */
-const langBtn = document.getElementById("lang-toggle");
-
-if (langBtn) {
-  langBtn.addEventListener("click", () => {
-    const current = localStorage.getItem("acesLang") || "en";
-    const next = current === "en" ? "es" : "en";
-
-    localStorage.setItem("acesLang", next);
-    applyLanguage(next);
-  });
 }
 
 /* ============================================================
@@ -98,14 +77,11 @@ function loadFooter() {
 
   fetch("footer.html")
     .then(res => {
-      if (!res.ok) {
-        throw new Error(`Footer failed: ${res.status}`);
-      }
+      if (!res.ok) throw new Error(`Footer failed: ${res.status}`);
       return res.text();
     })
     .then(html => {
       footer.innerHTML = html;
-
       applyLanguage(localStorage.getItem("acesLang") || "en");
     })
     .catch(err => {
@@ -124,7 +100,6 @@ function initLanguage() {
 function applyLanguage(lang) {
 
   const isEs = lang === "es";
-
   document.documentElement.lang = isEs ? "es" : "en";
 
   document.querySelectorAll("[data-en]").forEach(el => {
@@ -134,9 +109,7 @@ function applyLanguage(lang) {
   });
 
   const langBtn = document.getElementById("lang-toggle");
-  if (langBtn) {
-    langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
-  }
+  if (langBtn) langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
 
 }
 
@@ -146,18 +119,15 @@ function applyLanguage(lang) {
 function setActiveNav() {
 
   const path = window.location.pathname.split("/").pop() || "index.html";
-
   const links = document.querySelectorAll(".nav-links a, #mobile-menu a");
 
   links.forEach(link => {
     const file = link.getAttribute("href").split("/").pop();
-    link.classList.toggle(
-      "active",
-      file === path || (path === "" && file === "index.html")
-    );
+    link.classList.toggle("active", file === path || (path === "" && file === "index.html"));
   });
 
 }
+
 /* ============================================================
    MOBILE MENU
 ============================================================ */
@@ -168,28 +138,19 @@ function initMobileMenu() {
 
   if (!btn || !menu) return;
 
-  /* TOGGLE */
   btn.addEventListener("click", e => {
     e.stopPropagation();
     menu.classList.toggle("open");
   });
 
-  /* CLOSE OUTSIDE */
   document.addEventListener("click", e => {
-    if (
-      menu.classList.contains("open") &&
-      !menu.contains(e.target) &&
-      !btn.contains(e.target)
-    ) {
+    if (menu.classList.contains("open") && !menu.contains(e.target) && !btn.contains(e.target)) {
       menu.classList.remove("open");
     }
   });
 
-  /* CLOSE WHEN LINK CLICKED */
   menu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      menu.classList.remove("open");
-    });
+    link.addEventListener("click", () => menu.classList.remove("open"));
   });
 
 }
@@ -212,9 +173,7 @@ function initAgentPanel() {
   const callBtn = panel.querySelector(".panel-call");
   const closeBtn = panel.querySelector(".close-panel");
 
-  if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) {
-    return;
-  }
+  if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) return;
 
   cards.forEach(card => {
     card.addEventListener("click", () => {
@@ -231,16 +190,10 @@ function initAgentPanel() {
     });
   });
 
-  /* CLOSE BUTTON */
-  closeBtn.addEventListener("click", () => {
-    panel.classList.remove("open");
-  });
+  closeBtn.addEventListener("click", () => panel.classList.remove("open"));
 
-  /* CLOSE BACKDROP */
   panel.addEventListener("click", e => {
-    if (e.target === panel) {
-      panel.classList.remove("open");
-    }
+    if (e.target === panel) panel.classList.remove("open");
   });
 
 }
@@ -256,82 +209,3 @@ window.addEventListener("scroll", () => {
   header.classList.toggle("scrolled", window.scrollY > 20);
 
 });
-
-/* ============================================================
-   TEXT POLICY MODAL SYSTEM
-============================================================ */
-function initModalSystem() {
-
-  const modal = document.getElementById("textPolicyModal");
-  const overlay = document.getElementById("modalOverlay");
-
-  if (!modal || !overlay) return;
-
-  const openBtn = document.getElementById("openTextPolicy");
-  const closeX = modal.querySelector(".close");
-  const closeBtn = document.getElementById("modalCloseBtn");
-
-  /* OPEN */
-  function openModal() {
-
-    overlay.style.display = "block";
-    modal.style.display = "flex";
-
-    requestAnimationFrame(() => {
-      modal.classList.add("show");
-    });
-
-    document.body.classList.add("modal-open");
-
-    /* REFRESH LANGUAGE */
-    applyLanguage(localStorage.getItem("acesLang") || "en");
-  }
-
-  /* CLOSE */
-  function closeModal() {
-
-    modal.classList.remove("show");
-    document.body.classList.remove("modal-open");
-
-    setTimeout(() => {
-      modal.style.display = "none";
-      overlay.style.display = "none";
-    }, 250);
-
-  }
-
-  /* OPEN BUTTON */
-  if (openBtn) {
-    openBtn.addEventListener("click", e => {
-      e.preventDefault();
-      openModal();
-    });
-  }
-
-  /* CLOSE X */
-  if (closeX) {
-    closeX.addEventListener("click", closeModal);
-  }
-
-  /* CLOSE BUTTON */
-  if (closeBtn) {
-    closeBtn.addEventListener("click", closeModal);
-  }
-
-  /* CLICK OUTSIDE */
-  overlay.addEventListener("click", closeModal);
-
-  /* ESC SUPPORT */
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && modal.classList.contains("show")) {
-      closeModal();
-    }
-  });
-
-  /* AUTO OPEN ONCE */
-  if (!sessionStorage.getItem("policySeen")) {
-    openModal();
-    sessionStorage.setItem("policySeen", "1");
-  }
-
-}
