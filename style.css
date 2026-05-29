@@ -21,6 +21,55 @@ section { padding: 60px 28px; }
    HERO
 ============================================================ */
 /* ============================================================
+   HERO
+============================================================ */
+.small-hero {
+  background: radial-gradient(circle at top, #550000 0, #000 55%);
+  padding: 80px 20px 60px;
+  text-align: center;
+}
+.small-hero-content { max-width: 800px; margin: 0 auto; }
+.small-hero h1 { font-size: 2.3rem; margin-bottom: 10px; }
+.small-hero p { font-size: 1.1rem; color: #ddd; }
+
+.auto-hero {
+  background: radial-gradient(circle at top, #550000 0, #000 55%);
+  padding: 60px 20px;
+  text-align: center;
+}
+.auto-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.auto-hero-inner h1 {
+  font-size: 2.3rem;
+  margin-bottom: 10px;
+}
+.auto-hero-inner p {
+  font-size: 1.1rem;
+  color: #ddd;
+  margin-bottom: 30px;
+}
+
+.page-hero {
+  background: radial-gradient(circle at top, #550000 0, #000 55%);
+  padding: 60px 20px;
+  text-align: center;
+}
+.page-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.page-hero-inner h1 {
+  font-size: 2.3rem;
+  margin-bottom: 10px;
+}
+.page-hero-inner p {
+  font-size: 1.1rem;
+  color: #ddd;
+}
+
+/* ============================================================
    HEADER (POLISHED, NO DROPDOWN)
 ============================================================ */
 #aces-header {
