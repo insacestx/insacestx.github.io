@@ -175,66 +175,49 @@ window.addEventListener("scroll", () => {
 });
 
 /* ------------------------------------------------------------
-   TEXT POLICY MODAL (Enhanced: Scroll Lock + Bilingual + Footer Close)
+   TEXT POLICY MODAL — FIXED (Mobile + Desktop + Scroll Unlock)
 ------------------------------------------------------------ */
-function attachTextPolicyModal() {
-  const modal = document.getElementById("textPolicyModal");
-  const openBtn = document.getElementById("openTextPolicy");
-  const closeBtn = document.querySelector("#textPolicyModal .close");
-  const bottomClose = document.getElementById("modalCloseBtn");
 
-  if (!modal || !openBtn || !closeBtn) {
-    return setTimeout(attachTextPolicyModal, 200);
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("textPolicyModal");
+  const overlay = document.getElementById("modalOverlay");
+  const openBtn = document.getElementById("openTextPolicy");
+  const closeX = document.querySelector("#textPolicyModal .close");
+  const closeBtn = document.getElementById("modalCloseBtn");
+
+  if (!modal || !overlay || !openBtn) return;
 
   /* OPEN MODAL */
   openBtn.addEventListener("click", e => {
     e.preventDefault();
-    modal.style.display = "block";
 
-    // Lock background scroll
-    document.body.style.overflow = "hidden";
+    modal.style.display = "block";
+    overlay.style.display = "block";
+
+    document.body.classList.add("modal-open");
 
     // Fade-in animation
     setTimeout(() => modal.classList.add("show"), 10);
 
-    // Apply bilingual text inside modal
+    // Apply bilingual text
     applyLanguage(localStorage.getItem("acesLang") || "en");
   });
 
-  /* CLOSE MODAL (X BUTTON) */
-  closeBtn.addEventListener("click", () => {
+  /* CLOSE FUNCTION */
+  function closeModal() {
     modal.classList.remove("show");
+    document.body.classList.remove("modal-open");
 
-    // Unlock scroll
-    document.body.style.overflow = "";
-
-    setTimeout(() => modal.style.display = "none", 300);
-  });
-
-  /* CLOSE MODAL (BOTTOM BUTTON) */
-  if (bottomClose) {
-    bottomClose.addEventListener("click", () => {
-      modal.classList.remove("show");
-
-      // Unlock scroll
-      document.body.style.overflow = "";
-
-      setTimeout(() => modal.style.display = "none", 300);
-    });
+    setTimeout(() => {
+      modal.style.display = "none";
+      overlay.style.display = "none";
+    }, 250);
   }
 
-  /* CLOSE MODAL (CLICK OUTSIDE) */
-  window.addEventListener("click", e => {
-    if (e.target === modal) {
-      modal.classList.remove("show");
+  /* CLOSE BUTTONS */
+  if (closeX) closeX.addEventListener("click", closeModal);
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
 
-      // Unlock scroll
-      document.body.style.overflow = "";
-
-      setTimeout(() => modal.style.display = "none", 300);
-    }
-  });
-}
-
-document.addEventListener("DOMContentLoaded", attachTextPolicyModal);
+  /* CLICK OUTSIDE TO CLOSE */
+  overlay.addEventListener("click", closeModal);
+});
