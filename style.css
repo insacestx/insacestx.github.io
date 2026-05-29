@@ -3439,3 +3439,46 @@ body.modal-open {
     width: 100%;
   }
 }
+/* ============================================================
+   BREADCRUMB (ACES LIGHT THEME)
+============================================================ */
+
+.breadcrumb {
+  font-size: 14px;
+  color: #555;
+  margin: 20px auto 0;
+  padding: 0 20px;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: #d40000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  color: #a00000;
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  color: #333;
+}
+
+.breadcrumb-separator {
+  margin: 0 6px;
+  color: #777;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .breadcrumb {
+    font-size: 13px;
+    padding: 0 16px;
+  }
+}
