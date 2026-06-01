@@ -66,6 +66,98 @@
 <style>
   .icon-circle{width:90px;height:90px;background:#f7f7f7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 15px;}
   .application-icon{width:55px;height:55px;object-fit:contain;}
+
+  /* ============================================================
+       QUICK QUOTE BOX — ACES + KEITH SANDERS HYBRID
+  ============================================================ */
+  .quick-quote-section {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .quick-quote-box {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 35px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-top: 6px solid #c8102e; /* ACES Red */
+  }
+
+  .quick-quote-box h2 {
+    text-align: center;
+    font-size: 1.9rem;
+    margin-bottom: 10px;
+    color: #111;
+  }
+
+  .quick-quote-box p {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #444;
+  }
+
+  .quick-quote-box form input,
+  .quick-quote-box form select {
+    width: 100%;
+    padding: 14px 45px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background: #fafafa;
+  }
+
+  .input-icon {
+    position: relative;
+  }
+
+  .input-icon img {
+    width: 22px;
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    opacity: 0.7;
+  }
+
+  .quick-quote-box button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    background: #c8102e;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* ============================================================
+       FLOATING MOBILE BUTTON
+  ============================================================ */
+  .floating-quote-btn {
+    display: none;
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    background: #c8102e;
+    color: #fff;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    font-size: 28px;
+    border: none;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    z-index: 999;
+  }
+
+  @media (max-width: 768px) {
+    .floating-quote-btn {
+      display: block;
+    }
+  }
 </style>
 
 </head>
@@ -89,9 +181,7 @@
     </p>
 
     <div class="hero-buttons">
-
-      <!-- ⭐ UPDATED: This button now opens the slide‑out quote panel -->
-      <button class="hero-btn" id="openQuotePanel"
+      <button class="hero-btn scroll-to-quote"
               data-en="Get a Quote" data-es="Obtener una Cotización">
         Get a Quote
       </button>
@@ -102,6 +192,70 @@
       <a href="contact.html" class="hero-btn"
          data-en="Contact Us" data-es="Contáctenos">Contact Us</a>
     </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     QUICK QUOTE BOX (NEW)
+============================================================ -->
+<section class="quick-quote-section" id="quickQuoteBox">
+  <div class="quick-quote-box fade-in">
+
+    <h2 data-en="Quick Insurance Quote" data-es="Cotización Rápida de Seguro">
+      Quick Insurance Quote
+    </h2>
+
+    <p data-en="Start your quote in less than 60 seconds."
+       data-es="Comience su cotización en menos de 60 segundos.">
+       Start your quote in less than 60 seconds.
+    </p>
+
+    <form action="https://formsubmit.co/office@insaces.com" method="POST">
+
+      <!-- Round Robin + CC + Redirect -->
+      <input type="hidden" name="_cc" value="office@insaces.com">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+      <input type="hidden" name="_subject" value="New Quick Quote Request">
+      <input type="hidden" id="rrEmail" name="rrEmail">
+
+      <div class="input-icon">
+        <img src="Icons/icon-user.png">
+        <input type="text" name="Full Name" placeholder="Full Name" required>
+      </div>
+
+      <div class="input-icon">
+        <img src="Icons/icon-phone.png">
+        <input type="tel" name="Phone" placeholder="Phone Number" required>
+      </div>
+
+      <div class="input-icon">
+        <img src="Icons/icon-email.png">
+        <input type="email" name="Email" placeholder="Email Address" required>
+      </div>
+
+      <div class="input-icon">
+        <img src="Icons/icon-insurance.png">
+        <select name="Insurance Type" required>
+          <option value="" disabled selected>Select Insurance Type</option>
+          <option>Auto Insurance</option>
+          <option>Homeowners Insurance</option>
+          <option>Renters Insurance</option>
+          <option>Commercial Auto</option>
+          <option>General Liability</option>
+          <option>Workers Compensation</option>
+          <option>Life Insurance</option>
+          <option>Bundle & Save</option>
+        </select>
+      </div>
+
+      <button type="submit"
+        data-en="Start My Quote"
+        data-es="Comenzar Mi Cotización">
+        Start My Quote
+      </button>
+
+    </form>
   </div>
 </section>
 
@@ -171,7 +325,7 @@
 </section>
 
 <!-- ============================================================
-     TEAM SECTION
+     TEAM SECTION (UNCHANGED)
 ============================================================ -->
 <section class="team-section fade-in">
 
@@ -271,62 +425,22 @@
   </div>
 </section>
 
-<!-- SLIDE-OUT PANEL -->
-<div class="agent-panel">
-  <button class="close-panel">&times;</button>
-  <img class="panel-photo" src="">
-  <h2></h2>
-  <p class="panel-title"></p>
-  <p><strong>Phone:</strong> <span class="panel-phone"></span></p>
-  <p><strong>Email:</strong> <span class="panel-email"></span></p>
-  <a class="panel-call" href="#">Call Now</a>
-</div>
-
+<!-- SLIDE-OUT PANEL REMOVED -->
 
 <footer id="aces-footer"></footer>
 
 <!-- ============================================================
-     ⭐ SLIDE‑OUT QUOTE PANEL (added cleanly, no other changes)
+     FLOATING MOBILE BUTTON SCRIPT
 ============================================================ -->
-<div id="quote-panel">
-  <button id="closeQuotePanel">×</button>
+<button class="floating-quote-btn scroll-to-quote">+</button>
 
-  <h2 data-en="Get a Free Quote" data-es="Obtenga una Cotización Gratis">
-    Get a Free Quote
-  </h2>
-
-  <form id="quoteForm">
-
-    <label data-en="Name" data-es="Nombre">Name</label>
-    <input type="text" id="qName" required>
-
-    <label data-en="Phone" data-es="Teléfono">Phone</label>
-    <input type="tel" id="qPhone" required>
-
-    <label data-en="Email" data-es="Correo Electrónico">Email</label>
-    <input type="email" id="qEmail" required>
-
-    <label data-en="Type of Insurance" data-es="Tipo de Seguro">
-      Type of Insurance
-    </label>
-    <select id="qType" required>
-      <option value="auto" data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</option>
-      <option value="home" data-en="Home Insurance" data-es="Seguro de Casa">Home Insurance</option>
-      <option value="life" data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</option>
-      <option value="business" data-en="Business Insurance" data-es="Seguro Comercial">Business Insurance</option>
-      <option value="health" data-en="Health Insurance" data-es="Seguro de Salud">Health Insurance</option>
-      <option value="renters" data-en="Renters Insurance" data-es="Seguro de Inquilinos">Renters Insurance</option>
-      <option value="other" data-en="Other" data-es="Otro">Other</option>
-    </select>
-
-    <button type="submit" class="btn-primary"
-            data-en="Get My Free Quote"
-            data-es="Obtener Mi Cotización">
-      Get My Free Quote
-    </button>
-
-  </form>
-</div>
+<script>
+  document.querySelectorAll('.scroll-to-quote').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('quickQuoteBox').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
 
 </body>
 </html>
