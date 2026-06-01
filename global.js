@@ -42,7 +42,7 @@ function loadHeader() {
         <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
         <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
         <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-        <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
+         <li><a href="testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a></li>
         <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
       </nav>
 
@@ -61,7 +61,7 @@ function loadHeader() {
       <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
       <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
       <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-      <a href="about.html" data-en="Meet Our Team" data-es="Nuestro Equipo">Meet Our Team</a>
+       <li><a href="testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a></li>
       <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
   `;
