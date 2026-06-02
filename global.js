@@ -65,6 +65,14 @@ function loadHeader() {
       <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
   `;
+
+  /* ATTACH LANGUAGE TOGGLE EVENT LISTENER */
+  setTimeout(() => {
+    const langToggle = document.getElementById("lang-toggle");
+    if (langToggle) {
+      langToggle.addEventListener("click", toggleLanguage);
+    }
+  }, 0);
 }
 
 /* ============================================================
@@ -95,6 +103,13 @@ function loadFooter() {
 ============================================================ */
 function initLanguage() {
   applyLanguage(localStorage.getItem("acesLang") || "en");
+}
+
+function toggleLanguage() {
+  const current = localStorage.getItem("acesLang") || "en";
+  const newLang = current === "en" ? "es" : "en";
+  localStorage.setItem("acesLang", newLang);
+  applyLanguage(newLang);
 }
 
 function applyLanguage(lang) {
@@ -158,8 +173,6 @@ function initMobileMenu() {
 /* ============================================================
    AGENT PANEL
 ============================================================ */
-function initAgentPanel() {
-
 function initAgentPanel() {
   const cards = document.querySelectorAll(".agent-card");
   const panel = document.querySelector(".agent-panel");
