@@ -160,6 +160,7 @@ function initMobileMenu() {
 ============================================================ */
 function initAgentPanel() {
 
+function initAgentPanel() {
   const cards = document.querySelectorAll(".agent-card");
   const panel = document.querySelector(".agent-panel");
 
@@ -175,28 +176,44 @@ function initAgentPanel() {
 
   if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) return;
 
+  // Handle clicks on agent cards
   cards.forEach(card => {
     card.addEventListener("click", () => {
+      photo.src = card.dataset.photo || "";
+      nameEl.textContent = card.dataset.name || "";
+      titleEl.textContent = card.dataset.title || "";
+      phoneEl.textContent = card.dataset.phone || "";
+      emailEl.textContent = card.dataset.email || "";
+      callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
+      panel.classList.add("open");
+    });
+  });
+
+  // Handle clicks on "More Info" buttons
+  const infoBtns = document.querySelectorAll(".agent-info-btn");
+  infoBtns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      const card = e.target.closest(".agent-card");
+      if (!card) return;
 
       photo.src = card.dataset.photo || "";
       nameEl.textContent = card.dataset.name || "";
       titleEl.textContent = card.dataset.title || "";
       phoneEl.textContent = card.dataset.phone || "";
       emailEl.textContent = card.dataset.email || "";
-
       callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
-
       panel.classList.add("open");
     });
   });
 
+  // Close panel
   closeBtn.addEventListener("click", () => panel.classList.remove("open"));
-
   panel.addEventListener("click", e => {
     if (e.target === panel) panel.classList.remove("open");
   });
-
 }
+
 
 /* ============================================================
    SLIDE‑OUT QUOTE PANEL — OPEN/CLOSE + AUTO LANGUAGE APPLY
