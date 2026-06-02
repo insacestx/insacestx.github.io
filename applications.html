@@ -146,18 +146,19 @@
   <header id="aces-header"></header>
 
   <!-- HERO -->
-  <section class="small-hero fade-in">
-    <div class="small-hero-content">
-      <h1 data-en="Start an Application" data-es="Comenzar una Solicitud">
-        Start an Application
-      </h1>
+ <!-- PAGE TITLE -->
+<section class="page-title fade-in">
+  <h1 data-en="Start an Application" data-es="Comenzar una Solicitud">
+    Start an Application
+  </h1>
+  <p data-en="Choose the type of insurance you need and begin your application."
+     data-es="Elija el tipo de seguro que necesita y comience su solicitud.">
+    Choose the type of insurance you need and begin your application.
+  </p>
+</section>
 
-      <p data-en="Begin your insurance application quickly and easily."
-         data-es="Comience su solicitud de seguro rápida y fácilmente.">
-         Begin your insurance application quickly and easily.
-      </p>
 <!-- QUICK INSURANCE QUOTE BOX -->
-<div class="quick-quote-box">
+<div class="quick-quote-box fade-in">
   <h3 data-en="Quick Insurance Quote" data-es="Cotización Rápida de Seguro">
     Quick Insurance Quote
   </h3>
@@ -165,8 +166,10 @@
   <form action="contact.html" method="get" class="quick-quote-form">
     <input type="text" name="name" placeholder="Name" required
            data-en="Name" data-es="Nombre">
+
     <input type="tel" name="phone" placeholder="Phone" required
            data-en="Phone" data-es="Teléfono">
+
     <input type="email" name="email" placeholder="Email" required
            data-en="Email" data-es="Correo Electrónico">
 
@@ -199,36 +202,29 @@
   </form>
 </div>
 
-  </section>
+<!-- FILTER + SEARCH BAR -->
+<div class="application-filter-bar fade-in">
+  <input id="appSearch"
+         type="text"
+         placeholder="Search applications..."
+         data-en="Search applications..."
+         data-es="Buscar solicitudes...">
 
-<!-- APPLICATIONS -->
-<section class="app-section fade-in">
-  <h2 class="app-category-title" data-en="Find Your Application" data-es="Encuentre su Solicitud">
-    Find Your Application
-  </h2>
-
-  <!-- FILTER + SEARCH BAR -->
-  <div class="application-filter-bar">
-    <input id="appSearch"
-           type="text"
-           placeholder="Search applications..."
-           data-en="Search applications..."
-           data-es="Buscar solicitudes...">
-
-    <div class="filter-buttons">
-      <button class="filter-btn active" data-filter="all" data-en="All" data-es="Todos">All</button>
-      <button class="filter-btn" data-filter="Commercial" data-en="Commercial" data-es="Comercial">Commercial</button>
-      <button class="filter-btn" data-filter="Personal" data-en="Personal" data-es="Personal">Personal</button>
-      <button class="filter-btn" data-filter="Life" data-en="Life" data-es="Vida">Life</button>
-    </div>
-
-    <button id="clearFiltersBtn"
-            class="filter-clear-btn"
-            data-en="Clear Filters"
-            data-es="Limpiar Filtros">
-      Clear Filters
-    </button>
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all" data-en="All" data-es="Todos">All</button>
+    <button class="filter-btn" data-filter="Commercial" data-en="Commercial" data-es="Comercial">Commercial</button>
+    <button class="filter-btn" data-filter="Personal" data-en="Personal" data-es="Personal">Personal</button>
+    <button class="filter-btn" data-filter="Life" data-en="Life" data-es="Vida">Life</button>
   </div>
+
+  <button id="clearFiltersBtn"
+          class="filter-clear-btn"
+          data-en="Clear Filters"
+          data-es="Limpiar Filtros">
+    Clear Filters
+  </button>
+</div>
+
 
   <!-- ============================
        COMMERCIAL APPLICATIONS
