@@ -1310,3 +1310,67 @@ section {
     right: -100%;
   }
 }
+.application-filter-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-btn,
+.filter-clear-btn {
+  text-align: center;
+}
+.quick-quote-box {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.quick-quote-box h3 {
+  margin-bottom: 1rem;
+}
+
+.quick-quote-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quick-quote-form input,
+.quick-quote-form select {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.quote-submit-btn {
+  padding: 0.9rem;
+  background: #004aad;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.quote-submit-btn:hover {
+  background: #003a87;
+}
