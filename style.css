@@ -1310,6 +1310,7 @@ section {
     right: -100%;
   }
 }
+
 .application-filter-bar {
   display: flex;
   flex-direction: column;
