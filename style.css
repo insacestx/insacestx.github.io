@@ -54,6 +54,17 @@ section {
   }
 }
 
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /* ============================================================
    HERO
 ============================================================ */
@@ -720,6 +731,18 @@ section {
 }
 
 /* ============================================================
+   TEAM IMAGES
+============================================================ */
+
+.team-img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  object-fit: cover;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* ============================================================
    ICONS — LIGHT THEME
 ============================================================ */
 
@@ -1025,6 +1048,103 @@ section {
 }
 
 /* ============================================================
+   AGENT PANEL — LIGHT THEME (SLIDE-OUT)
+============================================================ */
+
+.agent-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 320px;
+  max-width: 80%;
+  height: 100vh;
+  background: #ffffff;
+  box-shadow: -10px 0 25px rgba(0,0,0,0.15);
+  padding: 20px;
+  z-index: 2000;
+  overflow-y: auto;
+  border-left: 1px solid #e5e5e5;
+  transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.agent-panel.open {
+  right: 0;
+  animation: slideInRight 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.agent-panel .close-panel {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1.8rem;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, background 0.2s ease;
+  border-radius: 4px;
+}
+
+.agent-panel .close-panel:hover {
+  color: #fff;
+  background: #d40000;
+}
+
+.agent-panel .panel-photo {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  object-fit: cover;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.agent-panel h2 {
+  margin-top: 20px;
+  margin-bottom: 4px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.agent-panel .panel-title {
+  color: #d40000;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.agent-panel p {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.agent-panel .panel-call {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: #d40000;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.agent-panel .panel-call:hover {
+  background: #ff1a1a;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
    CHECKBOX CARDS
 ============================================================ */
 
@@ -1045,4 +1165,148 @@ section {
 
   transition:
     all 0.25s ease;
+}
+
+/* ============================================================
+   FOOTER — ACES LIGHT THEME
+============================================================ */
+
+.aces-footer {
+  background: #ffffff;
+  padding: 60px 20px 40px;
+  color: #333;
+  border-top: 1px solid #e5e5e5;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-column h3 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: #111827;
+  font-weight: 600;
+}
+
+.footer-column p {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.footer-logo {
+  height: 48px;
+  margin-bottom: 16px;
+  object-fit: contain;
+}
+
+.footer-copyright {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 12px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.social-icon {
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+}
+
+.footer-link {
+  color: #d40000;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #ff1a1a;
+  text-decoration: underline;
+}
+
+.footer-center {
+  text-align: center;
+  align-items: center;
+}
+
+.footer-badge {
+  height: 80px;
+  object-fit: contain;
+  margin: 12px 0;
+}
+
+.footer-chamber-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 12px 0 !important;
+}
+
+.footer-qr {
+  height: 100px;
+  object-fit: contain;
+  margin-top: 12px;
+}
+
+.footer-legal {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  padding: 20px 0;
+  border-top: 1px solid #e5e5e5;
+  text-align: center;
+}
+
+.footer-legal p {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.back-to-top {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background: #d40000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.back-to-top:hover {
+  background: #ff1a1a;
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+  }
+
+  .agent-panel {
+    width: 100%;
+    right: -100%;
+  }
 }
