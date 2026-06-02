@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setActiveNav();
     initMobileMenu();
     initAgentPanel();
-    initQuotePanel();   // ⭐ ADDED FOR SLIDE‑OUT QUOTE PANEL
+    initQuotePanel();   // ⭐ SLIDE‑OUT QUOTE PANEL
   }, 0);
 
 });
@@ -42,7 +42,7 @@ function loadHeader() {
         <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
         <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
         <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-         <li><a href="testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a></li>
+        <a href="testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
         <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
       </nav>
 
@@ -61,11 +61,10 @@ function loadHeader() {
       <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
       <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
       <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-       <li><a href="testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a></li>
+      <a href="testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
       <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
   `;
-
 }
 
 /* ============================================================
@@ -213,7 +212,6 @@ function initQuotePanel() {
       btn.addEventListener("click", () => {
         document.body.classList.add("quote-panel-open");
 
-        // Re-apply language so the panel matches current selection
         if (typeof applyLanguage === "function") {
           applyLanguage(savedLang);
         }
