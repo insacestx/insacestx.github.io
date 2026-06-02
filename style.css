@@ -1333,49 +1333,18 @@ section {
 .filter-clear-btn {
   text-align: center;
 }
-.quick-quote-box {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto 2rem auto;
-  padding: 1.5rem;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+/* PAGE TITLE */
+.page-title {
   text-align: center;
+  margin: 2rem 0 1.5rem 0;
 }
 
-.quick-quote-box h3 {
-  margin-bottom: 1rem;
+.page-title h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
 }
 
-.quick-quote-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.quick-quote-form input,
-.quick-quote-form select {
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-
-.quote-submit-btn {
-  padding: 0.9rem;
-  background: #004aad;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.quote-submit-btn:hover {
-  background: #003a87;
-}
-/* QUICK QUOTE BOX — ACES STYLE */
+/* QUICK QUOTE BOX — MATCHES INDEX.HTML */
 .quick-quote-box {
   width: 100%;
   max-width: 650px;
@@ -1384,14 +1353,14 @@ section {
   background: #ffffff;
   border-radius: 14px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  border-left: 6px solid #c8102e; /* ACES Red */
+  border-left: 6px solid #c8102e;
+  text-align: center;
 }
 
 .quick-quote-box h3 {
   margin-bottom: 1rem;
   font-weight: 700;
   color: #1a1a1a;
-  text-align: center;
 }
 
 .quick-quote-form {
@@ -1430,4 +1399,23 @@ section {
 
 .quote-submit-btn:hover {
   background: #a50d26;
+}
+
+/* FILTER BAR CENTERING */
+.application-filter-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
