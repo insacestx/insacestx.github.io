@@ -7,11 +7,13 @@
           data-es="Comenzar una Solicitud | ACES Insurance Services">
     Start an Application | ACES Insurance Services
   </title>
+
   <link rel="stylesheet" href="style.css">
   <script src="global.js" defer></script>
   <script src="applications.js" defer></script>
 
   <style>
+    /* ICON CIRCLE */
     .icon-circle {
       width: 90px;
       height: 90px;
@@ -28,14 +30,17 @@
       object-fit: contain;
     }
 
+    /* APPLICATION GRID */
     .application-grid {
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 24px;
+      padding: 0 20px;
     }
 
+    /* APPLICATION CARD */
     .application-card {
       background: rgba(0, 0, 0, 0.7);
       border-radius: 12px;
@@ -48,7 +53,6 @@
       align-items: center;
       text-align: center;
     }
-
     .application-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 14px 30px rgba(0, 0, 0, 0.9);
@@ -60,7 +64,6 @@
       font-size: 1.1rem;
       color: #f0f0f0;
     }
-
     .application-card p {
       font-size: 0.9rem;
       color: #ddd;
@@ -68,6 +71,7 @@
       flex-grow: 1;
     }
 
+    /* APPLY BUTTON */
     .apply-button {
       display: inline-block;
       padding: 10px 18px;
@@ -78,455 +82,547 @@
       font-weight: 600;
       transition: background 0.2s, transform 0.1s;
     }
-
     .apply-button:hover {
       background: #ff0000;
       transform: translateY(-1px);
     }
+
+    /* QUICK QUOTE BOX (MATCHES INDEX) */
     .quick-quote-box {
-  width: 100%;
-  max-width: 650px;
-  margin: 0 auto 2.5rem auto;
-  padding: 1.75rem;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  border-left: 6px solid #c8102e;
-  text-align: center;
-}
+      width: 100%;
+      max-width: 650px;
+      margin: 0 auto 2.5rem auto;
+      padding: 1.75rem;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      border-left: 6px solid #c8102e;
+      text-align: center;
+    }
+    .quick-quote-box h3 {
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
 
-.quick-quote-box h3 {
-  margin-bottom: 1rem;
-  font-weight: 700;
-  color: #1a1a1a;
-}
+    .quick-quote-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
-.quick-quote-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+    .quick-quote-form input,
+    .quick-quote-form select {
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      border: 1px solid #d0d0d0;
+      font-size: 1rem;
+      background: #fafafa;
+    }
 
-.quick-quote-form input,
-.quick-quote-form select {
-  padding: 0.85rem 1rem;
-  border-radius: 10px;
-  border: 1px solid #d0d0d0;
-  font-size: 1rem;
-  background: #fafafa;
-}
+    .quick-quote-form input:focus,
+    .quick-quote-form select:focus {
+      border-color: #c8102e;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(200,16,46,0.15);
+    }
 
-.quick-quote-form input:focus,
-.quick-quote-form select:focus {
-  border-color: #c8102e;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(200,16,46,0.15);
-}
+    /* SUBMIT BUTTON */
+    .quote-submit-btn {
+      padding: 1rem;
+      background: #c8102e;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .quote-submit-btn:hover {
+      background: #a50d26;
+    }
 
-.quote-submit-btn {
-  padding: 1rem;
-  background: #c8102e;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
+    /* SMS OPT-IN */
+    .sms-optin {
+      margin-top: -4px;
+      margin-bottom: 10px;
+      text-align: left;
+      font-size: 0.8rem;
+      line-height: 1.3rem;
+    }
+    .sms-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .sms-label input[type="checkbox"] {
+      margin-top: 0.2rem;
+      transform: scale(1.1);
+    }
 
-.quote-submit-btn:hover {
-  background: #a50d26;
-}
-
+    /* FILTER BAR */
+    .application-filter-bar {
+      max-width: 1200px;
+      margin: 0 auto 2rem auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: #e5e5e5;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .filter-btn.active {
+      background: #c8102e;
+      color: white;
+    }
+    .filter-clear-btn {
+      margin-top: 5px;
+      padding: 8px 16px;
+      background: #444;
+      color: white;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      width: fit-content;
+    }
   </style>
 </head>
 
 <body>
   <header id="aces-header"></header>
 
-  <!-- HERO -->
- <!-- PAGE TITLE -->
-<section class="page-title fade-in">
-  <h1 data-en="Start an Application" data-es="Comenzar una Solicitud">
-    Start an Application
-  </h1>
-  <p data-en="Choose the type of insurance you need and begin your application."
-     data-es="Elija el tipo de seguro que necesita y comience su solicitud.">
-    Choose the type of insurance you need and begin your application.
-  </p>
-</section>
+  <!-- PAGE TITLE -->
+  <section class="page-title fade-in">
+    <h1 data-en="Start an Application" data-es="Comenzar una Solicitud">
+      Start an Application
+    </h1>
+    <p data-en="Choose the type of insurance you need and begin your application."
+       data-es="Elija el tipo de seguro que necesita y comience su solicitud.">
+      Choose the type of insurance you need and begin your application.
+    </p>
+  </section>
 
-<!-- QUICK INSURANCE QUOTE BOX -->
-<div class="quick-quote-box fade-in">
-  <h3 data-en="Quick Insurance Quote" data-es="Cotización Rápida de Seguro">
-    Quick Insurance Quote
-  </h3>
+  <!-- QUICK QUOTE BOX (ROUND ROBIN + SMS OPT-IN) -->
+  <div class="quick-quote-box fade-in">
+    <h3 data-en="Quick Insurance Quote" data-es="Cotización Rápida de Seguro">
+      Quick Insurance Quote
+    </h3>
 
-  <form action="contact.html" method="get" class="quick-quote-form">
-    <input type="text" name="name" placeholder="Name" required
-           data-en="Name" data-es="Nombre">
+    <form action="https://formsubmit.co/office@insaces.com" method="POST" class="quick-quote-form">
 
-    <input type="tel" name="phone" placeholder="Phone" required
-           data-en="Phone" data-es="Teléfono">
+      <!-- Round Robin + CC + Redirect -->
+      <input type="hidden" name="_cc" value="office@insaces.com">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+      <input type="hidden" name="_subject" value="New Quick Quote Request">
+      <input type="hidden" id="rrEmail" name="rrEmail">
 
-    <input type="email" name="email" placeholder="Email" required
-           data-en="Email" data-es="Correo Electrónico">
+      <input type="text" name="Full Name" placeholder="Full Name"
+             data-en="Full Name" data-es="Nombre Completo" required>
 
-    <select name="type" required
-            data-en="Type of Insurance" data-es="Tipo de Seguro">
-      <option value="" disabled selected>Select Type</option>
-      <option value="auto">Auto</option>
-      <option value="homeowners">Homeowners</option>
-      <option value="renters">Renters</option>
-      <option value="umbrella">Umbrella</option>
-      <option value="motorcycle">Motorcycle</option>
-      <option value="boat">Boat</option>
-      <option value="rv">RV</option>
-      <option value="condo">Condo</option>
-      <option value="flood">Flood</option>
-      <option value="atv">ATV</option>
-      <option value="life">Life</option>
-      <option value="commercial-auto">Commercial Auto</option>
-      <option value="bop">BOP</option>
-      <option value="gl">General Liability</option>
-      <option value="workerscomp">Workers Comp</option>
-      <option value="cyber">Cyber</option>
-      <option value="surety">Surety</option>
-    </select>
+      <input type="tel" name="Phone" placeholder="Phone Number"
+             data-en="Phone Number" data-es="Número de Teléfono" required>
 
-    <button type="submit" class="quote-submit-btn"
-            data-en="Get My Free Quote" data-es="Obtener Mi Cotización Gratis">
-      Get My Free Quote
+      <input type="email" name="Email" placeholder="Email Address"
+             data-en="Email Address" data-es="Correo Electrónico" required>
+
+      <select name="Insurance Type" required>
+        <option value="" disabled selected
+                data-en="Select Insurance Type"
+                data-es="Seleccione el Tipo de Seguro">
+          Select Insurance Type
+        </option>
+
+        <option data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</option>
+        <option data-en="Homeowners Insurance" data-es="Seguro de Hogar">Homeowners Insurance</option>
+        <option data-en="Renters Insurance" data-es="Seguro de Inquilinos">Renters Insurance</option>
+        <option data-en="Umbrella Insurance" data-es="Seguro Paraguas">Umbrella Insurance</option>
+        <option data-en="Motorcycle Insurance" data-es="Seguro de Motocicleta">Motorcycle Insurance</option>
+        <option data-en="Boat Insurance" data-es="Seguro de Bote">Boat Insurance</option>
+        <option data-en="RV & Travel Trailer" data-es="Seguro de RV y Remolque">RV & Travel Trailer</option>
+        <option data-en="Condo Insurance" data-es="Seguro de Condominio">Condo Insurance</option>
+        <option data-en="Flood Insurance" data-es="Seguro contra Inundaciones">Flood Insurance</option>
+        <option data-en="ATV & Off-Road" data-es="ATV y Vehículos Todo Terreno">ATV & Off-Road</option>
+        <option data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</option>
+        <option data-en="Commercial Auto" data-es="Auto Comercial">Commercial Auto</option>
+        <option data-en="General Liability" data-es="Responsabilidad Civil General">General Liability</option>
+        <option data-en="Workers Compensation" data-es="Compensación Laboral">Workers Compensation</option>
+        <option data-en="Business Owners Policy (BOP)" data-es="Póliza para Dueños de Negocios (BOP)">Business Owners Policy (BOP)</option>
+        <option data-en="Cyber Liability" data-es="Responsabilidad Cibernética">Cyber Liability</option>
+        <option data-en="Surety Bonds" data-es="Fianzas">Surety Bonds</option>
+      </select>
+
+      <!-- SMS OPT-IN -->
+      <div class="sms-optin">
+        <label class="sms-label">
+          <input type="checkbox" name="SMS Opt-In" required>
+          <span
+            data-en="By checking this box, I consent to receive SMS messages from ACES Insurance Services, including marketing promotions, updates, and informational texts. Message and data rates may apply. Message frequency may vary. You may text HELP for assistance or STOP to opt out at any time. Your phone number will be used solely for communication from ACES Insurance Services and will not be shared with third parties for marketing or promotional purposes."
+            data-es="Al marcar esta casilla, doy mi consentimiento para recibir mensajes SMS de ACES Insurance Services, incluidos promociones de marketing, actualizaciones y mensajes informativos. Pueden aplicarse tarifas de mensajes y datos. La frecuencia de mensajes puede variar. Puede enviar HELP para obtener ayuda o STOP para cancelar en cualquier momento. Su número de teléfono se utilizará únicamente para comunicación de ACES Insurance Services y no se compartirá con terceros para fines de marketing o promoción.">
+            By checking this box, I consent to receive SMS messages from ACES Insurance Services, including marketing promotions, updates, and informational texts. Message and data rates may apply. Message frequency may vary. You may text HELP for assistance or STOP to opt out at any time. Your phone number will be used solely for communication from ACES Insurance Services and will not be shared with third parties for marketing or promotional purposes.
+          </span>
+        </label>
+      </div>
+
+      <button type="submit" class="quote-submit-btn"
+              data-en="Get My Free Quote" data-es="Obtener Mi Cotización Gratis">
+        Get My Free Quote
+      </button>
+    </form>
+  </div>
+
+  <!-- FILTER + SEARCH BAR -->
+  <div class="application-filter-bar fade-in">
+    <input id="appSearch"
+           type="text"
+           placeholder="Search applications..."
+           data-en="Search applications..."
+           data-es="Buscar solicitudes...">
+
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all" data-en="All" data-es="Todos">All</button>
+      <button class="filter-btn" data-filter="Commercial" data-en="Commercial" data-es="Comercial">Commercial</button>
+      <button class="filter-btn" data-filter="Personal" data-en="Personal" data-es="Personal">Personal</button>
+      <button class="filter-btn" data-filter="Life" data-en="Life" data-es="Vida">Life</button>
+    </div>
+
+    <button id="clearFiltersBtn"
+            class="filter-clear-btn"
+            data-en="Clear Filters"
+            data-es="Limpiar Filtros">
+      Clear Filters
     </button>
-  </form>
-</div>
-
-<!-- FILTER + SEARCH BAR -->
-<div class="application-filter-bar fade-in">
-  <input id="appSearch"
-         type="text"
-         placeholder="Search applications..."
-         data-en="Search applications..."
-         data-es="Buscar solicitudes...">
-
-  <div class="filter-buttons">
-    <button class="filter-btn active" data-filter="all" data-en="All" data-es="Todos">All</button>
-    <button class="filter-btn" data-filter="Commercial" data-en="Commercial" data-es="Comercial">Commercial</button>
-    <button class="filter-btn" data-filter="Personal" data-en="Personal" data-es="Personal">Personal</button>
-    <button class="filter-btn" data-filter="Life" data-en="Life" data-es="Vida">Life</button>
   </div>
-
-  <button id="clearFiltersBtn"
-          class="filter-clear-btn"
-          data-en="Clear Filters"
-          data-es="Limpiar Filtros">
-    Clear Filters
-  </button>
-</div>
-
-
-  <!-- ============================
+<!-- ============================
        COMMERCIAL APPLICATIONS
-  ============================= -->
-  <h3 class="app-group-title" data-en="Commercial Applications" data-es="Solicitudes Comerciales">
-    Commercial Applications
-  </h3>
+============================= -->
+<h3 class="app-group-title" data-en="Commercial Applications" data-es="Solicitudes Comerciales">
+  Commercial Applications
+</h3>
 
-  <div class="application-grid">
+<div class="application-grid">
 
-    <!-- BOP -->
-    <div class="app-item application-card" data-category="Commercial" data-type="bop">
-      <div class="icon-circle">
-        <img src="Icons/icon-bop-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Business Owners Policy (BOP)" data-es="Póliza para Dueños de Negocios (BOP)">Business Owners Policy (BOP)</h3>
-      <p data-en="Comprehensive coverage for small to medium-sized businesses."
-         data-es="Cobertura integral para negocios pequeños y medianos.">
-        Comprehensive coverage for small to medium-sized businesses.
-      </p>
-      <a href="application-bop.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  <!-- BOP -->
+  <div class="app-item application-card" data-category="Commercial" data-type="bop">
+    <div class="icon-circle">
+      <img src="Icons/icon-bop-aces.png" class="application-icon">
     </div>
-
-    <!-- GL -->
-    <div class="app-item application-card" data-category="Commercial" data-type="gl">
-      <div class="icon-circle">
-        <img src="Icons/icon-gl-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="General Liability" data-es="Responsabilidad General">General Liability</h3>
-      <p data-en="Protection against third-party bodily injury and property damage."
-         data-es="Protección contra lesiones corporales y daños a la propiedad de terceros.">
-        Protection against third-party bodily injury and property damage.
-      </p>
-      <a href="application-gl.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Commercial Auto -->
-    <div class="app-item application-card" data-category="Commercial" data-type="commercial-auto">
-      <div class="icon-circle">
-        <img src="Icons/icon-commauto-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Commercial Auto" data-es="Auto Comercial">Commercial Auto</h3>
-      <p data-en="Coverage for vehicles used in business operations."
-         data-es="Cobertura para vehículos utilizados en operaciones comerciales.">
-        Coverage for vehicles used in business operations.
-      </p>
-      <a href="application-commercial-auto.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Commercial Property -->
-    <div class="app-item application-card" data-category="Commercial" data-type="commercial-property">
-      <div class="icon-circle">
-        <img src="Icons/icon-commprop_aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Commercial Property" data-es="Propiedad Comercial">Commercial Property</h3>
-      <p data-en="Protection for your business building, equipment, and inventory."
-         data-es="Protección para su edificio comercial, equipo e inventario.">
-        Protection for your business building, equipment, and inventory.
-      </p>
-      <a href="application-commercial-property.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Workers Comp -->
-    <div class="app-item application-card" data-category="Commercial" data-type="workerscomp">
-      <div class="icon-circle">
-        <img src="Icons/icon-workerscomp-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Workers Compensation" data-es="Compensación Laboral">Workers Compensation</h3>
-      <p data-en="Statutory coverage for employee injuries and illnesses."
-         data-es="Cobertura legal para lesiones y enfermedades de empleados.">
-        Statutory coverage for employee injuries and illnesses.
-      </p>
-      <a href="application-workerscomp.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- E&O -->
-    <div class="app-item application-card" data-category="Commercial" data-type="eo">
-      <div class="icon-circle">
-        <img src="Icons/icon-e&o-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Errors & Omissions" data-es="Errores y Omisiones">Errors & Omissions</h3>
-      <p data-en="Professional liability coverage for your business."
-         data-es="Cobertura de responsabilidad profesional para su negocio.">
-        Professional liability coverage for your business.
-      </p>
-      <a href="application-eo.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Cyber -->
-    <div class="app-item application-card" data-category="Commercial" data-type="cyber">
-      <div class="icon-circle">
-        <img src="Icons/icon-cyber-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Cyber Liability" data-es="Responsabilidad Cibernética">Cyber Liability</h3>
-      <p data-en="Protection against data breaches and cyber attacks."
-         data-es="Protección contra violaciones de datos y ciberataques.">
-        Protection against data breaches and cyber attacks.
-      </p>
-      <a href="application-cyber.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Surety -->
-    <div class="app-item application-card" data-category="Commercial" data-type="surety">
-      <div class="icon-circle">
-        <img src="Icons/icon-surety-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Surety Bonds" data-es="Fianzas">Surety Bonds</h3>
-      <p data-en="Bond solutions for contractors and businesses."
-         data-es="Soluciones de fianzas para contratistas y negocios.">
-        Bond solutions for contractors and businesses.
-      </p>
-      <a href="application-surety.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
+    <h3 data-en="Business Owners Policy (BOP)" data-es="Póliza para Dueños de Negocios (BOP)">
+      Business Owners Policy (BOP)
+    </h3>
+    <p data-en="Comprehensive coverage for small to medium-sized businesses."
+       data-es="Cobertura integral para negocios pequeños y medianos.">
+      Comprehensive coverage for small to medium-sized businesses.
+    </p>
+    <a href="application-bop.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
   </div>
 
-  <!-- ============================
+  <!-- GL -->
+  <div class="app-item application-card" data-category="Commercial" data-type="gl">
+    <div class="icon-circle">
+      <img src="Icons/icon-gl-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="General Liability" data-es="Responsabilidad General">General Liability</h3>
+    <p data-en="Protection against third-party bodily injury and property damage."
+       data-es="Protección contra lesiones corporales y daños a la propiedad de terceros.">
+      Protection against third-party bodily injury and property damage.
+    </p>
+    <a href="application-gl.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Commercial Auto -->
+  <div class="app-item application-card" data-category="Commercial" data-type="commercial-auto">
+    <div class="icon-circle">
+      <img src="Icons/icon-commauto-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Commercial Auto" data-es="Auto Comercial">Commercial Auto</h3>
+    <p data-en="Coverage for vehicles used in business operations."
+       data-es="Cobertura para vehículos utilizados en operaciones comerciales.">
+      Coverage for vehicles used in business operations.
+    </p>
+    <a href="application-commercial-auto.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Commercial Property -->
+  <div class="app-item application-card" data-category="Commercial" data-type="commercial-property">
+    <div class="icon-circle">
+      <img src="Icons/icon-commprop_aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Commercial Property" data-es="Propiedad Comercial">Commercial Property</h3>
+    <p data-en="Protection for your business building, equipment, and inventory."
+       data-es="Protección para su edificio comercial, equipo e inventario.">
+      Protection for your business building, equipment, and inventory.
+    </p>
+    <a href="application-commercial-property.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Workers Comp -->
+  <div class="app-item application-card" data-category="Commercial" data-type="workerscomp">
+    <div class="icon-circle">
+      <img src="Icons/icon-workerscomp-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Workers Compensation" data-es="Compensación Laboral">Workers Compensation</h3>
+    <p data-en="Statutory coverage for employee injuries and illnesses."
+       data-es="Cobertura legal para lesiones y enfermedades de empleados.">
+      Statutory coverage for employee injuries and illnesses.
+    </p>
+    <a href="application-workerscomp.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- E&O -->
+  <div class="app-item application-card" data-category="Commercial" data-type="eo">
+    <div class="icon-circle">
+      <img src="Icons/icon-e&o-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Errors & Omissions" data-es="Errores y Omisiones">Errors & Omissions</h3>
+    <p data-en="Professional liability coverage for your business."
+       data-es="Cobertura de responsabilidad profesional para su negocio.">
+      Professional liability coverage for your business.
+    </p>
+    <a href="application-eo.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Cyber -->
+  <div class="app-item application-card" data-category="Commercial" data-type="cyber">
+    <div class="icon-circle">
+      <img src="Icons/icon-cyber-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Cyber Liability" data-es="Responsabilidad Cibernética">Cyber Liability</h3>
+    <p data-en="Protection against data breaches and cyber attacks."
+       data-es="Protección contra violaciones de datos y ciberataques.">
+      Protection against data breaches and cyber attacks.
+    </p>
+    <a href="application-cyber.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Surety -->
+  <div class="app-item application-card" data-category="Commercial" data-type="surety">
+    <div class="icon-circle">
+      <img src="Icons/icon-surety-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Surety Bonds" data-es="Fianzas">Surety Bonds</h3>
+    <p data-en="Bond solutions for contractors and businesses."
+       data-es="Soluciones de fianzas para contratistas y negocios.">
+      Bond solutions for contractors and businesses.
+    </p>
+    <a href="application-surety.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+</div>
+<!-- ============================
        PERSONAL APPLICATIONS
-  ============================= -->
-  <h3 class="app-group-title" data-en="Personal Applications" data-es="Solicitudes Personales">
-    Personal Applications
-  </h3>
+============================= -->
+<h3 class="app-group-title" data-en="Personal Applications" data-es="Solicitudes Personales">
+  Personal Applications
+</h3>
 
-  <div class="application-grid">
+<div class="application-grid">
 
-    <!-- Auto -->
-    <div class="app-item application-card" data-category="Personal" data-type="auto">
-      <div class="icon-circle">
-        <img src="Icons/icon-auto-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</h3>
-      <p data-en="Coverage for your vehicle and liability protection."
-         data-es="Cobertura para su vehículo y protección de responsabilidad.">
-        Coverage for your vehicle and liability protection.
-      </p>
-      <a href="application-auto.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  <!-- Auto -->
+  <div class="app-item application-card" data-category="Personal" data-type="auto">
+    <div class="icon-circle">
+      <img src="Icons/icon-auto-aces.png" class="application-icon">
     </div>
-
-    <!-- Homeowners -->
-    <div class="app-item application-card" data-category="Personal" data-type="homeowners">
-      <div class="icon-circle">
-        <img src="Icons/icon-property-ace.png" class="application-icon">
-      </div>
-      <h3 data-en="Homeowners Insurance" data-es="Seguro de Hogar">Homeowners Insurance</h3>
-      <p data-en="Protect your home and possessions with comprehensive coverage."
-         data-es="Proteja su hogar y pertenencias con cobertura integral.">
-        Protect your home and possessions with comprehensive coverage.
-      </p>
-      <a href="application-homeowners.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Renters -->
-    <div class="app-item application-card" data-category="Personal" data-type="renters">
-      <div class="icon-circle">
-        <img src="Icons/icon-renters-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Renters Insurance" data-es="Seguro de Inquilinos">Renters Insurance</h3>
-      <p data-en="Affordable coverage for renters and their belongings."
-         data-es="Cobertura asequible para inquilinos y sus pertenencias.">
-        Affordable coverage for renters and their belongings.
-      </p>
-      <a href="application-renters.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Umbrella -->
-    <div class="app-item application-card" data-category="Personal" data-type="umbrella">
-      <div class="icon-circle">
-        <img src="Icons/icon-umbrella-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Umbrella Insurance" data-es="Seguro Paraguas">Umbrella Insurance</h3>
-      <p data-en="Extra liability coverage beyond your standard policies."
-         data-es="Cobertura de responsabilidad adicional más allá de sus pólizas estándar.">
-        Extra liability coverage beyond your standard policies.
-      </p>
-      <a href="application-umbrella.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Motorcycle -->
-    <div class="app-item application-card" data-category="Personal" data-type="motorcycle">
-      <div class="icon-circle">
-        <img src="Icons/icon-motorcycle-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Motorcycle Insurance" data-es="Seguro de Motocicleta">Motorcycle Insurance</h3>
-      <p data-en="Coverage tailored for motorcycles and riders."
-         data-es="Cobertura diseñada para motocicletas y motociclistas.">
-        Coverage tailored for motorcycles and riders.
-      </p>
-      <a href="application-motorcycle.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Boat -->
-    <div class="app-item application-card" data-category="Personal" data-type="boat">
-      <div class="icon-circle">
-        <img src="Icons/icon-boat-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Boat Insurance" data-es="Seguro de Bote">Boat Insurance</h3>
-      <p data-en="Protection for your boat and on-the-water liability."
-         data-es="Protección para su bote y responsabilidad en el agua.">
-        Protection for your boat and on-the-water liability.
-      </p>
-      <a href="application-boat.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- RV -->
-    <div class="app-item application-card" data-category="Personal" data-type="rv">
-      <div class="icon-circle">
-        <img src="Icons/icon-rv-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="RV & Travel Trailer" data-es="Seguro de RV y Remolque">RV & Travel Trailer</h3>
-      <p data-en="Coverage for motorhomes and travel trailers."
-         data-es="Cobertura para casas rodantes y remolques de viaje.">
-        Coverage for motorhomes and travel trailers.
-      </p>
-      <a href="application-rv.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Condo -->
-    <div class="app-item application-card" data-category="Personal" data-type="condo">
-      <div class="icon-circle">
-        <img src="Icons/icon-condo-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Condo Insurance" data-es="Seguro de Condominio">Condo Insurance</h3>
-      <p data-en="Coverage for your condo unit and personal property."
-         data-es="Cobertura para su condominio y propiedad personal.">
-        Coverage for your condo unit and personal property.
-      </p>
-      <a href="application-condo.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- Flood -->
-    <div class="app-item application-card" data-category="Personal" data-type="flood">
-      <div class="icon-circle">
-        <img src="Icons/icon-flood-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Flood Insurance" data-es="Seguro contra Inundaciones">Flood Insurance</h3>
-      <p data-en="Specialized coverage for flood-related damage."
-         data-es="Cobertura especializada para daños por inundaciones.">
-        Specialized coverage for flood-related damage.
-      </p>
-      <a href="application-flood.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
-    <!-- ATV -->
-    <div class="app-item application-card" data-category="Personal" data-type="atv">
-      <div class="icon-circle">
-        <img src="Icons/icon-atv-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="ATV & Off-Road" data-es="ATV y Vehículos Todo Terreno">ATV & Off-Road</h3>
-      <p data-en="Coverage for ATVs and off-road vehicles."
-         data-es="Cobertura para vehículos todo terreno y recreativos.">
-        Coverage for ATVs and off-road vehicles.
-      </p>
-      <a href="application-atv.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
-    </div>
-
+    <h3 data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</h3>
+    <p data-en="Coverage for your vehicle and liability protection."
+       data-es="Cobertura para su vehículo y protección de responsabilidad.">
+      Coverage for your vehicle and liability protection.
+    </p>
+    <a href="application-auto.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
   </div>
 
-  <!-- ============================
+  <!-- Homeowners -->
+  <div class="app-item application-card" data-category="Personal" data-type="homeowners">
+    <div class="icon-circle">
+      <img src="Icons/icon-property-ace.png" class="application-icon">
+    </div>
+    <h3 data-en="Homeowners Insurance" data-es="Seguro de Hogar">Homeowners Insurance</h3>
+    <p data-en="Protect your home and possessions with comprehensive coverage."
+       data-es="Proteja su hogar y pertenencias con cobertura integral.">
+      Protect your home and possessions with comprehensive coverage.
+    </p>
+    <a href="application-homeowners.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Renters -->
+  <div class="app-item application-card" data-category="Personal" data-type="renters">
+    <div class="icon-circle">
+      <img src="Icons/icon-renters-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Renters Insurance" data-es="Seguro de Inquilinos">Renters Insurance</h3>
+    <p data-en="Affordable coverage for renters and their belongings."
+       data-es="Cobertura asequible para inquilinos y sus pertenencias.">
+      Affordable coverage for renters and their belongings.
+    </p>
+    <a href="application-renters.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Umbrella -->
+  <div class="app-item application-card" data-category="Personal" data-type="umbrella">
+    <div class="icon-circle">
+      <img src="Icons/icon-umbrella-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Umbrella Insurance" data-es="Seguro Paraguas">Umbrella Insurance</h3>
+    <p data-en="Extra liability coverage beyond your standard policies."
+       data-es="Cobertura de responsabilidad adicional más allá de sus pólizas estándar.">
+      Extra liability coverage beyond your standard policies.
+    </p>
+    <a href="application-umbrella.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Motorcycle -->
+  <div class="app-item application-card" data-category="Personal" data-type="motorcycle">
+    <div class="icon-circle">
+      <img src="Icons/icon-motorcycle-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Motorcycle Insurance" data-es="Seguro de Motocicleta">Motorcycle Insurance</h3>
+    <p data-en="Coverage tailored for motorcycles and riders."
+       data-es="Cobertura diseñada para motocicletas y motociclistas.">
+      Coverage tailored for motorcycles and riders.
+    </p>
+    <a href="application-motorcycle.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Boat -->
+  <div class="app-item application-card" data-category="Personal" data-type="boat">
+    <div class="icon-circle">
+      <img src="Icons/icon-boat-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Boat Insurance" data-es="Seguro de Bote">Boat Insurance</h3>
+    <p data-en="Protection for your boat and on-the-water liability."
+       data-es="Protección para su bote y responsabilidad en el agua.">
+      Protection for your boat and on-the-water liability.
+    </p>
+    <a href="application-boat.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- RV -->
+  <div class="app-item application-card" data-category="Personal" data-type="rv">
+    <div class="icon-circle">
+      <img src="Icons/icon-rv-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="RV & Travel Trailer" data-es="Seguro de RV y Remolque">RV & Travel Trailer</h3>
+    <p data-en="Coverage for motorhomes and travel trailers."
+       data-es="Cobertura para casas rodantes y remolques de viaje.">
+      Coverage for motorhomes and travel trailers.
+    </p>
+    <a href="application-rv.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Condo -->
+  <div class="app-item application-card" data-category="Personal" data-type="condo">
+    <div class="icon-circle">
+      <img src="Icons/icon-condo-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Condo Insurance" data-es="Seguro de Condominio">Condo Insurance</h3>
+    <p data-en="Coverage for your condo unit and personal property."
+       data-es="Cobertura para su condominio y propiedad personal.">
+      Coverage for your condo unit and personal property.
+    </p>
+    <a href="application-condo.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- Flood -->
+  <div class="app-item application-card" data-category="Personal" data-type="flood">
+    <div class="icon-circle">
+      <img src="Icons/icon-flood-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="Flood Insurance" data-es="Seguro contra Inundaciones">Flood Insurance</h3>
+    <p data-en="Specialized coverage for flood-related damage."
+       data-es="Cobertura especializada para daños por inundaciones.">
+      Specialized coverage for flood-related damage.
+    </p>
+    <a href="application-flood.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+  <!-- ATV -->
+  <div class="app-item application-card" data-category="Personal" data-type="atv">
+    <div class="icon-circle">
+      <img src="Icons/icon-atv-aces.png" class="application-icon">
+    </div>
+    <h3 data-en="ATV & Off-Road" data-es="ATV y Vehículos Todo Terreno">ATV & Off-Road</h3>
+    <p data-en="Coverage for ATVs and off-road vehicles."
+       data-es="Cobertura para vehículos todo terreno y recreativos.">
+      Coverage for ATVs and off-road vehicles.
+    </p>
+    <a href="application-atv.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  </div>
+
+</div>
+<!-- ============================
        LIFE APPLICATIONS
-  ============================= -->
-  <h3 class="app-group-title" data-en="Life Applications" data-es="Solicitudes de Vida">
-    Life Applications
-  </h3>
+============================= -->
+<h3 class="app-group-title" data-en="Life Applications" data-es="Solicitudes de Vida">
+  Life Applications
+</h3>
 
-  <div class="application-grid">
+<div class="application-grid">
 
-    <!-- Life Insurance -->
-    <div class="app-item application-card" data-category="Life" data-type="life">
-      <div class="icon-circle">
-        <img src="Icons/icon-life-aces.png" class="application-icon">
-      </div>
-      <h3 data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</h3>
-      <p data-en="Flexible life insurance options to protect your family."
-         data-es="Opciones flexibles de seguro de vida para proteger a su familia.">
-        Flexible life insurance options to protect your family.
-      </p>
-      <a href="application-life.html" class="apply-button" data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
+  <!-- Life Insurance -->
+  <div class="app-item application-card" data-category="Life" data-type="life">
+    <div class="icon-circle">
+      <img src="Icons/icon-life-aces.png" class="application-icon">
     </div>
-
+    <h3 data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</h3>
+    <p data-en="Flexible life insurance options to protect your family."
+       data-es="Opciones flexibles de seguro de vida para proteger a su familia.">
+      Flexible life insurance options to protect your family.
+    </p>
+    <a href="application-life.html" class="apply-button"
+       data-en="Start Application" data-es="Comenzar Solicitud">Start Application</a>
   </div>
 
-   <!-- PRIVACY / CONSENT NOTE -->
-  <p class="legal-note"
-     data-en="By submitting an application, you agree to our Text Messaging Privacy Policy and authorize ACES Insurance Services to contact you regarding your quote."
-     data-es="Al enviar una solicitud, usted acepta nuestra Política de Privacidad de Mensajes de Texto y autoriza a ACES Insurance Services a comunicarse con usted sobre su cotización.">
-    By submitting an application, you agree to our Text Messaging Privacy Policy and authorize ACES Insurance Services to contact you regarding your quote.
-  </p>
+</div>
 
-</section>
+<!-- PRIVACY / CONSENT NOTE -->
+<p class="legal-note"
+   data-en="By submitting an application, you agree to our Text Messaging Privacy Policy and authorize ACES Insurance Services to contact you regarding your quote."
+   data-es="Al enviar una solicitud, usted acepta nuestra Política de Privacidad de Mensajes de Texto y autoriza a ACES Insurance Services a comunicarse con usted sobre su cotización.">
+  By submitting an application, you agree to our Text Messaging Privacy Policy and authorize ACES Insurance Services to contact you regarding your quote.
+</p>
 
-  <footer id="aces-footer"></footer>
+<footer id="aces-footer"></footer>
 
-  <!-- SLIDE-OUT QUOTE PANEL MUST BE AT PAGE ROOT -->
-  <div class="agent-panel">
-    <button class="close-panel" aria-label="Close">&times;</button>
-    <img class="panel-photo" src="" alt="Agent Photo">
-    <h2></h2>
-    <p class="panel-title"></p>
-    <p><strong>Phone:</strong> <span class="panel-phone"></span></p>
-    <p><strong>Email:</strong> <span class="panel-email"></span></p>
-    <a class="panel-call" href="#" data-en="Call Now" data-es="Llamar Ahora">Call Now</a>
-  </div>
+<!-- SLIDE-OUT AGENT PANEL -->
+<div class="agent-panel">
+  <button class="close-panel" aria-label="Close">&times;</button>
+  <img class="panel-photo" src="" alt="Agent Photo">
+  <h2></h2>
+  <p class="panel-title"></p>
+  <p><strong>Phone:</strong> <span class="panel-phone"></span></p>
+  <p><strong>Email:</strong> <span class="panel-email"></span></p>
+  <a class="panel-call" href="#" data-en="Call Now" data-es="Llamar Ahora">Call Now</a>
+</div>
 
 </body>
 </html>
