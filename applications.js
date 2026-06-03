@@ -3,6 +3,13 @@
    (Search, category filters, URL-based filtering, highlight, clear)
 ============================================================ */
 
+// Prevent running on pages without application cards
+if (!document.querySelector(".app-item")) {
+  console.log("Applications.js: No application cards found. Skipping filter logic.");
+  return;
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
   initApplicationFilters();
   initSearchFilter();
