@@ -229,43 +229,12 @@ function initAgentPanel() {
   });
 }
 
-
 /* ============================================================
-   SLIDE‑OUT QUOTE PANEL — OPEN/CLOSE + AUTO LANGUAGE APPLY
-============================================================ */
-function initQuotePanel() {
-
-  const openBtns = document.querySelectorAll("#openQuotePanel");
-  const closeBtn = document.getElementById("closeQuotePanel");
-  const savedLang = localStorage.getItem("acesLang") || "en";
-
-  if (openBtns.length) {
-    openBtns.forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.body.classList.add("quote-panel-open");
-
-        if (typeof applyLanguage === "function") {
-          applyLanguage(savedLang);
-        }
-      });
-    });
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      document.body.classList.remove("quote-panel-open");
-    });
-  }
-}
-
-/* ============================================================
-   HEADER SHADOW
+   HEADER SHADOW ON SCROLL
 ============================================================ */
 window.addEventListener("scroll", () => {
-
   const header = document.getElementById("aces-header");
-  if (!header) return;
-
-  header.classList.toggle("scrolled", window.scrollY > 20);
-
+  if (header) {
+    header.classList.toggle("scrolled", window.scrollY > 20);
+  }
 });
