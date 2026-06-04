@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Condo Insurance Application | ACES Insurance Services</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="global.js" defer></script>
+
+  <!-- GLOBAL FILES NOW ONE LEVEL UP -->
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../global.js" defer></script>
 </head>
 
 <body>
@@ -83,41 +85,20 @@
             </div>
           </div>
         </div>
+
         <!-- STEP 2 -->
         <div class="form-step" data-step="2">
           <h2>Property Details</h2>
           <p class="section-subtitle">Tell us about the condo you want to insure.</p>
 
           <div class="auto-grid-2">
-            <div class="auto-field">
-              <label>Condo Address</label>
-              <input name="condo_address" required />
-            </div>
+            <div class="auto-field"><label>Condo Address</label><input name="condo_address" required /></div>
+            <div class="auto-field"><label>City</label><input name="condo_city" required /></div>
+            <div class="auto-field"><label>State</label><input name="condo_state" value="TX" required /></div>
+            <div class="auto-field"><label>ZIP Code</label><input name="condo_zip" required /></div>
 
-            <div class="auto-field">
-              <label>City</label>
-              <input name="condo_city" required />
-            </div>
-
-            <div class="auto-field">
-              <label>State</label>
-              <input name="condo_state" value="TX" required />
-            </div>
-
-            <div class="auto-field">
-              <label>ZIP Code</label>
-              <input name="condo_zip" required />
-            </div>
-
-            <div class="auto-field">
-              <label>Year Built</label>
-              <input name="year_built" placeholder="Example: 2010" required />
-            </div>
-
-            <div class="auto-field">
-              <label>Square Footage</label>
-              <input name="square_feet" placeholder="Example: 1200" required />
-            </div>
+            <div class="auto-field"><label>Year Built</label><input name="year_built" placeholder="Example: 2010" required /></div>
+            <div class="auto-field"><label>Square Footage</label><input name="square_feet" placeholder="Example: 1200" required /></div>
 
             <div class="auto-field">
               <label>Is this your primary residence?</label>
@@ -129,10 +110,7 @@
               </select>
             </div>
 
-            <div class="auto-field">
-              <label>Floor Level</label>
-              <input name="floor_level" placeholder="Example: 3" />
-            </div>
+            <div class="auto-field"><label>Floor Level</label><input name="floor_level" placeholder="Example: 3" /></div>
 
             <div class="auto-field auto-field-full">
               <label>Additional Property Notes (optional)</label>
@@ -150,17 +128,139 @@
 
         <!-- STEP 3 -->
         <div class="form-step" data-step="3">
-          <h2>Coverage Options</h2>
-          <p class="section-subtitle">Choose the coverages you want quoted.</p>
+          <h2>Coverages</h2>
+          <p class="section-subtitle">Tell us about the coverage you need.</p>
 
           <div class="auto-grid-2">
+            <div class="auto-field"><label>Dwelling Coverage</label><input name="dwelling_coverage" required /></div>
+            <div class="auto-field"><label>Personal Property Coverage</label><input name="personal_property" required /></div>
+
             <div class="auto-field">
-              <label>Dwelling Coverage (HO-6)</label>
-              <input name="dwelling_limit" placeholder="Example: 50000" required />
+              <label>Liability Coverage</label>
+              <select name="liability_coverage" required>
+                <option value="">Select</option>
+                <option>$100,000</option>
+                <option>$300,000</option>
+                <option>$500,000</option>
+                <option>$1,000,000</option>
+              </select>
             </div>
 
             <div class="auto-field">
-              <label>Personal Property Limit</label>
+              <label>Loss of Use Coverage</label>
+              <select name="loss_of_use" required>
+                <option value="">Select</option>
+                <option>$5,000</option>
+                <option>$10,000</option>
+                <option>$20,000</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Coverage Notes (optional)</label>
+              <textarea name="coverage_notes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="form-step" data-step="4">
+          <h2>Features</h2>
+          <p class="section-subtitle">Tell us about the condo’s features and safety items.</p>
+
+          <div class="auto-grid-2">
+            <div class="auto-field">
+              <label>Security System</label>
+              <select name="security_system">
+                <option value="">Select</option>
+                <option>None</option>
+                <option>Monitored Alarm</option>
+                <option>Smart Home Security</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Fire Sprinklers</label>
+              <select name="fire_sprinklers">
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="auto-field">
+              <label>Fire Extinguishers</label>
+              <select name="fire_extinguishers">
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <div class="auto-field auto-field-full">
+              <label>Additional Feature Notes (optional)</label>
+              <textarea name="feature_notes" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="button" class="btn-primary" data-next-step>Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="form-step" data-step="5">
+          <h2>Review & Submit</h2>
+
+          <div class="review-section">
+            <div class="review-block"><h3>Applicant</h3><ul id="reviewApplicant"></ul></div>
+            <div class="review-block"><h3>Property</h3><ul id="reviewProperty"></ul></div>
+            <div class="review-block"><h3>Coverages</h3><ul id="reviewCoverages"></ul></div>
+            <div class="review-block"><h3>Features</h3><ul id="reviewFeatures"></ul></div>
+          </div>
+
+          <div class="upload-row">
+            <label>Upload Documents (optional)</label>
+            <input type="file" name="supporting_documents" />
+          </div>
+
+          <div class="consent-row">
+            <input type="checkbox" id="consentCheckbox" required />
+            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="submit" class="btn-primary">Submit Application</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<footer id="aces-footer"></footer>
+
+<!-- APPLICATION JS (same folder) -->
+<script src="application-condo.js"></script>
+
+</body>
+</html>
               <input name="personal_property_limit" placeholder="Example: 30000" required />
             </div>
 
