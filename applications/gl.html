@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>General Liability Application | ACES Insurance Services</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="global.js" defer></script>
+
+  <!-- GLOBAL FILES NOW ONE LEVEL UP -->
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../global.js" defer></script>
 </head>
 
 <body>
@@ -26,7 +28,6 @@
         Tell us about your business operations and liability needs. An ACES agent will review and follow up with tailored options.
       </p>
 
-      <!-- Wizard Steps -->
       <div class="auto-wizard-steps" id="glWizardSteps">
         <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
         <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Operations</div>
@@ -91,6 +92,7 @@
             </div>
           </div>
         </div>
+
         <!-- STEP 2 -->
         <div class="form-step" data-step="2">
           <h2>Operations & Coverage Options</h2>
@@ -98,7 +100,6 @@
 
           <div class="auto-grid-2">
 
-            <!-- OPERATIONS -->
             <div class="auto-field">
               <label>Annual Gross Revenue</label>
               <input name="annual_revenue" placeholder="Example: 250000" required />
@@ -134,7 +135,6 @@
               <textarea name="hazard_ops" rows="3"></textarea>
             </div>
 
-            <!-- COVERAGE OPTIONS -->
             <div class="auto-field">
               <label>Requested General Liability Limit</label>
               <select name="gl_limit" required>
@@ -185,19 +185,19 @@
             </div>
           </div>
         </div>
+
         <!-- STEP 3 -->
         <div class="form-step" data-step="3">
           <h2>Review & Submit</h2>
-          <p class="section-subtitle">Review your details below.</p>
 
           <div class="review-section">
             <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
             <div class="review-block"><h3>Operations</h3><ul id="reviewOperations"></ul></div>
-            <div class="review-block"><h3>Coverages</h3><ul id="reviewCoverages"></ul></div>
+            <div class="review-block"><h3>Coverage</h3><ul id="reviewCoverage"></ul></div>
           </div>
 
           <div class="upload-row">
-            <label>Upload Prior Policy, Contracts, or Documents (optional)</label>
+            <label>Upload Documents (optional)</label>
             <input type="file" name="supporting_documents" />
           </div>
 
@@ -213,6 +213,21 @@
             </div>
           </div>
         </div>
+
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<footer id="aces-footer"></footer>
+
+<!-- APPLICATION JS (same folder) -->
+<script src="application-gl.js"></script>
+
+</body>
+</html>
 
       </form>
 
