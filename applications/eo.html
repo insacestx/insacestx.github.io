@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Errors & Omissions Application | ACES Insurance Services</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="global.js" defer></script>
+
+  <!-- GLOBAL FILES NOW ONE LEVEL UP -->
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../global.js" defer></script>
 </head>
 
 <body>
@@ -199,7 +201,6 @@
         <!-- STEP 5 -->
         <div class="form-step" data-step="5">
           <h2>Review & Submit</h2>
-          <p class="section-subtitle">Review your details below.</p>
 
           <div class="review-section">
             <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
@@ -209,13 +210,37 @@
           </div>
 
           <div class="upload-row">
-            <label>Upload Contracts, Prior Policies, or Other Documents (optional)</label>
+            <label>Upload Documents (optional)</label>
             <input type="file" name="supporting_documents" />
           </div>
 
           <div class="consent-row">
             <input type="checkbox" id="consentCheckbox" required />
             <label for="consentCheckbox">I confirm the information provided is accurate.</label>
+          </div>
+
+          <div class="app-actions">
+            <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="submit" class="btn-primary">Submit Application</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<footer id="aces-footer"></footer>
+
+<!-- APPLICATION JS (same folder) -->
+<script src="application-eo.js"></script>
+
+</body>
+</html>
           </div>
 
           <div class="app-actions">
