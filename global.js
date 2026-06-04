@@ -136,6 +136,8 @@ function setActiveNav() {
   const path = window.location.pathname.split("/").pop() || "index.html";
   const links = document.querySelectorAll(".nav-links a, #mobile-menu a");
 
+  if (!links.length) return;
+
   links.forEach(link => {
     const file = link.getAttribute("href").split("/").pop();
     link.classList.toggle("active", file === path || (path === "" && file === "index.html"));
