@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RV Insurance Application | ACES Insurance Services</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="global.js" defer></script>
+
+  <!-- UPDATED PATHS -->
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../global.js" defer></script>
 </head>
 
 <body>
@@ -26,7 +28,6 @@
         Tell us about you and your RV. An ACES agent will review and follow up with tailored options.
       </p>
 
-      <!-- Wizard Steps -->
       <div class="auto-wizard-steps" id="rvWizardSteps">
         <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Personal & RV</div>
         <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Coverage</div>
@@ -52,7 +53,6 @@
 
           <div class="auto-grid-2">
 
-            <!-- PERSONAL -->
             <div class="auto-field"><label>First Name</label><input name="first_name" required /></div>
             <div class="auto-field"><label>Last Name</label><input name="last_name" required /></div>
 
@@ -64,7 +64,6 @@
             <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
             <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
 
-            <!-- RV DETAILS -->
             <div class="auto-field">
               <label>RV Type</label>
               <select name="rv_type" required>
@@ -112,6 +111,7 @@
             </div>
           </div>
         </div>
+
         <!-- STEP 2 -->
         <div class="form-step" data-step="2">
           <h2>Coverage Details</h2>
@@ -202,6 +202,7 @@
             </div>
           </div>
         </div>
+
         <!-- STEP 3 -->
         <div class="form-step" data-step="3">
           <h2>Review & Submit</h2>
@@ -240,6 +241,7 @@
 
 <footer id="aces-footer"></footer>
 
+<!-- APP-SPECIFIC JS -->
 <script src="application-rv.js"></script>
 
 </body>
