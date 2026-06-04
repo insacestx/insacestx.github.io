@@ -6,9 +6,10 @@
 // Prevent running on pages without application cards
 if (!document.querySelector(".app-item")) {
   console.log("Applications.js: No application cards found. Skipping filter logic.");
+  // Do NOT return inside DOMContentLoaded — return here stops the entire file safely
+  // and prevents errors on wizard pages.
   return;
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
   initApplicationFilters();
