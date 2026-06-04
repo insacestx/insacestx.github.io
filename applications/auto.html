@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Auto Insurance Application | ACES Insurance Services</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="global.js" defer></script>
+
+  <!-- GLOBAL FILES NOW ONE LEVEL UP -->
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../global.js" defer></script>
 </head>
 
 <body>
@@ -139,64 +141,73 @@
 
         <!-- STEP 5 -->
         <div class="form-step" data-step="5">
-          <h2>Coverage Preferences</h2>
-          <p class="section-subtitle">Tell us how you’d like to be protected.</p>
+          <h2>Coverage Options</h2>
+          <p class="section-subtitle">Tell us the coverage you want for your vehicles.</p>
 
           <div class="auto-grid-2">
-            <div class="auto-field"><label>Liability Limits</label>
-              <select name="liability_limits">
-                <option value="">Not sure / Recommend</option>
-                <option>30/60/25</option>
-                <option>50/100/50</option>
-                <option>100/300/100</option>
-                <option>250/500/100</option>
+            <div class="auto-field">
+              <label>Liability Coverage</label>
+              <select name="liability_coverage" required>
+                <option value="">Select</option>
+                <option>$30,000 / $60,000</option>
+                <option>$50,000 / $100,000</option>
+                <option>$100,000 / $300,000</option>
+                <option>$250,000 / $500,000</option>
               </select>
             </div>
 
-            <div class="auto-field"><label>Comp & Collision</label>
-              <select name="comp_collision">
-                <option value="">Not sure / Recommend</option>
-                <option value="full">Full Coverage</option>
-                <option value="liability_only">Liability Only</option>
+            <div class="auto-field">
+              <label>Property Damage</label>
+              <select name="property_damage" required>
+                <option value="">Select</option>
+                <option>$25,000</option>
+                <option>$50,000</option>
+                <option>$100,000</option>
               </select>
             </div>
 
-            <div class="auto-field"><label>Deductible</label>
-              <select name="deductible">
-                <option value="">Not sure / Recommend</option>
-                <option value="500">$500</option>
-                <option value="1000">$1,000</option>
+            <div class="auto-field">
+              <label>Collision Coverage</label>
+              <select name="collision">
+                <option value="">Select</option>
+                <option>Yes — $500 Deductible</option>
+                <option>Yes — $1,000 Deductible</option>
+                <option>No</option>
               </select>
             </div>
 
-            <div class="auto-field"><label>Rental Reimbursement</label>
-              <select name="rental">
-                <option value="">Not sure / Recommend</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+            <div class="auto-field">
+              <label>Comprehensive Coverage</label>
+              <select name="comprehensive">
+                <option value="">Select</option>
+                <option>Yes — $500 Deductible</option>
+                <option>Yes — $1,000 Deductible</option>
+                <option>No</option>
               </select>
             </div>
 
-            <div class="auto-field"><label>Roadside Assistance</label>
-              <select name="roadside">
-                <option value="">Not sure / Recommend</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
-            </div>
-
-            <div class="auto-field"><label>UM/UIM</label>
+            <div class="auto-field">
+              <label>Uninsured / Underinsured Motorist</label>
               <select name="um_uim">
-                <option value="">Not sure / Recommend</option>
-                <option value="match">Match Liability Limits</option>
-                <option value="reject">Reject UM/UIM</option>
+                <option value="">Select</option>
+                <option>$30,000 / $60,000</option>
+                <option>$50,000 / $100,000</option>
+                <option>$100,000 / $300,000</option>
+                <option>Reject Coverage</option>
               </select>
             </div>
-          </div>
 
-          <div class="auto-field" style="margin-top:1rem;">
-            <label>Anything else we should know?</label>
-            <textarea name="additional_notes" rows="3"></textarea>
+            <div class="auto-field">
+              <label>Medical Payments</label>
+              <select name="medical_payments">
+                <option value="">Select</option>
+                <option>$500</option>
+                <option>$1,000</option>
+                <option>$2,500</option>
+                <option>$5,000</option>
+                <option>Reject Coverage</option>
+              </select>
+            </div>
           </div>
 
           <div class="app-actions">
@@ -220,8 +231,8 @@
           </div>
 
           <div class="upload-row">
-            <label>Upload Declarations Page (optional)</label>
-            <input type="file" name="current_policy" />
+            <label>Upload Documents (optional)</label>
+            <input type="file" name="supporting_documents" />
           </div>
 
           <div class="consent-row">
@@ -246,7 +257,8 @@
 
 <footer id="aces-footer"></footer>
 
-<script src="application-auto.js"></script>
+<!-- APPLICATION JS (same folder) -->
+<script src="auto.js"></script>
 
 </body>
 </html>
