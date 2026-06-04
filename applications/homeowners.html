@@ -10,8 +10,9 @@
   Homeowners Insurance Application | ACES Insurance Services
 </title>
 
-<link rel="stylesheet" href="style.css">
-<script src="global.js" defer></script>
+<!-- CORRECT PATHS -->
+<link rel="stylesheet" href="../style.css">
+<script src="../global.js" defer></script>
 <script src="application-homeowners.js" defer></script>
 
 </head>
@@ -37,36 +38,16 @@
 
     <!-- PROGRESS STEPS -->
     <div class="ho-steps">
-      <div class="ho-step" data-step="1">
-        <span>1</span>
-        <p data-en="Property" data-es="Propiedad">Property</p>
-      </div>
-      <div class="ho-step" data-step="2">
-        <span>2</span>
-        <p data-en="Applicant" data-es="Solicitante">Applicant</p>
-      </div>
-      <div class="ho-step" data-step="3">
-        <span>3</span>
-        <p data-en="Coverage" data-es="Cobertura">Coverage</p>
-      </div>
-      <div class="ho-step" data-step="4">
-        <span>4</span>
-        <p data-en="Features" data-es="Características">Features</p>
-      </div>
-      <div class="ho-step" data-step="5">
-        <span>5</span>
-        <p data-en="Claims & Submit" data-es="Reclamos y Envío">Claims & Submit</p>
-      </div>
+      <div class="ho-step" data-step="1"><span>1</span><p data-en="Property" data-es="Propiedad">Property</p></div>
+      <div class="ho-step" data-step="2"><span>2</span><p data-en="Applicant" data-es="Solicitante">Applicant</p></div>
+      <div class="ho-step" data-step="3"><span>3</span><p data-en="Coverage" data-es="Cobertura">Coverage</p></div>
+      <div class="ho-step" data-step="4"><span>4</span><p data-en="Features" data-es="Características">Features</p></div>
+      <div class="ho-step" data-step="5"><span>5</span><p data-en="Claims & Submit" data-es="Reclamos y Envío">Claims & Submit</p></div>
     </div>
 
     <!-- FORM -->
-    <form id="hoAppForm"
-          class="ho-form"
-          method="POST"
-          action="https://formsubmit.co/office@insaces.com"
-          enctype="multipart/form-data">
+    <form id="hoAppForm" class="ho-form" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
 
-      <!-- FormSubmit basics -->
       <input type="hidden" name="_subject" value="New Homeowners Application - ACES">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
@@ -74,52 +55,26 @@
 
       <!-- STEP 1: PROPERTY -->
       <div class="ho-step-panel" data-step="1">
-        <h2 class="section-title"
-            data-en="Property Information"
-            data-es="Información de la Propiedad">
-          Property Information
-        </h2>
+        <h2 class="section-title" data-en="Property Information" data-es="Información de la Propiedad">Property Information</h2>
 
         <div class="ho-grid">
           <div class="ho-field ho-field-full">
-            <label data-en="Property Address" data-es="Dirección de la Propiedad">
-              Property Address
-            </label>
+            <label data-en="Property Address" data-es="Dirección de la Propiedad">Property Address</label>
             <input type="text" name="Property Address" required>
           </div>
 
           <div class="ho-field ho-field-full">
-            <label data-en="Mailing Address (if different)"
-                   data-es="Dirección Postal (si es diferente)">
-              Mailing Address (if different)
-            </label>
+            <label data-en="Mailing Address (if different)" data-es="Dirección Postal (si es diferente)">Mailing Address (if different)</label>
             <input type="text" name="Mailing Address">
           </div>
 
-          <div class="ho-field">
-            <label data-en="City" data-es="Ciudad">City</label>
-            <input type="text" name="City" required>
-          </div>
+          <div class="ho-field"><label data-en="City" data-es="Ciudad">City</label><input type="text" name="City" required></div>
+          <div class="ho-field"><label data-en="State" data-es="Estado">State</label><input type="text" name="State" value="TX" required></div>
+          <div class="ho-field"><label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label><input type="text" name="ZIP" required></div>
+          <div class="ho-field"><label data-en="County" data-es="Condado">County</label><input type="text" name="County"></div>
 
           <div class="ho-field">
-            <label data-en="State" data-es="Estado">State</label>
-            <input type="text" name="State" value="TX" required>
-          </div>
-
-          <div class="ho-field">
-            <label data-en="ZIP Code" data-es="Código Postal">ZIP Code</label>
-            <input type="text" name="ZIP" required>
-          </div>
-
-          <div class="ho-field">
-            <label data-en="County" data-es="Condado">County</label>
-            <input type="text" name="County">
-          </div>
-
-          <div class="ho-field">
-            <label data-en="Occupancy Type" data-es="Tipo de Ocupación">
-              Occupancy Type
-            </label>
+            <label data-en="Occupancy Type" data-es="Tipo de Ocupación">Occupancy Type</label>
             <select name="Occupancy Type">
               <option value="Primary Residence">Primary Residence</option>
               <option value="Secondary Home">Secondary Home</option>
@@ -128,84 +83,20 @@
             </select>
           </div>
 
-          <div class="ho-field">
-            <label data-en="Year Built" data-es="Año de Construcción">
-              Year Built
-            </label>
-            <input type="number" name="Year Built">
-          </div>
+          <div class="ho-field"><label data-en="Year Built" data-es="Año de Construcción">Year Built</label><input type="number" name="Year Built"></div>
+          <div class="ho-field"><label data-en="Square Footage" data-es="Metros Cuadrados">Square Footage</label><input type="number" name="Square Footage"></div>
+          <div class="ho-field"><label data-en="Number of Stories" data-es="Número de Pisos">Number of Stories</label><input type="number" name="Stories"></div>
+          <div class="ho-field"><label data-en="Roof Type" data-es="Tipo de Techo">Roof Type</label><input type="text" name="Roof Type"></div>
+          <div class="ho-field"><label data-en="Roof Age" data-es="Edad del Techo">Roof Age</label><input type="number" name="Roof Age"></div>
+          <div class="ho-field"><label data-en="Construction Type" data-es="Tipo de Construcción">Construction Type</label><input type="text" name="Construction Type"></div>
+          <div class="ho-field"><label data-en="Foundation Type" data-es="Tipo de Fundación">Foundation Type</label><input type="text" name="Foundation Type"></div>
+          <div class="ho-field"><label data-en="Heating/Cooling Type" data-es="Tipo de Calefacción/Aire">Heating/Cooling Type</label><input type="text" name="HVAC Type"></div>
 
-          <div class="ho-field">
-            <label data-en="Square Footage" data-es="Metros Cuadrados">
-              Square Footage
-            </label>
-            <input type="number" name="Square Footage">
-          </div>
-
-          <div class="ho-field">
-            <label data-en="Number of Stories" data-es="Número de Pisos">
-              Number of Stories
-            </label>
-            <input type="number" name="Stories">
-          </div>
-
-          <div class="ho-field">
-            <label data-en="Roof Type" data-es="Tipo de Techo">Roof Type</label>
-            <input type="text" name="Roof Type">
-          </div>
-
-          <div class="ho-field">
-            <label data-en="Roof Age" data-es="Edad del Techo">Roof Age</label>
-            <input type="number" name="Roof Age">
-          </div>
-
-          <div class="ho-field">
-            <label data-en="Construction Type" data-es="Tipo de Construcción">
-              Construction Type
-            </label>
-            <input type="text" name="Construction Type">
-          </div>
-
-          <div class="ho-field">
-            <label data-en="Foundation Type" data-es="Tipo de Fundación">
-              Foundation Type
-            </label>
-            <input type="text" name="Foundation Type">
-          </div>
-
-          <div class="ho-field">
-            <label data-en="Heating/Cooling Type"
-                   data-es="Tipo de Calefacción/Aire">
-              Heating/Cooling Type
-            </label>
-            <input type="text" name="HVAC Type">
-          </div>
-
-          <div class="ho-field">
-            <label data-en="Distance to Fire Hydrant"
-                   data-es="Distancia a Hidrante">
-              Distance to Fire Hydrant
-            </label>
-            <input type="text" name="Distance to Hydrant">
-          </div>
-
-          <div class="ho-field">
-            <label data-en="Distance to Fire Station"
-                   data-es="Distancia a Estación de Bomberos">
-              Distance to Fire Station
-            </label>
-            <input type="text" name="Distance to Fire Station">
-          </div>
-
-          <div class="ho-field">
-            <label data-en="Fire Protection Class"
-                   data-es="Clase de Protección Contra Incendios">
-              Fire Protection Class
-            </label>
-            <input type="text" name="Fire Protection Class">
-          </div>
+          <div class="ho-field"><label data-en="Distance to Fire Hydrant" data-es="Distancia a Hidrante">Distance to Fire Hydrant</label><input type="text" name="Distance to Hydrant"></div>
+          <div class="ho-field"><label data-en="Distance to Fire Station" data-es="Distancia a Estación de Bomberos">Distance to Fire Station</label><input type="text" name="Distance to Fire Station"></div>
         </div>
       </div>
+            
       <!-- STEP 2: APPLICANT -->
       <div class="ho-step-panel" data-step="2">
         <h2 class="section-title"
