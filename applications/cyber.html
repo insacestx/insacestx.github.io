@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cyber Liability Application | ACES Insurance Services</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="global.js" defer></script>
+
+  <!-- GLOBAL FILES NOW ONE LEVEL UP -->
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../global.js" defer></script>
 </head>
 
 <body>
@@ -89,6 +91,7 @@
             </div>
           </div>
         </div>
+
         <!-- STEP 2 -->
         <div class="form-step" data-step="2">
           <h2>Cyber Controls & Coverage Options</h2>
@@ -215,19 +218,19 @@
             </div>
           </div>
         </div>
+
         <!-- STEP 3 -->
         <div class="form-step" data-step="3">
           <h2>Review & Submit</h2>
-          <p class="section-subtitle">Review your details below.</p>
 
           <div class="review-section">
             <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
             <div class="review-block"><h3>Cyber Controls</h3><ul id="reviewControls"></ul></div>
-            <div class="review-block"><h3>Coverages</h3><ul id="reviewCoverages"></ul></div>
+            <div class="review-block"><h3>Coverage</h3><ul id="reviewCoverage"></ul></div>
           </div>
 
           <div class="upload-row">
-            <label>Upload Prior Policy, Security Reports, or Documents (optional)</label>
+            <label>Upload Documents (optional)</label>
             <input type="file" name="supporting_documents" />
           </div>
 
@@ -238,6 +241,26 @@
 
           <div class="app-actions">
             <button type="button" class="btn-secondary" data-prev-step>Back</button>
+            <div class="app-actions-right">
+              <button type="submit" class="btn-primary">Submit Application</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<footer id="aces-footer"></footer>
+
+<!-- APPLICATION JS (same folder) -->
+<script src="application-cyber.js"></script>
+
+</body>
+</html>
             <div class="app-actions-right">
               <button type="submit" class="btn-primary">Submit Application</button>
             </div>
