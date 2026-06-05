@@ -209,6 +209,9 @@
     </button>
   </div>
 
+<!-- APPLICATION GRID -->
+<div class="application-grid fade-in">
+  
   <!-- ============================
        COMMERCIAL APPLICATIONS
   ============================= -->
@@ -516,19 +519,75 @@
   By submitting an application, you agree to our Text Messaging Privacy Policy and authorize ACES Insurance Services to contact you regarding your quote.
 </p>
 
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const cards = document.querySelectorAll(".app-item");
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const searchInput = document.getElementById("appSearch");
+  const clearBtn = document.getElementById("clearFiltersBtn");
+
+  /* ============================
+       CATEGORY FILTERING
+  ============================= */
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+
+      // Remove active state from all buttons
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const filter = btn.getAttribute("data-filter");
+
+      cards.forEach(card => {
+        const category = card.getAttribute("data-category");
+
+        if (filter === "all" || category === filter) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    });
+  });
+
+  /* ============================
+       SEARCH FILTER
+  ============================= */
+  searchInput.addEventListener("input", () => {
+    const term = searchInput.value.toLowerCase();
+
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+
+      if (text.includes(term)) {
+        card.classList.remove("hidden");
+      } else {
+        card.classList.add("hidden");
+      }
+    });
+  });
+
+  /* ============================
+       CLEAR FILTERS
+  ============================= */
+  clearBtn.addEventListener("click", () => {
+    searchInput.value = "";
+
+    // Reset all cards
+    cards.forEach(card => card.classList.remove("hidden"));
+
+    // Reset filter buttons
+    filterButtons.forEach(b => b.classList.remove("active"));
+    document.querySelector('[data-filter="all"]').classList.add("active");
+  });
+
+});
+</script>
+
+  
 <!-- FOOTER -->
 <footer id="aces-footer"></footer>
-
-<!-- SLIDE-OUT AGENT PANEL -->
-<div class="agent-panel">
-  <button class="close-panel" aria-label="Close">&times;</button>
-  <img class="panel-photo" src="" alt="Agent Photo">
-  <h2></h2>
-  <p class="panel-title"></p>
-  <p><strong>Phone:</strong> <span class="panel-phone"></span></p>
-  <p><strong>Email:</strong> <span class="panel-email"></span></p>
-  <a class="panel-call" href="#" data-en="Call Now" data-es="Llamar Ahora">Call Now</a>
-</div>
 
 </body>
 </html>
