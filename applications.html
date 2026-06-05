@@ -18,6 +18,31 @@
 
   <!-- APPLICATIONS PAGE — UNIQUE INLINE STYLES ONLY -->
   <style>
+   
+    .application-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: center;   /* centers cards inside grid cells */
+}
+
+    
+    /* KEEP ALL APPLICATION CARDS CARD-SHAPED */
+    .application-card {
+    max-width: 340px;      /* prevents stretching */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    /* CATEGORY TITLES */
+.app-category-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 40px 0 20px;
+  color: #b00000;
+}
 
     /* ICON CIRCLE — UNIQUE TO APPLICATIONS PAGE */
     .icon-circle {
@@ -215,9 +240,12 @@
   <!-- ============================
        COMMERCIAL APPLICATIONS
   ============================= -->
-  <h3 class="app-group-title" data-en="Commercial Applications" data-es="Solicitudes Comerciales">
-    Commercial Applications
-  </h3>
+  <h2 class="app-category-title"
+    data-en="Commercial Applications"
+    data-es="Solicitudes Comerciales">
+  Commercial Applications
+</h2>
+
 
   <div class="application-grid">
 
@@ -336,12 +364,15 @@
     </div>
 
   </div> <!-- END COMMERCIAL GRID -->
+  
 <!-- ============================
        PERSONAL APPLICATIONS
 ============================= -->
-<h3 class="app-group-title" data-en="Personal Applications" data-es="Solicitudes Personales">
+<h2 class="app-category-title"
+    data-en="Personal Applications"
+    data-es="Solicitudes Personales">
   Personal Applications
-</h3>
+</h2>
 
 <div class="application-grid">
 
@@ -489,9 +520,12 @@
 <!-- ============================
        LIFE APPLICATIONS
 ============================= -->
-<h3 class="app-group-title" data-en="Life Applications" data-es="Solicitudes de Vida">
+<h2 class="app-category-title"
+    data-en="Life Applications"
+    data-es="Solicitudes de Vida">
   Life Applications
-</h3>
+</h2>
+
 
 <div class="application-grid">
 
