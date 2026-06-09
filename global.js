@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
    HEADER INJECTION
 ============================================================ */
 function loadHeader() {
-
   const header = document.getElementById("aces-header");
   if (!header) return;
 
@@ -30,48 +29,45 @@ function loadHeader() {
 
       <!-- LOGO -->
       <div class="logo-area">
-        <a href="/insacestx.github.io/index.html" class="logo-link">
-          <img src="/insacestx.github.io/image2.png" alt="ACES Insurance Logo" class="aces-logo">
+        <a href="/index.html" class="logo-link">
+          <img src="/image2.png" alt="ACES Insurance Logo" class="aces-logo">
         </a>
       </div>
 
       <!-- DESKTOP NAV -->
       <nav class="nav-links">
-        <a href="/insacestx.github.io/index.html" data-en="Home" data-es="Inicio">Home</a>
-        <a href="/insacestx.github.io/services.html" data-en="Services" data-es="Servicios">Services</a>
-        <a href="/insacestx.github.io/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-        <a href="/insacestx.github.io/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-        <a href="/insacestx.github.io/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-        <a href="/insacestx.github.io/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
-        <a href="/insacestx.github.io/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+        <a href="/index.html" data-en="Home" data-es="Inicio">Home</a>
+        <a href="/services.html" data-en="Services" data-es="Servicios">Services</a>
+        <a href="/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+        <a href="/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+        <a href="/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+        <a href="/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
+        <a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
       </nav>
 
-      <!-- HEADER CONTROLS -->
+      <!-- CONTROLS -->
       <div class="header-controls">
         <button id="lang-toggle" class="lang-btn">EN / ES</button>
-        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+        <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
       </div>
 
     </div>
 
     <!-- MOBILE MENU -->
     <nav id="mobile-menu" class="mobile-menu">
-      <a href="/insacestx.github.io/index.html" data-en="Home" data-es="Inicio">Home</a>
-      <a href="/insacestx.github.io/services.html" data-en="Services" data-es="Servicios">Services</a>
-      <a href="/insacestx.github.io/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-      <a href="/insacestx.github.io/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-      <a href="/insacestx.github.io/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-      <a href="/insacestx.github.io/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
-      <a href="/insacestx.github.io/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+      <a href="/index.html" data-en="Home" data-es="Inicio">Home</a>
+      <a href="/services.html" data-en="Services" data-es="Servicios">Services</a>
+      <a href="/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+      <a href="/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+      <a href="/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+      <a href="/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
+      <a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
   `;
 
-  /* ATTACH LANGUAGE TOGGLE EVENT LISTENER */
   setTimeout(() => {
     const langToggle = document.getElementById("lang-toggle");
-    if (langToggle) {
-      langToggle.addEventListener("click", toggleLanguage);
-    }
+    if (langToggle) langToggle.addEventListener("click", toggleLanguage);
   }, 0);
 }
 
@@ -79,23 +75,16 @@ function loadHeader() {
    FOOTER INJECTION
 ============================================================ */
 function loadFooter() {
-
   const footer = document.getElementById("aces-footer");
   if (!footer) return;
 
-  fetch("/insacestx.github.io/footer.html")
-    .then(res => {
-      if (!res.ok) throw new Error(`Footer failed: ${res.status}`);
-      return res.text();
-    })
+  fetch("/footer.html")
+    .then(res => res.text())
     .then(html => {
       footer.innerHTML = html;
       applyLanguage(localStorage.getItem("acesLang") || "en");
     })
-    .catch(err => {
-      console.warn("Footer failed to load:", err);
-    });
-
+    .catch(err => console.warn("Footer load error:", err));
 }
 
 /* ============================================================
@@ -113,9 +102,7 @@ function toggleLanguage() {
 }
 
 function applyLanguage(lang) {
-
   const isEs = lang === "es";
-  document.documentElement.lang = isEs ? "es" : "en";
 
   document.querySelectorAll("[data-en]").forEach(el => {
     const en = el.getAttribute("data-en");
@@ -125,29 +112,22 @@ function applyLanguage(lang) {
 
   const langBtn = document.getElementById("lang-toggle");
   if (langBtn) langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
-
 }
 
 /* ============================================================
-   ACTIVE NAV LINK
+   ACTIVE NAV
 ============================================================ */
 function setActiveNav() {
-
   const path = window.location.pathname;
-  const links = document.querySelectorAll(".nav-links a, #mobile-menu a");
-
-  links.forEach(link => {
-    const href = link.getAttribute("href");
-    link.classList.toggle("active", path === href);
+  document.querySelectorAll(".nav-links a, #mobile-menu a").forEach(link => {
+    link.classList.toggle("active", link.getAttribute("href") === path);
   });
-
 }
 
 /* ============================================================
    MOBILE MENU
 ============================================================ */
 function initMobileMenu() {
-
   const btn = document.getElementById("mobile-menu-btn");
   const menu = document.getElementById("mobile-menu");
 
@@ -159,7 +139,7 @@ function initMobileMenu() {
   });
 
   document.addEventListener("click", e => {
-    if (menu.classList.contains("open") && !menu.contains(e.target) && !btn.contains(e.target)) {
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
       menu.classList.remove("open");
     }
   });
@@ -167,7 +147,6 @@ function initMobileMenu() {
   menu.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => menu.classList.remove("open"));
   });
-
 }
 
 /* ============================================================
