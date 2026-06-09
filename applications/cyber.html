@@ -2,284 +2,201 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cyber Liability Application | ACES Insurance Services</title>
 
-  <!-- CSS (Repo‑Prefixed) -->
-  <link rel="stylesheet" href="/insacestx.github.io/style.css">
-  <link rel="stylesheet" href="/insacestx.github.io/applications.css">
+  <!-- CORRECT CSS (Root‑Absolute) -->
+  <link rel="stylesheet" href="/style.css">
 
-  <!-- JS (Repo‑Prefixed) -->
-  <script src="/insacestx.github.io/global.js" defer></script>
+  <!-- CORRECT JS (Root‑Absolute) -->
+  <script src="/global.js" defer></script>
+  <script src="/applications/cyber.js" defer></script>
 </head>
 
 <body>
 
-<header id="aces-header"></header>
+  <!-- HEADER -->
+  <header id="aces-header"></header>
 
-<main class="fade-in">
+  <main class="fade-in">
 
-  <!-- HERO -->
-  <section class="auto-hero">
-    <div class="auto-hero-inner">
-      <h1 data-en="Cyber Liability Insurance Application" data-es="Solicitud de Seguro de Responsabilidad Cibernética">
-        Cyber Liability Insurance Application
-      </h1>
+    <!-- HERO -->
+    <section class="auto-hero">
+      <div class="auto-hero-inner">
 
-      <p data-en="Tell us about your business and cyber protection needs. An ACES agent will review and follow up with tailored options."
-         data-es="Cuéntenos sobre su negocio y sus necesidades de protección cibernética. Un agente de ACES revisará y le dará opciones personalizadas.">
-        Tell us about your business and cyber protection needs. An ACES agent will review and follow up with tailored options.
-      </p>
+        <h1 data-en="Cyber Liability Insurance Application"
+            data-es="Solicitud de Seguro de Responsabilidad Cibernética">
+          Cyber Liability Insurance Application
+        </h1>
 
-      <!-- Wizard Steps -->
-      <div class="auto-wizard-steps" id="cyberWizardSteps">
-        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
-        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Cyber Controls</div>
-        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Review</div>
+        <p data-en="Tell us about your business and cyber exposure. An ACES agent will review and follow up with tailored options."
+           data-es="Cuéntenos sobre su negocio y su exposición cibernética. Un agente de ACES revisará y le dará opciones personalizadas.">
+          Tell us about your business and cyber exposure. An ACES agent will review and follow up with tailored options.
+        </p>
+
+        <!-- Wizard Steps -->
+        <div class="auto-wizard-steps" id="cyberWizardSteps">
+          <div class="auto-wizard-step active" data-step="1">
+            <span class="step-index">1</span> Business Info
+          </div>
+          <div class="auto-wizard-step" data-step="2">
+            <span class="step-index">2</span> Cyber Controls
+          </div>
+          <div class="auto-wizard-step" data-step="3">
+            <span class="step-index">3</span> Coverages
+          </div>
+          <div class="auto-wizard-step" data-step="4">
+            <span class="step-index">4</span> Review
+          </div>
+        </div>
+
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FORM -->
-  <section class="auto-app-wrapper">
-    <div class="auto-app-card">
+    <!-- FORM -->
+    <section class="auto-app-wrapper">
+      <div class="auto-app-card">
 
-      <form id="cyberAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="New Cyber Liability Application - ACES" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="_honey" style="display:none" />
-        <input type="hidden" id="rrEmail" name="rrEmail" />
+        <form id="cyberAppForm"
+              method="POST"
+              action="https://formsubmit.co/office@insaces.com"
+              enctype="multipart/form-data">
 
-        <!-- STEP 1 -->
-        <div class="form-step active" data-step="1">
-          <h2>Business Information</h2>
-          <p class="section-subtitle">Tell us about your company.</p>
+          <input type="hidden" name="_subject" value="New Cyber Liability Application - ACES">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" id="rrEmail" name="rrEmail">
 
-          <div class="auto-grid-2">
-            <div class="auto-field"><label>Business Name</label><input name="business_name" required /></div>
-            <div class="auto-field"><label>DBA (if applicable)</label><input name="dba" /></div>
+          <!-- STEP 1 -->
+          <div class="form-step active" data-step="1">
+            <h2>Business Information</h2>
+            <p class="section-subtitle">Tell us about your business.</p>
 
-            <div class="auto-field">
-              <label>Business Type</label>
-              <select name="business_type" required>
-                <option value="">Select</option>
-                <option>LLC</option>
-                <option>Corporation</option>
-                <option>Sole Proprietor</option>
-                <option>Partnership</option>
-                <option>Non-Profit</option>
-              </select>
+            <div class="auto-grid-2">
+
+              <div class="auto-field">
+                <label>Business Name</label>
+                <input name="business_name" required>
+              </div>
+
+              <div class="auto-field">
+                <label>Industry</label>
+                <input name="industry" required>
+              </div>
+
+              <div class="auto-field">
+                <label>Number of Employees</label>
+                <input name="employees" type="number" required>
+              </div>
+
+              <div class="auto-field">
+                <label>Annual Revenue</label>
+                <input name="revenue" required>
+              </div>
+
+              <div class="auto-field">
+                <label>Contact Email</label>
+                <input name="email" type="email" required>
+              </div>
+
+              <div class="auto-field">
+                <label>Phone Number</label>
+                <input name="phone" required>
+              </div>
+
             </div>
+          </div>
 
-            <div class="auto-field"><label>EIN</label><input name="ein" /></div>
+          <!-- STEP 2 -->
+          <div class="form-step" data-step="2">
+            <h2>Cyber Controls</h2>
+            <p class="section-subtitle">Tell us about your cybersecurity practices.</p>
 
-            <div class="auto-field"><label>Business Phone</label><input name="business_phone" required /></div>
-            <div class="auto-field"><label>Business Email</label><input type="email" name="business_email" required /></div>
+            <div class="auto-grid-2">
 
-            <div class="auto-field auto-field-full"><label>Business Address</label><input name="business_address" required /></div>
-            <div class="auto-field"><label>City</label><input name="city" required /></div>
-            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
-            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+              <div class="auto-field">
+                <label>Do you use MFA (Multi‑Factor Authentication)?</label>
+                <select name="mfa">
+                  <option value="">Select</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
 
-            <div class="auto-field auto-field-full">
-              <label>Describe Your Business Operations</label>
-              <textarea name="business_description" rows="3" placeholder="Retail, office, tech company, healthcare, etc." required></textarea>
+              <div class="auto-field">
+                <label>Do you perform regular data backups?</label>
+                <select name="backups">
+                  <option value="">Select</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
+
+              <div class="auto-field">
+                <label>Do you have endpoint protection?</label>
+                <select name="endpoint_protection">
+                  <option value="">Select</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
+
+              <div class="auto-field">
+                <label>Do you train employees on cyber awareness?</label>
+                <select name="training">
+                  <option value="">Select</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
+
             </div>
           </div>
 
-          <div class="app-actions">
-            <div></div>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
+          <!-- STEP 3 -->
+          <div class="form-step" data-step="3">
+            <h2>Coverage Options</h2>
+            <p class="section-subtitle">Choose the coverage you want.</p>
+
+            <div class="auto-grid-2">
+
+              <div class="auto-field">
+                <label>Liability Limit</label>
+                <select name="liability_limit">
+                  <option value="250k">$250,000</option>
+                  <option value="500k">$500,000</option>
+                  <option value="1M">$1,000,000</option>
+                </select>
+              </div>
+
+              <div class="auto-field">
+                <label>Deductible</label>
+                <select name="deductible">
+                  <option value="2500">$2,500</option>
+                  <option value="5000">$5,000</option>
+                </select>
+              </div>
+
             </div>
           </div>
-        </div>
 
-        <!-- STEP 2 -->
-        <div class="form-step" data-step="2">
-          <h2>Cyber Controls & Coverage Options</h2>
-          <p class="section-subtitle">Tell us about your cybersecurity practices and the coverage you need.</p>
+          <!-- STEP 4 -->
+          <div class="form-step" data-step="4">
+            <h2>Review & Submit</h2>
+            <p class="section-subtitle">Review your information before submitting.</p>
 
-          <div class="auto-grid-2">
-
-            <!-- SECURITY CONTROLS -->
-            <div class="auto-field">
-              <label>Do you store customer or employee personal data?</label>
-              <select name="stores_personal_data" required>
-                <option value="">Select</option>
-                <option>Yes — Customer Data</option>
-                <option>Yes — Employee Data</option>
-                <option>Yes — Both</option>
-                <option>No</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Do you process credit card payments?</label>
-              <select name="credit_cards">
-                <option value="">Select</option>
-                <option>Yes — In Person</option>
-                <option>Yes — Online</option>
-                <option>Yes — Both</option>
-                <option>No</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Do you use Multi‑Factor Authentication (MFA)?</label>
-              <select name="mfa">
-                <option value="">Select</option>
-                <option>Yes — For All Users</option>
-                <option>Yes — For Admins Only</option>
-                <option>No</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Do you perform regular data backups?</label>
-              <select name="data_backups">
-                <option value="">Select</option>
-                <option>Yes — Daily</option>
-                <option>Yes — Weekly</option>
-                <option>Yes — Monthly</option>
-                <option>No</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Do you have antivirus or endpoint protection?</label>
-              <select name="endpoint_protection">
-                <option value="">Select</option>
-                <option>Yes — Managed Security</option>
-                <option>Yes — Basic Antivirus</option>
-                <option>No</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Have you had a cyber incident in the last 3 years?</label>
-              <select name="prior_incidents">
-                <option value="">Select</option>
-                <option>No</option>
-                <option>Yes — Data Breach</option>
-                <option>Yes — Ransomware</option>
-                <option>Yes — Other</option>
-              </select>
-            </div>
-
-            <div class="auto-field auto-field-full">
-              <label>If yes, briefly describe the incident (optional)</label>
-              <textarea name="incident_description" rows="3"></textarea>
-            </div>
-
-            <!-- COVERAGE OPTIONS -->
-            <div class="auto-field">
-              <label>Requested Cyber Liability Limit</label>
-              <select name="cyber_limit" required>
-                <option value="">Select</option>
-                <option>$100,000</option>
-                <option>$250,000</option>
-                <option>$500,000</option>
-                <option>$1,000,000</option>
-                <option>$2,000,000</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Requested Data Breach Response Limit</label>
-              <select name="breach_limit">
-                <option value="">Select</option>
-                <option>$50,000</option>
-                <option>$100,000</option>
-                <option>$250,000</option>
-                <option>$500,000</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Requested Cyber Crime / Fraud Limit</label>
-              <select name="cyber_crime_limit">
-                <option value="">Select</option>
-                <option>$25,000</option>
-                <option>$50,000</option>
-                <option>$100,000</option>
-                <option>$250,000</option>
-              </select>
-            </div>
-
-            <div class="auto-field auto-field-full">
-              <label>Additional Coverage Notes (optional)</label>
-              <textarea name="coverage_notes" rows="3"></textarea>
-            </div>
-
+            <button type="submit" class="apply-button">Submit Application</button>
           </div>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
-          </div>
-        </div>
+        </form>
 
-        <!-- STEP 3 -->
-        <div class="form-step" data-step="3">
-          <h2>Review & Submit</h2>
+      </div>
+    </section>
 
-          <div class="review-section">
-            <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
-            <div class="review-block"><h3>Cyber Controls</h3><ul id="reviewControls"></ul></div>
-            <div class="review-block"><h3>Coverage</h3><ul id="reviewCoverage"></ul></div>
-          </div>
+  </main>
 
-          <div class="upload-row">
-            <label>Upload Documents (optional)</label>
-            <input type="file" name="supporting_documents" />
-          </div>
-
-          <div class="consent-row">
-            <input type="checkbox" id="consentCheckbox" required />
-            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
-          </div>
-
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="submit" class="btn-primary">Submit Application</button>
-            </div>
-          </div>
-        </div>
-
-      </form>
-
-    </div>
-  </section>
-
-</main>
-
-<footer id="aces-footer"></footer>
-
-<!-- APPLICATION JS (same folder) -->
-<script src="application-cyber.js"></script>
-
-</body>
-</html>
-            <div class="app-actions-right">
-              <button type="submit" class="btn-primary">Submit Application</button>
-            </div>
-          </div>
-        </div>
-
-      </form>
-
-    </div>
-  </section>
-
-</main>
-
-<footer id="aces-footer"></footer>
-
-<script src="application-cyber.js"></script>
+  <!-- FOOTER -->
+  <footer id="aces-footer"></footer>
 
 </body>
 </html>
