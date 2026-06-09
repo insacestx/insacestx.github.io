@@ -37,13 +37,13 @@ function loadHeader() {
 
       <!-- DESKTOP NAV -->
       <nav class="nav-links">
-        <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-        <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
-        <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-        <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-        <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-        <a href="testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
-        <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+        <a href="/" data-en="Home" data-es="Inicio">Home</a>
+<a href="/services.html" data-en="Services" data-es="Servicios">Services</a>
+<a href="/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+<a href="/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+<a href="/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+<a href="/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
+<a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
       </nav>
 
       <!-- HEADER CONTROLS -->
@@ -56,15 +56,15 @@ function loadHeader() {
 
     <!-- MOBILE MENU -->
     <nav id="mobile-menu" class="mobile-menu">
-      <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-      <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
-      <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-      <a href="coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-      <a href="claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-      <a href="testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
-      <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+      <a href="/" data-en="Home" data-es="Inicio">Home</a>
+<a href="/services.html" data-en="Services" data-es="Servicios">Services</a>
+<a href="/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+<a href="/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+<a href="/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+<a href="/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
+<a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
-  `;
+  
 
   /* ATTACH LANGUAGE TOGGLE EVENT LISTENER */
   setTimeout(() => {
