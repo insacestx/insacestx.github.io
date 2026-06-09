@@ -2,268 +2,190 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Errors & Omissions Application | ACES Insurance Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Errors & Omissions (E&O) Application | ACES Insurance Services</title>
 
-  <!-- CSS (Repo‑Prefixed) -->
-  <link rel="stylesheet" href="/insacestx.github.io/style.css">
-  <link rel="stylesheet" href="/insacestx.github.io/applications.css">
+  <!-- CORRECT CSS (Root‑Absolute) -->
+  <link rel="stylesheet" href="/style.css">
 
-  <!-- JS (Repo‑Prefixed) -->
-  <script src="/insacestx.github.io/global.js" defer></script>
+  <!-- CORRECT JS (Root‑Absolute) -->
+  <script src="/global.js" defer></script>
+  <script src="/applications/eo.js" defer></script>
 </head>
 
 <body>
 
-<header id="aces-header"></header>
+  <!-- HEADER -->
+  <header id="aces-header"></header>
 
-<main class="fade-in">
+  <main class="fade-in">
 
-  <!-- HERO -->
-  <section class="auto-hero">
-    <div class="auto-hero-inner">
-      <h1 data-en="Errors & Omissions (E&O) Application" data-es="Solicitud de Errores y Omisiones (E&O)">
-        Errors & Omissions (E&O) Application
-      </h1>
+    <!-- HERO -->
+    <section class="auto-hero">
+      <div class="auto-hero-inner">
 
-      <p data-en="Tell us about your business and professional services. An ACES agent will review and follow up with tailored options."
-         data-es="Cuéntenos sobre su negocio y servicios profesionales. Un agente de ACES revisará y le dará opciones personalizadas.">
-        Tell us about your business and professional services. An ACES agent will review and follow up with tailored options.
-      </p>
+        <h1 data-en="Errors & Omissions (E&O) Insurance Application"
+            data-es="Solicitud de Seguro de Errores y Omisiones (E&O)">
+          Errors & Omissions (E&O) Insurance Application
+        </h1>
 
-      <div class="auto-wizard-steps" id="eoWizardSteps">
-        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
-        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Services</div>
-        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Claims</div>
-        <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span>Coverage</div>
-        <div class="auto-wizard-step" data-step="5"><span class="step-index">5</span>Review</div>
+        <p data-en="Tell us about your business and professional services. An ACES agent will review and follow up with tailored options."
+           data-es="Cuéntenos sobre su negocio y servicios profesionales. Un agente de ACES revisará y le dará opciones personalizadas.">
+          Tell us about your business and professional services. An ACES agent will review and follow up with tailored options.
+        </p>
+
+        <!-- Wizard Steps -->
+        <div class="auto-wizard-steps" id="eoWizardSteps">
+          <div class="auto-wizard-step active" data-step="1">
+            <span class="step-index">1</span> Business Info
+          </div>
+          <div class="auto-wizard-step" data-step="2">
+            <span class="step-index">2</span> Professional Services
+          </div>
+          <div class="auto-wizard-step" data-step="3">
+            <span class="step-index">3</span> Claims History
+          </div>
+          <div class="auto-wizard-step" data-step="4">
+            <span class="step-index">4</span> Coverage
+          </div>
+          <div class="auto-wizard-step" data-step="5">
+            <span class="step-index">5</span> Review
+          </div>
+        </div>
+
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FORM -->
-  <section class="auto-app-wrapper">
-    <div class="auto-app-card">
+    <!-- FORM -->
+    <section class="auto-app-wrapper">
+      <div class="auto-app-card">
 
-      <form id="eoAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="New E&O Application - ACES" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="_honey" style="display:none" />
-        <input type="hidden" id="rrEmail" name="rrEmail" />
+        <form id="eoAppForm"
+              method="POST"
+              action="https://formsubmit.co/office@insaces.com"
+              enctype="multipart/form-data">
 
-        <!-- STEP 1 -->
-        <div class="form-step active" data-step="1">
-          <h2>Business Information</h2>
-          <p class="section-subtitle">Tell us about your company.</p>
+          <input type="hidden" name="_subject" value="New E&O Application - ACES">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" id="rrEmail" name="rrEmail">
 
-          <div class="auto-grid-2">
-            <div class="auto-field"><label>Business Name</label><input name="business_name" required /></div>
-            <div class="auto-field"><label>DBA (if applicable)</label><input name="dba" /></div>
+          <!-- STEP 1 -->
+          <div class="form-step active" data-step="1">
+            <h2>Business Information</h2>
+            <p class="section-subtitle">Tell us about your business.</p>
 
-            <div class="auto-field">
-              <label>Business Type</label>
-              <select name="business_type" required>
-                <option value="">Select</option>
-                <option>LLC</option>
-                <option>Corporation</option>
-                <option>Sole Proprietor</option>
-                <option>Partnership</option>
-              </select>
-            </div>
+            <div class="auto-grid-2">
 
-            <div class="auto-field"><label>EIN</label><input name="ein" /></div>
+              <div class="auto-field">
+                <label>Business Name</label>
+                <input name="business_name" required>
+              </div>
 
-            <div class="auto-field"><label>Business Phone</label><input name="business_phone" required /></div>
-            <div class="auto-field"><label>Business Email</label><input type="email" name="business_email" required /></div>
+              <div class="auto-field">
+                <label>Owner / Principal</label>
+                <input name="owner_name" required>
+              </div>
 
-            <div class="auto-field auto-field-full"><label>Business Address</label><input name="business_address" required /></div>
-            <div class="auto-field"><label>City</label><input name="city" required /></div>
-            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
-            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+              <div class="auto-field">
+                <label>Industry</label>
+                <input name="industry" required>
+              </div>
 
-            <div class="auto-field auto-field-full">
-              <label>Describe Your Business</label>
-              <textarea name="business_description" rows="3" required></textarea>
-            </div>
-          </div>
+              <div class="auto-field">
+                <label>Years in Business</label>
+                <input name="years_in_business" required>
+              </div>
 
-          <div class="app-actions">
-            <div></div>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
-          </div>
-        </div>
+              <div class="auto-field">
+                <label>Email</label>
+                <input name="email" type="email" required>
+              </div>
 
-        <!-- STEP 2 -->
-        <div class="form-step" data-step="2">
-          <h2>Professional Services</h2>
-          <p class="section-subtitle">Tell us what services you provide.</p>
+              <div class="auto-field">
+                <label>Phone Number</label>
+                <input name="phone" required>
+              </div>
 
-          <div class="auto-grid-2">
-            <div class="auto-field auto-field-full">
-              <label>Primary Professional Services</label>
-              <textarea name="services_description" rows="3" placeholder="Consulting, IT services, real estate, legal, accounting, etc." required></textarea>
-            </div>
-
-            <div class="auto-field">
-              <label>Years Providing These Services</label>
-              <input name="years_in_services" required />
-            </div>
-
-            <div class="auto-field">
-              <label>Annual Gross Revenue</label>
-              <input name="annual_revenue" required />
-            </div>
-
-            <div class="auto-field auto-field-full">
-              <label>High-Risk Activities (if any)</label>
-              <textarea name="high_risk_activities" rows="3" placeholder="Any services that could create higher liability exposure."></textarea>
             </div>
           </div>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
-          </div>
-        </div>
+          <!-- STEP 2 -->
+          <div class="form-step" data-step="2">
+            <h2>Professional Services</h2>
+            <p class="section-subtitle">Tell us about the services you provide.</p>
 
-        <!-- STEP 3 -->
-        <div class="form-step" data-step="3">
-          <h2>Claims / Loss History</h2>
-          <p class="section-subtitle">Tell us about any prior or pending claims.</p>
+            <textarea name="services" rows="4" placeholder="Describe your professional services..." required></textarea>
 
-          <div class="auto-grid-2">
-            <div class="auto-field auto-field-full">
-              <label>Any E&O claims in the past 5 years?</label>
-              <select name="prior_claims">
-                <option value="">Select</option>
-                <option>No</option>
-                <option>Yes — Details Below</option>
-              </select>
-            </div>
+            <div class="auto-grid-2">
 
-            <div class="auto-field auto-field-full">
-              <label>Claim Details</label>
-              <textarea name="claim_details" rows="4" placeholder="Date, type of claim, amount paid or reserved, status, etc."></textarea>
+              <div class="auto-field">
+                <label>Percentage of Revenue from Consulting</label>
+                <input name="consulting_percent" type="number">
+              </div>
+
+              <div class="auto-field">
+                <label>Percentage of Revenue from Technical Services</label>
+                <input name="technical_percent" type="number">
+              </div>
+
             </div>
           </div>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
+          <!-- STEP 3 -->
+          <div class="form-step" data-step="3">
+            <h2>Claims History</h2>
+            <p class="section-subtitle">Tell us about any past E&O claims.</p>
+
+            <textarea name="claims_history" rows="4" placeholder="Describe any claims in the past 5 years..."></textarea>
           </div>
-        </div>
 
-        <!-- STEP 4 -->
-        <div class="form-step" data-step="4">
-          <h2>Coverage Options</h2>
-          <p class="section-subtitle">Tell us what coverage limits you’re looking for.</p>
+          <!-- STEP 4 -->
+          <div class="form-step" data-step="4">
+            <h2>Coverage Options</h2>
+            <p class="section-subtitle">Choose the coverage you want.</p>
 
-          <div class="auto-grid-2">
-            <div class="auto-field">
-              <label>Requested E&O Limit</label>
-              <select name="eo_limit" required>
-                <option value="">Select</option>
-                <option>$250,000</option>
-                <option>$500,000</option>
-                <option>$1,000,000</option>
-                <option>$2,000,000</option>
-              </select>
-            </div>
+            <div class="auto-grid-2">
 
-            <div class="auto-field">
-              <label>Requested Deductible</label>
-              <select name="deductible" required>
-                <option value="">Select</option>
-                <option>$1,000</option>
-                <option>$2,500</option>
-                <option>$5,000</option>
-                <option>$10,000</option>
-              </select>
-            </div>
+              <div class="auto-field">
+                <label>Liability Limit</label>
+                <select name="liability_limit">
+                  <option value="250k">$250,000</option>
+                  <option value="500k">$500,000</option>
+                  <option value="1M">$1,000,000</option>
+                  <option value="2M">$2,000,000</option>
+                </select>
+              </div>
 
-            <div class="auto-field auto-field-full">
-              <label>Additional Coverage Notes (optional)</label>
-              <textarea name="coverage_notes" rows="3"></textarea>
+              <div class="auto-field">
+                <label>Deductible</label>
+                <select name="deductible">
+                  <option value="1000">$1,000</option>
+                  <option value="2500">$2,500</option>
+                  <option value="5000">$5,000</option>
+                </select>
+              </div>
+
             </div>
           </div>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
-          </div>
-        </div>
+          <!-- STEP 5 -->
+          <div class="form-step" data-step="5">
+            <h2>Review & Submit</h2>
+            <p class="section-subtitle">Review your information before submitting.</p>
 
-        <!-- STEP 5 -->
-        <div class="form-step" data-step="5">
-          <h2>Review & Submit</h2>
-
-          <div class="review-section">
-            <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
-            <div class="review-block"><h3>Services</h3><ul id="reviewServices"></ul></div>
-            <div class="review-block"><h3>Claims</h3><ul id="reviewClaims"></ul></div>
-            <div class="review-block"><h3>Coverage</h3><ul id="reviewCoverage"></ul></div>
+            <button type="submit" class="apply-button">Submit Application</button>
           </div>
 
-          <div class="upload-row">
-            <label>Upload Documents (optional)</label>
-            <input type="file" name="supporting_documents" />
-          </div>
+        </form>
 
-          <div class="consent-row">
-            <input type="checkbox" id="consentCheckbox" required />
-            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
-          </div>
+      </div>
+    </section>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="submit" class="btn-primary">Submit Application</button>
-            </div>
-          </div>
-        </div>
+  </main>
 
-      </form>
-
-    </div>
-  </section>
-
-</main>
-
-<footer id="aces-footer"></footer>
-
-<!-- APPLICATION JS (same folder) -->
-<script src="application-eo.js"></script>
-
-</body>
-</html>
-          </div>
-
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="submit" class="btn-primary">Submit Application</button>
-            </div>
-          </div>
-        </div>
-
-      </form>
-
-    </div>
-  </section>
-
-</main>
-
-<footer id="aces-footer"></footer>
-
-<script src="application-eo.js"></script>
+  <!-- FOOTER -->
+  <footer id="aces-footer"></footer>
 
 </body>
 </html>
