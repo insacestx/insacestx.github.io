@@ -100,13 +100,15 @@ function highlightCard(type) {
 }
 
 /* ============================================================
-   SCROLL TO GRID
+   SCROLL TO GRID — FIXED FOR MULTIPLE GRIDS
 ============================================================ */
 
 function scrollToGrid() {
-  const grid = document.querySelector(".application-grid");
-  if (grid) {
-    grid.scrollIntoView({ behavior: "smooth", block: "start" });
+  const visibleGrid = [...document.querySelectorAll(".application-grid")]
+    .find(grid => grid.offsetParent !== null);
+
+  if (visibleGrid) {
+    visibleGrid.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
 
