@@ -3,484 +3,258 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applications | ACES Insurance Services</title>
 
-  <title data-en="Start an Application | ACES Insurance Services"
-          data-es="Comenzar una Solicitud | ACES Insurance Services">
-    Start an Application | ACES Insurance Services
-  </title>
+  <!-- GLOBAL STYLE -->
+  <link rel="stylesheet" href="/insacestx.github.io/style.css">
+  <link rel="stylesheet" href="/insacestx.github.io/applications.css">
 
-  <!-- GLOBAL STYLES -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- GLOBAL SCRIPTS -->
-  <script src="global.js" defer></script>
-  <script src="applications.js" defer></script>
-
-  <!-- APPLICATIONS PAGE — UNIQUE INLINE STYLES ONLY -->
-  <style>
-
-    /* GRID — KEEP EXACTLY AS YOU LIKE IT */
-    .application-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      justify-items: center;
-    }
-
-    /* KEEP ALL CARDS CARD-SHAPED (fixes Life card stretching) */
-    .application-card {
-      max-width: 340px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* CATEGORY TITLES — CENTERED */
-    .app-category-title {
-      text-align: center;
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin: 40px 0 20px;
-      color: #b00000;
-    }
-
-    /* ICON CIRCLE */
-    .icon-circle {
-      width: 90px;
-      height: 90px;
-      background: #f7f7f7;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 15px;
-    }
-
-    .application-icon {
-      width: 55px;
-      height: 55px;
-      object-fit: contain;
-    }
-
-    /* APPLICATION CARD */
-    .application-card {
-      background: rgba(255,255,255,0.95);
-      border-radius: 14px;
-      padding: 24px;
-      border: 1px solid rgba(212,0,0,0.12);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      animation: fadeIn 0.6s ease forwards;
-    }
-
-    .application-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(212,0,0,0.12);
-      border-color: rgba(212,0,0,0.35);
-    }
-
-    .application-card h3 {
-      margin: 12px 0 8px;
-      font-size: 1.1rem;
-      color: #b00000;
-      font-weight: 600;
-    }
-
-    .application-card p {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 16px;
-      flex-grow: 1;
-      line-height: 1.5;
-    }
-
-    /* APPLY BUTTON */
-    .apply-button {
-      display: inline-block;
-      padding: 10px 18px;
-      border-radius: 8px;
-      background: #d40000;
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: background 0.25s ease, transform 0.15s ease;
-    }
-
-    .apply-button:hover {
-      background: #ee0000;
-      transform: translateY(-2px);
-    }
-
-    /* FILTER VISIBILITY */
-    .app-item.hidden {
-      display: none !important;
-    }
-
-  </style>
+  <!-- GLOBAL SCRIPT  -->
+  <script src="/insacestx.github.io/global.js" defer></script>
+  <script src="/insacestx.github.io/applications.js" defer></script>
 </head>
 
 <body>
+
+  <!-- HEADER -->
   <header id="aces-header"></header>
 
-  <!-- PAGE TITLE -->
-  <section class="page-title fade-in">
-    <h1 data-en="Start an Application" data-es="Comenzar una Solicitud">
-      Start an Application
+  <main class="applications-page">
+
+    <h1 class="page-title"
+        data-en="Insurance Applications"
+        data-es="Solicitudes de Seguro">
+      Insurance Applications
     </h1>
-    <p data-en="Choose the type of insurance you need and begin your application."
-       data-es="Elija el tipo de seguro que necesita y comience su solicitud.">
-      Choose the type of insurance you need and begin your application.
-    </p>
-  </section>
 
-  <!-- QUICK QUOTE BOX -->
-  <div class="quick-quote-box fade-in">
-    <h3 data-en="Quick Insurance Quote" data-es="Cotización Rápida de Seguro">
-      Quick Insurance Quote
-    </h3>
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <input id="appSearch" type="text" placeholder="Search applications…">
 
-    <form action="https://formsubmit.co/office@insaces.com" method="POST" class="quick-quote-form">
-
-      <!-- Round Robin + CC + Redirect -->
-      <input type="hidden" name="_cc" value="office@insaces.com">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-      <input type="hidden" name="_subject" value="New Quick Quote Request">
-      <input type="hidden" id="rrEmail" name="rrEmail">
-
-      <input type="text" name="Full Name" placeholder="Full Name"
-             data-en="Full Name" data-es="Nombre Completo" required>
-
-      <input type="tel" name="Phone" placeholder="Phone Number"
-             data-en="Phone Number" data-es="Número de Teléfono" required>
-
-      <input type="email" name="Email" placeholder="Email Address"
-             data-en="Email Address" data-es="Correo Electrónico" required>
-
-      <select name="Insurance Type" required>
-        <option value="" disabled selected
-                data-en="Select Insurance Type"
-                data-es="Seleccione el Tipo de Seguro">
-          Select Insurance Type
-        </option>
-
-        <option data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</option>
-        <option data-en="Homeowners Insurance" data-es="Seguro de Hogar">Homeowners Insurance</option>
-        <option data-en="Renters Insurance" data-es="Seguro de Inquilinos">Renters Insurance</option>
-        <option data-en="Umbrella Insurance" data-es="Seguro Paraguas">Umbrella Insurance</option>
-        <option data-en="Motorcycle Insurance" data-es="Seguro de Motocicleta">Motorcycle Insurance</option>
-        <option data-en="Boat Insurance" data-es="Seguro de Bote">Boat Insurance</option>
-        <option data-en="RV & Travel Trailer" data-es="Seguro de RV y Remolque">RV & Travel Trailer</option>
-        <option data-en="Condo Insurance" data-es="Seguro de Condominio">Condo Insurance</option>
-        <option data-en="Flood Insurance" data-es="Seguro contra Inundaciones">Flood Insurance</option>
-        <option data-en="ATV & Off-Road" data-es="ATV y Vehículos Todo Terreno">ATV & Off-Road</option>
-        <option data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</option>
-        <option data-en="Commercial Auto" data-es="Auto Comercial">Commercial Auto</option>
-        <option data-en="General Liability" data-es="Responsabilidad Civil General">General Liability</option>
-        <option data-en="Workers Compensation" data-es="Compensación Laboral">Workers Compensation</option>
-        <option data-en="Business Owners Policy (BOP)" data-es="Póliza para Dueños de Negocios (BOP)">Business Owners Policy (BOP)</option>
-        <option data-en="Cyber Liability" data-es="Responsabilidad Cibernética">Cyber Liability</option>
-        <option data-en="Surety Bonds" data-es="Fianzas">Surety Bonds</option>
-      </select>
-
-      <!-- SMS OPT-IN -->
-      <div class="sms-optin">
-        <label class="sms-label">
-          <input type="checkbox" name="SMS Opt-In" required>
-          <span
-            data-en="By checking this box, I consent to receive SMS messages from ACES Insurance Services, including marketing promotions, updates, and informational texts. Message and data rates may apply. Message frequency may vary. You may text HELP for assistance or STOP to opt out at any time. Your phone number will be used solely for communication from ACES Insurance Services and will not be shared with third parties for marketing or promotional purposes."
-            data-es="Al marcar esta casilla, doy mi consentimiento para recibir mensajes SMS de ACES Insurance Services, incluidos promociones de marketing, actualizaciones y mensajes informativos. Pueden aplicarse tarifas de mensajes y datos. La frecuencia de mensajes puede variar. Puede enviar HELP para obtener ayuda o STOP para cancelar en cualquier momento. Su número de teléfono se utilizará únicamente para comunicación de ACES Insurance Services y no se compartirá con terceros para fines de marketing o promoción.">
-            By checking this box, I consent to receive SMS messages from ACES Insurance Services, including marketing promotions, updates, and informational texts. Message and data rates may apply. Message frequency may vary. You may text HELP for assistance or STOP to opt out at any time. Your phone number will be used solely for communication from ACES Insurance Services and will not be shared with third parties for marketing or promotional purposes.
-          </span>
-        </label>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Commercial">Commercial</button>
+        <button class="filter-btn" data-filter="Personal">Personal</button>
+        <button class="filter-btn" data-filter="Life">Life</button>
       </div>
 
-      <button type="submit" class="quote-submit-btn"
-              data-en="Get My Free Quote" data-es="Obtener Mi Cotización Gratis">
-        Get My Free Quote
-      </button>
-    </form>
-  </div>
-
-  <!-- FILTER + SEARCH BAR -->
-  <div class="application-filter-bar fade-in">
-    <input id="appSearch"
-           type="text"
-           placeholder="Search applications..."
-           data-en="Search applications..."
-           data-es="Buscar solicitudes...">
-
-    <div class="filter-buttons">
-      <button class="filter-btn active" data-filter="all" data-en="All" data-es="Todos">All</button>
-      <button class="filter-btn" data-filter="Commercial" data-en="Commercial" data-es="Comercial">Commercial</button>
-      <button class="filter-btn" data-filter="Personal" data-en="Personal" data-es="Personal">Personal</button>
-      <button class="filter-btn" data-filter="Life" data-en="Life" data-es="Vida">Life</button>
+      <button id="clearFiltersBtn" class="clear-filters">Clear</button>
     </div>
 
-    <button id="clearFiltersBtn"
-            class="filter-clear-btn"
-            data-en="Clear Filters"
-            data-es="Limpiar Filtros">
-      Clear Filters
-    </button>
-  </div>
+    <!-- ============================================================
+         COMMERCIAL APPLICATIONS
+    ============================================================ -->
+    <h2 class="app-category-title"
+        data-en="Commercial Applications"
+        data-es="Solicitudes Comerciales">
+      Commercial Applications
+    </h2>
 
-<!-- APPLICATION GRID -->
-<div class="application-grid fade-in">
-  
-<!-- ============================
-     COMMERCIAL APPLICATIONS
-============================= -->
-<h2 class="app-category-title"
-    data-en="Commercial Applications"
-    data-es="Solicitudes Comerciales">
-  Commercial Applications
-</h2>
+    <div class="application-grid">
 
-<div class="application-grid">
+      <div class="application-card app-item" data-category="Commercial">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-bop-aces.png" class="application-icon">
+        </div>
+        <h3>Business Owners Policy (BOP)</h3>
+        <p>Comprehensive coverage for small to medium-sized businesses.</p>
+        <a href="/insacestx.github.io/applications/bop.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Commercial">
-    <div class="icon-circle"><img src="Icons/icon-bop-aces.png" class="application-icon"></div>
-    <h3>Business Owners Policy (BOP)</h3>
-    <p>Comprehensive coverage for small to medium-sized businesses.</p>
-    <a href="applications/bop.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Commercial">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-gl-aces.png" class="application-icon">
+        </div>
+        <h3>General Liability</h3>
+        <p>Protection against third-party bodily injury and property damage.</p>
+        <a href="/insacestx.github.io/applications/gl.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Commercial">
-    <div class="icon-circle"><img src="Icons/icon-gl-aces.png" class="application-icon"></div>
-    <h3>General Liability</h3>
-    <p>Protection against third-party bodily injury and property damage.</p>
-    <a href="applications/gl.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Commercial">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-commauto-aces.png" class="application-icon">
+        </div>
+        <h3>Commercial Auto</h3>
+        <p>Coverage for vehicles used in business operations.</p>
+        <a href="/insacestx.github.io/applications/commercial-auto.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Commercial">
-    <div class="icon-circle"><img src="Icons/icon-commauto-aces.png" class="application-icon"></div>
-    <h3>Commercial Auto</h3>
-    <p>Coverage for vehicles used in business operations.</p>
-    <a href="applications/commercial-auto.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Commercial">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-commprop_aces.png" class="application-icon">
+        </div>
+        <h3>Commercial Property</h3>
+        <p>Protection for your business building, equipment, and inventory.</p>
+        <a href="/insacestx.github.io/applications/commercial-property.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Commercial">
-    <div class="icon-circle"><img src="Icons/icon-commprop_aces.png" class="application-icon"></div>
-    <h3>Commercial Property</h3>
-    <p>Protection for your business building, equipment, and inventory.</p>
-    <a href="applications/commercial-property.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Commercial">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-workerscomp-aces.png" class="application-icon">
+        </div>
+        <h3>Workers Compensation</h3>
+        <p>Coverage for employee injuries and illnesses.</p>
+        <a href="/insacestx.github.io/applications/workerscomp.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Commercial">
-    <div class="icon-circle"><img src="Icons/icon-workerscomp-aces.png" class="application-icon"></div>
-    <h3>Workers Compensation</h3>
-    <p>Statutory coverage for employee injuries and illnesses.</p>
-    <a href="applications/workerscomp.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Commercial">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-e&o-aces.png" class="application-icon">
+        </div>
+        <h3>Errors & Omissions</h3>
+        <p>Professional liability coverage for your business.</p>
+        <a href="/insacestx.github.io/applications/eo.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Commercial">
-    <div class="icon-circle"><img src="Icons/icon-e&o-aces.png" class="application-icon"></div>
-    <h3>Errors & Omissions</h3>
-    <p>Professional liability coverage for your business.</p>
-    <a href="applications/eo.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Commercial">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-cyber-aces.png" class="application-icon">
+        </div>
+        <h3>Cyber Liability</h3>
+        <p>Protection against data breaches and cyber attacks.</p>
+        <a href="/insacestx.github.io/applications/cyber.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Commercial">
-    <div class="icon-circle"><img src="Icons/icon-cyber-aces.png" class="application-icon"></div>
-    <h3>Cyber Liability</h3>
-    <p>Protection against data breaches and cyber attacks.</p>
-    <a href="applications/cyber.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Commercial">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-surety-aces.png" class="application-icon">
+        </div>
+        <h3>Surety Bonds</h3>
+        <p>Bond solutions for contractors and businesses.</p>
+        <a href="/insacestx.github.io/applications/surety.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Commercial">
-    <div class="icon-circle"><img src="Icons/icon-surety-aces.png" class="application-icon"></div>
-    <h3>Surety Bonds</h3>
-    <p>Bond solutions for contractors and businesses.</p>
-    <a href="applications/surety.html" class="apply-button">Start Application</a>
-  </div>
+    </div>
 
-</div>
+    <!-- ============================================================
+         PERSONAL APPLICATIONS
+    ============================================================ -->
+    <h2 class="app-category-title"
+        data-en="Personal Applications"
+        data-es="Solicitudes Personales">
+      Personal Applications
+    </h2>
 
+    <div class="application-grid">
 
-<!-- ============================
-     PERSONAL APPLICATIONS
-============================= -->
-<h2 class="app-category-title"
-    data-en="Personal Applications"
-    data-es="Solicitudes Personales">
-  Personal Applications
-</h2>
+      <div class="application-card app-item" data-category="Personal">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-auto-aces.png" class="application-icon">
+        </div>
+        <h3>Auto Insurance</h3>
+        <p>Coverage for your vehicle and liability protection.</p>
+        <a href="/insacestx.github.io/applications/auto.html" class="apply-button">Start Application</a>
+      </div>
 
-<div class="application-grid">
+      <div class="application-card app-item" data-category="Personal">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-property-aces.png" class="application-icon">
+        </div>
+        <h3>Homeowners Insurance</h3>
+        <p>Protect your home and possessions with comprehensive coverage.</p>
+        <a href="/insacestx.github.io/applications/homeowners.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Personal">
-    <div class="icon-circle"><img src="Icons/icon-auto-aces.png" class="application-icon"></div>
-    <h3>Auto Insurance</h3>
-    <p>Coverage for your vehicle and liability protection.</p>
-    <a href="applications/auto.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Personal">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-renters-aces.png" class="application-icon">
+        </div>
+        <h3>Renters Insurance</h3>
+        <p>Affordable coverage for renters and their belongings.</p>
+        <a href="/insacestx.github.io/applications/renters.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Personal">
-    <div class="icon-circle"><img src="Icons/icon-property-aces.png" class="application-icon"></div>
-    <h3>Homeowners Insurance</h3>
-    <p>Protect your home and possessions with comprehensive coverage.</p>
-    <a href="applications/homeowners.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Personal">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-umbrella-aces.png" class="application-icon">
+        </div>
+        <h3>Umbrella Insurance</h3>
+        <p>Extra liability protection beyond your standard policies.</p>
+        <a href="/insacestx.github.io/applications/umbrella.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Personal">
-    <div class="icon-circle"><img src="Icons/icon-renters-aces.png" class="application-icon"></div>
-    <h3>Renters Insurance</h3>
-    <p>Affordable coverage for renters and their belongings.</p>
-    <a href="applications/renters.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Personal">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-motorcycle-aces.png" class="application-icon">
+        </div>
+        <h3>Motorcycle Insurance</h3>
+        <p>Coverage for motorcycles and riders.</p>
+        <a href="/insacestx.github.io/applications/motorcycle.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Personal">
-    <div class="icon-circle"><img src="Icons/icon-umbrella-aces.png" class="application-icon"></div>
-    <h3>Umbrella Insurance</h3>
-    <p>Extra liability protection beyond your standard policies.</p>
-    <a href="applications/umbrella.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Personal">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-boat-aces.png" class="application-icon">
+        </div>
+        <h3>Boat Insurance</h3>
+        <p>Protection for boats and personal watercraft.</p>
+        <a href="/insacestx.github.io/applications/boat.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Personal">
-    <div class="icon-circle"><img src="Icons/icon-motorcycle-aces.png" class="application-icon"></div>
-    <h3>Motorcycle Insurance</h3>
-    <p>Coverage for motorcycles and riders.</p>
-    <a href="applications/motorcycle.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Personal">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-rv-aces.png" class="application-icon">
+        </div>
+        <h3>RV & Travel Trailer</h3>
+        <p>Coverage for recreational vehicles and travel trailers.</p>
+        <a href="/insacestx.github.io/applications/rv.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Personal">
-    <div class="icon-circle"><img src="Icons/icon-boat-aces.png" class="application-icon"></div>
-    <h3>Boat Insurance</h3>
-    <p>Protection for boats and personal watercraft.</p>
-    <a href="applications/boat.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Personal">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-condo-aces.png" class="application-icon">
+        </div>
+        <h3>Condo Insurance</h3>
+        <p>Protection for condo owners and their belongings.</p>
+        <a href="/insacestx.github.io/applications/condo.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Personal">
-    <div class="icon-circle"><img src="Icons/icon-rv-aces.png" class="application-icon"></div>
-    <h3>RV & Travel Trailer</h3>
-    <p>Coverage for recreational vehicles and travel trailers.</p>
-    <a href="applications/rv.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Personal">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-flood-aces.png" class="application-icon">
+        </div>
+        <h3>Flood Insurance</h3>
+        <p>Coverage for flood-related damage.</p>
+        <a href="/insacestx.github.io/applications/flood.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Personal">
-    <div class="icon-circle"><img src="Icons/icon-condo-aces.png" class="application-icon"></div>
-    <h3>Condo Insurance</h3>
-    <p>Protection for condo owners and their belongings.</p>
-    <a href="applications/condo.html" class="apply-button">Start Application</a>
-  </div>
+      <div class="application-card app-item" data-category="Personal">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-atv-aces.png" class="application-icon">
+        </div>
+        <h3>ATV & Off-Road</h3>
+        <p>Coverage for ATVs and off-road vehicles.</p>
+        <a href="/insacestx.github.io/applications/atv.html" class="apply-button">Start Application</a>
+      </div>
 
-  <div class="application-card app-item" data-category="Personal">
-    <div class="icon-circle"><img src="Icons/icon-flood-aces.png" class="application-icon"></div>
-    <h3>Flood Insurance</h3>
-    <p>Coverage for flood-related damage.</p>
-    <a href="applications/flood.html" class="apply-button">Start Application</a>
-  </div>
+    </div>
 
-  <div class="application-card app-item" data-category="Personal">
-    <div class="icon-circle"><img src="Icons/icon-atv-aces.png" class="application-icon"></div>
-    <h3>ATV & Off-Road</h3>
-    <p>Coverage for ATVs and off-road vehicles.</p>
-    <a href="applications/atv.html" class="apply-button">Start Application</a>
-  </div>
+    <!-- ============================================================
+         LIFE APPLICATIONS
+    ============================================================ -->
+    <h2 class="app-category-title"
+        data-en="Life Applications"
+        data-es="Solicitudes de Vida">
+      Life Applications
+    </h2>
 
-</div>
+    <div class="application-grid">
 
-<!-- ============================
-     LIFE APPLICATIONS
-============================= -->
-<h2 class="app-category-title"
-    data-en="Life Applications"
-    data-es="Solicitudes de Vida">
-  Life Applications
-</h2>
+      <div class="application-card app-item" data-category="Life">
+        <div class="icon-circle">
+          <img src="/insacestx.github.io/Icons/icon-life-aces.png" class="application-icon">
+        </div>
+        <h3>Life Insurance</h3>
+        <p>Protect your family with tailored life insurance options.</p>
+        <a href="/insacestx.github.io/applications/life.html" class="apply-button">Start Application</a>
+      </div>
 
-<div class="application-grid">
+    </div>
 
-  <div class="application-card app-item" data-category="Life">
-    <div class="icon-circle"><img src="Icons/icon-life-aces.png" class="application-icon"></div>
-    <h3>Life Insurance</h3>
-    <p>Protect your family with tailored life insurance options.</p>
-    <a href="applications/life.html" class="apply-button">Start Application</a>
-  </div>
+  </main>
 
-</div>
-
-
-<!-- PRIVACY / CONSENT NOTE -->
-<p class="legal-note"
-   data-en="By submitting an application, you agree to our Text Messaging Privacy Policy and authorize ACES Insurance Services to contact you regarding your quote."
-   data-es="Al enviar una solicitud, usted acepta nuestra Política de Privacidad de Mensajes de Texto y autoriza a ACES Insurance Services a comunicarse con usted sobre su cotización.">
-  By submitting an application, you agree to our Text Messaging Privacy Policy and authorize ACES Insurance Services to contact you regarding your quote.
-</p>
-
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const cards = document.querySelectorAll(".app-item");
-  const filterButtons = document.querySelectorAll(".filter-btn");
-  const searchInput = document.getElementById("appSearch");
-  const clearBtn = document.getElementById("clearFiltersBtn");
-
-  /* ============================
-       CATEGORY FILTERING
-  ============================= */
-  filterButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-
-      // Remove active state from all buttons
-      filterButtons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      const filter = btn.getAttribute("data-filter");
-
-      cards.forEach(card => {
-        const category = card.getAttribute("data-category");
-
-        if (filter === "all" || category === filter) {
-          card.classList.remove("hidden");
-        } else {
-          card.classList.add("hidden");
-        }
-      });
-    });
-  });
-
-  /* ============================
-       SEARCH FILTER
-  ============================= */
-  searchInput.addEventListener("input", () => {
-    const term = searchInput.value.toLowerCase();
-
-    cards.forEach(card => {
-      const text = card.innerText.toLowerCase();
-
-      if (text.includes(term)) {
-        card.classList.remove("hidden");
-      } else {
-        card.classList.add("hidden");
-      }
-    });
-  });
-
-  /* ============================
-       CLEAR FILTERS
-  ============================= */
-  clearBtn.addEventListener("click", () => {
-    searchInput.value = "";
-
-    // Reset all cards
-    cards.forEach(card => card.classList.remove("hidden"));
-
-    // Reset filter buttons
-    filterButtons.forEach(b => b.classList.remove("active"));
-    document.querySelector('[data-filter="all"]').classList.add("active");
-  });
-
-});
-</script>
-
-  
-<!-- FOOTER -->
-<footer id="aces-footer"></footer>
+  <!-- FOOTER -->
+  <footer id="aces-footer"></footer>
 
 </body>
 </html>
