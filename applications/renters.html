@@ -1,219 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Renters Insurance Application | ACES Insurance Services</title>
 
-  <!-- UPDATED PATHS -->
-  <link rel="stylesheet" href="../style.css" />
-  <script src="../global.js" defer></script>
+  <!-- CORRECT CSS (Root‑Absolute) -->
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- CORRECT JS (Root‑Absolute) -->
+  <script src="/global.js" defer></script>
+  <script src="/applications/renters.js" defer></script>
 </head>
 
 <body>
 
-<header id="aces-header"></header>
+  <!-- HEADER -->
+  <header id="aces-header"></header>
 
-<main class="fade-in">
+  <main class="fade-in">
 
-  <!-- HERO -->
-  <section class="auto-hero">
-    <div class="auto-hero-inner">
-      <h1 data-en="Renters Insurance Application" data-es="Solicitud de Seguro para Inquilinos">
-        Renters Insurance Application
-      </h1>
+    <!-- HERO -->
+    <section class="auto-hero">
+      <div class="auto-hero-inner">
 
-      <p data-en="Tell us about you and your rental property. An ACES agent will review and follow up with tailored options."
-         data-es="Cuéntenos sobre usted y su propiedad en alquiler. Un agente de ACES revisará y le dará opciones personalizadas.">
-        Tell us about you and your rental property. An ACES agent will review and follow up with tailored options.
-      </p>
+        <h1 data-en="Renters Insurance Application"
+            data-es="Solicitud de Seguro para Inquilinos">
+          Renters Insurance Application
+        </h1>
 
-      <div class="auto-wizard-steps" id="rentersWizardSteps">
-        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Personal & Property</div>
-        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Coverage</div>
-        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Review</div>
+        <p data-en="Tell us about your rental home and coverage needs. An ACES agent will review and follow up with tailored options."
+           data-es="Cuéntenos sobre su vivienda alquilada y sus necesidades de cobertura. Un agente de ACES revisará y le dará opciones personalizadas.">
+          Tell us about your rental home and coverage needs. An ACES agent will review and follow up with tailored options.
+        </p>
+
+        <!-- Wizard Steps -->
+        <div class="auto-wizard-steps" id="rentersWizardSteps">
+          <div class="auto-wizard-step active" data-step="1">
+            <span class="step-index">1</span> Applicant
+          </div>
+          <div class="auto-wizard-step" data-step="2">
+            <span class="step-index">2</span> Residence
+          </div>
+          <div class="auto-wizard-step" data-step="3">
+            <span class="step-index">3</span> Coverages
+          </div>
+          <div class="auto-wizard-step" data-step="4">
+            <span class="step-index">4</span> Review
+          </div>
+        </div>
+
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FORM -->
-  <section class="auto-app-wrapper">
-    <div class="auto-app-card">
+    <!-- FORM -->
+    <section class="auto-app-wrapper">
+      <div class="auto-app-card">
 
-      <form id="rentersAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="New Renters Insurance Application - ACES" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="_honey" style="display:none" />
-        <input type="hidden" id="rrEmail" name="rrEmail" />
+        <form id="rentersAppForm"
+              method="POST"
+              action="https://formsubmit.co/office@insaces.com"
+              enctype="multipart/form-data">
 
-        <!-- STEP 1 -->
-        <div class="form-step active" data-step="1">
-          <h2>Personal & Property Information</h2>
-          <p class="section-subtitle">Tell us about yourself and the rental property.</p>
+          <input type="hidden" name="_subject" value="New Renters Insurance Application - ACES">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" id="rrEmail" name="rrEmail">
 
-          <div class="auto-grid-2">
+          <!-- STEP 1 -->
+          <div class="form-step active" data-step="1">
+            <h2>Applicant Information</h2>
+            <p class="section-subtitle">Tell us about yourself.</p>
 
-            <div class="auto-field"><label>First Name</label><input name="first_name" required /></div>
-            <div class="auto-field"><label>Last Name</label><input name="last_name" required /></div>
+            <div class="auto-grid-2">
 
-            <div class="auto-field"><label>Phone Number</label><input name="phone" required /></div>
-            <div class="auto-field"><label>Email Address</label><input type="email" name="email" required /></div>
+              <div class="auto-field">
+                <label>Full Name</label>
+                <input name="full_name" required>
+              </div>
 
-            <div class="auto-field auto-field-full"><label>Rental Address</label><input name="rental_address" required /></div>
-            <div class="auto-field"><label>City</label><input name="city" required /></div>
-            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
-            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+              <div class="auto-field">
+                <label>Date of Birth</label>
+                <input type="date" name="dob" required>
+              </div>
 
-            <div class="auto-field">
-              <label>Type of Residence</label>
-              <select name="residence_type" required>
-                <option value="">Select</option>
-                <option>Apartment</option>
-                <option>Condo</option>
-                <option>Townhome</option>
-                <option>Single-Family Home</option>
-                <option>Duplex</option>
-              </select>
-            </div>
+              <div class="auto-field">
+                <label>Phone Number</label>
+                <input name="phone" required>
+              </div>
 
-            <div class="auto-field">
-              <label>Do you have roommates?</label>
-              <select name="roommates" required>
-                <option value="">Select</option>
-                <option>No</option>
-                <option>Yes — 1</option>
-                <option>Yes — 2+</option>
-              </select>
-            </div>
+              <div class="auto-field">
+                <label>Email Address</label>
+                <input type="email" name="email" required>
+              </div>
 
-            <div class="auto-field auto-field-full">
-              <label>Approximate Move‑In Date</label>
-              <input type="date" name="move_in" />
-            </div>
+              <div class="auto-field auto-field-full">
+                <label>Current Address</label>
+                <input name="current_address" required>
+              </div>
 
-          </div>
+              <div class="auto-field">
+                <label>City</label>
+                <input name="current_city" required>
+              </div>
 
-          <div class="app-actions">
-            <div></div>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
-            </div>
-          </div>
-        </div>
+              <div class="auto-field">
+                <label>State</label>
+                <input name="current_state" value="TX" required>
+              </div>
 
-        <!-- STEP 2 -->
-        <div class="form-step" data-step="2">
-          <h2>Coverage Details</h2>
-          <p class="section-subtitle">Tell us about the protection you need.</p>
+              <div class="auto-field">
+                <label>ZIP Code</label>
+                <input name="current_zip" required>
+              </div>
 
-          <div class="auto-grid-2">
-
-            <div class="auto-field">
-              <label>Personal Property Coverage Amount</label>
-              <select name="property_coverage" required>
-                <option value="">Select</option>
-                <option>$10,000</option>
-                <option>$20,000</option>
-                <option>$30,000</option>
-                <option>$40,000</option>
-                <option>$50,000</option>
-                <option>$75,000</option>
-                <option>$100,000+</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Liability Coverage Amount</label>
-              <select name="liability_coverage" required>
-                <option value="">Select</option>
-                <option>$100,000</option>
-                <option>$300,000</option>
-                <option>$500,000</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Deductible</label>
-              <select name="deductible" required>
-                <option value="">Select</option>
-                <option>$250</option>
-                <option>$500</option>
-                <option>$1,000</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Do you need coverage for high‑value items?</label>
-              <select name="high_value_items">
-                <option value="">Select</option>
-                <option>No</option>
-                <option>Yes — Jewelry</option>
-                <option>Yes — Electronics</option>
-                <option>Yes — Art/Collectibles</option>
-                <option>Yes — Multiple Categories</option>
-              </select>
-            </div>
-
-            <div class="auto-field auto-field-full">
-              <label>If yes, list items & estimated values (optional)</label>
-              <textarea name="item_list" rows="3"></textarea>
-            </div>
-
-            <div class="auto-field auto-field-full">
-              <label>Additional Notes (optional)</label>
-              <textarea name="coverage_notes" rows="3"></textarea>
-            </div>
-
-          </div>
-
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
             </div>
           </div>
-        </div>
 
-        <!-- STEP 3 -->
-        <div class="form-step" data-step="3">
-          <h2>Review & Submit</h2>
-          <p class="section-subtitle">Review your details below.</p>
+          <!-- STEP 2 -->
+          <div class="form-step" data-step="2">
+            <h2>Residence Information</h2>
+            <p class="section-subtitle">Tell us about the place you rent.</p>
 
-          <div class="review-section">
-            <div class="review-block"><h3>Personal</h3><ul id="reviewPersonal"></ul></div>
-            <div class="review-block"><h3>Property</h3><ul id="reviewProperty"></ul></div>
-            <div class="review-block"><h3>Coverage</h3><ul id="reviewCoverage"></ul></div>
-          </div>
+            <div class="auto-grid-2">
 
-          <div class="upload-row">
-            <label>Upload Documents (optional)</label>
-            <input type="file" name="supporting_documents" />
-          </div>
+              <div class="auto-field">
+                <label>Rental Address</label>
+                <input name="rental_address" required>
+              </div>
 
-          <div class="consent-row">
-            <input type="checkbox" id="consentCheckbox" required />
-            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
-          </div>
+              <div class="auto-field">
+                <label>City</label>
+                <input name="rental_city" required>
+              </div>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="submit" class="btn-primary">Submit Application</button>
+              <div class="auto-field">
+                <label>State</label>
+                <input name="rental_state" value="TX" required>
+              </div>
+
+              <div class="auto-field">
+                <label>ZIP Code</label>
+                <input name="rental_zip" required>
+              </div>
+
+              <div class="auto-field">
+                <label>Residence Type</label>
+                <select name="residence_type">
+                  <option value="">Select</option>
+                  <option>Apartment</option>
+                  <option>House</option>
+                  <option>Townhome</option>
+                </select>
+              </div>
+
+              <div class="auto-field">
+                <label>Year Built</label>
+                <input name="year_built">
+              </div>
+
             </div>
           </div>
-        </div>
 
-      </form>
+          <!-- STEP 3 -->
+          <div class="form-step" data-step="3">
+            <h2>Coverage Options</h2>
+            <p class="section-subtitle">Choose the coverage you want.</p>
 
-    </div>
-  </section>
+            <div class="auto-grid-2">
 
-</main>
+              <div class="auto-field">
+                <label>Personal Property Coverage</label>
+                <input name="personal_property" placeholder="e.g., 25000">
+              </div>
 
-<footer id="aces-footer"></footer>
+              <div class="auto-field">
+                <label>Liability Coverage</label>
+                <select name="liability">
+                  <option value="100k">$100,000</option>
+                  <option value="300k">$300,000</option>
+                </select>
+              </div>
 
-<!-- APP-SPECIFIC JS -->
-<script src="application-renters.js"></script>
+              <div class="auto-field">
+                <label>Deductible</label>
+                <select name="deductible">
+                  <option value="500">$500</option>
+                  <option value="1000">$1,000</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- STEP 4 -->
+          <div class="form-step" data-step="4">
+            <h2>Review & Submit</h2>
+            <p class="section-subtitle">Review your information before submitting.</p>
+
+            <button type="submit" class="apply-button">Submit Application</button>
+          </div>
+
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="aces-footer"></footer>
 
 </body>
 </html>
