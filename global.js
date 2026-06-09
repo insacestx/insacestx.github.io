@@ -1,4 +1,4 @@
-// ACES 2026 — global.js (Stable Build, No Modal)
+// ACES 2026 — global.js (Stable Build, Folder‑Safe, Repo‑Prefixed)
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setActiveNav();
     initMobileMenu();
     initAgentPanel();
-    initQuotePanel();   // ⭐ SLIDE‑OUT QUOTE PANEL
+    initQuotePanel();
   }, 0);
 
 });
@@ -30,20 +30,20 @@ function loadHeader() {
 
       <!-- LOGO -->
       <div class="logo-area">
-        <a href="index.html" class="logo-link">
-          <img src="image2.png" alt="ACES Insurance Logo" class="aces-logo">
+        <a href="/insacestx.github.io/index.html" class="logo-link">
+          <img src="/insacestx.github.io/image2.png" alt="ACES Insurance Logo" class="aces-logo">
         </a>
       </div>
 
       <!-- DESKTOP NAV -->
       <nav class="nav-links">
-        <a href="/" data-en="Home" data-es="Inicio">Home</a>
-<a href="/services.html" data-en="Services" data-es="Servicios">Services</a>
-<a href="/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-<a href="/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-<a href="/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-<a href="/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
-<a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+        <a href="/insacestx.github.io/index.html" data-en="Home" data-es="Inicio">Home</a>
+        <a href="/insacestx.github.io/services.html" data-en="Services" data-es="Servicios">Services</a>
+        <a href="/insacestx.github.io/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+        <a href="/insacestx.github.io/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+        <a href="/insacestx.github.io/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+        <a href="/insacestx.github.io/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
+        <a href="/insacestx.github.io/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
       </nav>
 
       <!-- HEADER CONTROLS -->
@@ -56,15 +56,15 @@ function loadHeader() {
 
     <!-- MOBILE MENU -->
     <nav id="mobile-menu" class="mobile-menu">
-      <a href="/" data-en="Home" data-es="Inicio">Home</a>
-<a href="/services.html" data-en="Services" data-es="Servicios">Services</a>
-<a href="/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-<a href="/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-<a href="/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-<a href="/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
-<a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+      <a href="/insacestx.github.io/index.html" data-en="Home" data-es="Inicio">Home</a>
+      <a href="/insacestx.github.io/services.html" data-en="Services" data-es="Servicios">Services</a>
+      <a href="/insacestx.github.io/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+      <a href="/insacestx.github.io/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+      <a href="/insacestx.github.io/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+      <a href="/insacestx.github.io/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
+      <a href="/insacestx.github.io/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
-  
+  `;
 
   /* ATTACH LANGUAGE TOGGLE EVENT LISTENER */
   setTimeout(() => {
@@ -83,7 +83,7 @@ function loadFooter() {
   const footer = document.getElementById("aces-footer");
   if (!footer) return;
 
-  fetch("footer.html")
+  fetch("/insacestx.github.io/footer.html")
     .then(res => {
       if (!res.ok) throw new Error(`Footer failed: ${res.status}`);
       return res.text();
@@ -133,14 +133,12 @@ function applyLanguage(lang) {
 ============================================================ */
 function setActiveNav() {
 
-  const path = window.location.pathname.split("/").pop() || "index.html";
+  const path = window.location.pathname;
   const links = document.querySelectorAll(".nav-links a, #mobile-menu a");
 
-  if (!links.length) return;
-
   links.forEach(link => {
-    const file = link.getAttribute("href").split("/").pop();
-    link.classList.toggle("active", file === path || (path === "" && file === "index.html"));
+    const href = link.getAttribute("href");
+    link.classList.toggle("active", path === href);
   });
 
 }
@@ -185,13 +183,12 @@ function initAgentPanel() {
   const nameEl = panel.querySelector("h2");
   const titleEl = panel.querySelector(".panel-title");
   const phoneEl = panel.querySelector(".panel-phone");
-  const emailEl = panel.querySelector(".panel-email");
+  const emailEl = panel.queryquerySelector(".panel-email");
   const callBtn = panel.querySelector(".panel-call");
   const closeBtn = panel.querySelector(".close-panel");
 
   if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) return;
 
-  // Handle clicks on agent cards
   cards.forEach(card => {
     card.addEventListener("click", () => {
       photo.src = card.dataset.photo || "";
@@ -204,25 +201,6 @@ function initAgentPanel() {
     });
   });
 
-  // Handle clicks on "More Info" buttons
-  const infoBtns = document.querySelectorAll(".agent-info-btn");
-  infoBtns.forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      const card = e.target.closest(".agent-card");
-      if (!card) return;
-
-      photo.src = card.dataset.photo || "";
-      nameEl.textContent = card.dataset.name || "";
-      titleEl.textContent = card.dataset.title || "";
-      phoneEl.textContent = card.dataset.phone || "";
-      emailEl.textContent = card.dataset.email || "";
-      callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
-      panel.classList.add("open");
-    });
-  });
-
-  // Close panel
   closeBtn.addEventListener("click", () => panel.classList.remove("open"));
   panel.addEventListener("click", e => {
     if (e.target === panel) panel.classList.remove("open");
