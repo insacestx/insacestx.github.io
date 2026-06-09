@@ -1,218 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BOP Application | ACES Insurance Services</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Owners Policy (BOP) Application | ACES Insurance Services</title>
 
-  <!-- CSS (Repo‑Prefixed) -->
-  <link rel="stylesheet" href="/insacestx.github.io/style.css">
-  <link rel="stylesheet" href="/insacestx.github.io/applications.css">
+  <!-- CORRECT CSS (Root‑Absolute) -->
+  <link rel="stylesheet" href="/style.css">
 
-  <!-- JS (Repo‑Prefixed) -->
-  <script src="/insacestx.github.io/global.js" defer></script>
+  <!-- CORRECT JS (Root‑Absolute) -->
+  <script src="/global.js" defer></script>
+  <script src="/applications/bop.js" defer></script>
 </head>
 
 <body>
 
-<header id="aces-header"></header>
+  <!-- HEADER -->
+  <header id="aces-header"></header>
 
-<main class="fade-in">
+  <main class="fade-in">
 
-  <section class="auto-hero">
-    <div class="auto-hero-inner">
-      <h1 data-en="Business Owners Policy (BOP) Application" data-es="Solicitud de Póliza para Dueños de Negocios (BOP)">
-        Business Owners Policy (BOP) Application
-      </h1>
+    <!-- HERO -->
+    <section class="auto-hero">
+      <div class="auto-hero-inner">
 
-      <p data-en="Tell us about your business, property, and liability needs. An ACES agent will follow up with tailored options."
-         data-es="Cuéntenos sobre su negocio, propiedad y necesidades de responsabilidad. Un agente de ACES le dará opciones personalizadas.">
-        Tell us about your business, property, and liability needs. An ACES agent will follow up with tailored options.
-      </p>
+        <h1 data-en="Business Owners Policy (BOP) Application"
+            data-es="Solicitud de Póliza para Dueños de Negocios (BOP)">
+          Business Owners Policy (BOP) Application
+        </h1>
 
-      <div class="auto-wizard-steps" id="bopWizardSteps">
-        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Business</div>
-        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Property</div>
-        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Liability</div>
-        <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span>Operations</div>
-        <div class="auto-wizard-step" data-step="5"><span class="step-index">5</span>Review</div>
+        <p data-en="Tell us about your business. An ACES agent will review and follow up with tailored options."
+           data-es="Cuéntenos sobre su negocio. Un agente de ACES revisará y le dará opciones personalizadas.">
+          Tell us about your business. An ACES agent will review and follow up with tailored options.
+        </p>
+
+        <!-- Wizard Steps -->
+        <div class="auto-wizard-steps" id="bopWizardSteps">
+          <div class="auto-wizard-step active" data-step="1">
+            <span class="step-index">1</span> Business Info
+          </div>
+          <div class="auto-wizard-step" data-step="2">
+            <span class="step-index">2</span> Property Info
+          </div>
+          <div class="auto-wizard-step" data-step="3">
+            <span class="step-index">3</span> Coverage
+          </div>
+          <div class="auto-wizard-step" data-step="4">
+            <span class="step-index">4</span> Review
+          </div>
+        </div>
+
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="auto-app-wrapper">
-    <div class="auto-app-card">
+    <!-- FORM -->
+    <section class="auto-app-wrapper">
+      <div class="auto-app-card">
 
-      <form id="bopAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="New BOP Application - ACES" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="_honey" style="display:none" />
-        <input type="hidden" id="rrEmail" name="rrEmail" />
+        <form id="bopAppForm"
+              method="POST"
+              action="https://formsubmit.co/office@insaces.com"
+              enctype="multipart/form-data">
 
-        <!-- STEP 1 -->
-        <div class="form-step active" data-step="1">
-          <h2>Business Information</h2>
-          <p class="section-subtitle">Tell us about your company.</p>
+          <input type="hidden" name="_subject" value="New BOP Application - ACES">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" id="rrEmail" name="rrEmail">
 
-          <div class="auto-grid-2">
-            <div class="auto-field"><label>Business Name</label><input name="business_name" required /></div>
-            <div class="auto-field"><label>DBA</label><input name="dba" /></div>
+          <!-- STEP 1 -->
+          <div class="form-step active" data-step="1">
+            <h2>Business Information</h2>
+            <p class="section-subtitle">Tell us about your business.</p>
 
-            <div class="auto-field">
-              <label>Business Type</label>
-              <select name="business_type" required>
-                <option value="">Select</option>
-                <option>LLC</option>
-                <option>Corporation</option>
-                <option>Sole Proprietor</option>
-                <option>Partnership</option>
-              </select>
-            </div>
+            <div class="auto-grid-2">
 
-            <div class="auto-field"><label>EIN</label><input name="ein" /></div>
+              <div class="auto-field">
+                <label>Business Name</label>
+                <input name="business_name" required>
+              </div>
 
-            <div class="auto-field"><label>Business Phone</label><input name="business_phone" required /></div>
-            <div class="auto-field"><label>Business Email</label><input type="email" name="business_email" required /></div>
+              <div class="auto-field">
+                <label>Owner Name</label>
+                <input name="owner_name" required>
+              </div>
 
-            <div class="auto-field auto-field-full"><label>Business Address</label><input name="business_address" required /></div>
-            <div class="auto-field"><label>City</label><input name="city" required /></div>
-            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
-            <div class="auto-field"><label>ZIP</label><input name="zip" required /></div>
+              <div class="auto-field">
+                <label>Email</label>
+                <input name="email" type="email" required>
+              </div>
 
-            <div class="auto-field auto-field-full">
-              <label>Business Description</label>
-              <textarea name="business_description" rows="3" required></textarea>
-            </div>
-          </div>
+              <div class="auto-field">
+                <label>Phone Number</label>
+                <input name="phone" required>
+              </div>
 
-          <div class="app-actions">
-            <div></div>
-            <div class="app-actions-right"><button type="button" class="btn-primary" data-next-step>Next</button></div>
-          </div>
-        </div>
+              <div class="auto-field">
+                <label>Business Type</label>
+                <select name="business_type">
+                  <option value="Retail">Retail</option>
+                  <option value="Restaurant">Restaurant</option>
+                  <option value="Contractor">Contractor</option>
+                  <option value="Office">Office</option>
+                  <option value="Service">Service</option>
+                </select>
+              </div>
 
-        <!-- STEP 2 -->
-        <div class="form-step" data-step="2">
-          <h2>Property Details</h2>
-          <p class="section-subtitle">Tell us about your business property.</p>
-
-          <div class="auto-grid-2">
-            <div class="auto-field"><label>Building Value</label><input name="building_value" required /></div>
-            <div class="auto-field"><label>Contents Value</label><input name="contents_value" required /></div>
-
-            <div class="auto-field auto-field-full">
-              <label>Construction Type</label>
-              <select name="construction_type" required>
-                <option value="">Select</option>
-                <option>Frame</option>
-                <option>Masonry</option>
-                <option>Non-Combustible</option>
-                <option>Fire Resistive</option>
-              </select>
-            </div>
-
-            <div class="auto-field auto-field-full">
-              <label>Property Notes (optional)</label>
-              <textarea name="property_notes" rows="3"></textarea>
             </div>
           </div>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right"><button type="button" class="btn-primary" data-next-step>Next</button></div>
-          </div>
-        </div>
+          <!-- STEP 2 -->
+          <div class="form-step" data-step="2">
+            <h2>Property Information</h2>
+            <p class="section-subtitle">Tell us about your business location.</p>
 
-        <!-- STEP 3 -->
-        <div class="form-step" data-step="3">
-          <h2>Liability Details</h2>
-          <p class="section-subtitle">Tell us about your liability needs.</p>
+            <div class="auto-grid-2">
 
-          <div class="auto-grid-2">
-            <div class="auto-field">
-              <label>General Liability Limit</label>
-              <select name="gl_limit" required>
-                <option value="">Select</option>
-                <option>$300,000</option>
-                <option>$500,000</option>
-                <option>$1,000,000</option>
-                <option>$2,000,000</option>
-              </select>
-            </div>
+              <div class="auto-field">
+                <label>Address</label>
+                <input name="property_address" required>
+              </div>
 
-            <div class="auto-field auto-field-full">
-              <label>Liability Notes (optional)</label>
-              <textarea name="liability_notes" rows="3"></textarea>
-            </div>
-          </div>
+              <div class="auto-field">
+                <label>City</label>
+                <input name="property_city" required>
+              </div>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right"><button type="button" class="btn-primary" data-next-step>Next</button></div>
-          </div>
-        </div>
+              <div class="auto-field">
+                <label>State</label>
+                <input name="property_state" required>
+              </div>
 
-        <!-- STEP 4 -->
-        <div class="form-step" data-step="4">
-          <h2>Operations</h2>
-          <p class="section-subtitle">Tell us about your business operations.</p>
+              <div class="auto-field">
+                <label>Zip Code</label>
+                <input name="property_zip" required>
+              </div>
 
-          <div class="auto-grid-2">
-            <div class="auto-field auto-field-full">
-              <label>Describe Your Operations</label>
-              <textarea name="operations_description" rows="3" required></textarea>
-            </div>
+              <div class="auto-field">
+                <label>Building Type</label>
+                <select name="building_type">
+                  <option value="Office">Office</option>
+                  <option value="Retail">Retail</option>
+                  <option value="Warehouse">Warehouse</option>
+                  <option value="Restaurant">Restaurant</option>
+                </select>
+              </div>
 
-            <div class="auto-field auto-field-full">
-              <label>Additional Notes (optional)</label>
-              <textarea name="operations_notes" rows="3"></textarea>
             </div>
           </div>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right"><button type="button" class="btn-primary" data-next-step>Next</button></div>
+          <!-- STEP 3 -->
+          <div class="form-step" data-step="3">
+            <h2>Coverage Options</h2>
+            <p class="section-subtitle">Choose the coverage you want.</p>
+
+            <div class="auto-grid-2">
+
+              <div class="auto-field">
+                <label>General Liability Limit</label>
+                <select name="liability_limit">
+                  <option value="1M/2M">1M / 2M</option>
+                  <option value="2M/4M">2M / 4M</option>
+                </select>
+              </div>
+
+              <div class="auto-field">
+                <label>Property Coverage Amount</label>
+                <input name="property_coverage" placeholder="e.g., 250000">
+              </div>
+
+              <div class="auto-field">
+                <label>Deductible</label>
+                <select name="deductible">
+                  <option value="500">$500</option>
+                  <option value="1000">$1,000</option>
+                </select>
+              </div>
+
+            </div>
           </div>
-        </div>
 
-        <!-- STEP 5 -->
-        <div class="form-step" data-step="5">
-          <h2>Review & Submit</h2>
+          <!-- STEP 4 -->
+          <div class="form-step" data-step="4">
+            <h2>Review & Submit</h2>
+            <p class="section-subtitle">Review your information before submitting.</p>
 
-          <div class="review-section">
-            <div class="review-block"><h3>Business</h3><ul id="reviewBusiness"></ul></div>
-            <div class="review-block"><h3>Property</h3><ul id="reviewProperty"></ul></div>
-            <div class="review-block"><h3>Liability</h3><ul id="reviewLiability"></ul></div>
-            <div class="review-block"><h3>Operations</h3><ul id="reviewOperations"></ul></div>
+            <button type="submit" class="apply-button">Submit Application</button>
           </div>
 
-          <div class="upload-row">
-            <label>Upload Documents (optional)</label>
-            <input type="file" name="supporting_documents" />
-          </div>
+        </form>
 
-          <div class="consent-row">
-            <input type="checkbox" id="consentCheckbox" required />
-            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
-          </div>
+      </div>
+    </section>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right"><button type="submit" class="btn-primary">Submit Application</button></div>
-          </div>
-        </div>
+  </main>
 
-      </form>
-
-    </div>
-  </section>
-
-</main>
-
-<footer id="aces-footer"></footer>
-
-<!-- APPLICATION JS (same folder) -->
-<script src="application-bop.js"></script>
+  <!-- FOOTER -->
+  <footer id="aces-footer"></footer>
 
 </body>
 </html>
