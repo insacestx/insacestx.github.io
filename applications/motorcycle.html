@@ -1,239 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Motorcycle Insurance Application | ACES Insurance Services</title>
 
-  <!-- UPDATED PATHS -->
-  <link rel="stylesheet" href="../style.css" />
-  <script src="../global.js" defer></script>
+  <!-- CORRECT CSS (Root‑Absolute) -->
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- CORRECT JS (Root‑Absolute) -->
+  <script src="/global.js" defer></script>
+  <script src="/applications/motorcycle.js" defer></script>
 </head>
 
 <body>
 
-<header id="aces-header"></header>
+  <!-- HEADER -->
+  <header id="aces-header"></header>
 
-<main class="fade-in">
+  <main class="fade-in">
 
-  <!-- HERO -->
-  <section class="auto-hero">
-    <div class="auto-hero-inner">
-      <h1 data-en="Motorcycle Insurance Application" data-es="Solicitud de Seguro para Motocicletas">
-        Motorcycle Insurance Application
-      </h1>
+    <!-- HERO -->
+    <section class="auto-hero">
+      <div class="auto-hero-inner">
 
-      <p data-en="Tell us about you and your motorcycle. An ACES agent will review and follow up with tailored options."
-         data-es="Cuéntenos sobre usted y su motocicleta. Un agente de ACES revisará y le dará opciones personalizadas.">
-        Tell us about you and your motorcycle. An ACES agent will review and follow up with tailored options.
-      </p>
+        <h1 data-en="Motorcycle Insurance Application"
+            data-es="Solicitud de Seguro para Motocicletas">
+          Motorcycle Insurance Application
+        </h1>
 
-      <div class="auto-wizard-steps" id="motorcycleWizardSteps">
-        <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span>Personal & Motorcycle</div>
-        <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span>Coverage</div>
-        <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span>Review</div>
+        <p data-en="Tell us about you and your motorcycle. An ACES agent will review and follow up with tailored options."
+           data-es="Cuéntenos sobre usted y su motocicleta. Un agente de ACES revisará y le dará opciones personalizadas.">
+          Tell us about you and your motorcycle. An ACES agent will review and follow up with tailored options.
+        </p>
+
+        <!-- Wizard Steps -->
+        <div class="auto-wizard-steps" id="motoWizardSteps">
+          <div class="auto-wizard-step active" data-step="1">
+            <span class="step-index">1</span> Personal
+          </div>
+          <div class="auto-wizard-step" data-step="2">
+            <span class="step-index">2</span> Motorcycle
+          </div>
+          <div class="auto-wizard-step" data-step="3">
+            <span class="step-index">3</span> Coverage
+          </div>
+          <div class="auto-wizard-step" data-step="4">
+            <span class="step-index">4</span> Review
+          </div>
+        </div>
+
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FORM -->
-  <section class="auto-app-wrapper">
-    <div class="auto-app-card">
+    <!-- FORM -->
+    <section class="auto-app-wrapper">
+      <div class="auto-app-card">
 
-      <form id="motorcycleAppForm" method="POST" action="https://formsubmit.co/office@insaces.com" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="New Motorcycle Insurance Application - ACES" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="_honey" style="display:none" />
-        <input type="hidden" id="rrEmail" name="rrEmail" />
+        <form id="motoAppForm"
+              method="POST"
+              action="https://formsubmit.co/office@insaces.com"
+              enctype="multipart/form-data">
 
-        <!-- STEP 1 -->
-        <div class="form-step active" data-step="1">
-          <h2>Personal & Motorcycle Information</h2>
-          <p class="section-subtitle">Tell us about yourself and your motorcycle.</p>
+          <input type="hidden" name="_subject" value="New Motorcycle Insurance Application - ACES">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" id="rrEmail" name="rrEmail">
 
-          <div class="auto-grid-2">
+          <!-- STEP 1 -->
+          <div class="form-step active" data-step="1">
+            <h2>Personal Information</h2>
+            <p class="section-subtitle">Tell us about yourself.</p>
 
-            <div class="auto-field"><label>First Name</label><input name="first_name" required /></div>
-            <div class="auto-field"><label>Last Name</label><input name="last_name" required /></div>
+            <div class="auto-grid-2">
 
-            <div class="auto-field"><label>Phone Number</label><input name="phone" required /></div>
-            <div class="auto-field"><label>Email Address</label><input type="email" name="email" required /></div>
+              <div class="auto-field">
+                <label>First Name</label>
+                <input name="first_name" required>
+              </div>
 
-            <div class="auto-field auto-field-full"><label>Home Address</label><input name="address" required /></div>
-            <div class="auto-field"><label>City</label><input name="city" required /></div>
-            <div class="auto-field"><label>State</label><input name="state" value="TX" required /></div>
-            <div class="auto-field"><label>ZIP Code</label><input name="zip" required /></div>
+              <div class="auto-field">
+                <label>Last Name</label>
+                <input name="last_name" required>
+              </div>
 
-            <div class="auto-field"><label>Year</label><input name="mc_year" required /></div>
-            <div class="auto-field"><label>Make</label><input name="mc_make" required /></div>
-            <div class="auto-field"><label>Model</label><input name="mc_model" required /></div>
+              <div class="auto-field">
+                <label>Email</label>
+                <input name="email" type="email" required>
+              </div>
 
-            <div class="auto-field">
-              <label>Engine CC</label>
-              <input name="mc_cc" placeholder="Example: 600cc" required />
-            </div>
+              <div class="auto-field">
+                <label>Phone Number</label>
+                <input name="phone" required>
+              </div>
 
-            <div class="auto-field">
-              <label>Primary Use</label>
-              <select name="mc_use" required>
-                <option value="">Select</option>
-                <option>Personal</option>
-                <option>Commuting</option>
-                <option>Business</option>
-                <option>Recreational</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Do you have a motorcycle license?</label>
-              <select name="mc_license" required>
-                <option value="">Select</option>
-                <option>Yes</option>
-                <option>No</option>
-              </select>
-            </div>
-
-            <div class="auto-field auto-field-full">
-              <label>VIN (optional)</label>
-              <input name="mc_vin" />
-            </div>
-
-          </div>
-
-          <div class="app-actions">
-            <div></div>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
             </div>
           </div>
-        </div>
 
-        <!-- STEP 2 -->
-        <div class="form-step" data-step="2">
-          <h2>Coverage Details</h2>
-          <p class="section-subtitle">Tell us about the coverage you need for your motorcycle.</p>
+          <!-- STEP 2 -->
+          <div class="form-step" data-step="2">
+            <h2>Motorcycle Information</h2>
+            <p class="section-subtitle">Tell us about your motorcycle.</p>
 
-          <div class="auto-grid-2">
+            <div class="auto-grid-2">
 
-            <div class="auto-field">
-              <label>Liability Coverage</label>
-              <select name="liability_coverage" required>
-                <option value="">Select</option>
-                <option>$30,000 / $60,000</option>
-                <option>$50,000 / $100,000</option>
-                <option>$100,000 / $300,000</option>
-                <option>$250,000 / $500,000</option>
-              </select>
-            </div>
+              <div class="auto-field">
+                <label>Year</label>
+                <input name="moto_year" required>
+              </div>
 
-            <div class="auto-field">
-              <label>Property Damage Coverage</label>
-              <select name="property_damage" required>
-                <option value="">Select</option>
-                <option>$25,000</option>
-                <option>$50,000</option>
-                <option>$100,000</option>
-              </select>
-            </div>
+              <div class="auto-field">
+                <label>Make</label>
+                <input name="moto_make" required>
+              </div>
 
-            <div class="auto-field">
-              <label>Collision Coverage</label>
-              <select name="collision">
-                <option value="">Select</option>
-                <option>Yes — $500 Deductible</option>
-                <option>Yes — $1,000 Deductible</option>
-                <option>No</option>
-              </select>
-            </div>
+              <div class="auto-field">
+                <label>Model</label>
+                <input name="moto_model" required>
+              </div>
 
-            <div class="auto-field">
-              <label>Comprehensive Coverage</label>
-              <select name="comprehensive">
-                <option value="">Select</option>
-                <option>Yes — $500 Deductible</option>
-                <option>Yes — $1,000 Deductible</option>
-                <option>No</option>
-              </select>
-            </div>
+              <div class="auto-field">
+                <label>VIN</label>
+                <input name="moto_vin">
+              </div>
 
-            <div class="auto-field">
-              <label>Uninsured/Underinsured Motorist</label>
-              <select name="um_uim">
-                <option value="">Select</option>
-                <option>$30,000 / $60,000</option>
-                <option>$50,000 / $100,000</option>
-                <option>$100,000 / $300,000</option>
-                <option>Reject Coverage</option>
-              </select>
-            </div>
-
-            <div class="auto-field">
-              <label>Medical Payments</label>
-              <select name="medical_payments">
-                <option value="">Select</option>
-                <option>$500</option>
-                <option>$1,000</option>
-                <option>$2,500</option>
-                <option>$5,000</option>
-                <option>Reject Coverage</option>
-              </select>
-            </div>
-
-            <div class="auto-field auto-field-full">
-              <label>Additional Notes (optional)</label>
-              <textarea name="coverage_notes" rows="3"></textarea>
-            </div>
-
-          </div>
-
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="button" class="btn-primary" data-next-step>Next</button>
             </div>
           </div>
-        </div>
 
-        <!-- STEP 3 -->
-        <div class="form-step" data-step="3">
-          <h2>Review & Submit</h2>
-          <p class="section-subtitle">Review your details below.</p>
+          <!-- STEP 3 -->
+          <div class="form-step" data-step="3">
+            <h2>Coverage Options</h2>
+            <p class="section-subtitle">Choose the coverage you want.</p>
 
-          <div class="review-section">
-            <div class="review-block"><h3>Personal</h3><ul id="reviewPersonal"></ul></div>
-            <div class="review-block"><h3>Motorcycle</h3><ul id="reviewMotorcycle"></ul></div>
-            <div class="review-block"><h3>Coverage</h3><ul id="reviewCoverage"></ul></div>
-          </div>
+            <div class="auto-grid-2">
 
-          <div class="upload-row">
-            <label>Upload Documents (optional)</label>
-            <input type="file" name="supporting_documents" />
-          </div>
+              <div class="auto-field">
+                <label>Liability Limits</label>
+                <select name="liability_limits">
+                  <option value="30/60/25">30/60/25</option>
+                  <option value="50/100/50">50/100/50</option>
+                  <option value="100/300/100">100/300/100</option>
+                </select>
+              </div>
 
-          <div class="consent-row">
-            <input type="checkbox" id="consentCheckbox" required />
-            <label for="consentCheckbox">I confirm the information provided is accurate.</label>
-          </div>
+              <div class="auto-field">
+                <label>Comprehensive Deductible</label>
+                <select name="comp_deductible">
+                  <option value="500">$500</option>
+                  <option value="1000">$1,000</option>
+                </select>
+              </div>
 
-          <div class="app-actions">
-            <button type="button" class="btn-secondary" data-prev-step>Back</button>
-            <div class="app-actions-right">
-              <button type="submit" class="btn-primary">Submit Application</button>
+              <div class="auto-field">
+                <label>Collision Deductible</label>
+                <select name="collision_deductible">
+                  <option value="500">$500</option>
+                  <option value="1000">$1,000</option>
+                </select>
+              </div>
+
             </div>
           </div>
-        </div>
 
-      </form>
+          <!-- STEP 4 -->
+          <div class="form-step" data-step="4">
+            <h2>Review & Submit</h2>
+            <p class="section-subtitle">Review your information before submitting.</p>
 
-    </div>
-  </section>
+            <button type="submit" class="apply-button">Submit Application</button>
+          </div>
 
-</main>
+        </form>
 
-<footer id="aces-footer"></footer>
+      </div>
+    </section>
 
-<!-- APP-SPECIFIC JS -->
-<script src="application-motorcycle.js"></script>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="aces-footer"></footer>
 
 </body>
 </html>
