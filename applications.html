@@ -26,22 +26,25 @@
       Insurance Applications
     </h1>
 
-<!-- FILTER BAR -->
-<div class="filter-bar">
 
-  <div class="app-search-wrapper">
-    <input type="text" id="appSearch" placeholder="Search applications…">
-    <button id="clearFiltersBtn">Clear</button>
+  <!-- FILTER BAR (Corrected + Centered) -->
+  <div class="application-filter-bar">
+
+    <!-- Centered Search Bar -->
+    <div class="app-search-wrapper">
+      <input type="text" id="appSearch" placeholder="Search applications…">
+      <button id="clearFiltersBtn" class="filter-clear-btn">Clear</button>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="Commercial">Commercial</button>
+      <button class="filter-btn" data-filter="Personal">Personal</button>
+      <button class="filter-btn" data-filter="Life">Life</button>
+    </div>
+
   </div>
-
-  <div class="filter-buttons">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="Commercial">Commercial</button>
-    <button class="filter-btn" data-filter="Personal">Personal</button>
-    <button class="filter-btn" data-filter="Life">Life</button>
-  </div>
-
-</div>
 
     <!-- ============================================================
          COMMERCIAL APPLICATIONS
