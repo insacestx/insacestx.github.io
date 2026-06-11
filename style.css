@@ -1635,57 +1635,146 @@ section {
   }
 }
 /* ============================================================
-   SERVICE DETAIL HERO — ACES 2026
+   SERVICE DETAIL HERO (Full Banner Layout) — ACES 2026
 ============================================================ */
 
-.product-hero-swap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  padding: 70px 28px;
-  max-width: 1200px;
+/* The outer container for your wide, top hero graphic */
+.product-hero-container {
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
-}
-
-/* Center icon + title + subtitle */
-.centered-hero {
-  text-align: center;
-  flex: 1;
-}
-
-/* Icon size (your chosen 120px) */
-.product-hero-icon-large {
-  width: 120px;
-  height: auto;
-  margin: 0 auto 20px auto;
+  padding: 0;
   display: block;
+  overflow: hidden;
 }
 
-/* Right-side hero image */
-.product-hero-image-small img {
-  width: 280px;
+/* Forces the wide banner to scale perfectly across the screen */
+.product-hero-banner {
+  width: 100%;
   height: auto;
-  border-radius: 14px;
+  max-height: 450px; /* Adjusts the banner's maximum visible thickness */
+  display: block;
   object-fit: cover;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
-/* Section spacing after hero */
+/* Center-aligns the Title, Icon, and Subtitle block */
+.product-title-section {
+  text-align: center;
+  margin: 50px auto 30px auto;
+  padding: 0 24px;
+  max-width: 800px;
+}
+
+.product-title-section h1 {
+  font-size: 2.5rem;
+  color: #1f2937;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+/* Beautifully maps your small PNG icon right under the title */
+.product-type-icon {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
+  display: block;
+  object-fit: contain;
+}
+
+.product-hero-sub {
+  font-size: 1.2rem;
+  color: #4b5563;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+/* Centered global structural spacing for product body sections */
 .product-section {
-  margin-top: 60px;
+  margin: 60px auto;
+  padding: 0 24px;
+  max-width: 800px;
+  text-align: center;
 }
 
-/* Mobile layout */
+.product-section h2 {
+  font-size: 1.8rem;
+  color: #d40000;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.product-section p {
+  font-size: 1.05rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+/* Centers list components cleanly without breaking indentation */
+.product-list {
+  list-style-position: inside;
+  padding: 0;
+  text-align: center;
+  display: inline-block;
+}
+
+.product-list li {
+  font-size: 1.05rem;
+  color: #374151;
+  margin: 12px 0;
+  text-align: left; /* Keeps text left-aligned inside the centered block */
+}
+
+/* FAQ Block formatting updates */
+.faq-item {
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.faq-item h3 {
+  font-size: 1.2rem;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+/* Call to Action Wrapper */
+.product-cta {
+  text-align: center;
+  margin: 60px auto;
+}
+
+.product-cta-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #b30000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.product-cta-btn:hover {
+  background: #d40000;
+  transform: translateY(-2px);
+}
+
+/* Responsive Mobile Modifications */
 @media (max-width: 768px) {
-  .product-hero-swap {
-    flex-direction: column;
-    text-align: center;
-    padding: 50px 20px;
+  .product-title-section h1 {
+    font-size: 2rem;
+  }
+  
+  .product-hero-banner {
+    max-height: 250px; /* Thins down the hero photo display on mobile */
   }
 
-  .product-hero-image-small img {
-    width: 75%;
-    margin-top: 20px;
+  .product-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .product-type-icon {
+    width: 85px;
+    height: 85px;
   }
 }
