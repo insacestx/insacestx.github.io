@@ -1563,12 +1563,20 @@ section {
   gap: 24px;
 }
 
+/* ============================================================
+   SERVICE CARDS — VERTICAL STACKED STYLE
+============================================================ */
+
 .service-box {
   background: #fff;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 24px;
+  border-radius: 10px;
+  padding: 22px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -1579,30 +1587,33 @@ section {
 }
 
 .service-box img {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 12px;
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  display: block;
 }
 
 .service-box h3 {
   font-size: 1.1rem;
-  margin-bottom: 8px;
+  font-weight: 700;
+  margin: 0;
   color: #1f2937;
 }
 
 .service-box p {
   font-size: 0.95rem;
   color: #374151;
-  margin-bottom: 16px;
+  margin: 0 0 10px 0;
+  line-height: 1.4;
 }
 
 .service-btn {
-  display: inline-block;
   background: #1f2937;
   color: #fff;
-  padding: 8px 18px;
-  border-radius: 5px;
+  padding: 8px 16px;
+  border-radius: 6px;
   font-weight: 600;
+  text-decoration: none;
   transition: background 0.25s ease;
 }
 
