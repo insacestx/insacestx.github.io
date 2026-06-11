@@ -1634,3 +1634,58 @@ section {
     font-size: 1.5rem;
   }
 }
+/* ============================================================
+   SERVICE DETAIL HERO — ACES 2026
+============================================================ */
+
+.product-hero-swap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 70px 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Center icon + title + subtitle */
+.centered-hero {
+  text-align: center;
+  flex: 1;
+}
+
+/* Icon size (your chosen 120px) */
+.product-hero-icon-large {
+  width: 120px;
+  height: auto;
+  margin: 0 auto 20px auto;
+  display: block;
+}
+
+/* Right-side hero image */
+.product-hero-image-small img {
+  width: 280px;
+  height: auto;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Section spacing after hero */
+.product-section {
+  margin-top: 60px;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+  .product-hero-swap {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  .product-hero-image-small img {
+    width: 75%;
+    margin-top: 20px;
+  }
+}
