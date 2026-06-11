@@ -1,64 +1,56 @@
 /* ============================================================
-   ACES 2026 — SERVICES PAGE LOGIC
-   (Category switching + subcategory routing)
+   ACES 2026 — SERVICES PAGE FILTER SYSTEM
+   (Filter bar + grouped sections + smooth transitions)
 ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  initServiceCategories();
-  initSubcategoryRouting();
+  initServiceFilters();
 });
 
-/* CATEGORY SWITCHING (Scale + Fade) */
-function initServiceCategories() {
-  const cards = document.querySelectorAll(".service-category-card");
-  const groups = {
-    personal: document.getElementById("group-personal"),
-    commercial: document.getElementById("group-commercial"),
-    life: document.getElementById("group-life")
-  };
+/* -----------------------------------
+   FILTER BAR LOGIC
+----------------------------------- */
 
-  if (!cards.length) return;
+function initServiceFilters() {
+  const buttons = document.querySelectorAll(".filter-btn");
+  const sections = document.querySelectorAll(".services-section");
+  const boxes = document.querySelectorAll(".service-box");
 
-  cards.forEach(card => {
-    card.addEventListener("click", () => {
-      const selected = card.getAttribute("data-category");
+  if (!buttons.length) return;
 
-      cards.forEach(c => {
-        if (c === card) {
-          c.classList.add("active");
-          c.classList.remove("inactive");
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter");
+
+      // Update active button
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Show/hide sections
+      sections.forEach(section => {
+        const sectionType = section.getAttribute("data-section");
+
+        if (filter === "all" || filter === sectionType) {
+          section.style.display = "block";
+          section.classList.add("active");
         } else {
-          c.classList.remove("active");
-          c.classList.add("inactive");
+          section.style.display = "none";
+          section.classList.remove("active");
         }
       });
 
-      Object.keys(groups).forEach(key => {
-        if (key === selected) {
-          groups[key].classList.add("active");
+      // Show/hide individual boxes (extra safety)
+      boxes.forEach(box => {
+        const category = box.getAttribute("data-category");
+
+        if (filter === "all" || filter === category) {
+          box.style.display = "flex";
         } else {
-          groups[key].classList.remove("active");
+          box.style.display = "none";
         }
       });
 
-      const section = document.querySelector(".subcategory-section");
-      if (section) {
-        section.scrollIntoView({ behavior:"smooth", block:"start" });
-      }
-    });
-  });
-}
-
-/* SUBCATEGORY CLICK → APPLICATIONS PAGE */
-function initSubcategoryRouting() {
-  const subCards = document.querySelectorAll(".subcategory-card");
-  if (!subCards.length) return;
-
-  subCards.forEach(card => {
-    card.addEventListener("click", () => {
-      const type = card.getAttribute("data-type");
-      if (!type) return;
-      window.location.href = `applications.html?type=${encodeURIComponent(type)}`;
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
 }
