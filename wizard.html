@@ -1,0 +1,282 @@
+<!-- ============================================================
+     ACES 2026 — UNIVERSAL WIZARD TEMPLATE
+     Requires: wizard.css + wizard.js
+============================================================ -->
+
+<div class="aces-wizard">
+
+  <!-- ============================
+       DESKTOP TABS (Centered)
+  ============================ -->
+  <div class="aces-wizard-tabs">
+    <div class="aces-wizard-tab active">
+      <div class="aces-wizard-step-circle">1</div>
+      Driver Information
+    </div>
+
+    <div class="aces-wizard-tab">
+      <div class="aces-wizard-step-circle">2</div>
+      Vehicle Details
+    </div>
+
+    <div class="aces-wizard-tab">
+      <div class="aces-wizard-step-circle">3</div>
+      Coverage Options
+    </div>
+
+    <div class="aces-wizard-tab">
+      <div class="aces-wizard-step-circle">4</div>
+      Claim History
+    </div>
+
+    <div class="aces-wizard-tab">
+      <div class="aces-wizard-step-circle">5</div>
+      Review & Submit
+    </div>
+  </div>
+
+  <!-- ============================
+       MOBILE VERTICAL STEPS
+  ============================ -->
+  <div class="aces-wizard-mobile-steps">
+    <div class="aces-wizard-mobile-step active">
+      <div class="aces-wizard-step-circle">1</div>
+      Driver Information
+    </div>
+
+    <div class="aces-wizard-mobile-step">
+      <div class="aces-wizard-step-circle">2</div>
+      Vehicle Details
+    </div>
+
+    <div class="aces-wizard-mobile-step">
+      <div class="aces-wizard-step-circle">3</div>
+      Coverage Options
+    </div>
+
+    <div class="aces-wizard-mobile-step">
+      <div class="aces-wizard-step-circle">4</div>
+      Claim History
+    </div>
+
+    <div class="aces-wizard-mobile-step">
+      <div class="aces-wizard-step-circle">5</div>
+      Review & Submit
+    </div>
+  </div>
+
+  <!-- ============================
+       PROGRESS BAR
+  ============================ -->
+  <div class="aces-wizard-progress">
+    <div class="aces-wizard-progress-fill"></div>
+  </div>
+
+  <!-- ============================
+       STEP 1 — DRIVER INFORMATION
+  ============================ -->
+  <div class="aces-wizard-card active">
+    <h2>Driver Information</h2>
+    <p class="section-subtitle">Tell us about the primary driver.</p>
+
+    <div class="aces-wizard-grid">
+
+      <div class="aces-wizard-field">
+        <label>Full Name</label>
+        <input type="text" name="driver_name" data-required>
+      </div>
+
+      <div class="aces-wizard-field">
+        <label>Date of Birth</label>
+        <input type="date" name="driver_dob" data-required>
+      </div>
+
+      <div class="aces-wizard-field">
+        <label>License Number</label>
+        <input type="text" name="driver_license" data-required>
+      </div>
+
+      <div class="aces-wizard-field">
+        <label>State</label>
+        <select name="driver_state" data-required>
+          <option value="">Select</option>
+          <option>TX</option>
+          <option>OK</option>
+          <option>LA</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- Add Driver Button -->
+    <button class="aces-wizard-btn next">Next</button>
+  </div>
+
+  <!-- ============================
+       STEP 2 — VEHICLE DETAILS
+  ============================ -->
+  <div class="aces-wizard-card">
+    <h2>Vehicle Details</h2>
+    <p class="section-subtitle">Tell us about the vehicle(s).</p>
+
+    <!-- Repeater Container -->
+    <div id="vehicleRepeaterContainer"></div>
+
+    <!-- Add Vehicle Button -->
+    <button class="aces-wizard-btn next"
+      onclick="acesWizard.addRepeater('vehicles','vehicleTemplate','vehicleRepeaterContainer')">
+      + Add Vehicle
+    </button>
+
+    <div class="aces-wizard-nav">
+      <button class="aces-wizard-btn back">Back</button>
+      <button class="aces-wizard-btn next">Next</button>
+    </div>
+  </div>
+
+  <!-- ============================
+       STEP 3 — COVERAGE OPTIONS
+  ============================ -->
+  <div class="aces-wizard-card">
+    <h2>Coverage Options</h2>
+    <p class="section-subtitle">Choose the coverages you want.</p>
+
+    <div class="aces-wizard-grid">
+
+      <div class="aces-wizard-field">
+        <label>Liability Limits</label>
+        <select name="liability_limits" data-required>
+          <option value="">Select</option>
+          <option>30/60/25</option>
+          <option>50/100/50</option>
+          <option>100/300/100</option>
+        </select>
+      </div>
+
+      <div class="aces-wizard-field">
+        <label>Comprehensive Deductible</label>
+        <select name="comp_deductible">
+          <option value="">Select</option>
+          <option>$100</option>
+          <option>$250</option>
+          <option>$500</option>
+        </select>
+      </div>
+
+      <div class="aces-wizard-field">
+        <label>Collision Deductible</label>
+        <select name="collision_deductible">
+          <option value="">Select</option>
+          <option>$100</option>
+          <option>$250</option>
+          <option>$500</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="aces-wizard-nav">
+      <button class="aces-wizard-btn back">Back</button>
+      <button class="aces-wizard-btn next">Next</button>
+    </div>
+  </div>
+
+  <!-- ============================
+       STEP 4 — CLAIM HISTORY
+  ============================ -->
+  <div class="aces-wizard-card">
+    <h2>Claim History</h2>
+    <p class="section-subtitle">List any prior claims.</p>
+
+    <div id="claimRepeaterContainer"></div>
+
+    <button class="aces-wizard-btn next"
+      onclick="acesWizard.addRepeater('claims','claimTemplate','claimRepeaterContainer')">
+      + Add Claim
+    </button>
+
+    <div class="aces-wizard-nav">
+      <button class="aces-wizard-btn back">Back</button>
+      <button class="aces-wizard-btn next">Next</button>
+    </div>
+  </div>
+
+  <!-- ============================
+       STEP 5 — REVIEW & SUBMIT
+  ============================ -->
+  <div class="aces-wizard-card">
+    <h2>Review & Submit</h2>
+    <p class="section-subtitle">Review your information before submitting.</p>
+
+    <div id="reviewContainer"></div>
+
+    <div class="aces-wizard-nav">
+      <button class="aces-wizard-btn back">Back</button>
+      <button class="aces-wizard-btn next"
+        onclick="acesWizard.buildReview('reviewContainer')">
+        Submit Application
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     REPEATER TEMPLATES
+============================================================ -->
+
+<!-- VEHICLE TEMPLATE -->
+<template id="vehicleTemplate">
+  <div class="aces-wizard-repeater">
+    <h3>Vehicle <span data-repeater-number></span></h3>
+
+    <div class="aces-wizard-grid">
+
+      <div class="aces-wizard-field">
+        <label>Year</label>
+        <input type="number" name="vehicle_year" data-required>
+      </div>
+
+      <div class="aces-wizard-field">
+        <label>Make</label>
+        <input type="text" name="vehicle_make" data-required>
+      </div>
+
+      <div class="aces-wizard-field">
+        <label>Model</label>
+        <input type="text" name="vehicle_model" data-required>
+      </div>
+
+    </div>
+
+    <button class="aces-wizard-remove-btn">Remove Vehicle</button>
+  </div>
+</template>
+
+<!-- CLAIM TEMPLATE -->
+<template id="claimTemplate">
+  <div class="aces-wizard-repeater">
+    <h3>Claim <span data-repeater-number></span></h3>
+
+    <div class="aces-wizard-grid">
+
+      <div class="aces-wizard-field">
+        <label>Claim Type</label>
+        <select name="claim_type" data-required>
+          <option value="">Select</option>
+          <option>Accident</option>
+          <option>Comprehensive</option>
+          <option>Collision</option>
+        </select>
+      </div>
+
+      <div class="aces-wizard-field">
+        <label>Claim Date</label>
+        <input type="date" name="claim_date" data-required>
+      </div>
+
+    </div>
+
+    <button class="aces-wizard-remove-btn">Remove Claim</button>
+  </div>
+</template>
