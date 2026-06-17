@@ -1778,3 +1778,309 @@ section {
     height: 85px;
   }
 }
+/* ============================================================
+   ACES 2026 — UNIVERSAL WIZARD (RED THEME + HYBRID LAYOUT)
+   Fully Isolated Namespace: .aces-wizard
+============================================================ */
+
+/* WIZARD WRAPPER */
+.aces-wizard {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: linear-gradient(
+    180deg,
+    #fff5f5 0%,
+    #ffeaea 60%,
+    #fff7f7 100%
+  );
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+}
+
+/* ============================================================
+   DESKTOP TABS (Centered)
+============================================================ */
+
+.aces-wizard-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.aces-wizard-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  padding: 10px 14px;
+  border-bottom: 3px solid transparent;
+
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+
+  transition: all 0.25s ease;
+}
+
+.aces-wizard-tab:hover {
+  color: #b00000;
+  border-bottom-color: rgba(212,0,0,0.35);
+}
+
+/* ACTIVE TAB */
+.aces-wizard-tab.active {
+  color: #b00000;
+  border-bottom-color: #d40000;
+}
+
+/* STEP NUMBER CIRCLE */
+.aces-wizard-step-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+/* ACTIVE STEP CIRCLE */
+.aces-wizard-tab.active .aces-wizard-step-circle {
+  background: #d40000;
+  color: #fff;
+  border: 2px solid #d40000;
+}
+
+/* INACTIVE STEP CIRCLE */
+.aces-wizard-tab:not(.active) .aces-wizard-step-circle {
+  background: #fff;
+  color: #d40000;
+  border: 2px solid #d40000;
+}
+
+/* ============================================================
+   PROGRESS BAR (Thick ACES Red)
+============================================================ */
+
+.aces-wizard-progress {
+  width: 100%;
+  height: 14px;
+  background: #ffd6d6;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 35px;
+}
+
+.aces-wizard-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #d40000;
+  transition: width 0.35s ease;
+}
+
+/* ============================================================
+   STEP CARDS
+============================================================ */
+
+.aces-wizard-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 28px;
+  border: 1px solid rgba(212,0,0,0.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  margin-bottom: 30px;
+  display: none;
+}
+
+.aces-wizard-card.active {
+  display: block;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.aces-wizard-card h2 {
+  font-size: 1.6rem;
+  color: #b00000;
+  margin-bottom: 12px;
+}
+
+.aces-wizard-card p.section-subtitle {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* ============================================================
+   FORM GRID
+============================================================ */
+
+.aces-wizard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin: 20px 0;
+}
+
+/* FIELDS */
+.aces-wizard-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.aces-wizard-field label {
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+  color: #444;
+  font-weight: 600;
+}
+
+.aces-wizard-field input,
+.aces-wizard-field select,
+.aces-wizard-field textarea {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  color: #222;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aces-wizard-field input:focus,
+.aces-wizard-field select:focus,
+.aces-wizard-field textarea:focus {
+  outline: none;
+  border-color: #d40000;
+  box-shadow: 0 0 0 4px rgba(212,0,0,0.12);
+}
+
+/* ============================================================
+   REPEATERS (Drivers, Vehicles, Claims)
+============================================================ */
+
+.aces-wizard-repeater {
+  background: #fff;
+  border: 1px solid rgba(212,0,0,0.15);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.aces-wizard-repeater h3 {
+  font-size: 1.1rem;
+  color: #b00000;
+  margin-bottom: 12px;
+}
+
+.aces-wizard-remove-btn {
+  background: #fff;
+  border: 1px solid #d40000;
+  color: #d40000;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.aces-wizard-remove-btn:hover {
+  background: #d40000;
+  color: #fff;
+}
+
+/* ============================================================
+   NAVIGATION BUTTONS
+============================================================ */
+
+.aces-wizard-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.aces-wizard-btn {
+  padding: 12px 22px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* BACK BUTTON */
+.aces-wizard-btn.back {
+  background: #fff;
+  color: #555;
+  border: 1px solid #ccc;
+}
+
+.aces-wizard-btn.back:hover {
+  background: #fff;
+  color: #b00000;
+  border-color: #d40000;
+}
+
+/* NEXT BUTTON */
+.aces-wizard-btn.next {
+  background: #d40000;
+  color: #fff;
+}
+
+.aces-wizard-btn.next:hover {
+  background: #ff1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(212,0,0,0.22);
+}
+
+/* ============================================================
+   MOBILE LAYOUT — Vertical Steps
+============================================================ */
+
+@media (max-width: 900px) {
+
+  .aces-wizard-tabs {
+    display: none;
+  }
+
+  .aces-wizard-mobile-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+
+  .aces-wizard-mobile-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 16px;
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(212,0,0,0.15);
+
+    font-size: 1rem;
+    font-weight: 600;
+    color: #444;
+  }
+
+  .aces-wizard-mobile-step.active {
+    background: #d40000;
+    color: #fff;
+    border-color: #d40000;
+  }
+
+  .aces-wizard-mobile-step .aces-wizard-step-circle {
+    width: 26px;
+    height: 26px;
+  }
+}
