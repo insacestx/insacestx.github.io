@@ -202,3 +202,12 @@ document.addEventListener("DOMContentLoaded", () => {
     applyLanguage(currentLanguage);
   }
 });
+
+// APPLICATION PAGE LANGUAGE HANDLER
+document.addEventListener("DOMContentLoaded", () => {
+  const isApplicationPage = window.location.pathname.includes("applications");
+
+  if (isApplicationPage && typeof applyLanguage === "function") {
+    applyLanguage(currentLanguage);
+  }
+});
