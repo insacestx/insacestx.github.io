@@ -195,3 +195,10 @@ window.addEventListener("scroll", () => {
     header.classList.toggle("scrolled", window.scrollY > 20);
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Apply language from global.js
+  if (typeof applyLanguage === "function") {
+    applyLanguage(currentLanguage);
+  }
+});
