@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-en="Commercial Trucking Application | ACES Insurance Services"
+          data-es="Solicitud de Transporte Comercial | ACES Insurance Services">
+    Commercial Trucking Application | ACES Insurance Services
+  </title>
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/global.js" defer></script>
+
+  <!-- Page-specific buildReview() -->
+  <script>
+    function buildReview() {
+      fill("reviewBusiness", [
+        { label: "Business Name", value: val("business_name") },
+        { label: "DOT Number", value: val("dot") },
+        { label: "MC Number", value: val("mc") },
+        { label: "Phone", value: val("business_phone") },
+        { label: "Email", value: val("business_email") },
+        { label: "Address", value: val("business_address") },
+        { label: "City", value: val("city") },
+        { label: "State", value: val("state") },
+        { label: "ZIP", value: val("zip") }
+      ]);
+
+      fill("reviewVehicles", window.collectVehicles?.() || []);
+
+      fill("reviewCoverage", [
+        { label: "Liability Limit", value: val("liability") },
+        { label: "Cargo Limit", value: val("cargo") },
+        { label: "Physical Damage", value: val("physical_damage") },
+        { label: "Radius of Operation", value: val("radius") },
+        { label: "Trailer Coverage", value: val("trailer_coverage") },
+        { label: "Notes", value: val("notes") }
+      ]);
+
+      fill("reviewAdditional", [
+        { label: "Years in Business", value: val("years_business") },
+        { label: "Driver Count", value: val("driver_count") },
+        { label: "Safety Program", value: val("safety_program") }
+      ]);
+    }
+  </script>
+
+  <!-- Vehicle collector helper -->
+  <script>
+    window.collectVehicles = function () {
+      const rows = [...document.querySelectorAll(".vehicle-row")];
+      return rows.map((row, i) => ({
+        label: `Vehicle ${i + 1}`,
+        value: [
+          row.querySelector("[name='unit_year[]']")?.value,
+          row.querySelector("[name='unit_make[]']")?.value,
+          row.querySelector("[name='unit_model[]']")?.value,
+          row.querySelector("[name='unit_vin[]']")?.value,
+          row.querySelector("[name='unit_type[]']")?.value
+        ].filter(Boolean).join(" | ")
+      }));
+    };
+  </script>
+</head>
+
+<body>
+<header id="aces-header"></header>
+
+<main class="fade-in">
+
+  <!-- HERO -->
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
+      <h1 data-en="Commercial Trucking Application" data-es="Solicitud de Transporte Comercial">
+        Commercial Trucking Application
+      </h1>
+
+      <p data-en="Tell us about your trucking operation. An ACES agent will review and follow up."
+         data-es="Cuéntenos sobre su operación de transporte. Un agente de ACES le dará seguimiento.">
+        Tell us about your trucking operation. An ACES agent will review and follow up.
+      </p>
+
+      <div class="auto-wizard-steps" id="truckingWizardSteps">
+        <div class="auto-wizard-step active"><span class="step-index">1</span> Business</div>
+        <div class="auto-wizard-step"><span class="step-index">2</span> Vehicles</div>
+        <div class="auto-wizard-step"><span class="step-index">3</span> Coverage</div>
+        <div class="auto-wizard-step"><span class="step-index">4</span> Additional</div>
+        <div class="auto-wizard-step"><span class="step-index">5</span> Review</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
+
+      <form id="truckingAppForm" data-wizard method="POST"
+            action="https://formsubmit.co/office@insaces.com"
+            enctype="multipart/form-data">
+
+        <input type="hidden" name="_subject" value="New Commercial Trucking Application - ACES">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none">
+        <input type="hidden" id="rrEmail" name="rrEmail">
+
+        <!-- STEP 1: BUSINESS -->
+        <div class="form-step active">
+          <h2>Business Information</h2>
+
+          <div class="auto-grid-2">
+            <div class="auto-field"><label>Business Name</label><input name="business_name" required></div>
+            <div class="auto-field"><label>DOT Number</label><input name="dot"></div>
+            <div class="auto-field"><label>MC Number</label><input name="mc"></div>
+            <div class="auto-field"><label>Phone</label><input name="business_phone" required></div>
+            <div class="auto-field"><label>Email</label><input type="email" name="business_email" required></div>
+            <div class="auto-field auto-field-full"><label>Address</label><input name="business_address" required></div>
+            <div class="auto-field"><label>City</label><input name="city" required></div>
+            <div class="auto-field"><label>State</label><input name="state" required></div>
+            <div class="auto-field"><label>ZIP</label><input name="zip" required></div>
+          </div>
+
+          <button type="button" data-next-step>Next</button>
+        </div>
+
+        <!-- STEP 2: VEHICLES -->
+        <div class="form-step">
+          <h2>Vehicles</h2>
+
+          <div id="vehicleContainer">
+            <div class="vehicle-row auto-grid-2">
+              <div class="auto-field"><label>Year</label><input name="unit_year[]"></div>
+              <div class="auto-field"><label>Make</label><input name="unit_make[]"></div>
+              <div class="auto-field"><label>Model</label><input name="unit_model[]"></div>
+              <div class="auto-field"><label>VIN</label><input name="unit_vin[]"></div>
+              <div class="auto-field auto-field-full"><label>Unit Type</label><input name="unit_type[]"></div>
+            </div>
+          </div>
+
+          <button type="button" id="addVehicleBtn">Add Another Vehicle</button>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              const container = document.getElementById("vehicleContainer");
+              document.getElementById("addVehicleBtn").addEventListener("click", () => {
+                const clone = container.firstElementChild.cloneNode(true);
+                clone.querySelectorAll("input").forEach(i => i.value = "");
+                container.appendChild(clone);
+              });
+            });
+          </script>
+
+          <button type="button" data-prev-step>Back</button>
+          <button type="button" data-next-step>Next</button>
+        </div>
+
+        <!-- STEP 3: COVERAGE -->
+        <div class="form-step">
+          <h2>Coverage Options</h2>
+
+          <div class="auto-grid-2">
+            <div class="auto-field"><label>Liability Limit</label><input name="liability"></div>
+            <div class="auto-field"><label>Cargo Limit</label><input name="cargo"></div>
+            <div class="auto-field"><label>Physical Damage</label><input name="physical_damage"></div>
+            <div class="auto-field"><label>Radius of Operation</label><input name="radius"></div>
+            <div class="auto-field auto-field-full"><label>Trailer Coverage</label><input name="trailer_coverage"></div>
+            <div class="auto-field auto-field-full"><label>Notes</label><textarea name="notes"></textarea></div>
+          </div>
+
+          <button type="button" data-prev-step>Back</button>
+          <button type="button" data-next-step>Next</button>
+        </div>
+
+        <!-- STEP 4: ADDITIONAL INFO -->
+        <div class="form-step">
+          <h2>Additional Information</h2>
+
+          <div class="auto-grid-2">
+            <div class="auto-field"><label>Years in Business</label><input name="years_business"></div>
+            <div class="auto-field"><label>Driver Count</label><input name="driver_count"></div>
+            <div class="auto-field auto-field-full"><label>Safety Program</label><input name="safety_program"></div>
+          </div>
+
+          <button type="button" data-prev-step>Back</button>
+          <button type="button" data-next-step>Next</button>
+        </div>
+
+        <!-- STEP 5: REVIEW -->
+        <div class="form-step">
+          <h2>Review Your Information</h2>
+
+          <h3>Business Information</h3>
+          <ul id="reviewBusiness"></ul>
+
+          <h3>Vehicles</h3>
+          <ul id="reviewVehicles"></ul>
+
+          <h3>Coverage</h3>
+          <ul id="reviewCoverage"></ul>
+
+          <h3>Additional Information</h3>
+          <ul id="reviewAdditional"></ul>
+
+          <div class="consent-box">
+            <label><input type="checkbox" id="consentCheckbox"> I confirm the information provided is accurate.</label>
+          </div>
+
+          <button type="button" data-prev-step>Back</button>
+          <button type="submit">Submit Application</button>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<footer id="aces-footer"></footer>
+</body>
+</html>
