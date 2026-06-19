@@ -1981,7 +1981,7 @@ section {
 }
 
 /* ============================================================
-   HOME HERO — STOREFRONT VERSION (FINAL)
+   HOME HERO — STOREFRONT VERSION (FINAL FIXED)
 ============================================================ */
 
 /* Main Hero Wrapper */
@@ -1990,10 +1990,9 @@ section {
   height: 600px;
   overflow: hidden;
 
-  background: url('Icons/storefront.jpg') center center no-repeat;
-  .home-hero {
-  background-size: 120%; /* adjust between 100%–150% */
-};
+  background: url('Icons/storefront.jpg') center top no-repeat;
+  background-size: 115%; /* zoom OUT slightly */
+  background-color: #000;
 
   padding: 140px 20px;
   text-align: left;
@@ -2018,11 +2017,13 @@ section {
 
 /* LEFT COLUMN */
 .hero-left {
+  flex: 1; /* prevents quote box from being squished */
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 20px;
   max-width: 600px;
+  color: #ffffff;
 }
 
 /* Logo */
@@ -2060,11 +2061,19 @@ section {
 
 /* Quote Box (Right Side) */
 .quote-box {
-  max-width: 420px;
+  max-width: 360px; /* medium size */
+  width: 100%;
+  flex-shrink: 0; /* prevents squishing */
   background: #ffffffdd;
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  color: #111;
+}
+
+/* Force all text inside quote box to be black */
+.quote-box * {
+  color: #111 !important;
 }
 
 /* ============================================================
@@ -2093,6 +2102,7 @@ section {
     height: auto;
     padding: 80px 20px;
     text-align: center;
+    background-size: cover; /* better for mobile */
   }
 
   .home-hero-inner {
@@ -2102,13 +2112,13 @@ section {
     gap: 30px;
   }
 
-  .hero-logo {
-    width: 200px;
-    margin: 0 auto;
+  .hero-left {
+    align-items: center;
+    text-align: center;
   }
 
-  .hero-text {
-    max-width: 100%;
+  .hero-logo {
+    width: 200px;
   }
 
   .hero-buttons {
