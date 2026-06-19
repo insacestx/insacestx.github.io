@@ -626,20 +626,17 @@ section {
 
 /* Icon Wrapper */
 .app-icon {
-  background: rgba(212, 0, 0, 0.08);
-  border-radius: 50%;
-  padding: 14px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   width: 72px;
   height: 72px;
 
+  background: none;
+  border-radius: 0;
+  padding: 0;
+
+  display: block;
   margin: 0 auto 12px;
 
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 /* Icon Image / SVG */
