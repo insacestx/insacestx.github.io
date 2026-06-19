@@ -2105,36 +2105,45 @@ section {
     inset: 0;
 
     background:
-      linear-gradient(
-        90deg,
-        rgba(0,0,0,.55) 0%,
-        rgba(0,0,0,.35) 50%,
-        rgba(0,0,0,.20) 100%
-      );
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.55) 0%,
+            rgba(0,0,0,.35) 50%,
+            rgba(0,0,0,.20) 100%
+        );
 
     z-index: 1;
 }
 
-/* Building image */
-/* FOREGROUND IMAGE (image2.png) — ZOOM + CROP ADJUSTED */
+/* ============================================================
+   FOREGROUND BUILDING IMAGE
+============================================================ */
+
 .hero-foreground {
-  position: absolute;
-  left: 0;
-  top: 55%; /* moves image upward to show more of the building */
-  transform: translateY(-50%);
-  width: 600px; /* zoom level increased */
-  max-width: 48%;
-  z-index: 1;
-  opacity: 1;
-  pointer-events: none;
+    position: absolute;
+    left: -30px;
+    top: 55%;
+    transform: translateY(-50%);
+
+    width: 500px;
+    max-width: 38%;
+
+    height: auto;
+
+    z-index: 2;
+    opacity: 1;
+    pointer-events: none;
 }
 
-/* Main content wrapper */
+/* ============================================================
+   HERO CONTENT WRAPPER
+============================================================ */
+
 .home-hero-inner {
     position: relative;
     z-index: 3;
 
-    max-width: 1300px;
+    max-width: 1450px;
     margin: 0 auto;
 
     height: 100%;
@@ -2143,58 +2152,101 @@ section {
     align-items: center;
     justify-content: space-between;
 
-    gap: 60px;
-    padding: 0 20px;
+    gap: 80px;
+    padding: 0 30px;
 }
 
-/* LEFT SIDE */
+/* ============================================================
+   LEFT SIDE
+============================================================ */
+
 .hero-left {
-  flex: 0;
-  text-align: center;
-  padding-top: 10px;
+    flex: 1;
+    max-width: 650px;
+
+    margin-left: -60px;
+
+    text-align: center;
 }
+
+/* Larger ACES logo */
 
 .hero-logo {
-  display: block;
-  margin: 0 auto 25px;
-  width: 170px;
+    display: block;
+    margin: 0 auto 25px;
+
+    width: 280px;
+    max-width: none;
+    height: auto;
 }
 
-/* TEXT SPACING + CONTRAST */
+/* Headline */
+
 .home-hero h1 {
-  color: #ffffff;
-  margin-bottom: 15px;
-  text-shadow: 0 3px 6px rgba(0,0,0,0.45);
+    color: #ffffff !important;
+
+    font-size: clamp(2.8rem, 4vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+
+    margin-bottom: 18px;
+
+    text-shadow:
+        0 4px 12px rgba(0,0,0,.55);
 }
+
+/* Subheadline */
 
 .home-hero p {
-  color: #ffffff;
-  font-size: 1.15rem;
-  margin-bottom: 25px;
-  text-shadow: 0 3px 6px rgba(0,0,0,0.45);
+    color: #ffffff;
+
+    font-size: 1.15rem;
+    line-height: 1.7;
+
+    margin-bottom: 28px;
+
+    text-shadow:
+        0 3px 8px rgba(0,0,0,.45);
 }
 
-/* BUTTON SPACING */
+/* Buttons */
+
 .hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
 }
 
-/* RIGHT SIDE */
+/* ============================================================
+   RIGHT SIDE
+============================================================ */
+
 .hero-right {
-  flex: 0;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+    flex: 0 0 430px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    margin-right: 25px;
 }
 
-/* QUICK QUOTE BOX ALIGNMENT */
+/* Quote Box */
+
 .quick-quote-box {
-  max-width: 420px;
-  margin-top: 10px;
+    width: 100%;
+    max-width: 420px;
+    margin-top: 10px;
 }
+
+/* Prevent image stretching */
+
+.home-hero img {
+    max-width: 100%;
+    height: auto;
+}
+
 /* ============================================================
    TABLET
 ============================================================ */
@@ -2206,17 +2258,28 @@ section {
         padding: 80px 20px;
     }
 
-    .hero-foreground {
-        width: 500px;
-        max-width: 50%;
+    .home-hero-inner {
+        gap: 40px;
     }
 
-    .home-hero-inner {
-        gap: 30px;
+    .hero-left {
+        margin-left: 0;
+        max-width: 100%;
+    }
+
+    .hero-logo {
+        width: 240px;
+    }
+
+    .hero-foreground {
+        width: 420px;
+        max-width: 40%;
+        left: -10px;
     }
 
     .hero-right {
         flex: 0 0 380px;
+        margin-right: 0;
     }
 }
 
@@ -2234,14 +2297,17 @@ section {
     .home-hero-inner {
         flex-direction: column;
         text-align: center;
+        gap: 30px;
     }
 
     .hero-left {
+        margin-left: 0;
         max-width: 100%;
     }
 
-    .hero-buttons {
-        justify-content: center;
+    .hero-logo {
+        width: 220px;
+        margin: 0 auto 20px;
     }
 
     .hero-right {
@@ -2250,20 +2316,27 @@ section {
         justify-content: center;
     }
 
+    .quick-quote-box {
+        max-width: 100%;
+    }
+
     .hero-foreground {
         position: relative;
+
+        left: auto;
+        top: auto;
+
+        transform: none;
 
         width: 320px;
         max-width: 80%;
 
-        left: auto;
-        bottom: auto;
+        margin: 0 auto 20px;
 
-        margin: 0 auto 25px;
         display: block;
     }
 
-    .hero-logo {
-        margin: 0 auto 20px;
+    .home-hero h1 {
+        font-size: 2.4rem;
     }
 }
