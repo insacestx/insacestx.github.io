@@ -10,7 +10,34 @@
 
   <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script src="/applications/auto.js" defer></script>
+  <script>
+    function buildReview() {
+  fill("reviewPersonal", [
+    { label: "First Name", value: val("first_name") },
+    { label: "Last Name", value: val("last_name") },
+    { label: "DOB", value: val("dob") },
+    { label: "Phone", value: val("phone") },
+    { label: "Email", value: val("email") },
+    { label: "Address", value: val("address") },
+    { label: "City", value: val("city") },
+    { label: "State", value: val("state") },
+    { label: "ZIP", value: val("zip") }
+  ]);
+
+  fill("reviewVehicles", window.collectVehicles?.() || []);
+  fill("reviewDrivers", window.collectDrivers?.() || []);
+
+  fill("reviewCoverage", [
+    { label: "Liability Limits", value: val("liability_limits") },
+    { label: "Comp/Collision", value: val("comp_collision") },
+    { label: "Deductible", value: val("deductible") },
+    { label: "Rental", value: val("rental") },
+    { label: "Roadside", value: val("roadside") },
+    { label: "UM/UIM", value: val("um_uim") },
+    { label: "Notes", value: val("additional_notes") }
+  ]);
+}
+</script>
 </head>
 
 <body>
