@@ -199,108 +199,118 @@
 <header id="aces-header"></header>
 
 <!-- ============================================================
-     HERO
+     HERO — UPDATED WITH LOGO + QUICK QUOTE ON RIGHT
 ============================================================ -->
 <section class="home-hero">
   <div class="home-hero-inner">
-    <h1 data-en="Your Trusted Texas Independent Insurance Agency."
-        data-es="Su Agencia de Seguros Independiente de Confianza en Texas.">
-      Your Trusted Texas Independent Insurance Agency.
-    </h1>
 
-    <p data-en="Independent. Bilingual. Local. Serving Texans with honesty and expertise."
-       data-es="Independientes. Bilingües. Locales. Sirviendo a los tejanos con honestidad y experiencia.">
-      Independent. Bilingual. Local. Serving Texans with honesty and expertise.
-    </p>
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <img src="Icons/ACES-Logo.png" alt="ACES Insurance Services Logo" class="hero-logo">
 
-    <div class="hero-buttons">
-      <button class="hero-btn scroll-to-quote"
-              data-en="Get a Quote" data-es="Obtener una Cotización">
-        Get a Quote
-      </button>
+      <h1 data-en="Your Trusted Texas Independent Insurance Agency."
+          data-es="Su Agencia de Seguros Independiente de Confianza en Texas.">
+        Your Trusted Texas Independent Insurance Agency.
+      </h1>
 
-      <a href="applications.html" class="hero-btn"
-         data-en="Start an Application" data-es="Comenzar una Solicitud">Start an Application</a>
+      <p data-en="Independent. Bilingual. Local. Serving Texans with honesty and expertise."
+         data-es="Independientes. Bilingües. Locales. Sirviendo a los tejanos con honestidad y experiencia.">
+        Independent. Bilingual. Local. Serving Texans with honesty and expertise.
+      </p>
 
-      <a href="contact.html" class="hero-btn"
-         data-en="Contact Us" data-es="Contáctenos">Contact Us</a>
-    </div>
-  </div>
-</section>
+      <div class="hero-buttons">
+        <button class="hero-btn scroll-to-quote"
+                data-en="Get a Quote" data-es="Obtener una Cotización">
+          Get a Quote
+        </button>
 
-<!-- ============================================================
-     QUICK QUOTE BOX
-============================================================ -->
-<section class="quick-quote-section" id="quickQuoteBox">
-    <div class="quick-quote-box fade-in">
-    <h3 data-en="Quick Insurance Quote" data-es="Cotización Rápida de Seguro">
-      Quick Insurance Quote
-    </h3>
+        <a href="applications.html" class="hero-btn"
+           data-en="Start an Application" data-es="Comenzar una Solicitud">
+          Start an Application
+        </a>
 
-    <form action="https://formsubmit.co/office@insaces.com" method="POST" class="quick-quote-form">
-
-      <!-- Round Robin + CC + Redirect -->
-      <input type="hidden" name="_cc" value="office@insaces.com">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-      <input type="hidden" name="_subject" value="New Quick Quote Request">
-      <input type="hidden" id="rrEmail" name="rrEmail">
-
-      <input type="text" name="Full Name" placeholder="Full Name"
-             data-en="Full Name" data-es="Nombre Completo" required>
-
-      <input type="tel" name="Phone" placeholder="Phone Number"
-             data-en="Phone Number" data-es="Número de Teléfono" required>
-
-      <input type="email" name="Email" placeholder="Email Address"
-             data-en="Email Address" data-es="Correo Electrónico" required>
-
-      <select name="Insurance Type" required>
-        <option value="" disabled selected
-                data-en="Select Insurance Type"
-                data-es="Seleccione el Tipo de Seguro">
-          Select Insurance Type
-        </option>
-
-        <option data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</option>
-        <option data-en="Homeowners Insurance" data-es="Seguro de Hogar">Homeowners Insurance</option>
-        <option data-en="Renters Insurance" data-es="Seguro de Inquilinos">Renters Insurance</option>
-        <option data-en="Umbrella Insurance" data-es="Seguro Paraguas">Umbrella Insurance</option>
-        <option data-en="Motorcycle Insurance" data-es="Seguro de Motocicleta">Motorcycle Insurance</option>
-        <option data-en="Boat Insurance" data-es="Seguro de Bote">Boat Insurance</option>
-        <option data-en="RV & Travel Trailer" data-es="Seguro de RV y Remolque">RV & Travel Trailer</option>
-        <option data-en="Condo Insurance" data-es="Seguro de Condominio">Condo Insurance</option>
-        <option data-en="Flood Insurance" data-es="Seguro contra Inundaciones">Flood Insurance</option>
-        <option data-en="ATV & Off-Road" data-es="ATV y Vehículos Todo Terreno">ATV & Off-Road</option>
-        <option data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</option>
-        <option data-en="Commercial Auto" data-es="Auto Comercial">Commercial Auto</option>
-        <option data-en="General Liability" data-es="Responsabilidad Civil General">General Liability</option>
-        <option data-en="Workers Compensation" data-es="Compensación Laboral">Workers Compensation</option>
-        <option data-en="Business Owners Policy (BOP)" data-es="Póliza para Dueños de Negocios (BOP)">Business Owners Policy (BOP)</option>
-        <option data-en="Cyber Liability" data-es="Responsabilidad Cibernética">Cyber Liability</option>
-        <option data-en="Surety Bonds" data-es="Fianzas">Surety Bonds</option>
-      </select>
-
-      <!-- SMS OPT-IN -->
-      <div class="sms-optin">
-        <label class="sms-label">
-          <input type="checkbox" name="SMS Opt-In" required>
-          <span
-            data-en="By checking this box, I consent to receive SMS messages from ACES Insurance Services, including marketing promotions, updates, and informational texts. Message and data rates may apply. Message frequency may vary. You may text HELP for assistance or STOP to opt out at any time. Your phone number will be used solely for communication from ACES Insurance Services and will not be shared with third parties for marketing or promotional purposes."
-            data-es="Al marcar esta casilla, doy mi consentimiento para recibir mensajes SMS de ACES Insurance Services, incluidos promociones de marketing, actualizaciones y mensajes informativos. Pueden aplicarse tarifas de mensajes y datos. La frecuencia de mensajes puede variar. Puede enviar HELP para obtener ayuda o STOP para cancelar en cualquier momento. Su número de teléfono se utilizará únicamente para comunicación de ACES Insurance Services y no se compartirá con terceros para fines de marketing o promoción.">
-            By checking this box, I consent to receive SMS messages from ACES Insurance Services, including marketing promotions, updates, and informational texts. Message and data rates may apply. Message frequency may vary. You may text HELP for assistance or STOP to opt out at any time. Your phone number will be used solely for communication from ACES Insurance Services and will not be shared with third parties for marketing or promotional purposes.
-          </span>
-        </label>
+        <a href="contact.html" class="hero-btn"
+           data-en="Contact Us" data-es="Contáctenos">
+          Contact Us
+        </a>
       </div>
+    </div>
 
-      <!-- SUBMIT BUTTON -->
-      <button type="submit"
-        data-en="Start My Quote"
-        data-es="Comenzar Mi Cotización">
-        Start My Quote
-      </button>
+    <!-- RIGHT SIDE — QUICK QUOTE BOX -->
+    <div class="hero-right">
+      <div class="quick-quote-box fade-in">
 
-    </form>
+        <h3 data-en="Quick Insurance Quote" data-es="Cotización Rápida de Seguro">
+          Quick Insurance Quote
+        </h3>
+
+        <form action="https://formsubmit.co/office@insaces.com"
+              method="POST" class="quick-quote-form">
+
+          <!-- Round Robin + CC + Redirect -->
+          <input type="hidden" name="_cc" value="office@insaces.com">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+          <input type="hidden" name="_subject" value="New Quick Quote Request">
+          <input type="hidden" id="rrEmail" name="rrEmail">
+
+          <input type="text" name="Full Name" placeholder="Full Name"
+                 data-en="Full Name" data-es="Nombre Completo" required>
+
+          <input type="tel" name="Phone" placeholder="Phone Number"
+                 data-en="Phone Number" data-es="Número de Teléfono" required>
+
+          <input type="email" name="Email" placeholder="Email Address"
+                 data-en="Email Address" data-es="Correo Electrónico" required>
+
+          <select name="Insurance Type" required>
+            <option value="" disabled selected
+                    data-en="Select Insurance Type"
+                    data-es="Seleccione el Tipo de Seguro">
+              Select Insurance Type
+            </option>
+
+            <option data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</option>
+            <option data-en="Homeowners Insurance" data-es="Seguro de Hogar">Homeowners Insurance</option>
+            <option data-en="Renters Insurance" data-es="Seguro de Inquilinos">Renters Insurance</option>
+            <option data-en="Umbrella Insurance" data-es="Seguro Paraguas">Umbrella Insurance</option>
+            <option data-en="Motorcycle Insurance" data-es="Seguro de Motocicleta">Motorcycle Insurance</option>
+            <option data-en="Boat Insurance" data-es="Seguro de Bote">Boat Insurance</option>
+            <option data-en="RV & Travel Trailer" data-es="Seguro de RV y Remolque">RV & Travel Trailer</option>
+            <option data-en="Condo Insurance" data-es="Seguro de Condominio">Condo Insurance</option>
+            <option data-en="Flood Insurance" data-es="Seguro contra Inundaciones">Flood Insurance</option>
+            <option data-en="ATV & Off-Road" data-es="ATV y Vehículos Todo Terreno">ATV & Off-Road</option>
+            <option data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</option>
+            <option data-en="Commercial Auto" data-es="Auto Comercial">Commercial Auto</option>
+            <option data-en="General Liability" data-es="Responsabilidad Civil General">General Liability</option>
+            <option data-en="Workers Compensation" data-es="Compensación Laboral">Workers Compensation</option>
+            <option data-en="Business Owners Policy (BOP)" data-es="Póliza para Dueños de Negocios (BOP)">Business Owners Policy (BOP)</option>
+            <option data-en="Cyber Liability" data-es="Responsabilidad Cibernética">Cyber Liability</option>
+            <option data-en="Surety Bonds" data-es="Fianzas">Surety Bonds</option>
+          </select>
+
+          <!-- SMS OPT-IN -->
+          <div class="sms-optin">
+            <label class="sms-label">
+              <input type="checkbox" name="SMS Opt-In" required>
+              <span
+                data-en="By checking this box, I consent to receive SMS messages from ACES Insurance Services..."
+                data-es="Al marcar esta casilla, doy mi consentimiento para recibir mensajes SMS de ACES Insurance Services...">
+                By checking this box, I consent to receive SMS messages from ACES Insurance Services...
+              </span>
+            </label>
+          </div>
+
+          <button type="submit"
+            data-en="Start My Quote"
+            data-es="Comenzar Mi Cotización">
+            Start My Quote
+          </button>
+
+        </form>
+      </div>
+    </div>
+
   </div>
 </section>
 
