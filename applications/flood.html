@@ -10,7 +10,25 @@
 
   <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script src="/applications/flood.js" defer></script>
+  <script>
+    function buildReview() {
+  fill("reviewProperty", [
+    { label: "Address", value: val("address") },
+    { label: "City", value: val("city") },
+    { label: "State", value: val("state") },
+    { label: "ZIP", value: val("zip") },
+    { label: "Elevation", value: val("elevation") },
+    { label: "Flood Zone", value: val("flood_zone") }
+  ]);
+
+  fill("reviewCoverage", [
+    { label: "Building Coverage", value: val("building") },
+    { label: "Contents Coverage", value: val("contents") },
+    { label: "Deductible", value: val("deductible") },
+    { label: "Notes", value: val("notes") }
+  ]);
+}
+</script>
 </head>
 
 <body>
