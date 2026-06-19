@@ -52,48 +52,7 @@ section {
   to   { opacity: 1; transform: translateX(0); }
 }
 
-/* ============================================================
-   HERO SECTIONS
-============================================================ */
 
-.small-hero,
-.auto-hero,
-.page-hero {
-  background: radial-gradient(circle at top, #ffe5e5 0, #ffffff 60%);
-  text-align: center;
-}
-
-.small-hero {
-  padding: 80px 20px 60px;
-}
-
-.auto-hero,
-.page-hero {
-  padding: 60px 20px;
-}
-
-.small-hero-content,
-.auto-hero-inner,
-.page-hero-inner {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.small-hero h1,
-.auto-hero-inner h1,
-.page-hero-inner h1 {
-  font-size: 2.3rem;
-  margin-bottom: 10px;
-  color: #111827;
-}
-
-.small-hero p,
-.auto-hero-inner p,
-.page-hero-inner p {
-  font-size: 1.1rem;
-  color: #4b5563;
-  margin-bottom: 30px;
-}
 
 /* ============================================================
    HEADER — LIGHT THEME
@@ -374,67 +333,6 @@ section {
   }
 
   .claims-hero-inner p {
-    font-size: 1.05rem;
-  }
-}
-
-/* ============================================================
-   HOME HERO — LIGHT THEME WITH IMAGE
-============================================================ */
-
-.home-hero {
-  background-image: url('Icons/home-hero-aces.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  position: relative;
-  padding: 140px 20px;
-  text-align: center;
-  color: #222;
-  overflow: hidden;
-}
-
-/* Light overlay */
-.home-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(2px);
-}
-
-.home-hero-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.home-hero-inner h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #c40000;
-  margin-bottom: 14px;
-}
-
-.home-hero-inner p {
-  font-size: 1.25rem;
-  color: #333;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .home-hero {
-    padding: 100px 20px;
-  }
-
-  .home-hero-inner h1 {
-    font-size: 2.2rem;
-  }
-
-  .home-hero-inner p {
     font-size: 1.05rem;
   }
 }
@@ -2083,250 +1981,130 @@ section {
 }
 
 /* ============================================================
-   ACES HERO 2026
+   HOME HERO — STOREFRONT VERSION (FINAL CLEAN BUILD)
 ============================================================ */
 
+/* Main Hero Wrapper */
 .home-hero {
-    position: relative;
-    height: 600px;
-    overflow: hidden;
+  position: relative;
+  height: 600px;
+  overflow: hidden;
 
-    background: url('Icons/storefront.jpg') center center no-repeat;
-    background-size: cover;
+  background: url('Icons/storefront.jpg') center center no-repeat;
+  background-size: cover;
+
+  padding: 140px 20px;
+  text-align: left;
+  color: #222;
 }
 
-/* Dark overlay for readability */
-.home-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0,0,0,.55) 0%,
-            rgba(0,0,0,.35) 50%,
-            rgba(0,0,0,.20) 100%
-        );
-
-    z-index: 1;
-}
-
-/* ============================================================
-   FOREGROUND BUILDING IMAGE
-============================================================ */
-
-.hero-foreground {
-    position: absolute;
-    left: -30px;
-    top: 55%;
-    transform: translateY(-50%);
-
-    width: 500px;
-    max-width: 38%;
-
-    height: auto;
-
-    z-index: 2;
-    opacity: 1;
-    pointer-events: none;
-}
-
-/* ============================================================
-   HERO CONTENT WRAPPER
-============================================================ */
-
+/* Inner Flex Layout */
 .home-hero-inner {
-    position: relative;
-    z-index: 3;
+  position: relative;
+  z-index: 3;
 
-    max-width: 1450px;
-    margin: 0 auto;
+  max-width: 1450px;
+  margin: 0 auto;
 
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 80px;
-    padding: 0 30px;
-}
-
-/* ============================================================
-   LEFT SIDE
-============================================================ */
-
-/* LEFT SIDE */
-.hero-left {
-  flex: 1;
-}
-
-/* Larger ACES logo */
-
-.hero-logo {
-    display: block;
-    margin: 0 auto 25px;
-
-    width: 160px;
-    max-width: none;
-    height: auto;
-}
-
-/* Headline */
-
-.home-hero h1 {
-    color: #ffffff !important;
-
-    font-size: clamp(2.8rem, 4vw, 4.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-
-    margin-bottom: 18px;
-
-    text-shadow:
-        0 4px 12px rgba(0,0,0,.55);
-}
-
-/* Subheadline */
-
-.home-hero p {
-    color: #ffffff;
-
-    font-size: 1.15rem;
-    line-height: 1.7;
-
-    margin-bottom: 28px;
-
-    text-shadow:
-        0 3px 8px rgba(0,0,0,.45);
-}
-
-/* Buttons */
-
-.hero-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-}
-
-/* ============================================================
-   RIGHT SIDE
-============================================================ */
-
-/* RIGHT SIDE */
-.hero-right {
-  flex: 1;
+  height: 100%;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+  padding: 0 30px;
 }
 
-/* Quote Box */
-
-.quick-quote-box {
-    width: 100%;
-    max-width: 420px;
-    margin-top: 10px;
+/* Logo on the Left */
+.hero-logo {
+  width: 260px;
+  height: auto;
+  flex-shrink: 0;
 }
 
-/* Prevent image stretching */
+/* Text Column */
+.hero-text {
+  max-width: 600px;
+}
 
-.home-hero img {
-    max-width: 100%;
-    height: auto;
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #c40000;
+  margin-bottom: 16px;
+}
+
+.hero-text p {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+/* Buttons Row */
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+/* Quote Box (Right Side) */
+.quote-box {
+  max-width: 420px;
+  background: #ffffffdd;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
 }
 
 /* ============================================================
-   TABLET
+   RESPONSIVE — TABLET
 ============================================================ */
-
 @media (max-width: 1024px) {
+  .home-hero-inner {
+    gap: 40px;
+  }
 
-    .home-hero {
-        height: auto;
-        padding: 80px 20px;
-    }
+  .hero-logo {
+    width: 220px;
+  }
 
-    .home-hero-inner {
-        gap: 40px;
-    }
-
-    .hero-left {
-        margin-left: 0;
-        max-width: 100%;
-    }
-
-    .hero-logo {
-        width: 240px;
-    }
-
-    .hero-foreground {
-        width: 420px;
-        max-width: 40%;
-        left: -10px;
-    }
-
-    .hero-right {
-        flex: 0 0 380px;
-        margin-right: 0;
-    }
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
 }
 
 /* ============================================================
-   MOBILE
+   RESPONSIVE — MOBILE
 ============================================================ */
-
 @media (max-width: 768px) {
 
-    .home-hero {
-        height: auto;
-        padding: 60px 20px;
-    }
+  .home-hero {
+    height: auto;
+    padding: 80px 20px;
+    text-align: center;
+  }
 
-    .home-hero-inner {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
-    }
+  .home-hero-inner {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 30px;
+  }
 
-    .hero-left {
-        margin-left: 0;
-        max-width: 100%;
-    }
+  .hero-logo {
+    width: 200px;
+    margin: 0 auto;
+  }
 
-    .hero-logo {
-        width: 220px;
-        margin: 0 auto 20px;
-    }
+  .hero-text {
+    max-width: 100%;
+  }
 
-    .hero-right {
-        width: 100%;
-        flex: auto;
-        justify-content: center;
-    }
+  .hero-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
-    .quick-quote-box {
-        max-width: 100%;
-    }
-
-    .hero-foreground {
-        position: relative;
-
-        left: auto;
-        top: auto;
-
-        transform: none;
-
-        width: 320px;
-        max-width: 80%;
-
-        margin: 0 auto 20px;
-
-        display: block;
-    }
-
-    .home-hero h1 {
-        font-size: 2.4rem;
-    }
+  .quote-box {
+    max-width: 100%;
+    margin-top: 20px;
+  }
 }
