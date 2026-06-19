@@ -10,7 +10,31 @@
 
   <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script src="/applications/rv.js" defer></script>
+  <script>function buildReview() {
+  fill("reviewPersonal", [
+    { label: "First Name", value: val("first_name") },
+    { label: "Last Name", value: val("last_name") },
+    { label: "Phone", value: val("phone") },
+    { label: "Email", value: val("email") }
+  ]);
+
+  fill("reviewRV", [
+    { label: "Year", value: val("rv_year") },
+    { label: "Make", value: val("rv_make") },
+    { label: "Model", value: val("rv_model") },
+    { label: "VIN", value: val("rv_vin") },
+    { label: "RV Type", value: val("rv_type") }
+  ]);
+
+  fill("reviewCoverage", [
+    { label: "Liability", value: val("liability") },
+    { label: "Comp/Collision", value: val("comp_collision") },
+    { label: "Vacation Liability", value: val("vacation_liability") },
+    { label: "Personal Effects", value: val("personal_effects") },
+    { label: "Notes", value: val("notes") }
+  ]);
+}
+</script>
 </head>
 
 <body>
