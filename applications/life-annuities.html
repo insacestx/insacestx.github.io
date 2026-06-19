@@ -11,7 +11,30 @@
 
 <link rel="stylesheet" href="../style.css">
 <script src="../global.js" defer></script>
-<script src="life.js" defer></script>
+<script>function buildReview() {
+  fill("reviewPersonal", [
+    { label: "First Name", value: val("first_name") },
+    { label: "Last Name", value: val("last_name") },
+    { label: "DOB", value: val("dob") },
+    { label: "Phone", value: val("phone") },
+    { label: "Email", value: val("email") }
+  ]);
+
+  fill("reviewHealth", [
+    { label: "Height", value: val("height") },
+    { label: "Weight", value: val("weight") },
+    { label: "Tobacco Use", value: val("tobacco") },
+    { label: "Medical Conditions", value: val("conditions") }
+  ]);
+
+  fill("reviewCoverage", [
+    { label: "Coverage Amount", value: val("coverage_amount") },
+    { label: "Term Length", value: val("term_length") },
+    { label: "Beneficiary", value: val("beneficiary") },
+    { label: "Notes", value: val("notes") }
+  ]);
+}
+</script>
 </head>
 
 <body>
