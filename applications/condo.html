@@ -10,7 +10,34 @@
 
   <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script src="/applications/condo.js" defer></script>
+  <script>
+    function buildReview() {
+  fill("reviewPersonal", [
+    { label: "First Name", value: val("first_name") },
+    { label: "Last Name", value: val("last_name") },
+    { label: "Phone", value: val("phone") },
+    { label: "Email", value: val("email") }
+  ]);
+
+  fill("reviewProperty", [
+    { label: "Address", value: val("address") },
+    { label: "City", value: val("city") },
+    { label: "State", value: val("state") },
+    { label: "ZIP", value: val("zip") },
+    { label: "Unit Number", value: val("unit_number") },
+    { label: "Square Feet", value: val("sqft") },
+    { label: "Year Built", value: val("year_built") }
+  ]);
+
+  fill("reviewCoverage", [
+    { label: "Dwelling (Interior) Coverage", value: val("dwelling") },
+    { label: "Personal Property", value: val("personal_property") },
+    { label: "Liability", value: val("liability") },
+    { label: "Deductible", value: val("deductible") },
+    { label: "Notes", value: val("notes") }
+  ]);
+}
+</script>
 </head>
 
 <body>
