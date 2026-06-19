@@ -2157,13 +2157,9 @@ section {
    LEFT SIDE
 ============================================================ */
 
+/* LEFT SIDE */
 .hero-left {
-    flex: 1;
-    max-width: 650px;
-
-    margin-left: -60px;
-
-    text-align: center;
+  flex: 1;
 }
 
 /* Larger ACES logo */
@@ -2172,7 +2168,7 @@ section {
     display: block;
     margin: 0 auto 25px;
 
-    width: 280px;
+    width: 160px;
     max-width: none;
     height: auto;
 }
@@ -2219,14 +2215,11 @@ section {
    RIGHT SIDE
 ============================================================ */
 
+/* RIGHT SIDE */
 .hero-right {
-    flex: 0 0 430px;
-
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-
-    margin-right: 25px;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* Quote Box */
