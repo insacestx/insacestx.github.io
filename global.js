@@ -213,6 +213,12 @@ function applyLanguage(lang) {
   if (langBtn) langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
 }
 
+if (currentLang === "es") {
+  document.getElementById("heroImage").src = "Icons/hero-services-commercialproperty-es.png";
+} else {
+  document.getElementById("heroImage").src = "Icons/hero-services-commercialproperty-en.png";
+}
+
 /* ============================================================
    ACTIVE NAV
 ============================================================ */
