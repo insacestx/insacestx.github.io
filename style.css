@@ -2086,7 +2086,7 @@ section {
 }
 
 /* ============================================================
-   HERO — CLEANED + FIXED
+   HERO — FULL RESPONSIVE VERSION WITH BACKGROUND + FOREGROUND
 ============================================================ */
 
 /* HERO BACKGROUND */
@@ -2095,6 +2095,16 @@ section {
   position: relative;
   padding: 80px 20px;
   overflow: hidden;
+  min-height: 520px;
+}
+
+/* OPTIONAL SOFT OVERLAY FOR TEXT READABILITY */
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.0); /* adjust 0.0–0.25 if needed */
+  z-index: 1;
 }
 
 /* HERO INNER LAYOUT */
@@ -2115,10 +2125,11 @@ section {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 520px;      /* adjust size here */
-  max-width: 40%;    /* keeps it responsive */
-  z-index: 1;        /* sits above background but behind text */
+  width: 520px;
+  max-width: 40%;
+  z-index: 1;
   opacity: 1;
+  pointer-events: none;
 }
 
 /* LEFT SIDE */
@@ -2141,4 +2152,89 @@ section {
 /* QUICK QUOTE BOX WIDTH */
 .quick-quote-box {
   max-width: 420px;
+}
+
+/* ============================================================
+   TABLET RESPONSIVE (768px–1024px)
+============================================================ */
+@media (max-width: 1024px) {
+  .hero-foreground {
+    width: 420px;
+    max-width: 45%;
+    opacity: 0.9;
+  }
+
+  .home-hero-inner {
+    gap: 30px;
+  }
+
+  .hero-logo {
+    width: 140px;
+  }
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE (under 768px)
+============================================================ */
+@media (max-width: 768px) {
+
+  .home-hero {
+    padding: 60px 20px;
+    min-height: auto;
+  }
+
+  /* Stack hero content vertically */
+  .home-hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Foreground image moves to top and shrinks */
+  .hero-foreground {
+    position: relative;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    max-width: 70%;
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+
+  .hero-left {
+    max-width: 100%;
+  }
+
+  .hero-right {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .quick-quote-box {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .hero-logo {
+    width: 130px;
+  }
+}
+
+/* ============================================================
+   SMALL MOBILE (under 480px)
+============================================================ */
+@media (max-width: 480px) {
+
+  .hero-foreground {
+    width: 240px;
+    max-width: 80%;
+  }
+
+  .hero-logo {
+    width: 120px;
+  }
+
+  .home-hero {
+    padding: 50px 15px;
+  }
 }
