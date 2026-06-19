@@ -1990,16 +1990,19 @@ section {
   height: 600px;
   overflow: hidden;
 
-  background: url('Icons/storefront.jpg') center top no-repeat;
-  background-size: 110%; /* zoom OUT slightly */
-  background-color: #000; /* fills edges if needed */
+  background: url('Icons/storefront.jpg') center center no-repeat;
+  background-size: cover;
 
   padding: 140px 20px;
-  color: #ffffff;
+  text-align: left;
+  color: #222;
 }
 
 /* Inner Flex Layout */
 .home-hero-inner {
+  position: relative;
+  z-index: 3;
+
   max-width: 1450px;
   margin: 0 auto;
 
@@ -2007,7 +2010,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 60px;
+  gap: 80px;
   padding: 0 30px;
 }
 
@@ -2053,14 +2056,13 @@ section {
   gap: 16px;
 }
 
-/* MEDIUM QUOTE BOX */
+/* Quote Box (Right Side) */
 .quote-box {
-  max-width: 340px;
-  background: rgba(255,255,255,0.92);
-  padding: 22px;
+  max-width: 420px;
+  background: #ffffffdd;
+  padding: 24px;
   border-radius: 12px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.12);
-  color: #111;
 }
 
 /* ============================================================
