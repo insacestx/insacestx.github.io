@@ -10,7 +10,22 @@
 
   <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script src="/applications/gl.js" defer></script>
+  <script>
+    function buildReview() {
+  fill("reviewBusiness", [
+    { label: "Business Name", value: val("business_name") },
+    { label: "Industry", value: val("industry") },
+    { label: "Employees", value: val("employees") },
+    { label: "Revenue", value: val("revenue") }
+  ]);
+
+  fill("reviewCoverage", [
+    { label: "GL Limit", value: val("gl_limit") },
+    { label: "Products/Completed Ops", value: val("products_ops") },
+    { label: "Notes", value: val("notes") }
+  ]);
+}
+  </script>
 </head>
 
 <body>
