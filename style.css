@@ -1991,7 +1991,9 @@ section {
   overflow: hidden;
 
   background: url('Icons/storefront.jpg') center center no-repeat;
-  background-size: cover;
+  .home-hero {
+  background-size: 120%; /* adjust between 100%–150% */
+};
 
   padding: 140px 20px;
   text-align: left;
