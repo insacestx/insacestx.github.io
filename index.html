@@ -199,14 +199,18 @@
 <header id="aces-header"></header>
 
 <!-- ============================================================
-     HERO — UPDATED WITH LOGO + QUICK QUOTE ON RIGHT
+     HERO — BACKGROUND + FOREGROUND IMAGE + TEXT + QUOTE BOX
 ============================================================ -->
 <section class="home-hero">
+
+  <!-- Foreground image (left side) -->
+  <img src="image2.png" alt="" class="hero-foreground">
+
   <div class="home-hero-inner">
 
-    <!-- LEFT SIDE -->
+    <!-- LEFT SIDE TEXT -->
     <div class="hero-left">
-      <img src="image2.png" alt="ACES Insurance Services Logo" class="hero-logo">
+      <img src="Icons/ACES-Logo.png" alt="ACES Insurance Services Logo" class="hero-logo">
 
       <h1 data-en="Your Trusted Texas Independent Insurance Agency."
           data-es="Su Agencia de Seguros Independiente de Confianza en Texas.">
@@ -247,7 +251,6 @@
         <form action="https://formsubmit.co/office@insaces.com"
               method="POST" class="quick-quote-form">
 
-          <!-- Round Robin + CC + Redirect -->
           <input type="hidden" name="_cc" value="office@insaces.com">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
@@ -289,13 +292,11 @@
             <option data-en="Surety Bonds" data-es="Fianzas">Surety Bonds</option>
           </select>
 
-          <!-- SMS OPT-IN -->
           <div class="sms-optin">
             <label class="sms-label">
               <input type="checkbox" name="SMS Opt-In" required>
-              <span
-                data-en="By checking this box, I consent to receive SMS messages from ACES Insurance Services..."
-                data-es="Al marcar esta casilla, doy mi consentimiento para recibir mensajes SMS de ACES Insurance Services...">
+              <span data-en="By checking this box, I consent to receive SMS messages from ACES Insurance Services..."
+                    data-es="Al marcar esta casilla, doy mi consentimiento para recibir mensajes SMS de ACES Insurance Services...">
                 By checking this box, I consent to receive SMS messages from ACES Insurance Services...
               </span>
             </label>
@@ -313,6 +314,7 @@
 
   </div>
 </section>
+
 
 <!-- ============================================================
      SERVICES SECTION
