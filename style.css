@@ -1991,7 +1991,7 @@ section {
   overflow: hidden;
 
   background: url('Icons/storefront.jpg') center center no-repeat;
-  background-size: cover;
+  background-size: contain;
 
   padding: 140px 20px;
   text-align: left;
