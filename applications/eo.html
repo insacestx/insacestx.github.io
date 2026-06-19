@@ -10,7 +10,21 @@
 
   <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script src="/applications/eo.js" defer></script>
+  <script function buildReview() {
+  fill("reviewBusiness", [
+    { label: "Business Name", value: val("business_name") },
+    { label: "Industry", value: val("industry") },
+    { label: "Employees", value: val("employees") },
+    { label: "Revenue", value: val("revenue") }
+  ]);
+
+  fill("reviewCoverage", [
+    { label: "E&O Limit", value: val("eo_limit") },
+    { label: "Retro Date", value: val("retro_date") },
+    { label: "Notes", value: val("notes") }
+  ]);
+}
+</script>
 </head>
 
 <body>
