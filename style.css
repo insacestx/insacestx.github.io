@@ -2084,3 +2084,36 @@ section {
     height: 26px;
   }
 }
+
+.home-hero {
+  background: #fff;
+  padding: 60px 20px;
+}
+
+.home-hero-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-logo {
+  width: 160px;
+  margin-bottom: 20px;
+}
+
+.quick-quote-box {
+  max-width: 420px;
+}
