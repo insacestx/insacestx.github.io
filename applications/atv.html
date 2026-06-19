@@ -10,7 +10,32 @@
 
   <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script src="/applications/atv.js" defer></script>
+  <script>
+    function buildReview() {
+  fill("reviewPersonal", [
+    { label: "First Name", value: val("first_name") },
+    { label: "Last Name", value: val("last_name") },
+    { label: "Phone", value: val("phone") },
+    { label: "Email", value: val("email") }
+  ]);
+
+  fill("reviewATV", [
+    { label: "Year", value: val("atv_year") },
+    { label: "Make", value: val("atv_make") },
+    { label: "Model", value: val("atv_model") },
+    { label: "VIN", value: val("atv_vin") },
+    { label: "Vehicle Type", value: val("atv_type") }
+  ]);
+
+  fill("reviewCoverage", [
+    { label: "Liability", value: val("liability") },
+    { label: "Comp/Collision", value: val("comp_collision") },
+    { label: "Medical", value: val("medical") },
+    { label: "Accessories", value: val("accessories") },
+    { label: "Notes", value: val("notes") }
+  ]);
+}
+</script>
 </head>
 
 <body>
