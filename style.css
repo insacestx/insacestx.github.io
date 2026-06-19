@@ -2159,7 +2159,7 @@ section {
     width: 180px;
     height: auto;
     display: block;
-    margin-bottom: 25px;
+    margin: 0 auto 25px;
 }
 
 /* HEADLINE */
