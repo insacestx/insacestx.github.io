@@ -1995,7 +1995,7 @@ section {
 
   padding: 140px 20px;
   text-align: left;
-  color: #222;
+  color: #ffffff;
 }
 
 /* Inner Flex Layout */
@@ -2074,7 +2074,7 @@ section {
   }
 
   .hero-logo {
-    width: 200px;
+    width: 220px;
   }
 
   .hero-text h1 {
@@ -2090,23 +2090,23 @@ section {
   .home-hero {
     height: auto;
     padding: 80px 20px;
-    background-size: cover; /* better for mobile */
-    background-position: center top;
+    text-align: center;
   }
 
   .home-hero-inner {
     flex-direction: column;
+    justify-content: center;
     text-align: center;
     gap: 30px;
   }
 
-  .hero-left {
-    align-items: center;
-    text-align: center;
+  .hero-logo {
+    width: 200px;
+    margin: 0 auto;
   }
 
-  .hero-logo {
-    width: 180px;
+  .hero-text {
+    max-width: 100%;
   }
 
   .hero-buttons {
@@ -2116,6 +2116,6 @@ section {
 
   .quote-box {
     max-width: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
   }
 }
