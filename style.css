@@ -1981,7 +1981,7 @@ section {
 }
 
 /* ============================================================
-   HOME HERO — STOREFRONT VERSION (FINAL FIXED)
+   HOME HERO — STOREFRONT VERSION (UPDATED)
 ============================================================ */
 
 /* Main Hero Wrapper */
@@ -1990,7 +1990,7 @@ section {
   height: 600px;
   overflow: hidden;
 
-  background: url('Icons/storefront.jpg') center top no-repeat;
+  background: url('Icons/storefront.jpg') center 20% no-repeat;
   background-size: 115%; /* zoom OUT slightly */
   background-color: #000;
 
@@ -2010,8 +2010,8 @@ section {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 80px;
+  justify-content: space-between; /* pushes quote box right */
+  gap: 60px;
   padding: 0 30px;
 }
 
@@ -2061,9 +2061,10 @@ section {
 
 /* Quote Box (Right Side) */
 .quote-box {
-  max-width: 360px; /* medium size */
-  width: 100%;
-  flex-shrink: 0; /* prevents squishing */
+  width: 360px;       /* medium size */
+  flex-shrink: 0;     /* prevents squishing */
+  margin-right: 20px; /* pushes it further right */
+
   background: #ffffffdd;
   padding: 24px;
   border-radius: 12px;
@@ -2102,7 +2103,8 @@ section {
     height: auto;
     padding: 80px 20px;
     text-align: center;
-    background-size: cover; /* better for mobile */
+    background-size: cover;
+    background-position: center top;
   }
 
   .home-hero-inner {
@@ -2128,6 +2130,7 @@ section {
 
   .quote-box {
     max-width: 100%;
-    margin-top: 20px;
+    width: 100%;
+    margin: 20px 0 0 0;
   }
 }
