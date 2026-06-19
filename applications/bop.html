@@ -10,7 +10,39 @@
 
   <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script src="/applications/bop.js" defer></script>
+  <script>function buildReview() {
+  fill("reviewBusiness", [
+    { label: "Business Name", value: val("business_name") },
+    { label: "DBA", value: val("dba") },
+    { label: "Business Type", value: val("business_type") },
+    { label: "EIN", value: val("ein") },
+    { label: "Phone", value: val("business_phone") },
+    { label: "Email", value: val("business_email") },
+    { label: "Address", value: val("business_address") },
+    { label: "City", value: val("city") },
+    { label: "State", value: val("state") },
+    { label: "ZIP", value: val("zip") },
+    { label: "Description", value: val("business_description") }
+  ]);
+
+  fill("reviewProperty", [
+    { label: "Building Value", value: val("building_value") },
+    { label: "Contents Value", value: val("contents_value") },
+    { label: "Construction Type", value: val("construction_type") },
+    { label: "Property Notes", value: val("property_notes") }
+  ]);
+
+  fill("reviewLiability", [
+    { label: "GL Limit", value: val("gl_limit") },
+    { label: "Liability Notes", value: val("liability_notes") }
+  ]);
+
+  fill("reviewOperations", [
+    { label: "Operations Description", value: val("operations_description") },
+    { label: "Operations Notes", value: val("operations_notes") }
+  ]);
+}
+</script>
 </head>
 
 <body>
