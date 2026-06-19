@@ -1,193 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-en="Life Insurance Application | ACES Insurance Services"
+          data-es="Solicitud de Seguro de Vida | ACES Insurance Services">
+    Life Insurance Application | ACES Insurance Services
+  </title>
 
-<title data-en="Life Insurance Application | ACES Insurance Services"
-        data-es="Solicitud de Seguro de Vida | ACES Insurance Services">
-  Life Insurance Application | ACES Insurance Services
-</title>
+  <!-- Root‑absolute paths -->
+  <link rel="stylesheet" href="/style.css">
+  <script src="/global.js" defer></script>
 
-<link rel="stylesheet" href="../style.css">
-<script src="../global.js" defer></script>
-<script src="life.js" defer></script>
+  <!-- Require at least one life product -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const nextBtn = document.getElementById("lifeNextBtn");
+      const error = document.getElementById("lifeError");
+
+      nextBtn.addEventListener("click", () => {
+        const selected = [...document.querySelectorAll("input[name='life_products']:checked")];
+        if (selected.length === 0) {
+          error.style.display = "block";
+          return;
+        }
+        error.style.display = "none";
+        document.querySelector("[data-next-step]").click();
+      });
+    });
+  </script>
+
+  <!-- Page‑specific review builder -->
+  <script>
+    function buildReview() {
+      const selectedProducts = [...document.querySelectorAll("input[name='life_products']:checked")]
+        .map(cb => cb.value);
+
+      fill("reviewProducts", selectedProducts.map(p => ({ label: "Product", value: p })));
+
+      fill("reviewPersonal", [
+        { label: "First Name", value: val("first_name") },
+        { label: "Last Name", value: val("last_name") },
+        { label: "DOB", value: val("dob") },
+        { label: "Phone", value: val("phone") },
+        { label: "Email", value: val("email") },
+        { label: "Address", value: val("address") },
+        { label: "City", value: val("city") },
+        { label: "State", value: val("state") },
+        { label: "ZIP", value: val("zip") },
+        { label: "Occupation", value: val("occupation") }
+      ]);
+
+      fill("reviewHealth", [
+        { label: "Height", value: val("height") },
+        { label: "Weight", value: val("weight") },
+        { label: "Tobacco Use", value: val("tobacco") },
+        { label: "Medical Conditions", value: val("conditions") }
+      ]);
+
+      fill("reviewCoverage", [
+        { label: "Coverage Amount", value: val("coverage_amount") },
+        { label: "Term Length", value: val("term_length") },
+        { label: "Beneficiary", value: val("beneficiary") },
+        { label: "Notes", value: val("notes") }
+      ]);
+    }
+  </script>
 </head>
 
 <body>
-<header id="aces-header"></header>
+  <header id="aces-header"></header>
 
-<main class="fade-in">
+  <main class="fade-in">
 
-<!-- HERO -->
-<section class="auto-hero">
-  <div class="auto-hero-inner">
+    <!-- HERO -->
+    <section class="auto-hero">
+      <div class="auto-hero-inner">
+        <h1 data-en="Life Insurance Application" data-es="Solicitud de Seguro de Vida">
+          Life Insurance Application
+        </h1>
 
-    <h1 data-en="Life Insurance Application"
-        data-es="Solicitud de Seguro de Vida">
-      Life Insurance Application
-    </h1>
+        <p data-en="Tell us about your coverage needs. An ACES agent will review and follow up with personalized options."
+           data-es="Cuéntenos sobre sus necesidades de cobertura. Un agente de ACES revisará y le dará opciones personalizadas.">
+          Tell us about your coverage needs. An ACES agent will review and follow up with personalized options.
+        </p>
 
-    <p data-en="Tell us about your coverage needs. An ACES agent will review and follow up with personalized options."
-       data-es="Cuéntenos sobre sus necesidades de cobertura. Un agente de ACES revisará y le dará opciones personalizadas.">
-      Tell us about your coverage needs. An ACES agent will review and follow up with personalized options.
-    </p>
-
-    <!-- Wizard Steps -->
-    <div class="auto-wizard-steps" id="lifeWizardSteps">
-      <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span> Personal</div>
-      <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span> Health</div>
-      <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span> Coverage</div>
-      <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span> Review</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FORM -->
-<section class="auto-app-wrapper">
-  <div class="auto-app-card">
-
-    <form id="lifeAppForm"
-          method="POST"
-          action="https://formsubmit.co/office@insaces.com"
-          enctype="multipart/form-data">
-
-      <input type="hidden" name="_subject" value="New Life Insurance Application - ACES">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="text" name="_honey" style="display:none">
-      <input type="hidden" id="rrEmail" name="rrEmail">
-
-      <!-- STEP 1 -->
-      <div class="form-step active" data-step="1">
-        <h2>Personal Information</h2>
-        <p class="section-subtitle">Tell us about yourself.</p>
-
-        <div class="auto-grid-2">
-          <div class="auto-field"><label>First Name</label><input name="first_name" required></div>
-          <div class="auto-field"><label>Last Name</label><input name="last_name" required></div>
-          <div class="auto-field"><label>Date of Birth</label><input type="date" name="dob" required></div>
-          <div class="auto-field"><label>Gender</label><input name="gender"></div>
-          <div class="auto-field"><label>Phone</label><input name="phone" required></div>
-          <div class="auto-field"><label>Email</label><input type="email" name="email" required></div>
-          <div class="auto-field auto-field-full"><label>Address</label><input name="address" required></div>
-          <div class="auto-field"><label>City</label><input name="city" required></div>
-          <div class="auto-field"><label>State</label><input name="state" required></div>
-          <div class="auto-field"><label>ZIP</label><input name="zip" required></div>
-          <div class="auto-field auto-field-full"><label>Occupation</label><input name="occupation"></div>
+        <!-- Wizard Steps -->
+        <div class="auto-wizard-steps" id="lifeWizardSteps">
+          <div class="auto-wizard-step active" data-step="1"><span class="step-index">1</span> Personal</div>
+          <div class="auto-wizard-step" data-step="2"><span class="step-index">2</span> Products</div>
+          <div class="auto-wizard-step" data-step="3"><span class="step-index">3</span> Health</div>
+          <div class="auto-wizard-step" data-step="4"><span class="step-index">4</span> Coverage</div>
+          <div class="auto-wizard-step" data-step="5"><span class="step-index">5</span> Review</div>
         </div>
-
-        <button type="button" class="next-button" data-next-step>Next</button>
       </div>
+    </section>
 
-      <!-- STEP 2 -->
-      <div class="form-step" data-step="2">
-        <h2>Health Information</h2>
-        <p class="section-subtitle">Tell us about your health background.</p>
+    <!-- FORM -->
+    <section class="auto-app-wrapper">
+      <div class="auto-app-card">
 
-        <div class="auto-grid-2">
-          <div class="auto-field"><label>Height</label><input name="height"></div>
-          <div class="auto-field"><label>Weight</label><input name="weight"></div>
-          <div class="auto-field"><label>Tobacco Use</label><input name="tobacco_use"></div>
-          <div class="auto-field auto-field-full"><label>Medical Conditions</label><input name="medical_conditions"></div>
-        </div>
+        <form id="lifeAppForm" data-wizard method="POST"
+              action="https://formsubmit.co/office@insaces.com"
+              enctype="multipart/form-data">
 
-        <div class="auto-field auto-field-full">
-          <label>Medical Description</label>
-          <textarea name="medical_description" rows="4"></textarea>
-        </div>
+          <input type="hidden" name="_subject" value="New Life Insurance Application - ACES">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" id="rrEmail" name="rrEmail">
 
-        <button type="button" class="prev-button" data-prev-step>Back</button>
-        <button type="button" class="next-button" data-next-step>Next</button>
+          <!-- STEP 1: PERSONAL -->
+          <div class="form-step active" data-step="1">
+            <h2>Personal Information</h2>
+            <p class="section-subtitle">Tell us about yourself.</p>
+
+            <div class="auto-grid-2">
+              <div class="auto-field"><label>First Name</label><input name="first_name" required></div>
+              <div class="auto-field"><label>Last Name</label><input name="last_name" required></div>
+              <div class="auto-field"><label>Date of Birth</label><input type="date" name="dob" required></div>
+              <div class="auto-field"><label>Gender</label><input name="gender"></div>
+              <div class="auto-field"><label>Phone</label><input name="phone" required></div>
+              <div class="auto-field"><label>Email</label><input type="email" name="email" required></div>
+              <div class="auto-field auto-field-full"><label>Address</label><input name="address" required></div>
+              <div class="auto-field"><label>City</label><input name="city" required></div>
+              <div class="auto-field"><label>State</label><input name="state" required></div>
+              <div class="auto-field"><label>ZIP</label><input name="zip" required></div>
+              <div class="auto-field auto-field-full"><label>Occupation</label><input name="occupation"></div>
+            </div>
+
+            <button type="button" data-next-step>Next</button>
+          </div>
+
+          <!-- STEP 2: PRODUCT SELECTION -->
+          <div class="form-step" data-step="2">
+            <h2>Select Life Insurance Products</h2>
+            <p>Please select at least one option below.</p>
+
+            <div class="checkbox-group" id="lifeProducts">
+              <label><input type="checkbox" name="life_products" value="Term Life"> Term Life</label>
+              <label><input type="checkbox" name="life_products" value="Whole Life"> Whole Life</label>
+              <label><input type="checkbox" name="life_products" value="Final Expense"> Final Expense</label>
+              <label><input type="checkbox" name="life_products" value="Mortgage Protection"> Mortgage Protection</label>
+              <label><input type="checkbox" name="life_products" value="Indexed Universal Life (IUL)"> Indexed Universal Life (IUL)</label>
+              <label><input type="checkbox" name="life_products" value="Annuities"> Annuities</label>
+              <label><input type="checkbox" name="life_products" value="Life Settlement"> Life Settlement</label>
+              <label><input type="checkbox" name="life_products" value="Policy Review"> Policy Review</label>
+              <label><input type="checkbox" name="life_products" value="General Life Inquiry"> General Life Inquiry</label>
+            </div>
+
+            <p id="lifeError" style="color:red; display:none;">Please select at least one option.</p>
+
+            <button type="button" id="lifeNextBtn">Next</button>
+          </div>
+
+          <!-- STEP 3: HEALTH -->
+          <div class="form-step" data-step="3">
+            <h2>Health Information</h2>
+
+            <div class="auto-grid-2">
+              <div class="auto-field"><label>Height</label><input name="height"></div>
+              <div class="auto-field"><label>Weight</label><input name="weight"></div>
+              <div class="auto-field auto-field-full"><label>Tobacco Use</label><input name="tobacco"></div>
+              <div class="auto-field auto-field-full"><label>Medical Conditions</label><input name="conditions"></div>
+            </div>
+
+            <button type="button" data-prev-step>Back</button>
+            <button type="button" data-next-step>Next</button>
+          </div>
+
+          <!-- STEP 4: COVERAGE -->
+          <div class="form-step" data-step="4">
+            <h2>Coverage Details</h2>
+
+            <div class="auto-grid-2">
+              <div class="auto-field"><label>Coverage Amount</label><input name="coverage_amount"></div>
+              <div class="auto-field"><label>Term Length</label><input name="term_length"></div>
+              <div class="auto-field auto-field-full"><label>Beneficiary</label><input name="beneficiary"></div>
+              <div class="auto-field auto-field-full"><label>Notes</label><textarea name="notes"></textarea></div>
+            </div>
+
+            <button type="button" data-prev-step>Back</button>
+            <button type="button" data-next-step>Next</button>
+          </div>
+
+          <!-- STEP 5: REVIEW -->
+          <div class="form-step" data-step="5">
+            <h2>Review Your Information</h2>
+
+            <h3>Selected Products</h3>
+            <ul id="reviewProducts"></ul>
+
+            <h3>Personal Information</h3>
+            <ul id="reviewPersonal"></ul>
+
+            <h3>Health Information</h3>
+            <ul id="reviewHealth"></ul>
+
+            <h3>Coverage Details</h3>
+            <ul id="reviewCoverage"></ul>
+
+            <div class="consent-box">
+              <label><input type="checkbox" id="consentCheckbox"> I confirm the information provided is accurate.</label>
+            </div>
+
+            <button type="button" data-prev-step>Back</button>
+            <button type="submit">Submit Application</button>
+          </div>
+
+        </form>
       </div>
+    </section>
 
-      <!-- STEP 3 -->
-      <div class="form-step" data-step="3">
-        <h2>Coverage Details</h2>
-        <p class="section-subtitle">Tell us what type of coverage you need.</p>
+  </main>
 
-        <div class="auto-grid-2">
-          <div class="auto-field">
-            <label>Coverage Type</label>
-            <select name="coverage_type" required>
-              <option value="">Select</option>
-              <option>Term Life</option>
-              <option>Whole Life</option>
-              <option>Final Expense</option>
-              <option>Mortgage Protection</option>
-              <option>IUL / UL</option>
-              <option>Annuities</option>
-            </select>
-          </div>
-
-          <div class="auto-field">
-            <label>Coverage Amount</label>
-            <select name="coverage_amount" required>
-              <option value="">Select</option>
-              <option>$50,000</option>
-              <option>$100,000</option>
-              <option>$250,000</option>
-              <option>$500,000</option>
-              <option>$1,000,000</option>
-            </select>
-          </div>
-
-          <div class="auto-field">
-            <label>Term Length (if applicable)</label>
-            <select name="term_length">
-              <option value="">Select</option>
-              <option>10 Years</option>
-              <option>15 Years</option>
-              <option>20 Years</option>
-              <option>30 Years</option>
-            </select>
-          </div>
-
-          <div class="auto-field auto-field-full">
-            <label>Beneficiaries</label>
-            <textarea name="beneficiaries" rows="3"></textarea>
-          </div>
-
-          <div class="auto-field auto-field-full">
-            <label>Coverage Notes</label>
-            <textarea name="coverage_notes" rows="3"></textarea>
-          </div>
-        </div>
-
-        <button type="button" class="prev-button" data-prev-step>Back</button>
-        <button type="button" class="next-button" data-next-step>Next</button>
-      </div>
-
-      <!-- STEP 4 -->
-      <div class="form-step" data-step="4">
-        <h2>Review & Submit</h2>
-        <p class="section-subtitle">Review your information before submitting.</p>
-
-        <h3>Personal</h3>
-        <ul id="reviewPersonal"></ul>
-
-        <h3>Health</h3>
-        <ul id="reviewHealth"></ul>
-
-        <h3>Coverage</h3>
-        <ul id="reviewCoverage"></ul>
-
-        <label class="consent-label">
-          <input type="checkbox" id="consentCheckbox">
-          I confirm the information provided is accurate.
-        </label>
-
-        <button type="button" class="prev-button" data-prev-step>Back</button>
-        <button type="submit" class="apply-button">Submit Application</button>
-      </div>
-
-    </form>
-
-  </div>
-</section>
-
-</main>
-
-<footer id="aces-footer"></footer>
+  <footer id="aces-footer"></footer>
 </body>
 </html>
