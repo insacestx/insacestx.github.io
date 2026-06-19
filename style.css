@@ -2085,11 +2085,19 @@ section {
   }
 }
 
+/* ============================================================
+   HERO — CLEANED + FIXED
+============================================================ */
+
+/* HERO BACKGROUND */
 .home-hero {
-  background: #fff;
-  padding: 60px 20px;
+  background: url('Icons/storefront.jpg') center center / cover no-repeat;
+  position: relative;
+  padding: 80px 20px;
+  overflow: hidden;
 }
 
+/* HERO INNER LAYOUT */
 .home-hero-inner {
   max-width: 1300px;
   margin: 0 auto;
@@ -2097,16 +2105,25 @@ section {
   align-items: center;
   justify-content: space-between;
   gap: 40px;
+  position: relative;
+  z-index: 2; /* ensures text + quote box stay above images */
 }
 
+/* FOREGROUND IMAGE (image2.png) */
+.hero-foreground {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 520px;      /* adjust size here */
+  max-width: 40%;    /* keeps it responsive */
+  z-index: 1;        /* sits above background but behind text */
+  opacity: 1;
+}
+
+/* LEFT SIDE */
 .hero-left {
   flex: 1;
-}
-
-.hero-right {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .hero-logo {
@@ -2114,13 +2131,14 @@ section {
   margin-bottom: 20px;
 }
 
-.quick-quote-box {
-  max-width: 420px;
+/* RIGHT SIDE */
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.home-hero {
-  background: url('Icons/storefront.jpg') center center / cover no-repeat;
-  position: relative;
-  padding: 80px 20px;
-  overflow: hidden;
+/* QUICK QUOTE BOX WIDTH */
+.quick-quote-box {
+  max-width: 420px;
 }
