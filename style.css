@@ -2084,7 +2084,6 @@ section {
     height: 26px;
   }
 }
-
 /* ============================================================
    HERO — FULL RESPONSIVE VERSION WITH BACKGROUND + FOREGROUND
 ============================================================ */
@@ -2093,9 +2092,9 @@ section {
 .home-hero {
   background: url('Icons/storefront.jpg') center center / cover no-repeat;
   position: relative;
-  padding: 80px 20px;
+  padding: 90px 20px;
   overflow: hidden;
-  min-height: 520px;
+  min-height: 560px;
 }
 
 /* OPTIONAL SOFT OVERLAY FOR TEXT READABILITY */
@@ -2103,7 +2102,11 @@ section {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.0); /* adjust 0.0–0.25 if needed */
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.35),
+    rgba(0,0,0,0.10)
+  );
   z-index: 1;
 }
 
@@ -2114,19 +2117,19 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
+  gap: 50px;
   position: relative;
-  z-index: 2; /* ensures text + quote box stay above images */
+  z-index: 2;
 }
 
-/* FOREGROUND IMAGE (image2.png) */
+/* FOREGROUND IMAGE (image2.png) — ZOOM + CROP ADJUSTED */
 .hero-foreground {
   position: absolute;
   left: 0;
-  top: 50%;
+  top: 45%; /* moves image upward to show more of the building */
   transform: translateY(-50%);
-  width: 520px;
-  max-width: 40%;
+  width: 650px; /* zoom level increased */
+  max-width: 48%;
   z-index: 1;
   opacity: 1;
   pointer-events: none;
@@ -2134,12 +2137,37 @@ section {
 
 /* LEFT SIDE */
 .hero-left {
+  flex: 1;
   text-align: center;
+  padding-top: 10px;
 }
 
 .hero-logo {
   display: block;
-  margin: 0 auto 20px;
+  margin: 0 auto 25px;
+  width: 170px;
+}
+
+/* TEXT SPACING + CONTRAST */
+.home-hero h1 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-shadow: 0 3px 6px rgba(0,0,0,0.45);
+}
+
+.home-hero p {
+  color: #ffffff;
+  font-size: 1.15rem;
+  margin-bottom: 25px;
+  text-shadow: 0 3px 6px rgba(0,0,0,0.45);
+}
+
+/* BUTTON SPACING */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
 }
 
 /* RIGHT SIDE */
@@ -2147,29 +2175,37 @@ section {
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  align-items: flex-start;
 }
 
-/* QUICK QUOTE BOX WIDTH */
+/* QUICK QUOTE BOX ALIGNMENT */
 .quick-quote-box {
   max-width: 420px;
+  margin-top: 10px;
 }
 
 /* ============================================================
    TABLET RESPONSIVE (768px–1024px)
 ============================================================ */
 @media (max-width: 1024px) {
+
   .hero-foreground {
-    width: 420px;
-    max-width: 45%;
-    opacity: 0.9;
+    width: 520px;
+    max-width: 55%;
+    top: 48%;
+    opacity: 0.95;
   }
 
   .home-hero-inner {
-    gap: 30px;
+    gap: 35px;
   }
 
   .hero-logo {
-    width: 140px;
+    width: 150px;
+  }
+
+  .quick-quote-box {
+    max-width: 380px;
   }
 }
 
@@ -2179,7 +2215,7 @@ section {
 @media (max-width: 768px) {
 
   .home-hero {
-    padding: 60px 20px;
+    padding: 70px 20px;
     min-height: auto;
   }
 
@@ -2187,6 +2223,7 @@ section {
   .home-hero-inner {
     flex-direction: column;
     text-align: center;
+    gap: 25px;
   }
 
   /* Foreground image moves to top and shrinks */
@@ -2195,10 +2232,10 @@ section {
     top: auto;
     left: 50%;
     transform: translateX(-50%);
-    width: 300px;
-    max-width: 70%;
+    width: 360px;
+    max-width: 80%;
     margin-bottom: 20px;
-    opacity: 0.9;
+    opacity: 0.95;
   }
 
   .hero-left {
@@ -2212,11 +2249,11 @@ section {
 
   .quick-quote-box {
     max-width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   .hero-logo {
-    width: 130px;
+    width: 140px;
   }
 }
 
@@ -2226,15 +2263,19 @@ section {
 @media (max-width: 480px) {
 
   .hero-foreground {
-    width: 240px;
-    max-width: 80%;
+    width: 260px;
+    max-width: 85%;
   }
 
   .hero-logo {
-    width: 120px;
+    width: 125px;
   }
 
   .home-hero {
-    padding: 50px 15px;
+    padding: 55px 15px;
+  }
+
+  .home-hero p {
+    font-size: 1.05rem;
   }
 }
