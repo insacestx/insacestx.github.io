@@ -2149,7 +2149,7 @@ section {
 
 /* LEFT SIDE */
 .hero-left {
-  flex: 1;
+  flex: 0;
   text-align: center;
   padding-top: 10px;
 }
@@ -2184,7 +2184,7 @@ section {
 
 /* RIGHT SIDE */
 .hero-right {
-  flex: 1;
+  flex: 0;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
