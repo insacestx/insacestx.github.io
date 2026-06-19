@@ -2117,3 +2117,10 @@ section {
 .quick-quote-box {
   max-width: 420px;
 }
+
+.home-hero {
+  background: url('Icons/storefront.jpg') center center / cover no-repeat;
+  position: relative;
+  padding: 80px 20px;
+  overflow: hidden;
+}
