@@ -10,7 +10,26 @@
 
   <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script src="/applications/commercial-property.js" defer></script>
+  <script>function buildReview() {
+  fill("reviewBusiness", [
+    { label: "Business Name", value: val("business_name") },
+    { label: "Phone", value: val("business_phone") },
+    { label: "Email", value: val("business_email") }
+  ]);
+
+  fill("reviewProperty", [
+    { label: "Building Value", value: val("building_value") },
+    { label: "Contents Value", value: val("contents_value") },
+    { label: "Construction Type", value: val("construction_type") },
+    { label: "Year Built", value: val("year_built") }
+  ]);
+
+  fill("reviewCoverage", [
+    { label: "Deductible", value: val("deductible") },
+    { label: "Notes", value: val("notes") }
+  ]);
+}
+</script>
 </head>
 
 <body>
