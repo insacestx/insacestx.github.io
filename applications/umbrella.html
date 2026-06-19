@@ -10,7 +10,21 @@
 
   <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script src="/applications/umbrella.js" defer></script>
+  <script>
+    function buildReview() {
+  fill("reviewPersonal", [
+    { label: "First Name", value: val("first_name") },
+    { label: "Last Name", value: val("last_name") },
+    { label: "Phone", value: val("phone") },
+    { label: "Email", value: val("email") }
+  ]);
+
+  fill("reviewCoverage", [
+    { label: "Umbrella Limit", value: val("umbrella_limit") },
+    { label: "Notes", value: val("notes") }
+  ]);
+}
+</script>
 </head>
 
 <body>
