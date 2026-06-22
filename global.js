@@ -273,16 +273,24 @@ function initAgentPanel() {
   if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) return;
 
   cards.forEach(card => {
-    card.addEventListener("click", () => {
-      photo.src = card.dataset.photo || "";
-      nameEl.textContent = card.dataset.name || "";
-      titleEl.textContent = card.dataset.title || "";
-      phoneEl.textContent = card.dataset.phone || "";
-      emailEl.textContent = card.dataset.email || "";
-      callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
-      panel.classList.add("open");
-    });
+  card.addEventListener("click", () => {
+
+    console.log("Clicked:", card.dataset.name);
+
+    photo.src = card.dataset.photo || "";
+    nameEl.textContent = card.dataset.name || "";
+    titleEl.textContent = card.dataset.title || "";
+    phoneEl.textContent = card.dataset.phone || "";
+    emailEl.textContent = card.dataset.email || "";
+
+    callBtn.href =
+      `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
+
+    panel.classList.add("open");
+
+    console.log("Panel opened");
   });
+});
 
   closeBtn.addEventListener("click", () => panel.classList.remove("open"));
   panel.addEventListener("click", e => {
