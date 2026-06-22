@@ -1,260 +1,235 @@
 /* ============================================================
-ACES 2026 — UNIVERSAL WIZARD ENGINE
+   ACES UNIVERSAL WIZARD ENGINE
 ============================================================ */
 
-const acesWizard = {
+const ACESWizard = {
 
-currentStep: 0,
-steps: [],
-progressFill: null,
-desktopTabs: [],
-mobileSteps: [],
-repeaters: {},
+  currentStep: 0,
+  steps: [],
+  indicators: [],
+  form: null,
 
-init() {
+  init() {
 
-```
-this.steps =
-  Array.from(document.querySelectorAll(".aces-wizard-card"));
+    this.form = document.querySelector(".aces-form");
 
-this.desktopTabs =
-  Array.from(document.querySelectorAll(".aces-wizard-tab"));
+    if (!this.form) return;
 
-this.mobileSteps =
-  Array.from(document.querySelectorAll(".aces-wizard-mobile-step"));
+    this.steps = [
+      ...document.querySelectorAll(".form-step")
+    ];
 
-this.progressFill =
-  document.querySelector(".aces-wizard-progress-fill");
+    this.indicators = [
+      ...document.querySelectorAll(".aces-wizard-step")
+    ];
 
-this.attachEvents();
-this.showStep(0);
-```
+    this.attachEvents();
 
-},
+    this.showStep(0);
 
-showStep(index) {
+    console.log("ACES Wizard Loaded");
+  },
 
-```
-this.currentStep = index;
+  /* ============================================================
+     STEP DISPLAY
+  ============================================================ */
 
-this.steps.forEach((step, i) => {
-  step.classList.toggle("active", i === index);
-});
+  showStep(index) {
 
-this.desktopTabs.forEach((tab, i) => {
-  tab.classList.toggle("active", i === index);
-});
+    this.currentStep = index;
 
-this.mobileSteps.forEach((step, i) => {
-  step.classList.toggle("active", i === index);
-});
+    this.steps.forEach((step,i)=>{
+      step.classList.toggle("active", i===index);
+    });
 
-if (this.progressFill) {
+    this.indicators.forEach((step,i)=>{
+      step.classList.toggle("active", i===index);
+    });
 
-  const percent =
-    (index / (this.steps.length - 1)) * 100;
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+  },
 
-  this.progressFill.style.width = percent + "%";
-}
-```
+  /* ============================================================
+     NEXT
+  ============================================================ */
 
-},
+  next() {
 
-nextStep() {
+    if(!this.validateStep()) return;
 
-```
-if (!this.validateStep(this.currentStep)) {
-  return;
-}
+    if(this.currentStep < this.steps.length-1){
 
-if (this.currentStep < this.steps.length - 1) {
-  this.showStep(this.currentStep + 1);
-}
-```
+      this.showStep(this.currentStep+1);
 
-},
+      if(this.currentStep===this.steps.length-1){
+        this.buildReview();
+      }
+    }
+  },
 
-prevStep() {
+  /* ============================================================
+     BACK
+  ============================================================ */
 
-```
-if (this.currentStep > 0) {
-  this.showStep(this.currentStep - 1);
-}
-```
+  back() {
 
-},
+    if(this.currentStep>0){
+      this.showStep(this.currentStep-1);
+    }
+  },
 
-attachEvents() {
+  /* ============================================================
+     VALIDATION
+  ============================================================ */
 
-```
-this.desktopTabs.forEach((tab, index) => {
-  tab.addEventListener("click", () => {
-    this.showStep(index);
-  });
-});
+  validateStep() {
 
-this.mobileSteps.forEach((tab, index) => {
-  tab.addEventListener("click", () => {
-    this.showStep(index);
-  });
-});
+    const current = this.steps[this.currentStep];
 
-document
-  .querySelectorAll(".aces-wizard-btn.next")
-  .forEach(btn => {
+    let valid = true;
 
-    btn.addEventListener("click", e => {
+    current.querySelectorAll("[required]")
+      .forEach(field=>{
 
-      if (
-        btn.classList.contains("add-vehicle") ||
-        btn.classList.contains("add-driver") ||
-        btn.classList.contains("add-claim") ||
-        btn.classList.contains("submit-app")
-      ) {
-        return;
+      field.classList.remove("field-error");
+
+      if(!field.value.trim()){
+
+        field.classList.add("field-error");
+
+        valid = false;
       }
 
-      this.nextStep();
     });
 
-  });
+    return valid;
+  },
 
-document
-  .querySelectorAll(".aces-wizard-btn.back")
-  .forEach(btn => {
+  /* ============================================================
+     REVIEW BUILDER
+  ============================================================ */
 
-    btn.addEventListener("click", () => {
-      this.prevStep();
+  buildReview() {
+
+    const review = document.getElementById("reviewContainer");
+
+    if(!review) return;
+
+    review.innerHTML = "";
+
+    const fields = this.form.querySelectorAll(
+      "input,select,textarea"
+    );
+
+    fields.forEach(field=>{
+
+      if(
+        !field.name ||
+        field.type==="hidden" ||
+        !field.value
+      ) return;
+
+      const row = document.createElement("div");
+
+      row.className = "review-row";
+
+      row.innerHTML = `
+        <strong>
+          ${field.name.replaceAll("_"," ")}
+        </strong>
+        <span>${field.value}</span>
+      `;
+
+      review.appendChild(row);
+
     });
 
-  });
-```
+  },
 
-},
+  /* ============================================================
+     REPEATERS
+  ============================================================ */
 
-validateStep(stepIndex) {
+  addRepeater(templateId, containerId) {
 
-```
-const step = this.steps[stepIndex];
+    const template =
+      document.getElementById(templateId);
 
-if (!step) return true;
+    const container =
+      document.getElementById(containerId);
 
-const requiredFields =
-  step.querySelectorAll("[data-required]");
+    if(!template || !container) return;
 
-let valid = true;
+    const clone =
+      template.content.cloneNode(true);
 
-requiredFields.forEach(field => {
+    container.appendChild(clone);
 
-  if (!field.value.trim()) {
+    this.attachRemoveButtons();
+  },
 
-    valid = false;
+  attachRemoveButtons() {
 
-    field.style.borderColor = "#d40000";
-    field.style.boxShadow =
-      "0 0 0 3px rgba(212,0,0,.15)";
+    document
+      .querySelectorAll(".remove-repeater")
+      .forEach(btn=>{
 
-  } else {
+      btn.onclick=()=>{
 
-    field.style.borderColor = "#d8d8d8";
-    field.style.boxShadow = "none";
+        btn.closest(".repeater-card")
+          ?.remove();
+
+      };
+
+    });
+  },
+
+  /* ============================================================
+     EVENTS
+  ============================================================ */
+
+  attachEvents() {
+
+    document.addEventListener("click",(e)=>{
+
+      if(e.target.closest(".wizard-next")){
+
+        e.preventDefault();
+
+        this.next();
+      }
+
+      if(e.target.closest(".wizard-back")){
+
+        e.preventDefault();
+
+        this.back();
+      }
+
+      if(e.target.closest("[data-add-repeater]")){
+
+        e.preventDefault();
+
+        this.addRepeater(
+          e.target.dataset.template,
+          e.target.dataset.container
+        );
+      }
+
+    });
+
   }
-});
-
-return valid;
-```
-
-},
-
-addRepeater(groupName, templateId, containerId) {
-
-```
-if (!this.repeaters[groupName]) {
-  this.repeaters[groupName] = 0;
-}
-
-const template =
-  document.getElementById(templateId);
-
-const container =
-  document.getElementById(containerId);
-
-if (!template || !container) return;
-
-const clone =
-  template.content.cloneNode(true);
-
-const index =
-  ++this.repeaters[groupName];
-
-clone.querySelectorAll(
-  "[data-repeater-number]"
-).forEach(el => {
-
-  el.textContent = index;
-});
-
-clone.querySelectorAll(
-  ".aces-wizard-remove-btn"
-).forEach(btn => {
-
-  btn.addEventListener("click", () => {
-
-    btn.closest(
-      ".aces-wizard-repeater"
-    ).remove();
-
-  });
-
-});
-
-container.appendChild(clone);
-```
-
-},
-
-buildReview(containerId) {
-
-```
-const container =
-  document.getElementById(containerId);
-
-if (!container) return;
-
-container.innerHTML = "";
-
-document
-  .querySelectorAll(
-    ".aces-wizard input, .aces-wizard select, .aces-wizard textarea"
-  )
-  .forEach(field => {
-
-    if (!field.name || !field.value) return;
-
-    const row =
-      document.createElement("div");
-
-    row.className = "review-row";
-
-    row.innerHTML = `
-      <strong>${field.name.replace(/_/g,' ')}</strong>
-      <span>${field.value}</span>
-    `;
-
-    container.appendChild(row);
-  });
-```
-
-}
 
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+/* ============================================================
+   START
+============================================================ */
 
-if (
-document.querySelector(".aces-wizard")
-) {
-acesWizard.init();
-}
-
-});
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>ACESWizard.init()
+);
