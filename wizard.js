@@ -1,178 +1,260 @@
 /* ============================================================
-   ACES 2026 — UNIVERSAL WIZARD ENGINE (wizard.js)
-   Fully Isolated Namespace: acesWizard
+ACES 2026 — UNIVERSAL WIZARD ENGINE
 ============================================================ */
 
 const acesWizard = {
-  currentStep: 0,
-  steps: [],
-  progressFill: null,
-  desktopTabs: [],
-  mobileSteps: [],
-  repeaters: {},
 
-  init() {
-    this.steps = Array.from(document.querySelectorAll(".aces-wizard-card"));
-    this.desktopTabs = Array.from(document.querySelectorAll(".aces-wizard-tab"));
-    this.mobileSteps = Array.from(document.querySelectorAll(".aces-wizard-mobile-step"));
-    this.progressFill = document.querySelector(".aces-wizard-progress-fill");
+currentStep: 0,
+steps: [],
+progressFill: null,
+desktopTabs: [],
+mobileSteps: [],
+repeaters: {},
 
-    this.showStep(0);
-    this.attachEvents();
-  },
+init() {
 
-  /* ============================================================
-     STEP NAVIGATION
-  ============================================================ */
+```
+this.steps =
+  Array.from(document.querySelectorAll(".aces-wizard-card"));
 
-  showStep(index) {
-    this.currentStep = index;
+this.desktopTabs =
+  Array.from(document.querySelectorAll(".aces-wizard-tab"));
 
-    // Show correct card
-    this.steps.forEach((step, i) => {
-      step.classList.toggle("active", i === index);
-    });
+this.mobileSteps =
+  Array.from(document.querySelectorAll(".aces-wizard-mobile-step"));
 
-    // Update desktop tabs
-    this.desktopTabs.forEach((tab, i) => {
-      tab.classList.toggle("active", i === index);
-    });
+this.progressFill =
+  document.querySelector(".aces-wizard-progress-fill");
 
-    // Update mobile steps
-    this.mobileSteps.forEach((mStep, i) => {
-      mStep.classList.toggle("active", i === index);
-    });
+this.attachEvents();
+this.showStep(0);
+```
 
-    // Update progress bar
-    const progressPercent = ((index) / (this.steps.length - 1)) * 100;
-    if (this.progressFill) {
-      this.progressFill.style.width = progressPercent + "%";
-    }
-  },
+},
 
-  nextStep() {
-    if (this.currentStep < this.steps.length - 1) {
-      this.showStep(this.currentStep + 1);
-    }
-  },
+showStep(index) {
 
-  prevStep() {
-    if (this.currentStep > 0) {
-      this.showStep(this.currentStep - 1);
-    }
-  },
+```
+this.currentStep = index;
 
-  /* ============================================================
-     EVENT ATTACHMENT
-  ============================================================ */
+this.steps.forEach((step, i) => {
+  step.classList.toggle("active", i === index);
+});
 
-  attachEvents() {
-    // Desktop tab clicks
-    this.desktopTabs.forEach((tab, index) => {
-      tab.addEventListener("click", () => this.showStep(index));
-    });
+this.desktopTabs.forEach((tab, i) => {
+  tab.classList.toggle("active", i === index);
+});
 
-    // Mobile step clicks
-    this.mobileSteps.forEach((mStep, index) => {
-      mStep.addEventListener("click", () => this.showStep(index));
-    });
+this.mobileSteps.forEach((step, i) => {
+  step.classList.toggle("active", i === index);
+});
 
-    // Navigation buttons
-    document.querySelectorAll(".aces-wizard-btn.next").forEach(btn => {
-      btn.addEventListener("click", () => this.nextStep());
-    });
+if (this.progressFill) {
 
-    document.querySelectorAll(".aces-wizard-btn.back").forEach(btn => {
-      btn.addEventListener("click", () => this.prevStep());
-    });
-  },
+  const percent =
+    (index / (this.steps.length - 1)) * 100;
 
-  /* ============================================================
-     REPEATERS (Drivers, Vehicles, Claims, etc.)
-  ============================================================ */
+  this.progressFill.style.width = percent + "%";
+}
+```
 
-  addRepeater(groupName, templateId, containerId) {
-    if (!this.repeaters[groupName]) this.repeaters[groupName] = 0;
+},
 
-    const template = document.getElementById(templateId);
-    const container = document.getElementById(containerId);
+nextStep() {
 
-    if (!template || !container) return;
+```
+if (!this.validateStep(this.currentStep)) {
+  return;
+}
 
-    const clone = template.content.cloneNode(true);
-    const repeaterIndex = ++this.repeaters[groupName];
+if (this.currentStep < this.steps.length - 1) {
+  this.showStep(this.currentStep + 1);
+}
+```
 
-    // Auto-numbering
-    clone.querySelectorAll("[data-repeater-number]").forEach(el => {
-      el.textContent = repeaterIndex;
-    });
+},
 
-    // Remove button
-    clone.querySelectorAll(".aces-wizard-remove-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        btn.closest(".aces-wizard-repeater").remove();
-      });
-    });
+prevStep() {
 
-    container.appendChild(clone);
-  },
+```
+if (this.currentStep > 0) {
+  this.showStep(this.currentStep - 1);
+}
+```
 
-  /* ============================================================
-     VALIDATION (Simple Required Field Check)
-  ============================================================ */
+},
 
-  validateStep(stepIndex) {
-    const step = this.steps[stepIndex];
-    if (!step) return true;
+attachEvents() {
 
-    const requiredFields = step.querySelectorAll("[data-required]");
-    let valid = true;
+```
+this.desktopTabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => {
+    this.showStep(index);
+  });
+});
 
-    requiredFields.forEach(field => {
-      if (!field.value || field.value.trim() === "") {
-        valid = false;
-        field.style.borderColor = "#d40000";
-        field.style.boxShadow = "0 0 0 3px rgba(212,0,0,0.15)";
-      } else {
-        field.style.borderColor = "#d8d8d8";
-        field.style.boxShadow = "none";
+this.mobileSteps.forEach((tab, index) => {
+  tab.addEventListener("click", () => {
+    this.showStep(index);
+  });
+});
+
+document
+  .querySelectorAll(".aces-wizard-btn.next")
+  .forEach(btn => {
+
+    btn.addEventListener("click", e => {
+
+      if (
+        btn.classList.contains("add-vehicle") ||
+        btn.classList.contains("add-driver") ||
+        btn.classList.contains("add-claim") ||
+        btn.classList.contains("submit-app")
+      ) {
+        return;
       }
+
+      this.nextStep();
     });
 
-    return valid;
-  },
+  });
 
-  /* ============================================================
-     REVIEW BUILDER (Auto-Generate Summary)
-  ============================================================ */
+document
+  .querySelectorAll(".aces-wizard-btn.back")
+  .forEach(btn => {
 
-  buildReview(reviewContainerId) {
-    const container = document.getElementById(reviewContainerId);
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    this.steps.forEach(step => {
-      const fields = step.querySelectorAll("input, select, textarea");
-
-      fields.forEach(field => {
-        if (field.name && field.value.trim() !== "") {
-          const row = document.createElement("div");
-          row.className = "review-row";
-          row.innerHTML = `
-            <strong>${field.name.replace(/_/g, " ")}:</strong>
-            <span>${field.value}</span>
-          `;
-          container.appendChild(row);
-        }
-      });
+    btn.addEventListener("click", () => {
+      this.prevStep();
     });
+
+  });
+```
+
+},
+
+validateStep(stepIndex) {
+
+```
+const step = this.steps[stepIndex];
+
+if (!step) return true;
+
+const requiredFields =
+  step.querySelectorAll("[data-required]");
+
+let valid = true;
+
+requiredFields.forEach(field => {
+
+  if (!field.value.trim()) {
+
+    valid = false;
+
+    field.style.borderColor = "#d40000";
+    field.style.boxShadow =
+      "0 0 0 3px rgba(212,0,0,.15)";
+
+  } else {
+
+    field.style.borderColor = "#d8d8d8";
+    field.style.boxShadow = "none";
   }
+});
+
+return valid;
+```
+
+},
+
+addRepeater(groupName, templateId, containerId) {
+
+```
+if (!this.repeaters[groupName]) {
+  this.repeaters[groupName] = 0;
+}
+
+const template =
+  document.getElementById(templateId);
+
+const container =
+  document.getElementById(containerId);
+
+if (!template || !container) return;
+
+const clone =
+  template.content.cloneNode(true);
+
+const index =
+  ++this.repeaters[groupName];
+
+clone.querySelectorAll(
+  "[data-repeater-number]"
+).forEach(el => {
+
+  el.textContent = index;
+});
+
+clone.querySelectorAll(
+  ".aces-wizard-remove-btn"
+).forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    btn.closest(
+      ".aces-wizard-repeater"
+    ).remove();
+
+  });
+
+});
+
+container.appendChild(clone);
+```
+
+},
+
+buildReview(containerId) {
+
+```
+const container =
+  document.getElementById(containerId);
+
+if (!container) return;
+
+container.innerHTML = "";
+
+document
+  .querySelectorAll(
+    ".aces-wizard input, .aces-wizard select, .aces-wizard textarea"
+  )
+  .forEach(field => {
+
+    if (!field.name || !field.value) return;
+
+    const row =
+      document.createElement("div");
+
+    row.className = "review-row";
+
+    row.innerHTML = `
+      <strong>${field.name.replace(/_/g,' ')}</strong>
+      <span>${field.value}</span>
+    `;
+
+    container.appendChild(row);
+  });
+```
+
+}
+
 };
 
-/* Initialize wizard when DOM is ready */
 document.addEventListener("DOMContentLoaded", () => {
-  if (document.querySelector(".aces-wizard")) {
-    acesWizard.init();
-  }
+
+if (
+document.querySelector(".aces-wizard")
+) {
+acesWizard.init();
+}
+
 });
