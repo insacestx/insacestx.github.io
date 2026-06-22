@@ -1981,189 +1981,224 @@ section {
 }
 
 /* ============================================================
-   HOME HERO — STOREFRONT VERSION (UPDATED)
+   HOME HERO — ACES STOREFRONT HERO (FIXED LAYOUT)
 ============================================================ */
 
 /* Main Hero Wrapper */
-.home-hero {
-  position: relative;
-  height: 600px;
-  overflow: hidden;
+.home-hero{
+    position:relative;
+    min-height:650px;
+    overflow:hidden;
 
-  background: url('Icons/storefront.jpg') center 30% no-repeat;
-  background-size: 113%; /* zoom OUT slightly */
-  background-color: #000;
+    background:
+      linear-gradient(
+        rgba(0,0,0,0.30),
+        rgba(0,0,0,0.30)
+      ),
+      url('Icons/storefront.jpg') center 30% no-repeat;
 
-  padding: 140px 20px;
-  text-align: left;
-  color: #ffffff;
+    background-size:cover;
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+
+    padding:120px 20px 80px;
 }
 
-/* Inner Flex Layout */
-.home-hero-inner {
-  position: relative;
-  z-index: 3;
+/* Main Layout */
+.home-hero-inner{
+    width:100%;
+    max-width:1450px;
+    margin:0 auto;
 
-  max-width: 1450px;
-  margin: 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* pushes quote box right */
-  gap: 60px;
-  padding: 0 30px;
-}
-
-/* LEFT COLUMN */
-.hero-left {
-  flex: 1; /* prevents quote box from being squished */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  max-width: 600px;
-  color: #ffffff;
-}
-
-/* Logo */
-.hero-logo {
-  width: 240px;
-  height: auto;
-}
-
-/* Text Column */
-.hero-text {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: #ffffff;
-}
-
-.hero-text h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #ffffff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
-}
-
-.hero-text p {
-  font-size: 1.25rem;
-  color: #ffffff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
-}
-
-/* Buttons Row */
-.hero-buttons {
-  display: flex;
-  gap: 16px;
-}
-
-/* RIGHT SIDE */
-.hero-right {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-}
-
-/* QUICK QUOTE BOX ALIGNMENT */
-.quick-quote-box {
-  max-width: 420px;
-  margin-top: 10px;
-}
-/* ============================================================
-   TABLET RESPONSIVE (768px–1024px)
-============================================================ */
-@media (max-width: 1024px) {
-
-  .hero-foreground {
-    width: 520px;
-    max-width: 55%;
-    top: 48%;
-    opacity: 0.95;
-  }
-
-  .home-hero-inner {
-    gap: 35px;
-  }
-
-  .hero-logo {
-    width: 150px;
-  }
-
-  .quick-quote-box {
-    max-width: 380px;
-  }
+    gap:80px;
 }
 
 /* ============================================================
-   MOBILE RESPONSIVE (under 768px)
+   LEFT SIDE
 ============================================================ */
-@media (max-width: 768px) {
 
-  .home-hero {
-    padding: 70px 20px;
-    min-height: auto;
-  }
+.hero-left{
+    flex:0 0 55%;
+    max-width:700px;
 
-  /* Stack hero content vertically */
-  .home-hero-inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 25px;
-  }
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
 
-  /* Foreground image moves to top and shrinks */
-  .hero-foreground {
-    position: relative;
-    top: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 360px;
-    max-width: 80%;
-    margin-bottom: 20px;
-    opacity: 0.95;
-  }
+.hero-logo{
+    width:220px;
+    height:auto;
+    margin-bottom:20px;
+}
 
-  .hero-left {
-    max-width: 100%;
-  }
+.hero-left h1{
+    font-size:3.2rem;
+    line-height:1.1;
+    font-weight:800;
+    color:#fff;
+    margin-bottom:20px;
 
-  .hero-right {
-    justify-content: center;
-    width: 100%;
-  }
+    text-shadow:
+      0 2px 10px rgba(0,0,0,.40);
+}
 
-  .quick-quote-box {
-    max-width: 100%;
-    margin-top: 10px;
-  }
+.hero-left p{
+    font-size:1.2rem;
+    line-height:1.7;
+    color:#fff;
 
-  .hero-logo {
-    width: 140px;
-  }
+    margin-bottom:30px;
+
+    text-shadow:
+      0 2px 8px rgba(0,0,0,.35);
+}
+
+/* Buttons */
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
 }
 
 /* ============================================================
-   SMALL MOBILE (under 480px)
+   RIGHT SIDE
 ============================================================ */
-@media (max-width: 480px) {
 
-  .hero-foreground {
-    width: 260px;
-    max-width: 85%;
-  }
+.hero-right{
+    flex:0 0 45%;
 
-  .hero-logo {
-    width: 125px;
-  }
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+}
 
-  .home-hero {
-    padding: 55px 15px;
-  }
+/* Quote Box */
+.hero-right .quick-quote-box{
+    width:100%;
+    max-width:520px;
 
-  .home-hero p {
-    font-size: 1.05rem;
-  }
+    margin:0;
+
+    background:#fff;
+    border-radius:14px;
+
+    box-shadow:
+      0 15px 45px rgba(0,0,0,.25);
+
+    overflow:hidden;
+}
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width:1024px){
+
+    .home-hero{
+        min-height:auto;
+        padding:120px 20px 60px;
+    }
+
+    .home-hero-inner{
+        gap:40px;
+    }
+
+    .hero-left{
+        flex:0 0 50%;
+    }
+
+    .hero-right{
+        flex:0 0 50%;
+    }
+
+    .hero-left h1{
+        font-size:2.6rem;
+    }
+
+    .hero-logo{
+        width:180px;
+    }
+
+    .hero-right .quick-quote-box{
+        max-width:450px;
+    }
+}
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width:768px){
+
+    .home-hero{
+        text-align:center;
+        padding:90px 20px 50px;
+    }
+
+    .home-hero-inner{
+        flex-direction:column;
+        gap:35px;
+    }
+
+    .hero-left,
+    .hero-right{
+        flex:none;
+        width:100%;
+        max-width:100%;
+    }
+
+    .hero-right{
+        justify-content:center;
+    }
+
+    .hero-logo{
+        width:160px;
+        margin:0 auto 20px;
+    }
+
+    .hero-left h1{
+        font-size:2.2rem;
+    }
+
+    .hero-left p{
+        font-size:1.05rem;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .hero-right .quick-quote-box{
+        max-width:550px;
+    }
+}
+
+/* ============================================================
+   SMALL MOBILE
+============================================================ */
+
+@media (max-width:480px){
+
+    .hero-left h1{
+        font-size:1.85rem;
+    }
+
+    .hero-logo{
+        width:140px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .hero-buttons .hero-btn{
+        width:100%;
+    }
 }
