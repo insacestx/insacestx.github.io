@@ -267,7 +267,7 @@ function initAgentPanel() {
   const nameEl = panel.querySelector("h2");
   const titleEl = panel.querySelector(".panel-title");
   const phoneEl = panel.querySelector(".panel-phone");
-  const emailEl = panel.queryquerySelector(".panel-email");
+  const emailEl = panel.querySelector(".panel-email");
   const callBtn = panel.querySelector(".panel-call");
   const closeBtn = panel.querySelector(".close-panel");
 
