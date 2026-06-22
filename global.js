@@ -282,6 +282,7 @@ function initAgentPanel() {
     titleEl.textContent = card.dataset.title || "";
     phoneEl.textContent = card.dataset.phone || "";
     emailEl.textContent = card.dataset.email || "";
+emailEl.href = `mailto:${card.dataset.email || ""}`;
 
     callBtn.href =
       `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
