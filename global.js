@@ -17,9 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
-
-
 /* ============================================================
    HEADER INJECTION
 ============================================================ */
@@ -258,6 +255,8 @@ function initMobileMenu() {
    AGENT PANEL
 ============================================================ */
 function initAgentPanel() {
+  console.log("Agent panel initialized");
+
   const cards = document.querySelectorAll(".agent-card");
   const panel = document.querySelector(".agent-panel");
 
