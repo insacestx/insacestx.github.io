@@ -1,205 +1,210 @@
-/* ================================
-   ACES 2026 UNIVERSAL WIZARD THEME
-   Bold Red • Centered Tabs • Clean UI
-================================ */
+/* ============================================================
+   ACES 2026 — UNIVERSAL WIZARD STYLES
+   Clean, modern, bilingual-ready, fully responsive
+============================================================ */
 
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", Arial, sans-serif;
+/* GLOBAL WRAPPER */
+.wizard-page {
+  min-height: 100vh;
+  background: #f5f5f7;
+  padding-bottom: 60px;
 }
 
-/* Page Background */
-body {
-    background: #f7f7f7;
-    padding-bottom: 60px;
+/* HERO */
+.wizard-hero {
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: #ffffff;
+  padding: 60px 20px 40px;
 }
 
-/* ================================
-   PROGRESS BAR (Bold ACES Red)
-================================ */
+.wizard-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.wizard-hero h1 {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.wizard-hero p {
+  font-size: 1.05rem;
+  max-width: 600px;
+  color: #e5e7eb;
+}
+
+/* PROGRESS BAR */
+.wizard-progress-wrap {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  margin: 25px auto 20px;
+  overflow: hidden;
+}
+
 #wizard-progress {
-    width: 0%;
-    height: 8px;
-    background: #c8102e; /* ACES Red */
-    transition: width 0.35s ease;
-    position: sticky;
-    top: 0;
-    z-index: 999;
+  height: 100%;
+  width: 0%;
+  background: #111827;
+  transition: width 0.25s ease;
 }
 
-/* ================================
-   STEP TABS (Centered)
-================================ */
+/* TABS */
 #wizard-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    padding: 20px 0;
-    background: #ffffff;
-    border-bottom: 2px solid #e5e5e5;
-    position: sticky;
-    top: 8px;
-    z-index: 998;
+  max-width: 900px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .wizard-tab {
-    padding: 8px 4px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #555;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: 0.25s ease;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  color: #374151;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.wizard-tab:hover {
+  background: #d1d5db;
 }
 
 .wizard-tab.active {
-    color: #c8102e;
-    border-bottom: 3px solid #c8102e;
+  background: #111827;
+  color: #ffffff;
 }
 
-/* ================================
-   WIZARD CONTAINER
-================================ */
+/* WIZARD CONTAINER */
 #wizard-container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-/* ================================
-   STEP CARD
-================================ */
-.wizard-step {
-    background: #ffffff;
-    border: 2px solid #c8102e;
-    border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 25px;
-    display: none;
+/* STEP CARD */
+.wizard-step-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  padding: 24px 26px 30px;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+  transition: box-shadow 0.2s ease;
 }
 
-.wizard-step.active {
-    display: block;
+.wizard-step-card:hover {
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
 }
 
-/* Step Title */
-.step-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #c8102e;
-    margin-bottom: 20px;
+/* STEP TITLE */
+.wizard-step-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 20px;
 }
 
-/* ================================
-   FORM FIELDS
-================================ */
+/* FIELD WRAPPER */
 .wizard-field {
-    margin-bottom: 18px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .wizard-field label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
 }
 
+/* INPUTS */
 .wizard-field input,
-.wizard-field select,
-.wizard-field textarea {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
-    transition: 0.25s ease;
+.wizard-field select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: #ffffff;
 }
 
 .wizard-field input:focus,
-.wizard-field select:focus,
-.wizard-field textarea:focus {
-    border-color: #c8102e;
-    outline: none;
+.wizard-field select:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.15);
 }
 
-/* ================================
-   BUTTONS
-================================ */
+/* BUTTONS */
 .wizard-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
 }
 
-.btn {
-    padding: 12px 22px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    border: none;
-    transition: 0.25s ease;
+.wizard-btn {
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
 }
 
-.btn-next {
-    background: #c8102e;
-    color: #fff;
+.wizard-btn.back {
+  background: #e5e7eb;
+  color: #374151;
 }
 
-.btn-next:hover {
-    background: #a50d26;
+.wizard-btn.back:hover {
+  background: #d1d5db;
 }
 
-.btn-back {
-    background: #ddd;
-    color: #333;
+.wizard-btn.next {
+  background: #111827;
+  color: #ffffff;
 }
 
-.btn-back:hover {
-    background: #c5c5c5;
+.wizard-btn.next:hover {
+  background: #1f2937;
 }
 
-/* ================================
-   REVIEW STEP
-================================ */
+/* REVIEW SECTION */
 .review-section {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-left: 4px solid #c8102e;
-    background: #fafafa;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.review-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #c8102e;
-    margin-bottom: 10px;
+.review-section h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 10px;
 }
 
-.review-item {
-    margin-bottom: 8px;
-    font-size: 15px;
+.review-section p {
+  font-size: 0.95rem;
+  color: #374151;
+  margin: 4px 0;
 }
 
-/* ================================
-   MOBILE RESPONSIVE
-================================ */
+/* MOBILE */
 @media (max-width: 600px) {
-    #wizard-tabs {
-        gap: 20px;
-        font-size: 14px;
-    }
+  .wizard-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
 
-    .wizard-buttons {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .btn {
-        width: 100%;
-        text-align: center;
-    }
+  .wizard-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
