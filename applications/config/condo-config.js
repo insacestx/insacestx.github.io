@@ -36,4 +36,19 @@ export default {
                 { id: "dwellingImprovements", label_en: "Improvements & Betterments Coverage", label_es: "Mejoras y Mejoramientos", type: "number", required: true },
                 { id: "personalProperty", label_en: "Personal Property Coverage", label_es: "Cobertura de Propiedad Personal", type: "number", required: true },
                 { id: "liabilityCoverage", label_en: "Liability Coverage", label_es: "Cobertura de Responsabilidad", type: "number", required: true },
-                { id: "deductible", label_en: "Deductible", label_es: "
+                { id: "deductible", label_en: "Deductible", label_es: "Deducible", type: "number", required: true }
+            ]
+        },
+
+        {
+            id: "association",
+            title_en: "Association Details",
+            title_es: "Detalles de la Asociación",
+            fields: [
+                { id: "hoaName", label_en: "HOA / Condo Association Name", label_es: "Nombre de la Asociación (HOA)", type: "text" },
+                { id: "masterPolicyCarrier", label_en: "Master Policy Carrier", label_es: "Aseguradora de la Póliza Maestra", type: "text" },
+                { id: "masterPolicyDeductible", label_en: "Master Policy Deductible", label_es: "Deducible de la Póliza Maestra", type: "number" }
+            ]
+        }
+    ]
+};
