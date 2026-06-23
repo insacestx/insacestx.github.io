@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ACES AMS | Quotes Dashboard</title>
+
+  <link rel="stylesheet" href="/ams/style-ams.css" />
+  <script src="/ams/quotes.js" defer></script>
+
+  <style>
+    .quotes-container {
+      margin-left: 240px;
+      padding: 30px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #d40000;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .filter-btn {
+      padding: 10px 16px;
+      border-radius: 6px;
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .filter-btn.active {
+      background: #d40000;
+      color: #fff;
+      border-color: #d40000;
+    }
+
+    #quoteSearch {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 14px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    th {
+      background: #fafafa;
+      font-weight: 700;
+    }
+
+    .action-btn {
+      background: #d40000;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside class="sidebar">
+    <div class="logo"><img src="/images/image2.png"></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="clients.html">Clients</a>
+      <a href="policies.html">Policies</a>
+      <a href="cois.html">COIs</a>
+      <a href="claims.html">Claims</a>
+      <a href="tasks.html">Tasks</a>
+      <a href="agents.html">Agents</a>
+      <a href="quotes.html" class="active">Quotes</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </aside>
+
+  <main class="quotes-container">
+    <h1>Quotes Dashboard</h1>
+
+    <!-- FILTERS -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="received">Received</button>
+      <button class="filter-btn" data-filter="assigned">Assigned</button>
+      <button class="filter-btn" data-filter="review">In Review</button>
+      <button class="filter-btn" data-filter="quoting">Quoting</button>
+      <button class="filter-btn" data-filter="awaiting">Awaiting Docs</button>
+      <button class="filter-btn" data-filter="completed">Completed</button>
+    </div>
+
+    <!-- SEARCH -->
+    <input id="quoteSearch" type="text" placeholder="Search quotes by name, email, phone, or ID">
+
+    <!-- TABLE -->
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Client</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Agent</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="quotesTable"></tbody>
+    </table>
+
+  </main>
+
+</body>
+</html>
