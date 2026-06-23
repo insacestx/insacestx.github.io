@@ -3,77 +3,72 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!container) return;
 
   try {
-    // Detect GitHub Pages subdirectory
-    const base = window.location.pathname.includes("insacestx.github.io")
-      ? "/insacestx.github.io"
+    // Better base path detection
+    const path = window.location.pathname;
+    const base = path.includes("/insacestx.github.io") 
+      ? "/insacestx.github.io" 
       : "";
 
-    // Load manifest
     const response = await fetch(`${base}/applications/manifest.json`);
-    const manifest = await response.json();
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
+    const manifest = await response.json();
     const currentLang = localStorage.getItem("aces_lang") || "en";
 
     const categories = { personal: [], commercial: [], life: [] };
 
-    for (const key in manifest) {
+    Object.keys(manifest).forEach(key => {
       const app = manifest[key];
-      categories[app.category].push({ id: key, ...app });
-    }
+      if (categories[app.category]) {
+        categories[app.category].push({ id: key, ...app });
+      }
+    });
 
-    for (const category in categories) {
-      if (categories[category].length === 0) continue;
+    // Helper
+    const getAssetPath = (p) => p?.startsWith('/') ? `${base}${p}` : `${base}/${p || ''}`;
+
+    for (const [category, apps] of Object.entries(categories)) {
+      if (apps.length === 0) continue;
 
       const section = document.createElement("section");
       section.className = "app-category-section fade-in";
 
       const title = document.createElement("h2");
       title.className = "app-category-title";
-
-      title.textContent =
-        category === "personal"
-          ? currentLang === "es" ? "Seguros Personales" : "Personal Insurance"
-          : category === "commercial"
-          ? currentLang === "es" ? "Seguros Comerciales" : "Commercial Insurance"
-          : currentLang === "es" ? "Vida y Familia" : "Life & Family";
-
+      title.textContent = getCategoryTitle(category, currentLang);
       section.appendChild(title);
 
       const grid = document.createElement("div");
       grid.className = "app-card-grid";
 
-      categories[category].forEach(app => {
+      apps.forEach(app => {
         const card = document.createElement("div");
         card.className = "app-card";
         card.setAttribute("data-category", app.category);
 
+        // Icon with fallback
         const icon = document.createElement("img");
         icon.className = "app-card-icon";
-        icon.src = app.icon || "/img/icons/default.svg";
-        icon.alt = app.name_en;
-        card.appendChild(icon);
+        icon.src = getAssetPath(app.icon);
+        icon.alt = currentLang === "es" ? app.name_es : app.name_en;
+        icon.onerror = () => { icon.src = `${base}/img/icons/default.svg`; };
 
-        const title = document.createElement("h3");
-        title.className = "app-card-title";
-        title.textContent = currentLang === "es" ? app.name_es : app.name_en;
-        card.appendChild(title);
+        const cardTitle = document.createElement("h3");
+        cardTitle.className = "app-card-title";
+        cardTitle.textContent = currentLang === "es" ? app.name_es : app.name_en;
 
         const desc = document.createElement("p");
         desc.className = "app-card-desc";
-        desc.textContent =
-          currentLang === "es" ? app.description_es : app.description_en;
-        card.appendChild(desc);
+        desc.textContent = currentLang === "es" 
+          ? (app.description_es || app.description_en) 
+          : (app.description_en || app.description_es);
 
         const link = document.createElement("a");
         link.className = "app-card-btn";
+        link.href = `${base}/wizard.html?app=${encodeURIComponent(app.id)}`;
+        link.textContent = currentLang === "es" ? "Comenzar" : "Start Application";
 
-        // FIXED ROUTING
-        link.href = `${base}/wizard.html?app=${app.id}`;
-
-        link.textContent =
-          currentLang === "es" ? "Comenzar" : "Start Application";
-        card.appendChild(link);
-
+        card.append(icon, cardTitle, desc, link);
         grid.appendChild(card);
       });
 
@@ -83,8 +78,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error loading manifest.json:", error);
     container.innerHTML = `
-      <p style="color:#d32f2f; font-weight:600;">
-        Unable to load applications. Please try again later.
+      <p style="color:#d32f2f; font-weight:600; padding: 2rem; text-align:center;">
+        Unable to load applications. Please try again later.<br>
+        <small>${error.message}</small>
       </p>`;
   }
 });
+
+function getCategoryTitle(cat, lang) {
+  const titles = {
+    personal: { en: "Personal Insurance", es: "Seguros Personales" },
+    commercial: { en: "Commercial Insurance", es: "Seguros Comerciales" },
+    life: { en: "Life & Family", es: "Vida y Familia" }
+  };
+  return titles[cat]?.[lang] || titles[cat]?.en || cat;
+}
