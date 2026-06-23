@@ -1,31 +1,51 @@
 /* ==========================================
-   ACES 2026 UNIVERSAL WIZARD ENGINE
-   Filename-Based App Detection + Config Loader
+   ACES 2026 UNIVERSAL WIZARD ENGINE (BILINGUAL)
 ========================================== */
 
 let wizardConfig = null;
 let currentStep = 0;
 
-/* Detect application type from URL parameter */
-function getAppType() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("app"); // e.g., "auto"
+/* Language helpers */
+function getCurrentLang() {
+    return localStorage.getItem("acesLang") || "en";
 }
 
-/* Load the correct config file dynamically */
+function isSpanish() {
+    return getCurrentLang() === "es";
+}
+
+/* Button text map (Formal MX/LatAm) */
+function getText(key) {
+    const es = isSpanish();
+    const map = {
+        next: es ? "Siguiente" : "Next",
+        back: es ? "Regresar" : "Back",
+        review: es ? "Revisar" : "Review",
+        submit: es ? "Enviar Solicitud" : "Submit Application",
+        reviewTitle: es ? "Revise su Información" : "Review Your Information"
+    };
+    return map[key] || key;
+}
+
+/* Detect application type */
+function getAppType() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("app");
+}
+
+/* Load config */
 async function loadConfig(appType) {
     try {
         const module = await import(`/applications/config/${appType}-config.js`);
         wizardConfig = module.default;
-        console.log("Loaded config:", wizardConfig);
     } catch (err) {
-        console.error("Config load error:", err);
         document.getElementById("wizard-container").innerHTML =
             `<p style="color:red;">Error loading application configuration.</p>`;
+        console.error("Error loading config for app:", appType, err);
     }
 }
 
-/* Initialize Wizard */
+/* Init */
 async function initWizard() {
     const appType = getAppType();
     if (!appType) {
@@ -35,7 +55,6 @@ async function initWizard() {
     }
 
     await loadConfig(appType);
-
     if (!wizardConfig) return;
 
     buildTabs();
@@ -44,15 +63,22 @@ async function initWizard() {
 }
 
 document.addEventListener("DOMContentLoaded", initWizard);
-/* Build centered step tabs based on config */
+
+/* Build Tabs */
 function buildTabs() {
     const tabsContainer = document.getElementById("wizard-tabs");
     tabsContainer.innerHTML = "";
 
+    const lang = getCurrentLang();
+    const useEs = lang === "es";
+
     wizardConfig.steps.forEach((step, index) => {
         const tab = document.createElement("div");
         tab.className = "wizard-tab";
-        tab.textContent = step.title;
+
+        const title = useEs ? (step.title_es || step.title_en) : step.title_en;
+        tab.textContent = title || step.title || `Step ${index + 1}`;
+
         tab.addEventListener("click", () => goToStep(index));
         tabsContainer.appendChild(tab);
     });
@@ -60,48 +86,52 @@ function buildTabs() {
     setActiveTab(0);
 }
 
-/* Set active tab styling */
 function setActiveTab(index) {
-    const tabs = document.querySelectorAll(".wizard-tab");
-    tabs.forEach((tab, i) => {
+    document.querySelectorAll(".wizard-tab").forEach((tab, i) => {
         tab.classList.toggle("active", i === index);
     });
 }
 
-/* Build a specific step */
+/* Build Step */
 function buildStep(index) {
     currentStep = index;
     const container = document.getElementById("wizard-container");
     container.innerHTML = "";
 
     const step = wizardConfig.steps[index];
+    const lang = getCurrentLang();
+    const useEs = lang === "es";
 
     const card = document.createElement("div");
     card.className = "wizard-step-card";
 
     const title = document.createElement("div");
     title.className = "wizard-step-title";
-    title.textContent = step.title;
+
+    const stepTitle = useEs ? (step.title_es || step.title_en) : step.title_en;
+    title.textContent = stepTitle || step.title || "";
     card.appendChild(title);
 
-    // Fields
     step.fields.forEach(field => {
-        const fieldWrapper = document.createElement("div");
-        fieldWrapper.className = "wizard-field";
+        const wrap = document.createElement("div");
+        wrap.className = "wizard-field";
 
         const label = document.createElement("label");
-        label.setAttribute("for", field.id);
-        label.textContent = field.label + (field.required ? " *" : "");
-        fieldWrapper.appendChild(label);
+        const labelText = useEs ? (field.label_es || field.label_en) : field.label_en;
+        const finalLabel = labelText || field.label || field.id || "";
+
+        label.textContent = finalLabel + (field.required ? " *" : "");
+        wrap.appendChild(label);
 
         let input;
         if (field.type === "select") {
             input = document.createElement("select");
-            field.options.forEach(opt => {
-                const option = document.createElement("option");
-                option.value = opt.value;
-                option.textContent = opt.label;
-                input.appendChild(option);
+            (field.options || []).forEach(opt => {
+                const o = document.createElement("option");
+                o.value = opt.value;
+                const optLabel = useEs ? (opt.label_es || opt.label_en || opt.label) : (opt.label_en || opt.label);
+                o.textContent = optLabel || opt.value;
+                input.appendChild(o);
             });
         } else {
             input = document.createElement("input");
@@ -109,47 +139,42 @@ function buildStep(index) {
         }
 
         input.id = field.id;
-        input.name = field.id;
-        fieldWrapper.appendChild(input);
-
-        card.appendChild(fieldWrapper);
+        wrap.appendChild(input);
+        card.appendChild(wrap);
     });
 
-    // Buttons
-    const btnWrapper = document.createElement("div");
-    btnWrapper.className = "wizard-buttons";
+    const btns = document.createElement("div");
+    btns.className = "wizard-buttons";
 
-    const backBtn = document.createElement("button");
-    backBtn.className = "wizard-btn back";
-    backBtn.textContent = "Back";
-    backBtn.disabled = index === 0;
-    backBtn.addEventListener("click", goBack);
+    const back = document.createElement("button");
+    back.className = "wizard-btn back";
+    back.textContent = getText("back");
+    back.disabled = index === 0;
+    back.addEventListener("click", goBack);
 
-    const nextBtn = document.createElement("button");
-    nextBtn.className = "wizard-btn next";
-    nextBtn.textContent = index === wizardConfig.steps.length - 1 ? "Review" : "Next";
-    nextBtn.addEventListener("click", goNext);
+    const next = document.createElement("button");
+    next.className = "wizard-btn next";
+    const isLastStep = index === wizardConfig.steps.length - 1;
+    next.textContent = isLastStep ? getText("review") : getText("next");
+    next.addEventListener("click", goNext);
 
-    btnWrapper.appendChild(backBtn);
-    btnWrapper.appendChild(nextBtn);
+    btns.appendChild(back);
+    btns.appendChild(next);
+    card.appendChild(btns);
 
-    card.appendChild(btnWrapper);
     container.appendChild(card);
 
     setActiveTab(index);
     updateProgress();
 }
 
-/* Navigation helpers */
-function goToStep(index) {
-    if (index < 0 || index >= wizardConfig.steps.length) return;
-    buildStep(index);
+/* Navigation */
+function goToStep(i) {
+    if (i >= 0 && i < wizardConfig.steps.length) buildStep(i);
 }
 
 function goBack() {
-    if (currentStep > 0) {
-        buildStep(currentStep - 1);
-    }
+    if (currentStep > 0) buildStep(currentStep - 1);
 }
 
 function goNext() {
@@ -162,18 +187,33 @@ function goNext() {
     }
 }
 
-/* Progress bar update */
+/* Progress */
 function updateProgress() {
-    const progressEl = document.getElementById("wizard-progress");
-    const total = wizardConfig.steps.length + 1; // +1 for review
-    const currentIndex = currentStep;
-    const percent = Math.round(((currentIndex) / total) * 100);
-    progressEl.style.width = percent + "%";
+    const bar = document.getElementById("wizard-progress");
+    const total = wizardConfig.steps.length + 1;
+    const percent = Math.round((currentStep / total) * 100);
+    bar.style.width = percent + "%";
 }
-/* ================================
-   BUILD REVIEW STEP
-================================ */
 
+/* Validation */
+function validateStep() {
+    const step = wizardConfig.steps[currentStep];
+    let valid = true;
+
+    step.fields.forEach(field => {
+        const el = document.getElementById(field.id);
+        if (field.required && (!el || el.value.trim() === "")) {
+            el.style.border = "2px solid red";
+            valid = false;
+        } else if (el) {
+            el.style.border = "1px solid #bbb";
+        }
+    });
+
+    return valid;
+}
+
+/* Review */
 function buildReview() {
     const container = document.getElementById("wizard-container");
     container.innerHTML = "";
@@ -183,94 +223,72 @@ function buildReview() {
 
     const title = document.createElement("div");
     title.className = "wizard-step-title";
-    title.textContent = "Review Your Information";
+    title.textContent = getText("reviewTitle");
     card.appendChild(title);
+
+    const lang = getCurrentLang();
+    const useEs = lang === "es";
 
     wizardConfig.steps.forEach(step => {
         const section = document.createElement("div");
         section.className = "review-section";
 
-        const header = document.createElement("h3");
-        header.textContent = step.title;
-        section.appendChild(header);
+        const h = document.createElement("h3");
+        const stepTitle = useEs ? (step.title_es || step.title_en) : step.title_en;
+        h.textContent = stepTitle || step.title || "";
+        section.appendChild(h);
 
         step.fields.forEach(field => {
-            const value = document.getElementById(field.id)?.value || "";
-
+            const val = document.getElementById(field.id)?.value || "";
             const row = document.createElement("p");
-            row.innerHTML = `<strong>${field.label}:</strong> ${value}`;
+
+            const labelText = useEs ? (field.label_es || field.label_en) : field.label_en;
+            const finalLabel = labelText || field.label || field.id || "";
+
+            row.innerHTML = `<strong>${finalLabel}:</strong> ${val}`;
             section.appendChild(row);
         });
 
         card.appendChild(section);
     });
 
-    // Buttons
-    const btnWrapper = document.createElement("div");
-    btnWrapper.className = "wizard-buttons";
+    const btns = document.createElement("div");
+    btns.className = "wizard-buttons";
 
-    const backBtn = document.createElement("button");
-    backBtn.className = "wizard-btn back";
-    backBtn.textContent = "Back";
-    backBtn.addEventListener("click", () => buildStep(currentStep));
+    const back = document.createElement("button");
+    back.className = "wizard-btn back";
+    back.textContent = getText("back");
+    back.addEventListener("click", () => buildStep(currentStep));
 
-    const submitBtn = document.createElement("button");
-    submitBtn.className = "wizard-btn next";
-    submitBtn.textContent = "Submit Application";
-    submitBtn.addEventListener("click", submitApplication);
+    const submit = document.createElement("button");
+    submit.className = "wizard-btn next";
+    submit.textContent = getText("submit");
+    submit.addEventListener("click", submitApplication);
 
-    btnWrapper.appendChild(backBtn);
-    btnWrapper.appendChild(submitBtn);
+    btns.appendChild(back);
+    btns.appendChild(submit);
+    card.appendChild(btns);
 
-    card.appendChild(btnWrapper);
     container.appendChild(card);
 
-    // Progress bar full
     document.getElementById("wizard-progress").style.width = "100%";
 }
 
-/* ================================
-   VALIDATION
-================================ */
-
-function validateStep() {
-    const step = wizardConfig.steps[currentStep];
-    let valid = true;
-
-    step.fields.forEach(field => {
-        if (field.required) {
-            const el = document.getElementById(field.id);
-            if (!el || el.value.trim() === "") {
-                el.style.border = "2px solid red";
-                valid = false;
-            } else {
-                el.style.border = "1px solid #bbb";
-            }
-        }
-    });
-
-    return valid;
-}
-
-/* ================================
-   SUBMIT APPLICATION
-================================ */
-
+/* Submit */
 function submitApplication() {
-    const formData = {};
+    const data = {};
 
     wizardConfig.steps.forEach(step => {
         step.fields.forEach(field => {
             const el = document.getElementById(field.id);
-            formData[field.id] = el ? el.value : "";
+            data[field.id] = el ? el.value : "";
         });
     });
 
-    console.log("Submitting application:", formData);
+    alert(isSpanish()
+        ? "¡Su solicitud ha sido enviada con éxito!"
+        : "Your application has been submitted successfully!"
+    );
 
-    // Replace this with your FormSubmit or API endpoint
-    alert("Your application has been submitted successfully!");
-
-    // Redirect or reset
     window.location.href = "/applications.html";
 }
