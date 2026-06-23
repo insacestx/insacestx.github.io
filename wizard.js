@@ -7,7 +7,7 @@ let currentStep = 0;
 
 /* Language helpers */
 function getCurrentLang() {
-    return localStorage.getItem("acesLang") || "en";
+    return localStorage.getItem("aces_lang") || "en";
 }
 
 function isSpanish() {
@@ -36,8 +36,14 @@ function getAppType() {
 /* Load config */
 async function loadConfig(appType) {
     try {
-        const module = await import(`/applications/config/${appType}-config.js`);
+        // FIX FOR GITHUB PAGES SUBDIRECTORY
+        const base = window.location.pathname.includes("insacestx.github.io")
+            ? "/insacestx.github.io"
+            : "";
+
+        const module = await import(`${base}/applications/config/${appType}-config.js`);
         wizardConfig = module.default;
+
     } catch (err) {
         document.getElementById("wizard-container").innerHTML =
             `<p style="color:red;">Error loading application configuration.</p>`;
