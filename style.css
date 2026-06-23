@@ -1,63 +1,50 @@
 /* ============================================================
    ACES 2026 — LIGHT THEME VERSION
 ============================================================ */
-
 /* BASE RESET */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #f7f8fb;
   color: #1f2937;
   line-height: 1.6;
 }
-
 a {
   color: inherit;
   text-decoration: none;
 }
-
 img {
   max-width: 100%;
   display: block;
 }
-
 section {
   padding: 60px 28px;
 }
-
 @media (min-width: 900px) {
   section {
     padding: 80px 40px;
   }
 }
-
 /* ANIMATIONS */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes slideInUp {
   from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes slideInRight {
   from { opacity: 0; transform: translateX(100%); }
-  to   { opacity: 1; transform: translateX(0); }
+  to { opacity: 1; transform: translateX(0); }
 }
-
-
-
 /* ============================================================
    HEADER — LIGHT THEME
 ============================================================ */
-
 #aces-header {
   position: sticky;
   top: 0;
@@ -67,12 +54,10 @@ section {
   border-bottom: 1px solid rgba(0,0,0,0.08);
   transition: background 0.25s ease, box-shadow 0.25s ease;
 }
-
 #aces-header.scrolled {
   background: rgba(255,255,255,0.95);
   box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
-
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -81,37 +66,31 @@ section {
   justify-content: space-between;
   align-items: center;
 }
-
 .logo-area img {
   height: 48px;
 }
-
 /* NAV (DESKTOP) */
 .nav-links {
   display: flex;
   gap: 28px;
   align-items: center;
 }
-
 .nav-links a {
   color: #374151;
   font-size: 1rem;
   transition: color .25s ease;
 }
-
 .nav-links a:hover,
 .nav-links a.active {
   color: #d62828;
   font-weight: 600;
 }
-
 /* HEADER CONTROLS */
 .header-controls {
   display: flex;
   align-items: center;
   gap: 14px;
 }
-
 .lang-btn {
   background: #d62828;
   color: #fff;
@@ -122,11 +101,9 @@ section {
   font-size: .9rem;
   transition: background .25s ease;
 }
-
 .lang-btn:hover {
   background: #ef4444;
 }
-
 .mobile-menu-btn {
   display: none;
   background: none;
@@ -135,11 +112,9 @@ section {
   color: #111827;
   cursor: pointer;
 }
-
 /* ============================================================
    MOBILE MENU — LIGHT THEME
 ============================================================ */
-
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -149,13 +124,11 @@ section {
   transform: translateY(-10px);
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
-
 .mobile-menu.open {
   display: flex;
   opacity: 1;
   transform: translateY(0);
 }
-
 .mobile-menu a {
   padding: 14px 20px;
   border-top: 1px solid #f1f5f9;
@@ -164,29 +137,24 @@ section {
   display: block;
   transition: background 0.2s ease, color 0.2s ease;
 }
-
 .mobile-menu a:hover {
   background: #fee2e2;
   color: #b91c1c;
 }
-
 .mobile-menu a.active {
   background: #fecaca;
   color: #991b1b;
   font-weight: 600;
 }
-
 /* Mobile Dropdown */
 .mobile-dropdown-menu {
   display: none;
   flex-direction: column;
   background: #f9fafb;
 }
-
 .mobile-dropdown.open .mobile-dropdown-menu {
   display: flex;
 }
-
 .mobile-dropdown-toggle {
   padding: 14px 20px;
   border-top: 1px solid #f1f5f9;
@@ -195,7 +163,6 @@ section {
   cursor: pointer;
   display: block;
 }
-
 /* Mobile Language Buttons */
 .mobile-lang {
   display: flex;
@@ -203,7 +170,6 @@ section {
   gap: 12px;
   padding: 14px 0;
 }
-
 /* Hide desktop nav on mobile */
 @media (max-width: 900px) {
   .nav-links { display: none !important; }
@@ -212,7 +178,6 @@ section {
 /* ============================================================
    HERO — LIGHT VERSION (Unified)
 ============================================================ */
-
 /* Base Hero Wrapper */
 .aces-hero {
   background: radial-gradient(circle at top, #ffe5e5 0%, #ffffff 60%);
@@ -220,78 +185,63 @@ section {
   text-align: center;
   animation: fadeIn 0.6s ease forwards;
 }
-
 /* Inner Container */
 .aces-hero-inner {
   max-width: 900px;
   margin: 0 auto;
 }
-
 /* Headline */
 .aces-hero-inner h1 {
   font-size: 2.4rem;
   margin-bottom: 12px;
   color: #111827;
 }
-
 /* Subtext */
 .aces-hero-inner p {
   font-size: 1.15rem;
   color: #4b5563;
   margin-bottom: 20px;
 }
-
 /* Smaller Hero Variant */
 .aces-hero.small {
   padding: 60px 20px;
 }
-
 .aces-hero.small h1 {
   font-size: 2.1rem;
 }
-
 /* Page Hero Variant */
 .aces-hero.page {
   padding: 70px 20px;
 }
-
 /* Responsive */
 @media (max-width: 768px) {
   .aces-hero {
     padding: 70px 20px 50px;
   }
-
   .aces-hero-inner h1 {
     font-size: 2rem;
   }
-
   .aces-hero-inner p {
     font-size: 1rem;
   }
 }
-
 /* ============================================================
    CLAIMS HERO — ACES 2026 LIGHT THEME
 ============================================================ */
-
 .claims-hero {
   background-image: url('Icons/hero-claims-aces.png');
   background-size: cover;
   background-position: center 25%;
   background-repeat: no-repeat;
-
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-
   padding: 140px 20px;
   position: relative;
-
   color: #222;
   overflow: hidden;
 }
-
 /* Light overlay */
 .claims-hero::before {
   content: "";
@@ -300,47 +250,39 @@ section {
   background: rgba(255,255,255,0.60);
   backdrop-filter: blur(2px);
 }
-
 .claims-hero-inner {
   position: relative;
   z-index: 2;
   max-width: 900px;
   margin: 0 auto;
 }
-
 .claims-hero-inner h1 {
   font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 14px;
   color: #c40000;
 }
-
 .claims-hero-inner p {
   font-size: 1.25rem;
   max-width: 700px;
   margin: 0 auto;
   color: #333;
 }
-
 @media (max-width: 768px) {
   .claims-hero {
     padding: 100px 20px;
     background-position: center top;
   }
-
   .claims-hero-inner h1 {
     font-size: 2.2rem;
   }
-
   .claims-hero-inner p {
     font-size: 1.05rem;
   }
 }
-
 /* ============================================================
    WIZARD STEPS — LIGHT THEME
 ============================================================ */
-
 .auto-wizard-steps,
 .wizard-steps {
   display: flex;
@@ -350,32 +292,25 @@ section {
   margin-top: 30px;
   margin-bottom: 30px;
 }
-
 .auto-wizard-step,
 .wizard-step {
   display: flex;
   align-items: center;
   gap: 6px;
-
   padding: 8px 14px;
   border-radius: 20px;
-
   background: rgba(212, 0, 0, 0.08);
   border: 1px solid rgba(212, 0, 0, 0.18);
-
   color: #444;
   font-size: 0.9rem;
   cursor: pointer;
-
   transition: all 0.25s ease;
 }
-
 .auto-wizard-step:hover,
 .wizard-step:hover {
   background: rgba(212, 0, 0, 0.12);
   border-color: rgba(212, 0, 0, 0.28);
 }
-
 .auto-wizard-step.active,
 .wizard-step.active {
   background: #d40000;
@@ -383,21 +318,17 @@ section {
   border-color: #d40000;
   font-weight: 600;
 }
-
 .step-index {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   width: 20px;
   height: 20px;
   border-radius: 50%;
-
   background: rgba(255,255,255,0.45);
   font-size: 0.75rem;
   font-weight: bold;
 }
-
 .auto-wizard-step.active .step-index,
 .wizard-step.active .step-index {
   background: rgba(255,255,255,0.25);
@@ -405,7 +336,6 @@ section {
 /* ============================================================
    LIGHT RED SECTION
 ============================================================ */
-
 .app-section {
   background: linear-gradient(
     180deg,
@@ -414,7 +344,6 @@ section {
     #fff7f7 100%
   );
 }
-
 .section-title,
 .app-category-title {
   text-align: center;
@@ -422,7 +351,6 @@ section {
   margin-bottom: 10px;
   color: #b00000;
 }
-
 .app-category-intro {
   text-align: center;
   max-width: 700px;
@@ -430,19 +358,15 @@ section {
   color: #555;
   font-size: 1rem;
 }
-
 /* ============================================================
    LIGHT SECTION
 ============================================================ */
-
 .team-section {
   background: #f7f7f7;
 }
-
 /* ============================================================
    GRIDS — UNIFIED
 ============================================================ */
-
 .app-grid,
 .contact-grid,
 .team-grid {
@@ -452,11 +376,9 @@ section {
   gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
-
 /* ============================================================
    CARDS — LIGHT THEME (Unified)
 ============================================================ */
-
 .app-card,
 .contact-card,
 .team-card,
@@ -469,7 +391,6 @@ section {
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   animation: slideInUp 0.6s ease forwards;
 }
-
 /* Staggered animation for agent cards */
 .agent-card:nth-child(1) { animation-delay: 0.1s; }
 .agent-card:nth-child(2) { animation-delay: 0.2s; }
@@ -478,7 +399,6 @@ section {
 .agent-card:nth-child(5) { animation-delay: 0.5s; }
 .agent-card:nth-child(6) { animation-delay: 0.6s; }
 .agent-card:nth-child(7) { animation-delay: 0.7s; }
-
 .app-card:hover,
 .contact-card:hover,
 .team-card:hover,
@@ -487,7 +407,6 @@ section {
   box-shadow: 0 12px 28px rgba(0,0,0,0.10);
   border-color: rgba(212,0,0,0.35);
 }
-
 .app-card h3,
 .contact-card h3,
 .team-card h3,
@@ -496,7 +415,6 @@ section {
   font-size: 1.1rem;
   color: #b00000;
 }
-
 .app-card p,
 .contact-card p,
 .team-card p,
@@ -505,11 +423,9 @@ section {
   color: #555;
   line-height: 1.6;
 }
-
 /* ============================================================
    TEAM IMAGES
 ============================================================ */
-
 .team-img {
   width: 100%;
   border-radius: 10px;
@@ -517,26 +433,20 @@ section {
   object-fit: cover;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
-
 /* ============================================================
    ICONS — LIGHT THEME (Unified)
 ============================================================ */
-
 /* Icon Wrapper */
 .app-icon {
   width: 72px;
   height: 72px;
-
   background: none;
   border-radius: 0;
   padding: 0;
-
   display: block;
   margin: 0 auto 12px;
-
   transition: transform 0.3s ease;
 }
-
 /* Icon Image / SVG */
 .app-icon img,
 .app-icon svg {
@@ -545,20 +455,17 @@ section {
   filter: drop-shadow(0 0 4px rgba(212,0,0,0.18));
   transition: transform 0.3s ease, filter 0.3s ease;
 }
-
 /* Hover Animation */
 .app-card:hover .app-icon {
   transform: scale(1.06);
   background: rgba(212, 0, 0, 0.12);
   box-shadow: 0 4px 14px rgba(212,0,0,0.12);
 }
-
 .app-card:hover .app-icon img,
 .app-card:hover .app-icon svg {
   transform: scale(1.05);
   filter: drop-shadow(0 0 6px rgba(212,0,0,0.25));
 }
-
 /* Contact Icons */
 .contact-icon {
   font-size: 2rem;
@@ -568,7 +475,6 @@ section {
 /* ============================================================
    BUTTONS — LIGHT THEME
 ============================================================ */
-
 .app-btn,
 .hero-btn,
 .submit-btn {
@@ -584,7 +490,6 @@ section {
   cursor: pointer;
   transition: background .25s ease, transform .15s ease, box-shadow .25s ease;
 }
-
 .app-btn:hover,
 .hero-btn:hover,
 .submit-btn:hover {
@@ -592,9 +497,7 @@ section {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(212,0,0,0.22);
 }
-
 /* PRIMARY + SECONDARY */
-
 .btn-primary,
 .btn-secondary {
   padding: 10px 20px;
@@ -605,44 +508,35 @@ section {
   cursor: pointer;
   transition: background 0.25s ease, transform 0.15s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
-
 /* PRIMARY */
-
 .btn-primary {
   background: #d40000;
   color: #fff;
 }
-
 .btn-primary:hover {
   background: #ee0000;
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(212,0,0,0.22);
 }
-
 /* SECONDARY */
-
 .btn-secondary {
   background: rgba(255,255,255,0.85);
   color: #555;
   border: 1px solid #ddd;
 }
-
 .btn-secondary:hover {
   background: #fff;
   color: #b00000;
   border-color: rgba(212,0,0,0.35);
   box-shadow: 0 4px 14px rgba(0,0,0,0.06);
 }
-
 /* ============================================================
    FORM STYLES — LIGHT THEME
 ============================================================ */
-
 .form-section {
   background: #f7f7f7;
   padding: 40px 20px;
 }
-
 .form-container {
   max-width: 900px;
   margin: 0 auto;
@@ -652,51 +546,40 @@ section {
   box-shadow: 0 12px 35px rgba(0,0,0,0.08);
   border: 1px solid rgba(212,0,0,0.08);
 }
-
 /* FORM STEPS */
-
 .form-step {
   display: none;
 }
-
 .form-step.active {
   display: block;
 }
-
 .form-step h2 {
   margin-bottom: 10px;
   font-size: 1.5rem;
   color: #b00000;
 }
-
 .section-subtitle {
   color: #666;
   margin-bottom: 20px;
 }
-
 /* GRID */
-
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   margin: 20px 0;
 }
-
 /* FIELDS */
-
 .form-field {
   display: flex;
   flex-direction: column;
 }
-
 .form-field label {
   font-size: 0.92rem;
   margin-bottom: 6px;
   color: #444;
   font-weight: 500;
 }
-
 .form-field input,
 .form-field select,
 .form-field textarea {
@@ -708,7 +591,6 @@ section {
   font-size: 0.95rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
-
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
@@ -717,16 +599,13 @@ section {
   box-shadow: 0 0 0 4px rgba(212,0,0,0.08);
   background: #fff;
 }
-
 /* ============================================================
    INPUT ICONS — QUICK QUOTE FORM
 ============================================================ */
-
 .input-icon {
   position: relative;
   margin-bottom: 15px;
 }
-
 .input-icon img {
   position: absolute;
   width: 20px;
@@ -737,17 +616,14 @@ section {
   opacity: 0.6;
   pointer-events: none;
 }
-
 .input-icon input,
 .input-icon select {
   padding-left: 45px !important;
   width: 100%;
 }
-
 /* ============================================================
    AGENT PANEL — LIGHT THEME (SLIDE-OUT)
 ============================================================ */
-
 .agent-panel {
   position: fixed;
   top: 0;
@@ -763,12 +639,10 @@ section {
   border-left: 1px solid #e5e5e5;
   transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .agent-panel.open {
   right: 0;
   animation: slideInRight 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .agent-panel .close-panel {
   background: none;
   border: none;
@@ -787,12 +661,10 @@ section {
   transition: color 0.2s ease, background 0.2s ease;
   border-radius: 4px;
 }
-
 .agent-panel .close-panel:hover {
   color: #fff;
   background: #d40000;
 }
-
 .agent-panel .panel-photo {
   width: 100%;
   border-radius: 10px;
@@ -801,7 +673,6 @@ section {
   object-fit: cover;
   box-shadow: 0 6px 18px rgba(0,0,0,0.1);
 }
-
 .agent-panel h2 {
   margin-top: 20px;
   margin-bottom: 4px;
@@ -809,21 +680,18 @@ section {
   font-weight: 700;
   color: #111827;
 }
-
 .agent-panel .panel-title {
   color: #d40000;
   margin-bottom: 12px;
   font-size: 0.95rem;
   font-weight: 600;
 }
-
 .agent-panel p {
   font-size: 0.9rem;
   margin-bottom: 6px;
   color: #555;
   line-height: 1.5;
 }
-
 .agent-panel .panel-call {
   display: inline-block;
   margin-top: 16px;
@@ -835,16 +703,13 @@ section {
   font-weight: 600;
   transition: background 0.2s ease, transform 0.2s ease;
 }
-
 .agent-panel .panel-call:hover {
   background: #ff1a1a;
   transform: translateY(-2px);
 }
-
 /* ============================================================
    CHECKBOX CARDS
 ============================================================ */
-
 .checkbox-card {
   display: flex;
   align-items: center;
@@ -856,18 +721,15 @@ section {
   cursor: pointer;
   transition: all 0.25s ease;
 }
-
 /* ============================================================
    FOOTER — ACES LIGHT THEME
 ============================================================ */
-
 .aces-footer {
   background: #ffffff;
   padding: 60px 20px 40px;
   color: #333;
   border-top: 1px solid #e5e5e5;
 }
-
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -875,81 +737,67 @@ section {
   max-width: 1200px;
   margin: 0 auto 40px;
 }
-
 .footer-column {
   display: flex;
   flex-direction: column;
 }
-
 .footer-column h3 {
   font-size: 1.1rem;
   margin-bottom: 16px;
   color: #111827;
   font-weight: 600;
 }
-
 .footer-column p {
   font-size: 0.95rem;
   margin-bottom: 10px;
   color: #555;
   line-height: 1.6;
 }
-
 .footer-logo {
   height: 48px;
   margin-bottom: 16px;
   object-fit: contain;
 }
-
 .footer-social {
   display: flex;
   gap: 12px;
   margin-top: 12px;
 }
-
 .social-icon {
   font-size: 1.5rem;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-
 .social-icon:hover {
   transform: scale(1.2);
 }
-
 .footer-link {
   color: #d40000;
   font-size: 0.95rem;
   transition: color 0.2s ease;
 }
-
 .footer-link:hover {
   color: #ff1a1a;
   text-decoration: underline;
 }
-
 .footer-center {
   text-align: center;
 }
-
 .footer-badge {
   height: 80px;
   object-fit: contain;
   margin: 12px 0;
 }
-
 .footer-chamber-text {
   font-size: 0.9rem;
   font-weight: 600;
   margin: 12px 0 !important;
 }
-
 .footer-qr {
   height: 100px;
   object-fit: contain;
   margin-top: 12px;
 }
-
 .footer-legal {
   max-width: 1200px;
   margin: 0 auto 20px;
@@ -957,13 +805,11 @@ section {
   border-top: 1px solid #e5e5e5;
   text-align: center;
 }
-
 .footer-legal p {
   font-size: 0.85rem;
   color: #888;
   margin-bottom: 8px;
 }
-
 .back-to-top {
   display: block;
   margin: 0 auto;
@@ -977,41 +823,33 @@ section {
   cursor: pointer;
   transition: background 0.2s ease;
 }
-
 .back-to-top:hover {
   background: #ff1a1a;
 }
-
 @media (max-width: 768px) {
   .footer-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
   }
-
   .agent-panel {
     width: 100%;
     right: -100%;
   }
 }
-
 /* ============================================================
    PAGE TITLE
 ============================================================ */
-
 .page-title {
   text-align: center;
   margin: 2rem 0 1.5rem;
 }
-
 .page-title h1 {
   font-size: 2.2rem;
   margin-bottom: 0.5rem;
 }
-
 /* ============================================================
    QUICK QUOTE BOX
 ============================================================ */
-
 .quick-quote-box {
   width: 100%;
   max-width: 650px;
@@ -1023,19 +861,16 @@ section {
   border-left: 6px solid #c8102e;
   text-align: center;
 }
-
 .quick-quote-box h3 {
   margin-bottom: 1rem;
   font-weight: 700;
   color: #1a1a1a;
 }
-
 .quick-quote-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
-
 .quick-quote-form input,
 .quick-quote-form select {
   padding: 0.85rem 1rem;
@@ -1044,14 +879,12 @@ section {
   font-size: 1rem;
   background: #fafafa;
 }
-
 .quick-quote-form input:focus,
 .quick-quote-form select:focus {
   border-color: #c8102e;
   outline: none;
   box-shadow: 0 0 0 2px rgba(200,16,46,0.15);
 }
-
 .quote-submit-btn {
   padding: 1rem;
   background: #c8102e;
@@ -1063,15 +896,12 @@ section {
   cursor: pointer;
   transition: 0.2s ease;
 }
-
 .quote-submit-btn:hover {
   background: #a50d26;
 }
-
 /* ============================================================
    FILTER BAR (Unified)
 ============================================================ */
-
 .application-filter-bar {
   display: flex;
   flex-direction: column;
@@ -1082,14 +912,12 @@ section {
   width: 100%;
   text-align: center;
 }
-
 .filter-buttons {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .filter-btn {
   padding: 10px 18px;
   border-radius: 6px;
@@ -1101,14 +929,12 @@ section {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
 .filter-btn:hover,
 .filter-btn.active {
   background: #d40000;
   color: #fff;
   border-color: #d40000;
 }
-
 .filter-clear-btn {
   padding: 10px 16px;
   border-radius: 6px;
@@ -1119,21 +945,17 @@ section {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
 .filter-clear-btn:hover {
   background: #ddd;
   color: #333;
 }
-
 /* ============================================================
    SERVICES PAGE
 ============================================================ */
-
 .services-category-section {
   background: linear-gradient(180deg, #fff5f5 0%, #ffeaea 60%, #fff7f7 100%);
   padding: 60px 28px;
 }
-
 .services-category-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1141,7 +963,6 @@ section {
   max-width: 1200px;
   margin: 30px auto;
 }
-
 .service-category-card {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 14px;
@@ -1152,33 +973,28 @@ section {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
-
 .service-category-card:hover {
   transform: translateY(-6px);
   border-color: rgba(212, 0, 0, 0.35);
   box-shadow: 0 12px 25px rgba(212, 0, 0, 0.12);
 }
-
 .service-category-card h3 {
   font-size: 1.3rem;
   color: #d40000;
   margin: 0;
   font-weight: 600;
 }
-
 .subcategory-section {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 28px;
 }
-
 .subcategory-group {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 16px;
   margin-bottom: 40px;
 }
-
 .subcategory-card {
   background: rgba(255, 255, 255, 0.92);
   border-radius: 10px;
@@ -1190,44 +1006,109 @@ section {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   animation: fadeIn 0.6s ease forwards;
 }
-
 .subcategory-card:hover {
   transform: translateY(-3px) scale(1.02);
   background: rgba(255, 255, 255, 1);
   border-color: rgba(212, 0, 0, 0.35);
   box-shadow: 0 8px 16px rgba(212, 0, 0, 0.12);
 }
-
 .subcategory-card p {
   font-size: 0.95rem;
   color: #333;
   margin: 0;
   font-weight: 500;
 }
-
 /* ============================================================
-   APPLICATIONS PAGE
+   APPLICATIONS PAGE — NEW STYLES
 ============================================================ */
-
-#appSearch {
-  flex: 1;
-  min-width: 200px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 0.95rem;
+/* Category Section */
+.app-category-section {
+  padding: 60px 28px;
 }
 
-#appSearch:focus {
-  outline: none;
-  border-color: #d40000;
-  box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.1);
+.app-category-title {
+  text-align: center;
+  font-size: 1.7rem;
+  margin-bottom: 10px;
+  color: #b00000;
+}
+
+.app-card-grid {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.app-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(212,0,0,0.08);
+  transition: all 0.25s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(212,0,0,0.12);
+  border-color: rgba(212,0,0,0.3);
+}
+
+.app-card-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin: 0 auto 1.25rem;
+  filter: drop-shadow(0 4px 8px rgba(212,0,0,0.15));
+  transition: transform 0.3s ease;
+}
+
+.app-card:hover .app-card-icon {
+  transform: scale(1.08);
+}
+
+.app-card-title {
+  font-size: 1.25rem;
+  color: #b00000;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.app-card-desc {
+  flex: 1;
+  font-size: 0.98rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  line-height: 1.55;
+}
+
+.app-card-btn {
+  display: inline-block;
+  margin-top: auto;
+  padding: 12px 24px;
+  background: #d40000;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.app-card-btn:hover {
+  background: #ee0000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(212,0,0,0.25);
 }
 
 /* ============================================================
    CLAIMS PAGE
 ============================================================ */
-
 .claims-steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1235,7 +1116,6 @@ section {
   max-width: 1200px;
   margin: 40px auto;
 }
-
 .claims-step-card {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
@@ -1246,43 +1126,36 @@ section {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   animation: slideInUp 0.6s ease forwards;
 }
-
 .claims-step-card:nth-child(1) { animation-delay: 0.1s; }
 .claims-step-card:nth-child(2) { animation-delay: 0.2s; }
 .claims-step-card:nth-child(3) { animation-delay: 0.3s; }
 .claims-step-card:nth-child(4) { animation-delay: 0.4s; }
-
 .claims-step-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 24px rgba(212, 0, 0, 0.1);
   border-color: rgba(212, 0, 0, 0.3);
 }
-
 .claims-step-icon {
   font-size: 2.5rem;
   margin-bottom: 12px;
 }
-
 .claims-step-card h3 {
   font-size: 1.1rem;
   color: #d40000;
   margin: 12px 0 8px;
   font-weight: 600;
 }
-
 .claims-step-card p {
   font-size: 0.9rem;
   color: #666;
   line-height: 1.5;
 }
-
 .claims-download,
 .claims-agent-cta {
   text-align: center;
   margin: 40px auto;
   max-width: 1200px;
 }
-
 .carrier-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1290,7 +1163,6 @@ section {
   max-width: 1200px;
   margin: 40px auto;
 }
-
 .carrier-card {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
@@ -1300,27 +1172,23 @@ section {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   animation: slideInUp 0.6s ease forwards;
 }
-
 .carrier-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 28px rgba(212, 0, 0, 0.15);
   border-left-color: #ff1a1a;
 }
-
 .carrier-card h3 {
   font-size: 1.2rem;
   color: #111827;
   margin: 0 0 12px;
   font-weight: 600;
 }
-
 .carrier-card p {
   font-size: 0.9rem;
   color: #666;
   margin: 6px 0;
   line-height: 1.4;
 }
-
 .carrier-card a {
   display: inline-block;
   margin-top: 12px;
@@ -1332,7 +1200,6 @@ section {
   font-weight: 600;
   transition: all 0.2s ease;
 }
-
 .carrier-card a:hover {
   background: #ff1a1a;
   transform: translateY(-2px);
@@ -1344,7 +1211,6 @@ section {
   gap: 2rem;
   margin-top: 2rem;
 }
-
 /* CARD */
 .application-card {
   background: #ffffff;
@@ -1355,13 +1221,11 @@ section {
   transition: all 0.25s ease;
   position: relative;
 }
-
 /* RED UNDER-GLOW ON HOVER */
 .application-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 25px rgba(255, 0, 0, 0.35);
 }
-
 /* ICON CIRCLE */
 .icon-circle {
   width: 90px;
@@ -1373,12 +1237,10 @@ section {
   align-items: center;
   justify-content: center;
 }
-
 .application-icon {
   width: 55px;
   height: 55px;
 }
-
 /* BUTTON */
 .apply-button {
   display: inline-block;
@@ -1390,7 +1252,6 @@ section {
   font-weight: 600;
   transition: background 0.2s ease;
 }
-
 .apply-button:hover {
   background: #d00000;
 }
@@ -1400,11 +1261,9 @@ section {
   margin-left: auto;
   margin-right: auto;
 }
-
 /* ============================================================
    SERVICES FILTER BAR — ACES 2026
 ============================================================ */
-
 .services-filter-bar {
   display: flex;
   justify-content: center;
@@ -1413,7 +1272,6 @@ section {
   margin: 40px auto 20px;
   text-align: center;
 }
-
 .filter-btn {
   background: #fff;
   border: 2px solid #1f2937;
@@ -1424,44 +1282,36 @@ section {
   cursor: pointer;
   transition: all 0.25s ease;
 }
-
 .filter-btn:hover {
   background: #1f2937;
   color: #fff;
   transform: translateY(-2px);
 }
-
 .filter-btn.active {
   background: #1f2937;
   color: #fff;
   border-color: #1f2937;
 }
-
 /* ============================================================
    SERVICES SECTIONS — GRID + RESPONSIVE
 ============================================================ */
-
 .services-section {
   display: block;
   margin-top: 40px;
 }
-
 .services-section h2 {
   text-align: center;
   font-size: 1.8rem;
   margin-bottom: 28px;
 }
-
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
 }
-
 /* ============================================================
    SERVICE CARDS — VERTICAL STACKED STYLE
 ============================================================ */
-
 .service-box {
   background: #fff;
   border: 1px solid #e5e7eb;
@@ -1475,33 +1325,28 @@ section {
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-
 .service-box:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-
 .service-box img {
   width: 70px;
   height: 70px;
   object-fit: contain;
   display: block;
 }
-
 .service-box h3 {
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0;
   color: #1f2937;
 }
-
 .service-box p {
   font-size: 0.95rem;
   color: #374151;
   margin: 0 0 10px 0;
   line-height: 1.4;
 }
-
 .service-btn {
   background: #1f2937;
   color: #fff;
@@ -1511,15 +1356,12 @@ section {
   text-decoration: none;
   transition: background 0.25s ease;
 }
-
 .service-btn:hover {
   background: #374151;
 }
-
 /* ============================================================
    RESPONSIVE TWEAKS
 ============================================================ */
-
 @media (max-width: 768px) {
   .filter-btn {
     padding: 8px 16px;
@@ -1532,7 +1374,6 @@ section {
 /* ============================================================
    SERVICE DETAIL HERO (Full Banner Layout) — ACES 2026
 ============================================================ */
-
 /* The outer container for your wide, top hero graphic */
 .product-hero-container {
   width: 100%;
@@ -1542,7 +1383,6 @@ section {
   display: block;
   overflow: hidden;
 }
-
 /* Forces the wide banner to scale perfectly across the screen */
 .product-hero-banner {
   width: 100%;
@@ -1551,7 +1391,6 @@ section {
   display: block;
   object-fit: cover;
 }
-
 /* Center-aligns the Title, Icon, and Subtitle block */
 .product-title-section {
   text-align: center;
@@ -1559,14 +1398,12 @@ section {
   padding: 0 24px;
   max-width: 800px;
 }
-
 .product-title-section h1 {
   font-size: 2.5rem;
   color: #1f2937;
   margin-bottom: 10px;
   font-weight: 700;
 }
-
 /* Beautifully maps your small PNG icon right under the title */
 .product-type-icon {
   width: 100px;
@@ -1575,14 +1412,12 @@ section {
   display: block;
   object-fit: contain;
 }
-
 .product-hero-sub {
   font-size: 1.2rem;
   color: #4b5563;
   font-weight: 500;
   margin-top: 10px;
 }
-
 /* Centered global structural spacing for product body sections */
 .product-section {
   margin: 60px auto;
@@ -1590,20 +1425,17 @@ section {
   max-width: 800px;
   text-align: center;
 }
-
 .product-section h2 {
   font-size: 1.8rem;
   color: #d40000;
   margin-bottom: 20px;
   font-weight: 600;
 }
-
 .product-section p {
   font-size: 1.05rem;
   color: #374151;
   line-height: 1.6;
 }
-
 /* Centers list components cleanly without breaking indentation */
 .product-list {
   list-style-position: inside;
@@ -1611,32 +1443,27 @@ section {
   text-align: center;
   display: inline-block;
 }
-
 .product-list li {
   font-size: 1.05rem;
   color: #374151;
   margin: 12px 0;
   text-align: left; /* Keeps text left-aligned inside the centered block */
 }
-
 /* FAQ Block formatting updates */
 .faq-item {
   margin-bottom: 35px;
   text-align: center;
 }
-
 .faq-item h3 {
   font-size: 1.2rem;
   color: #1f2937;
   margin-bottom: 8px;
 }
-
 /* Call to Action Wrapper */
 .product-cta {
   text-align: center;
   margin: 60px auto;
 }
-
 .product-cta-btn {
   display: inline-block;
   padding: 14px 32px;
@@ -1648,26 +1475,23 @@ section {
   font-size: 1.1rem;
   transition: background 0.2s ease, transform 0.2s ease;
 }
-
 .product-cta-btn:hover {
   background: #d40000;
   transform: translateY(-2px);
 }
-
 /* Responsive Mobile Modifications */
 @media (max-width: 768px) {
   .product-title-section h1 {
     font-size: 2rem;
   }
-  
+ 
   .product-hero-banner {
-    max-height: 250px; /* Thins down the hero photo display on mobile */
+    max-height: 250px; /* Thins down the banner photo display on mobile */
   }
-
   .product-section h2 {
     font-size: 1.5rem;
   }
-  
+ 
   .product-type-icon {
     width: 85px;
     height: 85px;
@@ -1677,7 +1501,6 @@ section {
    ACES 2026 — UNIVERSAL WIZARD (RED THEME + HYBRID LAYOUT)
    Fully Isolated Namespace: .aces-wizard
 ============================================================ */
-
 /* WIZARD WRAPPER */
 .aces-wizard {
   width: 100%;
@@ -1693,11 +1516,9 @@ section {
   border-radius: 18px;
   box-shadow: 0 12px 35px rgba(0,0,0,0.08);
 }
-
 /* ============================================================
    DESKTOP TABS (Centered)
 ============================================================ */
-
 .aces-wizard-tabs {
   display: flex;
   justify-content: center;
@@ -1705,67 +1526,54 @@ section {
   margin-bottom: 25px;
   flex-wrap: wrap;
 }
-
 .aces-wizard-tab {
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
-
   padding: 10px 14px;
   border-bottom: 3px solid transparent;
-
   font-size: 1rem;
   font-weight: 600;
   color: #444;
-
   transition: all 0.25s ease;
 }
-
 .aces-wizard-tab:hover {
   color: #b00000;
   border-bottom-color: rgba(212,0,0,0.35);
 }
-
 /* ACTIVE TAB */
 .aces-wizard-tab.active {
   color: #b00000;
   border-bottom-color: #d40000;
 }
-
 /* STEP NUMBER CIRCLE */
 .aces-wizard-step-circle {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 0.85rem;
   font-weight: 700;
   transition: all 0.25s ease;
 }
-
 /* ACTIVE STEP CIRCLE */
 .aces-wizard-tab.active .aces-wizard-step-circle {
   background: #d40000;
   color: #fff;
   border: 2px solid #d40000;
 }
-
 /* INACTIVE STEP CIRCLE */
 .aces-wizard-tab:not(.active) .aces-wizard-step-circle {
   background: #fff;
   color: #d40000;
   border: 2px solid #d40000;
 }
-
 /* ============================================================
    PROGRESS BAR (Thick ACES Red)
 ============================================================ */
-
 .aces-wizard-progress {
   width: 100%;
   height: 14px;
@@ -1774,18 +1582,15 @@ section {
   overflow: hidden;
   margin-bottom: 35px;
 }
-
 .aces-wizard-progress-fill {
   height: 100%;
   width: 0%;
   background: #d40000;
   transition: width 0.35s ease;
 }
-
 /* ============================================================
    STEP CARDS
 ============================================================ */
-
 .aces-wizard-card {
   background: #ffffff;
   border-radius: 14px;
@@ -1795,47 +1600,39 @@ section {
   margin-bottom: 30px;
   display: none;
 }
-
 .aces-wizard-card.active {
   display: block;
   animation: fadeIn 0.4s ease forwards;
 }
-
 .aces-wizard-card h2 {
   font-size: 1.6rem;
   color: #b00000;
   margin-bottom: 12px;
 }
-
 .aces-wizard-card p.section-subtitle {
   color: #666;
   margin-bottom: 20px;
 }
-
 /* ============================================================
    FORM GRID
 ============================================================ */
-
 .aces-wizard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 18px;
   margin: 20px 0;
 }
-
 /* FIELDS */
 .aces-wizard-field {
   display: flex;
   flex-direction: column;
 }
-
 .aces-wizard-field label {
   font-size: 0.92rem;
   margin-bottom: 6px;
   color: #444;
   font-weight: 600;
 }
-
 .aces-wizard-field input,
 .aces-wizard-field select,
 .aces-wizard-field textarea {
@@ -1847,7 +1644,6 @@ section {
   font-size: 0.95rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
 .aces-wizard-field input:focus,
 .aces-wizard-field select:focus,
 .aces-wizard-field textarea:focus {
@@ -1855,11 +1651,9 @@ section {
   border-color: #d40000;
   box-shadow: 0 0 0 4px rgba(212,0,0,0.12);
 }
-
 /* ============================================================
    REPEATERS (Drivers, Vehicles, Claims)
 ============================================================ */
-
 .aces-wizard-repeater {
   background: #fff;
   border: 1px solid rgba(212,0,0,0.15);
@@ -1867,13 +1661,11 @@ section {
   padding: 18px;
   margin-bottom: 16px;
 }
-
 .aces-wizard-repeater h3 {
   font-size: 1.1rem;
   color: #b00000;
   margin-bottom: 12px;
 }
-
 .aces-wizard-remove-btn {
   background: #fff;
   border: 1px solid #d40000;
@@ -1884,22 +1676,18 @@ section {
   cursor: pointer;
   transition: all 0.25s ease;
 }
-
 .aces-wizard-remove-btn:hover {
   background: #d40000;
   color: #fff;
 }
-
 /* ============================================================
    NAVIGATION BUTTONS
 ============================================================ */
-
 .aces-wizard-nav {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
-
 .aces-wizard-btn {
   padding: 12px 22px;
   border-radius: 8px;
@@ -1909,295 +1697,228 @@ section {
   cursor: pointer;
   transition: all 0.25s ease;
 }
-
 /* BACK BUTTON */
 .aces-wizard-btn.back {
   background: #fff;
   color: #555;
   border: 1px solid #ccc;
 }
-
 .aces-wizard-btn.back:hover {
   background: #fff;
   color: #b00000;
   border-color: #d40000;
 }
-
 /* NEXT BUTTON */
 .aces-wizard-btn.next {
   background: #d40000;
   color: #fff;
 }
-
 .aces-wizard-btn.next:hover {
   background: #ff1a1a;
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(212,0,0,0.22);
 }
-
 /* ============================================================
    MOBILE LAYOUT — Vertical Steps
 ============================================================ */
-
 @media (max-width: 900px) {
-
   .aces-wizard-tabs {
     display: none;
   }
-
   .aces-wizard-mobile-steps {
     display: flex;
     flex-direction: column;
     gap: 12px;
     margin-bottom: 25px;
   }
-
   .aces-wizard-mobile-step {
     display: flex;
     align-items: center;
     gap: 12px;
-
     padding: 12px 16px;
     border-radius: 10px;
-
     background: rgba(255,255,255,0.85);
     border: 1px solid rgba(212,0,0,0.15);
-
     font-size: 1rem;
     font-weight: 600;
     color: #444;
   }
-
   .aces-wizard-mobile-step.active {
     background: #d40000;
     color: #fff;
     border-color: #d40000;
   }
-
   .aces-wizard-mobile-step .aces-wizard-step-circle {
     width: 26px;
     height: 26px;
   }
 }
-
 /* ============================================================
    HOME HERO — ACES STOREFRONT HERO (FIXED LAYOUT)
 ============================================================ */
-
 /* Main Hero Wrapper */
 .home-hero{
     position:relative;
     min-height:650px;
     overflow:hidden;
-
     background:
       linear-gradient(
         rgba(0,0,0,0.30),
         rgba(0,0,0,0.30)
       ),
       url('Icons/storefront.jpg') center 30% no-repeat;
-
     background-size:cover;
     color:#fff;
-
     display:flex;
     align-items:center;
-
     padding:120px 20px 80px;
 }
-
 /* Main Layout */
 .home-hero-inner{
     width:100%;
     max-width:1450px;
     margin:0 auto;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     gap:80px;
 }
-
 /* ============================================================
    LEFT SIDE
 ============================================================ */
-
 .hero-left{
     flex:0 0 55%;
     max-width:700px;
-
     display:flex;
     flex-direction:column;
     justify-content:center;
 }
-
 .hero-logo{
     width:220px;
     height:auto;
     margin-bottom:20px;
 }
-
 .hero-left h1{
     font-size:3.2rem;
     line-height:1.1;
     font-weight:800;
     color:#fff;
     margin-bottom:20px;
-
     text-shadow:
       0 2px 10px rgba(0,0,0,.40);
 }
-
 .hero-left p{
     font-size:1.2rem;
     line-height:1.7;
     color:#fff;
-
     margin-bottom:30px;
-
     text-shadow:
       0 2px 8px rgba(0,0,0,.35);
 }
-
 /* Buttons */
 .hero-buttons{
     display:flex;
     flex-wrap:wrap;
     gap:15px;
 }
-
 /* ============================================================
    RIGHT SIDE
 ============================================================ */
-
 .hero-right{
     flex:0 0 45%;
-
     display:flex;
     justify-content:flex-end;
     align-items:center;
 }
-
 /* Quote Box */
 .hero-right .quick-quote-box{
     width:100%;
     max-width:520px;
-
     margin:0;
-
     background:#fff;
     border-radius:14px;
-
     box-shadow:
       0 15px 45px rgba(0,0,0,.25);
-
     overflow:hidden;
 }
-
 /* ============================================================
    TABLET
 ============================================================ */
-
 @media (max-width:1024px){
-
     .home-hero{
         min-height:auto;
         padding:120px 20px 60px;
     }
-
     .home-hero-inner{
         gap:40px;
     }
-
     .hero-left{
         flex:0 0 50%;
     }
-
     .hero-right{
         flex:0 0 50%;
     }
-
     .hero-left h1{
         font-size:2.6rem;
     }
-
     .hero-logo{
         width:180px;
     }
-
     .hero-right .quick-quote-box{
         max-width:450px;
     }
 }
-
 /* ============================================================
    MOBILE
 ============================================================ */
-
 @media (max-width:768px){
-
     .home-hero{
         text-align:center;
         padding:90px 20px 50px;
     }
-
     .home-hero-inner{
         flex-direction:column;
         gap:35px;
     }
-
     .hero-left,
     .hero-right{
         flex:none;
         width:100%;
         max-width:100%;
     }
-
     .hero-right{
         justify-content:center;
     }
-
     .hero-logo{
         width:160px;
         margin:0 auto 20px;
     }
-
     .hero-left h1{
         font-size:2.2rem;
     }
-
     .hero-left p{
         font-size:1.05rem;
     }
-
     .hero-buttons{
         justify-content:center;
     }
-
     .hero-right .quick-quote-box{
         max-width:550px;
     }
 }
-
 /* ============================================================
    SMALL MOBILE
 ============================================================ */
-
 @media (max-width:480px){
-
     .hero-left h1{
         font-size:1.85rem;
     }
-
     .hero-logo{
         width:140px;
     }
-
     .hero-buttons{
         flex-direction:column;
     }
-
     .hero-buttons .hero-btn{
         width:100%;
     }
