@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title
+    data-en="Check Quote Status | ACES Insurance Services"
+    data-es="Ver Estado de la Cotización | ACES Insurance Services">
+    Check Quote Status | ACES Insurance Services
+  </title>
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/wizard.css" />
+
+  <script src="/global.js" defer></script>
+
+  <style>
+    .status-card {
+      max-width: 750px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      animation: fadeUp 0.6s ease;
+    }
+
+    .status-search {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .status-search input {
+      flex: 1;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .status-search button {
+      padding: 14px 20px;
+      background: #d32f2f;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .status-timeline {
+      margin-top: 20px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .status-timeline li {
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 1.05rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .status-timeline li.active {
+      font-weight: 700;
+      color: #d32f2f;
+    }
+
+    .status-actions {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .status-actions a {
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .primary-btn {
+      background: #d32f2f;
+      color: #fff;
+    }
+
+    .secondary-btn {
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <script>
+    function lookupStatus() {
+      const id = document.getElementById("status-id-input").value.trim();
+      const display = document.getElementById("status-display");
+
+      if (!id) {
+        display.innerHTML = `
+          <p style="color:#d32f2f; font-weight:600;">
+            Please enter a valid confirmation ID.
+          </p>`;
+        return;
+      }
+
+      // Simulated status logic (replace with backend later)
+      const stages = [
+        "Received",
+        "Assigned to Agent",
+        "In Review",
+        "Quoting Carriers",
+        "Completed"
+      ];
+
+      const randomStage = Math.floor(Math.random() * stages.length);
+
+      let timelineHTML = "<ul class='status-timeline'>";
+      stages.forEach((stage, index) => {
+        timelineHTML += `
+          <li class="${index === randomStage ? 'active' : ''}">
+            <span>${stage}</span>
+            <span>${index <= randomStage ? "✓" : ""}</span>
+          </li>`;
+      });
+      timelineHTML += "</ul>";
+
+      display.innerHTML = `
+        <h3>Status for ID: <strong>${id}</strong></h3>
+        ${timelineHTML}
+      `;
+    }
+  </script>
+</head>
+
+<body>
+
+<header id="aces-header"></header>
+
+<main class="fade-in">
+
+  <!-- HERO SECTION -->
+  <section class="quote-hero">
+    <div class="quote-hero-inner">
+
+      <div class="quote-hero-text">
+        <h1
+          data-en="Check Your Quote Status"
+          data-es="Ver el Estado de su Cotización">
+          Check Your Quote Status
+        </h1>
+
+        <p
+          data-en="Enter your confirmation ID to view your progress."
+          data-es="Ingrese su ID de confirmación para ver su progreso.">
+          Enter your confirmation ID to view your progress.
+        </p>
+      </div>
+
+      <!-- HERO IMAGE PLACEHOLDER -->
+      <div class="quote-hero-image"></div>
+
+    </div>
+  </section>
+
+  <!-- STATUS CARD -->
+  <section>
+    <div class="status-card">
+
+      <div class="status-search">
+        <input
+          id="status-id-input"
+          type="text"
+          placeholder="Enter Confirmation ID / Ingrese ID de Confirmación" />
+
+        <button onclick="lookupStatus()">
+          <span data-en="Check" data-es="Buscar">Check</span>
+        </button>
+      </div>
+
+      <div id="status-display"></div>
+
+      <div class="status-actions">
+        <a href="/get-a-quote.html" class="secondary-btn">
+          <span data-en="Return to Get a Quote" data-es="Regresar a Obtener Cotización">
+            Return to Get a Quote
+          </span>
+        </a>
+
+        <a href="/contact.html" class="primary-btn">
+          <span data-en="Contact Our Team" data-es="Contactar a Nuestro Equipo">
+            Contact Our Team
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer id="aces-footer"></footer>
+
+</body>
+</html>
