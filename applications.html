@@ -9,124 +9,60 @@
     data-es="Solicitudes de Seguro | ACES Insurance Services">
     Insurance Applications | ACES Insurance Services
   </title>
-  <link rel="stylesheet" href="/services.css" />
-  <link rel="stylesheet" href="/style.css" />
+
+  <link rel="stylesheet" href="/applications/applications.css" />
   <link rel="stylesheet" href="/wizard.css" />
 
   <script src="/global.js" defer></script>
   <script src="/applications/render-cards.js" defer></script>
   <script src="/applications/applications.js" defer></script>
-
-  <style>
-    .app-hero {
-      padding: 80px 20px;
-      text-align: center;
-      background: #fafafa;
-      border-bottom: 1px solid #eee;
-    }
-
-    .app-hero h1 {
-      font-size: 2.6rem;
-      margin-bottom: 10px;
-    }
-
-    .app-hero p {
-      font-size: 1.2rem;
-      color: #555;
-    }
-
-    /* FILTER BAR */
-    .filter-bar {
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 0 20px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      padding: 10px 18px;
-      border-radius: 8px;
-      background: #f5f5f5;
-      border: 1px solid #ddd;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .filter-btn.active {
-      background: #d32f2f;
-      color: #fff;
-      border-color: #d32f2f;
-    }
-
-    /* SEARCH BAR */
-    .search-wrapper {
-      max-width: 1200px;
-      margin: 10px auto 40px;
-      padding: 0 20px;
-    }
-
-    #appSearch {
-      width: 100%;
-      padding: 14px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-  </style>
 </head>
 
 <body>
+  <header id="aces-header"></header>
 
-<header id="aces-header"></header>
+  <main class="apps-main fade-in">
+    <!-- HERO -->
+    <section class="apps-hero">
+      <div class="apps-hero-inner">
+        <h1
+          data-en="Start Your Insurance Application"
+          data-es="Inicie su Solicitud de Seguro">
+          Start Your Insurance Application
+        </h1>
+        <p
+          data-en="Choose the type of coverage you need and complete a short, guided application."
+          data-es="Elija el tipo de cobertura que necesita y complete una solicitud guiada y sencilla.">
+          Choose the type of coverage you need and complete a short, guided application.
+        </p>
+      </div>
+    </section>
 
-<main class="fade-in">
+    <!-- CONTROLS BAR -->
+    <section class="apps-controls">
+      <div class="apps-filters">
+        <button class="apps-filter-btn active" data-filter="all"
+          data-en="All" data-es="Todos">All</button>
+        <button class="apps-filter-btn" data-filter="personal"
+          data-en="Personal" data-es="Personal">Personal</button>
+        <button class="apps-filter-btn" data-filter="commercial"
+          data-en="Commercial" data-es="Comercial">Commercial</button>
+        <button class="apps-filter-btn" data-filter="life"
+          data-en="Life & Family" data-es="Vida y Familia">Life & Family</button>
+      </div>
 
-  <!-- HERO SECTION -->
-  <section class="app-hero">
-    <h1
-      data-en="Insurance Applications"
-      data-es="Solicitudes de Seguro">
-      Insurance Applications
-    </h1>
+      <div class="apps-search">
+        <input
+          id="appSearch"
+          type="text"
+          placeholder="Search applications / Buscar aplicaciones" />
+      </div>
+    </section>
 
-    <p
-      data-en="Select the type of insurance you want to apply for."
-      data-es="Seleccione el tipo de seguro que desea solicitar.">
-      Select the type of insurance you want to apply for.
-    </p>
-  </section>
+    <!-- DYNAMIC APPLICATION CARDS -->
+    <section id="app-card-container" class="apps-grid"></section>
+  </main>
 
-  <!-- FILTER BAR -->
-  <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all"
-      data-en="All" data-es="Todos">All</button>
-
-    <button class="filter-btn" data-filter="personal"
-      data-en="Personal" data-es="Personal">Personal</button>
-
-    <button class="filter-btn" data-filter="commercial"
-      data-en="Commercial" data-es="Comercial">Commercial</button>
-
-    <button class="filter-btn" data-filter="life"
-      data-en="Life & Family" data-es="Vida y Familia">Life & Family</button>
-  </div>
-
-  <!-- SEARCH BAR -->
-  <div class="search-wrapper">
-    <input
-      id="appSearch"
-      type="text"
-      placeholder="Search applications / Buscar aplicaciones" />
-  </div>
-
-  <!-- AUTO-GENERATED APPLICATION CARDS -->
-  <section id="app-card-container"></section>
-
-</main>
-
-<footer id="aces-footer"></footer>
-
+  <footer id="aces-footer"></footer>
 </body>
 </html>
