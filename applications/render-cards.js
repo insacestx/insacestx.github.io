@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!response.ok) throw new Error(`Failed to load manifest: ${response.status}`);
 
     const manifest = await response.json();
-    const currentLang = localStorage.getItem("aces_lang") || "en";
+
+    // FIXED LANGUAGE KEY
+    const currentLang = localStorage.getItem("acesLang") || "en";
 
     const categories = { personal: [], commercial: [], life: [] };
 
@@ -21,7 +23,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
-    // Robust asset path helper
     const getAssetPath = (path) => {
       if (!path) return `${base}/img/icons/default.svg`;
       return path.startsWith('/') ? `${base}${path}` : `${base}/${path}`;
@@ -50,8 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         icon.className = "app-card-icon";
         icon.src = getAssetPath(app.icon);
         icon.alt = currentLang === "es" ? app.name_es : app.name_en;
-        
-        // Strong fallback
+
         icon.onerror = () => {
           console.warn(`Failed to load icon: ${app.icon}`);
           icon.src = `${base}/img/icons/default.svg`;
