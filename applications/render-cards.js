@@ -10,8 +10,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!response.ok) throw new Error(`Failed to load manifest: ${response.status}`);
 
     const manifest = await response.json();
-
-    // FIXED LANGUAGE KEY
     const currentLang = localStorage.getItem("acesLang") || "en";
 
     const categories = { personal: [], commercial: [], life: [] };
@@ -32,46 +30,37 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (apps.length === 0) continue;
 
       const section = document.createElement("section");
-      section.className = "app-category-section fade-in";
+      section.className = "services-section fade-in";
 
       const title = document.createElement("h2");
-      title.className = "app-category-title";
       title.textContent = getCategoryTitle(categoryKey, currentLang);
       section.appendChild(title);
 
       const grid = document.createElement("div");
-      grid.className = "app-card-grid";
+      grid.className = "services-grid";
 
       apps.forEach(app => {
-        const card = document.createElement("div");
-        card.className = "app-card";
-        card.setAttribute("data-category", app.category);
+        const box = document.createElement("div");
+        box.className = "service-box";
+        box.setAttribute("data-category", app.category);
 
         const icon = document.createElement("img");
-        icon.className = "app-card-icon";
         icon.src = getAssetPath(app.icon);
         icon.alt = currentLang === "es" ? app.name_es : app.name_en;
 
-        icon.onerror = () => {
-          console.warn(`Failed to load icon: ${app.icon}`);
-          icon.src = `${base}/img/icons/default.svg`;
-        };
-
-        const cardTitle = document.createElement("h3");
-        cardTitle.className = "app-card-title";
-        cardTitle.textContent = currentLang === "es" ? app.name_es : app.name_en;
+        const name = document.createElement("h3");
+        name.textContent = currentLang === "es" ? app.name_es : app.name_en;
 
         const desc = document.createElement("p");
-        desc.className = "app-card-desc";
         desc.textContent = currentLang === "es" ? app.description_es : app.description_en;
 
-        const link = document.createElement("a");
-        link.className = "app-card-btn";
-        link.href = `${base}/wizard.html?app=${encodeURIComponent(app.id)}`;
-        link.textContent = currentLang === "es" ? "Comenzar" : "Start Application";
+        const btn = document.createElement("a");
+        btn.className = "service-btn";
+        btn.href = `${base}/wizard.html?app=${encodeURIComponent(app.id)}`;
+        btn.textContent = currentLang === "es" ? "Comenzar" : "Start Application";
 
-        card.append(icon, cardTitle, desc, link);
-        grid.appendChild(card);
+        box.append(icon, name, desc, btn);
+        grid.appendChild(box);
       });
 
       section.appendChild(grid);
