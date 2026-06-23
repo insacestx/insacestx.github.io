@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // FIXED PATH FOR GITHUB PAGES
-    const response = await fetch(window.location.origin + "/applications/manifest.json");
+    const response = await fetch("/applications/manifest.json");
     const manifest = await response.json();
 
     const currentLang = localStorage.getItem("aces_lang") || "en";
