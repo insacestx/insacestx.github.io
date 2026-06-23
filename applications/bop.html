@@ -3,232 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Business Owners Policy (BOP) Application | ACES Insurance Services</title>
 
-  <!-- CORRECT CSS (Root‑Absolute) -->
+  <title
+    data-en="Business Owners Policy (BOP) Application"
+    data-es="Solicitud de Póliza para Dueños de Negocio (BOP)">
+    Business Owners Policy (BOP) Application
+  </title>
+
   <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/wizard.css">
 
-  <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script>
-    function buildReview() {
-  fill("reviewBusiness", [
-    { label: "Business Name", value: val("business_name") },
-    { label: "DBA", value: val("dba") },
-    { label: "Business Type", value: val("business_type") },
-    { label: "EIN", value: val("ein") },
-    { label: "Phone", value: val("business_phone") },
-    { label: "Email", value: val("business_email") },
-    { label: "Address", value: val("business_address") },
-    { label: "City", value: val("city") },
-    { label: "State", value: val("state") },
-    { label: "ZIP", value: val("zip") },
-    { label: "Description", value: val("business_description") }
-  ]);
-
-  fill("reviewProperty", [
-    { label: "Building Value", value: val("building_value") },
-    { label: "Contents Value", value: val("contents_value") },
-    { label: "Construction Type", value: val("construction_type") },
-    { label: "Property Notes", value: val("property_notes") }
-  ]);
-
-  fill("reviewLiability", [
-    { label: "GL Limit", value: val("gl_limit") },
-    { label: "Liability Notes", value: val("liability_notes") }
-  ]);
-
-  fill("reviewOperations", [
-    { label: "Operations Description", value: val("operations_description") },
-    { label: "Operations Notes", value: val("operations_notes") }
-  ]);
-}
-</script>
+  <script src="/wizard.js?app=bop" defer></script>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header id="aces-header"></header>
+<header id="aces-header"></header>
 
-  <main class="fade-in">
+<main class="fade-in">
 
-    <!-- HERO -->
-    <section class="auto-hero">
-      <div class="auto-hero-inner">
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
 
-        <h1 data-en="Business Owners Policy (BOP) Application"
-            data-es="Solicitud de Póliza para Dueños de Negocios (BOP)">
-          Business Owners Policy (BOP) Application
-        </h1>
+      <h1
+        data-en="Business Owners Policy (BOP) Application"
+        data-es="Solicitud de Póliza para Dueños de Negocio (BOP)">
+        Business Owners Policy (BOP) Application
+      </h1>
 
-        <p data-en="Tell us about your business. An ACES agent will review and follow up with tailored options."
-           data-es="Cuéntenos sobre su negocio. Un agente de ACES revisará y le dará opciones personalizadas.">
-          Tell us about your business. An ACES agent will review and follow up with tailored options.
-        </p>
+      <p
+        data-en="Tell us about your business, location, and operations."
+        data-es="Cuéntenos sobre su negocio, su ubicación y sus operaciones.">
+        Tell us about your business, location, and operations.
+      </p>
 
-        <!-- Wizard Steps -->
-        <div class="auto-wizard-steps" id="bopWizardSteps">
-          <div class="auto-wizard-step active" data-step="1">
-            <span class="step-index">1</span> Business Info
-          </div>
-          <div class="auto-wizard-step" data-step="2">
-            <span class="step-index">2</span> Property Info
-          </div>
-          <div class="auto-wizard-step" data-step="3">
-            <span class="step-index">3</span> Coverage
-          </div>
-          <div class="auto-wizard-step" data-step="4">
-            <span class="step-index">4</span> Review
-          </div>
-        </div>
+      <div id="wizard-tabs"></div>
 
+    </div>
+  </section>
+
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
+
+      <div id="wizard-container"></div>
+
+      <div class="wizard-progress-bar">
+        <div id="wizard-progress"></div>
       </div>
-    </section>
 
-    <!-- FORM -->
-    <section class="auto-app-wrapper">
-      <div class="auto-app-card">
+    </div>
+  </section>
 
-        <form id="bopAppForm"
-              method="POST"
-              action="https://formsubmit.co/office@insaces.com"
-              enctype="multipart/form-data">
+</main>
 
-          <input type="hidden" name="_subject" value="New BOP Application - ACES">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="text" name="_honey" style="display:none">
-          <input type="hidden" id="rrEmail" name="rrEmail">
-
-          <!-- STEP 1 -->
-          <div class="form-step active" data-step="1">
-            <h2>Business Information</h2>
-            <p class="section-subtitle">Tell us about your business.</p>
-
-            <div class="auto-grid-2">
-
-              <div class="auto-field">
-                <label>Business Name</label>
-                <input name="business_name" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Owner Name</label>
-                <input name="owner_name" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Email</label>
-                <input name="email" type="email" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Phone Number</label>
-                <input name="phone" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Business Type</label>
-                <select name="business_type">
-                  <option value="Retail">Retail</option>
-                  <option value="Restaurant">Restaurant</option>
-                  <option value="Contractor">Contractor</option>
-                  <option value="Office">Office</option>
-                  <option value="Service">Service</option>
-                </select>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- STEP 2 -->
-          <div class="form-step" data-step="2">
-            <h2>Property Information</h2>
-            <p class="section-subtitle">Tell us about your business location.</p>
-
-            <div class="auto-grid-2">
-
-              <div class="auto-field">
-                <label>Address</label>
-                <input name="property_address" required>
-              </div>
-
-              <div class="auto-field">
-                <label>City</label>
-                <input name="property_city" required>
-              </div>
-
-              <div class="auto-field">
-                <label>State</label>
-                <input name="property_state" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Zip Code</label>
-                <input name="property_zip" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Building Type</label>
-                <select name="building_type">
-                  <option value="Office">Office</option>
-                  <option value="Retail">Retail</option>
-                  <option value="Warehouse">Warehouse</option>
-                  <option value="Restaurant">Restaurant</option>
-                </select>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- STEP 3 -->
-          <div class="form-step" data-step="3">
-            <h2>Coverage Options</h2>
-            <p class="section-subtitle">Choose the coverage you want.</p>
-
-            <div class="auto-grid-2">
-
-              <div class="auto-field">
-                <label>General Liability Limit</label>
-                <select name="liability_limit">
-                  <option value="1M/2M">1M / 2M</option>
-                  <option value="2M/4M">2M / 4M</option>
-                </select>
-              </div>
-
-              <div class="auto-field">
-                <label>Property Coverage Amount</label>
-                <input name="property_coverage" placeholder="e.g., 250000">
-              </div>
-
-              <div class="auto-field">
-                <label>Deductible</label>
-                <select name="deductible">
-                  <option value="500">$500</option>
-                  <option value="1000">$1,000</option>
-                </select>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- STEP 4 -->
-          <div class="form-step" data-step="4">
-            <h2>Review & Submit</h2>
-            <p class="section-subtitle">Review your information before submitting.</p>
-
-            <button type="submit" class="apply-button">Submit Application</button>
-          </div>
-
-        </form>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer id="aces-footer"></footer>
+<footer id="aces-footer"></footer>
 
 </body>
 </html>
