@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title
+    data-en="Quote Review | ACES Insurance Services"
+    data-es="Revisión de Cotización | ACES Insurance Services">
+    Quote Review | ACES Insurance Services
+  </title>
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/wizard.css" />
+
+  <script src="/global.js" defer></script>
+
+  <style>
+    .review-container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .review-card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+      animation: fadeUp 0.6s ease;
+    }
+
+    .review-section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: #d32f2f;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .review-field {
+      background: #fafafa;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid #eee;
+    }
+
+    .review-field label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .review-field p {
+      margin-top: 6px;
+      font-size: 1rem;
+      color: #222;
+    }
+
+    .status-select,
+    .agent-select,
+    .notes-box {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      margin-top: 8px;
+    }
+
+    .notes-box {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .save-btn {
+      margin-top: 20px;
+      background: #d32f2f;
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id") || "Unknown";
+
+      document.getElementById("review-id").textContent = id;
+    });
+  </script>
+</head>
+
+<body>
+
+<header id="aces-header"></header>
+
+<main class="fade-in">
+
+  <!-- HERO SECTION -->
+  <section class="quote-hero">
+    <div class="quote-hero-inner">
+
+      <div class="quote-hero-text">
+        <h1
+          data-en="Quote Review"
+          data-es="Revisión de Cotización">
+          Quote Review
+        </h1>
+
+        <p
+          data-en="Internal ACES agent dashboard for reviewing client submissions."
+          data-es="Panel interno para agentes de ACES para revisar solicitudes de clientes.">
+          Internal ACES agent dashboard for reviewing client submissions.
+        </p>
+      </div>
+
+      <div class="quote-hero-image"></div>
+
+    </div>
+  </section>
+
+  <!-- REVIEW CONTENT -->
+  <div class="review-container">
+
+    <!-- CLIENT INFO -->
+    <div class="review-card">
+      <h2 class="review-section-title"
+        data-en="Client Information"
+        data-es="Información del Cliente">
+        Client Information
+      </h2>
+
+      <div class="review-grid">
+        <div class="review-field">
+          <label data-en="Confirmation ID" data-es="ID de Confirmación">Confirmation ID</label>
+          <p id="review-id">—</p>
+        </div>
+
+        <div class="review-field">
+          <label data-en="Name" data-es="Nombre">Name</label>
+          <p>—</p>
+        </div>
+
+        <div class="review-field">
+          <label data-en="Email" data-es="Correo Electrónico">Email</label>
+          <p>—</p>
+        </div>
+
+        <div class="review-field">
+          <label data-en="Phone" data-es="Teléfono">Phone</label>
+          <p>—</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPLICATION DETAILS -->
+    <div class="review-card">
+      <h2 class="review-section-title"
+        data-en="Application Details"
+        data-es="Detalles de la Solicitud">
+        Application Details
+      </h2>
+
+      <div class="review-grid">
+        <div class="review-field">
+          <label data-en="Application Type" data-es="Tipo de Solicitud">Application Type</label>
+          <p>—</p>
+        </div>
+
+        <div class="review-field">
+          <label data-en="Submission Date" data-es="Fecha de Envío">Submission Date</label>
+          <p>—</p>
+        </div>
+
+        <div class="review-field">
+          <label data-en="Status" data-es="Estado">Status</label>
+          <select class="status-select">
+            <option value="received">Received</option>
+            <option value="assigned">Assigned to Agent</option>
+            <option value="review">In Review</option>
+            <option value="quoting">Quoting Carriers</option>
+            <option value="awaiting">Awaiting Documents</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+
+        <div class="review-field">
+          <label data-en="Assigned Agent" data-es="Agente Asignado">Assigned Agent</label>
+          <select class="agent-select">
+            <option value="">—</option>
+            <option value="george">George Santibañez</option>
+            <option value="lanse">Lanse Derrick</option>
+            <option value="robert">Robert Hyde</option>
+            <option value="bryan">Bryan Carter</option>
+            <option value="jimmy">Jimmy Rodriguez</option>
+            <option value="renee">Renee Ridling</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERNAL NOTES -->
+    <div class="review-card">
+      <h2 class="review-section-title"
+        data-en="Internal Notes"
+        data-es="Notas Internas">
+        Internal Notes
+      </h2>
+
+      <textarea class="notes-box"
+        placeholder="Add internal notes here... / Agregar notas internas aquí..."></textarea>
+
+      <a class="save-btn"
+        data-en="Save Review"
+        data-es="Guardar Revisión">
+        Save Review
+      </a>
+    </div>
+
+  </div>
+
+</main>
+
+<footer id="aces-footer"></footer>
+
+</body>
+</html>
