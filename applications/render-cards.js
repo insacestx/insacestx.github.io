@@ -3,12 +3,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!container) return;
 
   try {
-    // FIXED PATH FOR GITHUB PAGES + CUSTOM DOMAINS
-    const basePath = window.location.pathname.includes("insacestx.github.io")
+    // Detect GitHub Pages subdirectory
+    const base = window.location.pathname.includes("insacestx.github.io")
       ? "/insacestx.github.io"
       : "";
 
-    const response = await fetch(`${basePath}/applications/manifest.json`);
+    // Load manifest
+    const response = await fetch(`${base}/applications/manifest.json`);
     const manifest = await response.json();
 
     const currentLang = localStorage.getItem("aces_lang") || "en";
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         link.className = "app-card-btn";
 
         // FIXED ROUTING
-        link.href = `/wizard.html?app=${app.id}`;
+        link.href = `${base}/wizard.html?app=${app.id}`;
 
         link.textContent =
           currentLang === "es" ? "Comenzar" : "Start Application";
