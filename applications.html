@@ -1,281 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Applications | ACES Insurance Services</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACES Insurance Applications</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/style.css">
-
-  <!-- JS -->
-  <script src="/global.js" defer></script>
-  <script src="/applications.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/applications.js" defer></script>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header id="aces-header"></header>
+    <section class="apps-header">
+        <h1>Insurance Applications</h1>
+        <p>Select the type of insurance application you want to begin.</p>
+    </section>
 
-  <main class="applications-page">
-
-    <h1 class="page-title"
-        data-en="Insurance Applications"
-        data-es="Solicitudes de Seguro">
-      Insurance Applications
-    </h1>
-
-
-  <!-- FILTER BAR (Corrected + Centered) -->
-  <div class="application-filter-bar">
-
-    <!-- Centered Search Bar -->
-    <div class="app-search-wrapper">
-      <input type="text" id="appSearch" placeholder="Search applications…">
-      <button id="clearFiltersBtn" class="filter-clear-btn">Clear</button>
+    <!-- Filters -->
+    <div class="apps-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="personal">Personal</button>
+        <button class="filter-btn" data-filter="commercial">Commercial</button>
+        <button class="filter-btn" data-filter="life">Life</button>
     </div>
 
-    <!-- Filter Buttons -->
-    <div class="filter-buttons">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="Commercial">Commercial</button>
-      <button class="filter-btn" data-filter="Personal">Personal</button>
-      <button class="filter-btn" data-filter="Life">Life</button>
+    <!-- Search -->
+    <div class="apps-search">
+        <input type="text" id="appSearch" placeholder="Search applications...">
     </div>
 
-  </div>
+    <!-- Applications Grid -->
+    <div class="apps-grid">
 
-    <!-- ============================================================
-         COMMERCIAL APPLICATIONS
-    ============================================================ -->
-    <h2 class="app-category-title"
-        data-en="Commercial Applications"
-        data-es="Solicitudes Comerciales">
-      Commercial Applications
-    </h2>
-
-    <div class="application-grid">
-
-      <div class="application-card app-item" data-category="Commercial">
-        <div class="icon-circle">
-          <img src="/Icons/icon-bop-aces.png" class="application-icon">
+        <!-- PERSONAL -->
+        <div class="app-card" data-category="personal" data-file="auto.html">
+            <h3>Auto Insurance</h3>
+            <p>Personal auto coverage application.</p>
         </div>
-        <h3>Business Owners Policy (BOP)</h3>
-        <p>Comprehensive coverage for small to medium-sized businesses.</p>
-        <a href="/applications/bop.html" class="apply-button">Start Application</a>
-      </div>
 
-      <div class="application-card app-item" data-category="Commercial">
-        <div class="icon-circle">
-          <img src="/Icons/icon-gl-aces.png" class="application-icon">
+        <div class="app-card" data-category="personal" data-file="homeowners.html">
+            <h3>Homeowners Insurance</h3>
+            <p>Property and dwelling coverage.</p>
         </div>
-        <h3>General Liability</h3>
-        <p>Protection against third-party bodily injury and property damage.</p>
-        <a href="/applications/gl.html" class="apply-button">Start Application</a>
-      </div>
 
-      <div class="application-card app-item" data-category="Commercial">
-        <div class="icon-circle">
-          <img src="/Icons/icon-commauto-aces.png" class="application-icon">
+        <div class="app-card" data-category="personal" data-file="renters.html">
+            <h3>Renters Insurance</h3>
+            <p>Personal property and liability.</p>
         </div>
-        <h3>Commercial Auto</h3>
-        <p>Coverage for vehicles used in business operations.</p>
-        <a href="/applications/commercial-auto.html" class="apply-button">Start Application</a>
-      </div>
 
-      <div class="application-card app-item" data-category="Commercial">
-        <div class="icon-circle">
-        <img src="Icons/icon-trucking-aces.png" alt="Commercial Trucking Application Icon" class="app-icon">
+        <div class="app-card" data-category="personal" data-file="motorcycle.html">
+            <h3>Motorcycle Insurance</h3>
+            <p>Motorcycle and rider coverage.</p>
         </div>
-        <h3 data-en="Commercial Trucking Application" data-es="Solicitud de Transporte Comercial">
-    Commercial Trucking Application
-  </h3>
-  <p data-en="Start your commercial trucking insurance application."
-     data-es="Inicie su solicitud de seguro para transporte comercial.">
-  </p>
-  <a href="applications/trucking-application.html" class="app-btn" data-en="Start Application" data-es="Iniciar Solicitud">
-    Start Application
-  </a>
-</div>
 
-
-      <div class="application-card app-item" data-category="Commercial">
-        <div class="icon-circle">
-          <img src="/Icons/icon-commprop_aces.png" class="application-icon">
+        <div class="app-card" data-category="personal" data-file="boat.html">
+            <h3>Boat Insurance</h3>
+            <p>Watercraft coverage.</p>
         </div>
-        <h3>Commercial Property</h3>
-        <p>Protection for your business building, equipment, and inventory.</p>
-        <a href="/applications/commercial-property.html" class="apply-button">Start Application</a>
-      </div>
 
-      <div class="application-card app-item" data-category="Commercial">
-        <div class="icon-circle">
-          <img src="/Icons/icon-workerscomp-aces.png" class="application-icon">
+        <div class="app-card" data-category="personal" data-file="rv.html">
+            <h3>RV Insurance</h3>
+            <p>Recreational vehicle coverage.</p>
         </div>
-        <h3>Workers Compensation</h3>
-        <p>Coverage for employee injuries and illnesses.</p>
-        <a href="/applications/workerscomp.html" class="apply-button">Start Application</a>
-      </div>
 
-      <div class="application-card app-item" data-category="Commercial">
-        <div class="icon-circle">
-          <img src="/Icons/icon-e&o-aces.png" class="application-icon">
+        <div class="app-card" data-category="personal" data-file="atv.html">
+            <h3>ATV Insurance</h3>
+            <p>Off‑road vehicle coverage.</p>
         </div>
-        <h3>Errors & Omissions</h3>
-        <p>Professional liability coverage for your business.</p>
-        <a href="/applications/eo.html" class="apply-button">Start Application</a>
-      </div>
 
-      <div class="application-card app-item" data-category="Commercial">
-        <div class="icon-circle">
-          <img src="/Icons/icon-cyber-aces.png" class="application-icon">
+        <!-- LIFE -->
+        <div class="app-card" data-category="life" data-file="life.html">
+            <h3>Life Insurance</h3>
+            <p>Term and whole life applications.</p>
         </div>
-        <h3>Cyber Liability</h3>
-        <p>Protection against data breaches and cyber attacks.</p>
-        <a href="/applications/cyber.html" class="apply-button">Start Application</a>
-      </div>
 
-      <div class="application-card app-item" data-category="Commercial">
-        <div class="icon-circle">
-          <img src="/Icons/icon-surety-aces.png" class="application-icon">
+        <!-- COMMERCIAL -->
+        <div class="app-card" data-category="commercial" data-file="commercial-auto.html">
+            <h3>Commercial Auto</h3>
+            <p>Fleet and business vehicle coverage.</p>
         </div>
-        <h3>Surety Bonds</h3>
-        <p>Bond solutions for contractors and businesses.</p>
-        <a href="/applications/surety.html" class="apply-button">Start Application</a>
-      </div>
+
+        <div class="app-card" data-category="commercial" data-file="bop.html">
+            <h3>Business Owners Policy (BOP)</h3>
+            <p>Small business package policy.</p>
+        </div>
+
+        <div class="app-card" data-category="commercial" data-file="gl.html">
+            <h3>General Liability</h3>
+            <p>Business liability protection.</p>
+        </div>
+
+        <div class="app-card" data-category="commercial" data-file="commercial-property.html">
+            <h3>Commercial Property</h3>
+            <p>Building and business property coverage.</p>
+        </div>
+
+        <div class="app-card" data-category="commercial" data-file="workerscomp.html">
+            <h3>Workers Compensation</h3>
+            <p>Employee injury protection.</p>
+        </div>
+
+        <div class="app-card" data-category="commercial" data-file="cyber.html">
+            <h3>Cyber Liability</h3>
+            <p>Data breach and cyber protection.</p>
+        </div>
+
+        <div class="app-card" data-category="commercial" data-file="umbrella.html">
+            <h3>Commercial Umbrella</h3>
+            <p>Extended liability protection.</p>
+        </div>
+
+        <div class="app-card" data-category="commercial" data-file="surety.html">
+            <h3>Surety Bonds</h3>
+            <p>Contract and license bonds.</p>
+        </div>
+
+        <div class="app-card" data-category="commercial" data-file="eo.html">
+            <h3>Errors & Omissions</h3>
+            <p>Professional liability coverage.</p>
+        </div>
+
+        <div class="app-card" data-category="commercial" data-file="trucking-application.html">
+            <h3>Trucking Insurance</h3>
+            <p>Commercial trucking coverage.</p>
+        </div>
+
+        <div class="app-card" data-category="commercial" data-file="flood.html">
+            <h3>Flood Insurance</h3>
+            <p>NFIP and private flood options.</p>
+        </div>
 
     </div>
-
-    <!-- ============================================================
-         PERSONAL APPLICATIONS
-    ============================================================ -->
-    <h2 class="app-category-title"
-        data-en="Personal Applications"
-        data-es="Solicitudes Personales">
-      Personal Applications
-    </h2>
-
-    <div class="application-grid">
-
-      <div class="application-card app-item" data-category="Personal">
-        <div class="icon-circle">
-          <img src="/Icons/icon-auto-aces.png" class="application-icon">
-        </div>
-        <h3>Auto Insurance</h3>
-        <p>Coverage for your vehicle and liability protection.</p>
-        <a href="/applications/auto.html" class="apply-button">Start Application</a>
-      </div>
-
-      <div class="application-card app-item" data-category="Personal">
-        <div class="icon-circle">
-          <img src="/Icons/icon-property-aces.png" class="application-icon">
-        </div>
-        <h3>Homeowners Insurance</h3>
-        <p>Protect your home and possessions with comprehensive coverage.</p>
-        <a href="/applications/homeowners.html" class="apply-button">Start Application</a>
-      </div>
-
-      <div class="application-card app-item" data-category="Personal">
-        <div class="icon-circle">
-          <img src="/Icons/icon-renters-aces.png" class="application-icon">
-        </div>
-        <h3>Renters Insurance</h3>
-        <p>Affordable coverage for renters and their belongings.</p>
-        <a href="/applications/renters.html" class="apply-button">Start Application</a>
-      </div>
-
-      <div class="application-card app-item" data-category="Personal">
-        <div class="icon-circle">
-          <img src="/Icons/icon-umbrella-aces.png" class="application-icon">
-        </div>
-        <h3>Umbrella Insurance</h3>
-        <p>Extra liability protection beyond your standard policies.</p>
-        <a href="/applications/umbrella.html" class="apply-button">Start Application</a>
-      </div>
-
-      <div class="application-card app-item" data-category="Personal">
-        <div class="icon-circle">
-          <img src="/Icons/icon-motorcycle-aces.png" class="application-icon">
-        </div>
-        <h3>Motorcycle Insurance</h3>
-        <p>Coverage for motorcycles and riders.</p>
-        <a href="/applications/motorcycle.html" class="apply-button">Start Application</a>
-      </div>
-
-      <div class="application-card app-item" data-category="Personal">
-        <div class="icon-circle">
-          <img src="/Icons/icon-boat-aces.png" class="application-icon">
-        </div>
-        <h3>Boat Insurance</h3>
-        <p>Protection for boats and personal watercraft.</p>
-        <a href="/applications/boat.html" class="apply-button">Start Application</a>
-      </div>
-
-      <div class="application-card app-item" data-category="Personal">
-        <div class="icon-circle">
-          <img src="/Icons/icon-rv-aces.png" class="application-icon">
-        </div>
-        <h3>RV & Travel Trailer</h3>
-        <p>Coverage for recreational vehicles and travel trailers.</p>
-        <a href="/applications/rv.html" class="apply-button">Start Application</a>
-      </div>
-
-      <div class="application-card app-item" data-category="Personal">
-        <div class="icon-circle">
-          <img src="/Icons/icon-condo-aces.png" class="application-icon">
-        </div>
-        <h3>Condo Insurance</h3>
-        <p>Protection for condo owners and their belongings.</p>
-        <a href="/applications/condo.html" class="apply-button">Start Application</a>
-      </div>
-
-      <div class="application-card app-item" data-category="Personal">
-        <div class="icon-circle">
-          <img src="/Icons/icon-flood-aces.png" class="application-icon">
-        </div>
-        <h3>Flood Insurance</h3>
-        <p>Coverage for flood-related damage.</p>
-        <a href="/applications/flood.html" class="apply-button">Start Application</a>
-      </div>
-
-      <div class="application-card app-item" data-category="Personal">
-        <div class="icon-circle">
-          <img src="/Icons/icon-atv-aces.png" class="application-icon">
-        </div>
-        <h3>ATV & Off-Road</h3>
-        <p>Coverage for ATVs and off-road vehicles.</p>
-        <a href="/applications/atv.html" class="apply-button">Start Application</a>
-      </div>
-
-    </div>
-
-    <!-- ============================================================
-         LIFE APPLICATIONS
-    ============================================================ -->
-    <h2 class="app-category-title"
-        data-en="Life Applications"
-        data-es="Solicitudes de Vida">
-      Life Applications
-    </h2>
-
-    <div class="application-grid">
-
-      <div class="application-card app-item" data-category="Life">
-        <div class="icon-circle">
-          <img src="/Icons/icon-life-aces.png" class="application-icon">
-        </div>
-        <h3>Life Insurance</h3>
-        <p>Protect your family with tailored life insurance options.</p>
-        <a href="/applications/life.html" class="apply-button">Start Application</a>
-      </div>
-
-    </div>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer id="aces-footer"></footer>
 
 </body>
 </html>
