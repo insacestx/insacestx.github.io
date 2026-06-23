@@ -1,136 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACES Insurance Applications</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/style.css">
-    <script src="/applications.js" defer></script>
+  <title
+    data-en="Insurance Applications | ACES Insurance Services"
+    data-es="Solicitudes de Seguro | ACES Insurance Services">
+    Insurance Applications | ACES Insurance Services
+  </title>
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/wizard.css" />
+
+  <script src="/global.js" defer></script>
+  <script src="/applications/render-cards.js" defer></script>
+  <script src="/applications/applications.js" defer></script>
+
+  <style>
+    .app-hero {
+      padding: 80px 20px;
+      text-align: center;
+      background: #fafafa;
+      border-bottom: 1px solid #eee;
+    }
+
+    .app-hero h1 {
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+    }
+
+    .app-hero p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .filter-btn.active {
+      background: #d32f2f;
+      color: #fff;
+      border-color: #d32f2f;
+    }
+
+    /* SEARCH BAR */
+    .search-wrapper {
+      max-width: 1200px;
+      margin: 10px auto 40px;
+      padding: 0 20px;
+    }
+
+    #appSearch {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+  </style>
 </head>
 
 <body>
 
-    <section class="apps-header">
-        <h1>Insurance Applications</h1>
-        <p>Select the type of insurance application you want to begin.</p>
-    </section>
+<header id="aces-header"></header>
 
-    <!-- Filters -->
-    <div class="apps-filters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="personal">Personal</button>
-        <button class="filter-btn" data-filter="commercial">Commercial</button>
-        <button class="filter-btn" data-filter="life">Life</button>
-    </div>
+<main class="fade-in">
 
-    <!-- Search -->
-    <div class="apps-search">
-        <input type="text" id="appSearch" placeholder="Search applications...">
-    </div>
+  <!-- HERO SECTION -->
+  <section class="app-hero">
+    <h1
+      data-en="Insurance Applications"
+      data-es="Solicitudes de Seguro">
+      Insurance Applications
+    </h1>
 
-    <!-- Applications Grid -->
-    <div class="apps-grid">
+    <p
+      data-en="Select the type of insurance you want to apply for."
+      data-es="Seleccione el tipo de seguro que desea solicitar.">
+      Select the type of insurance you want to apply for.
+    </p>
+  </section>
 
-        <!-- PERSONAL -->
-        <div class="app-card" data-category="personal" data-file="auto.html">
-            <h3>Auto Insurance</h3>
-            <p>Personal auto coverage application.</p>
-        </div>
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all"
+      data-en="All" data-es="Todos">All</button>
 
-        <div class="app-card" data-category="personal" data-file="homeowners.html">
-            <h3>Homeowners Insurance</h3>
-            <p>Property and dwelling coverage.</p>
-        </div>
+    <button class="filter-btn" data-filter="personal"
+      data-en="Personal" data-es="Personal">Personal</button>
 
-        <div class="app-card" data-category="personal" data-file="renters.html">
-            <h3>Renters Insurance</h3>
-            <p>Personal property and liability.</p>
-        </div>
+    <button class="filter-btn" data-filter="commercial"
+      data-en="Commercial" data-es="Comercial">Commercial</button>
 
-        <div class="app-card" data-category="personal" data-file="motorcycle.html">
-            <h3>Motorcycle Insurance</h3>
-            <p>Motorcycle and rider coverage.</p>
-        </div>
+    <button class="filter-btn" data-filter="life"
+      data-en="Life & Family" data-es="Vida y Familia">Life & Family</button>
+  </div>
 
-        <div class="app-card" data-category="personal" data-file="boat.html">
-            <h3>Boat Insurance</h3>
-            <p>Watercraft coverage.</p>
-        </div>
+  <!-- SEARCH BAR -->
+  <div class="search-wrapper">
+    <input
+      id="appSearch"
+      type="text"
+      placeholder="Search applications / Buscar aplicaciones" />
+  </div>
 
-        <div class="app-card" data-category="personal" data-file="rv.html">
-            <h3>RV Insurance</h3>
-            <p>Recreational vehicle coverage.</p>
-        </div>
+  <!-- AUTO-GENERATED APPLICATION CARDS -->
+  <section id="app-card-container"></section>
 
-        <div class="app-card" data-category="personal" data-file="atv.html">
-            <h3>ATV Insurance</h3>
-            <p>Off‑road vehicle coverage.</p>
-        </div>
+</main>
 
-        <!-- LIFE -->
-        <div class="app-card" data-category="life" data-file="life.html">
-            <h3>Life Insurance</h3>
-            <p>Term and whole life applications.</p>
-        </div>
-
-        <!-- COMMERCIAL -->
-        <div class="app-card" data-category="commercial" data-file="commercial-auto.html">
-            <h3>Commercial Auto</h3>
-            <p>Fleet and business vehicle coverage.</p>
-        </div>
-
-        <div class="app-card" data-category="commercial" data-file="bop.html">
-            <h3>Business Owners Policy (BOP)</h3>
-            <p>Small business package policy.</p>
-        </div>
-
-        <div class="app-card" data-category="commercial" data-file="gl.html">
-            <h3>General Liability</h3>
-            <p>Business liability protection.</p>
-        </div>
-
-        <div class="app-card" data-category="commercial" data-file="commercial-property.html">
-            <h3>Commercial Property</h3>
-            <p>Building and business property coverage.</p>
-        </div>
-
-        <div class="app-card" data-category="commercial" data-file="workerscomp.html">
-            <h3>Workers Compensation</h3>
-            <p>Employee injury protection.</p>
-        </div>
-
-        <div class="app-card" data-category="commercial" data-file="cyber.html">
-            <h3>Cyber Liability</h3>
-            <p>Data breach and cyber protection.</p>
-        </div>
-
-        <div class="app-card" data-category="commercial" data-file="umbrella.html">
-            <h3>Commercial Umbrella</h3>
-            <p>Extended liability protection.</p>
-        </div>
-
-        <div class="app-card" data-category="commercial" data-file="surety.html">
-            <h3>Surety Bonds</h3>
-            <p>Contract and license bonds.</p>
-        </div>
-
-        <div class="app-card" data-category="commercial" data-file="eo.html">
-            <h3>Errors & Omissions</h3>
-            <p>Professional liability coverage.</p>
-        </div>
-
-        <div class="app-card" data-category="commercial" data-file="trucking-application.html">
-            <h3>Trucking Insurance</h3>
-            <p>Commercial trucking coverage.</p>
-        </div>
-
-        <div class="app-card" data-category="commercial" data-file="flood.html">
-            <h3>Flood Insurance</h3>
-            <p>NFIP and private flood options.</p>
-        </div>
-
-    </div>
+<footer id="aces-footer"></footer>
 
 </body>
 </html>
