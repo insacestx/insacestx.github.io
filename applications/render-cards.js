@@ -50,6 +50,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         const card = document.createElement("div");
         card.className = "app-card";
 
+        // ADD CATEGORY ATTRIBUTE FOR FILTERING
+        card.setAttribute("data-category", app.category);
+
         // Icon
         const icon = document.createElement("img");
         icon.className = "app-card-icon";
