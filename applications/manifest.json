@@ -27,7 +27,7 @@
     "category": "personal",
     "config": "/applications/config/renters-config.js",
     "page": "/applications/renters.html",
-    "icon": "/img/icons/con-renters-aces.png",
+    "icon": "/img/icons/icon-renters-aces.png",
     "description_en": "Coverage for your rental property and belongings.",
     "description_es": "Cobertura para su vivienda rentada y pertenencias."
   },
