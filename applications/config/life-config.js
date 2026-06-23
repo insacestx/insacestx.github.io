@@ -1,26 +1,37 @@
 export default {
-    title: "Life Insurance Application",
+    title_en: "Life Insurance Application",
+    title_es: "Solicitud de Seguro de Vida",
 
     steps: [
         {
             id: "insured",
-            title: "Proposed Insured",
+            title_en: "Proposed Insured",
+            title_es: "Asegurado Propuesto",
             fields: [
-                { id: "fullName", label: "Full Name", type: "text", required: true },
-                { id: "dob", label: "Date of Birth", type: "date", required: true },
-                { id: "gender", label: "Gender", type: "select", required: false,
+                { id: "fullName", label_en: "Full Name", label_es: "Nombre Completo", type: "text", required: true },
+                { id: "dob", label_en: "Date of Birth", label_es: "Fecha de Nacimiento", type: "date", required: true },
+                {
+                    id: "gender",
+                    label_en: "Gender",
+                    label_es: "Género",
+                    type: "select",
                     options: [
-                        { value: "", label: "Select..." },
-                        { value: "male", label: "Male" },
-                        { value: "female", label: "Female" },
-                        { value: "other", label: "Other" }
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "male", label_en: "Male", label_es: "Masculino" },
+                        { value: "female", label_en: "Female", label_es: "Femenino" },
+                        { value: "other", label_en: "Other", label_es: "Otro" }
                     ]
                 },
-                { id: "tobaccoUse", label: "Tobacco Use?", type: "select", required: true,
+                {
+                    id: "tobaccoUse",
+                    label_en: "Tobacco Use?",
+                    label_es: "¿Uso de Tabaco?",
+                    type: "select",
+                    required: true,
                     options: [
-                        { value: "", label: "Select..." },
-                        { value: "yes", label: "Yes" },
-                        { value: "no", label: "No" }
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "yes", label_en: "Yes", label_es: "Sí" },
+                        { value: "no", label_en: "No", label_es: "No" }
                     ]
                 }
             ]
@@ -28,27 +39,34 @@ export default {
 
         {
             id: "coverage",
-            title: "Coverage Requested",
+            title_en: "Coverage Requested",
+            title_es: "Cobertura Solicitada",
             fields: [
-                { id: "productType", label: "Product Type", type: "select", required: true,
+                {
+                    id: "productType",
+                    label_en: "Product Type",
+                    label_es: "Tipo de Producto",
+                    type: "select",
+                    required: true,
                     options: [
-                        { value: "", label: "Select..." },
-                        { value: "term", label: "Term" },
-                        { value: "whole", label: "Whole Life" },
-                        { value: "ul", label: "Universal Life" }
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "term", label_en: "Term", label_es: "Plazo" },
+                        { value: "whole", label_en: "Whole Life", label_es: "Vida Entera" },
+                        { value: "ul", label_en: "Universal Life", label_es: "Vida Universal" }
                     ]
                 },
-                { id: "faceAmount", label: "Face Amount", type: "number", required: true },
-                { id: "termLength", label: "Term Length (if Term)", type: "number", required: false }
+                { id: "faceAmount", label_en: "Face Amount", label_es: "Monto de la Póliza", type: "number", required: true },
+                { id: "termLength", label_en: "Term Length (if Term)", label_es: "Duración del Plazo (si aplica)", type: "number" }
             ]
         },
 
         {
             id: "beneficiaries",
-            title: "Beneficiaries",
+            title_en: "Beneficiaries",
+            title_es: "Beneficiarios",
             fields: [
-                { id: "primaryBeneficiary", label: "Primary Beneficiary Name", type: "text", required: true },
-                { id: "contingentBeneficiary", label: "Contingent Beneficiary Name", type: "text", required: false }
+                { id: "primaryBeneficiary", label_en: "Primary Beneficiary", label_es: "Beneficiario Principal", type: "text", required: true },
+                { id: "contingentBeneficiary", label_en: "Contingent Beneficiary", label_es: "Beneficiario Contingente", type: "text" }
             ]
         }
     ]
