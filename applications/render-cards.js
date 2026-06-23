@@ -3,8 +3,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!container) return;
 
   try {
-    // FIXED PATH FOR GITHUB PAGES
-    const response = await fetch("/applications/manifest.json");
+    // FIXED PATH FOR GITHUB PAGES + CUSTOM DOMAINS
+    const basePath = window.location.pathname.includes("insacestx.github.io")
+      ? "/insacestx.github.io"
+      : "";
+
+    const response = await fetch(`${basePath}/applications/manifest.json`);
     const manifest = await response.json();
 
     const currentLang = localStorage.getItem("aces_lang") || "en";
