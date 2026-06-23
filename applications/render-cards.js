@@ -1,29 +1,21 @@
-// render-cards.js
-// Dynamically generates all application cards using manifest.json
-
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("app-card-container");
   if (!container) return;
 
   try {
-    const response = await fetch("/applications/manifest.json");
+    // FIXED PATH FOR GITHUB PAGES
+    const response = await fetch(window.location.origin + "/applications/manifest.json");
     const manifest = await response.json();
 
     const currentLang = localStorage.getItem("aces_lang") || "en";
 
-    // Group apps by category
-    const categories = {
-      personal: [],
-      commercial: [],
-      life: []
-    };
+    const categories = { personal: [], commercial: [], life: [] };
 
     for (const key in manifest) {
       const app = manifest[key];
       categories[app.category].push({ id: key, ...app });
     }
 
-    // Render each category section
     for (const category in categories) {
       if (categories[category].length === 0) continue;
 
@@ -45,38 +37,34 @@ document.addEventListener("DOMContentLoaded", async () => {
       const grid = document.createElement("div");
       grid.className = "app-card-grid";
 
-      // Build cards
       categories[category].forEach(app => {
         const card = document.createElement("div");
         card.className = "app-card";
-
-        // ADD CATEGORY ATTRIBUTE FOR FILTERING
         card.setAttribute("data-category", app.category);
 
-        // Icon
         const icon = document.createElement("img");
         icon.className = "app-card-icon";
         icon.src = app.icon || "/img/icons/default.svg";
         icon.alt = app.name_en;
         card.appendChild(icon);
 
-        // Title
         const title = document.createElement("h3");
         title.className = "app-card-title";
         title.textContent = currentLang === "es" ? app.name_es : app.name_en;
         card.appendChild(title);
 
-        // Description
         const desc = document.createElement("p");
         desc.className = "app-card-desc";
         desc.textContent =
           currentLang === "es" ? app.description_es : app.description_en;
         card.appendChild(desc);
 
-        // CTA
         const link = document.createElement("a");
         link.className = "app-card-btn";
-        link.href = app.page;
+
+        // FIXED ROUTING
+        link.href = `/wizard.html?app=${app.id}`;
+
         link.textContent =
           currentLang === "es" ? "Comenzar" : "Start Application";
         card.appendChild(link);
