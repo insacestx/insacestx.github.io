@@ -1,65 +1,46 @@
-/* ==========================================
-   ACES 2026 APPLICATIONS PAGE ENGINE
-   Filtering • Search • Wizard Routing
-========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const filterButtons = document.querySelectorAll(".apps-filter-btn");
+  const searchInput = document.getElementById("appSearch");
+  const cards = () => Array.from(document.querySelectorAll(".app-card"));
 
-/* FILTER BUTTONS */
-const filterButtons = document.querySelectorAll(".filter-btn");
-const appCards = document.querySelectorAll(".app-card");
-const searchInput = document.getElementById("appSearch");
+  const getLang = () => localStorage.getItem("acesLang") || "en";
 
-/* Apply filter */
-filterButtons.forEach(btn => {
+  function applyFilters() {
+    const activeBtn = document.querySelector(".apps-filter-btn.active");
+    const filter = activeBtn ? activeBtn.getAttribute("data-filter") : "all";
+    const term = (searchInput.value || "").toLowerCase().trim();
+    const lang = getLang();
+    const isEs = lang === "es";
+
+    cards().forEach(card => {
+      const cat = card.getAttribute("data-category") || "";
+      const name = (isEs ? card.getAttribute("data-name-es") : card.getAttribute("data-name-en")) || "";
+      const desc = (isEs ? card.getAttribute("data-desc-es") : card.getAttribute("data-desc-en")) || "";
+
+      const matchesCategory = filter === "all" || cat === filter;
+      const matchesSearch =
+        !term ||
+        name.toLowerCase().includes(term) ||
+        desc.toLowerCase().includes(term);
+
+      card.style.display = matchesCategory && matchesSearch ? "flex" : "none";
+    });
+  }
+
+  filterButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-        const filter = btn.getAttribute("data-filter");
-
-        // Update active button
-        filterButtons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        // Show/hide cards
-        appCards.forEach(card => {
-            const category = card.getAttribute("data-category");
-
-            if (filter === "all" || category === filter) {
-                card.style.display = "block";
-            } else {
-                card.style.display = "none";
-            }
-        });
-
-        // Reset search when switching filters
-        searchInput.value = "";
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      applyFilters();
     });
-});
+  });
 
-/* SEARCH FUNCTION */
-searchInput.addEventListener("input", () => {
-    const term = searchInput.value.toLowerCase();
-
-    appCards.forEach(card => {
-        const title = card.querySelector("h3").textContent.toLowerCase();
-        const desc = card.querySelector("p").textContent.toLowerCase();
-
-        if (title.includes(term) || desc.includes(term)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      applyFilters();
     });
-});
+  }
 
-/* ROUTE TO WIZARD */
-appCards.forEach(card => {
-    card.addEventListener("click", () => {
-        const file = card.getAttribute("data-file");
-
-        if (!file) return;
-
-        // Extract app name from filename (auto.html → auto)
-        const appName = file.replace(".html", "");
-
-        // Redirect to universal wizard
-        window.location.href = `/wizard.html?app=${appName}`;
-    });
+  // Small delay to ensure cards are rendered before first filter
+  setTimeout(applyFilters, 200);
 });
