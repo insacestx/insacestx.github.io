@@ -1,123 +1,65 @@
-/* ============================================================
-   ACES APPLICATIONS.JS — FIXED 2026
-============================================================ */
+/* ==========================================
+   ACES 2026 APPLICATIONS PAGE ENGINE
+   Filtering • Search • Wizard Routing
+========================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+/* FILTER BUTTONS */
+const filterButtons = document.querySelectorAll(".filter-btn");
+const appCards = document.querySelectorAll(".app-card");
+const searchInput = document.getElementById("appSearch");
 
-  const searchInput = document.getElementById("appSearch");
-  const filterButtons = document.querySelectorAll(".filter-btn");
-  const clearFiltersBtn = document.getElementById("clearFiltersBtn");
-  const appItems = document.querySelectorAll(".app-item");
-
-  if (!searchInput || !clearFiltersBtn || !filterButtons.length) {
-    console.warn("Applications filter elements not found.");
-    return;
-  }
-
-  /* ============================================================
-     FILTERING
-  ============================================================ */
-
-  function applyFilters() {
-
-    const searchValue = searchInput.value.toLowerCase();
-
-    const activeFilter =
-      document.querySelector(".filter-btn.active")?.dataset.filter || "all";
-
-    appItems.forEach(item => {
-
-      const category = item.dataset.category || "";
-
-      const text = item.textContent.toLowerCase();
-
-      const matchesCategory =
-        activeFilter === "all" ||
-        category === activeFilter;
-
-      const matchesSearch =
-        text.includes(searchValue);
-
-      item.classList.toggle(
-        "hidden",
-        !(matchesCategory && matchesSearch)
-      );
-    });
-  }
-
-  /* ============================================================
-     FILTER BUTTONS
-  ============================================================ */
-
-  filterButtons.forEach(btn => {
-
+/* Apply filter */
+filterButtons.forEach(btn => {
     btn.addEventListener("click", () => {
+        const filter = btn.getAttribute("data-filter");
 
-      filterButtons.forEach(b =>
-        b.classList.remove("active")
-      );
+        // Update active button
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
 
-      btn.classList.add("active");
+        // Show/hide cards
+        appCards.forEach(card => {
+            const category = card.getAttribute("data-category");
 
-      applyFilters();
+            if (filter === "all" || category === filter) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        // Reset search when switching filters
+        searchInput.value = "";
     });
+});
 
-  });
+/* SEARCH FUNCTION */
+searchInput.addEventListener("input", () => {
+    const term = searchInput.value.toLowerCase();
 
-  /* ============================================================
-     SEARCH
-  ============================================================ */
+    appCards.forEach(card => {
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        const desc = card.querySelector("p").textContent.toLowerCase();
 
-  searchInput.addEventListener("input", applyFilters);
+        if (title.includes(term) || desc.includes(term)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
 
-  /* ============================================================
-     CLEAR
-  ============================================================ */
+/* ROUTE TO WIZARD */
+appCards.forEach(card => {
+    card.addEventListener("click", () => {
+        const file = card.getAttribute("data-file");
 
-  clearFiltersBtn.addEventListener("click", () => {
+        if (!file) return;
 
-    searchInput.value = "";
+        // Extract app name from filename (auto.html → auto)
+        const appName = file.replace(".html", "");
 
-    filterButtons.forEach(btn =>
-      btn.classList.remove("active")
-    );
-
-    document
-      .querySelector('[data-filter="all"]')
-      ?.classList.add("active");
-
-    applyFilters();
-  });
-
-  /* ============================================================
-     URL FILTER
-     /applications.html?filter=Commercial
-  ============================================================ */
-
-  const params = new URLSearchParams(window.location.search);
-
-  const filter = params.get("filter");
-
-  if (filter) {
-
-    const btn = document.querySelector(
-      `.filter-btn[data-filter="${filter}"]`
-    );
-
-    if (btn) {
-
-      filterButtons.forEach(b =>
-        b.classList.remove("active")
-      );
-
-      btn.classList.add("active");
-
-      applyFilters();
-    }
-  }
-
-  /* Initial Run */
-
-  applyFilters();
-
+        // Redirect to universal wizard
+        window.location.href = `/wizard.html?app=${appName}`;
+    });
 });
