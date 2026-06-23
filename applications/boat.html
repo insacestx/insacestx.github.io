@@ -3,210 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boat / Watercraft Application | ACES Insurance Services</title>
 
-  <!-- CORRECT CSS (Root‑Absolute) -->
+  <title
+    data-en="Boat Insurance Application"
+    data-es="Solicitud de Seguro para Embarcaciones">
+    Boat Insurance Application
+  </title>
+
   <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/wizard.css">
 
-  <!-- CORRECT JS (Root‑Absolute) -->
   <script src="/global.js" defer></script>
-  <script>
-    function buildReview() {
-  fill("reviewPersonal", [
-    { label: "First Name", value: val("first_name") },
-    { label: "Last Name", value: val("last_name") },
-    { label: "Phone", value: val("phone") },
-    { label: "Email", value: val("email") }
-  ]);
-
-  fill("reviewBoat", [
-    { label: "Year", value: val("boat_year") },
-    { label: "Make", value: val("boat_make") },
-    { label: "Model", value: val("boat_model") },
-    { label: "Hull ID", value: val("hin") },
-    { label: "Motor Type", value: val("motor_type") }
-  ]);
-
-  fill("reviewCoverage", [
-    { label: "Hull Coverage", value: val("hull_value") },
-    { label: "Liability", value: val("liability") },
-    { label: "Medical", value: val("medical") },
-    { label: "Towing", value: val("towing") },
-    { label: "Notes", value: val("notes") }
-  ]);
-}
-</script>
+  <script src="/wizard.js" defer></script>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header id="aces-header"></header>
+<header id="aces-header"></header>
 
-  <main class="fade-in">
+<main class="fade-in">
 
-    <!-- HERO -->
-    <section class="auto-hero">
-      <div class="auto-hero-inner">
+  <section class="auto-hero">
+    <div class="auto-hero-inner">
 
-        <h1 data-en="Boat / Watercraft Insurance Application"
-            data-es="Solicitud de Seguro para Botes / Embarcaciones">
-          Boat / Watercraft Insurance Application
-        </h1>
+      <h1
+        data-en="Boat Insurance Application"
+        data-es="Solicitud de Seguro para Embarcaciones">
+        Boat Insurance Application
+      </h1>
 
-        <p data-en="Tell us about you and your watercraft. An ACES agent will review and follow up with tailored options."
-           data-es="Cuéntenos sobre usted y su embarcación. Un agente de ACES revisará y le dará opciones personalizadas.">
-          Tell us about you and your watercraft. An ACES agent will review and follow up with tailored options.
-        </p>
+      <p
+        data-en="Tell us about your vessel and how you use it."
+        data-es="Cuéntenos sobre su embarcación y cómo la utiliza.">
+        Tell us about your vessel and how you use it.
+      </p>
 
-        <!-- Wizard Steps -->
-        <div class="auto-wizard-steps" id="boatWizardSteps">
-          <div class="auto-wizard-step active" data-step="1">
-            <span class="step-index">1</span> Personal Info
-          </div>
-          <div class="auto-wizard-step" data-step="2">
-            <span class="step-index">2</span> Boat Details
-          </div>
-          <div class="auto-wizard-step" data-step="3">
-            <span class="step-index">3</span> Coverage
-          </div>
-          <div class="auto-wizard-step" data-step="4">
-            <span class="step-index">4</span> Review
-          </div>
-        </div>
+      <div id="wizard-tabs"></div>
 
+    </div>
+  </section>
+
+  <section class="auto-app-wrapper">
+    <div class="auto-app-card">
+
+      <div id="wizard-container"></div>
+
+      <div class="wizard-progress-bar">
+        <div id="wizard-progress"></div>
       </div>
-    </section>
 
-    <!-- FORM -->
-    <section class="auto-app-wrapper">
-      <div class="auto-app-card">
+    </div>
+  </section>
 
-        <form id="boatAppForm"
-              method="POST"
-              action="https://formsubmit.co/office@insaces.com"
-              enctype="multipart/form-data">
+</main>
 
-          <input type="hidden" name="_subject" value="New Boat Insurance Application - ACES">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="text" name="_honey" style="display:none">
-          <input type="hidden" id="rrEmail" name="rrEmail">
-
-          <!-- STEP 1 -->
-          <div class="form-step active" data-step="1">
-            <h2>Personal Information</h2>
-            <p class="section-subtitle">Tell us about yourself.</p>
-
-            <div class="auto-grid-2">
-
-              <div class="auto-field">
-                <label>First Name</label>
-                <input name="first_name" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Last Name</label>
-                <input name="last_name" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Email</label>
-                <input name="email" type="email" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Phone Number</label>
-                <input name="phone" required>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- STEP 2 -->
-          <div class="form-step" data-step="2">
-            <h2>Boat Details</h2>
-            <p class="section-subtitle">Tell us about your boat or watercraft.</p>
-
-            <div class="auto-grid-2">
-
-              <div class="auto-field">
-                <label>Year</label>
-                <input name="boat_year" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Make</label>
-                <input name="boat_make" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Model</label>
-                <input name="boat_model" required>
-              </div>
-
-              <div class="auto-field">
-                <label>Hull ID Number (HIN)</label>
-                <input name="boat_hin">
-              </div>
-
-              <div class="auto-field">
-                <label>Boat Type</label>
-                <select name="boat_type">
-                  <option value="Fishing">Fishing</option>
-                  <option value="Pontoon">Pontoon</option>
-                  <option value="Ski / Wake">Ski / Wake</option>
-                  <option value="Sailboat">Sailboat</option>
-                  <option value="Jet Ski / PWC">Jet Ski / PWC</option>
-                </select>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- STEP 3 -->
-          <div class="form-step" data-step="3">
-            <h2>Coverage Options</h2>
-            <p class="section-subtitle">Choose the coverage you want.</p>
-
-            <div class="auto-grid-2">
-
-              <div class="auto-field">
-                <label>Liability Limits</label>
-                <select name="liability_limits">
-                  <option value="100k">100,000</option>
-                  <option value="300k">300,000</option>
-                  <option value="500k">500,000</option>
-                </select>
-              </div>
-
-              <div class="auto-field">
-                <label>Deductible</label>
-                <select name="deductible">
-                  <option value="500">$500</option>
-                  <option value="1000">$1,000</option>
-                </select>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- STEP 4 -->
-          <div class="form-step" data-step="4">
-            <h2>Review & Submit</h2>
-            <p class="section-subtitle">Review your information before submitting.</p>
-
-            <button type="submit" class="apply-button">Submit Application</button>
-          </div>
-
-        </form>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer id="aces-footer"></footer>
+<footer id="aces-footer"></footer>
 
 </body>
 </html>
