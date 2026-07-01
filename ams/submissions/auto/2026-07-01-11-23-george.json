@@ -1,0 +1,28 @@
+{
+  "id": "2026-07-01-11-23-george",
+  "type": "auto",
+  "lang": "en",
+  "assignedAgent": "jordan@insaces.com",
+  "submittedAt": "2026-07-01 11:23",
+  "applicationType_en": "Auto Insurance",
+  "applicationType_es": "Seguro de Auto",
+  "wizardVersion": "2026.1",
+  "data": {
+    "driverName": "George Santibañez",
+    "driverDOB": "1988-05-12",
+    "driverLicense": "TX1234567",
+    "driverState": "TX",
+    "maritalStatus": "married",
+    "vehicleYear": "2020",
+    "vehicleMake": "Toyota",
+    "vehicleModel": "Camry",
+    "vin": "1ABCDEFG2H3456789",
+    "primaryUse": "commute",
+    "liabilityLimits": "100/300/100",
+    "compDeductible": "500",
+    "collisionDeductible": "500",
+    "rentalCoverage": "yes",
+    "claimsPast3Years": "0",
+    "accidentsPast3Years": "0"
+  }
+}
