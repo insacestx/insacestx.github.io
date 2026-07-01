@@ -50,6 +50,37 @@
       <h2>Recent Activity</h2>
       <ul id="activityFeed"></ul>
     </section>
+    <section class="submissions">
+  <h2>Recent Submissions</h2>
+
+  <div class="submissions-controls">
+    <input id="searchInput" type="text" placeholder="Search..." class="search-bar">
+
+    <select id="statusFilter" class="filter-select">
+      <option value="all">All Statuses</option>
+      <option value="new">New</option>
+      <option value="review">In Review</option>
+      <option value="completed">Completed</option>
+    </select>
+  </div>
+
+  <table class="submissions-table">
+    <thead>
+      <tr>
+        <th>Applicant</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Agent</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="submissionsBody">
+      <!-- Rows injected by dashboard.js -->
+    </tbody>
+  </table>
+</section>
+
   </main>
 
   <script src="ams.js"></script>
