@@ -1,1 +1,81 @@
+/* ACES Insurance — PDF Styles */
 
+body {
+  font-family: Arial, sans-serif;
+  color: #111827;
+  margin: 40px;
+  line-height: 1.5;
+}
+
+.pdf-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pdf-logo {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+.pdf-header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #111827;
+}
+
+.pdf-meta {
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+}
+
+.pdf-meta p {
+  margin: 4px 0;
+}
+
+.pdf-section {
+  margin-bottom: 30px;
+}
+
+.pdf-section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: #1f2937;
+}
+
+.pdf-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pdf-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.pdf-table .label {
+  font-weight: 600;
+  width: 40%;
+  color: #374151;
+}
+
+.pdf-table .value {
+  width: 60%;
+  color: #111827;
+}
+
+.pdf-footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Print Optimization */
+@media print {
+  body {
+    margin: 20px;
+  }
+  .pdf-logo {
+    width: 100px;
+  }
+}
