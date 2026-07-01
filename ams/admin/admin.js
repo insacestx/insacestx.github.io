@@ -1,3 +1,5 @@
+// ACES AMS — Admin Access Control
+
 const user = JSON.parse(localStorage.getItem("acesUser") || "{}");
 
 const owners = [
