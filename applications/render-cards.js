@@ -57,8 +57,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       icon.className = "app-card-icon";
       icon.src = getAssetPath(app.icon);
       icon.alt = isEs ? (app.name_es || app.name_en) : (app.name_en || "");
-      icon.onerror = () => {
-        icon.src = `${base}/img/icons/default.svg`;
+      
+      // Prevent infinite error loops with data attribute flag
+      icon.onerror = function() {
+        if (!this.dataset.errorHandled) {
+          this.dataset.errorHandled = "true";
+          this.src = `${base}/img/icons/default.svg`;
+        }
       };
 
       iconWrap.appendChild(icon);
