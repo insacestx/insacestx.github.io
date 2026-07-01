@@ -3,23 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>ACES AMS Login</title>
+  <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="login.css">
+  <script src="../../global.js" defer></script>
 </head>
 
 <body class="login-page">
+  <header id="aces-header"></header>
 
-  <div class="login-card">
-    <h1>ACES Agent Login</h1>
+  <div class="login-container">
+    <div class="login-card">
+      <h1>ACES Agent Login</h1>
 
-    <input id="email" type="email" placeholder="Email" class="login-input">
-    <input id="password" type="password" placeholder="Password" class="login-input">
+      <input id="email" type="email" placeholder="Email" class="login-input">
+      <input id="password" type="password" placeholder="Password" class="login-input">
 
-    <button id="loginBtn" class="login-btn">Login</button>
+      <button id="loginBtn" class="login-btn">Login</button>
 
-    <p class="login-note">
-      Temporary login system — Google OAuth coming soon.
-    </p>
+      <p class="login-note">
+        Temporary login system — Google OAuth coming soon.
+      </p>
+    </div>
   </div>
+
+  <footer id="aces-footer"></footer>
 
   <script src="login.js"></script>
 </body>
