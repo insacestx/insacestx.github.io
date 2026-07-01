@@ -64,7 +64,8 @@ function loadHeader() {
       <a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
   `;
-  
+}
+
 function initLoginPanel() {
 
   const loginBtn = document.getElementById("agent-login-btn");
