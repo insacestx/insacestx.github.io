@@ -9,18 +9,18 @@
 <body class="login-page">
 
   <div class="login-card">
-    <h1 data-en="ACES Agent Login" data-es="Inicio de Sesión de Agente ACES">
-      ACES Agent Login
-    </h1>
+    <h1>ACES Agent Login</h1>
 
-    <button id="googleLoginBtn" class="login-btn">
-      <img src="/icons/google.svg" class="google-icon">
-      <span data-en="Sign in with Google" data-es="Iniciar con Google">
-        Sign in with Google
-      </span>
-    </button>
+    <input id="email" type="email" placeholder="Email" class="login-input">
+    <input id="password" type="password" placeholder="Password" class="login-input">
+
+    <button id="loginBtn" class="login-btn">Login</button>
+
+    <p class="login-note">
+      Temporary login system — OAuth coming soon.
+    </p>
   </div>
 
-  <script type="module" src="login.js"></script>
+  <script src="login.js"></script>
 </body>
 </html>
