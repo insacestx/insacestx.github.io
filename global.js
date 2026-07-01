@@ -7,15 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
   loadFooter();
 
   /* WAIT FOR HEADER AND FOOTER INJECTION */
-  setTimeout(() => {
-    initLanguage();
-    setActiveNav();
-    initMobileMenu();
-    initAgentPanel();
-    initQuotePanel();
-  }, 100);
+ setTimeout(() => {
+  initLanguage();
+  setActiveNav();
+  initMobileMenu();
+  initAgentPanel();
+  initQuotePanel();
+  initLoginPanel();   // ⭐ ADD THIS
+}, 100);
 
-});
 
 /* ============================================================
    HEADER INJECTION
@@ -64,53 +64,58 @@ function loadHeader() {
       <a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
   `;
+  
+function initLoginPanel() {
 
-  setTimeout(() => {
-    const langToggle = document.getElementById("lang-toggle");
-    if (langToggle) langToggle.addEventListener("click", toggleLanguage);
-  }, 0);
+  const loginBtn = document.getElementById("agent-login-btn");
+  const panel = document.getElementById("loginPanel");
+  const closeBtn = document.getElementById("loginCloseBtn");
+  const submitBtn = document.getElementById("loginSubmitBtn");
+
+  if (!loginBtn || !panel || !closeBtn || !submitBtn) return;
+
+  // Open panel
+  loginBtn.addEventListener("click", () => {
+    panel.classList.add("open");
+  });
+
+  // Close panel
+  closeBtn.addEventListener("click", () => {
+    panel.classList.remove("open");
+  });
+
+  // Temporary login system
+  submitBtn.addEventListener("click", () => {
+    const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+    const password = document.getElementById("loginPassword").value.trim();
+
+    if (password !== "aces2026") {
+      alert("Invalid password.");
+      return;
+    }
+
+    const agents = [
+      { email: "george@insaces.com", role: "owner" },
+      { email: "bryan@insaces.com", role: "owner" },
+      { email: "jordan@insaces.com", role: "owner" },
+      { email: "lanse@insaces.com", role: "owner" },
+      { email: "robert@insaces.com", role: "owner" },
+      { email: "jimmy@insaces.com", role: "agent" },
+      { email: "office@insaces.com", role: "agent" }
+    ];
+
+    const user = agents.find(a => a.email === email);
+
+    if (!user) {
+      alert("Email not recognized.");
+      return;
+    }
+
+    localStorage.setItem("acesUser", JSON.stringify(user));
+    window.location.href = "/ams/dashboard/dashboard.html";
+  });
 }
-     // Open login panel
-document.getElementById("agent-login-btn").addEventListener("click", () => {
-  document.getElementById("loginPanel").classList.add("open");
-});
 
-// Close login panel
-document.getElementById("loginCloseBtn").addEventListener("click", () => {
-  document.getElementById("loginPanel").classList.remove("open");
-});
-
-// Temporary login system (replace with OAuth later)
-document.getElementById("loginSubmitBtn").addEventListener("click", () => {
-  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
-  const password = document.getElementById("loginPassword").value.trim();
-
-  if (password !== "aces2026") {
-    alert("Invalid password.");
-    return;
-  }
-
-  const agents = [
-    { email: "george@insaces.com", role: "owner" },
-    { email: "bryan@insaces.com", role: "owner" },
-    { email: "jordan@insaces.com", role: "owner" },
-    { email: "lanse@insaces.com", role: "owner" },
-    { email: "robert@insaces.com", role: "owner" },
-    { email: "jimmy@insaces.com", role: "agent" },
-    { email: "office@insaces.com", role: "agent" }
-  ];
-
-  const user = agents.find(a => a.email === email);
-
-  if (!user) {
-    alert("Email not recognized.");
-    return;
-  }
-
-  localStorage.setItem("acesUser", JSON.stringify(user));
-
-  window.location.href = "/ams/dashboard/dashboard.html";
-});
 
 /* ---------------------------------------------------------
    GLOBAL ROUND ROBIN EMAIL ENGINE
