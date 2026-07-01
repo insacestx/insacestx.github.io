@@ -5,7 +5,7 @@
     "category": "personal",
     "config": "/applications/config/auto-config.js",
     "page": "/applications/auto.html",
-    "icon": "/img/icons/icon-auto-aces.png",
+    "icon": "Icons/icon-auto-aces.png",
     "description_en": "Coverage for your personal vehicle.",
     "description_es": "Cobertura para su vehículo personal."
   },
@@ -16,7 +16,7 @@
     "category": "personal",
     "config": "/applications/config/homeowners-config.js",
     "page": "/applications/homeowners.html",
-    "icon": "/img/icons/icon-property-aces.png",
+    "icon": "Icons/icon-property-aces.png",
     "description_en": "Protection for your home and belongings.",
     "description_es": "Protección para su casa y pertenencias."
   },
@@ -27,7 +27,7 @@
     "category": "personal",
     "config": "/applications/config/renters-config.js",
     "page": "/applications/renters.html",
-    "icon": "/img/icons/icon-renters-aces.png",
+    "icon": "Icons/icon-renters-aces.png",
     "description_en": "Coverage for your rental property and belongings.",
     "description_es": "Cobertura para su vivienda rentada y pertenencias."
   },
@@ -38,7 +38,7 @@
     "category": "personal",
     "config": "/applications/config/motorcycle-config.js",
     "page": "/applications/motorcycle.html",
-    "icon": "/img/icons/icon-motorcycle-aces.png",
+    "icon": "Icons/icon-motorcycle-aces.png",
     "description_en": "Coverage for your motorcycle and riding needs.",
     "description_es": "Cobertura para su motocicleta y necesidades de manejo."
   },
@@ -49,7 +49,7 @@
     "category": "personal",
     "config": "/applications/config/boat-config.js",
     "page": "/applications/boat.html",
-    "icon": "/img/icons/icon-boat-aces.png",
+    "icon": "Icons/icon-boat-aces.png",
     "description_en": "Coverage for your vessel and watercraft.",
     "description_es": "Cobertura para su embarcación."
   },
@@ -60,7 +60,7 @@
     "category": "personal",
     "config": "/applications/config/rv-config.js",
     "page": "/applications/rv.html",
-    "icon": "/img/icons/icon-rv-aces.png",
+    "icon": "Icons/icon-rv-aces.png",
     "description_en": "Coverage for your recreational vehicle.",
     "description_es": "Cobertura para su vehículo recreativo."
   },
@@ -71,7 +71,7 @@
     "category": "personal",
     "config": "/applications/config/atv-config.js",
     "page": "/applications/atv.html",
-    "icon": "/img/icons/icon-atv-aces.png",
+    "icon": "Icons/icon-atv-aces.png",
     "description_en": "Coverage for your off-road vehicle.",
     "description_es": "Cobertura para su vehículo todoterreno."
   },
@@ -82,7 +82,7 @@
     "category": "personal",
     "config": "/applications/config/condo-config.js",
     "page": "/applications/condo.html",
-    "icon": "/img/icons/icon-condo-aces.png",
+    "icon": "Icons/icon-condo-aces.png",
     "description_en": "Protection for your condo unit.",
     "description_es": "Protección para su unidad de condominio."
   },
@@ -93,7 +93,7 @@
     "category": "personal",
     "config": "/applications/config/flood-config.js",
     "page": "/applications/flood.html",
-    "icon": "/img/icons/icon-flood-aces.png",
+    "icon": "Icons/icon-flood-aces.png",
     "description_en": "Coverage for flood-related property damage.",
     "description_es": "Cobertura contra daños por inundaciones."
   },
@@ -104,7 +104,7 @@
     "category": "personal",
     "config": "/applications/config/umbrella-config.js",
     "page": "/applications/umbrella.html",
-    "icon": "/img/icons/icon-umbrella-aces.png",
+    "icon": "Icons/icon-umbrella-aces.png",
     "description_en": "Extra liability protection for your household.",
     "description_es": "Protección adicional de responsabilidad para su hogar."
   },
@@ -115,7 +115,7 @@
     "category": "life",
     "config": "/applications/config/life-config.js",
     "page": "/applications/life.html",
-    "icon": "/img/icons/icon-life-aces.png",
+    "icon": "Icons/icon-life-aces.png",
     "description_en": "Coverage to protect your family’s future.",
     "description_es": "Cobertura para proteger el futuro de su familia."
   },
@@ -126,7 +126,7 @@
     "category": "commercial",
     "config": "/applications/config/commercialauto-config.js",
     "page": "/applications/commercial-auto.html",
-    "icon": "/img/icons/icon-commauto-aces.png",
+    "icon": "Icons/icon-commauto-aces.png",
     "description_en": "Coverage for business vehicles.",
     "description_es": "Cobertura para vehículos comerciales."
   },
@@ -137,7 +137,7 @@
     "category": "commercial",
     "config": "/applications/config/commercialtrucking-config.js",
     "page": "/applications/commercial-trucking.html",
-    "icon": "/img/icons/icon-trucking-aces.png",
+    "icon": "Icons/icon-trucking-aces.png",
     "description_en": "Coverage for trucking fleets and operations.",
     "description_es": "Cobertura para flotas y operaciones de camiones."
   },
@@ -148,7 +148,7 @@
     "category": "commercial",
     "config": "/applications/config/bop-config.js",
     "page": "/applications/bop.html",
-    "icon": "/img/icons/icon-bop-aces.png",
+    "icon": "Icons/icon-bop-aces.png",
     "description_en": "Package policy for small businesses.",
     "description_es": "Póliza combinada para pequeños negocios."
   },
@@ -159,7 +159,7 @@
     "category": "commercial",
     "config": "/applications/config/gl-config.js",
     "page": "/applications/gl.html",
-    "icon": "/img/icons/icon-gl-aces.png",
+    "icon": "Icons/icon-gl-aces.png",
     "description_en": "Protection against business liability claims.",
     "description_es": "Protección contra reclamaciones de responsabilidad comercial."
   },
@@ -170,7 +170,7 @@
     "category": "commercial",
     "config": "/applications/config/cyber-config.js",
     "page": "/applications/cyber.html",
-    "icon": "/img/icons/icon-cyber-aces.png",
+    "icon": "Icons/icon-cyber-aces.png",
     "description_en": "Protection against cyber attacks and data breaches.",
     "description_es": "Protección contra ataques cibernéticos y filtraciones de datos."
   },
@@ -181,7 +181,7 @@
     "category": "commercial",
     "config": "/applications/config/commercialproperty-config.js",
     "page": "/applications/commercial-property.html",
-    "icon": "/img/icons/icon-commprop_aces.png",
+    "icon": "Icons/icon-commprop_aces.png",
     "description_en": "Coverage for buildings, equipment, and inventory.",
     "description_es": "Cobertura para edificios, equipo e inventario."
   },
@@ -192,7 +192,7 @@
     "category": "commercial",
     "config": "/applications/config/workerscomp-config.js",
     "page": "/applications/workerscomp.html",
-    "icon": "/img/icons/icon-workerscomp-aces.png",
+    "icon": "Icons/icon-workerscomp-aces.png",
     "description_en": "Coverage for employee injuries and payroll risks.",
     "description_es": "Cobertura para lesiones de empleados y riesgos de nómina."
   },
@@ -203,7 +203,7 @@
     "category": "commercial",
     "config": "/applications/config/surety-config.js",
     "page": "/applications/surety.html",
-    "icon": "/img/icons/icon-surety-aces.png",
+    "icon": "Icons/icon-surety-aces.png",
     "description_en": "Bonds for licensing, permits, and contracts.",
     "description_es": "Fianzas para licencias, permisos y contratos."
   },
@@ -214,7 +214,7 @@
     "category": "commercial",
     "config": "/applications/config/eo-config.js",
     "page": "/applications/eo.html",
-    "icon": "/img/icons/icon-e&o-aces.png",
+    "icon": "Icons/icon-e&o-aces.png",
     "description_en": "Professional liability protection.",
     "description_es": "Protección de responsabilidad profesional."
   },
@@ -225,7 +225,7 @@
     "category": "commercial",
     "config": "/applications/config/commercialumbrella-config.js",
     "page": "/applications/commercial-umbrella.html",
-    "icon": "/img/icons/icon-umbrella-aces.png",
+    "icon": "Icons/icon-umbrella-aces.png",
     "description_en": "Extra liability protection for businesses.",
     "description_es": "Protección adicional de responsabilidad para negocios."
   }
