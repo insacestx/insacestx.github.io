@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   initLoginPanel();   // ⭐ ADD THIS
 }, 100);
 
+  initRoundRobinEmail();
+  initWizardNav();
+});
+
 
 /* ============================================================
    HEADER INJECTION
@@ -249,10 +253,10 @@ function initMobileMenu() {
    AGENT PANEL
 ============================================================ */
 function initAgentPanel() {
-  const cards = document.querySelectorAll(".agent-card");
+  const infoButtons = document.querySelectorAll(".agent-info-btn");
   const panel = document.querySelector(".agent-panel");
 
-  if (!cards.length || !panel) return;
+  if (!infoButtons.length || !panel) return;
 
   const photo = panel.querySelector(".panel-photo");
   const nameEl = panel.querySelector("h2");
@@ -264,16 +268,20 @@ function initAgentPanel() {
 
   if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) return;
 
-  cards.forEach(card => {
-    card.addEventListener("click", () => {
-      photo.src = card.dataset.photo || "";
-      nameEl.textContent = card.dataset.name || "";
-      titleEl.textContent = card.dataset.title || "";
-      phoneEl.textContent = card.dataset.phone || "";
-      emailEl.textContent = card.dataset.email || "";
-      emailEl.href = `mailto:${card.dataset.email || ""}`;
-      callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
-      panel.classList.add("open");
+  infoButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const card = btn.closest(".agent-card");
+      if (card) {
+        photo.src = card.dataset.photo || "";
+        nameEl.textContent = card.dataset.name || "";
+        titleEl.textContent = card.dataset.title || "";
+        phoneEl.textContent = card.dataset.phone || "";
+        emailEl.textContent = card.dataset.email || "";
+        emailEl.href = `mailto:${card.dataset.email || ""}`;
+        callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
+        panel.classList.add("open");
+      }
     });
   });
 
@@ -359,8 +367,3 @@ function initWizardNav() {
 
   show(0);
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  initRoundRobinEmail();
-  initWizardNav();
-});
