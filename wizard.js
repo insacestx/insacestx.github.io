@@ -33,15 +33,25 @@ function getAppType() {
     return params.get("app");
 }
 
-/* Load config */
+/* Load config — NOW MANIFEST‑DRIVEN */
 async function loadConfig(appType) {
     try {
-        // FIX FOR GITHUB PAGES SUBDIRECTORY
         const base = window.location.pathname.includes("insacestx.github.io")
             ? "/insacestx.github.io"
             : "";
 
-        const module = await import(`${base}/applications/config/${appType}-config.js`);
+        // Load manifest.json
+        const manifestRes = await fetch(`${base}/applications/manifest.json`);
+        const manifest = await manifestRes.json();
+
+        if (!manifest[appType]) {
+            throw new Error(`Application '${appType}' not found in manifest.`);
+        }
+
+        // Load config file from manifest.json
+        const configPath = manifest[appType].config;
+        const module = await import(`${base}${configPath}`);
+
         wizardConfig = module.default;
 
     } catch (err) {
@@ -75,8 +85,7 @@ function buildTabs() {
     const tabsContainer = document.getElementById("wizard-tabs");
     tabsContainer.innerHTML = "";
 
-    const lang = getCurrentLang();
-    const useEs = lang === "es";
+    const useEs = isSpanish();
 
     wizardConfig.steps.forEach((step, index) => {
         const tab = document.createElement("div");
@@ -105,8 +114,7 @@ function buildStep(index) {
     container.innerHTML = "";
 
     const step = wizardConfig.steps[index];
-    const lang = getCurrentLang();
-    const useEs = lang === "es";
+    const useEs = isSpanish();
 
     const card = document.createElement("div");
     card.className = "wizard-step-card";
@@ -232,8 +240,7 @@ function buildReview() {
     title.textContent = getText("reviewTitle");
     card.appendChild(title);
 
-    const lang = getCurrentLang();
-    const useEs = lang === "es";
+    const useEs = isSpanish();
 
     wizardConfig.steps.forEach(step => {
         const section = document.createElement("div");
