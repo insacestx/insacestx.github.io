@@ -1,4 +1,4 @@
-// TEMPORARY LOGIN SYSTEM (Replace with OAuth later)
+// TEMPORARY LOGIN SYSTEM — Replace with OAuth later
 
 const agents = [
   { email: "george@insaces.com", role: "owner" },
@@ -14,7 +14,7 @@ document.getElementById("loginBtn").addEventListener("click", () => {
   const email = document.getElementById("email").value.trim().toLowerCase();
   const password = document.getElementById("password").value.trim();
 
-  // TEMPORARY PASSWORD (replace later)
+  // TEMPORARY PASSWORD
   if (password !== "aces2026") {
     alert("Invalid password.");
     return;
