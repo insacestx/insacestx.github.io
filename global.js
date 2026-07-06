@@ -1,20 +1,19 @@
 // ACES 2026 — global.js (Stable Build, Folder‑Safe, Repo‑Prefixed)
 
 document.addEventListener("DOMContentLoaded", () => {
-
   /* CORE */
   loadHeader();
   loadFooter();
 
   /* WAIT FOR HEADER AND FOOTER INJECTION */
- setTimeout(() => {
-  initLanguage();
-  setActiveNav();
-  initMobileMenu();
-  initAgentPanel();
-  initQuotePanel();
-  initLoginPanel();   // ⭐ ADD THIS
-}, 100);
+  setTimeout(() => {
+    initLanguage();
+    setActiveNav();
+    initMobileMenu();
+    initAgentPanel();
+    initQuotePanel();
+    initLoginPanel();
+  }, 100);
 
   initRoundRobinEmail();
   initWizardNav();
@@ -51,8 +50,8 @@ function loadHeader() {
 
       <!-- CONTROLS -->
       <div class="header-controls">
-        <button id="lang-toggle" class="lang-btn">EN / ES</button>
-        <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
+        <button id="lang-toggle" class="lang-btn" type="button">EN / ES</button>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" type="button">☰</button>
       </div>
 
     </div>
@@ -71,7 +70,6 @@ function loadHeader() {
 }
 
 function initLoginPanel() {
-
   const loginBtn = document.getElementById("agent-login-btn");
   const panel = document.getElementById("loginPanel");
   const closeBtn = document.getElementById("loginCloseBtn");
@@ -179,11 +177,17 @@ function loadFooter() {
 }
 
 /* ============================================================
-   LANGUAGE SYSTEM (IMPROVED)
+   LANGUAGE SYSTEM (FIXED + GLOBAL)
 ============================================================ */
 function initLanguage() {
   const savedLang = localStorage.getItem("acesLang") || "en";
   applyLanguage(savedLang);
+
+  const langBtn = document.getElementById("lang-toggle");
+  if (langBtn && !langBtn.dataset.bound) {
+    langBtn.addEventListener("click", toggleLanguage);
+    langBtn.dataset.bound = "true";
+  }
 }
 
 function toggleLanguage() {
@@ -200,14 +204,28 @@ function applyLanguage(lang) {
   document.querySelectorAll("[data-en]").forEach(el => {
     const en = el.getAttribute("data-en");
     const es = el.getAttribute("data-es");
-    el.textContent = isEs ? (es || en) : en;
+    const translated = isEs ? (es || en || "") : (en || "");
+
+    // Handle page <title>
+    if (el.tagName && el.tagName.toLowerCase() === "title") {
+      document.title = translated || document.title;
+      return;
+    }
+
+    // Handle form placeholders
+    if (el.hasAttribute("placeholder")) {
+      el.setAttribute("placeholder", translated);
+      return;
+    }
+
+    // Default text replacement
+    el.textContent = translated;
   });
 
-  // Update language button
+  // Keep language button readable
   const langBtn = document.getElementById("lang-toggle");
   if (langBtn) langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
 
-  // Store language preference
   localStorage.setItem("acesLang", lang);
 }
 
@@ -366,4 +384,11 @@ function initWizardNav() {
   });
 
   show(0);
+}
+
+/* ============================================================
+   NAVIGATION HELPER: BACK TO APPLICATIONS
+============================================================ */
+function goBackToApplications() {
+  window.location.href = "/applications.html";
 }
