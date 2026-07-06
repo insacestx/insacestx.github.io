@@ -368,10 +368,10 @@ function initMobileMenu() {
    AGENT PANEL
 ============================================================ */
 function initAgentPanel() {
-  const infoButtons = document.querySelectorAll(".agent-info-btn");
+  const cards = document.querySelectorAll(".agent-card");
   const panel = document.querySelector(".agent-panel");
 
-  if (!infoButtons.length || !panel) return;
+  if (!cards.length || !panel) return;
 
   const photo = panel.querySelector(".panel-photo");
   const nameEl = panel.querySelector("h2");
@@ -383,20 +383,46 @@ function initAgentPanel() {
 
   if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) return;
 
-  infoButtons.forEach(btn => {
+  function openFromCard(card) {
+    if (!card) return;
+
+    photo.src = card.dataset.photo || "";
+    nameEl.textContent = card.dataset.name || "";
+    titleEl.textContent = card.dataset.title || "";
+    phoneEl.textContent = card.dataset.phone || "";
+    emailEl.textContent = card.dataset.email || "";
+    emailEl.href = `mailto:${card.dataset.email || ""}`;
+    callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
+    panel.classList.add("open");
+  }
+
+  cards.forEach(card => {
+    // whole card click
+    card.addEventListener("click", e => {
+      // if they click a link/button inside card, still allow default behavior
+      const interactive = e.target.closest("a, button, input, select, textarea, label");
+      if (interactive && !interactive.classList.contains("agent-info-btn")) return;
+      openFromCard(card);
+    });
+
+    // keyboard accessibility
+    if (!card.hasAttribute("tabindex")) card.setAttribute("tabindex", "0");
+    if (!card.hasAttribute("role")) card.setAttribute("role", "button");
+
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openFromCard(card);
+      }
+    });
+  });
+
+  // keep support for existing "More Info" button if present
+  document.querySelectorAll(".agent-info-btn").forEach(btn => {
     btn.addEventListener("click", e => {
       e.preventDefault();
       const card = btn.closest(".agent-card");
-      if (!card) return;
-
-      photo.src = card.dataset.photo || "";
-      nameEl.textContent = card.dataset.name || "";
-      titleEl.textContent = card.dataset.title || "";
-      phoneEl.textContent = card.dataset.phone || "";
-      emailEl.textContent = card.dataset.email || "";
-      emailEl.href = `mailto:${card.dataset.email || ""}`;
-      callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
-      panel.classList.add("open");
+      openFromCard(card);
     });
   });
 
