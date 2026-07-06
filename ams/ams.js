@@ -170,7 +170,7 @@ const agents = [
     photo: "/images/agents/jimmy.jpg"
   },
   {
-    name: "Office",
+    name: "Renee Ridling",
     title: "Agent",
     phone: "254-227-6560",
     email: "office@insaces.com",
