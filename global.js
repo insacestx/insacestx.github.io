@@ -195,9 +195,10 @@ function toggleLanguage() {
   const newLang = current === "en" ? "es" : "en";
   localStorage.setItem("acesLang", newLang);
   applyLanguage(newLang);
-}
 
-window.dispatchEvent(new Event("aces:language-changed"));
+  // notify dynamic pages (wizard/apps cards) to re-render in current tab
+  window.dispatchEvent(new Event("aces:language-changed"));
+}
 
 function applyLanguage(lang) {
   const isEs = lang === "es";
