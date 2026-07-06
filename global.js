@@ -77,26 +77,42 @@ function loadHeader() {
       <a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
 
-    <!-- LOGIN PANEL -->
-    <div id="loginPanel" class="login-panel">
-      <div class="login-panel-content">
-        <h2 data-en="Agent Login" data-es="Acceso de Agente">Agent Login</h2>
+  <!-- LOGIN PANEL (SLIDE-OUT) -->
+<aside id="loginPanel" class="login-panel" aria-hidden="true">
+  <button id="loginCloseBtn" class="close-panel" type="button" aria-label="Close">×</button>
 
-        <label for="loginEmail" data-en="Email" data-es="Correo Electrónico">Email</label>
-        <input type="email" id="loginEmail">
+  <h2 data-en="Agent Login" data-es="Acceso de Agente">Agent Login</h2>
 
-        <label for="loginPassword" data-en="Password" data-es="Contraseña">Password</label>
-        <input type="password" id="loginPassword">
+  <label for="loginEmail" data-en="Email" data-es="Correo Electrónico">Email</label>
+  <input
+    type="email"
+    id="loginEmail"
+    data-en="Email Address"
+    data-es="Correo Electrónico"
+    placeholder="Email Address"
+    autocomplete="username" />
 
-        <button id="loginSubmitBtn" class="login-submit-btn" type="button" data-en="Login" data-es="Iniciar Sesión">
-          Login
-        </button>
+  <label for="loginPassword" data-en="Password" data-es="Contraseña">Password</label>
+  <input
+    type="password"
+    id="loginPassword"
+    data-en="Password"
+    data-es="Contraseña"
+    placeholder="Password"
+    autocomplete="current-password" />
 
-        <button id="loginCloseBtn" class="login-close-btn" type="button" data-en="Close" data-es="Cerrar">
-          Close
-        </button>
-      </div>
-    </div>
+  <button id="loginSubmitBtn" class="login-submit-btn" type="button" data-en="Login" data-es="Iniciar Sesión">
+    Login
+  </button>
+
+  <a href="#"
+     class="portal-link-disabled"
+     data-en="Customer portal (Payments/Appointments) — coming soon"
+     data-es="Portal de clientes (Pagos/Citas) — próximamente"
+     onclick="return false;">
+    Customer portal (Payments/Appointments) — coming soon
+  </a>
+</aside>
   `;
 }
 
