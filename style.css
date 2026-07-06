@@ -2,6 +2,18 @@
    ACES 2026 — LIGHT THEME VERSION
 ============================================================ */
 
+:root {
+  --aces-bg: #f7f8fb;
+  --aces-surface: #ffffff;
+  --aces-surface-soft: #fff5f5;
+  --aces-text: #1f2937;
+  --aces-text-muted: #555;
+  --aces-primary: #d40000;
+  --aces-primary-hover: #ee0000;
+  --aces-border: rgba(212, 0, 0, 0.12);
+  --aces-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
 /* BASE RESET */
 * {
   box-sizing: border-box;
