@@ -1,5 +1,5 @@
 <!-- ============================================================
-     ACES 2026 HEADER (No Dropdown Version)
+     ACES 2026 HEADER (Accessible + Functional, Header-Only Scope)
 ============================================================ -->
 
 <header id="aces-header">
@@ -7,13 +7,13 @@
 
     <!-- LOGO -->
     <div class="logo-area">
-      <a href="index.html" class="logo-link">
+      <a href="index.html" class="logo-link" aria-label="ACES Home">
         <img src="image2.png" alt="ACES Insurance Logo" class="aces-logo">
       </a>
     </div>
 
     <!-- DESKTOP NAV -->
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Primary">
       <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
       <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
       <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
@@ -25,17 +25,35 @@
 
     <!-- CONTROLS -->
     <div class="header-controls">
-      <button id="lang-toggle" class="lang-btn">EN / ES</button>
-         <button id="agent-login-btn" class="agent-login-btn" data-en="Agent Login" data-es="Acceso de Agente">
-  Agent Login
-</button>
-      <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
-    </div>
+      <button id="lang-toggle" class="lang-btn" type="button" aria-label="Switch language">EN / ES</button>
 
+      <button
+        id="agent-login-btn"
+        class="agent-login-btn"
+        type="button"
+        data-en="Agent Login"
+        data-es="Acceso de Agente"
+        aria-controls="loginPanel"
+        aria-expanded="false"
+      >
+        Agent Login
+      </button>
+
+      <button
+        id="mobile-menu-btn"
+        class="mobile-menu-btn"
+        type="button"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Toggle menu"
+      >
+        ☰
+      </button>
+    </div>
   </div>
 
   <!-- MOBILE MENU -->
-  <nav id="mobile-menu" class="mobile-menu">
+  <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile" hidden>
     <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
     <a href="services.html" data-en="Services" data-es="Servicios">Services</a>
     <a href="applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
@@ -45,25 +63,108 @@
     <a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a>
   </nav>
 
-     <!-- SLIDE-OUT LOGIN PANEL -->
-<div id="loginPanel" class="login-panel">
-  <div class="login-panel-content">
-    <h2 data-en="Agent Login" data-es="Acceso de Agente">Agent Login</h2>
+  <!-- SLIDE-OUT LOGIN PANEL -->
+  <div id="loginPanel" class="login-panel" hidden>
+    <div class="login-panel-content" role="dialog" aria-modal="true" aria-labelledby="loginPanelTitle">
+      <h2 id="loginPanelTitle" data-en="Agent Login" data-es="Acceso de Agente">Agent Login</h2>
 
-    <label data-en="Email" data-es="Correo Electrónico">Email</label>
-    <input type="email" id="loginEmail">
+      <label for="loginEmail" data-en="Email" data-es="Correo Electrónico">Email</label>
+      <input type="email" id="loginEmail" autocomplete="email">
 
-    <label data-en="Password" data-es="Contraseña">Password</label>
-    <input type="password" id="loginPassword">
+      <label for="loginPassword" data-en="Password" data-es="Contraseña">Password</label>
+      <input type="password" id="loginPassword" autocomplete="current-password">
 
-    <button id="loginSubmitBtn" class="login-submit-btn" data-en="Login" data-es="Iniciar Sesión">
-      Login
-    </button>
+      <button id="loginSubmitBtn" class="login-submit-btn" type="button" data-en="Login" data-es="Iniciar Sesión">
+        Login
+      </button>
 
-    <button id="loginCloseBtn" class="login-close-btn" data-en="Close" data-es="Cerrar">
-      Close
-    </button>
+      <button id="loginCloseBtn" class="login-close-btn" type="button" data-en="Close" data-es="Cerrar">
+        Close
+      </button>
+    </div>
   </div>
-</div>
-
 </header>
+
+<script>
+(function () {
+  const html = document.documentElement;
+  const langToggle = document.getElementById('lang-toggle');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const agentLoginBtn = document.getElementById('agent-login-btn');
+  const loginPanel = document.getElementById('loginPanel');
+  const loginCloseBtn = document.getElementById('loginCloseBtn');
+
+  // Strictly header-scoped; bail out if expected elements are missing.
+  if (!langToggle || !mobileMenuBtn || !mobileMenu || !agentLoginBtn || !loginPanel || !loginCloseBtn) return;
+
+  function setLanguage(lang) {
+    const safeLang = lang === 'es' ? 'es' : 'en';
+    html.setAttribute('lang', safeLang);
+    try { localStorage.setItem('aces-language', safeLang); } catch (_) {}
+
+    const key = safeLang === 'es' ? 'es' : 'en';
+    document.querySelectorAll('#aces-header [data-en][data-es]').forEach((el) => {
+      const value = el.getAttribute('data-' + key);
+      if (value) el.textContent = value;
+    });
+  }
+
+  function openMobileMenu() {
+    mobileMenu.hidden = false;
+    mobileMenu.classList.add('is-open');
+    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('is-open');
+    mobileMenu.hidden = true;
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  function openLoginPanel() {
+    loginPanel.hidden = false;
+    loginPanel.classList.add('is-open');
+    agentLoginBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeLoginPanel() {
+    loginPanel.classList.remove('is-open');
+    loginPanel.hidden = true;
+    agentLoginBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  // Init language
+  let savedLang = 'en';
+  try { savedLang = localStorage.getItem('aces-language') || 'en'; } catch (_) {}
+  setLanguage(savedLang);
+
+  // Wire controls
+  langToggle.addEventListener('click', function () {
+    const current = html.getAttribute('lang') === 'es' ? 'es' : 'en';
+    setLanguage(current === 'en' ? 'es' : 'en');
+  });
+
+  mobileMenuBtn.addEventListener('click', function () {
+    const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+    isOpen ? closeMobileMenu() : openMobileMenu();
+  });
+
+  agentLoginBtn.addEventListener('click', openLoginPanel);
+  loginCloseBtn.addEventListener('click', closeLoginPanel);
+
+  // UX helpers (still header-only)
+  loginPanel.addEventListener('click', function (e) {
+    if (e.target === loginPanel) closeLoginPanel();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (!loginPanel.hidden) closeLoginPanel();
+      if (!mobileMenu.hidden) closeMobileMenu();
+    }
+  });
+
+  mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMobileMenu));
+})();
+</script>
