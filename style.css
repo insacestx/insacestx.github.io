@@ -2125,3 +2125,30 @@ section {
   border: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
   box-shadow: var(--aces-shadow, 0 6px 20px rgba(0,0,0,0.06));
 }
+
+/* HOTFIX: contact hero + fade */
+.small-hero {
+  background: linear-gradient(180deg, #fff5f5 0%, #ffeaea 60%, #fff7f7 100%);
+  padding: 56px 20px 38px;
+  border-bottom: 1px solid rgba(212, 0, 0, 0.12);
+}
+
+.small-hero-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.small-hero h1 {
+  color: var(--aces-primary, #d40000);
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.small-hero p {
+  color: var(--aces-text-muted, #555);
+  max-width: 700px;
+}
+
+.fade-in {
+  animation: fadeIn 0.45s ease both;
+}
