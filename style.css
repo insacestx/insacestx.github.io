@@ -2299,3 +2299,196 @@ section {
   z-index: 2;
   margin-top: 6px;
 }
+
+/* ===== COI PAGE VISUAL UPGRADE ===== */
+
+/* page background + section rhythm */
+.coi-hero {
+  background: linear-gradient(135deg, #0f4c81 0%, #1b6aa8 100%);
+  color: #fff;
+}
+.app-section {
+  background: #f6f8fc;
+  padding: 3rem 1rem 4rem;
+}
+
+/* form shell */
+.coi-app-form {
+  max-width: 980px;
+  margin: 1.5rem auto 0;
+  background: #fff;
+  border: 1px solid #e8edf5;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(15, 39, 72, 0.08);
+  padding: 2rem;
+}
+
+/* wizard steps */
+.coi-wizard-steps {
+  max-width: 980px;
+  margin: 0 auto 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.coi-wizard-steps .wizard-step {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e4eaf2;
+  border-radius: 12px;
+  padding: 0.8rem 0.9rem;
+  font-size: 0.92rem;
+  color: #5a6a85;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  transition: all 0.2s ease;
+}
+.coi-wizard-steps .wizard-step.active {
+  border-color: #1b6aa8;
+  background: #eef6ff;
+  color: #0f4c81;
+  box-shadow: inset 0 0 0 1px rgba(27, 106, 168, 0.2);
+}
+.coi-wizard-steps .wizard-step-icon {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e9eef7;
+  font-size: 0.95rem;
+}
+.coi-wizard-steps .wizard-step.active .wizard-step-icon {
+  background: #1b6aa8;
+  color: #fff;
+}
+
+/* steps */
+.coi-app-form .form-step h2 {
+  margin: 0 0 1rem;
+  color: #102a43;
+  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+}
+.coi-app-form .form-step p {
+  color: #5f6f89;
+  margin-bottom: 1rem;
+}
+
+/* grid + fields */
+.coi-app-form .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1rem;
+}
+.coi-app-form .form-field label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #334e68;
+  font-size: 0.93rem;
+}
+.coi-app-form input[type="text"],
+.coi-app-form input[type="email"],
+.coi-app-form input[type="tel"],
+.coi-app-form textarea,
+.coi-app-form input[type="file"] {
+  width: 100%;
+  border: 1px solid #d7e1ee;
+  border-radius: 10px;
+  padding: 0.78rem 0.88rem;
+  font-size: 0.95rem;
+  color: #102a43;
+  background: #fff;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.coi-app-form textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+.coi-app-form input:focus,
+.coi-app-form textarea:focus {
+  outline: none;
+  border-color: #1b6aa8;
+  box-shadow: 0 0 0 3px rgba(27, 106, 168, 0.18);
+}
+
+/* file upload zone look */
+.coi-app-form input[type="file"] {
+  padding: 1rem;
+  border-style: dashed;
+  background: #fbfdff;
+}
+
+/* nav buttons */
+.coi-app-form .wizard-nav {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.7rem;
+  justify-content: flex-end;
+}
+.coi-app-form .btn-primary,
+.coi-app-form .btn-secondary {
+  border: 0;
+  border-radius: 10px;
+  padding: 0.72rem 1rem;
+  min-height: 42px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s;
+}
+.coi-app-form .btn-primary {
+  background: linear-gradient(135deg, #1b6aa8 0%, #0f4c81 100%);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(15, 76, 129, 0.25);
+}
+.coi-app-form .btn-secondary {
+  background: #eef3fa;
+  color: #26415f;
+}
+.coi-app-form .btn-primary:hover,
+.coi-app-form .btn-secondary:hover {
+  transform: translateY(-1px);
+}
+
+/* consent */
+.coi-app-form .checkbox-field {
+  margin-top: 0.6rem;
+  padding: 0.85rem 0.95rem;
+  background: #f8fbff;
+  border: 1px solid #e3ebf7;
+  border-radius: 10px;
+}
+.coi-app-form .checkbox-field label {
+  margin: 0;
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+}
+
+/* responsive */
+@media (max-width: 860px) {
+  .coi-wizard-steps {
+    grid-template-columns: 1fr 1fr;
+  }
+  .coi-app-form {
+    padding: 1.25rem;
+    border-radius: 14px;
+  }
+}
+@media (max-width: 640px) {
+  .coi-app-form .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .coi-wizard-steps {
+    grid-template-columns: 1fr;
+  }
+  .coi-app-form .wizard-nav {
+    justify-content: stretch;
+    flex-direction: column;
+  }
+  .coi-app-form .btn-primary,
+  .coi-app-form .btn-secondary {
+    width: 100%;
+  }
+}
