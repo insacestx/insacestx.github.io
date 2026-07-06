@@ -122,7 +122,7 @@ function initLoginPanel() {
     { name: "Lanse Derrick", email: "lanse@insaces.com", role: "owner" },
     { name: "Robert", email: "robert@insaces.com", role: "owner" },
     { name: "Jimmy Rodriguez", email: "jimmy@insaces.com", role: "agent" },
-    { name: "Office", email: "office@insaces.com", role: "agent" }
+    { name: "Renee Ridling", email: "office@insaces.com", role: "agent" }
   ];
 
   let agents = fallbackAgents;
