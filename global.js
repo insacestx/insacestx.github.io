@@ -51,6 +51,16 @@ function loadHeader() {
       <!-- CONTROLS -->
       <div class="header-controls">
         <button id="lang-toggle" class="lang-btn" type="button">EN / ES</button>
+
+        <button
+          id="agent-login-btn"
+          class="agent-login-btn"
+          type="button"
+          data-en="Agent Login"
+          data-es="Acceso de Agente">
+          Agent Login
+        </button>
+
         <button id="mobile-menu-btn" class="mobile-menu-btn" type="button">☰</button>
       </div>
 
@@ -66,6 +76,27 @@ function loadHeader() {
       <a href="/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
       <a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
+
+    <!-- LOGIN PANEL -->
+    <div id="loginPanel" class="login-panel">
+      <div class="login-panel-content">
+        <h2 data-en="Agent Login" data-es="Acceso de Agente">Agent Login</h2>
+
+        <label for="loginEmail" data-en="Email" data-es="Correo Electrónico">Email</label>
+        <input type="email" id="loginEmail">
+
+        <label for="loginPassword" data-en="Password" data-es="Contraseña">Password</label>
+        <input type="password" id="loginPassword">
+
+        <button id="loginSubmitBtn" class="login-submit-btn" type="button" data-en="Login" data-es="Iniciar Sesión">
+          Login
+        </button>
+
+        <button id="loginCloseBtn" class="login-close-btn" type="button" data-en="Close" data-es="Cerrar">
+          Close
+        </button>
+      </div>
+    </div>
   `;
 }
 
@@ -77,20 +108,21 @@ function initLoginPanel() {
 
   if (!loginBtn || !panel || !closeBtn || !submitBtn) return;
 
-  // Open panel
   loginBtn.addEventListener("click", () => {
     panel.classList.add("open");
   });
 
-  // Close panel
   closeBtn.addEventListener("click", () => {
     panel.classList.remove("open");
   });
 
-  // Temporary login system
+  panel.addEventListener("click", (e) => {
+    if (e.target === panel) panel.classList.remove("open");
+  });
+
   submitBtn.addEventListener("click", () => {
-    const email = document.getElementById("loginEmail").value.trim().toLowerCase();
-    const password = document.getElementById("loginPassword").value.trim();
+    const email = document.getElementById("loginEmail")?.value.trim().toLowerCase() || "";
+    const password = document.getElementById("loginPassword")?.value.trim() || "";
 
     if (password !== "aces2026") {
       alert("Invalid password.");
@@ -165,13 +197,11 @@ function loadFooter() {
     })
     .then(html => {
       footer.innerHTML = html;
-      // Apply current language to footer immediately
       const currentLang = localStorage.getItem("acesLang") || "en";
       applyLanguage(currentLang);
     })
     .catch(err => {
       console.error("Footer load error:", err);
-      // Fallback footer
       footer.innerHTML = '<div class="aces-footer"><p style="text-align:center;padding:20px;color:#999;">© 2026 ACES Insurance Services</p></div>';
     });
 }
@@ -203,29 +233,36 @@ function toggleLanguage() {
 function applyLanguage(lang) {
   const isEs = lang === "es";
 
-  // Apply to all data-en/data-es elements
   document.querySelectorAll("[data-en]").forEach(el => {
     const en = el.getAttribute("data-en");
     const es = el.getAttribute("data-es");
     const translated = isEs ? (es || en || "") : (en || "");
 
-    // Handle page <title>
     if (el.tagName && el.tagName.toLowerCase() === "title") {
       document.title = translated || document.title;
       return;
     }
 
-    // Handle form placeholders
-    if (el.hasAttribute("placeholder")) {
+    // placeholders (inputs/selects/textarea with placeholder attr)
+    if (
+      (el.tagName === "INPUT" || el.tagName === "TEXTAREA") &&
+      el.hasAttribute("placeholder")
+    ) {
       el.setAttribute("placeholder", translated);
+    }
+
+    // options
+    if (el.tagName === "OPTION") {
+      el.textContent = translated;
       return;
     }
 
-    // Default text replacement
-    el.textContent = translated;
+    // default visible text
+    if (!((el.tagName === "INPUT" || el.tagName === "TEXTAREA") && el.hasAttribute("placeholder"))) {
+      el.textContent = translated;
+    }
   });
 
-  // Keep language button readable
   const langBtn = document.getElementById("lang-toggle");
   if (langBtn) langBtn.textContent = isEs ? "ES / EN" : "EN / ES";
 
@@ -239,7 +276,6 @@ function setActiveNav() {
   const path = window.location.pathname;
   document.querySelectorAll(".nav-links a, #mobile-menu a").forEach(link => {
     const href = link.getAttribute("href");
-    // Match both exact paths and index pages
     const isActive = path === href || (href === "/index.html" && (path === "/" || path === "/insacestx.github.io/"));
     link.classList.toggle("active", isActive);
   });
@@ -316,7 +352,6 @@ function initAgentPanel() {
    QUOTE PANEL (PLACEHOLDER)
 ============================================================ */
 function initQuotePanel() {
-  // Initialize quote panel if it exists on the page
   const quotePanel = document.querySelector(".quote-panel");
   if (quotePanel) {
     // Quote panel logic here if needed
@@ -339,7 +374,7 @@ window.addEventListener("scroll", () => {
 
 function initWizardNav() {
   const form = document.querySelector("form[data-wizard]");
-  if (!form) return; // Not an application page
+  if (!form) return;
 
   const steps = [...document.querySelectorAll(".form-step")];
   const indicators = [...document.querySelectorAll(".auto-wizard-step")];
