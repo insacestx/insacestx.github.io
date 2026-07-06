@@ -273,80 +273,72 @@
           Start your quote in less than a minute.
         </p>
 
-        <form action="https://formsubmit.co/office@insaces.com"
-              method="POST"
-              class="quick-quote-form">
+       <form action="https://formsubmit.co/office@insaces.com"
+      method="POST"
+      class="quick-quote-form">
 
-          <input type="hidden" name="_cc" value="office@insaces.com">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
-          <input type="hidden" name="_subject" value="New Quick Quote Request">
-          <input type="hidden" id="rrEmail" name="rrEmail">
+  <input type="hidden" name="_cc" value="office@insaces.com">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+  <input type="hidden" name="_subject" value="New Quick Quote Request">
+  <input type="hidden" id="rrEmail" name="rrEmail">
 
-          <input type="text"
-                 name="Full Name"
-                 placeholder="Full Name"
-                 required>
+  <input type="text"
+         name="Full Name"
+         data-en="Full Name"
+         data-es="Nombre Completo"
+         placeholder="Full Name"
+         required>
 
-          <input type="tel"
-                 name="Phone"
-                 placeholder="Phone Number"
-                 required>
+  <input type="tel"
+         name="Phone"
+         data-en="Phone Number"
+         data-es="Número de Teléfono"
+         placeholder="Phone Number"
+         required>
 
-          <input type="email"
-                 name="Email"
-                 placeholder="Email Address"
-                 required>
+  <input type="email"
+         name="Email"
+         data-en="Email Address"
+         data-es="Correo Electrónico"
+         placeholder="Email Address"
+         required>
 
-          <select name="Insurance Type" required>
+  <select name="Insurance Type" required>
+    <option value="" disabled selected data-en="Select Insurance Type" data-es="Seleccione Tipo de Seguro">
+      Select Insurance Type
+    </option>
 
-            <option value="" disabled selected>
-              Select Insurance Type
-            </option>
+    <option data-en="Auto Insurance" data-es="Seguro de Auto">Auto Insurance</option>
+    <option data-en="Homeowners Insurance" data-es="Seguro de Casa">Homeowners Insurance</option>
+    <option data-en="Renters Insurance" data-es="Seguro para Inquilinos">Renters Insurance</option>
+    <option data-en="Umbrella Insurance" data-es="Seguro Umbrella">Umbrella Insurance</option>
+    <option data-en="Motorcycle Insurance" data-es="Seguro de Motocicleta">Motorcycle Insurance</option>
+    <option data-en="Boat Insurance" data-es="Seguro de Bote">Boat Insurance</option>
+    <option data-en="RV & Travel Trailer" data-es="RV y Remolque de Viaje">RV & Travel Trailer</option>
+    <option data-en="Condo Insurance" data-es="Seguro de Condominio">Condo Insurance</option>
+    <option data-en="Flood Insurance" data-es="Seguro contra Inundación">Flood Insurance</option>
+    <option data-en="ATV & Off-Road" data-es="ATV y Todo Terreno">ATV & Off-Road</option>
+    <option data-en="Life Insurance" data-es="Seguro de Vida">Life Insurance</option>
+    <option data-en="Commercial Auto" data-es="Auto Comercial">Commercial Auto</option>
+    <option data-en="General Liability" data-es="Responsabilidad General">General Liability</option>
+    <option data-en="Workers Compensation" data-es="Compensación al Trabajador">Workers Compensation</option>
+    <option data-en="Business Owners Policy (BOP)" data-es="Póliza para Dueños de Negocio (BOP)">Business Owners Policy (BOP)</option>
+    <option data-en="Cyber Liability" data-es="Responsabilidad Cibernética">Cyber Liability</option>
+    <option data-en="Surety Bonds" data-es="Fianzas">Surety Bonds</option>
+  </select>
 
-            <option>Auto Insurance</option>
-            <option>Homeowners Insurance</option>
-            <option>Renters Insurance</option>
-            <option>Umbrella Insurance</option>
-            <option>Motorcycle Insurance</option>
-            <option>Boat Insurance</option>
-            <option>RV & Travel Trailer</option>
-            <option>Condo Insurance</option>
-            <option>Flood Insurance</option>
-            <option>ATV & Off-Road</option>
-            <option>Life Insurance</option>
-            <option>Commercial Auto</option>
-            <option>General Liability</option>
-            <option>Workers Compensation</option>
-            <option>Business Owners Policy (BOP)</option>
-            <option>Cyber Liability</option>
-            <option>Surety Bonds</option>
-
-          </select>
-
-          <div class="sms-optin">
-
-            <label class="sms-label">
-
-              <input type="checkbox"
-                     name="SMS Opt-In"
-                     required>
-
-              <span>
-                By checking this box, I consent to receive SMS messages from ACES Insurance Services regarding my insurance quote and related services.
-              </span>
-
-            </label>
-
-          </div>
-
-          <button type="submit"
-                  data-en="Start My Quote"
-                  data-es="Comenzar Mi Cotización">
-            Start My Quote
-          </button>
-
-        </form>
+  <div class="sms-optin">
+    <label class="sms-label">
+      <input type="checkbox" name="SMS Opt-In" required>
+      <span
+        data-en="By checking this box, I consent to receive SMS messages from ACES Insurance Services regarding my insurance quote and related services."
+        data-es="Al marcar esta casilla, doy mi consentimiento para recibir mensajes SMS de ACES Insurance Services sobre mi cotización de seguro y servicios relacionados.">
+        By checking this box, I consent to receive SMS messages from ACES Insurance Services regarding my insurance quote and related services.
+      </span>
+    </label>
+  </div>
+</form>
 
       </div>
 
