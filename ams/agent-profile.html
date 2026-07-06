@@ -2,57 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ACES AMS | Agent Profile</title>
+
+  <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="style-ams.css">
+
+  <script src="../global.js" defer></script>
+  <script src="ams.js" defer></script>
 </head>
 
 <body>
-  <aside class="sidebar">
-    <div class="logo"><img src="/images/image2.png"></div>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="clients.html">Clients</a>
-      <a href="policies.html">Policies</a>
-      <a href="cois.html">COIs</a>
-      <a href="claims.html">Claims</a>
-      <a href="tasks.html">Tasks</a>
-      <a href="/ams/leads.html">Leads</a>
-      <a href="agents.html" class="active">Agents</a>
-      <a href="settings.html">Settings</a>
-    </nav>
-  </aside>
+  <header id="aces-header"></header>
 
-  <main class="content">
-    <div class="page-header">
-      <h1 id="agentName">Agent Profile</h1>
-      <button class="btn-red" onclick="editAgent()">Edit</button>
-    </div>
+  <div class="ams-app">
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="../images/image2.png" alt="ACES Logo">
+      </div>
 
-    <section class="client-info">
-      <img id="agentPhoto" class="agent-profile-photo">
-      <h2 id="agentTitle"></h2>
-      <p><strong>Phone:</strong> <span id="agentPhone"></span></p>
-      <p><strong>Email:</strong> <span id="agentEmail"></span></p>
-    </section>
+      <nav aria-label="AMS navigation">
+        <a href="dashboard/dashboard.html">Dashboard</a>
+        <a href="dashboard/clients.html">Clients</a>
+        <a href="dashboard/policies.html">Policies</a>
+        <a href="dashboard/cois.html">COIs</a>
+        <a href="dashboard/claims.html">Claims</a>
+        <a href="dashboard/tasks.html">Tasks</a>
+        <a href="leads.html">Leads</a>
+        <a href="dashboard/agents.html" class="active" aria-current="page">Agents</a>
+        <a href="dashboard/settings.html">Settings</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </nav>
+    </aside>
 
-    <section class="client-section">
-      <h2>Assigned Clients</h2>
-      <ul id="agentClients"></ul>
-    </section>
+    <main class="content" role="main">
+      <div class="page-header">
+        <h1 id="agentName">Agent Profile</h1>
+        <button class="btn-red" id="editAgentBtn" type="button">Edit</button>
+      </div>
 
-    <section class="client-section">
-      <h2>Tasks</h2>
-      <ul id="agentTasks"></ul>
-    </section>
+      <section class="client-info">
+        <img id="agentPhoto" class="agent-profile-photo" alt="Agent profile photo">
+        <h2 id="agentTitle"></h2>
+        <p><strong>Phone:</strong> <span id="agentPhone"></span></p>
+        <p><strong>Email:</strong> <span id="agentEmail"></span></p>
+      </section>
 
-    <section class="client-section">
-      <h2>Notes</h2>
-      <textarea id="agentNotes" placeholder="Add internal notes..."></textarea>
-      <button class="btn-red small" onclick="saveAgentNotes()">Save Notes</button>
-    </section>
+      <section class="client-section">
+        <h2>Assigned Clients</h2>
+        <ul id="agentClients"></ul>
+      </section>
 
-  </main>
+      <section class="client-section">
+        <h2>Tasks</h2>
+        <ul id="agentTasks"></ul>
+      </section>
 
-  <script src="ams.js"></script>
+      <section class="client-section">
+        <h2>Notes</h2>
+        <label for="agentNotes" class="sr-only">Internal notes</label>
+        <textarea id="agentNotes" placeholder="Add internal notes..."></textarea>
+        <button class="btn-red small" id="saveAgentNotesBtn" type="button">Save Notes</button>
+      </section>
+    </main>
+  </div>
+
+  <footer id="aces-footer"></footer>
 </body>
 </html>
