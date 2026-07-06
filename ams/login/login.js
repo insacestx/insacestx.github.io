@@ -63,7 +63,7 @@
     if (existing) {
       try {
         const parsed = JSON.parse(existing);
-        if (parsed && parsed.email && parsed.role) {
+        if (parsed && parsed.email && parsed.role && ["owner", "agent"].includes(parsed.role)) {
           redirectForUser(parsed);
           return;
         }
