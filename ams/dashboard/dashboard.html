@@ -18,20 +18,21 @@
   <div class="ams-app">
     <aside class="sidebar">
       <div class="logo-area">
-      <a href="/ams/dashboard/index.html" class="logo-link" aria-label="ACES Home">
-        <img src="image2.png" alt="ACES Insurance Logo" class="aces-logo">
-      </a>
-    </div>
-      <nav>
-        <a href="/ams/dashboard/dashboard.html" class="active">Dashboard</a>
-        <a href="/ams/dashboard/clients.html">Clients</a>
-        <a href="/ams/dashboard/policies.html">Policies</a>
-        <a href="/ams/dashboard/cois.html">COIs</a>
-        <a href="/ams/dashboard/claims.html">Claims</a>
-        <a href="/ams/dashboard/tasks.html">Tasks</a>
-        <a href="/ams/leads.html">Leads</a>
-        <a href="/ams/dashboard/agents.html">Agents</a>
-        <a href="/ams/dashboard/settings.html">Settings</a>
+        <a href="dashboard.html" class="logo-link" aria-label="ACES Home">
+          <img src="../../images/image2.png" alt="ACES Insurance Logo" class="aces-logo">
+        </a>
+      </div>
+
+      <nav aria-label="Dashboard navigation">
+        <a href="dashboard.html" class="active" aria-current="page">Dashboard</a>
+        <a href="clients.html">Clients</a>
+        <a href="policies.html">Policies</a>
+        <a href="cois.html">COIs</a>
+        <a href="claims.html">Claims</a>
+        <a href="tasks.html">Tasks</a>
+        <a href="../leads.html">Leads</a>
+        <a href="agents.html">Agents</a>
+        <a href="settings.html">Settings</a>
         <a href="#" id="logoutLink">Logout</a>
       </nav>
     </aside>
@@ -39,7 +40,7 @@
     <main class="content" role="main">
       <h1>ACES AMS Dashboard</h1>
 
-      <section class="cards">
+      <section class="cards" aria-label="Dashboard metrics">
         <div class="card">
           <h2>New Leads</h2>
           <p id="leadCount">0</p>
@@ -70,8 +71,10 @@
         <h2>Recent Submissions</h2>
 
         <div class="submissions-controls">
+          <label for="searchInput" class="sr-only">Search submissions</label>
           <input id="searchInput" type="text" placeholder="Search...">
 
+          <label for="statusFilter" class="sr-only">Filter by status</label>
           <select id="statusFilter">
             <option value="all">All Statuses</option>
             <option value="new">New</option>
@@ -100,40 +103,5 @@
   </div>
 
   <footer id="aces-footer"></footer>
-
-  <script>
-    // Session guard + logout
-    (function () {
-      const userRaw = localStorage.getItem("acesUser");
-      if (!userRaw) {
-        window.location.href = "../login/login.html";
-        return;
-      }
-
-      try {
-        const user = JSON.parse(userRaw);
-        if (!user || !user.email || !user.role) {
-          localStorage.removeItem("acesUser");
-          window.location.href = "../login/login.html";
-          return;
-        }
-      } catch (e) {
-        localStorage.removeItem("acesUser");
-        window.location.href = "../login/login.html";
-        return;
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const logout = document.getElementById("logoutLink");
-        if (logout) {
-          logout.addEventListener("click", function (e) {
-            e.preventDefault();
-            localStorage.removeItem("acesUser");
-            window.location.href = "../login/login.html";
-          });
-        }
-      });
-    })();
-  </script>
 </body>
 </html>
