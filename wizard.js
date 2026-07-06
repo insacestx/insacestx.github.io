@@ -4,304 +4,397 @@
 
 let wizardConfig = null;
 let currentStep = 0;
+let formData = {};
+let reviewMode = false;
 
 /* Language helpers */
 function getCurrentLang() {
-    return localStorage.getItem("aces_lang") || "en";
+  // Unified key with global.js
+  return localStorage.getItem("acesLang") || "en";
 }
 
 function isSpanish() {
-    return getCurrentLang() === "es";
+  return getCurrentLang() === "es";
 }
 
 /* Button text map (Formal MX/LatAm) */
 function getText(key) {
-    const es = isSpanish();
-    const map = {
-        next: es ? "Siguiente" : "Next",
-        back: es ? "Regresar" : "Back",
-        review: es ? "Revisar" : "Review",
-        submit: es ? "Enviar Solicitud" : "Submit Application",
-        reviewTitle: es ? "Revise su Información" : "Review Your Information"
-    };
-    return map[key] || key;
+  const es = isSpanish();
+  const map = {
+    next: es ? "Siguiente" : "Next",
+    back: es ? "Regresar" : "Back",
+    review: es ? "Revisar" : "Review",
+    submit: es ? "Enviar Solicitud" : "Submit Application",
+    reviewTitle: es ? "Revise su Información" : "Review Your Information",
+    configError: es ? "Error al cargar la configuración de la solicitud." : "Error loading application configuration.",
+    noAppType: es ? "No se especificó el tipo de solicitud." : "No application type specified."
+  };
+  return map[key] || key;
 }
 
 /* Detect application type */
 function getAppType() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("app");
+  const params = new URLSearchParams(window.location.search);
+  return params.get("app");
 }
 
-/* Load config — NOW MANIFEST‑DRIVEN */
+/* Save current visible step values */
+function persistCurrentStepData() {
+  if (!wizardConfig || !wizardConfig.steps || reviewMode) return;
+  const step = wizardConfig.steps[currentStep];
+  if (!step || !step.fields) return;
+
+  step.fields.forEach(field => {
+    const el = document.getElementById(field.id);
+    if (el) formData[field.id] = el.value;
+  });
+}
+
+/* Load config — MANIFEST‑DRIVEN */
 async function loadConfig(appType) {
-    try {
-        const base = window.location.pathname.includes("insacestx.github.io")
-            ? "/insacestx.github.io"
-            : "";
+  try {
+    const base = window.location.pathname.includes("insacestx.github.io")
+      ? "/insacestx.github.io"
+      : "";
 
-        // Load manifest.json
-        const manifestRes = await fetch(`${base}/applications/manifest.json`);
-        const manifest = await manifestRes.json();
+    // Load manifest.json
+    const manifestRes = await fetch(`${base}/applications/manifest.json`);
+    const manifest = await manifestRes.json();
 
-        if (!manifest[appType]) {
-            throw new Error(`Application '${appType}' not found in manifest.`);
-        }
-
-        // Load config file from manifest.json
-        const configPath = manifest[appType].config;
-        const module = await import(`${base}${configPath}`);
-
-        wizardConfig = module.default;
-
-    } catch (err) {
-        document.getElementById("wizard-container").innerHTML =
-            `<p style="color:red;">Error loading application configuration.</p>`;
-        console.error("Error loading config for app:", appType, err);
+    if (!manifest[appType]) {
+      throw new Error(`Application '${appType}' not found in manifest.`);
     }
+
+    // Load config file from manifest.json
+    const configPath = manifest[appType].config;
+    const module = await import(`${base}${configPath}`);
+
+    wizardConfig = module.default;
+  } catch (err) {
+    const container = document.getElementById("wizard-container");
+    if (container) {
+      container.innerHTML = `<p style="color:red;">${getText("configError")}</p>`;
+    }
+    console.error("Error loading config for app:", appType, err);
+  }
 }
 
 /* Init */
 async function initWizard() {
-    const appType = getAppType();
-    if (!appType) {
-        document.getElementById("wizard-container").innerHTML =
-            `<p style="color:red;">No application type specified.</p>`;
-        return;
+  const appType = getAppType();
+  if (!appType) {
+    const container = document.getElementById("wizard-container");
+    if (container) {
+      container.innerHTML = `<p style="color:red;">${getText("noAppType")}</p>`;
     }
+    return;
+  }
 
-    await loadConfig(appType);
-    if (!wizardConfig) return;
+  await loadConfig(appType);
+  if (!wizardConfig) return;
 
-    buildTabs();
-    buildStep(0);
-    updateProgress();
+  buildTabs();
+  buildStep(0);
+  updateProgress();
 }
 
 document.addEventListener("DOMContentLoaded", initWizard);
 
+/* Re-render when language changes in another script/tab */
+window.addEventListener("storage", (e) => {
+  if (e.key !== "acesLang" || !wizardConfig) return;
+
+  persistCurrentStepData();
+  buildTabs();
+
+  if (reviewMode) {
+    buildReview();
+  } else {
+    buildStep(currentStep);
+  }
+});
+
+/* Also respond to same-tab language changes dispatched by global.js (optional custom event) */
+window.addEventListener("aces:language-changed", () => {
+  if (!wizardConfig) return;
+
+  persistCurrentStepData();
+  buildTabs();
+
+  if (reviewMode) {
+    buildReview();
+  } else {
+    buildStep(currentStep);
+  }
+});
+
 /* Build Tabs */
 function buildTabs() {
-    const tabsContainer = document.getElementById("wizard-tabs");
-    tabsContainer.innerHTML = "";
+  const tabsContainer = document.getElementById("wizard-tabs");
+  if (!tabsContainer) return;
 
-    const useEs = isSpanish();
+  tabsContainer.innerHTML = "";
+  const useEs = isSpanish();
 
-    wizardConfig.steps.forEach((step, index) => {
-        const tab = document.createElement("div");
-        tab.className = "wizard-tab";
+  wizardConfig.steps.forEach((step, index) => {
+    const tab = document.createElement("div");
+    tab.className = "wizard-tab";
 
-        const title = useEs ? (step.title_es || step.title_en) : step.title_en;
-        tab.textContent = title || step.title || `Step ${index + 1}`;
+    const title = useEs ? (step.title_es || step.title_en) : step.title_en;
+    tab.textContent = title || step.title || `Step ${index + 1}`;
 
-        tab.addEventListener("click", () => goToStep(index));
-        tabsContainer.appendChild(tab);
-    });
+    tab.addEventListener("click", () => goToStep(index));
+    tabsContainer.appendChild(tab);
+  });
 
-    setActiveTab(0);
+  setActiveTab(currentStep);
 }
 
 function setActiveTab(index) {
-    document.querySelectorAll(".wizard-tab").forEach((tab, i) => {
-        tab.classList.toggle("active", i === index);
-    });
+  document.querySelectorAll(".wizard-tab").forEach((tab, i) => {
+    tab.classList.toggle("active", i === index);
+  });
 }
 
 /* Build Step */
 function buildStep(index) {
-    currentStep = index;
-    const container = document.getElementById("wizard-container");
-    container.innerHTML = "";
+  reviewMode = false;
+  currentStep = index;
 
-    const step = wizardConfig.steps[index];
-    const useEs = isSpanish();
+  const container = document.getElementById("wizard-container");
+  if (!container) return;
+  container.innerHTML = "";
 
-    const card = document.createElement("div");
-    card.className = "wizard-step-card";
+  const step = wizardConfig.steps[index];
+  const useEs = isSpanish();
 
-    const title = document.createElement("div");
-    title.className = "wizard-step-title";
+  const card = document.createElement("div");
+  card.className = "wizard-step-card";
 
-    const stepTitle = useEs ? (step.title_es || step.title_en) : step.title_en;
-    title.textContent = stepTitle || step.title || "";
-    card.appendChild(title);
+  const title = document.createElement("div");
+  title.className = "wizard-step-title";
 
-    step.fields.forEach(field => {
-        const wrap = document.createElement("div");
-        wrap.className = "wizard-field";
+  const stepTitle = useEs ? (step.title_es || step.title_en) : step.title_en;
+  title.textContent = stepTitle || step.title || "";
+  card.appendChild(title);
 
-        const label = document.createElement("label");
-        const labelText = useEs ? (field.label_es || field.label_en) : field.label_en;
-        const finalLabel = labelText || field.label || field.id || "";
+  step.fields.forEach(field => {
+    const wrap = document.createElement("div");
+    wrap.className = "wizard-field";
 
-        label.textContent = finalLabel + (field.required ? " *" : "");
-        wrap.appendChild(label);
+    const label = document.createElement("label");
+    const labelText = useEs ? (field.label_es || field.label_en) : field.label_en;
+    const finalLabel = labelText || field.label || field.id || "";
 
-        let input;
-        if (field.type === "select") {
-            input = document.createElement("select");
-            (field.options || []).forEach(opt => {
-                const o = document.createElement("option");
-                o.value = opt.value;
-                const optLabel = useEs ? (opt.label_es || opt.label_en || opt.label) : (opt.label_en || opt.label);
-                o.textContent = optLabel || opt.value;
-                input.appendChild(o);
-            });
-        } else {
-            input = document.createElement("input");
-            input.type = field.type || "text";
-        }
+    label.textContent = finalLabel + (field.required ? " *" : "");
+    label.setAttribute("for", field.id);
+    wrap.appendChild(label);
 
-        input.id = field.id;
-        wrap.appendChild(input);
-        card.appendChild(wrap);
+    let input;
+    if (field.type === "select") {
+      input = document.createElement("select");
+      input.id = field.id;
+
+      (field.options || []).forEach(opt => {
+        const o = document.createElement("option");
+        o.value = opt.value;
+        const optLabel = useEs
+          ? (opt.label_es || opt.label_en || opt.label)
+          : (opt.label_en || opt.label);
+        o.textContent = optLabel || opt.value;
+        input.appendChild(o);
+      });
+    } else {
+      input = document.createElement("input");
+      input.type = field.type || "text";
+      input.id = field.id;
+      if (field.placeholder_en || field.placeholder_es) {
+        input.placeholder = useEs
+          ? (field.placeholder_es || field.placeholder_en || "")
+          : (field.placeholder_en || "");
+      }
+    }
+
+    // restore saved value
+    if (formData[field.id] != null) {
+      input.value = formData[field.id];
+    }
+
+    // live save
+    input.addEventListener("input", () => {
+      formData[field.id] = input.value;
+    });
+    input.addEventListener("change", () => {
+      formData[field.id] = input.value;
     });
 
-    const btns = document.createElement("div");
-    btns.className = "wizard-buttons";
+    wrap.appendChild(input);
+    card.appendChild(wrap);
+  });
 
-    const back = document.createElement("button");
-    back.className = "wizard-btn back";
-    back.textContent = getText("back");
-    back.disabled = index === 0;
-    back.addEventListener("click", goBack);
+  const btns = document.createElement("div");
+  btns.className = "wizard-buttons";
 
-    const next = document.createElement("button");
-    next.className = "wizard-btn next";
-    const isLastStep = index === wizardConfig.steps.length - 1;
-    next.textContent = isLastStep ? getText("review") : getText("next");
-    next.addEventListener("click", goNext);
+  const back = document.createElement("button");
+  back.type = "button";
+  back.className = "wizard-btn back";
+  back.textContent = getText("back");
+  back.disabled = index === 0;
+  back.addEventListener("click", goBack);
 
-    btns.appendChild(back);
-    btns.appendChild(next);
-    card.appendChild(btns);
+  const next = document.createElement("button");
+  next.type = "button";
+  next.className = "wizard-btn next";
+  const isLastStep = index === wizardConfig.steps.length - 1;
+  next.textContent = isLastStep ? getText("review") : getText("next");
+  next.addEventListener("click", goNext);
 
-    container.appendChild(card);
+  btns.appendChild(back);
+  btns.appendChild(next);
+  card.appendChild(btns);
 
-    setActiveTab(index);
-    updateProgress();
+  container.appendChild(card);
+
+  setActiveTab(index);
+  updateProgress();
 }
 
 /* Navigation */
 function goToStep(i) {
-    if (i >= 0 && i < wizardConfig.steps.length) buildStep(i);
+  persistCurrentStepData();
+  if (i >= 0 && i < wizardConfig.steps.length) buildStep(i);
 }
 
 function goBack() {
-    if (currentStep > 0) buildStep(currentStep - 1);
+  persistCurrentStepData();
+  if (currentStep > 0) buildStep(currentStep - 1);
 }
 
 function goNext() {
-    if (!validateStep()) return;
+  persistCurrentStepData();
+  if (!validateStep()) return;
 
-    if (currentStep === wizardConfig.steps.length - 1) {
-        buildReview();
-    } else {
-        buildStep(currentStep + 1);
-    }
+  if (currentStep === wizardConfig.steps.length - 1) {
+    buildReview();
+  } else {
+    buildStep(currentStep + 1);
+  }
 }
 
 /* Progress */
 function updateProgress() {
-    const bar = document.getElementById("wizard-progress");
-    const total = wizardConfig.steps.length + 1;
-    const percent = Math.round((currentStep / total) * 100);
-    bar.style.width = percent + "%";
+  const bar = document.getElementById("wizard-progress");
+  if (!bar || !wizardConfig) return;
+
+  const total = wizardConfig.steps.length + 1; // +1 for review
+  const current = reviewMode ? wizardConfig.steps.length : currentStep;
+  const percent = Math.round((current / total) * 100);
+  bar.style.width = percent + "%";
 }
 
 /* Validation */
 function validateStep() {
-    const step = wizardConfig.steps[currentStep];
-    let valid = true;
+  const step = wizardConfig.steps[currentStep];
+  let valid = true;
 
-    step.fields.forEach(field => {
-        const el = document.getElementById(field.id);
-        if (field.required && (!el || el.value.trim() === "")) {
-            el.style.border = "2px solid red";
-            valid = false;
-        } else if (el) {
-            el.style.border = "1px solid #bbb";
-        }
-    });
+  step.fields.forEach(field => {
+    const el = document.getElementById(field.id);
+    if (field.required && (!el || String(el.value).trim() === "")) {
+      if (el) el.style.border = "2px solid red";
+      valid = false;
+    } else if (el) {
+      el.style.border = "1px solid #bbb";
+    }
+  });
 
-    return valid;
+  return valid;
 }
 
 /* Review */
 function buildReview() {
-    const container = document.getElementById("wizard-container");
-    container.innerHTML = "";
+  reviewMode = true;
+  persistCurrentStepData();
 
-    const card = document.createElement("div");
-    card.className = "wizard-step-card";
+  const container = document.getElementById("wizard-container");
+  if (!container) return;
+  container.innerHTML = "";
 
-    const title = document.createElement("div");
-    title.className = "wizard-step-title";
-    title.textContent = getText("reviewTitle");
-    card.appendChild(title);
+  const card = document.createElement("div");
+  card.className = "wizard-step-card";
 
-    const useEs = isSpanish();
+  const title = document.createElement("div");
+  title.className = "wizard-step-title";
+  title.textContent = getText("reviewTitle");
+  card.appendChild(title);
 
-    wizardConfig.steps.forEach(step => {
-        const section = document.createElement("div");
-        section.className = "review-section";
+  const useEs = isSpanish();
 
-        const h = document.createElement("h3");
-        const stepTitle = useEs ? (step.title_es || step.title_en) : step.title_en;
-        h.textContent = stepTitle || step.title || "";
-        section.appendChild(h);
+  wizardConfig.steps.forEach(step => {
+    const section = document.createElement("div");
+    section.className = "review-section";
 
-        step.fields.forEach(field => {
-            const val = document.getElementById(field.id)?.value || "";
-            const row = document.createElement("p");
+    const h = document.createElement("h3");
+    const stepTitle = useEs ? (step.title_es || step.title_en) : step.title_en;
+    h.textContent = stepTitle || step.title || "";
+    section.appendChild(h);
 
-            const labelText = useEs ? (field.label_es || field.label_en) : field.label_en;
-            const finalLabel = labelText || field.label || field.id || "";
+    step.fields.forEach(field => {
+      const val = formData[field.id] || "";
+      const row = document.createElement("p");
 
-            row.innerHTML = `<strong>${finalLabel}:</strong> ${val}`;
-            section.appendChild(row);
-        });
+      const labelText = useEs ? (field.label_es || field.label_en) : field.label_en;
+      const finalLabel = labelText || field.label || field.id || "";
 
-        card.appendChild(section);
+      row.innerHTML = `<strong>${finalLabel}:</strong> ${val}`;
+      section.appendChild(row);
     });
 
-    const btns = document.createElement("div");
-    btns.className = "wizard-buttons";
+    card.appendChild(section);
+  });
 
-    const back = document.createElement("button");
-    back.className = "wizard-btn back";
-    back.textContent = getText("back");
-    back.addEventListener("click", () => buildStep(currentStep));
+  const btns = document.createElement("div");
+  btns.className = "wizard-buttons";
 
-    const submit = document.createElement("button");
-    submit.className = "wizard-btn next";
-    submit.textContent = getText("submit");
-    submit.addEventListener("click", submitApplication);
+  const back = document.createElement("button");
+  back.type = "button";
+  back.className = "wizard-btn back";
+  back.textContent = getText("back");
+  back.addEventListener("click", () => {
+    reviewMode = false;
+    buildStep(currentStep);
+  });
 
-    btns.appendChild(back);
-    btns.appendChild(submit);
-    card.appendChild(btns);
+  const submit = document.createElement("button");
+  submit.type = "button";
+  submit.className = "wizard-btn next";
+  submit.textContent = getText("submit");
+  submit.addEventListener("click", submitApplication);
 
-    container.appendChild(card);
+  btns.appendChild(back);
+  btns.appendChild(submit);
+  card.appendChild(btns);
 
-    document.getElementById("wizard-progress").style.width = "100%";
+  container.appendChild(card);
+
+  const progress = document.getElementById("wizard-progress");
+  if (progress) progress.style.width = "100%";
 }
 
 /* Submit */
 function submitApplication() {
-    const data = {};
+  const data = {};
 
-    wizardConfig.steps.forEach(step => {
-        step.fields.forEach(field => {
-            const el = document.getElementById(field.id);
-            data[field.id] = el ? el.value : "";
-        });
+  wizardConfig.steps.forEach(step => {
+    step.fields.forEach(field => {
+      data[field.id] = formData[field.id] || "";
     });
+  });
 
-    alert(isSpanish()
-        ? "¡Su solicitud ha sido enviada con éxito!"
-        : "Your application has been submitted successfully!"
-    );
+  alert(
+    isSpanish()
+      ? "¡Su solicitud ha sido enviada con éxito!"
+      : "Your application has been submitted successfully!"
+  );
 
-    window.location.href = "/applications.html";
+  window.location.href = "/applications.html";
 }
