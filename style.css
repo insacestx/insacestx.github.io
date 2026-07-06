@@ -2300,193 +2300,195 @@ section {
   margin-top: 6px;
 }
 
-/* ===== COI PAGE VISUAL UPGRADE ===== */
+/* ============================================================
+   COI PAGE — MATCH GLOBAL ACES RED LIGHT THEME
+   (place near end of style.css so it overrides earlier rules)
+============================================================ */
 
-/* page background + section rhythm */
+/* hero */
 .coi-hero {
-  background: linear-gradient(135deg, #0f4c81 0%, #1b6aa8 100%);
-  color: #fff;
+  background:
+    radial-gradient(circle at top, #ffe5e5 0%, #ffffff 62%);
+  color: var(--aces-text);
+  border-bottom: 1px solid var(--aces-border);
 }
-.app-section {
-  background: #f6f8fc;
-  padding: 3rem 1rem 4rem;
+
+.coi-hero .small-hero-content h1 {
+  color: #b00000;
+}
+
+.coi-hero .small-hero-content p {
+  color: var(--aces-text-muted);
+}
+
+/* keep app section aligned with existing site sections */
+.app-section:has(.coi-app-form) {
+  background: linear-gradient(
+    180deg,
+    #fff5f5 0%,
+    #ffeaea 60%,
+    #fff7f7 100%
+  );
 }
 
 /* form shell */
 .coi-app-form {
   max-width: 980px;
-  margin: 1.5rem auto 0;
-  background: #fff;
-  border: 1px solid #e8edf5;
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(15, 39, 72, 0.08);
-  padding: 2rem;
+  margin: 8px auto 0;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(212,0,0,0.10);
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+  padding: 30px;
 }
 
-/* wizard steps */
+/* stepper */
 .coi-wizard-steps {
   max-width: 980px;
-  margin: 0 auto 1rem;
+  margin: 0 auto 18px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: 10px;
 }
+
 .coi-wizard-steps .wizard-step {
-  position: relative;
-  background: #fff;
-  border: 1px solid #e4eaf2;
-  border-radius: 12px;
-  padding: 0.8rem 0.9rem;
-  font-size: 0.92rem;
-  color: #5a6a85;
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  transition: all 0.2s ease;
+  gap: 8px;
+  justify-content: center;
+
+  padding: 10px 12px;
+  border-radius: 22px;
+  border: 1px solid rgba(212,0,0,0.18);
+  background: rgba(212,0,0,0.08);
+  color: #555;
+  font-size: 0.9rem;
+  transition: all .25s ease;
 }
+
+.coi-wizard-steps .wizard-step:hover {
+  background: rgba(212,0,0,0.12);
+  border-color: rgba(212,0,0,0.28);
+}
+
 .coi-wizard-steps .wizard-step.active {
-  border-color: #1b6aa8;
-  background: #eef6ff;
-  color: #0f4c81;
-  box-shadow: inset 0 0 0 1px rgba(27, 106, 168, 0.2);
+  background: #d40000;
+  border-color: #d40000;
+  color: #fff;
+  font-weight: 600;
 }
+
 .coi-wizard-steps .wizard-step-icon {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   display: inline-grid;
   place-items: center;
   border-radius: 50%;
-  background: #e9eef7;
-  font-size: 0.95rem;
+  background: rgba(255,255,255,0.45);
+  font-size: 0.78rem;
 }
+
 .coi-wizard-steps .wizard-step.active .wizard-step-icon {
-  background: #1b6aa8;
-  color: #fff;
+  background: rgba(255,255,255,0.25);
 }
 
-/* steps */
+/* headings / copy */
 .coi-app-form .form-step h2 {
-  margin: 0 0 1rem;
-  color: #102a43;
-  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
-}
-.coi-app-form .form-step p {
-  color: #5f6f89;
-  margin-bottom: 1rem;
+  color: #b00000;
+  margin-bottom: 10px;
 }
 
-/* grid + fields */
+.coi-app-form .form-step p {
+  color: #666;
+  margin-bottom: 16px;
+}
+
+/* form grid consistency */
 .coi-app-form .form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
 }
+
+/* inputs consistent with site */
 .coi-app-form .form-field label {
-  display: block;
-  margin-bottom: 0.4rem;
-  font-weight: 600;
-  color: #334e68;
-  font-size: 0.93rem;
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+  color: #444;
+  font-weight: 500;
 }
+
 .coi-app-form input[type="text"],
 .coi-app-form input[type="email"],
 .coi-app-form input[type="tel"],
 .coi-app-form textarea,
 .coi-app-form input[type="file"] {
   width: 100%;
-  border: 1px solid #d7e1ee;
-  border-radius: 10px;
-  padding: 0.78rem 0.88rem;
-  font-size: 0.95rem;
-  color: #102a43;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d8d8d8;
   background: #fff;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  color: #222;
+  font-size: 0.95rem;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
 }
-.coi-app-form textarea {
-  min-height: 92px;
-  resize: vertical;
-}
+
 .coi-app-form input:focus,
 .coi-app-form textarea:focus {
   outline: none;
-  border-color: #1b6aa8;
-  box-shadow: 0 0 0 3px rgba(27, 106, 168, 0.18);
+  border-color: rgba(212,0,0,0.5);
+  box-shadow: 0 0 0 4px rgba(212,0,0,0.08);
 }
 
-/* file upload zone look */
+/* optional upload box polish */
 .coi-app-form input[type="file"] {
-  padding: 1rem;
   border-style: dashed;
-  background: #fbfdff;
+  background: #fffafa;
 }
 
-/* nav buttons */
+/* nav buttons reuse your existing .btn-primary/.btn-secondary styles */
 .coi-app-form .wizard-nav {
-  margin-top: 1.25rem;
+  margin-top: 16px;
   display: flex;
-  gap: 0.7rem;
+  gap: 10px;
   justify-content: flex-end;
 }
-.coi-app-form .btn-primary,
-.coi-app-form .btn-secondary {
-  border: 0;
+
+/* consent card */
+.coi-app-form .checkbox-field {
+  margin-top: 8px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(212,0,0,0.12);
   border-radius: 10px;
-  padding: 0.72rem 1rem;
-  min-height: 42px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s;
-}
-.coi-app-form .btn-primary {
-  background: linear-gradient(135deg, #1b6aa8 0%, #0f4c81 100%);
-  color: #fff;
-  box-shadow: 0 6px 16px rgba(15, 76, 129, 0.25);
-}
-.coi-app-form .btn-secondary {
-  background: #eef3fa;
-  color: #26415f;
-}
-.coi-app-form .btn-primary:hover,
-.coi-app-form .btn-secondary:hover {
-  transform: translateY(-1px);
 }
 
-/* consent */
-.coi-app-form .checkbox-field {
-  margin-top: 0.6rem;
-  padding: 0.85rem 0.95rem;
-  background: #f8fbff;
-  border: 1px solid #e3ebf7;
-  border-radius: 10px;
-}
 .coi-app-form .checkbox-field label {
   margin: 0;
   display: flex;
-  gap: 0.55rem;
+  gap: 10px;
   align-items: flex-start;
 }
 
 /* responsive */
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .coi-wizard-steps {
     grid-template-columns: 1fr 1fr;
   }
+
   .coi-app-form {
-    padding: 1.25rem;
-    border-radius: 14px;
+    padding: 22px;
   }
 }
+
 @media (max-width: 640px) {
-  .coi-app-form .form-grid {
-    grid-template-columns: 1fr;
-  }
   .coi-wizard-steps {
     grid-template-columns: 1fr;
   }
+
   .coi-app-form .wizard-nav {
-    justify-content: stretch;
     flex-direction: column;
   }
+
   .coi-app-form .btn-primary,
   .coi-app-form .btn-secondary {
     width: 100%;
