@@ -197,6 +197,8 @@ function toggleLanguage() {
   applyLanguage(newLang);
 }
 
+window.dispatchEvent(new Event("aces:language-changed"));
+
 function applyLanguage(lang) {
   const isEs = lang === "es";
 
