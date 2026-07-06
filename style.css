@@ -2285,3 +2285,17 @@ section {
   border-color: var(--aces-primary, #d40000);
   box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.12);
 }
+/* HOTFIX: ensure quick quote submit button is always visible/clickable */
+.quick-quote-form button[type="submit"],
+.quick-quote-form .quote-submit-btn,
+.quick-quote-form .submit-btn {
+  display: inline-block !important;
+  width: 100%;
+  min-height: 48px;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 2;
+  margin-top: 6px;
+}
