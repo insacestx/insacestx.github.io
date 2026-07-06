@@ -19,17 +19,17 @@
       <div class="logo">
         <img src="../../images/image2.png" alt="ACES Logo">
       </div>
-      <nav>
+      <nav aria-label="Admin navigation">
         <a href="../dashboard/dashboard.html">Dashboard</a>
         <a href="../dashboard/clients.html">Clients</a>
         <a href="../dashboard/policies.html">Policies</a>
         <a href="../dashboard/cois.html">COIs</a>
         <a href="../dashboard/claims.html">Claims</a>
         <a href="../dashboard/tasks.html">Tasks</a>
-        <a href="/ams/leads.html">Leads</a>
+        <a href="../leads.html">Leads</a>
         <a href="../dashboard/agents.html">Agents</a>
         <a href="../dashboard/settings.html">Settings</a>
-        <a href="admin.html" class="active">Admin</a>
+        <a href="admin.html" class="active" aria-current="page">Admin</a>
         <a href="#" id="logoutLink">Logout</a>
       </nav>
     </aside>
@@ -39,7 +39,7 @@
         <h1>Admin Console</h1>
       </div>
 
-      <section class="cards">
+      <section class="cards" aria-label="Admin summary metrics">
         <div class="card">
           <h2>Total Agents</h2>
           <p id="totalAgents">0</p>
@@ -71,29 +71,5 @@
   </div>
 
   <footer id="aces-footer"></footer>
-
-  <script>
-    // Logout handler
-    document.addEventListener("DOMContentLoaded", function () {
-      const logout = document.getElementById("logoutLink");
-      if (logout) {
-        logout.addEventListener("click", function (e) {
-          e.preventDefault();
-          localStorage.removeItem("acesUser");
-          window.location.href = "../login/login.html";
-        });
-      }
-
-      // Temporary demo counts
-      const set = (id, val) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = String(val);
-      };
-      set("totalAgents", 7);
-      set("openTasks", 3);
-      set("pendingReviews", 2);
-      set("systemAlerts", 0);
-    });
-  </script>
 </body>
 </html>
