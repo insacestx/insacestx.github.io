@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initWizardNav();
 });
 
-
 /* ============================================================
    HEADER INJECTION
 ============================================================ */
@@ -63,7 +62,6 @@ function loadHeader() {
 
         <button id="mobile-menu-btn" class="mobile-menu-btn" type="button">☰</button>
       </div>
-
     </div>
 
     <!-- MOBILE MENU -->
@@ -77,76 +75,98 @@ function loadHeader() {
       <a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
 
-  <!-- LOGIN PANEL (SLIDE-OUT) -->
-<aside id="loginPanel" class="login-panel" aria-hidden="true">
-  <button id="loginCloseBtn" class="close-panel" type="button" aria-label="Close">×</button>
+    <!-- LOGIN PANEL (SLIDE-OUT) -->
+    <aside id="loginPanel" class="login-panel" aria-hidden="true">
+      <button id="loginCloseBtn" class="close-panel" type="button" aria-label="Close">×</button>
 
-  <h2 data-en="Agent Login" data-es="Acceso de Agente">Agent Login</h2>
+      <h2 data-en="Agent Login" data-es="Acceso de Agente">Agent Login</h2>
 
-  function initLoginPanel() {
+      <label for="loginAgentSelect" data-en="Agent" data-es="Agente">Agent</label>
+      <select id="loginAgentSelect" class="login-agent-select" required>
+        <option value="" disabled selected data-en="Select your name" data-es="Seleccione su nombre">Select your name</option>
+      </select>
+
+      <label for="loginPassword" data-en="Password" data-es="Contraseña">Password</label>
+      <input
+        type="password"
+        id="loginPassword"
+        data-en="Password"
+        data-es="Contraseña"
+        placeholder="Password"
+        autocomplete="current-password" />
+
+      <button id="loginSubmitBtn" class="login-submit-btn" type="button" data-en="Login" data-es="Iniciar Sesión">
+        Login
+      </button>
+    </aside>
+  `;
+}
+
+/* ============================================================
+   LOGIN PANEL
+============================================================ */
+function initLoginPanel() {
   const loginBtn = document.getElementById("agent-login-btn");
   const panel = document.getElementById("loginPanel");
   const closeBtn = document.getElementById("loginCloseBtn");
   const submitBtn = document.getElementById("loginSubmitBtn");
-  const emailInput = document.getElementById("loginEmail");
+  const agentSelect = document.getElementById("loginAgentSelect");
   const passwordInput = document.getElementById("loginPassword");
 
-  if (!loginBtn || !panel || !closeBtn || !submitBtn || !passwordInput) return;
+  if (!loginBtn || !panel || !closeBtn || !submitBtn || !agentSelect || !passwordInput) return;
 
-  // Agent roster
-  const agents = [
-    { name: "George", email: "george@insaces.com", role: "owner" },
+  const fallbackAgents = [
+    { name: "George Santibañez", email: "george@insaces.com", role: "owner" },
     { name: "Bryan", email: "bryan@insaces.com", role: "owner" },
-    { name: "Jordan", email: "jordan@insaces.com", role: "owner" },
-    { name: "Lanse", email: "lanse@insaces.com", role: "owner" },
+    { name: "Jordan Jones", email: "jordan@insaces.com", role: "owner" },
+    { name: "Lanse Derrick", email: "lanse@insaces.com", role: "owner" },
     { name: "Robert", email: "robert@insaces.com", role: "owner" },
-    { name: "Jimmy", email: "jimmy@insaces.com", role: "agent" },
+    { name: "Jimmy Rodriguez", email: "jimmy@insaces.com", role: "agent" },
     { name: "Office", email: "office@insaces.com", role: "agent" }
   ];
 
-  // Build dropdown once
-  let agentSelect = document.getElementById("loginAgentSelect");
-  if (!agentSelect) {
-    agentSelect = document.createElement("select");
-    agentSelect.id = "loginAgentSelect";
-    agentSelect.className = "login-agent-select";
-    agentSelect.required = true;
-    agentSelect.setAttribute("data-en", "Select your name");
-    agentSelect.setAttribute("data-es", "Seleccione su nombre");
+  let agents = fallbackAgents;
+  try {
+    const raw = localStorage.getItem("aces_agents_login");
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length) {
+        agents = parsed;
+      }
+    }
+  } catch (e) {
+    console.warn("Unable to parse aces_agents_login:", e);
+  }
 
-    const placeholder = document.createElement("option");
-    placeholder.value = "";
-    placeholder.disabled = true;
-    placeholder.selected = true;
-    placeholder.setAttribute("data-en", "Select your name");
-    placeholder.setAttribute("data-es", "Seleccione su nombre");
-    placeholder.textContent = "Select your name";
-    agentSelect.appendChild(placeholder);
+  // Populate dropdown once
+  if (!agentSelect.dataset.loaded) {
+    const ph = agentSelect.querySelector('option[value=""]');
+    agentSelect.innerHTML = "";
+    if (ph) {
+      agentSelect.appendChild(ph);
+    } else {
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      placeholder.setAttribute("data-en", "Select your name");
+      placeholder.setAttribute("data-es", "Seleccione su nombre");
+      placeholder.textContent = "Select your name";
+      agentSelect.appendChild(placeholder);
+    }
 
     agents.forEach(a => {
+      const email = (a.email || "").toLowerCase().trim();
+      if (!email) return;
       const opt = document.createElement("option");
-      opt.value = a.email;
-      opt.textContent = a.name;
+      opt.value = email;
+      opt.textContent = a.name || email;
       agentSelect.appendChild(opt);
     });
 
-    if (emailInput && emailInput.parentElement) {
-      const emailLabel = panel.querySelector('label[for="loginEmail"]');
-      if (emailLabel) {
-        emailLabel.setAttribute("for", "loginAgentSelect");
-        emailLabel.setAttribute("data-en", "Agent");
-        emailLabel.setAttribute("data-es", "Agente");
-        emailLabel.textContent = "Agent";
-      }
-
-      emailInput.replaceWith(agentSelect);
-    } else {
-      const pwdLabel = panel.querySelector('label[for="loginPassword"]');
-      if (pwdLabel) panel.insertBefore(agentSelect, pwdLabel);
-    }
+    agentSelect.dataset.loaded = "true";
   }
 
-  // Open/close
   loginBtn.addEventListener("click", () => {
     panel.classList.add("open");
     panel.setAttribute("aria-hidden", "false");
@@ -157,17 +177,9 @@ function loadHeader() {
     panel.setAttribute("aria-hidden", "true");
   });
 
-  panel.addEventListener("click", (e) => {
-    if (e.target === panel) {
-      panel.classList.remove("open");
-      panel.setAttribute("aria-hidden", "true");
-    }
-  });
-
-  // Submit
   submitBtn.addEventListener("click", () => {
-    const selectedEmail = (document.getElementById("loginAgentSelect")?.value || "").trim().toLowerCase();
-    const password = passwordInput.value.trim();
+    const selectedEmail = (agentSelect.value || "").trim().toLowerCase();
+    const password = (passwordInput.value || "").trim();
 
     if (!selectedEmail) {
       alert("Please select your name.");
@@ -179,7 +191,7 @@ function loadHeader() {
       return;
     }
 
-    const user = agents.find(a => a.email === selectedEmail);
+    const user = agents.find(a => (a.email || "").toLowerCase().trim() === selectedEmail);
 
     if (!user) {
       alert("Agent not recognized.");
@@ -189,83 +201,15 @@ function loadHeader() {
     localStorage.setItem("acesUser", JSON.stringify(user));
     window.location.href = "/ams/dashboard/dashboard.html";
   });
-}
 
-  <label for="loginPassword" data-en="Password" data-es="Contraseña">Password</label>
-  <input
-    type="password"
-    id="loginPassword"
-    data-en="Password"
-    data-es="Contraseña"
-    placeholder="Password"
-    autocomplete="current-password" />
-
-  <button id="loginSubmitBtn" class="login-submit-btn" type="button" data-en="Login" data-es="Iniciar Sesión">
-    Login
-  </button>
-
-  <a href="#"
-     class="portal-link-disabled"
-     data-en="Customer portal (Payments/Appointments) — coming soon"
-     data-es="Portal de clientes (Pagos/Citas) — próximamente"
-     onclick="return false;">
-    Customer portal (Payments/Appointments) — coming soon
-  </a>
-</aside>
-  `;
-}
-
-function initLoginPanel() {
-  const loginBtn = document.getElementById("agent-login-btn");
-  const panel = document.getElementById("loginPanel");
-  const closeBtn = document.getElementById("loginCloseBtn");
-  const submitBtn = document.getElementById("loginSubmitBtn");
-
-  if (!loginBtn || !panel || !closeBtn || !submitBtn) return;
-
-  loginBtn.addEventListener("click", () => {
-    panel.classList.add("open");
-  });
-
-  closeBtn.addEventListener("click", () => {
-    panel.classList.remove("open");
-  });
-
-  panel.addEventListener("click", (e) => {
-    if (e.target === panel) panel.classList.remove("open");
-  });
-
-  submitBtn.addEventListener("click", () => {
-    const email = document.getElementById("loginEmail")?.value.trim().toLowerCase() || "";
-    const password = document.getElementById("loginPassword")?.value.trim() || "";
-
-    if (password !== "aces2026") {
-      alert("Invalid password.");
-      return;
+  // ESC close
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && panel.classList.contains("open")) {
+      panel.classList.remove("open");
+      panel.setAttribute("aria-hidden", "true");
     }
-
-    const agents = [
-      { email: "george@insaces.com", role: "owner" },
-      { email: "bryan@insaces.com", role: "owner" },
-      { email: "jordan@insaces.com", role: "owner" },
-      { email: "lanse@insaces.com", role: "owner" },
-      { email: "robert@insaces.com", role: "owner" },
-      { email: "jimmy@insaces.com", role: "agent" },
-      { email: "office@insaces.com", role: "agent" }
-    ];
-
-    const user = agents.find(a => a.email === email);
-
-    if (!user) {
-      alert("Email not recognized.");
-      return;
-    }
-
-    localStorage.setItem("acesUser", JSON.stringify(user));
-    window.location.href = "/ams/dashboard/dashboard.html";
   });
 }
-
 
 /* ---------------------------------------------------------
    GLOBAL ROUND ROBIN EMAIL ENGINE
@@ -299,7 +243,7 @@ function initRoundRobinEmail() {
 }
 
 /* ============================================================
-   FOOTER INJECTION (IMPROVED WITH ERROR HANDLING)
+   FOOTER INJECTION
 ============================================================ */
 function loadFooter() {
   const footer = document.getElementById("aces-footer");
@@ -322,7 +266,7 @@ function loadFooter() {
 }
 
 /* ============================================================
-   LANGUAGE SYSTEM (FIXED + GLOBAL)
+   LANGUAGE SYSTEM
 ============================================================ */
 function initLanguage() {
   const savedLang = localStorage.getItem("acesLang") || "en";
@@ -341,7 +285,7 @@ function toggleLanguage() {
   localStorage.setItem("acesLang", newLang);
   applyLanguage(newLang);
 
-  // notify dynamic pages (wizard/apps cards) to re-render in current tab
+  // notify dynamic pages to re-render
   window.dispatchEvent(new Event("aces:language-changed"));
 }
 
@@ -358,11 +302,8 @@ function applyLanguage(lang) {
       return;
     }
 
-    // placeholders (inputs/selects/textarea with placeholder attr)
-    if (
-      (el.tagName === "INPUT" || el.tagName === "TEXTAREA") &&
-      el.hasAttribute("placeholder")
-    ) {
+    // placeholders
+    if ((el.tagName === "INPUT" || el.tagName === "TEXTAREA") && el.hasAttribute("placeholder")) {
       el.setAttribute("placeholder", translated);
     }
 
@@ -372,7 +313,7 @@ function applyLanguage(lang) {
       return;
     }
 
-    // default visible text
+    // default text
     if (!((el.tagName === "INPUT" || el.tagName === "TEXTAREA") && el.hasAttribute("placeholder"))) {
       el.textContent = translated;
     }
@@ -391,7 +332,9 @@ function setActiveNav() {
   const path = window.location.pathname;
   document.querySelectorAll(".nav-links a, #mobile-menu a").forEach(link => {
     const href = link.getAttribute("href");
-    const isActive = path === href || (href === "/index.html" && (path === "/" || path === "/insacestx.github.io/"));
+    const isActive =
+      path === href ||
+      (href === "/index.html" && (path === "/" || path === "/insacestx.github.io/"));
     link.classList.toggle("active", isActive);
   });
 }
@@ -441,19 +384,19 @@ function initAgentPanel() {
   if (!photo || !nameEl || !titleEl || !phoneEl || !emailEl || !callBtn || !closeBtn) return;
 
   infoButtons.forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", e => {
       e.preventDefault();
       const card = btn.closest(".agent-card");
-      if (card) {
-        photo.src = card.dataset.photo || "";
-        nameEl.textContent = card.dataset.name || "";
-        titleEl.textContent = card.dataset.title || "";
-        phoneEl.textContent = card.dataset.phone || "";
-        emailEl.textContent = card.dataset.email || "";
-        emailEl.href = `mailto:${card.dataset.email || ""}`;
-        callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
-        panel.classList.add("open");
-      }
+      if (!card) return;
+
+      photo.src = card.dataset.photo || "";
+      nameEl.textContent = card.dataset.name || "";
+      titleEl.textContent = card.dataset.title || "";
+      phoneEl.textContent = card.dataset.phone || "";
+      emailEl.textContent = card.dataset.email || "";
+      emailEl.href = `mailto:${card.dataset.email || ""}`;
+      callBtn.href = `tel:${(card.dataset.phone || "").replace(/\D/g, "")}`;
+      panel.classList.add("open");
     });
   });
 
@@ -486,7 +429,6 @@ window.addEventListener("scroll", () => {
 /* ============================================================
    UNIVERSAL APPLICATION WIZARD ENGINE
 ============================================================ */
-
 function initWizardNav() {
   const form = document.querySelector("form[data-wizard]");
   if (!form) return;
@@ -523,9 +465,11 @@ function initWizardNav() {
   document.querySelectorAll("[data-next-step]").forEach(b => b.addEventListener("click", next));
   document.querySelectorAll("[data-prev-step]").forEach(b => b.addEventListener("click", prev));
 
-  indicators.forEach((ind, idx) => ind.addEventListener("click", () => {
-    if (idx <= current) show(idx);
-  }));
+  indicators.forEach((ind, idx) =>
+    ind.addEventListener("click", () => {
+      if (idx <= current) show(idx);
+    })
+  );
 
   form.addEventListener("submit", e => {
     if (consent && !consent.checked) {
