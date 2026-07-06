@@ -253,3 +253,50 @@
     font-size: 0.98rem;
   }
 }
+
+/* ============================================================
+   COMPATIBILITY PATCH (keep old JS class names working)
+============================================================ */
+
+/* If JS renders these legacy classes, style them same as current theme */
+.wizard-step-card {
+  background: var(--aces-surface, #ffffff);
+  border-radius: 14px;
+  border: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
+  padding: 24px 26px 30px;
+  box-shadow: var(--aces-shadow, 0 6px 20px rgba(0,0,0,0.06));
+}
+
+.wizard-step-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--aces-text, #1f2937);
+  margin-bottom: 20px;
+}
+
+.wizard-tab {
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #fff1f1;
+  color: var(--aces-text, #1f2937);
+  border: 1px solid rgba(212, 0, 0, 0.15);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.wizard-tab.active {
+  background: var(--aces-primary, #d40000);
+  color: #fff;
+  border-color: var(--aces-primary, #d40000);
+}
+
+.wizard-btn.next {
+  background: var(--aces-primary, #d40000);
+  color: #fff;
+}
+
+.wizard-btn.back {
+  background: #fff;
+  color: var(--aces-text-muted, #555);
+  border: 1px solid #d9d9d9;
+}
