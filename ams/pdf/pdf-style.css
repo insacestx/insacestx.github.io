@@ -1,55 +1,92 @@
 /* ACES Insurance — PDF Styles */
 
+@page {
+  size: Letter;
+  margin: 0.6in;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   font-family: Arial, sans-serif;
   color: #111827;
-  margin: 40px;
   line-height: 1.5;
+  font-size: 12px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.pdf-document {
+  max-width: 8in;
+  margin: 0 auto;
 }
 
 .pdf-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin: 0 0 24px 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .pdf-logo {
   width: 120px;
-  margin-bottom: 10px;
+  max-width: 100%;
+  height: auto;
+  margin: 0 0 8px 0;
 }
 
 .pdf-header h1 {
-  font-size: 1.8rem;
+  font-size: 24px;
+  line-height: 1.2;
   margin: 0;
   color: #111827;
 }
 
 .pdf-meta {
-  margin-bottom: 25px;
-  font-size: 0.95rem;
+  margin: 0 0 18px 0;
+  font-size: 12px;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .pdf-meta p {
-  margin: 4px 0;
+  margin: 2px 0;
 }
 
 .pdf-section {
-  margin-bottom: 30px;
+  margin: 0 0 22px 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .pdf-section h2 {
-  font-size: 1.3rem;
-  margin-bottom: 12px;
+  font-size: 18px;
+  margin: 0 0 10px 0;
   color: #1f2937;
+  page-break-after: avoid;
+  break-after: avoid;
 }
 
 .pdf-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.pdf-table tr {
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .pdf-table td {
   padding: 8px 6px;
   border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+  word-break: break-word;
 }
 
 .pdf-table .label {
@@ -65,17 +102,24 @@ body {
 
 .pdf-footer {
   text-align: center;
-  margin-top: 40px;
-  font-size: 0.85rem;
+  margin: 30px 0 0 0;
+  font-size: 11px;
   color: #6b7280;
+}
+
+p, li {
+  orphans: 3;
+  widows: 3;
 }
 
 /* Print Optimization */
 @media print {
-  body {
-    margin: 20px;
-  }
   .pdf-logo {
     width: 100px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 }
