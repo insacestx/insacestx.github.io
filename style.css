@@ -2075,3 +2075,53 @@ section {
         width:100%;
     }
 }
+/* ============================================================
+   CONTACT PAGE — NOTEPAD FORM POLISH
+============================================================ */
+.notepad-wrapper {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.notepad-form {
+  background: #fff;
+  border: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
+  border-radius: 14px;
+  box-shadow: var(--aces-shadow, 0 6px 20px rgba(0,0,0,0.06));
+  padding: 22px;
+  display: grid;
+  gap: 10px;
+}
+
+.notepad-form label {
+  font-weight: 600;
+  color: var(--aces-text, #1f2937);
+  margin-top: 4px;
+}
+
+.notepad-form input,
+.notepad-form textarea {
+  width: 100%;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  color: var(--aces-text, #1f2937);
+  background: #fff;
+}
+
+.notepad-form input:focus,
+.notepad-form textarea:focus {
+  outline: none;
+  border-color: var(--aces-primary, #d40000);
+  box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.12);
+}
+
+.map-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
+  box-shadow: var(--aces-shadow, 0 6px 20px rgba(0,0,0,0.06));
+}
