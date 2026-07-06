@@ -1,6 +1,8 @@
 // TEMPORARY LOGIN SYSTEM — Replace with OAuth later
 (() => {
-  const agents = [
+  "use strict";
+
+  const AGENTS = [
     { email: "george@insaces.com", role: "owner" },
     { email: "bryan@insaces.com", role: "owner" },
     { email: "jordan@insaces.com", role: "owner" },
@@ -18,77 +20,114 @@
   }
 
   function redirectForUser(user) {
-    window.location.href = getRedirectPath(user.role);
+    window.location.replace(getRedirectPath(user.role));
   }
 
-  function handleLogin() {
+  function setError(message) {
+    const errorEl = document.getElementById("loginError");
+    if (!errorEl) return;
+    if (!message) {
+      errorEl.hidden = true;
+      errorEl.textContent = "";
+      return;
+    }
+    errorEl.textContent = message;
+    errorEl.hidden = false;
+  }
+
+  function normalizeSessionUser(user) {
+    return {
+      email: String(user.email).toLowerCase(),
+      role: user.role,
+      name: "",
+      picture: "",
+      loginAt: new Date().toISOString()
+    };
+  }
+
+  function readExistingSession() {
+    const raw = localStorage.getItem("acesUser");
+    if (!raw) return null;
+
+    try {
+      const parsed = JSON.parse(raw);
+      if (
+        parsed &&
+        typeof parsed.email === "string" &&
+        typeof parsed.role === "string" &&
+        ["owner", "agent"].includes(parsed.role)
+      ) {
+        return {
+          email: parsed.email.toLowerCase(),
+          role: parsed.role
+        };
+      }
+    } catch (_) {
+      // no-op
+    }
+    return null;
+  }
+
+  function handleLoginSubmit(event) {
+    event.preventDefault();
+    setError("");
+
     const emailEl = document.getElementById("email");
     const passwordEl = document.getElementById("password");
 
     if (!emailEl || !passwordEl) return;
 
     const email = emailEl.value.trim().toLowerCase();
-    const password = passwordEl.value.trim();
+    const password = passwordEl.value;
 
     if (!email) {
-      alert("Please enter your email.");
+      setError("Please enter your email.");
+      emailEl.focus();
+      return;
+    }
+
+    if (!email.endsWith("@insaces.com")) {
+      setError("Use your ACES company email.");
       emailEl.focus();
       return;
     }
 
     if (password !== TEMP_PASSWORD) {
-      alert("Invalid password.");
+      setError("Invalid password.");
       passwordEl.focus();
       return;
     }
 
-    const user = agents.find(a => a.email === email);
-
+    const user = AGENTS.find((a) => a.email === email);
     if (!user) {
-      alert("Email not recognized.");
+      setError("Email not recognized.");
       emailEl.focus();
       return;
     }
 
-    // Save session
-    localStorage.setItem("acesUser", JSON.stringify(user));
-
-    // Redirect based on role
+    localStorage.setItem("acesUser", JSON.stringify(normalizeSessionUser(user)));
     redirectForUser(user);
   }
 
   function init() {
     // If already logged in, skip login page
-    const existing = localStorage.getItem("acesUser");
+    const existing = readExistingSession();
     if (existing) {
-      try {
-        const parsed = JSON.parse(existing);
-        if (parsed && parsed.email && parsed.role && ["owner", "agent"].includes(parsed.role)) {
-          redirectForUser(parsed);
-          return;
-        }
-      } catch (_) {
-        localStorage.removeItem("acesUser");
-      }
+      redirectForUser(existing);
+      return;
     }
 
-    const loginBtn = document.getElementById("loginBtn");
+    const form = document.getElementById("loginForm");
+    if (form) {
+      form.addEventListener("submit", handleLoginSubmit);
+    }
+
+    // Clear error as user types
     const emailEl = document.getElementById("email");
     const passwordEl = document.getElementById("password");
-
-    if (loginBtn) {
-      loginBtn.addEventListener("click", handleLogin);
-    }
-
-    // Press Enter to login from either field
-    [emailEl, passwordEl].forEach(el => {
+    [emailEl, passwordEl].forEach((el) => {
       if (!el) return;
-      el.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          handleLogin();
-        }
-      });
+      el.addEventListener("input", () => setError(""));
     });
   }
 
