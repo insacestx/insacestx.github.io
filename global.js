@@ -83,14 +83,113 @@ function loadHeader() {
 
   <h2 data-en="Agent Login" data-es="Acceso de Agente">Agent Login</h2>
 
-  <label for="loginEmail" data-en="Email" data-es="Correo Electrónico">Email</label>
-  <input
-    type="email"
-    id="loginEmail"
-    data-en="Email Address"
-    data-es="Correo Electrónico"
-    placeholder="Email Address"
-    autocomplete="username" />
+  function initLoginPanel() {
+  const loginBtn = document.getElementById("agent-login-btn");
+  const panel = document.getElementById("loginPanel");
+  const closeBtn = document.getElementById("loginCloseBtn");
+  const submitBtn = document.getElementById("loginSubmitBtn");
+  const emailInput = document.getElementById("loginEmail");
+  const passwordInput = document.getElementById("loginPassword");
+
+  if (!loginBtn || !panel || !closeBtn || !submitBtn || !passwordInput) return;
+
+  // Agent roster
+  const agents = [
+    { name: "George", email: "george@insaces.com", role: "owner" },
+    { name: "Bryan", email: "bryan@insaces.com", role: "owner" },
+    { name: "Jordan", email: "jordan@insaces.com", role: "owner" },
+    { name: "Lanse", email: "lanse@insaces.com", role: "owner" },
+    { name: "Robert", email: "robert@insaces.com", role: "owner" },
+    { name: "Jimmy", email: "jimmy@insaces.com", role: "agent" },
+    { name: "Office", email: "office@insaces.com", role: "agent" }
+  ];
+
+  // Build dropdown once
+  let agentSelect = document.getElementById("loginAgentSelect");
+  if (!agentSelect) {
+    agentSelect = document.createElement("select");
+    agentSelect.id = "loginAgentSelect";
+    agentSelect.className = "login-agent-select";
+    agentSelect.required = true;
+    agentSelect.setAttribute("data-en", "Select your name");
+    agentSelect.setAttribute("data-es", "Seleccione su nombre");
+
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    placeholder.setAttribute("data-en", "Select your name");
+    placeholder.setAttribute("data-es", "Seleccione su nombre");
+    placeholder.textContent = "Select your name";
+    agentSelect.appendChild(placeholder);
+
+    agents.forEach(a => {
+      const opt = document.createElement("option");
+      opt.value = a.email;
+      opt.textContent = a.name;
+      agentSelect.appendChild(opt);
+    });
+
+    if (emailInput && emailInput.parentElement) {
+      const emailLabel = panel.querySelector('label[for="loginEmail"]');
+      if (emailLabel) {
+        emailLabel.setAttribute("for", "loginAgentSelect");
+        emailLabel.setAttribute("data-en", "Agent");
+        emailLabel.setAttribute("data-es", "Agente");
+        emailLabel.textContent = "Agent";
+      }
+
+      emailInput.replaceWith(agentSelect);
+    } else {
+      const pwdLabel = panel.querySelector('label[for="loginPassword"]');
+      if (pwdLabel) panel.insertBefore(agentSelect, pwdLabel);
+    }
+  }
+
+  // Open/close
+  loginBtn.addEventListener("click", () => {
+    panel.classList.add("open");
+    panel.setAttribute("aria-hidden", "false");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    panel.classList.remove("open");
+    panel.setAttribute("aria-hidden", "true");
+  });
+
+  panel.addEventListener("click", (e) => {
+    if (e.target === panel) {
+      panel.classList.remove("open");
+      panel.setAttribute("aria-hidden", "true");
+    }
+  });
+
+  // Submit
+  submitBtn.addEventListener("click", () => {
+    const selectedEmail = (document.getElementById("loginAgentSelect")?.value || "").trim().toLowerCase();
+    const password = passwordInput.value.trim();
+
+    if (!selectedEmail) {
+      alert("Please select your name.");
+      return;
+    }
+
+    if (password !== "aces2026") {
+      alert("Invalid password.");
+      return;
+    }
+
+    const user = agents.find(a => a.email === selectedEmail);
+
+    if (!user) {
+      alert("Agent not recognized.");
+      return;
+    }
+
+    localStorage.setItem("acesUser", JSON.stringify(user));
+    window.location.href = "/ams/dashboard/dashboard.html";
+  });
+}
 
   <label for="loginPassword" data-en="Password" data-es="Contraseña">Password</label>
   <input
