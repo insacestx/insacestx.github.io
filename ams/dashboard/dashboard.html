@@ -2,18 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ACES AMS | Dashboard</title>
+
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../style-ams.css">
+
   <script src="../../global.js" defer></script>
+  <script src="dashboard.js" defer></script>
 </head>
 
 <body>
   <header id="aces-header"></header>
 
-  <div style="display: flex;">
+  <div class="ams-app">
     <aside class="sidebar">
-      <div class="logo"><img src="/images/image2.png"></div>
+      <div class="logo">
+        <img src="../../images/image2.png" alt="ACES Logo">
+      </div>
       <nav>
         <a href="dashboard.html" class="active">Dashboard</a>
         <a href="clients.html">Clients</a>
@@ -23,10 +29,11 @@
         <a href="tasks.html">Tasks</a>
         <a href="agents.html">Agents</a>
         <a href="settings.html">Settings</a>
+        <a href="#" id="logoutLink">Logout</a>
       </nav>
     </aside>
 
-    <main class="content">
+    <main class="content" role="main">
       <h1>ACES AMS Dashboard</h1>
 
       <section class="cards">
@@ -60,9 +67,9 @@
         <h2>Recent Submissions</h2>
 
         <div class="submissions-controls">
-          <input id="searchInput" type="text" placeholder="Search..." class="search-bar">
+          <input id="searchInput" type="text" placeholder="Search...">
 
-          <select id="statusFilter" class="filter-select">
+          <select id="statusFilter">
             <option value="all">All Statuses</option>
             <option value="new">New</option>
             <option value="review">In Review</option>
@@ -91,6 +98,39 @@
 
   <footer id="aces-footer"></footer>
 
-  <script src="dashboard.js"></script>
+  <script>
+    // Session guard + logout
+    (function () {
+      const userRaw = localStorage.getItem("acesUser");
+      if (!userRaw) {
+        window.location.href = "../login/login.html";
+        return;
+      }
+
+      try {
+        const user = JSON.parse(userRaw);
+        if (!user || !user.email || !user.role) {
+          localStorage.removeItem("acesUser");
+          window.location.href = "../login/login.html";
+          return;
+        }
+      } catch (e) {
+        localStorage.removeItem("acesUser");
+        window.location.href = "../login/login.html";
+        return;
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const logout = document.getElementById("logoutLink");
+        if (logout) {
+          logout.addEventListener("click", function (e) {
+            e.preventDefault();
+            localStorage.removeItem("acesUser");
+            window.location.href = "../login/login.html";
+          });
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
