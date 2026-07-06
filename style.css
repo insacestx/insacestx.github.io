@@ -2270,3 +2270,18 @@ section {
     max-width: 100%;
   }
 }
+
+.login-agent-select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d8d8d8;
+  margin-bottom: 8px;
+  background: #fff;
+  color: var(--aces-text, #1f2937);
+}
+.login-agent-select:focus {
+  outline: none;
+  border-color: var(--aces-primary, #d40000);
+  box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.12);
+}
