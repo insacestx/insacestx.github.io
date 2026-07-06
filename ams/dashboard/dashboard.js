@@ -2,19 +2,35 @@
 (() => {
   "use strict";
 
+  const LOGIN_PATH = "../login/login.html";
+
+  function redirectToLogin() {
+    window.location.replace(LOGIN_PATH);
+  }
+
+  function clearSession() {
+    localStorage.removeItem("acesUser");
+  }
+
   function getSessionUser() {
     const raw = localStorage.getItem("acesUser");
     if (!raw) return null;
+
     try {
       const parsed = JSON.parse(raw);
-      if (parsed && parsed.email && parsed.role) return parsed;
-    } catch (_) {}
+      if (parsed && typeof parsed.email === "string" && typeof parsed.role === "string") {
+        return parsed;
+      }
+    } catch (_) {
+      // no-op
+    }
     return null;
   }
 
   const user = getSessionUser();
   if (!user) {
-    window.location.href = "../login/login.html";
+    clearSession();
+    redirectToLogin();
     return;
   }
 
@@ -122,18 +138,14 @@
     }
 
     if (coiCount) {
+      leadCount;
       coiCount.textContent = String(
         submissions.filter((s) => s.type.toLowerCase().includes("coi")).length
       );
     }
 
-    if (claimCount) {
-      claimCount.textContent = "0";
-    }
-
-    if (taskCount) {
-      taskCount.textContent = "0";
-    }
+    if (claimCount) claimCount.textContent = "0";
+    if (taskCount) taskCount.textContent = "0";
 
     if (activityFeed) {
       activityFeed.innerHTML = `
@@ -143,18 +155,25 @@
     }
   }
 
+  function bindLogout() {
+    const logout = document.getElementById("logoutLink");
+    if (!logout) return;
+
+    logout.addEventListener("click", (e) => {
+      e.preventDefault();
+      clearSession();
+      redirectToLogin();
+    });
+  }
+
   function init() {
     const searchInput = document.getElementById("searchInput");
     const statusFilter = document.getElementById("statusFilter");
 
-    if (searchInput) {
-      searchInput.addEventListener("input", applyFilters);
-    }
+    if (searchInput) searchInput.addEventListener("input", applyFilters);
+    if (statusFilter) statusFilter.addEventListener("change", applyFilters);
 
-    if (statusFilter) {
-      statusFilter.addEventListener("change", applyFilters);
-    }
-
+    bindLogout();
     updateTopCards();
     renderTable(submissions);
   }
