@@ -1,123 +1,160 @@
-body{margin:0;font-family:Segoe UI,Arial;background:#f5f5f5;color:#111;display:flex}
-.sidebar{width:240px;background:#000;color:#fff;height:100vh;position:fixed;left:0;top:0;padding:20px 0}
-.sidebar .logo img{width:140px;margin:0 auto 20px;display:block}
-.sidebar nav a{display:block;padding:14px 20px;color:#fff;text-decoration:none;font-size:15px}
-.sidebar nav a:hover,.sidebar nav a.active{background:#d40000}
-.content{margin-left:240px;padding:30px;width:100%}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:30px}
-.card{background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1);text-align:center}
-.card h2{margin:0 0 10px;font-size:18px;color:#d40000}
-.card p{font-size:32px;margin:0;font-weight:bold}
-.recent{background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
-.recent h2{margin-top:0;color:#d40000}
-.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.page-header h1{margin:0;color:#d40000}
-.btn-red{background:#d40000;color:#fff;border:none;padding:10px 18px;border-radius:6px;cursor:pointer;font-size:14px}
-.btn-red:hover{background:#a30000}
-.search-bar{margin-bottom:20px}
-.search-bar input{width:100%;padding:12px;border:1px solid #ccc;border-radius:6px;font-size:14px}
-.data-table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.1)}
-.data-table th{background:#000;color:#fff;padding:12px;text-align:left;font-size:14px}
-.data-table td{padding:12px;border-bottom:1px solid #eee;font-size:14px}
-.data-table tr:hover{background:#f9f9f9;cursor:pointer}
-.client-info,.client-section{
-  background:#fff;padding:20px;border-radius:8px;
-  box-shadow:0 2px 6px rgba(0,0,0,.1);margin-bottom:25px
+/* ================================
+   ACES AMS Shared Styles
+================================ */
+
+:root{
+  --sidebar-width:240px;
+  --brand-red:#d40000;
+  --brand-black:#000;
+  --bg:#f5f5f5;
+  --card:#fff;
+  --text:#111;
 }
-.client-info h2,.client-section h2{color:#d40000;margin-top:0}
-.client-section ul{list-style:none;padding:0;margin:0 0 10px}
-.client-section ul li{
-  padding:10px 0;border-bottom:1px solid #eee;
-  display:flex;justify-content:space-between
+
+/* IMPORTANT: do NOT force all body tags to flex.
+   Scope AMS app layout only with .ams-app on pages that use sidebar. */
+body{
+  margin:0;
+  font-family:Segoe UI,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
-.client-section ul li:last-child{border-bottom:none}
-.small{padding:6px 12px;font-size:12px}
-#clientNotes{
-  width:100%;height:120px;padding:12px;border:1px solid #ccc;
-  border-radius:6px;font-size:14px;margin-bottom:10px
+
+/* App shell (use on dashboard/admin pages) */
+.ams-app{
+  display:flex;
+  min-height:100vh;
 }
-.data-table td.status-active{color:#0a8a0a;font-weight:bold}
-.data-table td.status-expired{color:#d40000;font-weight:bold}
-.data-table td.status-pending{color:#d48a00;font-weight:bold}
-#policyStatus.active{color:#0a8a0a;font-weight:bold}
-#policyStatus.expired{color:#d40000;font-weight:bold}
-#policyStatus.pending{color:#d48a00;font-weight:bold}
-.data-table td.status-pending{color:#d48a00;font-weight:bold}
-.data-table td.status-completed{color:#0a8a0a;font-weight:bold}
-.data-table td.status-delayed{color:#d40000;font-weight:bold}
-#coiStatus.pending{color:#d48a00;font-weight:bold}
-#coiStatus.completed{color:#0a8a0a;font-weight:bold}
-#coiStatus.delayed{color:#d40000;font-weight:bold}
-.data-table td.status-open{color:#d48a00;font-weight:bold}
-.data-table td.status-closed{color:#0a8a0a;font-weight:bold}
-.data-table td.status-pending{color:#d40000;font-weight:bold}
-#claimStatus.open{color:#d48a00;font-weight:bold}
-#claimStatus.closed{color:#0a8a0a;font-weight:bold}
-#claimStatus.pending{color:#d40000;font-weight:bold}
-.data-table td.status-open{color:#d48a00;font-weight:bold}
-.data-table td.status-done{color:#0a8a0a;font-weight:bold}
-.data-table td.status-overdue{color:#d40000;font-weight:bold}
-.agent-grid{
+
+/* Sidebar */
+.sidebar{
+  width:var(--sidebar-width);
+  background:var(--brand-black);
+  color:#fff;
+  min-height:100vh;
+  position:fixed;
+  left:0;
+  top:0;
+  padding:20px 0;
+  box-sizing:border-box;
+  z-index:1000;
+}
+
+.sidebar .logo img{
+  width:140px;
+  margin:0 auto 20px;
+  display:block;
+}
+
+.sidebar nav a{
+  display:block;
+  padding:14px 20px;
+  color:#fff;
+  text-decoration:none;
+  font-size:15px;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active{
+  background:var(--brand-red);
+}
+
+/* Main content area aligned with fixed sidebar */
+.content{
+  margin-left:var(--sidebar-width);
+  padding:30px;
+  width:calc(100% - var(--sidebar-width));
+  box-sizing:border-box;
+}
+
+/* Dashboard cards */
+.cards{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-  gap:20px
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  margin-bottom:30px;
 }
-.agent-card{
-  background:#fff;
+
+.card{
+  background:var(--card);
   padding:20px;
   border-radius:8px;
   box-shadow:0 2px 6px rgba(0,0,0,.1);
   text-align:center;
-  cursor:pointer;
-  transition:.2s
 }
-.agent-card:hover{transform:translateY(-3px)}
-.agent-card img{
-  width:90px;height:90px;border-radius:50%;object-fit:cover;margin-bottom:10px
-}
-.agent-card h3{margin:0;font-size:18px;color:#d40000}
-.agent-card p{margin:4px 0;font-size:14px}
-.agent-profile-photo{
-  width:140px;height:140px;border-radius:50%;
-  object-fit:cover;margin-bottom:15px;display:block
-}
-.client-info input{
-  padding:6px;border:1px solid #ccc;border-radius:6px;
-  margin-left:10px;font-size:14px
-}
-.client-section label{font-size:14px;margin-bottom:6px;display:block}
 
-/* ================================
-   ACES AMS — Submissions Dashboard
-================================ */
+.card h2{
+  margin:0 0 10px;
+  font-size:18px;
+  color:var(--brand-red);
+}
 
-/* Container */
-.submissions {
-  background:#fff;
+.card p{
+  font-size:32px;
+  margin:0;
+  font-weight:bold;
+}
+
+/* Generic sections */
+.recent,
+.client-info,
+.client-section,
+.submissions{
+  background:var(--card);
   padding:20px;
   border-radius:8px;
   box-shadow:0 2px 6px rgba(0,0,0,.1);
-  margin-top:30px;
 }
 
-/* Controls */
-.submissions-controls {
+.recent{ margin-bottom:25px; }
+.submissions{ margin-top:30px; }
+
+.recent h2,
+.client-info h2,
+.client-section h2{
+  margin-top:0;
+  color:var(--brand-red);
+}
+
+.page-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:15px;
+  margin-bottom:20px;
 }
 
-.submissions-controls input,
-.submissions-controls select {
-  padding:10px 12px;
-  border:1px solid #ccc;
+.page-header h1{
+  margin:0;
+  color:var(--brand-red);
+}
+
+.btn-red{
+  background:var(--brand-red);
+  color:#fff;
+  border:none;
+  padding:10px 18px;
   border-radius:6px;
+  cursor:pointer;
   font-size:14px;
 }
 
-/* Table */
-.submissions-table {
+.btn-red:hover{ background:#a30000; }
+
+/* Search */
+.search-bar{ margin-bottom:20px; }
+
+.search-bar input{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:14px;
+  box-sizing:border-box;
+}
+
+/* Tables */
+.data-table,
+.submissions-table{
   width:100%;
   border-collapse:collapse;
   background:#fff;
@@ -126,7 +163,8 @@ body{margin:0;font-family:Segoe UI,Arial;background:#f5f5f5;color:#111;display:f
   box-shadow:0 2px 6px rgba(0,0,0,.1);
 }
 
-.submissions-table th {
+.data-table th,
+.submissions-table th{
   background:#000;
   color:#fff;
   padding:12px;
@@ -134,19 +172,155 @@ body{margin:0;font-family:Segoe UI,Arial;background:#f5f5f5;color:#111;display:f
   font-size:14px;
 }
 
-.submissions-table td {
+.data-table td,
+.submissions-table td{
   padding:12px;
   border-bottom:1px solid #eee;
   font-size:14px;
 }
 
-.submissions-table tr:hover {
+.data-table tr:hover,
+.submissions-table tr:hover{
   background:#f9f9f9;
   cursor:pointer;
 }
 
-/* Status Badges */
-.status-badge {
+/* Client lists */
+.client-section ul{
+  list-style:none;
+  padding:0;
+  margin:0 0 10px;
+}
+
+.client-section ul li{
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+  display:flex;
+  justify-content:space-between;
+}
+
+.client-section ul li:last-child{ border-bottom:none; }
+
+.small{ padding:6px 12px; font-size:12px; }
+
+#clientNotes{
+  width:100%;
+  height:120px;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:14px;
+  margin-bottom:10px;
+  box-sizing:border-box;
+}
+
+.client-info input{
+  padding:6px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  margin-left:10px;
+  font-size:14px;
+}
+
+.client-section label{
+  font-size:14px;
+  margin-bottom:6px;
+  display:block;
+}
+
+/* Status colors */
+.data-table td.status-active,
+#policyStatus.active{ color:#0a8a0a; font-weight:bold; }
+
+.data-table td.status-expired,
+#policyStatus.expired{ color:var(--brand-red); font-weight:bold; }
+
+#policyStatus.pending{ color:#d48a00; font-weight:bold; }
+
+.data-table td.status-pending{ color:#d48a00; font-weight:bold; }
+.data-table td.status-completed{ color:#0a8a0a; font-weight:bold; }
+.data-table td.status-delayed{ color:var(--brand-red); font-weight:bold; }
+
+#coiStatus.pending{ color:#d48a00; font-weight:bold; }
+#coiStatus.completed{ color:#0a8a0a; font-weight:bold; }
+#coiStatus.delayed{ color:var(--brand-red); font-weight:bold; }
+
+.data-table td.status-open{ color:#d48a00; font-weight:bold; }
+.data-table td.status-closed{ color:#0a8a0a; font-weight:bold; }
+
+#claimStatus.open{ color:#d48a00; font-weight:bold; }
+#claimStatus.closed{ color:#0a8a0a; font-weight:bold; }
+#claimStatus.pending{ color:var(--brand-red); font-weight:bold; }
+
+.data-table td.status-done{ color:#0a8a0a; font-weight:bold; }
+.data-table td.status-overdue{ color:var(--brand-red); font-weight:bold; }
+
+/* Agent cards */
+.agent-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:20px;
+}
+
+.agent-card{
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+  text-align:center;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.agent-card:hover{ transform:translateY(-3px); }
+
+.agent-card img{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:10px;
+}
+
+.agent-card h3{
+  margin:0;
+  font-size:18px;
+  color:var(--brand-red);
+}
+
+.agent-card p{
+  margin:4px 0;
+  font-size:14px;
+}
+
+.agent-profile-photo{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:15px;
+  display:block;
+}
+
+/* Submissions controls */
+.submissions-controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.submissions-controls input,
+.submissions-controls select{
+  padding:10px 12px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:14px;
+}
+
+.status-badge{
   padding:4px 10px;
   border-radius:999px;
   font-size:12px;
@@ -154,12 +328,11 @@ body{margin:0;font-family:Segoe UI,Arial;background:#f5f5f5;color:#111;display:f
   font-weight:bold;
 }
 
-.status-new { background:#d40000; }
-.status-review { background:#d48a00; }
-.status-completed { background:#0a8a0a; }
+.status-new{ background:var(--brand-red); }
+.status-review{ background:#d48a00; }
+.status-completed{ background:#0a8a0a; }
 
-/* Action Buttons */
-.action-btn {
+.action-btn{
   padding:6px 12px;
   background:#000;
   color:#fff;
@@ -169,65 +342,25 @@ body{margin:0;font-family:Segoe UI,Arial;background:#f5f5f5;color:#111;display:f
   font-size:12px;
 }
 
-.action-btn:hover {
-  background:#333;
+.action-btn:hover{ background:#333; }
+
+/* Responsive */
+@media (max-width:1100px){
+  .cards{ grid-template-columns:repeat(2,1fr); }
 }
 
-/* Slide-out Login Panel */
-.login-panel {
-  position: fixed;
-  right: -400px;
-  top: 0;
-  width: 400px;
-  height: 100vh;
-  background: #fff;
-  box-shadow: -2px 0 6px rgba(0,0,0,.2);
-  transition: right .35s ease;
-  padding: 30px;
-  z-index: 9999;
-}
+@media (max-width:800px){
+  .sidebar{
+    position:static;
+    width:100%;
+    min-height:auto;
+  }
 
-.login-panel.open {
-  right: 0;
-}
+  .content{
+    margin-left:0;
+    width:100%;
+    padding:20px;
+  }
 
-.login-panel-content h2 {
-  margin-top: 0;
-  color: #d40000;
-}
-
-.login-panel-content label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-.login-panel-content input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-top: 5px;
-}
-
-.login-submit-btn {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  background: #000;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.login-close-btn {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  background: #d40000;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  .cards{ grid-template-columns:1fr; }
 }
