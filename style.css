@@ -2172,54 +2172,74 @@ section {
 }
 
 /* ============================================================
-   LOGIN PANEL
+   LOGIN PANEL (SLIDE-OUT RIGHT)
 ============================================================ */
 .login-panel {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 3000;
-  padding: 20px;
+  top: 0;
+  right: -420px;
+  width: 360px;
+  max-width: 92vw;
+  height: 100vh;
+  background: #ffffff;
+  border-left: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
+  box-shadow: -10px 0 28px rgba(0, 0, 0, 0.18);
+  z-index: 3200;
+  padding: 56px 20px 24px;
+  overflow-y: auto;
+  transition: right 0.3s ease;
 }
 .login-panel.open {
-  display: flex;
+  right: 0;
 }
 
-.login-panel-content {
-  width: 100%;
-  max-width: 420px;
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 22px;
-  border: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
-  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.2);
+/* close X (same style pattern as agent panel) */
+.login-panel .close-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #666;
+  font-size: 1.7rem;
+  cursor: pointer;
+  line-height: 1;
+}
+.login-panel .close-panel:hover {
+  background: #fff1f1;
+  color: var(--aces-primary, #d40000);
 }
 
-.login-panel-content h2 {
+.login-panel h2 {
   margin-bottom: 14px;
   color: var(--aces-primary, #d40000);
 }
 
-.login-panel-content label {
+.login-panel label {
   display: block;
   margin: 10px 0 6px;
   font-weight: 600;
   color: var(--aces-text, #1f2937);
 }
 
-.login-panel-content input {
+.login-panel input {
   width: 100%;
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #d8d8d8;
   margin-bottom: 8px;
+  background: #fff;
+}
+.login-panel input:focus {
+  outline: none;
+  border-color: var(--aces-primary, #d40000);
+  box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.12);
 }
 
-.login-submit-btn,
-.login-close-btn {
+.login-submit-btn {
   margin-top: 12px;
   width: 100%;
   padding: 10px 14px;
@@ -2227,9 +2247,6 @@ section {
   font-weight: 700;
   cursor: pointer;
   border: none;
-}
-
-.login-submit-btn {
   background: var(--aces-primary, #d40000);
   color: #fff;
 }
@@ -2237,10 +2254,19 @@ section {
   background: var(--aces-primary-hover, #ee0000);
 }
 
-.login-close-btn {
-  background: #f3f4f6;
-  color: #374151;
+.portal-link-disabled {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.88rem;
+  color: #6b7280;
+  text-decoration: none;
+  cursor: default;
 }
-.login-close-btn:hover {
-  background: #e5e7eb;
+
+@media (max-width: 768px) {
+  .login-panel {
+    width: 100%;
+    right: -100%;
+    max-width: 100%;
+  }
 }
