@@ -6,7 +6,7 @@
     "Lanse",
     "Robert",
     "Jimmy Rodriguez",
-    "Office Team"
+    "Renee Ridling"
   ];
 
   const STATUS_VALUES = ["new", "contacted", "quoted", "closed"];
