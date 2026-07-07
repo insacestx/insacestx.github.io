@@ -14,6 +14,36 @@
 <script src="global.js" defer></script>
 <script src="services.js" defer></script>
 
+<style>
+  .small-hero {
+    position: relative;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+      url('Icons/hero-services-aces.png') center/cover no-repeat;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+  }
+
+  .small-hero-content {
+    max-width: 900px;
+    padding: 0 20px;
+  }
+
+  .small-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 12px;
+  }
+
+  .small-hero p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    opacity: 0.95;
+  }
+</style>
+
 </head>
 <body>
 
@@ -147,23 +177,14 @@
       <a href="services/commercialauto.html" class="service-btn">Learn More</a>
     </div>
 
-          <div class="service-box" data-category="commercial">
-  <img src="Icons/icon-trucking-aces.png" alt="Commercial Trucking Insurance Icon" class="service-icon">
-  <h3 data-en="Commercial Trucking" data-es="Transporte Comercial">Commercial Trucking</h3>
-  <p data-en="Coverage for trucks, fleets, and commercial transport operations."
-     data-es="Cobertura para camiones, flotas y operaciones de transporte comercial.">
-  </p>
-  <a href="services/trucking.html" class="service-btn" data-en="Learn More" data-es="Aprender Más">Learn More</a>
-</div>
-
-
-<div class="service-box" data-category="commercial">
-  <img src="Icons/icon-trucking-aces.png" alt="Commercial Trucking Insurance Icon" class="service-icon">
-  <h3 data-en="Commercial Trucking" data-es="Transporte Comercial">Commercial Trucking</h3>
-  <p data-en="Coverage for trucks, fleets, and commercial transport operations." 
-     data-es="Cobertura para camiones, flotas y operaciones de transporte comercial."></p>
-  <a href="services/trucking.html" class="service-btn">Learn More</a>
-</div>
+    <div class="service-box" data-category="commercial">
+      <img src="Icons/icon-trucking-aces.png" alt="Commercial Trucking Insurance Icon" class="service-icon">
+      <h3 data-en="Commercial Trucking" data-es="Transporte Comercial">Commercial Trucking</h3>
+      <p data-en="Coverage for trucks, fleets, and commercial transport operations."
+         data-es="Cobertura para camiones, flotas y operaciones de transporte comercial.">
+      </p>
+      <a href="services/trucking.html" class="service-btn" data-en="Learn More" data-es="Aprender Más">Learn More</a>
+    </div>
           
     <div class="service-box" data-category="commercial">
       <img src="Icons/icon-workerscomp-aces.png" alt="">
