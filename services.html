@@ -16,17 +16,18 @@
 
 <style>
   .small-hero {
-    position: relative;
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-      url('Icons/hero-services-aces.png') 72% 78% / cover no-repeat;
-    min-height: 380px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
-  }
+  position: relative;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url('Icons/hero-services-aces.png') 72% 65% / contain no-repeat;
+  background-color: #1a1a1a; /* fallback fill when using contain */
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
 
   .small-hero-content {
     max-width: 900px;
