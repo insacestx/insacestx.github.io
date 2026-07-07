@@ -18,12 +18,12 @@
   <script src="/applications/render-cards.js" defer></script>
   <script src="/applications/applications.js" defer></script>
 
- <style>
-  .small-hero {
+<style>
+  .apps-hero {
     position: relative;
     background:
       linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-      url(Icons/hero-applications-aces.png') center/cover no-repeat;
+      url("/Icons/hero-applications-aces.png") center/cover no-repeat;
     min-height: 380px;
     display: flex;
     align-items: center;
@@ -32,17 +32,17 @@
     color: #fff;
   }
 
-  .small-hero-content {
+  .apps-hero-inner {
     max-width: 900px;
     padding: 0 20px;
   }
 
-  .small-hero h1 {
+  .apps-hero h1 {
     font-size: clamp(2rem, 4vw, 3rem);
     margin-bottom: 12px;
   }
 
-  .small-hero p {
+  .apps-hero p {
     font-size: clamp(1rem, 2vw, 1.2rem);
     opacity: 0.95;
   }
