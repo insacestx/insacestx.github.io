@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title data-en="Our Services | ACES Insurance Services"
@@ -15,17 +12,29 @@
 <script src="services.js" defer></script>
 
 <style>
-  .small-hero {
-    position: relative;
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-      url("/Icons/hero-services-aces.png") center 35% / cover no-repeat;
-    min-height: clamp(260px, 32vw, 420px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
+  /* tighten space above and below filter buttons */
+  .services-filter-bar {
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* reduce gap before first insurance section */
+  .subcategory-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* if style.css adds top spacing to each section, neutralize it */
+  .services-section {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  /* ensure first heading starts closer to filter bar */
+  .services-section h2 {
+    margin-top: 0;
   }
 </style>
 
