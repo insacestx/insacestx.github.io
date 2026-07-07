@@ -14,6 +14,44 @@
 <script src="global.js" defer></script>
 <script src="coi.js" defer></script>
 
+<style>
+  .small-hero {
+    position: relative;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+      url('Icons/hero-services-aces.png') 72% 65% / contain no-repeat;
+    background-color: #1a1a1a; /* fallback fill when using contain */
+
+    /* tightened vertical space */
+    min-height: 325px;          /* was 380px */
+    padding: 16px 0 12px;       /* less top/bottom breathing room */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 6px;         /* pulls filter closer */
+  }
+
+  .small-hero-content {
+    max-width: 900px;
+    padding: 0 20px;
+  }
+
+  .small-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 10px;         /* was 12px */
+  }
+
+  .small-hero p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    opacity: 0.95;
+    margin-bottom: 0;
+  }
+</style>
+
+        
 </head>
 <body>
 
