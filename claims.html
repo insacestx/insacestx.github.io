@@ -12,24 +12,19 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="pages-styles.css">
   <script src="global.js" defer></script>
-<style>
+
+  <style>
   .small-hero {
     position: relative;
     background:
       linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-      url('Icons/hero-claims-aces.png') 72% 65% / contain no-repeat;
-    background-color: #1a1a1a; /* fallback fill when using contain */
-
-    /* tightened vertical space */
-    min-height: 325px;          /* was 380px */
-    padding: 16px 0 12px;       /* less top/bottom breathing room */
-
+      url('hero-claims-aces.png') center/cover no-repeat;
+    min-height: 380px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: #fff;
-    margin-bottom: 6px;         /* pulls filter closer */
   }
 
   .small-hero-content {
@@ -39,13 +34,12 @@
 
   .small-hero h1 {
     font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: 10px;         /* was 12px */
+    margin-bottom: 12px;
   }
 
   .small-hero p {
     font-size: clamp(1rem, 2vw, 1.2rem);
     opacity: 0.95;
-    margin-bottom: 0;
   }
 </style>
   
