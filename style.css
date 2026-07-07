@@ -2528,6 +2528,18 @@ section {
 /* ============================================================
    TESTIMONIALS HERO — ACES 2026 LIGHT THEME
 ============================================================ */
+.testimonials-hero {
+  position: relative;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("Icons/hero-testimonials-aces.png") center/cover no-repeat;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
 
 .testimonials-hero {
   padding: 80px 20px;
