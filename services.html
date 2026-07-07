@@ -15,57 +15,17 @@
 <script src="services.js" defer></script>
 
 <style>
-    .small-hero {
-  position: relative;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("Icons/hero-services-aces.png") center/cover no-repeat;
-  min-height: 380px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-}
-
-.small-hero-content {
-  max-width: 900px;
-  padding: 0 20px;
-}
-
-.small-hero h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 12px;
-}
-
-.small-hero p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  opacity: 0.95;
-}
-
-  /* tighten space above and below filter buttons */
-  .services-filter-bar {
-    margin-top: 0 !important;
-    margin-bottom: 10px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  /* reduce gap before first insurance section */
-  .subcategory-section {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-
-  /* if style.css adds top spacing to each section, neutralize it */
-  .services-section {
-    margin-top: 0;
-    padding-top: 0;
-  }
-
-  /* ensure first heading starts closer to filter bar */
-  .services-section h2 {
-    margin-top: 0;
+  .apps-hero {
+    position: relative;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+      url("/Icons/hero-services-aces.png") center 35% / cover no-repeat;
+    min-height: clamp(220px, 28vw, 300px); /* shorter = more horizontal look */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
   }
 </style>
 
