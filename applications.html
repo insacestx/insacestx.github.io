@@ -18,35 +18,20 @@
   <script src="/applications/render-cards.js" defer></script>
   <script src="/applications/applications.js" defer></script>
 
-  <style>
-    .apps-hero {
-      position: relative;
-      background:
-        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-        url("/Icons/hero-applications-aces.png") center/cover no-repeat;
-      min-height: 380px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-    }
-
-    .apps-hero-inner {
-      max-width: 900px;
-      padding: 0 20px;
-    }
-
-    .apps-hero h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 12px;
-    }
-
-    .apps-hero p {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      opacity: 0.95;
-    }
-  </style>
+ <style>
+  .apps-hero {
+    position: relative;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+      url("/Icons/hero-applications-aces.png") center 35% / cover no-repeat;
+    min-height: clamp(220px, 28vw, 300px); /* shorter = more horizontal look */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+  }
+</style>
 </head>
 
 <body>
