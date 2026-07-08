@@ -1,76 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title
+    data-en="What Our Clients Are Saying | ACES Insurance Services"
+    data-es="Lo Que Dicen Nuestros Clientes | ACES Insurance Services"
+  >
+    What Our Clients Are Saying | ACES Insurance Services
+  </title>
 
-<title data-en="What Our Clients Are Saying | ACES Insurance Services"
-        data-es="Lo Que Dicen Nuestros Clientes | ACES Insurance Services">
-  What Our Clients Are Saying | ACES Insurance Services
-</title>
+  <meta
+    name="description"
+    content="Read real client testimonials about ACES Insurance Services. Trusted, bilingual, independent Texas insurance agency serving auto, home, life, and commercial clients."
+  />
 
-<meta name="description"
-      content="Read real client testimonials about ACES Insurance Services. Trusted, bilingual, independent Texas insurance agency serving auto, home, life, and commercial clients.">
-
-<link rel="stylesheet" href="style.css">
-<script src="global.js" defer></script>
-<section class="testimonials-hero fade-in">
-  <div class="testimonials-hero-content">
-    <h1>...</h1>
-    <p>...</p>
-  </div>
-</section>
+  <link rel="stylesheet" href="style.css" />
+  <script src="global.js" defer></script>
 </head>
 <body>
+  <header id="aces-header"></header>
 
-<header id="aces-header"></header>
+  <main id="main-content">
+    <!-- ============================================================
+         HERO SECTION
+    ============================================================ -->
+    <section class="testimonials-hero fade-in">
+      <h1
+        data-en="What Our Clients Are Saying"
+        data-es="Lo Que Dicen Nuestros Clientes"
+      >
+        What Our Clients Are Saying
+      </h1>
 
-<!-- ============================================================
-     HERO SECTION
-============================================================ -->
-<section class="testimonials-hero fade-in">
-  <h1 data-en="What Our Clients Are Saying"
-      data-es="Lo Que Dicen Nuestros Clientes">
-    What Our Clients Are Saying
-  </h1>
+      <p
+        data-en="Real reviews from real Texans who trust ACES Insurance Services."
+        data-es="Reseñas reales de tejanos que confían en ACES Insurance Services."
+      >
+        Real reviews from real Texans who trust ACES Insurance Services.
+      </p>
 
-  <p data-en="Real reviews from real Texans who trust ACES Insurance Services."
-     data-es="Reseñas reales de tejanos que confían en ACES Insurance Services.">
-     Real reviews from real Texans who trust ACES Insurance Services.
-  </p>
-</section>
+      <!-- Top Leave a Review button -->
+      <div class="leave-review-wrap" style="text-align: center; margin-top: 24px;">
+        <a
+          href="https://g.page/r/CZzW0Z0n0eHPEBM/review"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="leave-review-btn"
+          data-en="Leave a Review on Google"
+          data-es="Dejar una Reseña en Google"
+        >
+          Leave a Review on Google
+        </a>
+      </div>
+    </section>
 
-<!-- ============================================================
-     TESTIMONIALS CONTAINER
-============================================================ -->
-<section class="testimonials-container fade-in">
+    <!-- ============================================================
+         TESTIMONIALS CONTAINER
+    ============================================================ -->
+    <section class="testimonials-container fade-in" aria-labelledby="live-reviews-heading">
+      <!-- ============================================================
+           LIVE GOOGLE REVIEWS FEED
+      ============================================================ -->
+      <section class="testimonials-live fade-in">
+        <h2
+          id="live-reviews-heading"
+          data-en="Live Google Reviews"
+          data-es="Reseñas en Vivo de Google"
+        >
+          Live Google Reviews
+        </h2>
 
-        .testimonials-live {
-  padding: 40px 20px 10px;
-  text-align: center;
-}
+        
+        <div id="google-reviews-widget" style="max-width: 1100px; margin: 0 auto;">
+          <p
+            data-en="Live Google reviews will appear here shortly."
+            data-es="Las reseñas en vivo de Google aparecerán aquí en breve."
+          >
+            Live Google reviews will appear here shortly.
+          </p>
+        </div>
+      </section>
 
-.testimonials-live h2 {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  margin-bottom: 20px;
-}
-<!-- ============================================================
-     LEAVE A REVIEW BUTTON
-============================================================ -->
-<div style="text-align:center; margin-top:40px;">
-  <a href="https://g.page/r/CZzW0Z0n0eHPEBM/review"
-     target="_blank"
-     class="leave-review-btn"
-     data-en="Leave a Review on Google"
-     data-es="Dejar una Reseña en Google">
-     Leave a Review on Google
-  </a>
-</div>
+      <!-- Bottom Leave a Review button -->
+      <div class="leave-review-wrap" style="text-align: center; margin-top: 40px;">
+        <a
+          href="https://g.page/r/CZzW0Z0n0eHPEBM/review"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="leave-review-btn"
+          data-en="Leave a Review on Google"
+          data-es="Dejar una Reseña en Google"
+        >
+          Leave a Review on Google
+        </a>
+      </div>
+    </section>
+  </main>
 
-</section> <!-- END testimonials-container -->
-
-<footer id="aces-footer"></footer>
-
+  <footer id="aces-footer"></footer>
 </body>
 </html>
