@@ -2494,11 +2494,8 @@ section {
     width: 100%;
   }
 }
-/* ============================================================
-   SERVICES HERO — ACES 2026 LIGHT THEME
-============================================================ */
-
-.small-hero {
+/* Services page only */
+.services-hero {
   position: relative;
   background:
     linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
@@ -2511,19 +2508,18 @@ section {
   color: #fff;
 }
 
-.small-hero-content {
-  max-width: 900px;
-  padding: 0 20px;
-}
-
-.small-hero h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 12px;
-}
-
-.small-hero p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  opacity: 0.95;
+/* Contact page only */
+.contact-hero {
+  position: relative;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("Icons/hero-contact-aces.png") center/cover no-repeat;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
 }
 /* ============================================================
    TESTIMONIALS HERO — ACES 2026
