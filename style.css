@@ -2508,7 +2508,7 @@ section {
   color: #fff;
 }
 
-/* Contact page only */
+/* CONTACT HERO — ACES 2026 LIGHT THEME */
 .contact-hero {
   position: relative;
   background:
@@ -2520,6 +2520,21 @@ section {
   justify-content: center;
   text-align: center;
   color: #fff;
+}
+
+.contact-hero .small-hero-content {
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.contact-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 12px;
+}
+
+.contact-hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  opacity: 0.95;
 }
 /* ============================================================
    TESTIMONIALS HERO — ACES 2026
