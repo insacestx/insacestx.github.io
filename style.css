@@ -2642,10 +2642,9 @@ section {
 }
 
 /* ============================================================
-   CLAIMS / COI HERO — LIGHT THEME (FINAL)
+   CLAIMS HERO — LIGHT THEME
 ============================================================ */
-.claims-hero,
-.coi-hero {
+.claims-hero {
   position: relative;
   min-height: 420px;
   display: flex;
@@ -2660,8 +2659,57 @@ section {
   background-repeat: no-repeat;
 }
 
-/* light overlay for readability in light theme */
-.claims-hero::before,
+.claims-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.58);
+  z-index: 1;
+}
+
+.claims-hero-inner,
+.claims-hero .small-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.claims-hero h1,
+.claims-hero-inner h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 12px;
+  color: #111827;
+  text-shadow: none;
+}
+
+.claims-hero p,
+.claims-hero-inner p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #374151;
+  opacity: 1;
+  text-shadow: none;
+}
+
+/* ============================================================
+   COI HERO — LIGHT THEME
+============================================================ */
+.coi-hero {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+
+  background-image: url("/Icons/hero-coi-aces.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 .coi-hero::before {
   content: "";
   position: absolute;
@@ -2670,9 +2718,7 @@ section {
   z-index: 1;
 }
 
-/* content above overlay */
-.claims-hero-inner,
-.claims-hero .small-hero-content,
+.coi-hero-inner,
 .coi-hero .small-hero-content {
   position: relative;
   z-index: 2;
@@ -2681,27 +2727,25 @@ section {
   padding: 0 20px;
 }
 
-/* heading */
-.claims-hero h1,
-.claims-hero-inner h1,
-.coi-hero h1 {
+.coi-hero h1,
+.coi-hero-inner h1 {
   font-size: clamp(2rem, 4vw, 3rem);
   margin-bottom: 12px;
   color: #111827;
   text-shadow: none;
 }
 
-/* paragraph */
-.claims-hero p,
-.claims-hero-inner p,
-.coi-hero p {
+.coi-hero p,
+.coi-hero-inner p {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: #374151;
   opacity: 1;
   text-shadow: none;
 }
 
-/* mobile */
+/* ============================================================
+   MOBILE
+============================================================ */
 @media (max-width: 768px) {
   .claims-hero,
   .coi-hero {
