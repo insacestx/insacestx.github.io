@@ -2653,7 +2653,7 @@ section {
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  background: url("/Icons/hero-claims-aces.png") center/cover no-repeat;
+  background: url("../Icons/hero-coi-aces.png") center/cover no-repeat;
 }
 
 .claims-hero::before {
