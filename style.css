@@ -2640,3 +2640,97 @@ section {
   background: #a50d24;
   transform: translateY(-1px);
 }
+
+/* ============================================================
+   APPLICATIONS HERO — ACES 2026
+============================================================ */
+.applications-hero {
+  position: relative;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("Icons/hero-applications-aces.png") center/cover no-repeat;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+.applications-hero .small-hero-content {
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.applications-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 12px;
+}
+
+.applications-hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  opacity: 0.95;
+}
+
+/* ============================================================
+   COI HERO — ACES 2026
+============================================================ */
+.coi-hero {
+  position: relative;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("Icons/hero-coi-aces.png") center/cover no-repeat;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+.coi-hero .small-hero-content {
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.coi-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 12px;
+}
+
+.coi-hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  opacity: 0.95;
+}
+
+/* ============================================================
+   CLAIMS HERO — ACES 2026
+============================================================ */
+.claims-hero {
+  position: relative;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("Icons/hero-claims-aces.png") center/cover no-repeat;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+.claims-hero .small-hero-content,
+.claims-hero .claims-hero-inner {
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.claims-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 12px;
+}
+
+.claims-hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  opacity: 0.95;
+}
