@@ -2738,4 +2738,13 @@ section {
   opacity: 0.95;
 }
 
-
+/* FINAL HERO TEXT OVERRIDES — keep all page heroes white */
+.applications-hero h1,
+.applications-hero p,
+.coi-hero h1,
+.coi-hero p,
+.claims-hero .claims-hero-inner h1,
+.claims-hero .claims-hero-inner p {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+}
