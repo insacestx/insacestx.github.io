@@ -2494,7 +2494,8 @@ section {
     width: 100%;
   }
 }
-/* Services page only */
+
+/* SERVICES HERO — ACES 2026 LIGHT THEME */
 .services-hero {
   position: relative;
   background:
@@ -2506,6 +2507,21 @@ section {
   justify-content: center;
   text-align: center;
   color: #fff;
+}
+
+.services-hero .small-hero-content {
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.services-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 12px;
+}
+
+.services-hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  opacity: 0.95;
 }
 
 /* CONTACT HERO — ACES 2026 LIGHT THEME */
