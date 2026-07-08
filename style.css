@@ -2642,45 +2642,10 @@ section {
 }
 
 /* ============================================================
-   COI HERO — GLOBAL
+   CLAIMS / COI HERO — LIGHT THEME (FINAL)
 ============================================================ */
-/* CLAIMS HERO — class-aligned with claims.html */
-.claims-hero {
-  position: relative;
-  min-height: 420px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
-  background: url("../Icons/hero-coi-aces.png") center/cover no-repeat;
-}
-
-.claims-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.22);
-  z-index: 1;
-}
-
-.claims-hero .small-hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  padding: 0 20px;
-}
-
-.claims-hero h1,
-.claims-hero p {
-  color: #fff !important;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
-}
-
-/* ============================================================
-   CLAIMS HERO — CLEAN REBUILD
-============================================================ */
-.claims-hero {
+.claims-hero,
+.coi-hero {
   position: relative;
   min-height: 420px;
   display: flex;
@@ -2689,24 +2654,26 @@ section {
   text-align: center;
   overflow: hidden;
 
-  /* ensure image always renders */
   background-image: url("/Icons/hero-claims-aces.png");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 
-/* dark overlay for readability (NOT blurry) */
-.claims-hero::before {
+/* light overlay for readability in light theme */
+.claims-hero::before,
+.coi-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.22); /* lighter than before */
+  background: rgba(255, 255, 255, 0.58);
   z-index: 1;
 }
 
 /* content above overlay */
-.claims-hero-inner {
+.claims-hero-inner,
+.claims-hero .small-hero-content,
+.coi-hero .small-hero-content {
   position: relative;
   z-index: 2;
   max-width: 900px;
@@ -2714,24 +2681,30 @@ section {
   padding: 0 20px;
 }
 
-/* white text */
-.claims-hero-inner h1 {
+/* heading */
+.claims-hero h1,
+.claims-hero-inner h1,
+.coi-hero h1 {
   font-size: clamp(2rem, 4vw, 3rem);
   margin-bottom: 12px;
-  color: #ffffff !important;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+  color: #111827;
+  text-shadow: none;
 }
 
-.claims-hero-inner p {
+/* paragraph */
+.claims-hero p,
+.claims-hero-inner p,
+.coi-hero p {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: #ffffff !important;
-  opacity: 0.96;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+  color: #374151;
+  opacity: 1;
+  text-shadow: none;
 }
 
 /* mobile */
 @media (max-width: 768px) {
-  .claims-hero {
+  .claims-hero,
+  .coi-hero {
     min-height: 340px;
   }
 }
