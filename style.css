@@ -2738,13 +2738,51 @@ section {
   opacity: 0.95;
 }
 
-/* FINAL HERO TEXT OVERRIDES — keep all page heroes white */
-.applications-hero h1,
-.applications-hero p,
+/* ============================================================
+   UNIFIED HERO STANDARD (Claims / COI / Applications)
+   Place at END of style.css
+============================================================ */
+
+/* Shared hero layout + overlay behavior */
+.claims-hero,
+.coi-hero,
+.applications-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Unified dark overlay (clear image, readable white text) */
+.claims-hero::before,
+.coi-hero::before,
+.applications-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.30);   /* adjust 0.25–0.35 to taste */
+  backdrop-filter: none !important;  /* remove cloudy blur */
+  z-index: 1;
+}
+
+/* Ensure content sits above overlay */
+.claims-hero-inner,
+.coi-hero .small-hero-content,
+.applications-hero .small-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Unified white text */
+.claims-hero h1,
+.claims-hero p,
 .coi-hero h1,
 .coi-hero p,
-.claims-hero .claims-hero-inner h1,
-.claims-hero .claims-hero-inner p {
+.applications-hero h1,
+.applications-hero p {
   color: #ffffff !important;
   text-shadow: 0 2px 10px rgba(0,0,0,0.45);
 }
