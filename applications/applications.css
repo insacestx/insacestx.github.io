@@ -10,34 +10,39 @@
 
 /* HERO */
 
-.apps-hero {
-  background: linear-gradient(
-    180deg,
-    var(--aces-surface-soft, #fff5f5) 0%,
-    #ffeaea 60%,
-    #fff7f7 100%
-  );
-  color: var(--aces-text, #1f2937);
-  padding: 70px 20px 50px;
-  border-bottom: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
+.applications-hero {
+  position: relative;
+  background: url("Icons/hero-applications-aces.png") center/cover no-repeat;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
 }
 
-.apps-hero-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: left;
+/* overlay */
+.applications-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.30);
+  z-index: 1;
 }
 
-.apps-hero h1 {
-  font-size: 2.4rem;
-  margin-bottom: 10px;
-  color: var(--aces-primary, #d40000);
+/* content above overlay */
+.applications-hero .small-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 20px;
 }
 
-.apps-hero p {
-  font-size: 1.05rem;
-  max-width: 620px;
-  color: var(--aces-text-muted, #555);
+/* white text */
+.applications-hero h1,
+.applications-hero p {
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
 }
 
 /* CONTROLS BAR */
