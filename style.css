@@ -2709,9 +2709,9 @@ section {
 .claims-hero {
   position: relative;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("Icons/hero-claims-aces.png") center/cover no-repeat;
-  min-height: 380px;
+    linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.15)),
+    url("Icons/hero-claims-aces.png") center 45% / 110% no-repeat;
+  min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
