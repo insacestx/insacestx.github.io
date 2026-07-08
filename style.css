@@ -2644,46 +2644,37 @@ section {
 /* ============================================================
    COI HERO — GLOBAL
 ============================================================ */
-.coi-hero {
+/* CLAIMS HERO — class-aligned with claims.html */
+.claims-hero {
   position: relative;
-  background: url("Icons/hero-coi-aces.png") center/cover no-repeat;
-  min-height: 380px;
+  min-height: 420px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  background: url("/Icons/hero-claims-aces.png") center/cover no-repeat;
 }
 
-.coi-hero::before {
+.claims-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.30);
+  background: rgba(0, 0, 0, 0.22);
   z-index: 1;
 }
 
-.coi-hero .small-hero-content {
+.claims-hero .small-hero-content {
   position: relative;
   z-index: 2;
   max-width: 900px;
   padding: 0 20px;
 }
 
-.coi-hero h1,
-.coi-hero p {
-  color: #ffffff !important;
+.claims-hero h1,
+.claims-hero p {
+  color: #fff !important;
   text-shadow: 0 2px 10px rgba(0,0,0,0.45);
-}
-
-.coi-hero h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 12px;
-}
-
-.coi-hero p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  opacity: 0.95;
 }
 
 /* ============================================================
