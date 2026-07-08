@@ -2642,55 +2642,38 @@ section {
 }
 
 /* ============================================================
-   APPLICATIONS HERO — ACES 2026
-============================================================ */
-.applications-hero {
-  position: relative;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("Icons/hero-applications-aces.png") center/cover no-repeat;
-  min-height: 380px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-}
-
-.applications-hero .small-hero-content {
-  max-width: 900px;
-  padding: 0 20px;
-}
-
-.applications-hero h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 12px;
-}
-
-.applications-hero p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  opacity: 0.95;
-}
-
-/* ============================================================
-   COI HERO — ACES 2026
+   COI HERO — GLOBAL
 ============================================================ */
 .coi-hero {
   position: relative;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("Icons/hero-coi-aces.png") center/cover no-repeat;
+  background: url("Icons/hero-coi-aces.png") center/cover no-repeat;
   min-height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #fff;
+  overflow: hidden;
+}
+
+.coi-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.30);
+  z-index: 1;
 }
 
 .coi-hero .small-hero-content {
+  position: relative;
+  z-index: 2;
   max-width: 900px;
   padding: 0 20px;
+}
+
+.coi-hero h1,
+.coi-hero p {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
 }
 
 .coi-hero h1 {
@@ -2702,30 +2685,35 @@ section {
   font-size: clamp(1rem, 2vw, 1.2rem);
   opacity: 0.95;
 }
+
 /* ============================================================
-   Claims HERO — ACES 2026
+   CLAIMS HERO — GLOBAL
 ============================================================ */
+.claims-hero {
+  position: relative;
+  overflow: hidden;
+}
+
 .claims-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);   /* was rgba(255,255,255,0.60) */
-  backdrop-filter: none;             /* remove blur cloudiness */
+  background: rgba(0, 0, 0, 0.30);
+  backdrop-filter: none;
+  z-index: 1;
 }
 
-.claims-hero-inner h1 {
-  color: #ffffff;                    /* was #c40000 */
-  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+.claims-hero-inner {
+  position: relative;
+  z-index: 2;
 }
 
+.claims-hero h1,
+.claims-hero p,
+.claims-hero-inner h1,
 .claims-hero-inner p {
-  color: #ffffff;                    /* was #333 */
-  text-shadow: 0 1px 6px rgba(0,0,0,0.35);
-}
-
-.claims-hero .small-hero-content {
-  max-width: 900px;
-  padding: 0 20px;
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
 }
 
 .claims-hero h1 {
@@ -2736,53 +2724,4 @@ section {
 .claims-hero p {
   font-size: clamp(1rem, 2vw, 1.2rem);
   opacity: 0.95;
-}
-
-/* ============================================================
-   UNIFIED HERO STANDARD (Claims / COI / Applications)
-   Place at END of style.css
-============================================================ */
-
-/* Shared hero layout + overlay behavior */
-.claims-hero,
-.coi-hero,
-.applications-hero {
-  position: relative;
-  overflow: hidden;
-  min-height: 380px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-/* Unified dark overlay (clear image, readable white text) */
-.claims-hero::before,
-.coi-hero::before,
-.applications-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.30);   /* adjust 0.25–0.35 to taste */
-  backdrop-filter: none !important;  /* remove cloudy blur */
-  z-index: 1;
-}
-
-/* Ensure content sits above overlay */
-.claims-hero-inner,
-.coi-hero .small-hero-content,
-.applications-hero .small-hero-content {
-  position: relative;
-  z-index: 2;
-}
-
-/* Unified white text */
-.claims-hero h1,
-.claims-hero p,
-.coi-hero h1,
-.coi-hero p,
-.applications-hero h1,
-.applications-hero p {
-  color: #ffffff !important;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
 }
