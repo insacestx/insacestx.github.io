@@ -1,56 +1,76 @@
 /* ============================================================
-   ACES 2026 — SERVICES PAGE FILTER SYSTEM
-   (Filter bar + grouped sections + smooth transitions)
+   ACES 2026 — SERVICES PAGE FILTER + SEARCH SYSTEM
 ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  initServiceFilters();
+  initServiceWizard();
 });
 
-/* -----------------------------------
-   FILTER BAR LOGIC
------------------------------------ */
-
-function initServiceFilters() {
+function initServiceWizard() {
   const buttons = document.querySelectorAll(".filter-btn");
   const sections = document.querySelectorAll(".services-section");
-  const boxes = document.querySelectorAll(".service-box");
+  const searchInput = document.getElementById("serviceSearch");
 
-  if (!buttons.length) return;
+  if (!buttons.length || !sections.length) return;
 
-  buttons.forEach(btn => {
+  let activeFilter = "all";
+  let searchTerm = "";
+
+  buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const filter = btn.getAttribute("data-filter");
+      activeFilter = btn.getAttribute("data-filter") || "all";
 
-      // Update active button
-      buttons.forEach(b => b.classList.remove("active"));
+      buttons.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
 
-      // Show/hide sections
-      sections.forEach(section => {
-        const sectionType = section.getAttribute("data-section");
-
-        if (filter === "all" || filter === sectionType) {
-          section.style.display = "block";
-          section.classList.add("active");
-        } else {
-          section.style.display = "none";
-          section.classList.remove("active");
-        }
-      });
-
-      // Show/hide individual boxes (extra safety)
-      boxes.forEach(box => {
-        const category = box.getAttribute("data-category");
-
-        if (filter === "all" || filter === category) {
-          box.style.display = "flex";
-        } else {
-          box.style.display = "none";
-        }
-      });
-
+      applyFilters();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchTerm = (e.target.value || "").trim().toLowerCase();
+      applyFilters();
+    });
+  }
+
+  function applyFilters() {
+    sections.forEach((section) => {
+      const sectionType = section.getAttribute("data-section");
+      const sectionMatchesFilter =
+        activeFilter === "all" || activeFilter === sectionType;
+
+      const boxes = section.querySelectorAll(".service-box");
+      let visibleCount = 0;
+
+      boxes.forEach((box) => {
+        const category = box.getAttribute("data-category") || "";
+        const categoryMatches =
+          activeFilter === "all" || category === activeFilter;
+
+        const h3 = box.querySelector("h3");
+        const p = box.querySelector("p");
+
+        const enTitle = (h3?.getAttribute("data-en") || h3?.textContent || "").toLowerCase();
+        const esTitle = (h3?.getAttribute("data-es") || "").toLowerCase();
+        const enDesc = (p?.getAttribute("data-en") || p?.textContent || "").toLowerCase();
+        const esDesc = (p?.getAttribute("data-es") || "").toLowerCase();
+
+        const textBlob = `${enTitle} ${esTitle} ${enDesc} ${esDesc}`;
+        const matchesSearch = !searchTerm || textBlob.includes(searchTerm);
+
+        const shouldShow = sectionMatchesFilter && categoryMatches && matchesSearch;
+        box.style.display = shouldShow ? "flex" : "none";
+
+        if (shouldShow) visibleCount++;
+      });
+
+      section.style.display =
+        sectionMatchesFilter && visibleCount > 0 ? "block" : "none";
+      section.classList.toggle("active", section.style.display === "block");
+    });
+  }
+
+  applyFilters();
 }
