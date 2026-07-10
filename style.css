@@ -1080,148 +1080,6 @@ section {
   background: #a50d26;
 }
 
-/* ============================================================
-   SERVICES PAGE
-============================================================ */
-
-.services-filter-bar {
-  max-width: 1200px;
-  margin: 0 auto 10px;
-  padding: 0 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.services-filter-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.filter-btn {
-  border: 1px solid rgba(212, 0, 0, 0.25);
-  background: #fff;
-  color: #333;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.filter-btn:hover {
-  border-color: rgba(212, 0, 0, 0.5);
-  transform: translateY(-1px);
-}
-
-.filter-btn.active {
-  background: #d40000;
-  color: #fff;
-  border-color: #d40000;
-}
-
-.services-search-input {
-  width: min(420px, 92%);
-  margin: 0;
-  padding: 10px 14px;
-  border: 1px solid rgba(212, 0, 0, 0.25);
-  border-radius: 10px;
-  font-size: 0.95rem;
-  outline: none;
-}
-
-.services-search-input:focus {
-  border-color: rgba(212, 0, 0, 0.6);
-  box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.12);
-}
-
-.subcategory-section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px 28px 40px;
-}
-
-.services-section {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.services-section h2 {
-  margin-top: 0;
-  margin-bottom: 16px;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 18px;
-}
-
-.service-box {
-  background: rgba(255, 255, 255, 0.96);
-  border-radius: 12px;
-  padding: 18px;
-  border: 1px solid rgba(212, 0, 0, 0.14);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: all 0.25s ease;
-}
-
-.service-box:hover {
-  transform: translateY(-3px);
-  border-color: rgba(212, 0, 0, 0.35);
-  box-shadow: 0 10px 18px rgba(212, 0, 0, 0.12);
-}
-
-.service-box img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-}
-
-.service-box h3 {
-  margin: 0;
-  font-size: 1.05rem;
-}
-
-.service-box p {
-  margin: 0;
-  color: #444;
-  font-size: 0.92rem;
-  line-height: 1.45;
-  min-height: 42px;
-}
-
-.service-btn {
-  margin-top: auto;
-  display: inline-block;
-  text-decoration: none;
-  background: #d40000;
-  color: #fff;
-  padding: 9px 12px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.service-btn:hover {
-  background: #b70000;
-}
-
-@media (max-width: 640px) {
-  .services-filter-bar,
-  .subcategory-section {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .services-search-input {
-    width: 100%;
-  }
-}
 
 /* ============================================================
    CLAIMS PAGE
@@ -1335,121 +1193,6 @@ section {
 .carrier-card a:hover {
   background: #ff1a1a;
   transform: translateY(-2px);
-}
-
-/* ============================================================
-   SERVICES FILTER BAR — ACES 2026
-============================================================ */
-
-.services-filter-bar {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 40px auto 20px;
-  text-align: center;
-}
-
-.filter-btn {
-  background: #fff;
-  border: 2px solid #1f2937;
-  color: #1f2937;
-  font-weight: 600;
-  padding: 10px 22px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.filter-btn:hover {
-  background: #1f2937;
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.filter-btn.active {
-  background: #1f2937;
-  color: #fff;
-  border-color: #1f2937;
-}
-
-/* ============================================================
-   SERVICES SECTIONS — GRID + RESPONSIVE
-============================================================ */
-
-.services-section {
-  display: block;
-  margin-top: 40px;
-}
-
-.services-section h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 28px;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-}
-
-/* ============================================================
-   SERVICE CARDS — VERTICAL STACKED STYLE
-============================================================ */
-
-.service-box {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 22px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.service-box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.service-box img {
-  width: 70px;
-  height: 70px;
-  object-fit: contain;
-  display: block;
-}
-
-.service-box h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin: 0;
-  color: #1f2937;
-}
-
-.service-box p {
-  font-size: 0.95rem;
-  color: #374151;
-  margin: 0 0 10px 0;
-  line-height: 1.4;
-}
-
-.service-btn {
-  background: #1f2937;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.25s ease;
-}
-
-.service-btn:hover {
-  background: #374151;
 }
 
 /* ============================================================
@@ -2874,5 +2617,194 @@ section.coi-hero p {
   .claims-hero,
   .coi-hero {
     min-height: 340px;
+  }
+}
+
+
+/* ============================================================
+   SERVICES PAGE — FINAL MERGED (ACES 2026)
+============================================================ */
+
+.services-filter-bar {
+  max-width: 1200px;
+  margin: 24px auto 12px;
+  padding: 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.services-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn {
+  background: #fff;
+  border: 1px solid rgba(212, 0, 0, 0.25);
+  color: #333;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  border-color: rgba(212, 0, 0, 0.5);
+  color: #d40000;
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  background: #d40000;
+  color: #fff;
+  border-color: #d40000;
+}
+
+.services-search-input {
+  width: min(420px, 92%);
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid rgba(212, 0, 0, 0.25);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #1f2937;
+  outline: none;
+}
+
+.services-search-input::placeholder {
+  color: #6b7280;
+}
+
+.services-search-input:focus {
+  border-color: rgba(212, 0, 0, 0.6);
+  box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.12);
+}
+
+/* Main services wrapper */
+.subcategory-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 28px 40px;
+}
+
+/* Group section */
+.services-section {
+  display: block;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.services-section + .services-section {
+  margin-top: 34px;
+}
+
+.services-section h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin: 0 0 20px;
+  color: #1f2937;
+}
+
+/* Cards grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+/* Card */
+.service-box {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(212, 0, 0, 0.14);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.service-box:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212, 0, 0, 0.35);
+  box-shadow: 0 10px 18px rgba(212, 0, 0, 0.12);
+}
+
+.service-box img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+}
+
+.service-box h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1f2937;
+}
+
+.service-box p {
+  font-size: 0.92rem;
+  color: #374151;
+  margin: 0;
+  line-height: 1.45;
+  min-height: 42px;
+}
+
+/* CTA */
+.service-btn {
+  margin-top: auto;
+  display: inline-block;
+  background: #d40000;
+  color: #fff;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.service-btn:hover {
+  background: #b70000;
+  transform: translateY(-1px);
+}
+
+/* Optional no-results state */
+.services-empty-state {
+  text-align: center;
+  color: #555;
+  padding: 26px 0 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .services-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .filter-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .services-filter-bar,
+  .subcategory-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .services-search-input {
+    width: 100%;
   }
 }
