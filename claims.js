@@ -16,7 +16,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "24/7",
     hoursEs: "24/7",
     website: "https://www.allstate.com/claims",
-    logo: "Icons/carriers/allstate.png",
+    logo: "Icons/allstate_logo.png",
     brandColor: "#003da5"
   },
   {
@@ -27,7 +27,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "24/7",
     hoursEs: "24/7",
     website: "https://www.nationalgeneral.com/claims",
-    logo: "Icons/carriers/national-general.png",
+    logo: "Icons/natgen_logo.png",
     brandColor: "#f47a20"
   },
   {
@@ -38,7 +38,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "Business Hours",
     hoursEs: "Horario Laboral",
     website: "https://www.wellingtoninsgroup.com",
-    logo: "Icons/carriers/wellington.png",
+    logo: "Icons/wellington_logo.png",
     brandColor: "#2b4c7e"
   },
   {
@@ -49,7 +49,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "24/7",
     hoursEs: "24/7",
     website: "https://www.safeco.com/claims",
-    logo: "Icons/carriers/safeco.png",
+    logo: "Icons/libertymutual_logo.png",
     brandColor: "#005bbb"
   },
   {
@@ -60,7 +60,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "24/7",
     hoursEs: "24/7",
     website: "https://www.foremost.com/claims",
-    logo: "Icons/carriers/foremost.png",
+    logo: "Icons/foremost_logo.png",
     brandColor: "#1d4e89"
   },
   {
@@ -71,7 +71,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "Business Hours",
     hoursEs: "Horario Laboral",
     website: "https://www.rhpis.com",
-    logo: "Icons/carriers/rhp.png",
+    logo: "Icons/RHP_Logo.png",
     brandColor: "#7a1f1f"
   },
   {
@@ -82,7 +82,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "Business Hours",
     hoursEs: "Horario Laboral",
     website: "https://www.cnfrh.com",
-    logo: "Icons/carriers/conifer.png",
+    logo: "Icons/coniifer_logo.png",
     brandColor: "#2f7a3f"
   },
   {
@@ -93,7 +93,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "24/7",
     hoursEs: "24/7",
     website: "https://www.progressive.com/claims",
-    logo: "Icons/carriers/progressive.png",
+    logo: "Icons/progressive_logo.png",
     brandColor: "#1d4f91"
   },
   {
@@ -104,7 +104,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "24/7",
     hoursEs: "24/7",
     website: "https://www.bristolwest.com/claims",
-    logo: "Icons/carriers/bristol-west.png",
+    logo: "Icons/bristolwest_logo.png",
     brandColor: "#111827"
   },
   {
@@ -115,7 +115,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "24/7",
     hoursEs: "24/7",
     website: "https://www.gainsco.com/claims",
-    logo: "Icons/carriers/gainsco.png",
+    logo: "Icons/Gainsco_logo.png",
     brandColor: "#0f766e"
   },
   {
@@ -126,7 +126,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "24/7",
     hoursEs: "24/7",
     website: "https://www.geico.com/claims",
-    logo: "Icons/carriers/geico.png",
+    logo: "Icons/geico_Logo.png",
     brandColor: "#1f2937"
   }
 ];
