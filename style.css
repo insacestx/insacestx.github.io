@@ -2747,9 +2747,9 @@ section {
 }
 
 /* ============================================================
-   COI HERO — MATCH CLAIMS (WHITE TEXT)
+   COI HERO — FORCE WHITE TEXT + CRISP IMAGE
 ============================================================ */
-.coi-hero {
+section.small-hero.coi-hero {
   position: relative;
   min-height: 420px;
   display: flex;
@@ -2764,18 +2764,20 @@ section {
   background-repeat: no-repeat;
 }
 
-.coi-hero::before {
+/* remove any white wash / blur overlay */
+section.small-hero.coi-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: transparent;   /* remove wash */
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   z-index: 1;
 }
 
-.coi-hero-inner,
-.coi-hero .small-hero-content {
+/* content layer */
+section.small-hero.coi-hero .small-hero-content,
+section.small-hero.coi-hero .coi-hero-inner {
   position: relative;
   z-index: 2;
   max-width: 900px;
@@ -2783,21 +2785,25 @@ section {
   padding: 0 20px;
 }
 
-.coi-hero h1,
-.coi-hero-inner h1 {
+/* force white hero text */
+section.small-hero.coi-hero .small-hero-content h1,
+section.small-hero.coi-hero .coi-hero-inner h1,
+section.coi-hero h1 {
   font-size: clamp(2rem, 4vw, 3rem);
   margin-bottom: 12px;
-  color: #ffffff;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55) !important;
 }
 
-.coi-hero p,
-.coi-hero-inner p {
+section.small-hero.coi-hero .small-hero-content p,
+section.small-hero.coi-hero .coi-hero-inner p,
+section.coi-hero p {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: #ffffff;
+  color: #ffffff !important;
   opacity: 1;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
 }
+
 /* ============================================================
    MOBILE
 ============================================================ */
