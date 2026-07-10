@@ -2693,7 +2693,61 @@ section {
 }
 
 /* ============================================================
-   COI HERO — LIGHT THEME
+   CLAIMS HERO — CLEAR IMAGE VERSION
+============================================================ */
+.claims-hero {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+
+  background-image: url("/Icons/hero-claims-aces.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* remove white wash */
+.claims-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: transparent;   /* was rgba(255,255,255,0.58) */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  z-index: 1;
+}
+
+.claims-hero-inner,
+.claims-hero .small-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.claims-hero h1,
+.claims-hero-inner h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 12px;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.claims-hero p,
+.claims-hero-inner p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+}
+
+/* ============================================================
+   COI HERO — MATCH CLAIMS (WHITE TEXT)
 ============================================================ */
 .coi-hero {
   position: relative;
@@ -2714,7 +2768,9 @@ section {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.58);
+  background: transparent;   /* remove wash */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   z-index: 1;
 }
 
@@ -2731,18 +2787,17 @@ section {
 .coi-hero-inner h1 {
   font-size: clamp(2rem, 4vw, 3rem);
   margin-bottom: 12px;
-  color: #111827;
-  text-shadow: none;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .coi-hero p,
 .coi-hero-inner p {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: #374151;
+  color: #ffffff;
   opacity: 1;
-  text-shadow: none;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
 }
-
 /* ============================================================
    MOBILE
 ============================================================ */
