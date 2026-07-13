@@ -1,77 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ACES AMS | Policy Details</title>
-  <link rel="stylesheet" href="style-ams.css">
+
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../style-ams.css" />
+
+  <script src="../../global.js" defer></script>
+  <script src="../ams.js" defer></script>
 </head>
-
 <body>
- <aside class="sidebar">
-    <div class="logo"><img src="/images/image2.png"></div>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="clients.html">Clients</a>
-      <a href="policies.html">Policies</a>
-      <a href="cois.html" class="active">COIs</a>
-      <a href="claims.html">Claims</a>
-      <a href="tasks.html">Tasks</a>
-      <a href="/ams/leads.html">Leads</a>
-      <a href="agents.html">Agents</a>
-      <a href="settings.html">Settings</a>
-    </nav>
-  </aside>
+  <header id="aces-header"></header>
 
-  <main class="content">
-    <div class="page-header">
-      <h1 id="policyNumber">Policy Details</h1>
-      <button class="btn-red" onclick="editPolicy()">Edit</button>
-    </div>
+  <div class="ams-app">
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="../dashboard/dashboard.html" class="logo-link" aria-label="ACES Home">
+          <img src="../../images/image2.png" alt="ACES Insurance Logo" class="aces-logo" />
+        </a>
+      </div>
 
-    <section class="client-info">
-      <h2>Policy Information</h2>
-      <p><strong>Client:</strong> <span id="policyClient"></span></p>
-      <p><strong>Carrier:</strong> <span id="policyCarrier"></span></p>
-      <p><strong>Line of Business:</strong> <span id="policyLine"></span></p>
-      <p><strong>Effective Date:</strong> <span id="policyEffective"></span></p>
-      <p><strong>Renewal Date:</strong> <span id="policyRenewal"></span></p>
-      <p><strong>Status:</strong> <span id="policyStatus"></span></p>
-      <p><strong>Premium:</strong> <span id="policyPremium">$—</span></p>
-    </section>
+      <nav aria-label="AMS navigation">
+        <a href="../dashboard/dashboard.html">Dashboard</a>
+        <a href="../clients/clients.html">Clients</a>
+        <a href="policies.html" class="active" aria-current="page">Policies</a>
+        <a href="../cois/cois.html">COIs</a>
+        <a href="../claims/claims.html">Claims</a>
+        <a href="../tasks/tasks.html">Tasks</a>
+        <a href="../leads.html">Leads</a>
+        <a href="../agents/agents.html">Agents</a>
+        <a href="../settings/settings.html">Settings</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </nav>
+    </aside>
 
-    <section class="client-section">
-      <h2>COIs for This Policy</h2>
-      <ul id="policyCOIs"></ul>
-      <button class="btn-red small" onclick="addCOI()">+ Add COI</button>
-    </section>
+    <main class="content" role="main">
+      <div class="page-header">
+        <h1 id="policyNumber">Policy Details</h1>
+        <button class="btn-red" type="button" onclick="editPolicy()">Edit</button>
+      </div>
 
-    <section class="client-section">
-      <h2>Claims for This Policy</h2>
-      <ul id="policyClaims"></ul>
-      <button class="btn-red small" onclick="addClaim()">+ Add Claim</button>
-    </section>
+      <section class="client-info" aria-label="Policy information">
+        <h2>Policy Information</h2>
+        <p><strong>Client:</strong> <span id="policyClient">—</span></p>
+        <p><strong>Carrier:</strong> <span id="policyCarrier">—</span></p>
+        <p><strong>Line of Business:</strong> <span id="policyLine">—</span></p>
+        <p><strong>Effective Date:</strong> <span id="policyEffective">—</span></p>
+        <p><strong>Renewal Date:</strong> <span id="policyRenewal">—</span></p>
+        <p><strong>Status:</strong> <span id="policyStatus">—</span></p>
+        <p><strong>Premium:</strong> <span id="policyPremium">$—</span></p>
+      </section>
 
-    <section class="client-section">
-      <h2>Endorsements</h2>
-      <ul id="endorsementList"></ul>
-      <button class="btn-red small" onclick="addEndorsement()">+ Add Endorsement</button>
-    </section>
+      <section class="client-section" aria-label="COIs for this policy">
+        <h2>COIs for This Policy</h2>
+        <ul id="policyCOIs"></ul>
+        <button class="btn-red small" type="button" onclick="addCOI()">+ Add COI</button>
+      </section>
 
-    <section class="client-section">
-      <h2>Notes</h2>
-      <textarea id="policyNotes" placeholder="Add internal notes..."></textarea>
-      <button class="btn-red small" onclick="savePolicyNotes()">Save Notes</button>
-    </section>
+      <section class="client-section" aria-label="Claims for this policy">
+        <h2>Claims for This Policy</h2>
+        <ul id="policyClaims"></ul>
+        <button class="btn-red small" type="button" onclick="addClaim()">+ Add Claim</button>
+      </section>
 
-    <section class="client-section">
-      <h2>Documents</h2>
-      <input type="file" id="policyDocUpload" multiple>
-      <button class="btn-red small" onclick="uploadPolicyDocs()">Upload</button>
-      <ul id="policyDocs"></ul>
-    </section>
+      <section class="client-section" aria-label="Endorsements">
+        <h2>Endorsements</h2>
+        <ul id="endorsementList"></ul>
+        <button class="btn-red small" type="button" onclick="addEndorsement()">+ Add Endorsement</button>
+      </section>
 
-  </main>
+      <section class="client-section" aria-label="Policy notes">
+        <h2>Notes</h2>
+        <label for="policyNotes">Internal Notes</label>
+        <textarea id="policyNotes" placeholder="Add internal notes..."></textarea>
+        <button class="btn-red small" type="button" onclick="savePolicyNotes()">Save Notes</button>
+      </section>
 
-  <script src="ams.js"></script>
+      <section class="client-section" aria-label="Policy documents">
+        <h2>Documents</h2>
+        <input type="file" id="policyDocUpload" multiple />
+        <button class="btn-red small" type="button" onclick="uploadPolicyDocs()">Upload</button>
+        <ul id="policyDocs"></ul>
+      </section>
+    </main>
+  </div>
+
+  <footer id="aces-footer"></footer>
 </body>
 </html>
