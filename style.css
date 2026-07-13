@@ -2629,16 +2629,24 @@ section.coi-hero p {
   max-width: 1200px;
   margin: 24px auto 12px;
   padding: 0 28px;
+
   display: flex;
   flex-direction: column;
   gap: 10px;
-  text-align: left;
+
+  /* NEW — centers everything */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .services-filter-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+
+  /* NEW — centers the row */
+  justify-content: center;
 }
 
 .filter-btn {
@@ -2666,7 +2674,7 @@ section.coi-hero p {
 
 .services-search-input {
   width: min(420px, 92%);
-  margin: 0;
+  margin: 0 auto;
   padding: 10px 14px;
   border: 1px solid rgba(212, 0, 0, 0.25);
   border-radius: 10px;
