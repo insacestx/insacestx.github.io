@@ -1,52 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ACES AMS | Clients</title>
-  <link rel="stylesheet" href="style-ams.css">
+
+  <!-- Global site styles + AMS styles -->
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../style-ams.css" />
+
+  <!-- Global header/footer logic + AMS core logic -->
+  <script src="../../global.js" defer></script>
+  <script src="../ams.js" defer></script>
 </head>
 
 <body>
-  <aside class="sidebar">
-    <div class="logo"><img src="/images/image2.png"></div>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="clients.html" class="active">Clients</a>
-      <a href="policies.html">Policies</a>
-      <a href="cois.html">COIs</a>
-      <a href="claims.html">Claims</a>
-      <a href="tasks.html">Tasks</a>
-      <a href="/ams/leads.html">Leads</a>
-      <a href="agents.html">Agents</a>
-      <a href="settings.html">Settings</a>
-    </nav>
-  </aside>
+  <header id="aces-header"></header>
 
-  <main class="content">
-    <div class="page-header">
-      <h1>Clients</h1>
-      <button class="btn-red" onclick="openAddClient()">+ Add Client</button>
-    </div>
+  <div class="ams-app">
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="../dashboard/dashboard.html" class="logo-link" aria-label="ACES Home">
+          <img src="../../images/image2.png" alt="ACES Insurance Logo" class="aces-logo" />
+        </a>
+      </div>
 
-    <div class="search-bar">
-      <input type="text" id="clientSearch" placeholder="Search clients..." onkeyup="filterClients()">
-    </div>
+      <nav aria-label="AMS navigation">
+        <a href="../dashboard/dashboard.html">Dashboard</a>
+        <a href="clients.html" class="active" aria-current="page">Clients</a>
+        <a href="../policies/policies.html">Policies</a>
+        <a href="../cois/cois.html">COIs</a>
+        <a href="../claims/claims.html">Claims</a>
+        <a href="../tasks/tasks.html">Tasks</a>
+        <a href="../leads.html">Leads</a>
+        <a href="../agents/agents.html">Agents</a>
+        <a href="../settings/settings.html">Settings</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </nav>
+    </aside>
 
-    <table class="data-table" id="clientTable">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th>Policies</th>
-          <th>Agent</th>
-        </tr>
-      </thead>
-      <tbody id="clientRows">
-      </tbody>
-    </table>
-  </main>
+    <main class="content" role="main">
+      <div class="page-header">
+        <h1>Clients</h1>
+        <button id="addClientBtn" class="btn-red" type="button" onclick="openAddClient()">+ Add Client</button>
+      </div>
 
-  <script src="ams.js"></script>
+      <section class="search-bar" aria-label="Search clients">
+        <label for="clientSearch" class="sr-only">Search clients</label>
+        <input
+          id="clientSearch"
+          type="text"
+          placeholder="Search clients by name, phone, email, or agent..."
+          autocomplete="off"
+        />
+      </section>
+
+      <section class="client-section" aria-label="Clients table">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Policies</th>
+              <th>Agent</th>
+            </tr>
+          </thead>
+          <tbody id="clientRows">
+            <!-- Rows injected by ams.js (loadClients) -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <footer id="aces-footer"></footer>
 </body>
 </html>
