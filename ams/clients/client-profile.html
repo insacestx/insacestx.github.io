@@ -3,251 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACES AMS | Client Profile</title>
 
-  <title
-    data-en="Client Portal | ACES Insurance Services"
-    data-es="Portal del Cliente | ACES Insurance Services">
-    Client Portal | ACES Insurance Services
-  </title>
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../style-ams.css" />
 
-  <link rel="stylesheet" href="/style.css" />
-  <link rel="stylesheet" href="/wizard.css" />
-
-  <script src="/global.js" defer></script>
-
-  <style>
-    .portal-container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-
-    .portal-card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 14px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      margin-bottom: 30px;
-      animation: fadeUp 0.6s ease;
-    }
-
-    .portal-section-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-      color: #d32f2f;
-    }
-
-    .portal-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .portal-field {
-      background: #fafafa;
-      padding: 14px;
-      border-radius: 8px;
-      border: 1px solid #eee;
-    }
-
-    .portal-field label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #555;
-    }
-
-    .portal-field p {
-      margin-top: 6px;
-      font-size: 1rem;
-      color: #222;
-    }
-
-    .portal-actions {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .portal-actions a {
-      padding: 14px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-    }
-
-    .primary-btn {
-      background: #d32f2f;
-      color: #fff;
-    }
-
-    .secondary-btn {
-      background: #f5f5f5;
-      color: #333;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get("id") || sessionStorage.getItem("aces_quote_id") || "Unknown";
-
-      document.getElementById("portal-id").textContent = id;
-
-      // Simulated status (future API integration)
-      const statuses = [
-        "Received",
-        "Assigned to Agent",
-        "In Review",
-        "Quoting Carriers",
-        "Awaiting Documents",
-        "Completed"
-      ];
-
-      const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
-      document.getElementById("portal-status").textContent = randomStatus;
-
-      // Simulated assigned agent
-      const agents = [
-        "George Santibañez",
-        "Lanse Derrick",
-        "Robert Hyde",
-        "Bryan Carter",
-        "Jimmy Rodriguez",
-        "Renee Ridling"
-      ];
-
-      const assigned = agents[Math.floor(Math.random() * agents.length)];
-      document.getElementById("portal-agent").textContent = assigned;
-    });
-  </script>
+  <script src="../../global.js" defer></script>
+  <script src="../ams.js" defer></script>
 </head>
-
 <body>
+  <header id="aces-header"></header>
 
-<header id="aces-header"></header>
-
-<main class="fade-in">
-
-  <!-- HERO SECTION -->
-  <section class="quote-hero">
-    <div class="quote-hero-inner">
-
-      <div class="quote-hero-text">
-        <h1
-          data-en="Client Portal"
-          data-es="Portal del Cliente">
-          Client Portal
-        </h1>
-
-        <p
-          data-en="View your quote status, upload documents, and contact your ACES agent."
-          data-es="Vea el estado de su cotización, suba documentos y contacte a su agente de ACES.">
-          View your quote status, upload documents, and contact your ACES agent.
-        </p>
-      </div>
-
-      <div class="quote-hero-image"></div>
-
-    </div>
-  </section>
-
-  <!-- PORTAL CONTENT -->
-  <div class="portal-container">
-
-    <!-- QUOTE SUMMARY -->
-    <div class="portal-card">
-      <h2 class="portal-section-title"
-        data-en="Quote Summary"
-        data-es="Resumen de la Cotización">
-        Quote Summary
-      </h2>
-
-      <div class="portal-grid">
-        <div class="portal-field">
-          <label data-en="Quote ID" data-es="ID de Cotización">Quote ID</label>
-          <p id="portal-id">—</p>
-        </div>
-
-        <div class="portal-field">
-          <label data-en="Current Status" data-es="Estado Actual">Current Status</label>
-          <p id="portal-status">—</p>
-        </div>
-
-        <div class="portal-field">
-          <label data-en="Assigned Agent" data-es="Agente Asignado">Assigned Agent</label>
-          <p id="portal-agent">—</p>
-        </div>
-      </div>
-
-      <div class="portal-actions">
-        <a href="/quote-status.html" class="secondary-btn">
-          <span data-en="Check Status" data-es="Ver Estado">
-            Check Status
-          </span>
+  <div class="ams-app">
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="../dashboard/dashboard.html" class="logo-link" aria-label="ACES Home">
+          <img src="../../images/image2.png" alt="ACES Insurance Logo" class="aces-logo" />
         </a>
       </div>
-    </div>
 
-    <!-- DOCUMENTS -->
-    <div class="portal-card">
-      <h2 class="portal-section-title"
-        data-en="Documents"
-        data-es="Documentos">
-        Documents
-      </h2>
+      <nav aria-label="AMS navigation">
+        <a href="../dashboard/dashboard.html">Dashboard</a>
+        <a href="clients.html" class="active" aria-current="page">Clients</a>
+        <a href="../policies/policies.html">Policies</a>
+        <a href="../cois/cois.html">COIs</a>
+        <a href="../claims/claims.html">Claims</a>
+        <a href="../tasks/tasks.html">Tasks</a>
+        <a href="../leads.html">Leads</a>
+        <a href="../agents/agents.html">Agents</a>
+        <a href="../settings/settings.html">Settings</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </nav>
+    </aside>
 
-      <p
-        data-en="Upload any documents requested by your ACES agent."
-        data-es="Suba cualquier documento solicitado por su agente de ACES.">
-        Upload any documents requested by your ACES agent.
-      </p>
-
-      <div class="portal-actions">
-        <a href="/documents-upload.html" class="primary-btn">
-          <span data-en="Upload Documents" data-es="Subir Documentos">
-            Upload Documents
-          </span>
-        </a>
+    <main class="content" role="main">
+      <div class="page-header">
+        <h1 id="clientName">Client Profile</h1>
+        <button class="btn-red" type="button" onclick="editClient()">Edit Client</button>
       </div>
-    </div>
 
-    <!-- SUPPORT -->
-    <div class="portal-card">
-      <h2 class="portal-section-title"
-        data-en="Support"
-        data-es="Soporte">
-        Support
-      </h2>
+      <section class="client-info" aria-label="Client details">
+        <h2>Client Information</h2>
+        <p><strong>Phone:</strong> <span id="clientPhone">—</span></p>
+        <p><strong>Email:</strong> <span id="clientEmail">—</span></p>
+        <p><strong>Assigned Agent:</strong> <span id="clientAgent">—</span></p>
+      </section>
 
-      <p
-        data-en="Need help? Our team is here for you."
-        data-es="¿Necesita ayuda? Nuestro equipo está aquí para usted.">
-        Need help? Our team is here for you.
-      </p>
+      <section class="client-section" aria-label="Policies">
+        <h2>Policies</h2>
+        <ul id="policyList"></ul>
+      </section>
 
-      <div class="portal-actions">
-        <a href="/contact.html" class="secondary-btn">
-          <span data-en="Contact Support" data-es="Contactar Soporte">
-            Contact Support
-          </span>
-        </a>
-      </div>
-    </div>
+      <section class="client-section" aria-label="COIs">
+        <h2>COIs</h2>
+        <ul id="coiList"></ul>
+      </section>
 
+      <section class="client-section" aria-label="Claims">
+        <h2>Claims</h2>
+        <ul id="claimList"></ul>
+      </section>
+
+      <section class="client-section" aria-label="Documents">
+        <h2>Documents</h2>
+        <ul id="docList"></ul>
+        <button class="btn-red small" type="button" onclick="uploadDocs()">Upload Document</button>
+      </section>
+
+      <section class="client-section" aria-label="Notes">
+        <h2>Notes</h2>
+        <label for="clientNotes">Client Notes</label>
+        <textarea id="clientNotes" placeholder="Add notes about this client..."></textarea>
+        <button class="btn-red small" type="button" onclick="saveNotes()">Save Notes</button>
+      </section>
+    </main>
   </div>
 
-</main>
-
-<footer id="aces-footer"></footer>
-
+  <footer id="aces-footer"></footer>
 </body>
 </html>
