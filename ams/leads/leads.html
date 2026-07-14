@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ACES AMS | Leads</title>
 
+  <!-- Root-level AMS page paths -->
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="./style-ams.css" />
 
@@ -44,7 +45,10 @@
 
       <section class="submissions">
         <div class="submissions-controls">
+          <label for="searchInput" class="sr-only">Search leads</label>
           <input id="searchInput" type="text" placeholder="Search name, phone, email..." />
+
+          <label for="statusFilter" class="sr-only">Filter by status</label>
           <select id="statusFilter">
             <option value="all">All Statuses</option>
             <option value="new">New</option>
@@ -52,6 +56,8 @@
             <option value="quoted">Quoted</option>
             <option value="closed">Closed</option>
           </select>
+
+          <label for="agentFilter" class="sr-only">Filter by agent</label>
           <select id="agentFilter">
             <option value="all">All Agents</option>
           </select>
