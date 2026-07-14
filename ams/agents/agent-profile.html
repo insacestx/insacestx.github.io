@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ACES AMS | Agent Profile</title>
 
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="style-ams.css">
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../style-ams.css" />
 
-  <script src="../global.js" defer></script>
-  <script src="ams.js" defer></script>
+  <script src="../../global.js" defer></script>
+  <script src="../ams.js" defer></script>
 </head>
-
 <body>
   <header id="aces-header"></header>
 
   <div class="ams-app">
     <aside class="sidebar">
       <div class="logo">
-        <img src="../images/image2.png" alt="ACES Logo">
+        <a href="../dashboard/dashboard.html" class="logo-link" aria-label="ACES Home">
+          <img src="../../images/image2.png" alt="ACES Insurance Logo" class="aces-logo" />
+        </a>
       </div>
 
       <nav aria-label="AMS navigation">
-        <a href="dashboard/dashboard.html">Dashboard</a>
-        <a href="dashboard/clients.html">Clients</a>
-        <a href="dashboard/policies.html">Policies</a>
-        <a href="dashboard/cois.html">COIs</a>
-        <a href="dashboard/claims.html">Claims</a>
-        <a href="dashboard/tasks.html">Tasks</a>
-        <a href="leads.html">Leads</a>
-        <a href="dashboard/agents.html" class="active" aria-current="page">Agents</a>
-        <a href="dashboard/settings.html">Settings</a>
+        <a href="../dashboard/dashboard.html">Dashboard</a>
+        <a href="../clients/clients.html">Clients</a>
+        <a href="../policies/policies.html">Policies</a>
+        <a href="../coi/cois.html">COIs</a>
+        <a href="../claims/claims.html">Claims</a>
+        <a href="../tasks/tasks.html">Tasks</a>
+        <a href="../leads.html">Leads</a>
+        <a href="agents.html" class="active" aria-current="page">Agents</a>
+        <a href="../settings/settings.html">Settings</a>
         <a href="#" id="logoutLink">Logout</a>
       </nav>
     </aside>
@@ -38,14 +39,14 @@
     <main class="content" role="main">
       <div class="page-header">
         <h1 id="agentName">Agent Profile</h1>
-        <button class="btn-red" id="editAgentBtn" type="button">Edit</button>
+        <button id="editAgentBtn" class="btn-red" type="button">Edit Agent</button>
       </div>
 
       <section class="client-info">
-        <img id="agentPhoto" class="agent-profile-photo" alt="Agent profile photo">
-        <h2 id="agentTitle"></h2>
-        <p><strong>Phone:</strong> <span id="agentPhone"></span></p>
-        <p><strong>Email:</strong> <span id="agentEmail"></span></p>
+        <img id="agentPhoto" class="agent-profile-photo" src="../../images/agents/default.jpg" alt="Agent photo" />
+        <p><strong>Title:</strong> <span id="agentTitle">—</span></p>
+        <p><strong>Phone:</strong> <span id="agentPhone">—</span></p>
+        <p><strong>Email:</strong> <span id="agentEmail">—</span></p>
       </section>
 
       <section class="client-section">
@@ -54,15 +55,14 @@
       </section>
 
       <section class="client-section">
-        <h2>Tasks</h2>
+        <h2>Assigned Tasks</h2>
         <ul id="agentTasks"></ul>
       </section>
 
       <section class="client-section">
         <h2>Notes</h2>
-        <label for="agentNotes" class="sr-only">Internal notes</label>
         <textarea id="agentNotes" placeholder="Add internal notes..."></textarea>
-        <button class="btn-red small" id="saveAgentNotesBtn" type="button">Save Notes</button>
+        <button id="saveAgentNotesBtn" class="btn-red small" type="button">Save Notes</button>
       </section>
     </main>
   </div>
