@@ -10,6 +10,7 @@
 
   <script src="../global.js" defer></script>
   <script src="./ams.js" defer></script>
+  <script src="./leads/leads.js" defer></script>
 </head>
 <body>
   <header id="aces-header"></header>
@@ -38,31 +39,43 @@
 
     <main class="content" role="main">
       <div class="page-header">
-        <h1>Leads</h1>
-        <button class="btn-red" type="button">+ Add Lead</button>
+        <h1>Agent Leads</h1>
       </div>
 
-      <section class="search-bar" aria-label="Search leads">
-        <label for="leadSearch" class="sr-only">Search leads</label>
-        <input id="leadSearch" type="text" placeholder="Search leads..." autocomplete="off" />
-      </section>
+      <section class="submissions">
+        <div class="submissions-controls">
+          <input id="searchInput" type="text" placeholder="Search name, phone, email..." />
+          <select id="statusFilter">
+            <option value="all">All Statuses</option>
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="quoted">Quoted</option>
+            <option value="closed">Closed</option>
+          </select>
+          <select id="agentFilter">
+            <option value="all">All Agents</option>
+          </select>
+        </div>
 
-      <section aria-label="Leads table">
-        <table class="data-table" id="leadTable">
+        <table class="submissions-table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>Type</th>
-              <th>Source</th>
+              <th>Lead</th>
+              <th>Assigned Agent</th>
               <th>Status</th>
+              <th>Notes</th>
+              <th>Updated</th>
             </tr>
           </thead>
-          <tbody id="leadRows">
-            <tr><td colspan="6">Leads module connected soon.</td></tr>
-          </tbody>
+          <tbody id="leadRows"></tbody>
         </table>
+
+        <div id="emptyState" class="empty" style="display:none;">No leads match current filters.</div>
+
+        <div class="btn-row" style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-red" id="addLeadBtn" type="button">+ Add Lead</button>
+          <button class="action-btn" id="exportBtn" type="button">Export JSON</button>
+        </div>
       </section>
     </main>
   </div>
