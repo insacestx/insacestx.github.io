@@ -74,5 +74,12 @@
   </div>
 
   <footer id="aces-footer"></footer>
+
+  <script>
+    // Keep old /coi/coi.html entry working by normalizing to canonical /coi/cois.html
+    if (!location.pathname.toLowerCase().endsWith("/cois.html")) {
+      history.replaceState({}, "", "./cois.html" + location.search + location.hash);
+    }
+  </script>
 </body>
 </html>
