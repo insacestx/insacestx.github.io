@@ -53,8 +53,10 @@ body {
   z-index: 1000;
 }
 
-.sidebar .logo img {
+.sidebar .logo img,
+.sidebar .logo .aces-logo {
   width: 140px;
+  height: auto;
   margin: 0 auto 20px;
   display: block;
 }
@@ -162,6 +164,11 @@ body {
   background: #a30000;
 }
 
+.small {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
 /* Search */
 .search-bar {
   margin-bottom: 20px;
@@ -226,11 +233,6 @@ body {
 
 .client-section ul li:last-child {
   border-bottom: none;
-}
-
-.small {
-  padding: 6px 12px;
-  font-size: 12px;
 }
 
 #clientNotes,
@@ -325,7 +327,8 @@ body {
 /* ---- DETAILS PAGE STATUS TEXT ---- */
 #policyStatus.status-active,
 #coiStatus.status-completed,
-#claimStatus.status-closed {
+#claimStatus.status-closed,
+#claimStatus.status-active {
   color: #0a8a0a;
   font-weight: 700;
 }
@@ -344,12 +347,7 @@ body {
   font-weight: 700;
 }
 
-#claimStatus.status-active {
-  color: #0a8a0a;
-  font-weight: 700;
-}
-
-/* ---- BADGE STYLES ONLY (scoped) ---- */
+/* ---- Generic pill badges ---- */
 .status-badge {
   padding: 4px 10px;
   border-radius: 999px;
@@ -369,6 +367,35 @@ body {
 
 .status-badge.status-completed {
   background: #0a8a0a;
+}
+
+/* Leads badges (scoped, avoids collision with table status classes) */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.status-new {
+  background: #e7f1ff;
+  color: #1d4ed8;
+}
+
+.badge.status-contacted {
+  background: #fff4e5;
+  color: #9a3412;
+}
+
+.badge.status-quoted {
+  background: #ecfdf3;
+  color: #166534;
+}
+
+.badge.status-closed {
+  background: #f3f4f6;
+  color: #374151;
 }
 
 /* Agent cards */
@@ -452,6 +479,32 @@ body {
   background: #333;
 }
 
+/* Leads table helpers */
+.empty {
+  padding: 20px;
+  color: #666;
+}
+
+.notes {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 13px;
+  resize: vertical;
+  background: #fff;
+}
+
+.action-select {
+  width: 100%;
+  min-width: 140px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+}
+
 /* Responsive */
 @media (max-width: 1100px) {
   .cards {
@@ -476,12 +529,3 @@ body {
     grid-template-columns: 1fr;
   }
 }
-
-.empty { padding: 20px; color: #666; }
-.notes { width: 100%; min-height: 44px; border: 1px solid #ddd; border-radius: 8px; padding: 8px; font-size: 13px; resize: vertical; background: #fff; }
-.action-select { width: 100%; min-width: 140px; padding: 8px; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
-.badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-.status-new { background: #e7f1ff; color: #1d4ed8; }
-.status-contacted { background: #fff4e5; color: #9a3412; }
-.status-quoted { background: #ecfdf3; color: #166534; }
-.status-closed { background: #f3f4f6; color: #374151; }
