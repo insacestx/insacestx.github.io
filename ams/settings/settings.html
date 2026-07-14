@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACES AMS | Settings</title>
+
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../style-ams.css" />
+
+  <script src="../../global.js" defer></script>
+  <script src="../ams.js" defer></script>
+</head>
+<body>
+  <header id="aces-header"></header>
+
+  <div class="ams-app">
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="../dashboard/dashboard.html" class="logo-link" aria-label="ACES Home">
+          <img src="../../images/image2.png" alt="ACES Insurance Logo" class="aces-logo" />
+        </a>
+      </div>
+
+      <nav aria-label="AMS navigation">
+        <a href="../dashboard/dashboard.html">Dashboard</a>
+        <a href="../clients/clients.html">Clients</a>
+        <a href="../policies/policies.html">Policies</a>
+        <a href="../coi/cois.html">COIs</a>
+        <a href="../claims/claims.html">Claims</a>
+        <a href="../tasks/tasks.html">Tasks</a>
+        <a href="../leads.html">Leads</a>
+        <a href="../agents/agents.html">Agents</a>
+        <a href="settings.html" class="active" aria-current="page">Settings</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </nav>
+    </aside>
+
+    <main class="content" role="main">
+      <div class="page-header">
+        <h1>Settings</h1>
+      </div>
+
+      <section class="client-section">
+        <h2>Agency</h2>
+        <button class="btn-red small" type="button" onclick="saveAgencySettings()">Save Agency Settings</button>
+        <button class="btn-red small" type="button" onclick="uploadLogo()">Upload Logo</button>
+      </section>
+
+      <section class="client-section">
+        <h2>Notifications</h2>
+        <button class="btn-red small" type="button" onclick="saveNotifications()">Save Notification Settings</button>
+      </section>
+
+      <section class="client-section">
+        <h2>Data</h2>
+        <button class="btn-red small" type="button" onclick="exportData()">Export Data</button>
+        <button class="btn-red small" type="button" onclick="importData()">Import Data</button>
+      </section>
+    </main>
+  </div>
+
+  <footer id="aces-footer"></footer>
+</body>
+</html>
