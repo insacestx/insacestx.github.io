@@ -1,9 +1,15 @@
 (() => {
+  "use strict";
+
+  // Prevent double init if script is accidentally loaded twice
+  if (window.__AMS_LEADS_BOOTSTRAPPED__) return;
+  window.__AMS_LEADS_BOOTSTRAPPED__ = true;
+
   const AGENTS = [
     "George Santibañez",
     "Bryan",
     "Jordan Jones",
-    "Lanse",
+    "Lanse Derrick",
     "Robert",
     "Jimmy Rodriguez",
     "Renee Ridling"
@@ -20,10 +26,26 @@
 
   function init() {
     cacheEls();
+
+    // Fail-safe: only run on leads page when required DOM exists
+    if (!isReady()) return;
+
     bindEvents();
     loadFromStorageOrSeed();
     populateAgentFilter();
     applyFilters();
+  }
+
+  function isReady() {
+    return !!(
+      els.rows &&
+      els.empty &&
+      els.search &&
+      els.statusFilter &&
+      els.agentFilter &&
+      els.addLeadBtn &&
+      els.exportBtn
+    );
   }
 
   function cacheEls() {
@@ -51,17 +73,9 @@
       const lead = leads.find(l => l.id === id);
       if (!lead) return;
 
-      if (target.matches(".agent-select")) {
-        lead.assigned = target.value;
-      }
-
-      if (target.matches(".status-select")) {
-        lead.status = target.value;
-      }
-
-      if (target.matches(".notes-input")) {
-        lead.notes = target.value;
-      }
+      if (target.matches(".agent-select")) lead.assigned = target.value;
+      if (target.matches(".status-select")) lead.status = target.value;
+      if (target.matches(".notes-input")) lead.notes = target.value;
 
       lead.updatedAt = new Date().toISOString();
       saveToStorage();
@@ -128,9 +142,7 @@
   }
 
   function populateAgentFilter() {
-    const existing = new Set(
-      leads.map(l => l.assigned).filter(Boolean).concat(AGENTS)
-    );
+    const existing = new Set(leads.map(l => l.assigned).filter(Boolean).concat(AGENTS));
 
     const current = els.agentFilter.value || "all";
     els.agentFilter.innerHTML = `<option value="all">All Agents</option>`;
@@ -154,12 +166,9 @@
 
     filtered = leads.filter(l => {
       const matchesText =
-        !q ||
-        `${l.name} ${l.phone} ${l.email} ${l.assigned} ${l.notes}`.toLowerCase().includes(q);
-
+        !q || `${l.name} ${l.phone} ${l.email} ${l.assigned} ${l.notes}`.toLowerCase().includes(q);
       const matchesStatus = status === "all" || l.status === status;
       const matchesAgent = agent === "all" || l.assigned === agent;
-
       return matchesText && matchesStatus && matchesAgent;
     });
 
@@ -249,14 +258,18 @@
 
   function agentOptions(selected) {
     const set = new Set([...AGENTS, ...leads.map(l => l.assigned).filter(Boolean)]);
-    return [...set].sort().map(name =>
-      `<option value="${escapeHtml(name)}" ${name === selected ? "selected" : ""}>${escapeHtml(name)}</option>`
-    ).join("");
+    return [...set]
+      .sort()
+      .map(
+        name =>
+          `<option value="${escapeHtml(name)}" ${name === selected ? "selected" : ""}>${escapeHtml(name)}</option>`
+      )
+      .join("");
   }
 
   function statusOptions(selected) {
-    return STATUS_VALUES.map(s =>
-      `<option value="${s}" ${s === selected ? "selected" : ""}>${labelStatus(s)}</option>`
+    return STATUS_VALUES.map(
+      s => `<option value="${s}" ${s === selected ? "selected" : ""}>${labelStatus(s)}</option>`
     ).join("");
   }
 
