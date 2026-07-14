@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACES AMS | Tasks</title>
+
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../style-ams.css" />
+
+  <script src="../../global.js" defer></script>
+  <script src="../ams.js" defer></script>
+</head>
+<body>
+  <header id="aces-header"></header>
+
+  <div class="ams-app">
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="../dashboard/dashboard.html" class="logo-link" aria-label="ACES Home">
+          <img src="../../images/image2.png" alt="ACES Insurance Logo" class="aces-logo" />
+        </a>
+      </div>
+
+      <nav aria-label="AMS navigation">
+        <a href="../dashboard/dashboard.html">Dashboard</a>
+        <a href="../clients/clients.html">Clients</a>
+        <a href="../policies/policies.html">Policies</a>
+        <a href="../coi/cois.html">COIs</a>
+        <a href="../claims/claims.html">Claims</a>
+        <a href="tasks.html" class="active" aria-current="page">Tasks</a>
+        <a href="../leads.html">Leads</a>
+        <a href="../agents/agents.html">Agents</a>
+        <a href="../settings/settings.html">Settings</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </nav>
+    </aside>
+
+    <main class="content" role="main">
+      <div class="page-header">
+        <h1>Tasks</h1>
+        <button class="btn-red" type="button" onclick="addTask()">+ Add Task</button>
+      </div>
+
+      <section class="search-bar" aria-label="Search tasks">
+        <label for="taskSearch" class="sr-only">Search tasks</label>
+        <input id="taskSearch" type="text" placeholder="Search tasks..." autocomplete="off" />
+      </section>
+
+      <section aria-label="Tasks table">
+        <table class="data-table" id="taskTable">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Client</th>
+              <th>Due</th>
+              <th>Assigned</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="taskRows"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <footer id="aces-footer"></footer>
+</body>
+</html>
