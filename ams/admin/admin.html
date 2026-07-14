@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ACES AMS | Admin</title>
 
-  <link rel="stylesheet" href="../../style.css">
-  <link rel="stylesheet" href="../style-ams.css">
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../style-ams.css" />
 
   <script src="../../global.js" defer></script>
+  <script src="../ams.js" defer></script>
   <script src="admin.js" defer></script>
 </head>
 <body>
@@ -17,18 +18,21 @@
   <div class="ams-app">
     <aside class="sidebar">
       <div class="logo">
-        <img src="../../images/image2.png" alt="ACES Logo">
+        <a href="../dashboard/dashboard.html" class="logo-link" aria-label="ACES Home">
+          <img src="../../images/image2.png" alt="ACES Insurance Logo" class="aces-logo" />
+        </a>
       </div>
+
       <nav aria-label="Admin navigation">
         <a href="../dashboard/dashboard.html">Dashboard</a>
-        <a href="../dashboard/clients.html">Clients</a>
-        <a href="../dashboard/policies.html">Policies</a>
-        <a href="../dashboard/cois.html">COIs</a>
-        <a href="../dashboard/claims.html">Claims</a>
-        <a href="../dashboard/tasks.html">Tasks</a>
+        <a href="../clients/clients.html">Clients</a>
+        <a href="../policies/policies.html">Policies</a>
+        <a href="../coi/cois.html">COIs</a>
+        <a href="../claims/claims.html">Claims</a>
+        <a href="../tasks/tasks.html">Tasks</a>
         <a href="../leads.html">Leads</a>
-        <a href="../dashboard/agents.html">Agents</a>
-        <a href="../dashboard/settings.html">Settings</a>
+        <a href="../agents/agents.html">Agents</a>
+        <a href="../settings/settings.html">Settings</a>
         <a href="admin.html" class="active" aria-current="page">Admin</a>
         <a href="#" id="logoutLink">Logout</a>
       </nav>
