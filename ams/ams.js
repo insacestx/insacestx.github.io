@@ -200,10 +200,6 @@
     return document.getElementById(id);
   }
 
-  function hasEl(id) {
-    return !!byId(id);
-  }
-
   function getParam(key) {
     const params = new URLSearchParams(window.location.search);
     return params.get(key);
@@ -860,7 +856,8 @@
     if (path.includes("policies.html")) loadPolicies();
     if (path.includes("policy-details.html")) loadPolicyDetails();
 
-    if (path.includes("cois.html")) loadCOIs();
+    // Support both canonical and legacy COI list routes
+    if (path.includes("cois.html") || path.includes("coi.html")) loadCOIs();
     if (path.includes("coi-details.html")) loadCOIDetails();
 
     if (path.includes("claims.html")) loadClaims();
