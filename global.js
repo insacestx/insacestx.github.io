@@ -5,19 +5,28 @@ document.addEventListener("DOMContentLoaded", () => {
   loadHeader();
   loadFooter();
 
-  /* WAIT FOR HEADER AND FOOTER INJECTION */
-  setTimeout(() => {
-    initLanguage();
-    setActiveNav();
-    initMobileMenu();
-    initAgentPanel();
-    initQuotePanel();
-    initLoginPanel();
-  }, 100);
+  /* Header is injected synchronously, so init immediately */
+  initLanguage();
+  setActiveNav();
+  initMobileMenu();
+  initAgentPanel();
+  initQuotePanel();
+  initLoginPanel();
 
   initRoundRobinEmail();
   initWizardNav();
 });
+
+/* ============================================================
+   PATH HELPERS
+============================================================ */
+function getRootPath() {
+  // Handles user/org site and project site
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  // If hosted at /insacestx.github.io/... keep repo prefix
+  if (parts[0] === "insacestx.github.io") return "/insacestx.github.io/";
+  return "/";
+}
 
 /* ============================================================
    HEADER INJECTION
@@ -26,25 +35,27 @@ function loadHeader() {
   const header = document.getElementById("aces-header");
   if (!header) return;
 
+  const root = getRootPath();
+
   header.innerHTML = `
     <div class="header-container">
 
       <!-- LOGO -->
       <div class="logo-area">
-        <a href="/index.html" class="logo-link">
-          <img src="/image2.png" alt="ACES Insurance Logo" class="aces-logo">
+        <a href="${root}index.html" class="logo-link">
+          <img src="${root}images/image2.png" alt="ACES Insurance Logo" class="aces-logo">
         </a>
       </div>
 
       <!-- DESKTOP NAV -->
       <nav class="nav-links">
-        <a href="/index.html" data-en="Home" data-es="Inicio">Home</a>
-        <a href="/services.html" data-en="Services" data-es="Servicios">Services</a>
-        <a href="/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-        <a href="/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-        <a href="/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-        <a href="/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
-        <a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+        <a href="${root}index.html" data-en="Home" data-es="Inicio">Home</a>
+        <a href="${root}services.html" data-en="Services" data-es="Servicios">Services</a>
+        <a href="${root}applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+        <a href="${root}coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+        <a href="${root}claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+        <a href="${root}testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
+        <a href="${root}contact.html" data-en="Contact" data-es="Contacto">Contact</a>
       </nav>
 
       <!-- CONTROLS -->
@@ -66,13 +77,13 @@ function loadHeader() {
 
     <!-- MOBILE MENU -->
     <nav id="mobile-menu" class="mobile-menu">
-      <a href="/index.html" data-en="Home" data-es="Inicio">Home</a>
-      <a href="/services.html" data-en="Services" data-es="Servicios">Services</a>
-      <a href="/applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
-      <a href="/coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
-      <a href="/claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
-      <a href="/testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
-      <a href="/contact.html" data-en="Contact" data-es="Contacto">Contact</a>
+      <a href="${root}index.html" data-en="Home" data-es="Inicio">Home</a>
+      <a href="${root}services.html" data-en="Services" data-es="Servicios">Services</a>
+      <a href="${root}applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
+      <a href="${root}coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
+      <a href="${root}claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
+      <a href="${root}testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
+      <a href="${root}contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
 
     <!-- LOGIN PANEL (SLIDE-OUT) -->
@@ -199,7 +210,7 @@ function initLoginPanel() {
     }
 
     localStorage.setItem("acesUser", JSON.stringify(user));
-    window.location.href = "/ams/dashboard/dashboard.html";
+    window.location.href = `${getRootPath()}ams/dashboard/dashboard.html`;
   });
 
   // ESC close
@@ -249,7 +260,7 @@ function loadFooter() {
   const footer = document.getElementById("aces-footer");
   if (!footer) return;
 
-  fetch("/footer.html")
+  fetch(`${getRootPath()}footer.html`)
     .then(res => {
       if (!res.ok) throw new Error(`Footer load failed: ${res.status}`);
       return res.text();
@@ -330,11 +341,17 @@ function applyLanguage(lang) {
 ============================================================ */
 function setActiveNav() {
   const path = window.location.pathname;
+  const root = getRootPath();
+
   document.querySelectorAll(".nav-links a, #mobile-menu a").forEach(link => {
     const href = link.getAttribute("href");
+    if (!href) return;
+
+    const isHome = href === `${root}index.html`;
     const isActive =
       path === href ||
-      (href === "/index.html" && (path === "/" || path === "/insacestx.github.io/"));
+      (isHome && (path === root || path === `${root}index.html`));
+
     link.classList.toggle("active", isActive);
   });
 }
@@ -513,5 +530,5 @@ function initWizardNav() {
    NAVIGATION HELPER: BACK TO APPLICATIONS
 ============================================================ */
 function goBackToApplications() {
-  window.location.href = "/applications.html";
+  window.location.href = `${getRootPath()}applications.html`;
 }
