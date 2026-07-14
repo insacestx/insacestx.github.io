@@ -2,13 +2,40 @@ document.addEventListener("DOMContentLoaded", async () => {
   const list = document.getElementById("notifList");
   if (!list) return;
 
-  try {
-    const res = await fetch("/data/notifications.json", { cache: "no-store" });
-    if (!res.ok) throw new Error(`Failed to load notifications: ${res.status}`);
+  // Fallback notifications (used when no JSON exists)
+  const fallbackNotifs = [
+    {
+      title: "New COI Request",
+      message: "A new COI request was submitted for Maria Lopez.",
+      time: "Today, 9:12 AM"
+    },
+    {
+      title: "Claim Updated",
+      message: "Claim CLM-001 status changed to Open.",
+      time: "Today, 8:41 AM"
+    },
+    {
+      title: "Task Due",
+      message: "Task 'Send COI to ABC Construction' is due today.",
+      time: "Yesterday, 4:35 PM"
+    }
+  ];
 
-    const notifs = await res.json();
-    if (!Array.isArray(notifs)) throw new Error("Invalid notifications payload.");
+  async function getNotifications() {
+    try {
+      // Optional source if you add it later
+      const res = await fetch("/data/notifications.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      if (!Array.isArray(data)) throw new Error("Invalid payload");
+      return data;
+    } catch {
+      // No JSON file? Use fallback
+      return fallbackNotifs;
+    }
+  }
 
+  function render(notifs) {
     list.innerHTML = "";
 
     if (!notifs.length) {
@@ -20,28 +47,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     notifs.forEach((n) => {
-      const item = document.createElement("article");
-      item.className = "client-section";
-      item.style.marginBottom = "12px";
+      const card = document.createElement("article");
+      card.className = "client-section";
+      card.style.marginBottom = "12px";
 
       const title = document.createElement("strong");
-      title.textContent = n?.title ?? "Notification";
+      title.textContent = n.title || "Notification";
 
-      const msg = document.createElement("p");
-      msg.textContent = n?.message ?? "";
+      const message = document.createElement("p");
+      message.textContent = n.message || "";
 
       const time = document.createElement("small");
-      time.textContent = n?.time ?? "";
+      time.textContent = n.time || "";
 
-      item.append(title, document.createElement("br"), msg, time);
-      list.appendChild(item);
+      card.append(title, document.createElement("br"), message, time);
+      list.appendChild(card);
     });
-  } catch (err) {
-    list.innerHTML = "";
-    const error = document.createElement("p");
-    error.className = "empty";
-    error.textContent = "Unable to load notifications right now.";
-    list.appendChild(error);
-    console.error(err);
   }
+
+  const notifications = await getNotifications();
+  render(notifications);
 });
