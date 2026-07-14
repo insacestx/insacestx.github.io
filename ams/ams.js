@@ -9,6 +9,10 @@
 (() => {
   "use strict";
 
+  // Prevent double-initialization if script is included more than once
+  if (window.__AMS_BOOTSTRAPPED__) return;
+  window.__AMS_BOOTSTRAPPED__ = true;
+
   /* ============================================================
      DATA
   ============================================================ */
@@ -136,49 +140,49 @@
       title: "Independent Agent",
       phone: "254-289-2423",
       email: "george@insaces.com",
-      photo: "../images/agents/george.jpg"
+      photo: "/images/agents/george.jpg"
     },
     {
       name: "Bryan",
       title: "Co-Owner",
       phone: "254-289-2423",
       email: "bryan@insaces.com",
-      photo: "../images/agents/bryan.jpg"
+      photo: "/images/agents/bryan.jpg"
     },
     {
       name: "Jordan Jones",
       title: "Co-Owner",
       phone: "254-289-2423",
       email: "jordan@insaces.com",
-      photo: "../images/agents/jordan.jpg"
+      photo: "/images/agents/jordan.jpg"
     },
     {
       name: "Lanse Derrick",
       title: "Co-Owner",
       phone: "214-770-1488",
       email: "lanse@insaces.com",
-      photo: "../images/agents/lanse.jpg"
+      photo: "/images/agents/lanse.jpg"
     },
     {
       name: "Robert",
       title: "Co-Owner",
       phone: "254-555-7711",
       email: "robert@insaces.com",
-      photo: "../images/agents/robert.jpg"
+      photo: "/images/agents/robert.jpg"
     },
     {
       name: "Jimmy Rodriguez",
       title: "Agent",
       phone: "214-498-6928",
       email: "jimmy@insaces.com",
-      photo: "../images/agents/jimmy.jpg"
+      photo: "/images/agents/jimmy.jpg"
     },
     {
       name: "Renee Ridling",
       title: "Agent",
       phone: "254-227-6560",
       email: "office@insaces.com",
-      photo: "../images/agents/office.jpg"
+      photo: "/images/agents/office.jpg"
     }
   ];
 
@@ -762,7 +766,7 @@
           const li = document.createElement("li");
           li.textContent = c.name;
           li.addEventListener("click", () => {
-            window.location.href = `client-profile.html?name=${encodeURIComponent(c.name)}`;
+            window.location.href = `../clients/client-profile.html?name=${encodeURIComponent(c.name)}`;
           });
           clientList.appendChild(li);
         });
