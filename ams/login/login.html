@@ -3,45 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ACES AMS Login</title>
-  <meta name="robots" content="noindex,nofollow">
 
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/ams/login/login.css">
+  <title>ACES Agent Login</title>
 
-  <!-- Global header/footer injector -->
-  <script src="/global.js" defer></script>
-  <!-- Login logic -->
-  <script src="/ams/login/login.js" defer></script>
+  <!-- Main ACES Styles -->
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../wizard.css">
+
+  <!-- Login-specific styling -->
+  <link rel="stylesheet" href="login.css">
+
+  <!-- Global header/footer + login logic -->
+  <script src="../../global.js" defer></script>
+  <script src="login.js" defer></script>
 </head>
 
-<body class="login-page">
-  <header id="aces-header"></header>
+<body>
 
-  <main class="login-main" role="main">
-    <div class="login-container">
-      <section class="login-card" aria-label="Login form">
-        <h1>ACES Agent Login</h1>
+<header id="aces-header"></header>
 
-        <form id="loginForm" novalidate>
-          <label class="sr-only" for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="Email" class="login-input" autocomplete="username" required>
+<main>
+  <div class="login-wrapper">
 
-          <label class="sr-only" for="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="Password" class="login-input" autocomplete="current-password" required>
+    <h1>Agent Login</h1>
+    <p>Access your ACES dashboard</p>
 
-          <button id="loginBtn" class="login-btn" type="submit">Login</button>
-        </form>
-
-        <p id="loginError" class="login-error" role="alert" aria-live="polite" hidden></p>
-
-        <p class="login-note">
-          Temporary login system — Google OAuth coming soon.
-        </p>
-      </section>
+    <div class="login-field">
+      <label for="loginEmail">Email</label>
+      <input type="email" id="loginEmail" placeholder="agent@insaces.com">
     </div>
-  </main>
 
-  <footer id="aces-footer"></footer>
+    <div class="login-field">
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" placeholder="Enter password">
+    </div>
+
+    <button class="login-btn" id="loginSubmitBtn">Login</button>
+
+    <div id="loginError" class="login-error" style="display:none;">
+      Invalid email or password.
+    </div>
+
+  </div>
+</main>
+
+<footer id="aces-footer"></footer>
+
 </body>
 </html>
