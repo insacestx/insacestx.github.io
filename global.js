@@ -28,6 +28,19 @@ function getRootPath() {
   return "/";
 }
 
+function getRelativeRoot() {
+  // Calculate depth based on current path to use correct relative paths
+  const path = window.location.pathname;
+  // Count directory levels (ignore trailing filename)
+  const depth = (path.match(/\//g) || []).length - 1;
+  
+  // If we're at root level, no prefix needed
+  if (depth === 0) return "";
+  
+  // Otherwise, use ../ for each level deep
+  return "../".repeat(depth);
+}
+
 /* ============================================================
    HEADER INJECTION — GITHUB PAGES SAFE (NO ROOT LOGIC)
 ============================================================ */
@@ -35,8 +48,8 @@ function loadHeader() {
   const header = document.getElementById("aces-header");
   if (!header) return;
 
-  // Always use relative paths on GitHub Pages
-  const root = "";
+  // Use relative paths based on current depth
+  const root = getRelativeRoot();
 
   header.innerHTML = `
     <div class="header-container">
@@ -209,7 +222,8 @@ function initLoginPanel() {
     }
 
     localStorage.setItem("acesUser", JSON.stringify(user));
-    window.location.href = `${getRootPath()}ams/dashboard/dashboard.html`;
+    // Use absolute path for AMS dashboard to avoid relative path issues
+    window.location.href = "/ams/dashboard/dashboard.html";
   });
 
   // ESC close
@@ -259,7 +273,9 @@ function loadFooter() {
   const footer = document.getElementById("aces-footer");
   if (!footer) return;
 
-  fetch(`${getRootPath()}footer.html`)
+  const root = getRelativeRoot();
+
+  fetch(`${root}footer.html`)
     .then(res => {
       if (!res.ok) throw new Error(`Footer load failed: ${res.status}`);
       return res.text();
@@ -340,16 +356,17 @@ function applyLanguage(lang) {
 ============================================================ */
 function setActiveNav() {
   const path = window.location.pathname;
-  const root = getRootPath();
+  const root = getRelativeRoot();
 
   document.querySelectorAll(".nav-links a, #mobile-menu a").forEach(link => {
     const href = link.getAttribute("href");
     if (!href) return;
 
-    const isHome = href === `${root}index.html`;
+    const isHome = href === `${root}index.html` || href === "index.html";
     const isActive =
       path === href ||
-      (isHome && (path === root || path === `${root}index.html`));
+      path.endsWith(href) ||
+      (isHome && (path === "/" || path.endsWith("/index.html")));
 
     link.classList.toggle("active", isActive);
   });
@@ -529,5 +546,6 @@ function initWizardNav() {
    NAVIGATION HELPER: BACK TO APPLICATIONS
 ============================================================ */
 function goBackToApplications() {
-  window.location.href = `${getRootPath()}applications.html`;
+  const root = getRelativeRoot();
+  window.location.href = `${root}applications.html`;
 }
