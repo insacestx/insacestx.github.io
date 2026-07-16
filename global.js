@@ -42,8 +42,8 @@ function loadHeader() {
 
       <!-- LOGO -->
       <div class="logo-area">
-        <a href="${root}index.html" class="logo-link">
-          <img src="${root}images/image2.png" alt="ACES Insurance Logo" class="aces-logo">
+        <a href="${root}index.html" class="logo-link" aria-label="ACES Home">
+          <img src="${root}Icons/image2.png" alt="ACES Insurance Logo" class="aces-logo">
         </a>
       </div>
 
