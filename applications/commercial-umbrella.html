@@ -4,17 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title
-    data-en="Commercial Umbrella Insurance Application"
-    data-es="Solicitud de Seguro Umbrella Comercial">
-    Commercial Umbrella Insurance Application
+  <title data-en="Commercial Umbrella Application" data-es="Solicitud de Seguro Umbrella Comercial">
+    Commercial Umbrella Application
   </title>
 
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/wizard.css">
+  <!-- Correct GitHub Pages Paths -->
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../wizard.css">
 
-  <script src="/global.js" defer></script>
-  <script src="/wizard.js?app=commercialumbrella" defer></script>
+  <script src="../global.js" defer></script>
+  <script src="../wizard.js" defer></script>
 </head>
 
 <body>
@@ -23,19 +22,17 @@
 
 <main class="fade-in">
 
+  <!-- HERO -->
   <section class="auto-hero">
     <div class="auto-hero-inner">
 
-      <h1
-        data-en="Commercial Umbrella Insurance Application"
-        data-es="Solicitud de Seguro Umbrella Comercial">
-        Commercial Umbrella Insurance Application
+      <h1 data-en="Commercial Umbrella Application" data-es="Solicitud de Seguro Umbrella Comercial">
+        Commercial Umbrella Application
       </h1>
 
-      <p
-        data-en="Tell us about your business and underlying liability policies."
-        data-es="Cuéntenos sobre su negocio y sus pólizas de responsabilidad subyacentes.">
-        Tell us about your business and underlying liability policies.
+      <p data-en="Tell us about your underlying policies and desired umbrella limits."
+         data-es="Cuéntenos sobre sus pólizas subyacentes y los límites deseados del umbrella.">
+        Tell us about your underlying policies and desired umbrella limits.
       </p>
 
       <div id="wizard-tabs"></div>
@@ -43,6 +40,7 @@
     </div>
   </section>
 
+  <!-- WIZARD -->
   <section class="auto-app-wrapper">
     <div class="auto-app-card">
 
@@ -58,6 +56,137 @@
 </main>
 
 <footer id="aces-footer"></footer>
+
+<!-- ============================================================
+     EMBEDDED COMMERCIAL UMBRELLA CONFIG (DEFAULT QUESTIONS)
+============================================================ -->
+<script>
+  const applicationConfig = {
+    appName: "commercial-umbrella",
+    steps: [
+      {
+        id: "step1",
+        title_en: "Business Information",
+        title_es: "Información del Negocio",
+        fields: [
+          { type: "text", name: "businessName", label_en: "Business Name", label_es: "Nombre del Negocio", required: true },
+          { type: "text", name: "contactName", label_en: "Contact Name", label_es: "Nombre del Contacto", required: true },
+          { type: "tel", name: "contactPhone", label_en: "Contact Phone", label_es: "Teléfono del Contacto", required: true }
+        ]
+      },
+
+      {
+        id: "step2",
+        title_en: "Underlying Auto Policy",
+        title_es: "Póliza Subyacente de Auto",
+        fields: [
+          {
+            type: "number",
+            name: "autoLiability",
+            label_en: "Auto Liability Limit ($)",
+            label_es: "Límite de Responsabilidad de Auto ($)",
+            required: true
+          },
+          {
+            type: "textarea",
+            name: "autoNotes",
+            label_en: "Auto Policy Notes",
+            label_es: "Notas de la Póliza de Auto",
+            required: false
+          }
+        ]
+      },
+
+      {
+        id: "step3",
+        title_en: "Underlying General Liability",
+        title_es: "Responsabilidad General Subyacente",
+        fields: [
+          {
+            type: "number",
+            name: "glEachOcc",
+            label_en: "GL Each Occurrence Limit ($)",
+            label_es: "Límite por Incidente GL ($)",
+            required: true
+          },
+          {
+            type: "number",
+            name: "glAggregate",
+            label_en: "GL Aggregate Limit ($)",
+            label_es: "Límite Agregado GL ($)",
+            required: true
+          },
+          {
+            type: "textarea",
+            name: "glNotes",
+            label_en: "General Liability Notes",
+            label_es: "Notas de Responsabilidad General",
+            required: false
+          }
+        ]
+      },
+
+      {
+        id: "step4",
+        title_en: "Underlying Property / Other",
+        title_es: "Propiedad Subyacente / Otros",
+        fields: [
+          {
+            type: "number",
+            name: "propertyLimit",
+            label_en: "Property Limit ($)",
+            label_es: "Límite de Propiedad ($)",
+            required: false
+          },
+          {
+            type: "textarea",
+            name: "otherUnderlying",
+            label_en: "Other Underlying Policies",
+            label_es: "Otras Pólizas Subyacentes",
+            required: false
+          }
+        ]
+      },
+
+      {
+        id: "step5",
+        title_en: "Umbrella Coverage",
+        title_es: "Cobertura Umbrella",
+        fields: [
+          {
+            type: "number",
+            name: "umbrellaLimit",
+            label_en: "Desired Umbrella Limit ($)",
+            label_es: "Límite Deseado de Umbrella ($)",
+            required: true
+          },
+          {
+            type: "textarea",
+            name: "umbrellaNotes",
+            label_en: "Umbrella Notes",
+            label_es: "Notas del Umbrella",
+            required: false
+          }
+        ]
+      },
+
+      {
+        id: "step6",
+        title_en: "Additional Insureds",
+        title_es: "Asegurados Adicionales",
+        fields: [
+          {
+            type: "textarea",
+            name: "additionalInsureds",
+            label_en: "List Any Additional Insureds",
+            label_es: "Liste Cualquier Asegurado Adicional",
+            required: false
+          }
+        ]
+      }
+    ]
+  };
+</script>
 
 </body>
 </html>
