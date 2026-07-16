@@ -4,17 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title
-    data-en="Life Insurance Application"
-    data-es="Solicitud de Seguro de Vida">
+  <title data-en="Life Insurance Application" data-es="Solicitud de Seguro de Vida">
     Life Insurance Application
   </title>
 
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/wizard.css">
+  <!-- RELATIVE PATHS (GitHub Pages Safe) -->
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../wizard.css">
 
-  <script src="/global.js" defer></script>
-  <script src="/wizard.js?app=life" defer></script>
+  <script src="../global.js" defer></script>
+  <script src="../wizard.js" defer></script>
 </head>
 
 <body>
@@ -23,18 +22,16 @@
 
 <main class="fade-in">
 
+  <!-- HERO -->
   <section class="auto-hero">
     <div class="auto-hero-inner">
 
-      <h1
-        data-en="Life Insurance Application"
-        data-es="Solicitud de Seguro de Vida">
+      <h1 data-en="Life Insurance Application" data-es="Solicitud de Seguro de Vida">
         Life Insurance Application
       </h1>
 
-      <p
-        data-en="Tell us about the proposed insured and coverage requested."
-        data-es="Cuéntenos sobre el asegurado propuesto y la cobertura solicitada.">
+      <p data-en="Tell us about the proposed insured and coverage requested."
+         data-es="Cuéntenos sobre el asegurado propuesto y la cobertura solicitada.">
         Tell us about the proposed insured and coverage requested.
       </p>
 
@@ -43,6 +40,7 @@
     </div>
   </section>
 
+  <!-- WIZARD -->
   <section class="auto-app-wrapper">
     <div class="auto-app-card">
 
@@ -58,6 +56,98 @@
 </main>
 
 <footer id="aces-footer"></footer>
+
+<!-- ============================================================
+     EMBEDDED LIFE APPLICATION CONFIG (OPTION A)
+============================================================ -->
+<script>
+  const applicationConfig = {
+    appName: "life",
+    steps: [
+      {
+        id: "step1",
+        title_en: "Personal Information",
+        title_es: "Información Personal",
+        fields: [
+          {
+            type: "text",
+            name: "firstName",
+            label_en: "First Name",
+            label_es: "Nombre",
+            required: true
+          },
+          {
+            type: "text",
+            name: "lastName",
+            label_en: "Last Name",
+            label_es: "Apellido",
+            required: true
+          },
+          {
+            type: "date",
+            name: "dob",
+            label_en: "Date of Birth",
+            label_es: "Fecha de Nacimiento",
+            required: true
+          },
+          {
+            type: "select",
+            name: "tobacco",
+            label_en: "Tobacco Use",
+            label_es: "Uso de Tabaco",
+            required: true,
+            options_en: ["Yes", "No"],
+            options_es: ["Sí", "No"]
+          }
+        ]
+      },
+
+      {
+        id: "step2",
+        title_en: "Health Information",
+        title_es: "Información de Salud",
+        fields: [
+          {
+            type: "number",
+            name: "height",
+            label_en: "Height (inches)",
+            label_es: "Altura (pulgadas)",
+            required: true
+          },
+          {
+            type: "number",
+            name: "weight",
+            label_en: "Weight (lbs)",
+            label_es: "Peso (lbs)",
+            required: true
+          }
+        ]
+      },
+
+      {
+        id: "step3",
+        title_en: "Coverage Details",
+        title_es: "Detalles de Cobertura",
+        fields: [
+          {
+            type: "number",
+            name: "coverageAmount",
+            label_en: "Coverage Amount ($)",
+            label_es: "Monto de Cobertura ($)",
+            required: true
+          },
+          {
+            type: "textarea",
+            name: "beneficiaries",
+            label_en: "Beneficiaries",
+            label_es: "Beneficiarios",
+            required: true
+          }
+        ]
+      }
+    ]
+  };
+</script>
 
 </body>
 </html>
