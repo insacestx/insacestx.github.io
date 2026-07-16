@@ -2,62 +2,236 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Commercial Trucking Application | ACES Insurance Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title
-    data-en="Commercial Trucking Insurance Application"
-    data-es="Solicitud de Seguro para Camiones Comerciales">
-    Commercial Trucking Insurance Application
-  </title>
-
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/wizard.css">
-
-  <script src="/global.js" defer></script>
-  <script src="/wizard.js?app=commercialtrucking" defer></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../wizard.css">
 </head>
-
 <body>
 
-<header id="aces-header"></header>
+  <!-- HEADER -->
+  <header id="aces-header"></header>
 
-<main class="fade-in">
-
-  <section class="auto-hero">
-    <div class="auto-hero-inner">
-
-      <h1
-        data-en="Commercial Trucking Insurance Application"
-        data-es="Solicitud de Seguro para Camiones Comerciales">
-        Commercial Trucking Insurance Application
-      </h1>
-
-      <p
-        data-en="Tell us about your fleet, drivers, and operations."
-        data-es="Cuéntenos sobre su flota, sus conductores y sus operaciones.">
-        Tell us about your fleet, drivers, and operations.
-      </p>
-
-      <div id="wizard-tabs"></div>
-
-    </div>
-  </section>
-
-  <section class="auto-app-wrapper">
-    <div class="auto-app-card">
-
-      <div id="wizard-container"></div>
-
-      <div class="wizard-progress-bar">
-        <div id="wizard-progress"></div>
+  <!-- MAIN CONTENT -->
+  <main class="page-main">
+    <section class="hero hero-app">
+      <div class="hero-content">
+        <h1 data-en="Commercial Trucking Application" data-es="Solicitud de Seguro de Camiones Comerciales">
+          Commercial Trucking Application
+        </h1>
+        <p data-en="Tell us about your trucking operation so we can tailor coverage to your needs."
+           data-es="Cuéntenos sobre su operación de camiones para adaptar la cobertura a sus necesidades.">
+          Tell us about your trucking operation so we can tailor coverage to your needs.
+        </p>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- WIZARD CONTAINER -->
+    <section class="wizard-section">
+      <div id="wizard-root"></div>
+    </section>
+  </main>
 
-</main>
+  <!-- FOOTER -->
+  <footer id="aces-footer"></footer>
 
-<footer id="aces-footer"></footer>
+  <!-- ============================
+       EMBEDDED WIZARD CONFIG
+  ============================ -->
+  <script>
+    const applicationConfig = {
+      appName: "commercial-trucking",
+      steps: [
+        {
+          id: "step1",
+          title_en: "Business Information",
+          title_es: "Información del Negocio",
+          fields: [
+            {
+              type: "text",
+              name: "businessName",
+              label_en: "Business Name",
+              label_es: "Nombre del Negocio",
+              required: true
+            },
+            {
+              type: "text",
+              name: "dotNumber",
+              label_en: "DOT Number",
+              label_es: "Número DOT",
+              required: true
+            },
+            {
+              type: "text",
+              name: "mcNumber",
+              label_en: "MC Number",
+              label_es: "Número MC",
+              required: false
+            },
+            {
+              type: "text",
+              name: "contactName",
+              label_en: "Contact Name",
+              label_es: "Nombre del Contacto",
+              required: true
+            },
+            {
+              type: "tel",
+              name: "contactPhone",
+              label_en: "Contact Phone",
+              label_es: "Teléfono del Contacto",
+              required: true
+            },
+            {
+              type: "email",
+              name: "contactEmail",
+              label_en: "Contact Email",
+              label_es: "Correo Electrónico del Contacto",
+              required: false
+            }
+          ]
+        },
 
+        {
+          id: "step2",
+          title_en: "Vehicle Details",
+          title_es: "Detalles del Vehículo",
+          fields: [
+            {
+              type: "number",
+              name: "numVehicles",
+              label_en: "Number of Vehicles",
+              label_es: "Número de Vehículos",
+              required: true
+            },
+            {
+              type: "textarea",
+              name: "vehicleList",
+              label_en: "Vehicle List (Year / Make / Model / VIN)",
+              label_es: "Lista de Vehículos (Año / Marca / Modelo / VIN)",
+              required: true
+            }
+          ]
+        },
+
+        {
+          id: "step3",
+          title_en: "Driver Information",
+          title_es: "Información de Conductores",
+          fields: [
+            {
+              type: "number",
+              name: "numDrivers",
+              label_en: "Number of Drivers",
+              label_es: "Número de Conductores",
+              required: true
+            },
+            {
+              type: "textarea",
+              name: "driverList",
+              label_en: "Driver List (Name / DOB / License #)",
+              label_es: "Lista de Conductores (Nombre / Fecha de Nacimiento / Licencia)",
+              required: true
+            }
+          ]
+        },
+
+        {
+          id: "step4",
+          title_en: "Operations & Coverage",
+          title_es: "Operaciones y Cobertura",
+          fields: [
+            {
+              type: "select",
+              name: "cargoType",
+              label_en: "Cargo Type",
+              label_es: "Tipo de Carga",
+              required: true,
+              options_en: [
+                "General Freight",
+                "Refrigerated",
+                "Flatbed",
+                "Hazmat",
+                "Other"
+              ],
+              options_es: [
+                "Carga General",
+                "Refrigerada",
+                "Plataforma",
+                "Materiales Peligrosos",
+                "Otro"
+              ]
+            },
+            {
+              type: "select",
+              name: "radius",
+              label_en: "Radius of Operation",
+              label_es: "Radio de Operación",
+              required: true,
+              options_en: [
+                "0–50 miles",
+                "50–150 miles",
+                "150–300 miles",
+                "300+ miles"
+              ],
+              options_es: [
+                "0–50 millas",
+                "50–150 millas",
+                "150–300 millas",
+                "300+ millas"
+              ]
+            },
+            {
+              type: "number",
+              name: "liabilityLimit",
+              label_en: "Liability Limit ($)",
+              label_es: "Límite de Responsabilidad ($)",
+              required: true
+            },
+            {
+              type: "checkbox",
+              name: "physicalDamage",
+              label_en: "Physical Damage Coverage",
+              label_es: "Cobertura de Daños Físicos"
+            },
+            {
+              type: "checkbox",
+              name: "trailerInterchange",
+              label_en: "Trailer Interchange Coverage",
+              label_es: "Cobertura de Intercambio de Remolque"
+            }
+          ]
+        },
+
+        {
+          id: "step5",
+          title_en: "Additional Insureds & Notes",
+          title_es: "Asegurados Adicionales y Notas",
+          fields: [
+            {
+              type: "textarea",
+              name: "additionalInsureds",
+              label_en: "List Any Additional Insureds",
+              label_es: "Liste Cualquier Asegurado Adicional",
+              required: false
+            },
+            {
+              type: "textarea",
+              name: "notes",
+              label_en: "Additional Notes or Requirements",
+              label_es: "Notas Adicionales o Requisitos",
+              required: false
+            }
+          ]
+        }
+      ]
+    };
+  </script>
+
+  <!-- SCRIPTS -->
+  <script src="../global.js"></script>
+  <script src="../wizard.js"></script>
 </body>
 </html>
