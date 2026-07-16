@@ -29,13 +29,14 @@ function getRootPath() {
 }
 
 /* ============================================================
-   HEADER INJECTION
+   HEADER INJECTION — GITHUB PAGES SAFE (NO ROOT LOGIC)
 ============================================================ */
 function loadHeader() {
   const header = document.getElementById("aces-header");
   if (!header) return;
 
-  const root = getRootPath();
+  // Always use relative paths on GitHub Pages
+  const root = "";
 
   header.innerHTML = `
     <div class="header-container">
@@ -86,7 +87,7 @@ function loadHeader() {
       <a href="${root}contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
 
-    <!-- LOGIN PANEL (SLIDE-OUT) -->
+    <!-- LOGIN PANEL -->
     <aside id="loginPanel" class="login-panel" aria-hidden="true">
       <button id="loginCloseBtn" class="close-panel" type="button" aria-label="Close">×</button>
 
@@ -101,8 +102,6 @@ function loadHeader() {
       <input
         type="password"
         id="loginPassword"
-        data-en="Password"
-        data-es="Contraseña"
         placeholder="Password"
         autocomplete="current-password" />
 
