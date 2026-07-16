@@ -1,0 +1,95 @@
+/* ===========================
+   ACES Login Page Styling
+=========================== */
+
+:root {
+  --aces-primary: #d40000;
+  --aces-bg: #f7f8fb;
+  --aces-text: #1f2937;
+  --aces-border: rgba(0,0,0,0.12);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--aces-bg);
+  font-family: "Inter", sans-serif;
+  color: var(--aces-text);
+}
+
+/* Center wrapper */
+.login-wrapper {
+  max-width: 420px;
+  margin: 80px auto;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border: 1px solid var(--aces-border);
+}
+
+/* Title */
+.login-wrapper h1 {
+  margin: 0 0 10px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Subtitle */
+.login-wrapper p {
+  margin: 0 0 24px;
+  text-align: center;
+  color: #555;
+}
+
+/* Input fields */
+.login-field {
+  margin-bottom: 18px;
+}
+
+.login-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.login-field input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--aces-border);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.login-field input:focus {
+  border-color: var(--aces-primary);
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--aces-primary);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.login-btn:hover {
+  background: #ee0000;
+}
+
+/* Error message */
+.login-error {
+  margin-top: 12px;
+  color: #b00020;
+  font-weight: 600;
+  text-align: center;
+}
