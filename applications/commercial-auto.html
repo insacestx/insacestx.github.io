@@ -4,17 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title
-    data-en="Commercial Auto Insurance Application"
-    data-es="Solicitud de Seguro de Auto Comercial">
-    Commercial Auto Insurance Application
+  <title data-en="Commercial Auto Application" data-es="Solicitud de Seguro Comercial de Auto">
+    Commercial Auto Application
   </title>
 
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/wizard.css">
+  <!-- Correct GitHub Pages Paths -->
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../wizard.css">
 
-  <script src="/global.js" defer></script>
-  <script src="/wizard.js?app=commercialauto" defer></script>
+  <script src="../global.js" defer></script>
+  <script src="../wizard.js" defer></script>
 </head>
 
 <body>
@@ -23,19 +22,17 @@
 
 <main class="fade-in">
 
+  <!-- HERO -->
   <section class="auto-hero">
     <div class="auto-hero-inner">
 
-      <h1
-        data-en="Commercial Auto Insurance Application"
-        data-es="Solicitud de Seguro de Auto Comercial">
-        Commercial Auto Insurance Application
+      <h1 data-en="Commercial Auto Application" data-es="Solicitud de Seguro Comercial de Auto">
+        Commercial Auto Application
       </h1>
 
-      <p
-        data-en="Tell us about your business vehicles and operations."
-        data-es="Cuéntenos sobre sus vehículos comerciales y sus operaciones.">
-        Tell us about your business vehicles and operations.
+      <p data-en="Tell us about your business vehicles and drivers."
+         data-es="Cuéntenos sobre los vehículos y conductores de su negocio.">
+        Tell us about your business vehicles and drivers.
       </p>
 
       <div id="wizard-tabs"></div>
@@ -43,6 +40,7 @@
     </div>
   </section>
 
+  <!-- WIZARD -->
   <section class="auto-app-wrapper">
     <div class="auto-app-card">
 
@@ -58,6 +56,102 @@
 </main>
 
 <footer id="aces-footer"></footer>
+
+<!-- ============================================================
+     EMBEDDED COMMERCIAL AUTO CONFIG (DEFAULT QUESTIONS)
+============================================================ -->
+<script>
+  const applicationConfig = {
+    appName: "commercial-auto",
+    steps: [
+      {
+        id: "step1",
+        title_en: "Business Information",
+        title_es: "Información del Negocio",
+        fields: [
+          { type: "text", name: "businessName", label_en: "Business Name", label_es: "Nombre del Negocio", required: true },
+          { type: "text", name: "fein", label_en: "FEIN", label_es: "FEIN", required: false },
+          { type: "text", name: "contactName", label_en: "Contact Name", label_es: "Nombre del Contacto", required: true },
+          { type: "tel", name: "contactPhone", label_en: "Contact Phone", label_es: "Teléfono del Contacto", required: true }
+        ]
+      },
+
+      {
+        id: "step2",
+        title_en: "Vehicle List",
+        title_es: "Lista de Vehículos",
+        fields: [
+          { type: "number", name: "numVehicles", label_en: "Number of Vehicles", label_es: "Número de Vehículos", required: true },
+          {
+            type: "textarea",
+            name: "vehicleList",
+            label_en: "Vehicle List (Year / Make / Model / VIN)",
+            label_es: "Lista de Vehículos (Año / Marca / Modelo / VIN)",
+            required: true
+          }
+        ]
+      },
+
+      {
+        id: "step3",
+        title_en: "Driver List",
+        title_es: "Lista de Conductores",
+        fields: [
+          { type: "number", name: "numDrivers", label_en: "Number of Drivers", label_es: "Número de Conductores", required: true },
+          {
+            type: "textarea",
+            name: "driverList",
+            label_en: "Driver List (Name / DOB / License #)",
+            label_es: "Lista de Conductores (Nombre / Fecha de Nacimiento / Licencia)",
+            required: true
+          }
+        ]
+      },
+
+      {
+        id: "step4",
+        title_en: "Coverage Details",
+        title_es: "Detalles de Cobertura",
+        fields: [
+          {
+            type: "number",
+            name: "liabilityLimit",
+            label_en: "Liability Limit ($)",
+            label_es: "Límite de Responsabilidad ($)",
+            required: true
+          },
+          {
+            type: "checkbox",
+            name: "physicalDamage",
+            label_en: "Physical Damage Coverage",
+            label_es: "Cobertura de Daños Físicos"
+          },
+          {
+            type: "checkbox",
+            name: "umUim",
+            label_en: "UM/UIM Coverage",
+            label_es: "Cobertura UM/UIM"
+          }
+        ]
+      },
+
+      {
+        id: "step5",
+        title_en: "Additional Insureds",
+        title_es: "Asegurados Adicionales",
+        fields: [
+          {
+            type: "textarea",
+            name: "additionalInsureds",
+            label_en: "List Any Additional Insureds",
+            label_es: "Liste Cualquier Asegurado Adicional",
+            required: false
+          }
+        ]
+      }
+    ]
+  };
+</script>
 
 </body>
 </html>
