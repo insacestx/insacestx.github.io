@@ -50,9 +50,17 @@ function persistCurrentStepData() {
   });
 }
 
-/* Load config — MANIFEST‑DRIVEN */
+/* Load config — supports embedded or manifest-driven configs */
 async function loadConfig(appType) {
   try {
+    // First check if there's an embedded applicationConfig in the HTML page
+    if (typeof window.applicationConfig !== 'undefined') {
+      wizardConfig = window.applicationConfig;
+      console.log('Using embedded applicationConfig');
+      return;
+    }
+
+    // If no embedded config, load from manifest (existing logic)
     const base = window.location.pathname.includes("insacestx.github.io")
       ? "/insacestx.github.io"
       : "";
