@@ -53,6 +53,11 @@ function persistCurrentStepData() {
 /* Load config — MANIFEST‑DRIVEN */
 async function loadConfig(appType) {
   try {
+    if (typeof window.applicationConfig !== "undefined") {
+      wizardConfig = window.applicationConfig;
+      return;
+    }
+
     const base = window.location.pathname.includes("insacestx.github.io")
       ? "/insacestx.github.io"
       : "";
@@ -81,6 +86,16 @@ async function loadConfig(appType) {
 
 /* Init */
 async function initWizard() {
+  // Prefer embedded config when page defines it inline
+  if (typeof window.applicationConfig !== "undefined") {
+    wizardConfig = window.applicationConfig;
+    console.log("Using embedded applicationConfig");
+    buildTabs();
+    buildStep(0);
+    updateProgress();
+    return;
+  }
+
   const appType = getAppType();
   if (!appType) {
     const container = document.getElementById("wizard-container");
