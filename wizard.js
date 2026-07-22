@@ -81,6 +81,17 @@ async function loadConfig(appType) {
 
 /* Init */
 async function initWizard() {
+  // PRIORITY 1: Check for embedded applicationConfig in the HTML page
+  if (typeof window.applicationConfig !== 'undefined' && window.applicationConfig !== null) {
+    wizardConfig = window.applicationConfig;
+    console.log('✓ Using embedded applicationConfig');
+    buildTabs();
+    buildStep(0);
+    updateProgress();
+    return;
+  }
+
+  // PRIORITY 2: Load from manifest if no embedded config
   const appType = getAppType();
   if (!appType) {
     const container = document.getElementById("wizard-container");
@@ -90,6 +101,7 @@ async function initWizard() {
     return;
   }
 
+  console.log('Loading config from manifest for app:', appType);
   await loadConfig(appType);
   if (!wizardConfig) return;
 
