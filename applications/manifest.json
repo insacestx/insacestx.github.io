@@ -1,4 +1,125 @@
 {
+  "auto": {
+    "name_en": "Auto Insurance",
+    "name_es": "Seguro de Auto",
+    "category": "personal",
+    "config": "/applications/config/auto-config.js",
+    "page": "/applications/auto.html",
+    "icon": "Icons/icon-auto-aces.png",
+    "description_en": "Coverage for your personal vehicle.",
+    "description_es": "Cobertura para su vehículo personal."
+  },
+
+  "homeowners": {
+    "name_en": "Homeowners Insurance",
+    "name_es": "Seguro de Casa",
+    "category": "personal",
+    "config": "/applications/config/homeowners-config.js",
+    "page": "/applications/homeowners.html",
+    "icon": "Icons/icon-property-aces.png",
+    "description_en": "Protection for your home and belongings.",
+    "description_es": "Protección para su casa y pertenencias."
+  },
+
+  "renters": {
+    "name_en": "Renters Insurance",
+    "name_es": "Seguro de Inquilino",
+    "category": "personal",
+    "config": "/applications/config/renters-config.js",
+    "page": "/applications/renters.html",
+    "icon": "Icons/icon-renters-aces.png",
+    "description_en": "Coverage for your rental property and belongings.",
+    "description_es": "Cobertura para su vivienda rentada y pertenencias."
+  },
+
+  "motorcycle": {
+    "name_en": "Motorcycle Insurance",
+    "name_es": "Seguro de Motocicleta",
+    "category": "personal",
+    "config": "/applications/config/motorcycle-config.js",
+    "page": "/applications/motorcycle.html",
+    "icon": "Icons/icon-motorcycle-aces.png",
+    "description_en": "Coverage for your motorcycle and riding needs.",
+    "description_es": "Cobertura para su motocicleta y necesidades de manejo."
+  },
+
+  "boat": {
+    "name_en": "Boat Insurance",
+    "name_es": "Seguro para Embarcaciones",
+    "category": "personal",
+    "config": "/applications/config/boat-config.js",
+    "page": "/applications/boat.html",
+    "icon": "Icons/icon-boat-aces.png",
+    "description_en": "Coverage for your vessel and watercraft.",
+    "description_es": "Cobertura para su embarcación."
+  },
+
+  "rv": {
+    "name_en": "RV Insurance",
+    "name_es": "Seguro para RV",
+    "category": "personal",
+    "config": "/applications/config/rv-config.js",
+    "page": "/applications/rv.html",
+    "icon": "Icons/icon-rv-aces.png",
+    "description_en": "Coverage for your recreational vehicle.",
+    "description_es": "Cobertura para su vehículo recreativo."
+  },
+
+  "atv": {
+    "name_en": "ATV / UTV Insurance",
+    "name_es": "Seguro ATV / UTV",
+    "category": "personal",
+    "config": "/applications/config/atv-config.js",
+    "page": "/applications/atv.html",
+    "icon": "Icons/icon-atv-aces.png",
+    "description_en": "Coverage for your off-road vehicle.",
+    "description_es": "Cobertura para su vehículo todoterreno."
+  },
+
+  "condo": {
+    "name_en": "Condo Insurance",
+    "name_es": "Seguro de Condominio",
+    "category": "personal",
+    "config": "/applications/config/condo-config.js",
+    "page": "/applications/condo.html",
+    "icon": "Icons/icon-condo-aces.png",
+    "description_en": "Protection for your condo unit.",
+    "description_es": "Protección para su unidad de condominio."
+  },
+
+  "flood": {
+    "name_en": "Flood Insurance",
+    "name_es": "Seguro contra Inundaciones",
+    "category": "personal",
+    "config": "/applications/config/flood-config.js",
+    "page": "/applications/flood.html",
+    "icon": "Icons/icon-flood-aces.png",
+    "description_en": "Coverage for flood-related property damage.",
+    "description_es": "Cobertura contra daños por inundaciones."
+  },
+
+  "umbrella": {
+    "name_en": "Personal Umbrella Insurance",
+    "name_es": "Seguro Umbrella Personal",
+    "category": "personal",
+    "config": "/applications/config/umbrella-config.js",
+    "page": "/applications/umbrella.html",
+    "icon": "Icons/icon-umbrella-aces.png",
+    "description_en": "Extra liability protection for your household.",
+    "description_es": "Protección adicional de responsabilidad para su hogar."
+  },
+
+  "life": {
+    "name_en": "Life Insurance",
+    "name_es": "Seguro de Vida",
+    "category": "life",
+    "config": "/applications/config/life-config.js",
+    "page": "/applications/life.html",
+    "icon": "Icons/icon-life-aces.png",
+    "description_en": "Coverage to protect your family’s future.",
+    "description_es": "Cobertura para proteger el futuro de su familia."
+  },
+
   "commercialauto": {
     "name_en": "Commercial Auto Insurance",
     "name_es": "Seguro de Auto Comercial",
@@ -21,6 +142,39 @@
     "description_es": "Cobertura para flotas y operaciones de camiones."
   },
 
+  "bop": {
+    "name_en": "Business Owners Policy (BOP)",
+    "name_es": "Póliza para Dueños de Negocio (BOP)",
+    "category": "commercial",
+    "config": "/applications/config/bop-config.js",
+    "page": "/applications/bop.html",
+    "icon": "Icons/icon-bop-aces.png",
+    "description_en": "Package policy for small businesses.",
+    "description_es": "Póliza combinada para pequeños negocios."
+  },
+
+  "gl": {
+    "name_en": "General Liability Insurance",
+    "name_es": "Seguro de Responsabilidad General",
+    "category": "commercial",
+    "config": "/applications/config/gl-config.js",
+    "page": "/applications/gl.html",
+    "icon": "Icons/icon-gl-aces.png",
+    "description_en": "Protection against business liability claims.",
+    "description_es": "Protección contra reclamaciones de responsabilidad comercial."
+  },
+
+  "cyber": {
+    "name_en": "Cyber Liability Insurance",
+    "name_es": "Seguro de Responsabilidad Cibernética",
+    "category": "commercial",
+    "config": "/applications/config/cyber-config.js",
+    "page": "/applications/cyber.html",
+    "icon": "Icons/icon-cyber-aces.png",
+    "description_en": "Protection against cyber attacks and data breaches.",
+    "description_es": "Protección contra ataques cibernéticos y filtraciones de datos."
+  },
+
   "commercialproperty": {
     "name_en": "Commercial Property Insurance",
     "name_es": "Seguro de Propiedad Comercial",
@@ -32,11 +186,44 @@
     "description_es": "Cobertura para edificios, equipo e inventario."
   },
 
+  "workerscomp": {
+    "name_en": "Workers Compensation Insurance",
+    "name_es": "Seguro de Compensación para Trabajadores",
+    "category": "commercial",
+    "config": "/applications/config/workerscomp-config.js",
+    "page": "/applications/workerscomp.html",
+    "icon": "Icons/icon-workerscomp-aces.png",
+    "description_en": "Coverage for employee injuries and payroll risks.",
+    "description_es": "Cobertura para lesiones de empleados y riesgos de nómina."
+  },
+
+  "surety": {
+    "name_en": "Surety Bond",
+    "name_es": "Fianza (Surety Bond)",
+    "category": "commercial",
+    "config": "/applications/config/surety-config.js",
+    "page": "/applications/surety.html",
+    "icon": "Icons/icon-surety-aces.png",
+    "description_en": "Bonds for licensing, permits, and contracts.",
+    "description_es": "Fianzas para licencias, permisos y contratos."
+  },
+
+  "eo": {
+    "name_en": "Errors & Omissions (E&O)",
+    "name_es": "Errores y Omisiones (E&O)",
+    "category": "commercial",
+    "config": "/applications/config/eo-config.js",
+    "page": "/applications/eo.html",
+    "icon": "Icons/icon-e&o-aces.png",
+    "description_en": "Professional liability protection.",
+    "description_es": "Protección de responsabilidad profesional."
+  },
+
   "commercialumbrella": {
     "name_en": "Commercial Umbrella Insurance",
     "name_es": "Seguro Umbrella Comercial",
     "category": "commercial",
-    "config": "/applications/config/commercial-umbrella-config.js",
+    "config": "/applications/config/umbrella-commercial-config.js",
     "page": "/applications/commercial-umbrella.html",
     "icon": "Icons/icon-umbrella-aces.png",
     "description_en": "Extra liability protection for businesses.",
