@@ -52,29 +52,58 @@ function persistCurrentStepData() {
 
 /* Load config — MANIFEST‑DRIVEN */
 async function loadConfig(appType) {
+  const container = document.getElementById("wizard-container");
+
   try {
     const base = window.location.pathname.includes("insacestx.github.io")
       ? "/insacestx.github.io"
       : "";
 
-    // Load manifest.json
-    const manifestRes = await fetch(`${base}/applications/manifest.json`);
+    // 1) Load manifest with explicit error handling
+    const manifestUrl = `${base}/applications/manifest.json`;
+    const manifestRes = await fetch(manifestUrl, { cache: "no-store" });
+    if (!manifestRes.ok) {
+      throw new Error(`Manifest fetch failed: ${manifestRes.status} ${manifestRes.statusText} (${manifestUrl})`);
+    }
+
     const manifest = await manifestRes.json();
 
+    // 2) Validate app key
     if (!manifest[appType]) {
       throw new Error(`Application '${appType}' not found in manifest.`);
     }
 
-    // Load config file from manifest.json
+    // 3) Validate config path
     const configPath = manifest[appType].config;
-    const module = await import(`${base}${configPath}`);
+    if (!configPath || typeof configPath !== "string") {
+      throw new Error(`Missing/invalid config path for app '${appType}'.`);
+    }
+
+    // 4) Dynamic import
+    const importUrl = `${base}${configPath}`;
+    const module = await import(importUrl);
+
+    if (!module || !module.default) {
+      throw new Error(`Config module has no default export: ${importUrl}`);
+    }
 
     wizardConfig = module.default;
-  } catch (err) {
-    const container = document.getElementById("wizard-container");
-    if (container) {
-      container.innerHTML = `<p style="color:red;">${getText("configError")}</p>`;
+
+    if (!wizardConfig.steps || !Array.isArray(wizardConfig.steps)) {
+      throw new Error(`Invalid wizard config format (steps missing/invalid): ${importUrl}`);
     }
+  } catch (err) {
+    wizardConfig = null;
+
+    if (container) {
+      container.innerHTML = `
+        <p style="color:red;">${getText("configError")}</p>
+        <p style="color:#666;font-size:0.9rem;">
+          ${isSpanish() ? "Tipo de solicitud:" : "Application type:"} <strong>${appType || "(none)"}</strong>
+        </p>
+      `;
+    }
+
     console.error("Error loading config for app:", appType, err);
   }
 }
