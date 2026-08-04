@@ -1215,21 +1215,23 @@ section {
 ============================================================ */
 
 /* The outer container for your wide, top hero graphic */
-.product-hero-container {
+.product-hero-container{
   width: 100%;
-  max-width: 100%;
   margin: 0 auto;
   padding: 0;
-  display: block;
-  overflow: visible; /* was hidden */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff; /* or #f8f8f8 if you want subtle letterbox */
 }
 
-.product-hero-banner {
+.product-hero-banner{
   width: 100%;
-  height: auto;
-  max-height: none;  /* remove height cap */
+  height: clamp(180px, 28vw, 340px); /* smaller visual height */
+  object-fit: contain;               /* keep full image visible */
+  object-position: center;
   display: block;
-  object-fit: contain; /* was cover */
 }
 
 /* Center-aligns the Title, Icon, and Subtitle block */
