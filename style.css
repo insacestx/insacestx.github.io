@@ -1215,7 +1215,7 @@ section {
 ============================================================ */
 
 /* The outer container for your wide, top hero graphic */
-.product-hero-container{
+.product-hero-container {
   width: 100%;
   margin: 0 auto;
   padding: 0;
@@ -1223,7 +1223,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff; /* or #f8f8f8 if you want subtle letterbox */
+  background: #fff;
 }
 
 .product-hero-container,
@@ -1231,11 +1231,12 @@ section {
   box-sizing: border-box;
 }
 
-.product-hero-banner{
+/* Hero Banner Image - Full width with controlled height */
+.product-hero-banner {
   width: 100%;
-  height: clamp(160px, 24vw, 280px); /* smaller visual height */
-  object-fit: contain;               /* keep full image visible */
-  object-position: center;
+  height: clamp(250px, 30vw, 400px);  /* Responsive height: 250px min, 400px max */
+  object-fit: cover;                  /* Fills container, maintains aspect ratio */
+  object-position: center;            /* Centers the focal point */
   display: block;
 }
 
@@ -1261,6 +1262,7 @@ section {
   margin: 20px auto;
   display: block;
   object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(212,0,0,0.2));
 }
 
 .product-hero-sub {
@@ -1293,71 +1295,112 @@ section {
 
 /* Centers list components cleanly without breaking indentation */
 .product-list {
-  list-style-position: inside;
+  list-style: none;
   padding: 0;
-  text-align: center;
+  text-align: left;
   display: inline-block;
+  margin: 20px 0;
 }
 
 .product-list li {
   font-size: 1.05rem;
   color: #374151;
   margin: 12px 0;
-  text-align: left; /* Keeps text left-aligned inside the centered block */
+  padding-left: 30px;
+  position: relative;
 }
 
-/* FAQ Block formatting updates */
+/* Red checkmark bullet */
+.product-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #d40000;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+/* FAQ Block formatting */
 .faq-item {
   margin-bottom: 35px;
-  text-align: center;
+  padding: 20px;
+  background: rgba(255, 245, 245, 0.5);
+  border-radius: 10px;
+  border-left: 4px solid #d40000;
+  text-align: left;
 }
 
 .faq-item h3 {
   font-size: 1.2rem;
-  color: #1f2937;
-  margin-bottom: 8px;
+  color: #b00000;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.faq-item p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* Call to Action Wrapper */
 .product-cta {
   text-align: center;
   margin: 60px auto;
+  padding: 50px 20px;
+  background: linear-gradient(180deg, #fff5f5 0%, #ffeaea 100%);
 }
 
 .product-cta-btn {
   display: inline-block;
   padding: 14px 32px;
-  background: #b30000;
+  background: #d40000;
   color: #fff;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 600;
   font-size: 1.1rem;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(212, 0, 0, 0.2);
 }
 
 .product-cta-btn:hover {
-  background: #d40000;
+  background: #ee0000;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 0, 0, 0.3);
+}
+
+/* Fade-in animation for sections */
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
 }
 
 /* Responsive Mobile Modifications */
 @media (max-width: 768px) {
+  .product-hero-banner {
+    height: clamp(200px, 35vw, 280px);  /* Smaller height on mobile */
+  }
+
   .product-title-section h1 {
     font-size: 2rem;
-  }
-  
-  .product-hero-banner {
-    max-height: 250px; /* Thins down the hero photo display on mobile */
   }
 
   .product-section h2 {
     font-size: 1.5rem;
   }
-  
+
   .product-type-icon {
     width: 85px;
     height: 85px;
+  }
+
+  .product-hero-sub {
+    font-size: 1.05rem;
+  }
+
+  .product-list li {
+    font-size: 1rem;
   }
 }
 /* ============================================================
