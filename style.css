@@ -1221,16 +1221,15 @@ section {
   margin: 0 auto;
   padding: 0;
   display: block;
-  overflow: hidden;
+  overflow: visible; /* was hidden */
 }
 
-/* Forces the wide banner to scale perfectly across the screen */
 .product-hero-banner {
   width: 100%;
   height: auto;
-  max-height: 450px; /* Adjusts the banner's maximum visible thickness */
+  max-height: none;  /* remove height cap */
   display: block;
-  object-fit: cover;
+  object-fit: contain; /* was cover */
 }
 
 /* Center-aligns the Title, Icon, and Subtitle block */
