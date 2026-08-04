@@ -2869,3 +2869,166 @@ section.coi-hero p {
     width: 100%;
   }
 }
+
+/* ============================================================
+   HERO IMAGES OPTIMIZATION PATCH
+   Add this at the end of style.css
+============================================================ */
+
+/* Service Hero Variant - For pages using hero service images */
+.aces-hero.service-hero {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 400px;
+  position: relative;
+  padding: 100px 20px 80px;
+}
+
+/* Light overlay for better text readability */
+.aces-hero.service-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+/* Ensure content stays above overlay */
+.aces-hero.service-hero .aces-hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* Individual service hero backgrounds - OPTIMIZED JPGs */
+.hero-auto {
+  background-image: url('Icons/heroservices-optimized/hero-services-auto.jpg');
+}
+
+.hero-home {
+  background-image: url('Icons/heroservices-optimized/hero-services-home.jpg');
+}
+
+.hero-motorcycle {
+  background-image: url('Icons/heroservices-optimized/hero-services-motorcycle.jpg');
+}
+
+.hero-boat {
+  background-image: url('Icons/heroservices-optimized/hero-services-boat.jpg');
+}
+
+.hero-rv {
+  background-image: url('Icons/heroservices-optimized/hero-services-rv.jpg');
+}
+
+.hero-atv {
+  background-image: url('Icons/heroservices-optimized/hero-services-atv.jpg');
+}
+
+.hero-renters {
+  background-image: url('Icons/heroservices-optimized/hero-services-renters.jpg');
+}
+
+.hero-condo {
+  background-image: url('Icons/heroservices-optimized/hero-services-condo.jpg');
+}
+
+.hero-bundle {
+  background-image: url('Icons/heroservices-optimized/hero-services-bundle.jpg');
+}
+
+.hero-personal-umbrella {
+  background-image: url('Icons/heroservices-optimized/hero-services-personalumbrella.jpg');
+}
+
+.hero-life {
+  background-image: url('Icons/heroservices-optimized/hero-services-life.jpg');
+}
+
+.hero-term-life {
+  background-image: url('Icons/heroservices-optimized/hero-services-termlife.jpg');
+}
+
+.hero-whole-life {
+  background-image: url('Icons/heroservices-optimized/hero-services-wholelife.jpg');
+}
+
+.hero-final-expense {
+  background-image: url('Icons/heroservices-optimized/hero-services-finalexpense.jpg');
+}
+
+.hero-bop {
+  background-image: url('Icons/heroservices-optimized/hero-services-bop.jpg');
+}
+
+.hero-gl {
+  background-image: url('Icons/heroservices-optimized/hero-services-gl.jpg');
+}
+
+.hero-commercial-auto {
+  background-image: url('Icons/heroservices-optimized/hero-services-commercialauto.jpg');
+}
+
+.hero-commercial-prop {
+  background-image: url('Icons/heroservices-optimized/hero-services-commercialprop.jpg');
+}
+
+.hero-commercial-trucking {
+  background-image: url('Icons/heroservices-optimized/hero-services-commtrucking.jpg');
+}
+
+.hero-commercial-umbrella {
+  background-image: url('Icons/heroservices-optimized/hero-services-commumbrella.jpg');
+}
+
+.hero-workers-comp {
+  background-image: url('Icons/heroservices-optimized/hero-services-workerscomp.jpg');
+}
+
+.hero-inland-marine {
+  background-image: url('Icons/heroservices-optimized/hero-services-inlandmarine.jpg');
+}
+
+.hero-eo {
+  background-image: url('Icons/heroservices-optimized/hero-services-eo.jpg');
+}
+
+.hero-cyber {
+  background-image: url('Icons/heroservices-optimized/hero-services-cyber.jpg');
+}
+
+.hero-surety-bond {
+  background-image: url('Icons/heroservices-optimized/hero-services-suretybond.jpg');
+}
+
+/* Responsive adjustments for service heroes */
+@media (max-width: 768px) {
+  .aces-hero.service-hero {
+    min-height: 320px;
+    padding: 80px 20px 60px;
+    background-position: center center;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .aces-hero.service-hero {
+    min-height: 360px;
+    background-position: center 40%;
+  }
+}
+
+@media (min-width: 1201px) {
+  .aces-hero.service-hero {
+    min-height: 450px;
+    background-position: center 35%;
+  }
+}
+
+/* Large displays optimization */
+@media (min-width: 1920px) {
+  .aces-hero.service-hero {
+    background-size: contain;
+    background-color: #fff5f5;
+  }
+}
