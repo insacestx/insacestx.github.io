@@ -1228,7 +1228,7 @@ section {
 
 .product-hero-banner{
   width: 100%;
-  height: clamp(180px, 28vw, 340px); /* smaller visual height */
+  height: clamp(160px, 24vw, 280px); /* smaller visual height */
   object-fit: contain;               /* keep full image visible */
   object-position: center;
   display: block;
