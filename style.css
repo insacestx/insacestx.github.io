@@ -1226,6 +1226,11 @@ section {
   background: #fff; /* or #f8f8f8 if you want subtle letterbox */
 }
 
+.product-hero-container,
+.product-hero-container * {
+  box-sizing: border-box;
+}
+
 .product-hero-banner{
   width: 100%;
   height: clamp(160px, 24vw, 280px); /* smaller visual height */
