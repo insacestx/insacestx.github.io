@@ -1214,7 +1214,6 @@ section {
    SERVICE DETAIL HERO (Full Banner Layout) — ACES 2026
 ============================================================ */
 
-/* The outer container for your wide, top hero graphic */
 .product-hero-container {
   width: 100%;
   margin: 0 auto;
@@ -1234,9 +1233,9 @@ section {
 /* Hero Banner Image - Full width with controlled height */
 .product-hero-banner {
   width: 100%;
-  height: clamp(250px, 30vw, 400px);  /* Responsive height: 250px min, 400px max */
-  object-fit: cover;                  /* Fills container, maintains aspect ratio */
-  object-position: center;            /* Centers the focal point */
+  height: clamp(250px, 30vw, 400px);
+  object-fit: cover;
+  object-position: center top;  /* Shows more of the top portion */
   display: block;
 }
 
@@ -1255,7 +1254,6 @@ section {
   font-weight: 700;
 }
 
-/* Beautifully maps your small PNG icon right under the title */
 .product-type-icon {
   width: 100px;
   height: 100px;
@@ -1272,7 +1270,6 @@ section {
   margin-top: 10px;
 }
 
-/* Centered global structural spacing for product body sections */
 .product-section {
   margin: 60px auto;
   padding: 0 24px;
@@ -1293,7 +1290,6 @@ section {
   line-height: 1.6;
 }
 
-/* Centers list components cleanly without breaking indentation */
 .product-list {
   list-style: none;
   padding: 0;
@@ -1310,7 +1306,6 @@ section {
   position: relative;
 }
 
-/* Red checkmark bullet */
 .product-list li::before {
   content: "✓";
   position: absolute;
@@ -1320,7 +1315,6 @@ section {
   font-size: 1.3rem;
 }
 
-/* FAQ Block formatting */
 .faq-item {
   margin-bottom: 35px;
   padding: 20px;
@@ -1344,7 +1338,6 @@ section {
   margin: 0;
 }
 
-/* Call to Action Wrapper */
 .product-cta {
   text-align: center;
   margin: 60px auto;
@@ -1371,15 +1364,14 @@ section {
   box-shadow: 0 6px 20px rgba(212, 0, 0, 0.3);
 }
 
-/* Fade-in animation for sections */
 .fade-in {
   animation: fadeIn 0.6s ease forwards;
 }
 
-/* Responsive Mobile Modifications */
 @media (max-width: 768px) {
   .product-hero-banner {
-    height: clamp(200px, 35vw, 280px);  /* Smaller height on mobile */
+    height: clamp(200px, 35vw, 280px);
+    object-position: center top;  /* Keep top alignment on mobile too */
   }
 
   .product-title-section h1 {
@@ -1403,6 +1395,7 @@ section {
     font-size: 1rem;
   }
 }
+
 /* ============================================================
    ACES 2026 — UNIVERSAL WIZARD (RED THEME + HYBRID LAYOUT)
    Fully Isolated Namespace: .aces-wizard
