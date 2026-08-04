@@ -524,11 +524,11 @@ section {
 
 .team-img {
   width: 100%;
-
+  aspect-ratio: 4 / 5;
   border-radius: 10px;
   margin-bottom: 10px;
   object-fit: cover;
-
+  object-position: center;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
