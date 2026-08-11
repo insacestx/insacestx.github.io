@@ -65,7 +65,6 @@ function loadHeader() {
       <nav class="nav-links">
         <a href="${root}index.html" data-en="Home" data-es="Inicio">Home</a>
         <a href="${root}services.html" data-en="Services" data-es="Servicios">Services</a>
-        <a href="${root}applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
         <a href="${root}coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
         <a href="${root}claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
         <a href="${root}testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
@@ -93,7 +92,6 @@ function loadHeader() {
     <nav id="mobile-menu" class="mobile-menu">
       <a href="${root}index.html" data-en="Home" data-es="Inicio">Home</a>
       <a href="${root}services.html" data-en="Services" data-es="Servicios">Services</a>
-      <a href="${root}applications.html" data-en="Applications" data-es="Solicitudes">Applications</a>
       <a href="${root}coi.html" data-en="COI Request" data-es="Solicitud de COI">COI Request</a>
       <a href="${root}claims.html" data-en="Claims" data-es="Reclamos">Claims</a>
       <a href="${root}testimonials.html" data-en="Testimonials" data-es="Testimonios">Testimonials</a>
@@ -547,5 +545,5 @@ function initWizardNav() {
 ============================================================ */
 function goBackToApplications() {
   const root = getRelativeRoot();
-  window.location.href = `${root}applications.html`;
+  window.location.href = `${root}services.html`;
 }
