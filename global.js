@@ -11,8 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileMenu();
   initAgentPanel();
   initQuotePanel();
-  initLoginPanel();
-
   initRoundRobinEmail();
   initWizardNav();
 });
@@ -76,15 +74,6 @@ function loadHeader() {
       <div class="header-controls">
         <button id="lang-toggle" class="lang-btn" type="button">EN / ES</button>
 
-        <button
-          id="agent-login-btn"
-          class="agent-login-btn"
-          type="button"
-          data-en="Agent Login"
-          data-es="Acceso de Agente">
-          Agent Login
-        </button>
-
         <button id="mobile-menu-btn" class="mobile-menu-btn" type="button">☰</button>
       </div>
     </div>
@@ -100,139 +89,7 @@ function loadHeader() {
       <a href="${root}contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
 
-    <!-- LOGIN PANEL -->
-    <aside id="loginPanel" class="login-panel" aria-hidden="true">
-      <button id="loginCloseBtn" class="close-panel" type="button" aria-label="Close">×</button>
-
-      <h2 data-en="Agent Login" data-es="Acceso de Agente">Agent Login</h2>
-
-      <label for="loginAgentSelect" data-en="Agent" data-es="Agente">Agent</label>
-      <select id="loginAgentSelect" class="login-agent-select" required>
-        <option value="" disabled selected data-en="Select your name" data-es="Seleccione su nombre">Select your name</option>
-      </select>
-
-      <label for="loginPassword" data-en="Password" data-es="Contraseña">Password</label>
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Password"
-        autocomplete="current-password" />
-
-      <button id="loginSubmitBtn" class="login-submit-btn" type="button" data-en="Login" data-es="Iniciar Sesión">
-        Login
-      </button>
-    </aside>
   `;
-}
-
-/* ============================================================
-   LOGIN PANEL
-============================================================ */
-function initLoginPanel() {
-  const loginBtn = document.getElementById("agent-login-btn");
-  const panel = document.getElementById("loginPanel");
-  const closeBtn = document.getElementById("loginCloseBtn");
-  const submitBtn = document.getElementById("loginSubmitBtn");
-  const agentSelect = document.getElementById("loginAgentSelect");
-  const passwordInput = document.getElementById("loginPassword");
-
-  if (!loginBtn || !panel || !closeBtn || !submitBtn || !agentSelect || !passwordInput) return;
-
-  const fallbackAgents = [
-    { name: "George Santibañez", email: "george@insaces.com", role: "owner" },
-    { name: "Bryan", email: "bryan@insaces.com", role: "owner" },
-    { name: "Jordan Jones", email: "jordan@insaces.com", role: "owner" },
-    { name: "Lanse Derrick", email: "lanse@insaces.com", role: "owner" },
-    { name: "Robert", email: "robert@insaces.com", role: "owner" },
-    { name: "Jimmy Rodriguez", email: "jimmy@insaces.com", role: "agent" },
-    { name: "Renee Ridling", email: "office@insaces.com", role: "agent" }
-  ];
-
-  let agents = fallbackAgents;
-  try {
-    const raw = localStorage.getItem("aces_agents_login");
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length) {
-        agents = parsed;
-      }
-    }
-  } catch (e) {
-    console.warn("Unable to parse aces_agents_login:", e);
-  }
-
-  // Populate dropdown once
-  if (!agentSelect.dataset.loaded) {
-    const ph = agentSelect.querySelector('option[value=""]');
-    agentSelect.innerHTML = "";
-    if (ph) {
-      agentSelect.appendChild(ph);
-    } else {
-      const placeholder = document.createElement("option");
-      placeholder.value = "";
-      placeholder.disabled = true;
-      placeholder.selected = true;
-      placeholder.setAttribute("data-en", "Select your name");
-      placeholder.setAttribute("data-es", "Seleccione su nombre");
-      placeholder.textContent = "Select your name";
-      agentSelect.appendChild(placeholder);
-    }
-
-    agents.forEach(a => {
-      const email = (a.email || "").toLowerCase().trim();
-      if (!email) return;
-      const opt = document.createElement("option");
-      opt.value = email;
-      opt.textContent = a.name || email;
-      agentSelect.appendChild(opt);
-    });
-
-    agentSelect.dataset.loaded = "true";
-  }
-
-  loginBtn.addEventListener("click", () => {
-    panel.classList.add("open");
-    panel.setAttribute("aria-hidden", "false");
-  });
-
-  closeBtn.addEventListener("click", () => {
-    panel.classList.remove("open");
-    panel.setAttribute("aria-hidden", "true");
-  });
-
-  submitBtn.addEventListener("click", () => {
-    const selectedEmail = (agentSelect.value || "").trim().toLowerCase();
-    const password = (passwordInput.value || "").trim();
-
-    if (!selectedEmail) {
-      alert("Please select your name.");
-      return;
-    }
-
-    if (password !== "aces2026") {
-      alert("Invalid password.");
-      return;
-    }
-
-    const user = agents.find(a => (a.email || "").toLowerCase().trim() === selectedEmail);
-
-    if (!user) {
-      alert("Agent not recognized.");
-      return;
-    }
-
-    localStorage.setItem("acesUser", JSON.stringify(user));
-    // Use absolute path for AMS dashboard to avoid relative path issues
-    window.location.href = "/ams/dashboard/dashboard.html";
-  });
-
-  // ESC close
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && panel.classList.contains("open")) {
-      panel.classList.remove("open");
-      panel.setAttribute("aria-hidden", "true");
-    }
-  });
 }
 
 /* ---------------------------------------------------------
