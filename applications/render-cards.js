@@ -97,7 +97,7 @@ function buildCards(container, manifest) {
 
     const btn = document.createElement("a");
     btn.className = "app-card-btn";
-    btn.href = `${base}/wizard.html?app=${encodeURIComponent(app.id)}`;
+    btn.href = `${base}${app.page}`;
     btn.textContent = isEs ? "Comenzar solicitud" : "Start application";
 
     footer.appendChild(chip);
