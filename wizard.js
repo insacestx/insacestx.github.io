@@ -27,7 +27,8 @@ function getText(key) {
     submit: es ? "Enviar Solicitud" : "Submit Application",
     reviewTitle: es ? "Revise su Información" : "Review Your Information",
     configError: es ? "Error al cargar la configuración de la solicitud." : "Error loading application configuration.",
-    noAppType: es ? "No se especificó el tipo de solicitud." : "No application type specified."
+    noAppType: es ? "No se especificó el tipo de solicitud." : "No application type specified.",
+    loading: es ? "Cargando solicitud..." : "Loading application..."
   };
   return map[key] || key;
 }
@@ -50,27 +51,74 @@ function persistCurrentStepData() {
   });
 }
 
+/* Show loading state */
+function showLoading() {
+  const container = document.getElementById("wizard-container");
+  if (container) {
+    container.innerHTML = `
+      <div style="text-align:center; padding:40px; color:#666;">
+        <p style="font-size:1.1rem; margin-bottom:10px;">${getText("loading")}</p>
+        <div style="width:40px; height:40px; border:4px solid #f3f3f3; border-top:4px solid #d40000; border-radius:50%; margin:20px auto; animation:spin 1s linear infinite;"></div>
+      </div>
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+    `;
+  }
+}
+
+/* Show error state */
+function showError(appType, errorMessage) {
+  const container = document.getElementById("wizard-container");
+  if (container) {
+    container.innerHTML = `
+      <div style="background:#fff; border:1px solid #fdd; border-radius:12px; padding:30px; max-width:600px; margin:0 auto;">
+        <p style="color:#d40000; font-size:1.2rem; font-weight:600; margin-bottom:15px;">
+          ${getText("configError")}
+        </p>
+        <p style="color:#666; font-size:0.95rem; margin-bottom:10px;">
+          ${isSpanish() ? "Tipo de solicitud:" : "Application type:"} <strong>${appType || "(none)"}</strong>
+        </p>
+        <details style="margin-top:20px; padding:15px; background:#f9f9f9; border-radius:8px;">
+          <summary style="cursor:pointer; font-weight:600; color:#555;">
+            ${isSpanish() ? "Detalles técnicos" : "Technical Details"}
+          </summary>
+          <pre style="margin-top:10px; font-size:0.85rem; color:#666; overflow-x:auto;">${errorMessage}</pre>
+        </details>
+        <button onclick="window.location.href='/applications.html'" style="margin-top:20px; padding:10px 20px; background:#d40000; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600;">
+          ${isSpanish() ? "← Volver a Solicitudes" : "← Back to Applications"}
+        </button>
+      </div>
+    `;
+  }
+}
+
 /* Load config — MANIFEST‑DRIVEN */
 async function loadConfig(appType) {
-  const container = document.getElementById("wizard-container");
-
   try {
-    const base = window.location.pathname.includes("insacestx.github.io")
-      ? "/insacestx.github.io"
-      : "";
+    // GitHub Pages is always at root, no subdirectory needed
+    const base = "";
+
+    console.log("🔍 Loading wizard for app type:", appType);
 
     // 1) Load manifest with explicit error handling
     const manifestUrl = `${base}/applications/manifest.json`;
+    console.log("📄 Fetching manifest from:", manifestUrl);
+    
     const manifestRes = await fetch(manifestUrl, { cache: "no-store" });
     if (!manifestRes.ok) {
       throw new Error(`Manifest fetch failed: ${manifestRes.status} ${manifestRes.statusText} (${manifestUrl})`);
     }
 
     const manifest = await manifestRes.json();
+    console.log("✅ Manifest loaded:", manifest);
 
     // 2) Validate app key
     if (!manifest[appType]) {
-      throw new Error(`Application '${appType}' not found in manifest.`);
+      throw new Error(`Application '${appType}' not found in manifest. Available apps: ${Object.keys(manifest).join(", ")}`);
     }
 
     // 3) Validate config path
@@ -79,8 +127,15 @@ async function loadConfig(appType) {
       throw new Error(`Missing/invalid config path for app '${appType}'.`);
     }
 
-    // 4) Dynamic import
-    const importUrl = `${base}${configPath}`;
+    console.log("📦 Config path from manifest:", configPath);
+
+    // 4) Dynamic import - ensure path starts with ./ or /
+    let importUrl = configPath;
+    if (!importUrl.startsWith('/') && !importUrl.startsWith('./')) {
+      importUrl = './' + importUrl;
+    }
+    
+    console.log("⚙️ Importing config from:", importUrl);
     const module = await import(importUrl);
 
     if (!module || !module.default) {
@@ -88,39 +143,44 @@ async function loadConfig(appType) {
     }
 
     wizardConfig = module.default;
+    console.log("✅ Config loaded successfully:", wizardConfig);
 
     if (!wizardConfig.steps || !Array.isArray(wizardConfig.steps)) {
       throw new Error(`Invalid wizard config format (steps missing/invalid): ${importUrl}`);
     }
+
+    return true;
   } catch (err) {
+    console.error("❌ Error loading config:", err);
     wizardConfig = null;
-
-    if (container) {
-      container.innerHTML = `
-        <p style="color:red;">${getText("configError")}</p>
-        <p style="color:#666;font-size:0.9rem;">
-          ${isSpanish() ? "Tipo de solicitud:" : "Application type:"} <strong>${appType || "(none)"}</strong>
-        </p>
-      `;
-    }
-
-    console.error("Error loading config for app:", appType, err);
+    showError(appType, err.message || String(err));
+    return false;
   }
 }
 
 /* Init */
 async function initWizard() {
   const appType = getAppType();
+  
   if (!appType) {
     const container = document.getElementById("wizard-container");
     if (container) {
-      container.innerHTML = `<p style="color:red;">${getText("noAppType")}</p>`;
+      container.innerHTML = `
+        <div style="background:#fff; border:1px solid #fdd; border-radius:12px; padding:30px; max-width:600px; margin:0 auto; text-align:center;">
+          <p style="color:#d40000; font-size:1.2rem; font-weight:600;">${getText("noAppType")}</p>
+          <button onclick="window.location.href='/applications.html'" style="margin-top:20px; padding:10px 20px; background:#d40000; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600;">
+            ${isSpanish() ? "← Volver a Solicitudes" : "← Back to Applications"}
+          </button>
+        </div>
+      `;
     }
     return;
   }
 
-  await loadConfig(appType);
-  if (!wizardConfig) return;
+  showLoading();
+  
+  const success = await loadConfig(appType);
+  if (!success || !wizardConfig) return;
 
   buildTabs();
   buildStep(0);
@@ -419,6 +479,8 @@ function submitApplication() {
     });
   });
 
+  console.log("📤 Submitting application data:", data);
+
   alert(
     isSpanish()
       ? "¡Su solicitud ha sido enviada con éxito!"
@@ -427,3 +489,11 @@ function submitApplication() {
 
   window.location.href = "/applications.html";
 }
+
+/* Go back to applications page */
+function goBackToApplications() {
+  window.location.href = "/applications.html";
+}
+
+// Make function globally accessible for inline onclick in HTML
+window.goBackToApplications = goBackToApplications;
