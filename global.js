@@ -281,7 +281,8 @@ function loadFooter() {
       return res.text();
     })
     .then(html => {
-      footer.innerHTML = html;
+      const processedHtml = html.replace(/\$\{root\}/g, root);
+      footer.innerHTML = processedHtml;
       const currentLang = localStorage.getItem("acesLang") || "en";
       applyLanguage(currentLang);
     })
