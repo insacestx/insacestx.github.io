@@ -239,100 +239,103 @@
    Optional per-page override:
    :root { --app-hero-image: url("/images/your-image-name.png"); }
 ============================================================ */
+/* --- Hero split layout (image left, text right) --- */
 .app-selected-hero {
   position: relative;
-  min-height: 360px;
-  background-image: var(
-    --app-hero-image,
-    url("/Icons/heroservices/hero-wizard-application.png")
-  );
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-bottom: 4px solid var(--aces-primary, #d40000);
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 0 0 1.25rem;
+  min-height: 260px;
+  background: #0f172a;
 }
 
 .app-selected-overlay {
-  min-height: 360px;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.72) 0%,
-    rgba(0, 0, 0, 0.48) 50%,
-    rgba(0, 0, 0, 0.24) 100%
-  );
-  display: flex;
+  position: relative;
+  z-index: 2;
+  min-height: 260px;
+  display: grid;
+  grid-template-columns: minmax(180px, 340px) 1fr;
   align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
 }
 
-.app-selected-content {
-  max-width: 1100px;
-  margin: 0 auto;
+/* Left image panel */
+.app-selected-hero::before {
+  content: "";
+  display: block;
   width: 100%;
-  padding: 40px 24px;
+  height: 100%;
+  background-image: var(--app-hero-image, url("/Icons/heroservices/hero-wizard-application.png"));
+  background-repeat: no-repeat;
+  background-size: contain;      /* shrink image */
+  background-position: left center;
+  opacity: 0.95;
+}
+
+/* Place pseudo-image into first grid column */
+.app-selected-hero::before {
+  position: absolute;
+  inset: 0;
+  width: 42%;
+  max-width: 340px;
+  min-width: 180px;
+}
+
+/* Right text content */
+.app-selected-content {
+  grid-column: 2;
+  margin-left: 0.5rem;
   color: #fff;
+  max-width: 760px;
 }
 
 .app-selected-content h1 {
-  margin: 0 0 10px;
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  line-height: 1.08;
-  font-weight: 800;
-  color: #fff;
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  line-height: 1.2;
 }
 
 .app-selected-content p {
   margin: 0;
-  font-size: clamp(1rem, 2vw, 1.45rem);
+  font-size: clamp(0.98rem, 1.25vw, 1.08rem);
+  line-height: 1.5;
   opacity: 0.95;
 }
 
-/* If old auto hero is still used on some pages */
-.auto-hero {
-  background: #f8f9fb;
-  padding-top: 20px !important;
+/* subtle darkening for readability */
+.app-selected-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.35) 0%,
+    rgba(15, 23, 42, 0.45) 35%,
+    rgba(15, 23, 42, 0.72) 100%
+  );
+  z-index: 1;
 }
 
-/* Auto wizard hero image */
-.hero-wizard-application {
-  display: block;
-  width: min(100%, 980px);
-  height: auto;
-  margin: 0 auto 1rem;
-  object-fit: contain;
-}
-
-.auto-hero-inner {
-  padding-top: 0;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .app-selected-hero,
+/* Mobile stack */
+@media (max-width: 860px) {
   .app-selected-overlay {
-    min-height: 280px;
+    grid-template-columns: 1fr;
+    padding: 1rem 1rem 1.1rem;
+  }
+
+  .app-selected-hero::before {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    background-size: 42% auto;
+    background-position: left 0.8rem center;
+    opacity: 0.35;
   }
 
   .app-selected-content {
-    padding: 26px 18px;
-  }
-}
-
-@media (max-width: 600px) {
-  .wizard-buttons {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .wizard-btn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .wizard-hero h1 {
-    font-size: 1.9rem;
-  }
-
-  .wizard-hero p {
-    font-size: 0.98rem;
+    grid-column: 1;
+    margin-left: 0;
   }
 }
