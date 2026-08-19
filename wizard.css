@@ -1,8 +1,6 @@
 /* ============================================================
    ACES 2026 — UNIVERSAL WIZARD STYLES (Cleaned)
-   - Removed duplicate/redundant selector blocks
-   - Preserved visual behavior
-   - Kept compatibility intent where useful
+   Universal hero default included
 ============================================================ */
 
 /* GLOBAL WRAPPER */
@@ -106,7 +104,7 @@
   border-radius: 14px;
   border: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
   padding: 24px 26px 30px;
-  box-shadow: var(--aces-shadow, 0 6px 20px rgba(0,0,0,0.06));
+  box-shadow: var(--aces-shadow, 0 6px 20px rgba(0, 0, 0, 0.06));
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -237,10 +235,9 @@
 
 /* ============================================================
    REUSABLE APPLICATION HERO (ALL /applications/*.html)
-   Usage:
-   1) Add <section class="app-selected-hero">...</section> in each app page
-   2) Optional per-page override:
-      :root { --app-hero-image: url("/images/your-image-name.png"); }
+   Universal default image set below.
+   Optional per-page override:
+   :root { --app-hero-image: url("/images/your-image-name.png"); }
 ============================================================ */
 .app-selected-hero {
   position: relative;
