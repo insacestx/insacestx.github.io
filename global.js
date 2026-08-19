@@ -269,6 +269,21 @@ function initRoundRobinEmail() {
 /* ============================================================
    FOOTER INJECTION
 ============================================================ */
+/* ============================================================
+   FOOTER INJECTION
+============================================================ */
+function loadFooter() {
+  const footer = document.getElementById("aces-footer");
+  if (!footer) return;
+
+  const root = getRelativeRoot();
+
+  fetch(`${root}footer.html`)
+    .then(res => {
+      if (!res.ok) throw new Error(`Footer load failed: ${res.status}`);
+      return res.text();
+    })
+    .then(html => {
       footer.innerHTML = html;
 
       // Fix relative asset + link paths inside injected footer for nested pages
@@ -290,7 +305,7 @@ function initRoundRobinEmail() {
       });
 
       // Internal links in footer
-      footer.querySelectorAll('a[href]').forEach((a) => {
+      footer.querySelectorAll("a[href]").forEach((a) => {
         const href = a.getAttribute("href") || "";
         const isExternal =
           href.startsWith("http://") ||
@@ -307,6 +322,12 @@ function initRoundRobinEmail() {
 
       const currentLang = localStorage.getItem("acesLang") || "en";
       applyLanguage(currentLang);
+    })
+    .catch(err => {
+      console.error("Footer load error:", err);
+      footer.innerHTML = '<div class="aces-footer"><p style="text-align:center;padding:20px;color:#999;">© 2026 ACES Insurance Services</p></div>';
+    });
+}
 
 /* ============================================================
    LANGUAGE SYSTEM
