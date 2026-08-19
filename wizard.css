@@ -244,7 +244,7 @@
   min-height: 360px;
   background-image: var(
     --app-hero-image,
-    url("/Icons/heroservices/hero-wizard-applcation.png")
+    url("/Icons/heroservices/hero-wizard-application.png")
   );
   background-size: cover;
   background-position: center;
