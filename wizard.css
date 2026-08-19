@@ -239,55 +239,56 @@
    Optional per-page override:
    :root { --app-hero-image: url("/images/your-image-name.png"); }
 ============================================================ */
-/* --- Hero split layout (image left, text right) --- */
+/* ============================================================
+   REUSABLE APPLICATION HERO (FULL BACKGROUND IMAGE)
+   Text aligned right
+============================================================ */
 .app-selected-hero {
   position: relative;
   border-radius: 18px;
   overflow: hidden;
   margin: 0 0 1.25rem;
   min-height: 260px;
-  background: #0f172a;
+
+  /* full background image */
+  background-image: var(--app-hero-image, url("/Icons/heroservices/hero-wizard-application.png"));
+  background-repeat: no-repeat;
+  background-size: cover;      /* keep as full background */
+  background-position: center; /* center image */
 }
 
+/* dark overlay for readability */
+.app-selected-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.25) 0%,
+    rgba(15, 23, 42, 0.45) 45%,
+    rgba(15, 23, 42, 0.72) 100%
+  );
+  z-index: 1;
+}
+
+/* content wrapper */
 .app-selected-overlay {
   position: relative;
   z-index: 2;
   min-height: 260px;
-  display: grid;
-  grid-template-columns: minmax(180px, 340px) 1fr;
+  display: flex;
   align-items: center;
-  gap: 1.25rem;
+  justify-content: flex-end;  /* move text to right */
   padding: 1.25rem 1.5rem;
 }
 
-/* Left image panel */
-.app-selected-hero::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-image: var(--app-hero-image, url("/Icons/heroservices/hero-wizard-application.png"));
-  background-repeat: no-repeat;
-  background-size: contain;      /* shrink image */
-  background-position: left center;
-  opacity: 0.95;
-}
-
-/* Place pseudo-image into first grid column */
-.app-selected-hero::before {
-  position: absolute;
-  inset: 0;
-  width: 42%;
-  max-width: 340px;
-  min-width: 180px;
-}
-
-/* Right text content */
+/* text block on right */
 .app-selected-content {
-  grid-column: 2;
-  margin-left: 0.5rem;
   color: #fff;
-  max-width: 760px;
+  max-width: 560px;
+  width: 100%;
+  text-align: left;
+  margin-left: auto; /* anchor to right side */
 }
 
 .app-selected-content h1 {
@@ -303,39 +304,20 @@
   opacity: 0.95;
 }
 
-/* subtle darkening for readability */
-.app-selected-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(15, 23, 42, 0.35) 0%,
-    rgba(15, 23, 42, 0.45) 35%,
-    rgba(15, 23, 42, 0.72) 100%
-  );
-  z-index: 1;
-}
-
-/* Mobile stack */
+/* Mobile */
 @media (max-width: 860px) {
-  .app-selected-overlay {
-    grid-template-columns: 1fr;
-    padding: 1rem 1rem 1.1rem;
+  .app-selected-hero {
+    min-height: 230px;
+    background-position: center;
   }
 
-  .app-selected-hero::before {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    max-width: none;
-    background-size: 42% auto;
-    background-position: left 0.8rem center;
-    opacity: 0.35;
+  .app-selected-overlay {
+    min-height: 230px;
+    justify-content: flex-start; /* easier reading on small screens */
+    padding: 1rem;
   }
 
   .app-selected-content {
-    grid-column: 1;
-    margin-left: 0;
+    max-width: 100%;
   }
 }
