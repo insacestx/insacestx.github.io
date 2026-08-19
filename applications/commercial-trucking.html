@@ -1,216 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title data-en="Commercial Trucking Application" data-es="Solicitud de Seguro de Camiones Comerciales">
+  <title
+    data-en="Commercial Trucking Application"
+    data-es="Solicitud de Seguro de Camiones Comerciales">
     Commercial Trucking Application
   </title>
 
-  <!-- Correct GitHub Pages Paths -->
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="../wizard.css">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/wizard.css" />
 
-  <script src="../global.js" defer></script>
-  <script src="../wizard.js" defer></script>
+  <script src="/global.js" defer></script>
+  <script src="/wizard.js?app=commercial-trucking" type="module" defer></script>
 </head>
 
 <body>
+  <header id="aces-header"></header>
 
-<header id="aces-header"></header>
-
-<main class="fade-in">
-
-  <!-- HERO -->
-  <section class="auto-hero">
-    <div class="auto-hero-inner">
-
-<div class="auto-hero-inner">
-  <img
-    src="/Icons//hero-wizard-application.png"
-    alt="Commercial Trucking Insurance Application"
-    class="hero-wizard-application"
-  />
-  <div id="wizard-tabs"></div>
-</div>
-
-      <div id="wizard-tabs"></div>
-
-    </div>
-  </section>
-
-  <!-- WIZARD -->
-  <section class="auto-app-wrapper">
-    <div class="auto-app-card">
-
-      <div id="wizard-container"></div>
-
-      <div class="wizard-progress-bar">
-        <div id="wizard-progress"></div>
+  <main class="fade-in wizard-page">
+    <!-- UNIVERSAL APPLICATION HERO -->
+    <section class="app-selected-hero">
+      <div class="app-selected-overlay">
+        <div class="app-selected-content">
+          <h1
+            data-en="Commercial Trucking Application"
+            data-es="Solicitud de Seguro de Camiones Comerciales">
+            Commercial Trucking Application
+          </h1>
+          <p
+            data-en="Complete each step to submit your commercial trucking insurance application."
+            data-es="Complete cada paso para enviar su solicitud de seguro de camiones comerciales.">
+            Complete each step to submit your commercial trucking insurance application.
+          </p>
+        </div>
       </div>
+    </section>
 
+    <!-- PROGRESS BAR -->
+    <div class="wizard-progress-wrap">
+      <div id="wizard-progress"></div>
     </div>
-  </section>
 
-</main>
+    <!-- STEP TABS -->
+    <div id="wizard-tabs"></div>
 
-<footer id="aces-footer"></footer>
+    <!-- WIZARD CONTENT -->
+    <section id="wizard-container"></section>
+  </main>
 
-<!-- ============================================================
-     EMBEDDED COMMERCIAL TRUCKING CONFIG (DEFAULT QUESTIONS)
-============================================================ -->
-<script>
-  const applicationConfig = {
-    appName: "commercial-trucking",
-    steps: [
-      {
-        id: "step1",
-        title_en: "Business Information",
-        title_es: "Información del Negocio",
-        fields: [
-          { type: "text", name: "businessName", label_en: "Business Name", label_es: "Nombre del Negocio", required: true },
-          { type: "text", name: "dotNumber", label_en: "DOT Number", label_es: "Número DOT", required: true },
-          { type: "text", name: "mcNumber", label_en: "MC Number", label_es: "Número MC", required: false },
-          { type: "text", name: "contactName", label_en: "Contact Name", label_es: "Nombre del Contacto", required: true },
-          { type: "tel", name: "contactPhone", label_en: "Contact Phone", label_es: "Teléfono del Contacto", required: true }
-        ]
-      },
+  <footer id="aces-footer"></footer>
 
-      {
-        id: "step2",
-        title_en: "Vehicle & Trailer Details",
-        title_es: "Detalles de Vehículos y Remolques",
-        fields: [
-          { type: "number", name: "numVehicles", label_en: "Number of Power Units", label_es: "Número de Unidades Motrices", required: true },
-          {
-            type: "textarea",
-            name: "vehicleList",
-            label_en: "Power Units (Year / Make / Model / VIN / GVWR)",
-            label_es: "Unidades Motrices (Año / Marca / Modelo / VIN / GVWR)",
-            required: true
-          },
-          {
-            type: "textarea",
-            name: "trailerList",
-            label_en: "Trailers (Type / Year / VIN)",
-            label_es: "Remolques (Tipo / Año / VIN)",
-            required: false
-          }
-        ]
-      },
-
-      {
-        id: "step3",
-        title_en: "Driver Information",
-        title_es: "Información de Conductores",
-        fields: [
-          { type: "number", name: "numDrivers", label_en: "Number of Drivers", label_es: "Número de Conductores", required: true },
-          {
-            type: "textarea",
-            name: "driverList",
-            label_en: "Driver List (Name / DOB / License State / CDL Class / Experience)",
-            label_es: "Lista de Conductores (Nombre / Fecha de Nacimiento / Estado / Clase CDL / Experiencia)",
-            required: true
-          }
-        ]
-      },
-
-      {
-        id: "step4",
-        title_en: "Cargo & Operations",
-        title_es: "Carga y Operaciones",
-        fields: [
-          {
-            type: "select",
-            name: "cargoType",
-            label_en: "Cargo Type",
-            label_es: "Tipo de Carga",
-            required: true,
-            options_en: ["General Freight", "Refrigerated", "Flatbed", "Hazmat", "Oversized", "Other"],
-            options_es: ["Carga General", "Refrigerada", "Plataforma", "Materiales Peligrosos", "Sobredimensionada", "Otro"]
-          },
-          {
-            type: "select",
-            name: "radius",
-            label_en: "Radius of Operation",
-            label_es: "Radio de Operación",
-            required: true,
-            options_en: ["0–50 miles", "50–150 miles", "150–300 miles", "300+ miles"],
-            options_es: ["0–50 millas", "50–150 millas", "150–300 millas", "300+ millas"]
-          },
-          {
-            type: "checkbox",
-            name: "interstate",
-            label_en: "Interstate Operation",
-            label_es: "Operación Interestatal"
-          },
-          {
-            type: "checkbox",
-            name: "highRiskCities",
-            label_en: "Operate in High-Risk Cities (NYC / Chicago / LA)",
-            label_es: "Opera en Ciudades de Alto Riesgo (NYC / Chicago / LA)"
-          }
-        ]
-      },
-
-      {
-        id: "step5",
-        title_en: "Coverage Details",
-        title_es: "Detalles de Cobertura",
-        fields: [
-          {
-            type: "number",
-            name: "liabilityLimit",
-            label_en: "Liability Limit ($)",
-            label_es: "Límite de Responsabilidad ($)",
-            required: true
-          },
-          {
-            type: "checkbox",
-            name: "physicalDamage",
-            label_en: "Physical Damage Coverage",
-            label_es: "Cobertura de Daños Físicos"
-          },
-          {
-            type: "checkbox",
-            name: "trailerInterchange",
-            label_en: "Trailer Interchange Coverage",
-            label_es: "Cobertura de Intercambio de Remolque"
-          },
-          {
-            type: "checkbox",
-            name: "reeferBreakdown",
-            label_en: "Reefer Breakdown Coverage",
-            label_es: "Cobertura de Avería de Refrigeración"
-          }
-        ]
-      },
-
-      {
-        id: "step6",
-        title_en: "Additional Insureds & Notes",
-        title_es: "Asegurados Adicionales y Notas",
-        fields: [
-          {
-            type: "textarea",
-            name: "additionalInsureds",
-            label_en: "List Any Additional Insureds",
-            label_es: "Liste Cualquier Asegurado Adicional",
-            required: false
-          },
-          {
-            type: "textarea",
-            name: "notes",
-            label_en: "Additional Notes or Requirements",
-            label_es: "Notas Adicionales o Requisitos",
-            required: false
-          }
-        ]
-      }
-    ]
-  };
-</script>
-
+  <!-- ============================================================
+       EMBEDDED COMMERCIAL TRUCKING CONFIG (DEFAULT QUESTIONS)
+  ============================================================ -->
+  <script>
+    const applicationConfig = {
+      appName: "commercial-trucking",
+      steps: [
+        {
+          id: "step1",
+          title_en: "Business Information",
+          title_es: "Información del Negocio",
+          fields: [
+            { type: "text", name: "businessName", label_en: "Business Name", label_es: "Nombre del Negocio", required: true },
+            { type: "text", name: "dotNumber", label_en: "DOT Number", label_es: "Número DOT", required: true },
+            { type: "text", name: "mcNumber", label_en: "MC Number", label_es: "Número MC", required: false },
+            { type: "text", name: "contactName", label_en: "Contact Name", label_es: "Nombre del Contacto", required: true },
+            { type: "tel", name: "contactPhone", label_en: "Contact Phone", label_es: "Teléfono del Contacto", required: true }
+          ]
+        },
+        {
+          id: "step2",
+          title_en: "Vehicle & Trailer Details",
+          title_es: "Detalles de Vehículos y Remolques",
+          fields: [
+            { type: "number", name: "numVehicles", label_en: "Number of Power Units", label_es: "Número de Unidades Motrices", required: true },
+            {
+              type: "textarea",
+              name: "vehicleList",
+              label_en: "Power Units (Year / Make / Model / VIN / GVWR)",
+              label_es: "Unidades Motrices (Año / Marca / Modelo / VIN / GVWR)",
+              required: true
+            },
+            {
+              type: "textarea",
+              name: "trailerList",
+              label_en: "Trailers (Type / Year / VIN)",
+              label_es: "Remolques (Tipo / Año / VIN)",
+              required: false
+            }
+          ]
+        },
+        {
+          id: "step3",
+          title_en: "Driver Information",
+          title_es: "Información de Conductores",
+          fields: [
+            { type: "number", name: "numDrivers", label_en: "Number of Drivers", label_es: "Número de Conductores", required: true },
+            {
+              type: "textarea",
+              name: "driverList",
+              label_en: "Driver List (Name / DOB / License State / CDL Class / Experience)",
+              label_es: "Lista de Conductores (Nombre / Fecha de Nacimiento / Estado / Clase CDL / Experiencia)",
+              required: true
+            }
+          ]
+        },
+        {
+          id: "step4",
+          title_en: "Cargo & Operations",
+          title_es: "Carga y Operaciones",
+          fields: [
+            {
+              type: "select",
+              name: "cargoType",
+              label_en: "Cargo Type",
+              label_es: "Tipo de Carga",
+              required: true,
+              options_en: ["General Freight", "Refrigerated", "Flatbed", "Hazmat", "Oversized", "Other"],
+              options_es: ["Carga General", "Refrigerada", "Plataforma", "Materiales Peligrosos", "Sobredimensionada", "Otro"]
+            },
+            {
+              type: "select",
+              name: "radius",
+              label_en: "Radius of Operation",
+              label_es: "Radio de Operación",
+              required: true,
+              options_en: ["0–50 miles", "50–150 miles", "150–300 miles", "300+ miles"],
+              options_es: ["0–50 millas", "50–150 millas", "150–300 millas", "300+ millas"]
+            },
+            {
+              type: "checkbox",
+              name: "interstate",
+              label_en: "Interstate Operation",
+              label_es: "Operación Interestatal"
+            },
+            {
+              type: "checkbox",
+              name: "highRiskCities",
+              label_en: "Operate in High-Risk Cities (NYC / Chicago / LA)",
+              label_es: "Opera en Ciudades de Alto Riesgo (NYC / Chicago / LA)"
+            }
+          ]
+        },
+        {
+          id: "step5",
+          title_en: "Coverage Details",
+          title_es: "Detalles de Cobertura",
+          fields: [
+            {
+              type: "number",
+              name: "liabilityLimit",
+              label_en: "Liability Limit ($)",
+              label_es: "Límite de Responsabilidad ($)",
+              required: true
+            },
+            {
+              type: "checkbox",
+              name: "physicalDamage",
+              label_en: "Physical Damage Coverage",
+              label_es: "Cobertura de Daños Físicos"
+            },
+            {
+              type: "checkbox",
+              name: "trailerInterchange",
+              label_en: "Trailer Interchange Coverage",
+              label_es: "Cobertura de Intercambio de Remolque"
+            },
+            {
+              type: "checkbox",
+              name: "reeferBreakdown",
+              label_en: "Reefer Breakdown Coverage",
+              label_es: "Cobertura de Avería de Refrigeración"
+            }
+          ]
+        },
+        {
+          id: "step6",
+          title_en: "Additional Insureds & Notes",
+          title_es: "Asegurados Adicionales y Notas",
+          fields: [
+            {
+              type: "textarea",
+              name: "additionalInsureds",
+              label_en: "List Any Additional Insureds",
+              label_es: "Liste Cualquier Asegurado Adicional",
+              required: false
+            },
+            {
+              type: "textarea",
+              name: "notes",
+              label_en: "Additional Notes or Requirements",
+              label_es: "Notas Adicionales o Requisitos",
+              required: false
+            }
+          ]
+        }
+      ]
+    };
+  </script>
 </body>
 </html>
