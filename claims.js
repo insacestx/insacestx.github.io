@@ -27,7 +27,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "24/7",
     hoursEs: "24/7",
     website: "https://www.nationalgeneral.com/claims",
-    logo: "NationalGeneral-Logo.webp",
+    logo: "Icons/NationalGeneral-Logo.webp",
     brandColor: "#f47a20"
   },
   {
@@ -82,7 +82,7 @@ const CLAIM_CARRIERS = [
     hoursEn: "Business Hours",
     hoursEs: "Horario Laboral",
     website: "https://www.cnfrh.com",
-    logo: "conifer_logo.png",
+    logo: "Icons/conifer_logo.png",
     brandColor: "#2f7a3f"
   },
   {
