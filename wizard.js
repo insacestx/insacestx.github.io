@@ -33,10 +33,45 @@ function getText(key) {
   return map[key] || key;
 }
 
+/* Path helper for GitHub Pages project/user site compatibility */
+function getBasePath() {
+  const path = window.location.pathname || "";
+  return path.includes("insacestx.github.io") ? "/insacestx.github.io" : "";
+}
+
+/* Safe navigation helper */
+function applicationsHomeUrl() {
+  return `${getBasePath()}/applications.html`;
+}
+
 /* Detect application type */
 function getAppType() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("app");
+
+  // Support query-based routes
+  let type =
+    params.get("app") ||
+    params.get("type") ||
+    params.get("application") ||
+    "";
+
+  type = (type || "").toLowerCase().trim();
+  if (type) return type;
+
+  // Fallback: infer from filename (/applications/auto.html => auto)
+  const path = (window.location.pathname || "").toLowerCase();
+  const file = path.split("/").pop() || "";
+  const slug = file.replace(".html", "").trim();
+
+  // Map dashed filenames to manifest keys
+  const map = {
+    "commercial-auto": "commercialauto",
+    "commercial-trucking": "commercialtrucking",
+    "commercial-property": "commercialproperty",
+    "commercial-umbrella": "commercialumbrella"
+  };
+
+  return map[slug] || slug || null;
 }
 
 /* Save current visible step values */
@@ -88,7 +123,7 @@ function showError(appType, errorMessage) {
           </summary>
           <pre style="margin-top:10px; font-size:0.85rem; color:#666; overflow-x:auto;">${errorMessage}</pre>
         </details>
-        <button onclick="window.location.href='/applications.html'" style="margin-top:20px; padding:10px 20px; background:#d40000; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600;">
+        <button onclick="window.location.href='${applicationsHomeUrl()}'" style="margin-top:20px; padding:10px 20px; background:#d40000; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600;">
           ${isSpanish() ? "← Volver a Solicitudes" : "← Back to Applications"}
         </button>
       </div>
@@ -99,8 +134,7 @@ function showError(appType, errorMessage) {
 /* Load config — MANIFEST‑DRIVEN */
 async function loadConfig(appType) {
   try {
-    // GitHub Pages is always at root, no subdirectory needed
-    const base = "";
+    const base = getBasePath();
 
     console.log("🔍 Loading wizard for app type:", appType);
 
@@ -131,8 +165,8 @@ async function loadConfig(appType) {
 
     // 4) Dynamic import - ensure path starts with ./ or /
     let importUrl = configPath;
-    if (!importUrl.startsWith('/') && !importUrl.startsWith('./')) {
-      importUrl = './' + importUrl;
+    if (!importUrl.startsWith("/") && !importUrl.startsWith("./")) {
+      importUrl = "./" + importUrl;
     }
     
     console.log("⚙️ Importing config from:", importUrl);
@@ -168,7 +202,7 @@ async function initWizard() {
       container.innerHTML = `
         <div style="background:#fff; border:1px solid #fdd; border-radius:12px; padding:30px; max-width:600px; margin:0 auto; text-align:center;">
           <p style="color:#d40000; font-size:1.2rem; font-weight:600;">${getText("noAppType")}</p>
-          <button onclick="window.location.href='/applications.html'" style="margin-top:20px; padding:10px 20px; background:#d40000; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600;">
+          <button onclick="window.location.href='${applicationsHomeUrl()}'" style="margin-top:20px; padding:10px 20px; background:#d40000; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600;">
             ${isSpanish() ? "← Volver a Solicitudes" : "← Back to Applications"}
           </button>
         </div>
@@ -203,7 +237,7 @@ window.addEventListener("storage", (e) => {
   }
 });
 
-/* Also respond to same-tab language changes dispatched by global.js (optional custom event) */
+/* Also respond to same-tab language changes dispatched by global.js */
 window.addEventListener("aces:language-changed", () => {
   if (!wizardConfig) return;
 
@@ -487,12 +521,12 @@ function submitApplication() {
       : "Your application has been submitted successfully!"
   );
 
-  window.location.href = "/applications.html";
+  window.location.href = applicationsHomeUrl();
 }
 
 /* Go back to applications page */
 function goBackToApplications() {
-  window.location.href = "/applications.html";
+  window.location.href = applicationsHomeUrl();
 }
 
 // Make function globally accessible for inline onclick in HTML
