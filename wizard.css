@@ -367,3 +367,14 @@
     padding: 26px 18px;
   }
 }
+/* Auto wizard hero image */
+.hero-wizard-application {
+  display: block;
+  width: min(100%, 980px);
+  height: auto;
+  margin: 0 auto 1rem;
+  object-fit: contain;
+}
+.auto-hero-inner {
+  padding-top: 0;
+}
