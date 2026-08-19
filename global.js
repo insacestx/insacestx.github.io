@@ -1,5 +1,12 @@
 // ACES 2026 — global.js (Stable Build, Folder‑Safe, Repo‑Prefixed)
 
+/* ============================================================
+   FEATURE FLAGS
+============================================================ */
+const FEATURES = {
+  agentLogin: false // true = show Agent Login, false = hide/disable
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   /* CORE */
   loadHeader();
@@ -76,6 +83,7 @@ function loadHeader() {
       <div class="header-controls">
         <button id="lang-toggle" class="lang-btn" type="button">EN / ES</button>
 
+        ${FEATURES.agentLogin ? `
         <button
           id="agent-login-btn"
           class="agent-login-btn"
@@ -84,6 +92,7 @@ function loadHeader() {
           data-es="Acceso de Agente">
           Agent Login
         </button>
+        ` : ``}
 
         <button id="mobile-menu-btn" class="mobile-menu-btn" type="button">☰</button>
       </div>
@@ -100,6 +109,7 @@ function loadHeader() {
       <a href="${root}contact.html" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
 
+    ${FEATURES.agentLogin ? `
     <!-- LOGIN PANEL -->
     <aside id="loginPanel" class="login-panel" aria-hidden="true">
       <button id="loginCloseBtn" class="close-panel" type="button" aria-label="Close">×</button>
@@ -122,6 +132,7 @@ function loadHeader() {
         Login
       </button>
     </aside>
+    ` : ``}
   `;
 }
 
@@ -129,6 +140,8 @@ function loadHeader() {
    LOGIN PANEL
 ============================================================ */
 function initLoginPanel() {
+  if (!FEATURES.agentLogin) return;
+
   const loginBtn = document.getElementById("agent-login-btn");
   const panel = document.getElementById("loginPanel");
   const closeBtn = document.getElementById("loginCloseBtn");
@@ -266,9 +279,6 @@ function initRoundRobinEmail() {
   if (rrField) rrField.value = getNextRoundRobinEmail();
 }
 
-/* ============================================================
-   FOOTER INJECTION
-============================================================ */
 /* ============================================================
    FOOTER INJECTION
 ============================================================ */
