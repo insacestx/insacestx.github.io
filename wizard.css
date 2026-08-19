@@ -300,3 +300,70 @@
   color: var(--aces-text-muted, #555);
   border: 1px solid #d9d9d9;
 }
+/* ============================================================
+   REUSABLE APPLICATION HERO (ALL /applications/*.html)
+   Usage:
+   1) Add <section class="app-selected-hero">...</section> in each app page
+   2) Optional per-page override:
+      :root { --app-hero-image: url("/images/your-image-name.png"); }
+============================================================ */
+.app-selected-hero {
+  position: relative;
+  min-height: 360px;
+  background-image: var(--app-hero-image, url("/images/application-selected-hero.png"));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-bottom: 4px solid var(--aces-primary, #d40000);
+}
+
+.app-selected-overlay {
+  min-height: 360px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.48) 50%,
+    rgba(0, 0, 0, 0.24) 100%
+  );
+  display: flex;
+  align-items: center;
+}
+
+.app-selected-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 40px 24px;
+  color: #fff;
+}
+
+.app-selected-content h1 {
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.08;
+  font-weight: 800;
+  color: #fff;
+}
+
+.app-selected-content p {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.45rem);
+  opacity: 0.95;
+}
+
+/* make the old wizard hero less dominant if both exist */
+.auto-hero {
+  background: #f8f9fb;
+  padding-top: 20px !important;
+}
+
+@media (max-width: 768px) {
+  .app-selected-hero,
+  .app-selected-overlay {
+    min-height: 280px;
+  }
+
+  .app-selected-content {
+    padding: 26px 18px;
+  }
+}
