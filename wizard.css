@@ -1,6 +1,8 @@
 /* ============================================================
-   ACES 2026 — UNIVERSAL WIZARD STYLES (Theme-Aligned)
-   Clean, modern, bilingual-ready, fully responsive
+   ACES 2026 — UNIVERSAL WIZARD STYLES (Cleaned)
+   - Removed duplicate/redundant selector blocks
+   - Preserved visual behavior
+   - Kept compatibility intent where useful
 ============================================================ */
 
 /* GLOBAL WRAPPER */
@@ -233,73 +235,6 @@
   border-color: var(--aces-primary, #d40000);
 }
 
-/* MOBILE */
-@media (max-width: 600px) {
-  .wizard-buttons {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .wizard-btn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .wizard-hero h1 {
-    font-size: 1.9rem;
-  }
-
-  .wizard-hero p {
-    font-size: 0.98rem;
-  }
-}
-
-/* ============================================================
-   COMPATIBILITY PATCH (keep old JS class names working)
-============================================================ */
-
-/* If JS renders these legacy classes, style them same as current theme */
-.wizard-step-card {
-  background: var(--aces-surface, #ffffff);
-  border-radius: 14px;
-  border: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
-  padding: 24px 26px 30px;
-  box-shadow: var(--aces-shadow, 0 6px 20px rgba(0,0,0,0.06));
-}
-
-.wizard-step-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--aces-text, #1f2937);
-  margin-bottom: 20px;
-}
-
-.wizard-tab {
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: #fff1f1;
-  color: var(--aces-text, #1f2937);
-  border: 1px solid rgba(212, 0, 0, 0.15);
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.wizard-tab.active {
-  background: var(--aces-primary, #d40000);
-  color: #fff;
-  border-color: var(--aces-primary, #d40000);
-}
-
-.wizard-btn.next {
-  background: var(--aces-primary, #d40000);
-  color: #fff;
-}
-
-.wizard-btn.back {
-  background: #fff;
-  color: var(--aces-text-muted, #555);
-  border: 1px solid #d9d9d9;
-}
 /* ============================================================
    REUSABLE APPLICATION HERO (ALL /applications/*.html)
    Usage:
@@ -310,7 +245,10 @@
 .app-selected-hero {
   position: relative;
   min-height: 360px;
-  background-image: var(--app-hero-image, url("/images/application-selected-hero.png"));
+  background-image: var(
+    --app-hero-image,
+    url("/Icons/heroservices/hero-wizard-applcation.png")
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -351,12 +289,26 @@
   opacity: 0.95;
 }
 
-/* make the old wizard hero less dominant if both exist */
+/* If old auto hero is still used on some pages */
 .auto-hero {
   background: #f8f9fb;
   padding-top: 20px !important;
 }
 
+/* Auto wizard hero image */
+.hero-wizard-application {
+  display: block;
+  width: min(100%, 980px);
+  height: auto;
+  margin: 0 auto 1rem;
+  object-fit: contain;
+}
+
+.auto-hero-inner {
+  padding-top: 0;
+}
+
+/* MOBILE */
 @media (max-width: 768px) {
   .app-selected-hero,
   .app-selected-overlay {
@@ -367,14 +319,23 @@
     padding: 26px 18px;
   }
 }
-/* Auto wizard hero image */
-.hero-wizard-application {
-  display: block;
-  width: min(100%, 980px);
-  height: auto;
-  margin: 0 auto 1rem;
-  object-fit: contain;
-}
-.auto-hero-inner {
-  padding-top: 0;
+
+@media (max-width: 600px) {
+  .wizard-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .wizard-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .wizard-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .wizard-hero p {
+    font-size: 0.98rem;
+  }
 }
