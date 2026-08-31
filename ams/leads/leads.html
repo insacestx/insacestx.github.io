@@ -39,19 +39,170 @@
     <main class="content" role="main">
       <div class="page-header">
         <h1>Leads</h1>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+          <button class="btn-red" type="button" onclick="openLeadEditor()">+ Add Lead</button>
+          <button class="btn-red" type="button" onclick="runRoundRobinAssign()">Run Round Robin</button>
+        </div>
       </div>
+
+      <section class="client-section" aria-label="Round robin status">
+        <h2>Round Robin</h2>
+        <p><strong>Last Assigned Agent:</strong> <span id="rrLastAssigned">—</span></p>
+        <p><strong>Next Up:</strong> <span id="rrNextUp">—</span></p>
+        <p><strong>Queue:</strong> <span id="rrQueue">—</span></p>
+      </section>
 
       <section class="search-bar" aria-label="Search leads">
         <label for="leadSearch" class="sr-only">Search leads</label>
-        <input id="leadSearch" name="leadSearch" type="search" placeholder="Search leads..." autocomplete="off" />
+        <input id="leadSearch" name="leadSearch" type="search" placeholder="Search leads, status, assigned agent..." autocomplete="off" />
       </section>
 
-      <section aria-label="Leads list">
-        <div id="leadsContainer"></div>
+      <section class="client-section" aria-label="Lead filters">
+        <h2>Filters</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;">
+          <div>
+            <label for="filterStage">Application Stage</label>
+            <select id="filterStage">
+              <option value="">All</option>
+              <option>New</option>
+              <option>Contacted</option>
+              <option>Quoted</option>
+              <option>Application Started</option>
+              <option>Submitted</option>
+              <option>Bound</option>
+              <option>Lost</option>
+            </select>
+          </div>
+          <div>
+            <label for="filterAgent">Assigned Agent</label>
+            <select id="filterAgent">
+              <option value="">All</option>
+            </select>
+          </div>
+          <div>
+            <label for="filterBind">Policy Status</label>
+            <select id="filterBind">
+              <option value="">All</option>
+              <option value="not-bound">Not Bound</option>
+              <option value="bound">Bound</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Leads table">
+        <table class="data-table" id="leadsTable">
+          <thead>
+            <tr>
+              <th>Lead ID</th>
+              <th>Name</th>
+              <th>Contact</th>
+              <th>Line</th>
+              <th>Assigned Agent</th>
+              <th>Stage</th>
+              <th>Quoted Premium</th>
+              <th>Effective Date</th>
+              <th>Policy #</th>
+              <th>Client Link</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="leadsRows">
+            <!-- Render via ams.js -->
+          </tbody>
+        </table>
       </section>
     </main>
   </div>
 
   <footer id="aces-footer"></footer>
+
+  <!-- Lead Editor Modal -->
+  <dialog id="leadEditorModal" aria-labelledby="leadEditorTitle">
+    <form method="dialog" id="leadEditorForm">
+      <h2 id="leadEditorTitle">Lead Editor</h2>
+      <input type="hidden" id="leadId" />
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem;">
+        <div>
+          <label for="leadFirstName">First Name</label>
+          <input id="leadFirstName" type="text" required />
+        </div>
+        <div>
+          <label for="leadLastName">Last Name</label>
+          <input id="leadLastName" type="text" required />
+        </div>
+        <div>
+          <label for="leadEmail">Email</label>
+          <input id="leadEmail" type="email" />
+        </div>
+        <div>
+          <label for="leadPhone">Phone</label>
+          <input id="leadPhone" type="tel" />
+        </div>
+        <div>
+          <label for="leadLine">Line of Business</label>
+          <select id="leadLine">
+            <option>Auto</option>
+            <option>Home</option>
+            <option>Commercial</option>
+            <option>Life</option>
+            <option>Umbrella</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="leadAssignedAgent">Assigned Agent</label>
+          <select id="leadAssignedAgent"></select>
+        </div>
+        <div>
+          <label for="leadStage">Application Stage</label>
+          <select id="leadStage">
+            <option>New</option>
+            <option>Contacted</option>
+            <option>Quoted</option>
+            <option>Application Started</option>
+            <option>Submitted</option>
+            <option>Bound</option>
+            <option>Lost</option>
+          </select>
+        </div>
+        <div>
+          <label for="leadQuotedPremium">Quoted Premium</label>
+          <input id="leadQuotedPremium" type="number" min="0" step="0.01" placeholder="0.00" />
+        </div>
+        <div>
+          <label for="leadCarrier">Carrier</label>
+          <input id="leadCarrier" type="text" />
+        </div>
+        <div>
+          <label for="leadEffectiveDate">Effective Date</label>
+          <input id="leadEffectiveDate" type="date" />
+        </div>
+        <div>
+          <label for="leadPolicyNumber">Policy Number</label>
+          <input id="leadPolicyNumber" type="text" />
+        </div>
+        <div>
+          <label for="leadAppStartedDate">Application Started</label>
+          <input id="leadAppStartedDate" type="date" />
+        </div>
+        <div>
+          <label for="leadSubmittedDate">Submitted Date</label>
+          <input id="leadSubmittedDate" type="date" />
+        </div>
+      </div>
+
+      <div style="margin-top:.75rem;">
+        <label for="leadNotes">Notes</label>
+        <textarea id="leadNotes" rows="4" placeholder="Add lead notes..."></textarea>
+      </div>
+
+      <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem;">
+        <button type="button" onclick="closeLeadEditor()">Cancel</button>
+        <button class="btn-red" type="button" onclick="saveLead()">Save Lead</button>
+      </div>
+    </form>
+  </dialog>
 </body>
 </html>
