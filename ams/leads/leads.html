@@ -10,6 +10,7 @@
 
   <script src="../../global.js" defer></script>
   <script src="../ams.js" defer></script>
+  <script src="./leads.js" defer></script>
 </head>
 <body>
   <header id="aces-header"></header>
@@ -29,7 +30,7 @@
         <a href="../coi/cois.html">COIs</a>
         <a href="../claims/claims.html">Claims</a>
         <a href="../tasks/tasks.html">Tasks</a>
-        <a href="leads.html" class="active" aria-current="page">Leads</a>
+        <a href="./leads.html" class="active" aria-current="page">Leads</a>
         <a href="../agents/agents.html">Agents</a>
         <a href="../settings/settings.html">Settings</a>
         <a href="#" id="logoutLink" role="button">Logout</a>
@@ -37,8 +38,8 @@
     </aside>
 
     <main class="content" role="main">
-      <div class="page-header">
-        <h1>Leads</h1>
+      <div class="page-header" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <h1 style="margin:0;">Leads</h1>
         <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
           <button class="btn-red" type="button" onclick="openLeadEditor()">+ Add Lead</button>
           <button class="btn-red" type="button" onclick="runRoundRobinAssign()">Run Round Robin</button>
@@ -47,14 +48,20 @@
 
       <section class="client-section" aria-label="Round robin status">
         <h2>Round Robin</h2>
-        <p><strong>Last Assigned Agent:</strong> <span id="rrLastAssigned">—</span></p>
+        <p><strong>Last Assigned:</strong> <span id="rrLastAssigned">—</span></p>
         <p><strong>Next Up:</strong> <span id="rrNextUp">—</span></p>
         <p><strong>Queue:</strong> <span id="rrQueue">—</span></p>
       </section>
 
       <section class="search-bar" aria-label="Search leads">
         <label for="leadSearch" class="sr-only">Search leads</label>
-        <input id="leadSearch" name="leadSearch" type="search" placeholder="Search leads, status, assigned agent..." autocomplete="off" />
+        <input
+          id="leadSearch"
+          name="leadSearch"
+          type="search"
+          placeholder="Search name, phone, email, policy, notes..."
+          autocomplete="off"
+        />
       </section>
 
       <section class="client-section" aria-label="Lead filters">
@@ -64,21 +71,23 @@
             <label for="filterStage">Application Stage</label>
             <select id="filterStage">
               <option value="">All</option>
-              <option>New</option>
-              <option>Contacted</option>
-              <option>Quoted</option>
-              <option>Application Started</option>
-              <option>Submitted</option>
-              <option>Bound</option>
-              <option>Lost</option>
+              <option value="new">New</option>
+              <option value="contacted">Contacted</option>
+              <option value="quoted">Quoted</option>
+              <option value="application_started">Application Started</option>
+              <option value="submitted">Submitted</option>
+              <option value="bound">Bound</option>
+              <option value="lost">Lost</option>
             </select>
           </div>
+
           <div>
-            <label for="filterAgent">Assigned Agent</label>
+            <label for="filterAgent">Assigned Email</label>
             <select id="filterAgent">
               <option value="">All</option>
             </select>
           </div>
+
           <div>
             <label for="filterBind">Policy Status</label>
             <select id="filterBind">
@@ -98,7 +107,7 @@
               <th>Name</th>
               <th>Contact</th>
               <th>Line</th>
-              <th>Assigned Agent</th>
+              <th>Assigned Email</th>
               <th>Stage</th>
               <th>Quoted Premium</th>
               <th>Effective Date</th>
@@ -108,7 +117,7 @@
             </tr>
           </thead>
           <tbody id="leadsRows">
-            <!-- Render via ams.js -->
+            <!-- Rendered by leads.js -->
           </tbody>
         </table>
       </section>
@@ -128,65 +137,86 @@
           <label for="leadFirstName">First Name</label>
           <input id="leadFirstName" type="text" required />
         </div>
+
         <div>
           <label for="leadLastName">Last Name</label>
           <input id="leadLastName" type="text" required />
         </div>
+
         <div>
           <label for="leadEmail">Email</label>
           <input id="leadEmail" type="email" />
         </div>
+
         <div>
           <label for="leadPhone">Phone</label>
           <input id="leadPhone" type="tel" />
         </div>
+
         <div>
           <label for="leadLine">Line of Business</label>
           <select id="leadLine">
-            <option>Auto</option>
-            <option>Home</option>
-            <option>Commercial</option>
-            <option>Life</option>
-            <option>Umbrella</option>
-            <option>Other</option>
+            <option value="Auto">Auto</option>
+            <option value="Home">Home</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Life">Life</option>
+            <option value="Umbrella">Umbrella</option>
+            <option value="Other">Other</option>
           </select>
         </div>
+
         <div>
-          <label for="leadAssignedAgent">Assigned Agent</label>
+          <label for="leadAssignedAgent">Assigned Email</label>
           <select id="leadAssignedAgent"></select>
         </div>
+
+        <!-- leads.js will also ensure this exists dynamically; included here for clarity -->
+        <div>
+          <label for="leadLanguage">Language</label>
+          <select id="leadLanguage">
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+          </select>
+        </div>
+
         <div>
           <label for="leadStage">Application Stage</label>
           <select id="leadStage">
-            <option>New</option>
-            <option>Contacted</option>
-            <option>Quoted</option>
-            <option>Application Started</option>
-            <option>Submitted</option>
-            <option>Bound</option>
-            <option>Lost</option>
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Quoted">Quoted</option>
+            <option value="Application Started">Application Started</option>
+            <option value="Submitted">Submitted</option>
+            <option value="Bound">Bound</option>
+            <option value="Lost">Lost</option>
           </select>
         </div>
+
         <div>
           <label for="leadQuotedPremium">Quoted Premium</label>
           <input id="leadQuotedPremium" type="number" min="0" step="0.01" placeholder="0.00" />
         </div>
+
         <div>
           <label for="leadCarrier">Carrier</label>
           <input id="leadCarrier" type="text" />
         </div>
+
         <div>
           <label for="leadEffectiveDate">Effective Date</label>
           <input id="leadEffectiveDate" type="date" />
         </div>
+
         <div>
           <label for="leadPolicyNumber">Policy Number</label>
           <input id="leadPolicyNumber" type="text" />
         </div>
+
         <div>
           <label for="leadAppStartedDate">Application Started</label>
           <input id="leadAppStartedDate" type="date" />
         </div>
+
         <div>
           <label for="leadSubmittedDate">Submitted Date</label>
           <input id="leadSubmittedDate" type="date" />
@@ -198,7 +228,7 @@
         <textarea id="leadNotes" rows="4" placeholder="Add lead notes..."></textarea>
       </div>
 
-      <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem;">
+      <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem;flex-wrap:wrap;">
         <button type="button" onclick="closeLeadEditor()">Cancel</button>
         <button class="btn-red" type="button" onclick="saveLead()">Save Lead</button>
       </div>
