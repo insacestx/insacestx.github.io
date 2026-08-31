@@ -398,6 +398,27 @@ body {
   color: #374151;
 }
 
+/* Added for expanded lead workflow */
+.badge.status-application_started {
+  background: #eef2ff;
+  color: #3730a3;
+}
+
+.badge.status-submitted {
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.badge.status-bound {
+  background: #ecfdf3;
+  color: #166534;
+}
+
+.badge.status-lost {
+  background: #f3f4f6;
+  color: #374151;
+}
+
 /* Agent cards */
 .agent-grid {
   display: grid;
@@ -505,33 +526,8 @@ body {
   background: #fff;
 }
 
-/* Responsive */
-@media (max-width: 1100px) {
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 800px) {
-  .sidebar {
-    position: static;
-    width: 100%;
-    min-height: auto;
-  }
-
-  .content {
-    margin-left: 0;
-    width: 100%;
-    padding: 20px;
-  }
-
-  .cards {
-    grid-template-columns: 1fr;
-  }
-}
 /* ==========================================
    Leads page enhancements (email + EN/ES RR)
-   Append at end of file
 ========================================== */
 
 #leadsTable td:last-child {
@@ -607,29 +603,12 @@ body {
   min-height: 96px;
 }
 
-/* Stage badges for expanded lead statuses */
-.badge.status-application_started {
-  background: #eef2ff;
-  color: #3730a3;
-}
-
-.badge.status-submitted {
-  background: #fff7ed;
-  color: #9a3412;
-}
-
-.badge.status-bound {
-  background: #ecfdf3;
-  color: #166534;
-}
-
-.badge.status-lost {
-  background: #f3f4f6;
-  color: #374151;
-}
-
-/* Mobile table scrolling helper */
+/* Responsive */
 @media (max-width: 1100px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   #leadsTable {
     display: block;
     overflow-x: auto;
@@ -642,5 +621,23 @@ body {
   #leadsTable th,
   #leadsTable td {
     white-space: nowrap;
+  }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
   }
 }
