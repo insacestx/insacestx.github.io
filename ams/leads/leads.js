@@ -4,19 +4,12 @@
   if (window.__AMS_LEADS_BOOTSTRAPPED__) return;
   window.__AMS_LEADS_BOOTSTRAPPED__ = true;
 
-  // =========================
-  // CONFIG (EMAIL ROUND ROBIN)
-  // =========================
   const EMAIL_POOLS = {
     en: ["en1@acesinsure.com", "en2@acesinsure.com", "en3@acesinsure.com"],
     es: ["es1@acesinsure.com", "es2@acesinsure.com"]
   };
 
-  // Cloudflare Worker API base URL (replace with your deployed worker URL)
-  const API_BASE_URL = "https://long-brook-b453.george-daf.workers.dev";;
-
-  // If true, Email button sends secure magic link via Worker.
-  // If false or Worker unavailable, falls back to mailto.
+  const API_BASE_URL = "https://long-brook-b453.george-daf.workers.dev";
   const USE_MAGIC_LINKS = true;
 
   const STATUS_VALUES = [
@@ -138,9 +131,6 @@
     window.runRoundRobinAssign = runRoundRobinAssign;
   }
 
-  // =========================
-  // DATA
-  // =========================
   function loadFromStorageOrSeed() {
     const saved = localStorage.getItem(STORAGE_KEYS.leads);
     if (saved) {
@@ -266,9 +256,6 @@
     localStorage.setItem(STORAGE_KEYS.leads, JSON.stringify(leads));
   }
 
-  // =========================
-  // ROUND ROBIN
-  // =========================
   function normalizeLanguage(v) {
     const x = String(v || "").trim().toLowerCase();
     return x === "es" || x === "spanish" ? "es" : "en";
@@ -335,9 +322,6 @@
     alert(`Round Robin complete: ${count} lead(s) assigned/rotated.`);
   }
 
-  // =========================
-  // UI
-  // =========================
   function populateAssignedFilter() {
     const existing = new Set(
       leads.map((l) => l.assignedEmail).filter(Boolean).concat(EMAIL_POOLS.en).concat(EMAIL_POOLS.es)
@@ -440,9 +424,6 @@
     return pool[(Number.isFinite(idx) ? idx : 0) % pool.length];
   }
 
-  // =========================
-  // MODAL
-  // =========================
   function openLeadEditor(leadId = "") {
     const modal = els.leadEditorModal;
     if (!modal) return;
@@ -589,9 +570,6 @@
     });
   }
 
-  // =========================
-  // EMAIL / MAGIC LINK
-  // =========================
   async function emailLeadOwner(leadId) {
     const lead = leads.find((l) => l.id === leadId);
     if (!lead) return;
@@ -601,7 +579,7 @@
       return;
     }
 
-    if (USE_MAGIC_LINKS && API_BASE_URL.includes("YOUR-WORKER") === false) {
+    if (USE_MAGIC_LINKS) {
       try {
         const res = await fetch(`${API_BASE_URL}/api/magic-link/create`, {
           method: "POST",
@@ -623,7 +601,6 @@
       }
     }
 
-    // Fallback: mailto
     const subject = encodeURIComponent(`Lead Follow-up: ${lead.leadNumber} - ${lead.name}`);
     const body = encodeURIComponent([
       `Lead ID: ${lead.leadNumber}`,
@@ -638,9 +615,6 @@
     window.location.href = `mailto:${encodeURIComponent(lead.assignedEmail)}?subject=${subject}&body=${body}`;
   }
 
-  // =========================
-  // HELPERS
-  // =========================
   function assignedEmailOptions(selected) {
     const all = [...new Set([...EMAIL_POOLS.en, ...EMAIL_POOLS.es, ...leads.map((l) => l.assignedEmail).filter(Boolean)])];
     return all.sort().map((email) =>
