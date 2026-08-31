@@ -9,6 +9,18 @@ export default {
             title_es: "Información del Propietario",
             fields: [
                 { id: "ownerName", label_en: "Full Name", label_es: "Nombre Completo", type: "text", required: true },
+                {
+                    id: "preferredLanguage",
+                    label_en: "Preferred Agent Language",
+                    label_es: "Idioma Preferido del Agente",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "en", label_en: "English", label_es: "Inglés" },
+                        { value: "es", label_en: "Spanish", label_es: "Español" }
+                    ]
+                },
                 { id: "phone", label_en: "Phone Number", label_es: "Número de Teléfono", type: "text", required: true },
                 { id: "email", label_en: "Email Address", label_es: "Correo Electrónico", type: "email", required: true }
             ]
