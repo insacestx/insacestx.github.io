@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ACES AMS | Leads</title>
 
-  <!-- Root-level AMS page paths -->
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="./style-ams.css" />
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../style-ams.css" />
 
-  <script src="../global.js" defer></script>
-  <script src="./ams.js" defer></script>
-  <script src="./leads.js" defer></script>
+  <script src="../../global.js" defer></script>
+  <script src="../ams.js" defer></script>
 </head>
 <body>
   <header id="aces-header"></header>
@@ -19,69 +17,37 @@
   <div class="ams-app">
     <aside class="sidebar">
       <div class="logo">
-        <a href="./dashboard/dashboard.html" class="logo-link" aria-label="ACES Home">
-          <img src="../images/image2.png" alt="ACES Insurance Logo" class="aces-logo" />
+        <a href="../dashboard/dashboard.html" class="logo-link" aria-label="ACES Home">
+          <img src="../../images/image2.png" alt="ACES Insurance Logo" class="aces-logo" />
         </a>
       </div>
 
       <nav aria-label="AMS navigation">
-        <a href="./dashboard/dashboard.html">Dashboard</a>
-        <a href="./clients/clients.html">Clients</a>
-        <a href="./policies/policies.html">Policies</a>
-        <a href="./coi/cois.html">COIs</a>
-        <a href="./claims/claims.html">Claims</a>
-        <a href="./tasks/tasks.html">Tasks</a>
-        <a href="./leads.html" class="active" aria-current="page">Leads</a>
-        <a href="./agents/agents.html">Agents</a>
-        <a href="./settings/settings.html">Settings</a>
-        <a href="#" id="logoutLink">Logout</a>
+        <a href="../dashboard/dashboard.html">Dashboard</a>
+        <a href="../clients/clients.html">Clients</a>
+        <a href="../policies/policies.html">Policies</a>
+        <a href="../coi/cois.html">COIs</a>
+        <a href="../claims/claims.html">Claims</a>
+        <a href="../tasks/tasks.html">Tasks</a>
+        <a href="leads.html" class="active" aria-current="page">Leads</a>
+        <a href="../agents/agents.html">Agents</a>
+        <a href="../settings/settings.html">Settings</a>
+        <a href="#" id="logoutLink" role="button">Logout</a>
       </nav>
     </aside>
 
     <main class="content" role="main">
       <div class="page-header">
-        <h1>Agent Leads</h1>
+        <h1>Leads</h1>
       </div>
 
-      <section class="submissions">
-        <div class="submissions-controls">
-          <label for="searchInput" class="sr-only">Search leads</label>
-          <input id="searchInput" type="text" placeholder="Search name, phone, email..." />
+      <section class="search-bar" aria-label="Search leads">
+        <label for="leadSearch" class="sr-only">Search leads</label>
+        <input id="leadSearch" name="leadSearch" type="search" placeholder="Search leads..." autocomplete="off" />
+      </section>
 
-          <label for="statusFilter" class="sr-only">Filter by status</label>
-          <select id="statusFilter">
-            <option value="all">All Statuses</option>
-            <option value="new">New</option>
-            <option value="contacted">Contacted</option>
-            <option value="quoted">Quoted</option>
-            <option value="closed">Closed</option>
-          </select>
-
-          <label for="agentFilter" class="sr-only">Filter by agent</label>
-          <select id="agentFilter">
-            <option value="all">All Agents</option>
-          </select>
-        </div>
-
-        <table class="submissions-table">
-          <thead>
-            <tr>
-              <th>Lead</th>
-              <th>Assigned Agent</th>
-              <th>Status</th>
-              <th>Notes</th>
-              <th>Updated</th>
-            </tr>
-          </thead>
-          <tbody id="leadRows"></tbody>
-        </table>
-
-        <div id="emptyState" class="empty" style="display:none;">No leads match current filters.</div>
-
-        <div class="btn-row" style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
-          <button class="btn-red" id="addLeadBtn" type="button">+ Add Lead</button>
-          <button class="action-btn" id="exportBtn" type="button">Export JSON</button>
-        </div>
+      <section aria-label="Leads list">
+        <div id="leadsContainer"></div>
       </section>
     </main>
   </div>
