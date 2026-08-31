@@ -9,6 +9,18 @@ export default {
             title_es: "Información del Negocio",
             fields: [
                 { id: "businessName", label_en: "Business Name", label_es: "Nombre del Negocio", type: "text", required: true },
+                {
+                    id: "preferredLanguage",
+                    label_en: "Preferred Agent Language",
+                    label_es: "Idioma Preferido del Agente",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "en", label_en: "English", label_es: "Inglés" },
+                        { value: "es", label_en: "Spanish", label_es: "Español" }
+                    ]
+                },
                 { id: "industry", label_en: "Industry", label_es: "Industria", type: "text", required: true },
                 { id: "yearsInBusiness", label_en: "Years in Business", label_es: "Años en el Negocio", type: "number", required: true }
             ]
@@ -21,7 +33,11 @@ export default {
             fields: [
                 { id: "glLimit", label_en: "General Liability Limit", label_es: "Límite de Responsabilidad General", type: "number", required: true },
                 { id: "autoLimit", label_en: "Commercial Auto Limit", label_es: "Límite de Auto Comercial", type: "number" },
-                { id: "workersComp", label_en: "Workers Comp Policy?", label_es: "¿Póliza de Compensación para Trabajadores?", type: "select",
+                {
+                    id: "workersComp",
+                    label_en: "Workers Comp Policy?",
+                    label_es: "¿Póliza de Compensación para Trabajadores?",
+                    type: "select",
                     options: [
                         { value: "", label_en: "Select...", label_es: "Seleccione..." },
                         { value: "yes", label_en: "Yes", label_es: "Sí" },
