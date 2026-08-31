@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ACES AMS | COIs</title>
+  <title>ACES AMS | COI Details</title>
 
   <link rel="stylesheet" href="../../style.css" />
   <link rel="stylesheet" href="../style-ams.css" />
@@ -26,7 +26,7 @@
         <a href="../dashboard/dashboard.html">Dashboard</a>
         <a href="../clients/clients.html">Clients</a>
         <a href="../policies/policies.html">Policies</a>
-        <a href="cois.html" class="active" aria-current="page">COIs</a>
+        <a href="cois.html">COIs</a>
         <a href="../claims/claims.html">Claims</a>
         <a href="../tasks/tasks.html">Tasks</a>
         <a href="../leads.html">Leads</a>
@@ -38,48 +38,36 @@
 
     <main class="content" role="main">
       <div class="page-header">
-        <h1>Certificates of Insurance</h1>
-        <button class="btn-red" type="button" onclick="addCOI()">+ Add COI</button>
+        <h1 id="coiId">COI Details</h1>
+        <button class="btn-red" type="button" onclick="markCOICompleted()">Mark Completed</button>
       </div>
 
-      <section class="search-bar" aria-label="Search COIs">
-        <label for="coiSearch" class="sr-only">Search COIs</label>
-        <input
-          type="text"
-          id="coiSearch"
-          placeholder="Search COIs..."
-          autocomplete="off"
-        />
+      <section class="client-info" aria-label="COI information">
+        <h2>COI Information</h2>
+        <p><strong>Client:</strong> <span id="coiClient">—</span></p>
+        <p><strong>Holder:</strong> <span id="coiHolder">—</span></p>
+        <p><strong>Policy #:</strong> <span id="coiPolicy">—</span></p>
+        <p><strong>Date Requested:</strong> <span id="coiRequested">—</span></p>
+        <p><strong>Date Completed:</strong> <span id="coiCompleted">—</span></p>
+        <p><strong>Status:</strong> <span id="coiStatus">—</span></p>
       </section>
 
-      <section aria-label="COI table">
-        <table class="data-table" id="coiTable">
-          <thead>
-            <tr>
-              <th>COI ID</th>
-              <th>Client</th>
-              <th>Holder</th>
-              <th>Policy #</th>
-              <th>Requested</th>
-              <th>Completed</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="coiRows">
-            <!-- Rows injected by ams.js (loadCOIs) -->
-          </tbody>
-        </table>
+      <section class="client-section" aria-label="COI notes">
+        <h2>Notes</h2>
+        <label for="coiNotes">Internal Notes</label>
+        <textarea id="coiNotes" placeholder="Add internal notes..."></textarea>
+        <button class="btn-red small" type="button" onclick="saveCOINotes()">Save Notes</button>
+      </section>
+
+      <section class="client-section" aria-label="COI documents">
+        <h2>Documents</h2>
+        <input type="file" id="coiDocUpload" multiple />
+        <button class="btn-red small" type="button" onclick="uploadCOIDocs()">Upload</button>
+        <ul id="coiDocs"></ul>
       </section>
     </main>
   </div>
 
   <footer id="aces-footer"></footer>
-
-  <script>
-    // Keep old /coi/coi.html entry working by normalizing to canonical /coi/cois.html
-    if (!location.pathname.toLowerCase().endsWith("/cois.html")) {
-      history.replaceState({}, "", "./cois.html" + location.search + location.hash);
-    }
-  </script>
 </body>
 </html>
