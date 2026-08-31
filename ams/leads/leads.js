@@ -21,7 +21,7 @@
     es: [
       "george@insaces.com",
       "jimmy@insaces.com",
-      ]
+    ]
   };
 
   const API_BASE_URL = "https://long-brook-b453.george-daf.workers.dev";
@@ -627,40 +627,48 @@
       return;
     }
 
-    if (USE_MAGIC_LINKS) {
-      try {
-        const res = await fetch(`${API_BASE_URL}/api/magic-link/create`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            leadId: lead.id,
-            agentEmail: lead.assignedEmail,
-            expiresMinutes: 120
-          })
-        });
-
-        const data = await res.json();
-        if (!res.ok || !data.ok) throw new Error(data.error || "Failed to send secure link");
-
-        alert(`Secure update link sent to ${lead.assignedEmail}`);
-        return;
-      } catch (err) {
-        console.warn("Magic link send failed, falling back to mailto.", err);
-      }
+    if (!USE_MAGIC_LINKS) {
+      alert("Email sending is disabled: USE_MAGIC_LINKS must be true.");
+      return;
     }
 
-    const subject = encodeURIComponent(`Lead Follow-up: ${lead.leadNumber} - ${lead.name}`);
-    const body = encodeURIComponent([
-      `Lead ID: ${lead.leadNumber}`,
-      `Name: ${lead.name}`,
-      `Language: ${(lead.language || "en").toUpperCase()}`,
-      `Phone: ${lead.phone || "N/A"}`,
-      `Email: ${lead.email || "N/A"}`,
-      `Line: ${lead.lineOfBusiness || "N/A"}`,
-      `Stage: ${labelStatus(lead.status)}`,
-      `Notes: ${lead.notes || "N/A"}`
-    ].join("\n"));
-    window.location.href = `mailto:${encodeURIComponent(lead.assignedEmail)}?subject=${subject}&body=${body}`;
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/magic-link/create`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          leadId: lead.id,
+          leadNumber: lead.leadNumber || "",
+          agentEmail: lead.assignedEmail,
+          expiresMinutes: 120,
+
+          // Customer context (backend should use as Reply-To, not From)
+          customerEmail: lead.email || "",
+          customerName: lead.name || "",
+
+          // Optional template metadata
+          language: (lead.language || "en").toUpperCase(),
+          phone: lead.phone || "",
+          lineOfBusiness: lead.lineOfBusiness || "",
+          stage: labelStatus(lead.status),
+          notes: lead.notes || ""
+        })
+      });
+
+      let data = {};
+      try {
+        data = await res.json();
+      } catch (_) {}
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || `Failed to send secure link (${res.status})`);
+      }
+
+      alert(`Secure update link sent to ${lead.assignedEmail} from noreply@insaces.com`);
+    } catch (err) {
+      console.error("Magic link send failed. No client-side mail fallback allowed.", err);
+      alert("Unable to send email right now. Please try again or contact admin.");
+    }
   }
 
   // =========================
