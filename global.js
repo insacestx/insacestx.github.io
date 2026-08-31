@@ -4,7 +4,7 @@
    FEATURE FLAGS
 ============================================================ */
 const FEATURES = {
-  agentLogin: false // true = show Agent Login, false = hide/disable
+  agentLogin: true // true = show Agent Login, false = hide/disable
 };
 
 document.addEventListener("DOMContentLoaded", () => {
