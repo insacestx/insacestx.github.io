@@ -13,7 +13,7 @@
   };
 
   // Cloudflare Worker API base URL (replace with your deployed worker URL)
-  const API_BASE_URL = "https://YOUR-WORKER.your-subdomain.workers.dev";
+  const API_BASE_URL = "https://long-brook-b453.george-daf.workers.dev";;
 
   // If true, Email button sends secure magic link via Worker.
   // If false or Worker unavailable, falls back to mailto.
