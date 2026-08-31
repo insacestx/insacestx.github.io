@@ -19,6 +19,18 @@ const commercialAutoConfig = {
           required: true
         },
         {
+          id: "preferredLanguage",
+          type: "select",
+          label_en: "Preferred Agent Language",
+          label_es: "Idioma Preferido del Agente",
+          required: true,
+          options: [
+            { value: "", label_en: "Select", label_es: "Seleccione" },
+            { value: "en", label_en: "English", label_es: "Inglés" },
+            { value: "es", label_en: "Spanish", label_es: "Español" }
+          ]
+        },
+        {
           id: "dba_name",
           type: "text",
           label_en: "DBA (if applicable)",
