@@ -4,9 +4,24 @@
   if (window.__AMS_LEADS_BOOTSTRAPPED__) return;
   window.__AMS_LEADS_BOOTSTRAPPED__ = true;
 
+  // =========================
+  // CONFIG
+  // =========================
   const EMAIL_POOLS = {
-    en: ["en1@acesinsure.com", "en2@acesinsure.com", "en3@acesinsure.com"],
-    es: ["es1@acesinsure.com", "es2@acesinsure.com"]
+    en: [
+      "george@insaces.com", // George
+      "jimmy@insaces.com",  // Jimmy
+      "office@insaces.com", // Renee
+      "robert@insaces.com", // Robert
+      "jordan@insaces.com", // Jordan
+      "lanse@insaces.com",  // Lanse
+      "bryan@insaces.com"   // Bryan
+    ],
+    // Adjust ES pool as needed. For now mirrored to active users.
+    es: [
+      "george@insaces.com",
+      "jimmy@insaces.com",
+      ]
   };
 
   const API_BASE_URL = "https://long-brook-b453.george-daf.workers.dev";
@@ -53,6 +68,7 @@
     bindEvents();
     loadFromStorageOrSeed();
     migrateAndNormalizeLeads();
+    replaceLegacyAssignedEmails(); // <- cleans old en1/es1 placeholders
     populateAssignedFilter();
     applyFilters();
     renderRoundRobinStatus();
@@ -131,6 +147,9 @@
     window.runRoundRobinAssign = runRoundRobinAssign;
   }
 
+  // =========================
+  // DATA
+  // =========================
   function loadFromStorageOrSeed() {
     const saved = localStorage.getItem(STORAGE_KEYS.leads);
     if (saved) {
@@ -252,10 +271,30 @@
     if (changed) saveToStorage();
   }
 
+  function replaceLegacyAssignedEmails() {
+    const valid = new Set([...EMAIL_POOLS.en, ...EMAIL_POOLS.es]);
+    let changed = false;
+
+    leads.forEach((lead) => {
+      const assigned = String(lead.assignedEmail || "").trim().toLowerCase();
+      if (!assigned) return;
+      if (valid.has(assigned)) return;
+
+      lead.assignedEmail = nextRoundRobinEmail(lead.language || "en");
+      lead.updatedAt = new Date().toISOString();
+      changed = true;
+    });
+
+    if (changed) saveToStorage();
+  }
+
   function saveToStorage() {
     localStorage.setItem(STORAGE_KEYS.leads, JSON.stringify(leads));
   }
 
+  // =========================
+  // ROUND ROBIN
+  // =========================
   function normalizeLanguage(v) {
     const x = String(v || "").trim().toLowerCase();
     return x === "es" || x === "spanish" ? "es" : "en";
@@ -322,6 +361,9 @@
     alert(`Round Robin complete: ${count} lead(s) assigned/rotated.`);
   }
 
+  // =========================
+  // UI
+  // =========================
   function populateAssignedFilter() {
     const existing = new Set(
       leads.map((l) => l.assignedEmail).filter(Boolean).concat(EMAIL_POOLS.en).concat(EMAIL_POOLS.es)
@@ -424,6 +466,9 @@
     return pool[(Number.isFinite(idx) ? idx : 0) % pool.length];
   }
 
+  // =========================
+  // MODAL
+  // =========================
   function openLeadEditor(leadId = "") {
     const modal = els.leadEditorModal;
     if (!modal) return;
@@ -570,6 +615,9 @@
     });
   }
 
+  // =========================
+  // EMAIL / MAGIC LINK
+  // =========================
   async function emailLeadOwner(leadId) {
     const lead = leads.find((l) => l.id === leadId);
     if (!lead) return;
@@ -615,6 +663,9 @@
     window.location.href = `mailto:${encodeURIComponent(lead.assignedEmail)}?subject=${subject}&body=${body}`;
   }
 
+  // =========================
+  // HELPERS
+  // =========================
   function assignedEmailOptions(selected) {
     const all = [...new Set([...EMAIL_POOLS.en, ...EMAIL_POOLS.es, ...leads.map((l) => l.assignedEmail).filter(Boolean)])];
     return all.sort().map((email) =>
