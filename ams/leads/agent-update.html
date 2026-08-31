@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ACES | Agent Lead Update</title>
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../style-ams.css" />
+</head>
+<body>
+  <main class="content" style="margin:0 auto;max-width:760px;padding:24px;">
+    <section class="client-section">
+      <h1 style="margin-top:0;color:#d40000;">Lead Update</h1>
+      <p id="msg">Verifying secure link...</p>
+
+      <div id="formWrap" style="display:none;">
+        <div style="display:grid;gap:.75rem;">
+          <div>
+            <label for="status">Stage</label>
+            <select id="status">
+              <option value="contacted">Contacted</option>
+              <option value="quoted">Quoted</option>
+              <option value="application_started">Application Started</option>
+              <option value="submitted">Submitted</option>
+              <option value="bound">Bound</option>
+              <option value="lost">Lost</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="notes">Notes</label>
+            <textarea id="notes" rows="5" placeholder="Add update notes..."></textarea>
+          </div>
+
+          <div>
+            <button id="saveBtn" class="btn-red" type="button">Submit Update</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Replace with your deployed worker URL
+    const API = "https://YOUR-WORKER.your-subdomain.workers.dev";
+
+    const token = new URLSearchParams(location.search).get("token");
+    const msg = document.getElementById("msg");
+    const formWrap = document.getElementById("formWrap");
+    const saveBtn = document.getElementById("saveBtn");
+
+    if (!token) {
+      msg.textContent = "Missing token.";
+    } else {
+      verify();
+    }
+
+    async function verify() {
+      try {
+        const r = await fetch(API + "/api/magic-link/verify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token })
+        });
+        const data = await r.json();
+        if (!data.valid) {
+          msg.textContent = data.error || "Invalid or expired link.";
+          return;
+        }
+        msg.textContent = `Verified for lead ${data.leadId}.`;
+        formWrap.style.display = "block";
+      } catch {
+        msg.textContent = "Verification failed.";
+      }
+    }
+
+    saveBtn?.addEventListener("click", async () => {
+      const status = document.getElementById("status").value;
+      const notes = document.getElementById("notes").value;
+
+      try {
+        const r = await fetch(API + "/api/lead/update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token, status, notes })
+        });
+        const data = await r.json();
+        if (!data.ok) {
+          msg.textContent = data.error || "Update failed.";
+          return;
+        }
+        msg.textContent = "Update saved. Thank you.";
+        formWrap.style.display = "none";
+      } catch {
+        msg.textContent = "Update failed.";
+      }
+    });
+  </script>
+</body>
+</html>
