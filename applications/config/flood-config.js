@@ -9,6 +9,18 @@ export default {
             title_es: "Información de la Propiedad",
             fields: [
                 { id: "propertyAddress", label_en: "Property Address", label_es: "Dirección de la Propiedad", type: "text", required: true },
+                {
+                    id: "preferredLanguage",
+                    label_en: "Preferred Agent Language",
+                    label_es: "Idioma Preferido del Agente",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "en", label_en: "English", label_es: "Inglés" },
+                        { value: "es", label_en: "Spanish", label_es: "Español" }
+                    ]
+                },
                 { id: "city", label_en: "City", label_es: "Ciudad", type: "text", required: true },
                 { id: "state", label_en: "State", label_es: "Estado", type: "text", required: true },
                 { id: "zip", label_en: "ZIP Code", label_es: "Código Postal", type: "text", required: true },
