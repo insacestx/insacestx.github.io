@@ -31,8 +31,7 @@
         <a href="../tasks/tasks.html">Tasks</a>
         <a href="../leads.html">Leads</a>
         <a href="agents.html" class="active" aria-current="page">Agents</a>
-        <a href="../settings/settings.html">Settings</a>
-        <a href="#" id="logoutLink">Logout</a>
+        <a href="#" id="logoutLink" role="button">Logout</a>
       </nav>
     </aside>
 
@@ -44,11 +43,11 @@
 
       <section class="search-bar" aria-label="Search agents">
         <label for="agentSearch" class="sr-only">Search agents</label>
-        <input id="agentSearch" type="text" placeholder="Search agents..." autocomplete="off" />
+        <input id="agentSearch" type="search" placeholder="Search agents..." autocomplete="off" />
       </section>
 
       <section aria-label="Agent cards">
-        <div id="agentGrid" class="agent-grid"></div>
+        <div id="agentGrid" class="agent-grid" aria-live="polite"></div>
       </section>
     </main>
   </div>
