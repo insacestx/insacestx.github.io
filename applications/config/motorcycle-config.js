@@ -9,6 +9,18 @@ export default {
             title_es: "Información del Conductor",
             fields: [
                 { id: "riderName", label_en: "Full Name", label_es: "Nombre Completo", type: "text", required: true },
+                {
+                    id: "preferredLanguage",
+                    label_en: "Preferred Agent Language",
+                    label_es: "Idioma Preferido del Agente",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "en", label_en: "English", label_es: "Inglés" },
+                        { value: "es", label_en: "Spanish", label_es: "Español" }
+                    ]
+                },
                 { id: "riderDOB", label_en: "Date of Birth", label_es: "Fecha de Nacimiento", type: "date", required: true },
                 { id: "licenseNumber", label_en: "License Number", label_es: "Número de Licencia", type: "text", required: true },
                 { id: "licenseState", label_en: "License State", label_es: "Estado de la Licencia", type: "text", required: true },
