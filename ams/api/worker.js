@@ -2,16 +2,20 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Basic CORS handling
+    // Handle CORS preflight
     if (request.method === "OPTIONS") {
-      return new Response(null, { headers: corsHeaders() });
+      return new Response(null, { headers: corsHeaders(env) });
     }
 
-    if (request.method === "POST" && url.pathname === "/api/magic-link/create") {
+    // Route: create magic link + send agent email
+    if (url.pathname === "/api/magic-link/create") {
+      if (request.method !== "POST") {
+        return json({ ok: false, error: "Method Not Allowed" }, 405, env);
+      }
       return handleMagicLinkCreate(request, env);
     }
 
-    return json({ ok: false, error: "Not Found" }, 404);
+    return json({ ok: false, error: "Not Found" }, 404, env);
   }
 };
 
@@ -22,7 +26,8 @@ async function handleMagicLinkCreate(request, env) {
     const leadId = safe(body.leadId);
     const leadNumber = safe(body.leadNumber);
     const agentEmail = safe(body.agentEmail).toLowerCase();
-    const expiresMinutes = Number(body.expiresMinutes || 120);
+    const expiresMinutesRaw = Number(body.expiresMinutes || 120);
+    const expiresMinutes = clamp(expiresMinutesRaw, 5, 1440); // 5 min to 24h
 
     const customerEmail = safe(body.customerEmail).toLowerCase();
     const customerName = safe(body.customerName);
@@ -33,17 +38,18 @@ async function handleMagicLinkCreate(request, env) {
     const stage = safe(body.stage);
     const notes = safe(body.notes);
 
-    if (!leadId) return json({ ok: false, error: "leadId is required" }, 400);
+    if (!leadId) return json({ ok: false, error: "leadId is required" }, 400, env);
+
     if (!agentEmail || !isEmail(agentEmail)) {
-      return json({ ok: false, error: "Valid agentEmail is required" }, 400);
+      return json({ ok: false, error: "Valid agentEmail is required" }, 400, env);
     }
 
-    // Optional allowlist: prevent abuse by restricting recipients to your domain/team
+    // Restrict recipients to your domain/team
     if (!agentEmail.endsWith("@insaces.com")) {
-      return json({ ok: false, error: "agentEmail must be an @insaces.com address" }, 400);
+      return json({ ok: false, error: "agentEmail must be an @insaces.com address" }, 400, env);
     }
 
-    // Build magic link token (replace with DB-backed token in production)
+    // Build signed token payload
     const expiresAt = Date.now() + expiresMinutes * 60 * 1000;
     const tokenPayload = {
       leadId,
@@ -51,13 +57,12 @@ async function handleMagicLinkCreate(request, env) {
       exp: expiresAt
     };
 
-    // In production, use signed JWT or persisted token in KV/D1
     const token = await signToken(tokenPayload, env.MAGIC_LINK_SECRET);
 
     const appBase = (env.APP_BASE_URL || "https://insaces.com").replace(/\/+$/, "");
     const magicLink = `${appBase}/ams/leads/update.html?token=${encodeURIComponent(token)}`;
 
-    // Send from noreply@insaces.com (critical)
+    // Send from noreply@insaces.com (critical for alignment)
     const emailResult = await sendViaResend({
       apiKey: env.RESEND_API_KEY,
       from: env.MAIL_FROM || "ACES Insurance <noreply@insaces.com>",
@@ -91,16 +96,21 @@ async function handleMagicLinkCreate(request, env) {
     });
 
     if (!emailResult.ok) {
-      return json({ ok: false, error: emailResult.error || "Email send failed" }, 502);
+      return json({ ok: false, error: emailResult.error || "Email send failed" }, 502, env);
     }
 
-    return json({
-      ok: true,
-      message: "Secure link sent",
-      providerId: emailResult.id || null
-    });
+    return json(
+      {
+        ok: true,
+        message: "Secure link sent",
+        providerId: emailResult.id || null,
+        expiresMinutes
+      },
+      200,
+      env
+    );
   } catch (err) {
-    return json({ ok: false, error: err?.message || "Unexpected server error" }, 500);
+    return json({ ok: false, error: err?.message || "Unexpected server error" }, 500, env);
   }
 }
 
@@ -122,7 +132,7 @@ async function sendViaResend({ apiKey, from, to, replyTo, subject, html, text })
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${apiKey}`,
+      Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json"
     },
     body: JSON.stringify(payload)
@@ -182,11 +192,14 @@ function buildText(ctx) {
   ].join("\n");
 }
 
-// Simple HMAC token (replace with JWT lib if desired)
+// Simple signed token (payload.signature)
+// NOTE: Ensure your update.html verifies signature + exp before trusting token.
 async function signToken(payload, secret) {
   if (!secret) throw new Error("Missing MAGIC_LINK_SECRET");
+
   const enc = new TextEncoder();
   const data = enc.encode(JSON.stringify(payload));
+
   const key = await crypto.subtle.importKey(
     "raw",
     enc.encode(secret),
@@ -194,6 +207,7 @@ async function signToken(payload, secret) {
     false,
     ["sign"]
   );
+
   const sig = await crypto.subtle.sign("HMAC", key, data);
   return `${base64Url(data)}.${base64Url(new Uint8Array(sig))}`;
 }
@@ -212,6 +226,11 @@ function isEmail(v) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || "").trim());
 }
 
+function clamp(n, min, max) {
+  if (!Number.isFinite(n)) return min;
+  return Math.min(max, Math.max(min, Math.floor(n)));
+}
+
 function escapeHtml(s) {
   return String(s ?? "")
     .replaceAll("&", "&amp;")
@@ -225,20 +244,22 @@ function escapeAttr(s) {
   return escapeHtml(s).replaceAll("`", "&#96;");
 }
 
-function corsHeaders() {
+function corsHeaders(env) {
+  const allowed = env.ALLOWED_ORIGIN || "https://insaces.com";
   return {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": allowed,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Vary": "Origin"
   };
 }
 
-function json(obj, status = 200) {
+function json(obj, status = 200, env) {
   return new Response(JSON.stringify(obj), {
     status,
     headers: {
       "Content-Type": "application/json",
-      ...corsHeaders()
+      ...corsHeaders(env)
     }
   });
 }
