@@ -9,6 +9,18 @@ export default {
             title_es: "Información del Negocio",
             fields: [
                 { id: "businessName", label_en: "Business Name", label_es: "Nombre del Negocio", type: "text", required: true },
+                {
+                    id: "preferredLanguage",
+                    label_en: "Preferred Agent Language",
+                    label_es: "Idioma Preferido del Agente",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "en", label_en: "English", label_es: "Inglés" },
+                        { value: "es", label_en: "Spanish", label_es: "Español" }
+                    ]
+                },
                 { id: "industry", label_en: "Industry / NAICS", label_es: "Industria / NAICS", type: "text", required: true },
                 { id: "yearsInBusiness", label_en: "Years in Business", label_es: "Años en el Negocio", type: "number", required: true },
                 { id: "annualRevenue", label_en: "Annual Revenue", label_es: "Ingresos Anuales", type: "number", required: true }
