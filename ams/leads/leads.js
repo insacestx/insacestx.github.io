@@ -32,8 +32,10 @@
 
     bindEvents();
     loadFromStorageOrSeed();
+    ensureLeadFields();
     populateAgentFilter();
     applyFilters();
+    ensureLeadModal();
   }
 
   function isReady() {
@@ -65,6 +67,7 @@
     els.addLeadBtn.addEventListener("click", addLeadPrompt);
     els.exportBtn.addEventListener("click", exportJson);
 
+    // Row-level updates (existing behavior)
     els.rows.addEventListener("change", (e) => {
       const target = e.target;
       const id = target.getAttribute("data-id");
@@ -92,6 +95,39 @@
       lead.updatedAt = new Date().toISOString();
       saveToStorage();
     });
+
+    // Clickable row -> open modal details
+    els.rows.addEventListener("click", (e) => {
+      const target = e.target;
+
+      // Do not open modal when interacting with form controls
+      if (target.closest("select, textarea, input, button, a, label")) return;
+
+      const tr = target.closest("tr[data-id]");
+      if (!tr) return;
+
+      openLeadModal(tr.getAttribute("data-id"));
+    });
+
+    // Modal actions (event delegation)
+    document.addEventListener("click", (e) => {
+      const closeBtn = e.target.closest("[data-close-lead-modal]");
+      if (closeBtn) {
+        closeLeadModal();
+        return;
+      }
+
+      const pushBtn = e.target.closest("[data-push-next]");
+      if (pushBtn) {
+        const leadId = pushBtn.getAttribute("data-push-next");
+        pushToNextAgent(leadId);
+        openLeadModal(leadId); // refresh modal content
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeLeadModal();
+    });
   }
 
   function loadFromStorageOrSeed() {
@@ -106,6 +142,8 @@
       } catch (_) {}
     }
 
+    const now = new Date().toISOString();
+
     leads = [
       {
         id: uid(),
@@ -115,7 +153,8 @@
         assigned: "George Santibañez",
         status: "new",
         notes: "",
-        updatedAt: new Date().toISOString()
+        receivedAt: now,
+        updatedAt: now
       },
       {
         id: uid(),
@@ -125,7 +164,8 @@
         assigned: "Jordan Jones",
         status: "contacted",
         notes: "Requested GL + Auto quote.",
-        updatedAt: new Date().toISOString()
+        receivedAt: now,
+        updatedAt: now
       },
       {
         id: uid(),
@@ -135,10 +175,30 @@
         assigned: "Jimmy Rodriguez",
         status: "quoted",
         notes: "Waiting for bind confirmation.",
-        updatedAt: new Date().toISOString()
+        receivedAt: now,
+        updatedAt: now
       }
     ];
     saveToStorage();
+  }
+
+  // Backfill fields for existing stored leads
+  function ensureLeadFields() {
+    let changed = false;
+    const now = new Date().toISOString();
+
+    leads.forEach((lead) => {
+      if (!lead.receivedAt) {
+        lead.receivedAt = lead.updatedAt || now;
+        changed = true;
+      }
+      if (!lead.updatedAt) {
+        lead.updatedAt = lead.receivedAt || now;
+        changed = true;
+      }
+    });
+
+    if (changed) saveToStorage();
   }
 
   function populateAgentFilter() {
@@ -189,6 +249,10 @@
       .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
       .forEach(lead => {
         const tr = document.createElement("tr");
+        tr.setAttribute("data-id", lead.id);
+        tr.style.cursor = "pointer";
+        tr.title = "Click to view lead details";
+
         tr.innerHTML = `
           <td>
             <strong>${escapeHtml(lead.name)}</strong><br>
@@ -224,6 +288,8 @@
 
     if (!AGENTS.includes(assigned)) AGENTS.push(assigned);
 
+    const now = new Date().toISOString();
+
     leads.unshift({
       id: uid(),
       name,
@@ -232,12 +298,108 @@
       assigned,
       status: "new",
       notes: "",
-      updatedAt: new Date().toISOString()
+      receivedAt: now,
+      updatedAt: now
     });
 
     saveToStorage();
     populateAgentFilter();
     applyFilters();
+  }
+
+  function pushToNextAgent(leadId) {
+    const lead = leads.find(l => l.id === leadId);
+    if (!lead) return;
+
+    const pool = getAgentPool();
+    if (!pool.length) return;
+
+    const currentIndex = pool.indexOf(lead.assigned);
+    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % pool.length;
+    lead.assigned = pool[nextIndex];
+    lead.updatedAt = new Date().toISOString();
+
+    saveToStorage();
+    populateAgentFilter();
+    applyFilters();
+  }
+
+  function getAgentPool() {
+    const set = new Set([...AGENTS, ...leads.map(l => l.assigned).filter(Boolean)]);
+    return [...set].sort();
+  }
+
+  function ensureLeadModal() {
+    if (document.getElementById("leadDetailModal")) return;
+
+    const modal = document.createElement("div");
+    modal.id = "leadDetailModal";
+    modal.setAttribute("aria-hidden", "true");
+    modal.style.display = "none";
+    modal.style.position = "fixed";
+    modal.style.inset = "0";
+    modal.style.background = "rgba(0,0,0,0.45)";
+    modal.style.zIndex = "2000";
+    modal.style.padding = "24px";
+    modal.style.overflow = "auto";
+
+    modal.innerHTML = `
+      <div role="dialog" aria-modal="true" aria-labelledby="leadModalTitle"
+           style="max-width:640px;margin:40px auto;background:#fff;border-radius:12px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.2);">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:start;">
+          <h2 id="leadModalTitle" style="margin:0;font-size:1.25rem;">Lead Details</h2>
+          <button type="button" data-close-lead-modal
+                  style="border:0;background:#eee;padding:6px 10px;border-radius:8px;cursor:pointer;">Close</button>
+        </div>
+        <div id="leadModalBody" style="margin-top:14px;"></div>
+      </div>
+    `;
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeLeadModal();
+    });
+
+    document.body.appendChild(modal);
+  }
+
+  function openLeadModal(leadId) {
+    const lead = leads.find(l => l.id === leadId);
+    const modal = document.getElementById("leadDetailModal");
+    const body = document.getElementById("leadModalBody");
+    if (!lead || !modal || !body) return;
+
+    body.innerHTML = `
+      <div style="display:grid;grid-template-columns:160px 1fr;gap:8px 12px;">
+        <strong>Name:</strong><span>${escapeHtml(lead.name || "—")}</span>
+        <strong>Phone:</strong><span>${escapeHtml(lead.phone || "—")}</span>
+        <strong>Email:</strong><span>${escapeHtml(lead.email || "—")}</span>
+        <strong>Status:</strong><span>${escapeHtml(labelStatus(lead.status || "new"))}</span>
+        <strong>Assigned Agent:</strong><span>${escapeHtml(lead.assigned || "Unassigned")}</span>
+        <strong>Received At:</strong><span>${escapeHtml(formatDate(lead.receivedAt))}</span>
+        <strong>Last Updated:</strong><span>${escapeHtml(formatDate(lead.updatedAt))}</span>
+      </div>
+
+      <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button type="button" data-push-next="${lead.id}"
+                style="border:0;background:#0b5fff;color:#fff;padding:10px 14px;border-radius:8px;cursor:pointer;">
+          Push to Next Agent
+        </button>
+        <button type="button" data-close-lead-modal
+                style="border:1px solid #ccc;background:#fff;padding:10px 14px;border-radius:8px;cursor:pointer;">
+          Done
+        </button>
+      </div>
+    `;
+
+    modal.style.display = "block";
+    modal.setAttribute("aria-hidden", "false");
+  }
+
+  function closeLeadModal() {
+    const modal = document.getElementById("leadDetailModal");
+    if (!modal) return;
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
   }
 
   function exportJson() {
