@@ -255,7 +255,7 @@
     <!-- RIGHT SIDE -->
     <div class="hero-right">
 
-      <div class="quick-quote-box fade-in">
+      <div class="quick-quote-box fade-in" id="quickQuoteBox">
 
         <h2 data-en="Quick Insurance Quote"
             data-es="Cotización Rápida de Seguro">
@@ -276,6 +276,7 @@
   <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
   <input type="hidden" name="_subject" value="New Quick Quote Request">
   <input type="hidden" id="rrEmail" name="rrEmail">
+  <input type="hidden" id="routingLanguage" name="routingLanguage" value="en">
 
   <input type="text"
          name="Full Name"
@@ -320,6 +321,14 @@
     <option data-en="Business Owners Policy (BOP)" data-es="Póliza para Dueños de Negocio (BOP)">Business Owners Policy (BOP)</option>
     <option data-en="Cyber Liability" data-es="Responsabilidad Cibernética">Cyber Liability</option>
     <option data-en="Surety Bonds" data-es="Fianzas">Surety Bonds</option>
+  </select>
+
+  <select name="Preferred Agent Language" id="preferredLanguage" required>
+    <option value="" disabled selected data-en="Preferred Agent Language" data-es="Idioma Preferido del Agente">
+      Preferred Agent Language
+    </option>
+    <option value="en" data-en="English" data-es="Inglés">English</option>
+    <option value="es" data-en="Spanish" data-es="Español">Spanish</option>
   </select>
 
   <div class="sms-optin">
@@ -527,7 +536,6 @@
   <a class="panel-call" href="#" data-en="Call Now" data-es="Llamar Ahora">Call Now</a>
 </div>
 
-
 <footer id="aces-footer"></footer>
 
 <!-- ============================================================
@@ -541,6 +549,48 @@
       document.getElementById('quickQuoteBox').scrollIntoView({ behavior: 'smooth' });
     });
   });
+</script>
+
+<!-- ============================================================
+     QUICK QUOTE LANGUAGE ROUTING (SAFE)
+============================================================ -->
+<script>
+  (function () {
+    const form = document.querySelector(".quick-quote-form");
+    if (!form) return;
+
+    const preferred = form.querySelector("#preferredLanguage");
+    const routing = form.querySelector("#routingLanguage");
+
+    function currentSiteLang() {
+      const lang = (localStorage.getItem("acesLang") || "en").toLowerCase();
+      return lang === "es" ? "es" : "en";
+    }
+
+    function syncFromSiteLanguage() {
+      if (!preferred) return;
+      if (!preferred.value) preferred.value = currentSiteLang();
+      if (routing) routing.value = preferred.value || currentSiteLang();
+    }
+
+    syncFromSiteLanguage();
+
+    if (preferred) {
+      preferred.addEventListener("change", function () {
+        if (routing) routing.value = preferred.value || currentSiteLang();
+      });
+    }
+
+    window.addEventListener("aces:language-changed", function () {
+      syncFromSiteLanguage();
+    });
+
+    form.addEventListener("submit", function () {
+      const normalized = (preferred && preferred.value === "es") ? "es" : "en";
+      if (routing) routing.value = normalized;
+      if (preferred) preferred.value = normalized;
+    });
+  })();
 </script>
 
 </body>
