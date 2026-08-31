@@ -49,6 +49,37 @@
         <p><strong>Email:</strong> <span id="agentEmail">—</span></p>
       </section>
 
+      <section id="agentEditSection" class="client-section" hidden>
+        <h2>Edit Agent</h2>
+        <form id="agentEditForm">
+          <p>
+            <label for="editAgentName"><strong>Name</strong></label><br />
+            <input id="editAgentName" type="text" required />
+          </p>
+          <p>
+            <label for="editAgentTitle"><strong>Title</strong></label><br />
+            <input id="editAgentTitle" type="text" />
+          </p>
+          <p>
+            <label for="editAgentPhone"><strong>Phone</strong></label><br />
+            <input id="editAgentPhone" type="text" />
+          </p>
+          <p>
+            <label for="editAgentEmail"><strong>Email</strong></label><br />
+            <input id="editAgentEmail" type="email" required />
+          </p>
+          <p>
+            <label for="editAgentPhoto"><strong>Photo URL</strong></label><br />
+            <input id="editAgentPhoto" type="text" />
+          </p>
+
+          <div style="display:flex; gap:8px; margin-top:10px;">
+            <button type="submit" class="btn-red small">Save Changes</button>
+            <button type="button" id="cancelEditAgentBtn" class="btn-secondary small">Cancel</button>
+          </div>
+        </form>
+      </section>
+
       <section class="client-section">
         <h2>Assigned Clients</h2>
         <ul id="agentClients"></ul>
