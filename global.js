@@ -264,19 +264,55 @@ function getRoundRobinList() {
   ];
 }
 
-function getNextRoundRobinEmail() {
-  const key = "aces_rr_index";
+function getRoundRobinState() {
+  const key = "aces_rr_state";
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return { index: 0 };
+    const parsed = JSON.parse(raw);
+    if (!Number.isInteger(parsed?.index) || parsed.index < 0) return { index: 0 };
+    return parsed;
+  } catch {
+    return { index: 0 };
+  }
+}
+
+function setRoundRobinState(state) {
+  localStorage.setItem("aces_rr_state", JSON.stringify(state));
+}
+
+function getNextRoundRobinAssignment() {
   const list = getRoundRobinList();
-  let index = parseInt(localStorage.getItem(key) || "0", 10);
-  if (isNaN(index) || index < 0 || index >= list.length) index = 0;
+  if (!list.length) return null;
+
+  let { index = 0 } = getRoundRobinState();
+  if (!Number.isInteger(index) || index < 0 || index >= list.length) index = 0;
+
   const email = list[index];
-  localStorage.setItem(key, (index + 1) % list.length);
-  return email;
+  const nextIndex = (index + 1) % list.length;
+
+  setRoundRobinState({
+    index: nextIndex,
+    lastAssignedEmail: email,
+    lastAssignedAt: new Date().toISOString()
+  });
+
+  return { email, assignedIndex: index, nextIndex };
 }
 
 function initRoundRobinEmail() {
   const rrField = document.getElementById("rrEmail");
-  if (rrField) rrField.value = getNextRoundRobinEmail();
+  if (!rrField) return;
+
+  const assignment = getNextRoundRobinAssignment();
+  rrField.value = assignment?.email || "";
+}
+
+// optional test helper
+function resetRoundRobin(startIndex = 0) {
+  const list = getRoundRobinList();
+  const safe = Number.isInteger(startIndex) && startIndex >= 0 && startIndex < list.length ? startIndex : 0;
+  setRoundRobinState({ index: safe });
 }
 
 /* ============================================================
