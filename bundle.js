@@ -2,8 +2,9 @@
    ACES Bundle Quote Builder
    - Multi-step wizard
    - Dynamic sections for selected policies
-   - Round Robin routing (sales)
-   ============================================================ */
+   - Unified Round Robin routing (shared with whole site)
+   - No Cloudflare
+============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("bundleForm");
@@ -13,23 +14,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const steps = document.querySelectorAll(".form-step");
   const indicators = document.querySelectorAll(".wizard-step");
 
-  // Round Robin agents (SALES)
-  const rrAgents = [
-    "george@insaces.com",
-    "jordan@insaces.com",
-    "lanse@insaces.com",
-    "robert@insaces.com",
-    "bryan@insaces.com",
-    "jimmy@insaces.com",
-    "office@insaces.com"
-  ];
+  function normalizeLang(v) {
+    const x = String(v || "").trim().toLowerCase();
+    return x === "es" || x === "spanish" ? "es" : "en";
+  }
+
+  function getCurrentLang() {
+    return normalizeLang(localStorage.getItem("acesLang") || "en");
+  }
 
   function assignRoundRobinEmail() {
-    if (!form) return;
+    if (!form) return "";
 
-    let index = parseInt(localStorage.getItem("rrIndex") || "0", 10);
-    const target = rrAgents[index];
-    localStorage.setItem("rrIndex", (index + 1) % rrAgents.length);
+    const lang = getCurrentLang();
+    let target = "";
+
+    if (window.acesRoundRobin?.getNextAssignment) {
+      const next = window.acesRoundRobin.getNextAssignment(lang);
+      target = next?.email || "";
+    }
+
+    // Fallback (only if shared engine missing)
+    if (!target) {
+      const fallback = [
+        "george@insaces.com",
+        "jordan@insaces.com",
+        "lanse@insaces.com",
+        "robert@insaces.com",
+        "bryan@insaces.com",
+        "jimmy@insaces.com",
+        "office@insaces.com"
+      ];
+      const key = lang === "es" ? "acesRoundRobinIndexEs" : "acesRoundRobinIndexEn";
+      const idxRaw = Number(localStorage.getItem(key));
+      const idx = Number.isFinite(idxRaw) && idxRaw >= 0 ? idxRaw : 0;
+      target = fallback[idx % fallback.length];
+      localStorage.setItem(key, String((idx + 1) % fallback.length));
+      localStorage.setItem("acesRrLastAssigned", target);
+    }
 
     let hidden = form.querySelector("input[name='_to']");
     if (!hidden) {
@@ -39,9 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
       form.appendChild(hidden);
     }
     hidden.value = target;
-  }
 
-  /* ---------- Dynamic Sections ---------- */
+    return target;
+  }
 
   function createDetailsSection(type) {
     const div = document.createElement("div");
@@ -57,15 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     div.innerHTML = `
-      <h3>${titles[type]}</h3>
+      <h3>${titles[type] || type}</h3>
       <div class="form-grid">
         <div class="form-field">
-          <label>Notes for ${titles[type]}</label>
+          <label>Notes for ${titles[type] || type}</label>
           <textarea name="${type}_details" rows="3"></textarea>
         </div>
       </div>
     `;
-
     return div;
   }
 
@@ -83,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     div.innerHTML = `
-      <h3>${titles[type]}</h3>
+      <h3>${titles[type] || type}</h3>
       <div class="form-grid">
         <div class="form-field">
           <label>Coverage Notes</label>
@@ -91,27 +112,21 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
     `;
-
     return div;
   }
 
   function renderSections() {
-    const selected = Array.from(checks)
-      .filter(c => c.checked)
-      .map(c => c.value);
-
-    detailsContainer.innerHTML = "";
-    coverageContainer.innerHTML = "";
+    const selected = Array.from(checks).filter(c => c.checked).map(c => c.value);
+    if (detailsContainer) detailsContainer.innerHTML = "";
+    if (coverageContainer) coverageContainer.innerHTML = "";
 
     selected.forEach(type => {
-      detailsContainer.appendChild(createDetailsSection(type));
-      coverageContainer.appendChild(createCoverageSection(type));
+      if (detailsContainer) detailsContainer.appendChild(createDetailsSection(type));
+      if (coverageContainer) coverageContainer.appendChild(createCoverageSection(type));
     });
   }
 
   checks.forEach(c => c.addEventListener("change", renderSections));
-
-  /* ---------- Wizard Navigation ---------- */
 
   function showStep(stepNumber) {
     steps.forEach(step => {
@@ -136,29 +151,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ---------- Form Submit ---------- */
+  function buildBundleEmailBody(entries, assignedEmail) {
+    const lines = [
+      "New Bundle Quote Request",
+      `Assigned Agent: ${assignedEmail || "—"}`,
+      `Language: ${getCurrentLang().toUpperCase()}`,
+      `Submitted At: ${new Date().toLocaleString()}`,
+      "",
+      "----- Form Data -----"
+    ];
+
+    Object.entries(entries).forEach(([k, v]) => {
+      lines.push(`${k}: ${v}`);
+    });
+
+    return lines.join("\n");
+  }
 
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      // Assign Round Robin target for this SALES bundle form
-      assignRoundRobinEmail();
+      const assignedEmail = assignRoundRobinEmail();
 
       const formData = new FormData(form);
       const entries = Object.fromEntries(formData.entries());
+
+      const subject = `New Bundle Quote - ${entries.fullName || entries.name || entries.email || "Customer"}`;
+      const body = buildBundleEmailBody(entries, assignedEmail);
+
+      if (assignedEmail) {
+        const mailto = `mailto:${encodeURIComponent(assignedEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
+      }
+
       console.log("Bundle Quote Submitted:", entries);
 
       alert("Your bundle quote request has been submitted! An ACES agent will contact you shortly.");
 
       form.reset();
-      detailsContainer.innerHTML = "";
-      coverageContainer.innerHTML = "";
+      if (detailsContainer) detailsContainer.innerHTML = "";
+      if (coverageContainer) coverageContainer.innerHTML = "";
       checks.forEach(c => (c.checked = false));
       showStep(1);
     });
   }
 
-  // Initial render (in case nothing is selected yet)
   renderSections();
 });
