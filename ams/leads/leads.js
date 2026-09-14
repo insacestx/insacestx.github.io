@@ -615,10 +615,10 @@
     });
   }
 
-  // =========================
-  // EMAIL / MAGIC LINK
-  // =========================
-  function buildLeadEmailSummary(lead) {
+// =========================
+// EMAIL / MAGIC LINK
+// =========================
+function buildLeadEmailSummary(lead) {
   return [
     `Lead #: ${lead.leadNumber || "—"}`,
     `Name: ${lead.name || `${lead.firstName || ""} ${lead.lastName || ""}`.trim() || "—"}`,
@@ -634,63 +634,66 @@
     `Notes: ${lead.notes || "—"}`
   ].join("\n");
 }
-  async function emailLeadOwner(leadId) {
-    const lead = leads.find((l) => l.id === leadId);
-    if (!lead) return;
 
-    if (!lead.assignedEmail) {
-      alert("No assigned email on this lead. Run round robin first.");
-      return;
-    }
+async function emailLeadOwner(leadId) {
+  const lead = leads.find((l) => l.id === leadId);
+  if (!lead) return;
 
-    if (!USE_MAGIC_LINKS) {
-      alert("Email sending is disabled: USE_MAGIC_LINKS must be true.");
-      return;
-    }
-
-    try {
-      const amsLeadUrl = `${window.location.origin}/ams/leads/leads.html?leadId=${encodeURIComponent(lead.id)}`;
-const leadSummary = buildLeadEmailSummary(lead);
-      const res = await fetch(`${API_BASE_URL}/api/magic-link/create`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-  leadId: lead.id,
-  leadNumber: lead.leadNumber || "",
-  agentEmail: lead.assignedEmail,
-  expiresMinutes: 120,
-
-  // Customer context (backend should use as Reply-To, not From)
-  customerEmail: lead.email || "",
-  customerName: lead.name || "",
-
-  // Template metadata
-  language: (lead.language || "en").toUpperCase(),
-  phone: lead.phone || "",
-  lineOfBusiness: lead.lineOfBusiness || "",
-  stage: labelStatus(lead.status),
-  notes: lead.notes || "",
-
-  // NEW: rich content for email body
-  leadSummary,
-  amsLeadUrl
-})
-
-      let data = {};
-      try {
-        data = await res.json();
-      } catch (_) {}
-
-      if (!res.ok || !data.ok) {
-        throw new Error(data.error || `Failed to send secure link (${res.status})`);
-      }
-
-      alert(`Secure update link sent to ${lead.assignedEmail} from noreply@insaces.com`);
-    } catch (err) {
-      console.error("Magic link send failed. No client-side mail fallback allowed.", err);
-      alert("Unable to send email right now. Please try again or contact admin.");
-    }
+  if (!lead.assignedEmail) {
+    alert("No assigned email on this lead. Run round robin first.");
+    return;
   }
+
+  if (!USE_MAGIC_LINKS) {
+    alert("Email sending is disabled: USE_MAGIC_LINKS must be true.");
+    return;
+  }
+
+  try {
+    const amsLeadUrl = `${window.location.origin}/ams/leads/leads.html?leadId=${encodeURIComponent(lead.id)}`;
+    const leadSummary = buildLeadEmailSummary(lead);
+
+    const res = await fetch(`${API_BASE_URL}/api/magic-link/create`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        leadId: lead.id,
+        leadNumber: lead.leadNumber || "",
+        agentEmail: lead.assignedEmail,
+        expiresMinutes: 120,
+
+        // Customer context (backend should use as Reply-To, not From)
+        customerEmail: lead.email || "",
+        customerName: lead.name || "",
+
+        // Template metadata
+        language: (lead.language || "en").toUpperCase(),
+        phone: lead.phone || "",
+        lineOfBusiness: lead.lineOfBusiness || "",
+        stage: labelStatus(lead.status),
+        notes: lead.notes || "",
+
+        // NEW: rich content for email body
+        leadSummary,
+        amsLeadUrl
+      })
+    });
+
+    let data = {};
+    try {
+      data = await res.json();
+    } catch (_) {}
+
+    if (!res.ok || !data.ok) {
+      throw new Error(data.error || `Failed to send secure link (${res.status})`);
+    }
+
+    alert(`Secure update link sent to ${lead.assignedEmail} from noreply@insaces.com`);
+  } catch (err) {
+    console.error("Magic link send failed. No client-side mail fallback allowed.", err);
+    alert("Unable to send email right now. Please try again or contact admin.");
+  }
+}
 
   // =========================
   // HELPERS
