@@ -618,6 +618,22 @@
   // =========================
   // EMAIL / MAGIC LINK
   // =========================
+  function buildLeadEmailSummary(lead) {
+  return [
+    `Lead #: ${lead.leadNumber || "—"}`,
+    `Name: ${lead.name || `${lead.firstName || ""} ${lead.lastName || ""}`.trim() || "—"}`,
+    `Email: ${lead.email || "—"}`,
+    `Phone: ${lead.phone || "—"}`,
+    `Language: ${(lead.language || "en").toUpperCase()}`,
+    `Line of Business: ${lead.lineOfBusiness || "—"}`,
+    `Stage: ${labelStatus(lead.status) || "—"}`,
+    `Quoted Premium: ${lead.quotedPremium ? `$${Number(lead.quotedPremium).toFixed(2)}` : "—"}`,
+    `Carrier: ${lead.carrier || "—"}`,
+    `Effective Date: ${lead.effectiveDate || "—"}`,
+    `Policy #: ${lead.policyNumber || "—"}`,
+    `Notes: ${lead.notes || "—"}`
+  ].join("\n");
+}
   async function emailLeadOwner(leadId) {
     const lead = leads.find((l) => l.id === leadId);
     if (!lead) return;
@@ -633,27 +649,32 @@
     }
 
     try {
+      const amsLeadUrl = `${window.location.origin}/ams/leads/leads.html?leadId=${encodeURIComponent(lead.id)}`;
+const leadSummary = buildLeadEmailSummary(lead);
       const res = await fetch(`${API_BASE_URL}/api/magic-link/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          leadId: lead.id,
-          leadNumber: lead.leadNumber || "",
-          agentEmail: lead.assignedEmail,
-          expiresMinutes: 120,
+  leadId: lead.id,
+  leadNumber: lead.leadNumber || "",
+  agentEmail: lead.assignedEmail,
+  expiresMinutes: 120,
 
-          // Customer context (backend should use as Reply-To, not From)
-          customerEmail: lead.email || "",
-          customerName: lead.name || "",
+  // Customer context (backend should use as Reply-To, not From)
+  customerEmail: lead.email || "",
+  customerName: lead.name || "",
 
-          // Optional template metadata
-          language: (lead.language || "en").toUpperCase(),
-          phone: lead.phone || "",
-          lineOfBusiness: lead.lineOfBusiness || "",
-          stage: labelStatus(lead.status),
-          notes: lead.notes || ""
-        })
-      });
+  // Template metadata
+  language: (lead.language || "en").toUpperCase(),
+  phone: lead.phone || "",
+  lineOfBusiness: lead.lineOfBusiness || "",
+  stage: labelStatus(lead.status),
+  notes: lead.notes || "",
+
+  // NEW: rich content for email body
+  leadSummary,
+  amsLeadUrl
+})
 
       let data = {};
       try {
