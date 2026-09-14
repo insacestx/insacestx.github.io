@@ -21,12 +21,7 @@
     es: [
       "george@insaces.com",
       "jimmy@insaces.com",
-      "office@insaces.com",
-      "robert@insaces.com",
-      "jordan@insaces.com",
-      "lanse@insaces.com",
-      "bryan@insaces.com"
-    ]
+      ]
   };
 
   const STATUS_VALUES = [
