@@ -17,11 +17,11 @@
       "lanse@insaces.com",  // Lanse
       "bryan@insaces.com"   // Bryan
     ],
-    // Adjust ES pool as needed. For now mirrored to active users.
+    // Mirrored to EN so all agents remain in rotation for ES leads too (can adjust later)
     es: [
       "george@insaces.com",
       "jimmy@insaces.com",
-    ]
+     ]
   };
 
   const API_BASE_URL = "https://long-brook-b453.george-daf.workers.dev";
@@ -68,7 +68,7 @@
     bindEvents();
     loadFromStorageOrSeed();
     migrateAndNormalizeLeads();
-    replaceLegacyAssignedEmails(); // <- cleans old en1/es1 placeholders
+    replaceLegacyAssignedEmails();
     populateAssignedFilter();
     applyFilters();
     renderRoundRobinStatus();
@@ -316,19 +316,19 @@
   }
 
   function nextRoundRobinEmail(language) {
-  const lang = normalizeLanguage(language);
-  const pool = getPool(lang);
-  if (!pool.length) return "";
+    const lang = normalizeLanguage(language);
+    const pool = getPool(lang);
+    if (!pool.length) return "";
 
-  const key = getIndexKey(lang);
-  const raw = Number(localStorage.getItem(key));
-  const idx = Number.isFinite(raw) && raw >= 0 ? raw : 0;
+    const key = getIndexKey(lang);
+    const raw = Number(localStorage.getItem(key));
+    const idx = Number.isFinite(raw) && raw >= 0 ? raw : 0;
 
-  const selected = pool[idx % pool.length];
-  localStorage.setItem(key, String((idx + 1) % pool.length));
-  localStorage.setItem("acesRrLastAssigned", selected);
-  return selected;
-}
+    const selected = pool[idx % pool.length];
+    localStorage.setItem(key, String((idx + 1) % pool.length));
+    localStorage.setItem("acesRrLastAssigned", selected);
+    return selected;
+  }
 
   function pushToNextEmail(leadId) {
     const lead = leads.find((l) => l.id === leadId);
@@ -462,8 +462,9 @@
   function previewNext(lang) {
     const pool = getPool(lang);
     if (!pool.length) return "—";
-    const idx = Number(localStorage.getItem(getIndexKey(lang)) || 0);
-    return pool[(Number.isFinite(idx) ? idx : 0) % pool.length];
+    const idx = Number(localStorage.getItem(getIndexKey(lang)));
+    const safeIdx = Number.isFinite(idx) && idx >= 0 ? idx : 0;
+    return pool[safeIdx % pool.length];
   }
 
   // =========================
@@ -615,85 +616,85 @@
     });
   }
 
-// =========================
-// EMAIL / MAGIC LINK
-// =========================
-function buildLeadEmailSummary(lead) {
-  return [
-    `Lead #: ${lead.leadNumber || "—"}`,
-    `Name: ${lead.name || `${lead.firstName || ""} ${lead.lastName || ""}`.trim() || "—"}`,
-    `Email: ${lead.email || "—"}`,
-    `Phone: ${lead.phone || "—"}`,
-    `Language: ${(lead.language || "en").toUpperCase()}`,
-    `Line of Business: ${lead.lineOfBusiness || "—"}`,
-    `Stage: ${labelStatus(lead.status) || "—"}`,
-    `Quoted Premium: ${lead.quotedPremium ? `$${Number(lead.quotedPremium).toFixed(2)}` : "—"}`,
-    `Carrier: ${lead.carrier || "—"}`,
-    `Effective Date: ${lead.effectiveDate || "—"}`,
-    `Policy #: ${lead.policyNumber || "—"}`,
-    `Notes: ${lead.notes || "—"}`
-  ].join("\n");
-}
-
-async function emailLeadOwner(leadId) {
-  const lead = leads.find((l) => l.id === leadId);
-  if (!lead) return;
-
-  if (!lead.assignedEmail) {
-    alert("No assigned email on this lead. Run round robin first.");
-    return;
+  // =========================
+  // EMAIL / MAGIC LINK
+  // =========================
+  function buildLeadEmailSummary(lead) {
+    return [
+      `Lead #: ${lead.leadNumber || "—"}`,
+      `Name: ${lead.name || `${lead.firstName || ""} ${lead.lastName || ""}`.trim() || "—"}`,
+      `Email: ${lead.email || "—"}`,
+      `Phone: ${lead.phone || "—"}`,
+      `Language: ${(lead.language || "en").toUpperCase()}`,
+      `Line of Business: ${lead.lineOfBusiness || "—"}`,
+      `Stage: ${labelStatus(lead.status) || "—"}`,
+      `Quoted Premium: ${lead.quotedPremium ? `$${Number(lead.quotedPremium).toFixed(2)}` : "—"}`,
+      `Carrier: ${lead.carrier || "—"}`,
+      `Effective Date: ${lead.effectiveDate || "—"}`,
+      `Policy #: ${lead.policyNumber || "—"}`,
+      `Notes: ${lead.notes || "—"}`
+    ].join("\n");
   }
 
-  if (!USE_MAGIC_LINKS) {
-    alert("Email sending is disabled: USE_MAGIC_LINKS must be true.");
-    return;
-  }
+  async function emailLeadOwner(leadId) {
+    const lead = leads.find((l) => l.id === leadId);
+    if (!lead) return;
 
-  try {
-    const amsLeadUrl = `${window.location.origin}/ams/leads/leads.html?leadId=${encodeURIComponent(lead.id)}`;
-    const leadSummary = buildLeadEmailSummary(lead);
-
-    const res = await fetch(`${API_BASE_URL}/api/magic-link/create`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        leadId: lead.id,
-        leadNumber: lead.leadNumber || "",
-        agentEmail: lead.assignedEmail,
-        expiresMinutes: 120,
-
-        // Customer context (backend should use as Reply-To, not From)
-        customerEmail: lead.email || "",
-        customerName: lead.name || "",
-
-        // Template metadata
-        language: (lead.language || "en").toUpperCase(),
-        phone: lead.phone || "",
-        lineOfBusiness: lead.lineOfBusiness || "",
-        stage: labelStatus(lead.status),
-        notes: lead.notes || "",
-
-        // NEW: rich content for email body
-        leadSummary,
-        amsLeadUrl
-      })
-    });
-
-    let data = {};
-    try {
-      data = await res.json();
-    } catch (_) {}
-
-    if (!res.ok || !data.ok) {
-      throw new Error(data.error || `Failed to send secure link (${res.status})`);
+    if (!lead.assignedEmail) {
+      alert("No assigned email on this lead. Run round robin first.");
+      return;
     }
 
-    alert(`Secure update link sent to ${lead.assignedEmail} from noreply@insaces.com`);
-  } catch (err) {
-    console.error("Magic link send failed. No client-side mail fallback allowed.", err);
-    alert("Unable to send email right now. Please try again or contact admin.");
+    if (!USE_MAGIC_LINKS) {
+      alert("Email sending is disabled: USE_MAGIC_LINKS must be true.");
+      return;
+    }
+
+    try {
+      const amsLeadUrl = `${window.location.origin}/ams/leads/leads.html?leadId=${encodeURIComponent(lead.id)}`;
+      const leadSummary = buildLeadEmailSummary(lead);
+
+      const res = await fetch(`${API_BASE_URL}/api/magic-link/create`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          leadId: lead.id,
+          leadNumber: lead.leadNumber || "",
+          agentEmail: lead.assignedEmail,
+          expiresMinutes: 120,
+
+          // Customer context (backend should use as Reply-To, not From)
+          customerEmail: lead.email || "",
+          customerName: lead.name || "",
+
+          // Template metadata
+          language: (lead.language || "en").toUpperCase(),
+          phone: lead.phone || "",
+          lineOfBusiness: lead.lineOfBusiness || "",
+          stage: labelStatus(lead.status),
+          notes: lead.notes || "",
+
+          // Rich content for email body + AMS link
+          leadSummary,
+          amsLeadUrl
+        })
+      });
+
+      let data = {};
+      try {
+        data = await res.json();
+      } catch (_) {}
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || `Failed to send secure link (${res.status})`);
+      }
+
+      alert(`Secure update link sent to ${lead.assignedEmail} from noreply@insaces.com`);
+    } catch (err) {
+      console.error("Magic link send failed. No client-side mail fallback allowed.", err);
+      alert("Unable to send email right now. Please try again or contact admin.");
+    }
   }
-}
 
   // =========================
   // HELPERS
