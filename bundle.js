@@ -29,22 +29,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const lang = getCurrentLang();
     let target = "";
 
+    // Shared global RR engine (preferred)
     if (window.acesRoundRobin?.getNextAssignment) {
       const next = window.acesRoundRobin.getNextAssignment(lang);
       target = next?.email || "";
     }
 
-    // Fallback (only if shared engine missing)
+    // Fallback only if global RR not loaded
     if (!target) {
-      const fallback = [
-        "george@insaces.com",
-        "jordan@insaces.com",
-        "lanse@insaces.com",
-        "robert@insaces.com",
-        "bryan@insaces.com",
-        "jimmy@insaces.com",
-        "office@insaces.com"
-      ];
+      const fallback = lang === "es"
+        ? ["george@insaces.com", "jimmy@insaces.com"]
+        : [
+            "george@insaces.com",
+            "jordan@insaces.com",
+            "lanse@insaces.com",
+            "robert@insaces.com",
+            "bryan@insaces.com",
+            "jimmy@insaces.com",
+            "office@insaces.com"
+          ];
+
       const key = lang === "es" ? "acesRoundRobinIndexEs" : "acesRoundRobinIndexEn";
       const idxRaw = Number(localStorage.getItem(key));
       const idx = Number.isFinite(idxRaw) && idxRaw >= 0 ? idxRaw : 0;
@@ -64,6 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     return target;
   }
+
+  /* ---------- Dynamic Sections ---------- */
 
   function createDetailsSection(type) {
     const div = document.createElement("div");
@@ -87,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
     `;
+
     return div;
   }
 
@@ -112,11 +119,15 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
     `;
+
     return div;
   }
 
   function renderSections() {
-    const selected = Array.from(checks).filter(c => c.checked).map(c => c.value);
+    const selected = Array.from(checks)
+      .filter(c => c.checked)
+      .map(c => c.value);
+
     if (detailsContainer) detailsContainer.innerHTML = "";
     if (coverageContainer) coverageContainer.innerHTML = "";
 
@@ -127,6 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   checks.forEach(c => c.addEventListener("change", renderSections));
+
+  /* ---------- Wizard Navigation ---------- */
 
   function showStep(stepNumber) {
     steps.forEach(step => {
@@ -151,6 +164,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* ---------- Email ---------- */
+
   function buildBundleEmailBody(entries, assignedEmail) {
     const lines = [
       "New Bundle Quote Request",
@@ -168,24 +183,28 @@ document.addEventListener("DOMContentLoaded", () => {
     return lines.join("\n");
   }
 
+  /* ---------- Form Submit ---------- */
+
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
       const assignedEmail = assignRoundRobinEmail();
-
       const formData = new FormData(form);
       const entries = Object.fromEntries(formData.entries());
+
+      console.log("Bundle Quote Submitted:", entries);
+
+      if (!assignedEmail) {
+        alert("No assigned agent email found. Please try again.");
+        return;
+      }
 
       const subject = `New Bundle Quote - ${entries.fullName || entries.name || entries.email || "Customer"}`;
       const body = buildBundleEmailBody(entries, assignedEmail);
 
-      if (assignedEmail) {
-        const mailto = `mailto:${encodeURIComponent(assignedEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = mailto;
-      }
-
-      console.log("Bundle Quote Submitted:", entries);
+      const mailto = `mailto:${encodeURIComponent(assignedEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
 
       alert("Your bundle quote request has been submitted! An ACES agent will contact you shortly.");
 
@@ -197,5 +216,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Initial render
   renderSections();
 });
