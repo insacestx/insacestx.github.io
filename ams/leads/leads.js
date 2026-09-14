@@ -17,11 +17,11 @@
       "lanse@insaces.com",  // Lanse
       "bryan@insaces.com"   // Bryan
     ],
-    // Mirrored to EN for consistent round robin behavior.
+    // ES intentionally limited to Spanish-speaking agents
     es: [
       "george@insaces.com",
-      "jimmy@insaces.com",
-      ]
+      "jimmy@insaces.com"
+    ]
   };
 
   const STATUS_VALUES = [
@@ -65,7 +65,7 @@
     bindEvents();
     loadFromStorageOrSeed();
     migrateAndNormalizeLeads();
-    replaceLegacyAssignedEmails(); // cleans old invalid placeholders
+    replaceLegacyAssignedEmails();
     populateAssignedFilter();
     applyFilters();
     renderRoundRobinStatus();
@@ -143,7 +143,7 @@
     window.saveLead = saveLead;
     window.runRoundRobinAssign = runRoundRobinAssign;
 
-    // Optional admin helpers
+    // Admin helpers
     window.resetRoundRobin = resetRoundRobin;
     window.pushAllUnassignedToRoundRobin = pushAllUnassignedToRoundRobin;
   }
@@ -317,6 +317,14 @@
 
   function nextRoundRobinEmail(language) {
     const lang = normalizeLanguage(language);
+
+    // Shared global RR (preferred)
+    if (window.acesRoundRobin?.getNextAssignment) {
+      const assignment = window.acesRoundRobin.getNextAssignment(lang);
+      return assignment?.email || "";
+    }
+
+    // Local fallback
     const pool = getPool(lang);
     if (!pool.length) return "";
 
@@ -331,6 +339,14 @@
   }
 
   function resetRoundRobin(enIndex = 0, esIndex = 0) {
+    if (window.acesRoundRobin?.reset) {
+      window.acesRoundRobin.reset(enIndex, esIndex);
+      renderRoundRobinStatus();
+      alert(`Round Robin reset. EN=${enIndex}, ES=${esIndex}`);
+      return;
+    }
+
+    // Local fallback
     const enPoolSize = EMAIL_POOLS.en.length || 1;
     const esPoolSize = EMAIL_POOLS.es.length || 1;
 
@@ -494,9 +510,17 @@
   }
 
   function previewNext(lang) {
-    const pool = getPool(lang);
+    const nLang = normalizeLanguage(lang);
+
+    // Shared global RR preview (preferred)
+    if (window.acesRoundRobin?.previewNext) {
+      return window.acesRoundRobin.previewNext(nLang);
+    }
+
+    // Local fallback
+    const pool = getPool(nLang);
     if (!pool.length) return "—";
-    const idx = Number(localStorage.getItem(getIndexKey(lang)));
+    const idx = Number(localStorage.getItem(getIndexKey(nLang)));
     const safeIdx = Number.isFinite(idx) && idx >= 0 ? idx : 0;
     return pool[safeIdx % pool.length];
   }
