@@ -17,15 +17,17 @@
       "lanse@insaces.com",  // Lanse
       "bryan@insaces.com"   // Bryan
     ],
-    // Mirrored to EN so all agents remain in rotation for ES leads too (can adjust later)
+    // Mirrored to EN for consistent round robin behavior.
     es: [
       "george@insaces.com",
       "jimmy@insaces.com",
-     ]
+      "office@insaces.com",
+      "robert@insaces.com",
+      "jordan@insaces.com",
+      "lanse@insaces.com",
+      "bryan@insaces.com"
+    ]
   };
-
-  const API_BASE_URL = "https://long-brook-b453.george-daf.workers.dev";
-  const USE_MAGIC_LINKS = true;
 
   const STATUS_VALUES = [
     "new",
@@ -68,7 +70,7 @@
     bindEvents();
     loadFromStorageOrSeed();
     migrateAndNormalizeLeads();
-    replaceLegacyAssignedEmails();
+    replaceLegacyAssignedEmails(); // cleans old invalid placeholders
     populateAssignedFilter();
     applyFilters();
     renderRoundRobinStatus();
@@ -145,6 +147,10 @@
     window.closeLeadEditor = closeLeadEditor;
     window.saveLead = saveLead;
     window.runRoundRobinAssign = runRoundRobinAssign;
+
+    // Optional admin helpers
+    window.resetRoundRobin = resetRoundRobin;
+    window.pushAllUnassignedToRoundRobin = pushAllUnassignedToRoundRobin;
   }
 
   // =========================
@@ -261,6 +267,7 @@
         clientName: "",
         notes: ""
       };
+
       for (const [k, v] of Object.entries(defaults)) {
         if (typeof lead[k] === "undefined") { lead[k] = v; changed = true; }
       }
@@ -302,9 +309,7 @@
 
   function inferLanguage(lead) {
     const text = `${lead.name || ""} ${lead.notes || ""}`.toLowerCase();
-    return ["garcia", "rodriguez", "martinez", "español", "spanish"].some((s) => text.includes(s))
-      ? "es"
-      : "en";
+    return ["garcia", "rodriguez", "martinez", "español", "spanish"].some((s) => text.includes(s)) ? "es" : "en";
   }
 
   function getPool(lang) {
@@ -330,9 +335,24 @@
     return selected;
   }
 
+  function resetRoundRobin(enIndex = 0, esIndex = 0) {
+    const enPoolSize = EMAIL_POOLS.en.length || 1;
+    const esPoolSize = EMAIL_POOLS.es.length || 1;
+
+    const safeEn = Number.isInteger(enIndex) && enIndex >= 0 ? enIndex % enPoolSize : 0;
+    const safeEs = Number.isInteger(esIndex) && esIndex >= 0 ? esIndex % esPoolSize : 0;
+
+    localStorage.setItem(STORAGE_KEYS.rrIndexEn, String(safeEn));
+    localStorage.setItem(STORAGE_KEYS.rrIndexEs, String(safeEs));
+    localStorage.setItem("acesRrLastAssigned", "—");
+    renderRoundRobinStatus();
+    alert(`Round Robin reset. EN=${safeEn}, ES=${safeEs}`);
+  }
+
   function pushToNextEmail(leadId) {
     const lead = leads.find((l) => l.id === leadId);
     if (!lead) return;
+
     lead.assignedEmail = nextRoundRobinEmail(lead.language);
     lead.updatedAt = new Date().toISOString();
     saveToStorage();
@@ -359,6 +379,25 @@
     applyFilters();
     renderRoundRobinStatus();
     alert(`Round Robin complete: ${count} lead(s) assigned/rotated.`);
+  }
+
+  function pushAllUnassignedToRoundRobin() {
+    let count = 0;
+    const now = new Date().toISOString();
+
+    leads.forEach((lead) => {
+      if (!lead.assignedEmail) {
+        lead.assignedEmail = nextRoundRobinEmail(lead.language || "en");
+        lead.updatedAt = now;
+        count++;
+      }
+    });
+
+    saveToStorage();
+    populateAssignedFilter();
+    applyFilters();
+    renderRoundRobinStatus();
+    alert(`Assigned ${count} unassigned lead(s) with round robin.`);
   }
 
   // =========================
@@ -605,7 +644,11 @@
   function populateAssignedEmailSelect(selected = "") {
     const select = document.getElementById("leadAssignedAgent");
     if (!select) return;
-    const all = [...new Set([...EMAIL_POOLS.en, ...EMAIL_POOLS.es, ...leads.map((l) => l.assignedEmail).filter(Boolean)])];
+
+    const all = [
+      ...new Set([...EMAIL_POOLS.en, ...EMAIL_POOLS.es, ...leads.map((l) => l.assignedEmail).filter(Boolean)])
+    ];
+
     select.innerHTML = `<option value="">Auto-assign (Round Robin)</option>`;
     all.sort().forEach((email) => {
       const opt = document.createElement("option");
@@ -617,14 +660,14 @@
   }
 
   // =========================
-  // EMAIL / MAGIC LINK
+  // EMAIL (LOCAL / NO CLOUDFLARE)
   // =========================
   function buildLeadEmailSummary(lead) {
     return [
       `Lead #: ${lead.leadNumber || "—"}`,
       `Name: ${lead.name || `${lead.firstName || ""} ${lead.lastName || ""}`.trim() || "—"}`,
-      `Email: ${lead.email || "—"}`,
-      `Phone: ${lead.phone || "—"}`,
+      `Customer Email: ${lead.email || "—"}`,
+      `Customer Phone: ${lead.phone || "—"}`,
       `Language: ${(lead.language || "en").toUpperCase()}`,
       `Line of Business: ${lead.lineOfBusiness || "—"}`,
       `Stage: ${labelStatus(lead.status) || "—"}`,
@@ -632,7 +675,9 @@
       `Carrier: ${lead.carrier || "—"}`,
       `Effective Date: ${lead.effectiveDate || "—"}`,
       `Policy #: ${lead.policyNumber || "—"}`,
-      `Notes: ${lead.notes || "—"}`
+      `Notes: ${lead.notes || "—"}`,
+      ``,
+      `Open in AMS: ${window.location.origin}/ams/leads/leads.html?leadId=${encodeURIComponent(lead.id)}`
     ].join("\n");
   }
 
@@ -645,55 +690,11 @@
       return;
     }
 
-    if (!USE_MAGIC_LINKS) {
-      alert("Email sending is disabled: USE_MAGIC_LINKS must be true.");
-      return;
-    }
+    const subject = `New Lead Assigned: ${lead.leadNumber || lead.id} - ${lead.name || "Customer"}`;
+    const body = buildLeadEmailSummary(lead);
 
-    try {
-      const amsLeadUrl = `${window.location.origin}/ams/leads/leads.html?leadId=${encodeURIComponent(lead.id)}`;
-      const leadSummary = buildLeadEmailSummary(lead);
-
-      const res = await fetch(`${API_BASE_URL}/api/magic-link/create`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadId: lead.id,
-          leadNumber: lead.leadNumber || "",
-          agentEmail: lead.assignedEmail,
-          expiresMinutes: 120,
-
-          // Customer context (backend should use as Reply-To, not From)
-          customerEmail: lead.email || "",
-          customerName: lead.name || "",
-
-          // Template metadata
-          language: (lead.language || "en").toUpperCase(),
-          phone: lead.phone || "",
-          lineOfBusiness: lead.lineOfBusiness || "",
-          stage: labelStatus(lead.status),
-          notes: lead.notes || "",
-
-          // Rich content for email body + AMS link
-          leadSummary,
-          amsLeadUrl
-        })
-      });
-
-      let data = {};
-      try {
-        data = await res.json();
-      } catch (_) {}
-
-      if (!res.ok || !data.ok) {
-        throw new Error(data.error || `Failed to send secure link (${res.status})`);
-      }
-
-      alert(`Secure update link sent to ${lead.assignedEmail} from noreply@insaces.com`);
-    } catch (err) {
-      console.error("Magic link send failed. No client-side mail fallback allowed.", err);
-      alert("Unable to send email right now. Please try again or contact admin.");
-    }
+    const mailto = `mailto:${encodeURIComponent(lead.assignedEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
   }
 
   // =========================
