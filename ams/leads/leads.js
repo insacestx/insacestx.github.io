@@ -316,19 +316,19 @@
   }
 
   function nextRoundRobinEmail(language) {
-    const lang = normalizeLanguage(language);
-    const pool = getPool(lang);
-    if (!pool.length) return "";
+  const lang = normalizeLanguage(language);
+  const pool = getPool(lang);
+  if (!pool.length) return "";
 
-    const key = getIndexKey(lang);
-    const raw = Number(localStorage.getItem(key) || 0);
-    const idx = Number.isFinite(raw) ? raw : 0;
+  const key = getIndexKey(lang);
+  const raw = Number(localStorage.getItem(key));
+  const idx = Number.isFinite(raw) && raw >= 0 ? raw : 0;
 
-    const selected = pool[idx % pool.length];
-    localStorage.setItem(key, String((idx + 1) % pool.length));
-    localStorage.setItem("acesRrLastAssigned", selected);
-    return selected;
-  }
+  const selected = pool[idx % pool.length];
+  localStorage.setItem(key, String((idx + 1) % pool.length));
+  localStorage.setItem("acesRrLastAssigned", selected);
+  return selected;
+}
 
   function pushToNextEmail(leadId) {
     const lead = leads.find((l) => l.id === leadId);
