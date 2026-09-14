@@ -1,11 +1,78 @@
 /* ==========================================
    ACES 2026 UNIVERSAL WIZARD ENGINE (BILINGUAL)
+   CLEAN BUILD (NO CLOUDFLARE)
 ========================================== */
 
 let wizardConfig = null;
 let currentStep = 0;
 let formData = {};
 let reviewMode = false;
+
+/* ==========================================
+   ROUND ROBIN (NO CLOUDFLARE)
+========================================== */
+const RR_STORAGE_KEYS = {
+  en: "acesRoundRobinIndexEn",
+  es: "acesRoundRobinIndexEs"
+};
+
+const RR_POOLS = {
+  en: [
+    "george@insaces.com",
+    "jimmy@insaces.com",
+    "office@insaces.com",
+    "robert@insaces.com",
+    "jordan@insaces.com",
+    "lanse@insaces.com",
+    "bryan@insaces.com"
+  ],
+  es: [
+    "george@insaces.com",
+    "jimmy@insaces.com",
+    "office@insaces.com",
+    "robert@insaces.com",
+    "jordan@insaces.com",
+    "lanse@insaces.com",
+    "bryan@insaces.com"
+  ]
+};
+
+function normalizeLang(lang) {
+  const v = String(lang || "").trim().toLowerCase();
+  return v === "es" ? "es" : "en";
+}
+
+function getPool(lang) {
+  const n = normalizeLang(lang);
+  return RR_POOLS[n] || RR_POOLS.en;
+}
+
+function getNextRoundRobinEmail(lang) {
+  const n = normalizeLang(lang);
+  const pool = getPool(n);
+  if (!pool.length) return "";
+
+  const raw = Number(localStorage.getItem(RR_STORAGE_KEYS[n]));
+  const idx = Number.isFinite(raw) && raw >= 0 ? raw : 0;
+
+  const selected = pool[idx % pool.length];
+  localStorage.setItem(RR_STORAGE_KEYS[n], String((idx + 1) % pool.length));
+  localStorage.setItem("acesRrLastAssigned", selected);
+  return selected;
+}
+
+/* Optional admin helpers you can call in console */
+function resetRoundRobin(enIndex = 0, esIndex = 0) {
+  const enPool = getPool("en");
+  const esPool = getPool("es");
+  const safeEn = Number.isInteger(enIndex) && enIndex >= 0 ? enIndex % enPool.length : 0;
+  const safeEs = Number.isInteger(esIndex) && esIndex >= 0 ? esIndex % esPool.length : 0;
+
+  localStorage.setItem(RR_STORAGE_KEYS.en, String(safeEn));
+  localStorage.setItem(RR_STORAGE_KEYS.es, String(safeEs));
+  localStorage.setItem("acesRrLastAssigned", "—");
+}
+window.resetRoundRobin = resetRoundRobin;
 
 /* Language helpers */
 function getCurrentLang() {
@@ -138,10 +205,9 @@ async function loadConfig(appType) {
 
     console.log("🔍 Loading wizard for app type:", appType);
 
-    // 1) Load manifest with explicit error handling
     const manifestUrl = `${base}/applications/manifest.json`;
     console.log("📄 Fetching manifest from:", manifestUrl);
-    
+
     const manifestRes = await fetch(manifestUrl, { cache: "no-store" });
     if (!manifestRes.ok) {
       throw new Error(`Manifest fetch failed: ${manifestRes.status} ${manifestRes.statusText} (${manifestUrl})`);
@@ -150,12 +216,10 @@ async function loadConfig(appType) {
     const manifest = await manifestRes.json();
     console.log("✅ Manifest loaded:", manifest);
 
-    // 2) Validate app key
     if (!manifest[appType]) {
       throw new Error(`Application '${appType}' not found in manifest. Available apps: ${Object.keys(manifest).join(", ")}`);
     }
 
-    // 3) Validate config path
     const configPath = manifest[appType].config;
     if (!configPath || typeof configPath !== "string") {
       throw new Error(`Missing/invalid config path for app '${appType}'.`);
@@ -163,12 +227,11 @@ async function loadConfig(appType) {
 
     console.log("📦 Config path from manifest:", configPath);
 
-    // 4) Dynamic import - ensure path starts with ./ or /
     let importUrl = configPath;
     if (!importUrl.startsWith("/") && !importUrl.startsWith("./")) {
       importUrl = "./" + importUrl;
     }
-    
+
     console.log("⚙️ Importing config from:", importUrl);
     const module = await import(importUrl);
 
@@ -195,7 +258,7 @@ async function loadConfig(appType) {
 /* Init */
 async function initWizard() {
   const appType = getAppType();
-  
+
   if (!appType) {
     const container = document.getElementById("wizard-container");
     if (container) {
@@ -212,7 +275,7 @@ async function initWizard() {
   }
 
   showLoading();
-  
+
   const success = await loadConfig(appType);
   if (!success || !wizardConfig) return;
 
@@ -230,11 +293,8 @@ window.addEventListener("storage", (e) => {
   persistCurrentStepData();
   buildTabs();
 
-  if (reviewMode) {
-    buildReview();
-  } else {
-    buildStep(currentStep);
-  }
+  if (reviewMode) buildReview();
+  else buildStep(currentStep);
 });
 
 /* Also respond to same-tab language changes dispatched by global.js */
@@ -244,11 +304,8 @@ window.addEventListener("aces:language-changed", () => {
   persistCurrentStepData();
   buildTabs();
 
-  if (reviewMode) {
-    buildReview();
-  } else {
-    buildStep(currentStep);
-  }
+  if (reviewMode) buildReview();
+  else buildStep(currentStep);
 });
 
 /* Build Tabs */
@@ -338,12 +395,10 @@ function buildStep(index) {
       }
     }
 
-    // restore saved value
     if (formData[field.id] != null) {
       input.value = formData[field.id];
     }
 
-    // live save
     input.addEventListener("input", () => {
       formData[field.id] = input.value;
     });
@@ -409,7 +464,7 @@ function updateProgress() {
   const bar = document.getElementById("wizard-progress");
   if (!bar || !wizardConfig) return;
 
-  const total = wizardConfig.steps.length + 1; // +1 for review
+  const total = wizardConfig.steps.length + 1;
   const current = reviewMode ? wizardConfig.steps.length : currentStep;
   const percent = Math.round((current / total) * 100);
   bar.style.width = percent + "%";
@@ -503,6 +558,29 @@ function buildReview() {
   if (progress) progress.style.width = "100%";
 }
 
+/* Build email body */
+function buildApplicationEmailBody(data, appType) {
+  const lines = [];
+  lines.push(`Application Type: ${appType || "Unknown"}`);
+  lines.push(`Language: ${normalizeLang(getCurrentLang()).toUpperCase()}`);
+  lines.push(`Submitted At: ${new Date().toLocaleString()}`);
+  lines.push("");
+
+  wizardConfig.steps.forEach(step => {
+    const stepTitle = isSpanish() ? (step.title_es || step.title_en || step.title || "Step") : (step.title_en || step.title || "Step");
+    lines.push(`=== ${stepTitle} ===`);
+
+    step.fields.forEach(field => {
+      const label = isSpanish() ? (field.label_es || field.label_en || field.label || field.id) : (field.label_en || field.label || field.id);
+      lines.push(`${label}: ${data[field.id] || ""}`);
+    });
+
+    lines.push("");
+  });
+
+  return lines.join("\n");
+}
+
 /* Submit */
 function submitApplication() {
   const data = {};
@@ -513,12 +591,27 @@ function submitApplication() {
     });
   });
 
+  const lang = normalizeLang(getCurrentLang());
+  const agentEmail = getNextRoundRobinEmail(lang);
+  const appType = getAppType() || "application";
+  const subject = `New ${appType} application - ${data.fullName || data.name || data.firstName || "Customer"}`;
+  const body = buildApplicationEmailBody(data, appType);
+
   console.log("📤 Submitting application data:", data);
+  console.log("📬 Assigned agent:", agentEmail);
+
+  if (!agentEmail) {
+    alert(isSpanish() ? "No hay correo de agente disponible." : "No agent email available.");
+    return;
+  }
+
+  const mailto = `mailto:${encodeURIComponent(agentEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
 
   alert(
     isSpanish()
-      ? "¡Su solicitud ha sido enviada con éxito!"
-      : "Your application has been submitted successfully!"
+      ? "¡Su solicitud fue preparada y dirigida al agente asignado!"
+      : "Your application was prepared and routed to the assigned agent!"
   );
 
   window.location.href = applicationsHomeUrl();
@@ -529,5 +622,4 @@ function goBackToApplications() {
   window.location.href = applicationsHomeUrl();
 }
 
-// Make function globally accessible for inline onclick in HTML
 window.goBackToApplications = goBackToApplications;
