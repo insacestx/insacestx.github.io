@@ -9,11 +9,11 @@
   // =========================
 const EMAIL_POOLS = {
   en: [
+    "george@insaces.com",
     "bryan@insaces.com",
     "jordan@insaces.com",
     "lanse@insaces.com",
     "robert@insaces.com",
-    "george@insaces.com",
     "jimmy@insaces.com",
     "office@insaces.com"
   ],
