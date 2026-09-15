@@ -11,60 +11,52 @@ let reviewMode = false;
 /* ==========================================
    ROUND ROBIN (NO CLOUDFLARE)
 ========================================== */
-const RR_STORAGE_KEYS = {
-  en: "acesRoundRobinIndexEn",
-  es: "acesRoundRobinIndexEs"
-};
-
-const RR_POOLS = {
-  en: [
-    "george@insaces.com",
-    "jimmy@insaces.com",
-    "office@insaces.com",
-    "robert@insaces.com",
-    "jordan@insaces.com",
-    "lanse@insaces.com",
-    "bryan@insaces.com"
-  ],
-  es: [
-    "george@insaces.com",
-    "jimmy@insaces.com",
-    ]
-};
-
 function normalizeLang(lang) {
   const v = String(lang || "").trim().toLowerCase();
-  return v === "es" ? "es" : "en";
-}
-
-function getPool(lang) {
-  const n = normalizeLang(lang);
-  return RR_POOLS[n] || RR_POOLS.en;
+  return v === "es" || v === "spanish" ? "es" : "en";
 }
 
 function getNextRoundRobinEmail(lang) {
   const n = normalizeLang(lang);
-  const pool = getPool(n);
-  if (!pool.length) return "";
 
-  const raw = Number(localStorage.getItem(RR_STORAGE_KEYS[n]));
-  const idx = Number.isFinite(raw) && raw >= 0 ? raw : 0;
+  // Single source of truth: global.js engine
+  if (window.acesRoundRobin?.getNextAssignment) {
+    const assignment = window.acesRoundRobin.getNextAssignment(n);
+    return assignment?.email || "";
+  }
 
-  const selected = pool[idx % pool.length];
-  localStorage.setItem(RR_STORAGE_KEYS[n], String((idx + 1) % pool.length));
+  // Safe fallback (only if global engine unavailable)
+  console.warn("acesRoundRobin engine missing; fallback routing engaged.");
+  const fallback = n === "es"
+    ? ["george@insaces.com", "jimmy@insaces.com"]
+    : [
+        "bryan@insaces.com",
+        "jordan@insaces.com",
+        "lanse@insaces.com",
+        "robert@insaces.com",
+        "george@insaces.com",
+        "jimmy@insaces.com",
+        "office@insaces.com"
+      ];
+
+  const key = n === "es" ? "acesRoundRobinIndexEs" : "acesRoundRobinIndexEn";
+  const idxRaw = Number(localStorage.getItem(key));
+  const idx = Number.isFinite(idxRaw) && idxRaw >= 0 ? idxRaw : 0;
+
+  const selected = fallback[idx % fallback.length];
+  localStorage.setItem(key, String((idx + 1) % fallback.length));
   localStorage.setItem("acesRrLastAssigned", selected);
   return selected;
 }
 
-/* Optional admin helpers you can call in console */
+/* Optional admin helper */
 function resetRoundRobin(enIndex = 0, esIndex = 0) {
-  const enPool = getPool("en");
-  const esPool = getPool("es");
-  const safeEn = Number.isInteger(enIndex) && enIndex >= 0 ? enIndex % enPool.length : 0;
-  const safeEs = Number.isInteger(esIndex) && esIndex >= 0 ? esIndex % esPool.length : 0;
-
-  localStorage.setItem(RR_STORAGE_KEYS.en, String(safeEn));
-  localStorage.setItem(RR_STORAGE_KEYS.es, String(safeEs));
+  if (window.acesRoundRobin?.reset) {
+    window.acesRoundRobin.reset(enIndex, esIndex);
+    return;
+  }
+  localStorage.setItem("acesRoundRobinIndexEn", String(enIndex || 0));
+  localStorage.setItem("acesRoundRobinIndexEs", String(esIndex || 0));
   localStorage.setItem("acesRrLastAssigned", "—");
 }
 window.resetRoundRobin = resetRoundRobin;
