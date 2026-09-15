@@ -65,6 +65,13 @@
     <input type="hidden" name="_template" value="table">
     <input type="text" name="_honey" style="display:none">
 
+    <!-- Submit behavior hardening -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
+
+    <!-- Texting request value that will be sent -->
+    <input type="hidden" name="Texting Request" id="texting_request_field" value="No">
+
     <!-- STEP 1: BUSINESS INFO -->
     <div class="form-step active" data-step="1">
 
@@ -214,6 +221,17 @@
           <span data-en="I confirm the information provided is accurate."
                 data-es="Confirmo que la información proporcionada es correcta.">
             I confirm the information provided is accurate.
+          </span>
+        </label>
+      </div>
+
+      <!-- NEW: Texting request option -->
+      <div class="form-field checkbox-field">
+        <label>
+          <input type="checkbox" id="texting_opt_in">
+          <span data-en="I want text message updates about this COI request."
+                data-es="Quiero recibir actualizaciones por mensaje de texto sobre esta solicitud de COI.">
+            I want text message updates about this COI request.
           </span>
         </label>
       </div>
