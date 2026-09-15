@@ -7,22 +7,21 @@
   // =========================
   // CONFIG
   // =========================
-  const EMAIL_POOLS = {
-    en: [
-      "george@insaces.com", // George
-      "jimmy@insaces.com",  // Jimmy
-      "office@insaces.com", // Renee
-      "robert@insaces.com", // Robert
-      "jordan@insaces.com", // Jordan
-      "lanse@insaces.com",  // Lanse
-      "bryan@insaces.com"   // Bryan
-    ],
-    // ES intentionally limited to Spanish-speaking agents
-    es: [
-      "george@insaces.com",
-      "jimmy@insaces.com"
-    ]
-  };
+const EMAIL_POOLS = {
+  en: [
+    "bryan@insaces.com",
+    "jordan@insaces.com",
+    "lanse@insaces.com",
+    "robert@insaces.com",
+    "george@insaces.com",
+    "jimmy@insaces.com",
+    "office@insaces.com"
+  ],
+  es: [
+    "george@insaces.com",
+    "jimmy@insaces.com"
+  ]
+};
 
   const STATUS_VALUES = [
     "new",
