@@ -61,6 +61,7 @@
 </script>
 
 <link rel="stylesheet" href="style.css">
+<script src="roundrobin.js" defer></script>
 <script src="global.js" defer></script>
 
 <style>
@@ -267,16 +268,23 @@
           Start your quote in less than a minute.
         </p>
 
-       <form action="https://formsubmit.co/office@insaces.com"
+       <form id="quickQuoteForm" action="https://formsubmit.co/office@insaces.com"
       method="POST"
       class="quick-quote-form">
 
-  <input type="hidden" name="_cc" value="office@insaces.com">
+  <input type="hidden" name="_cc" id="ccField" value="">
   <input type="hidden" name="_captcha" value="false">
   <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
   <input type="hidden" name="_subject" value="New Quick Quote Request">
   <input type="hidden" id="rrEmail" name="rrEmail">
   <input type="hidden" id="routingLanguage" name="routingLanguage" value="en">
+
+  <!-- Round Robin audit fields -->
+  <input type="hidden" id="assignedAgentEmail" name="assignedAgentEmail" value="">
+  <input type="hidden" id="roundRobinLang" name="roundRobinLang" value="en">
+  <input type="hidden" id="roundRobinIndex" name="roundRobinIndex" value="">
+  <input type="hidden" id="roundRobinAssignedAt" name="roundRobinAssignedAt" value="">
+  <input type="hidden" id="roundRobinMode" name="roundRobinMode" value="office-primary-agent-cc">
 
   <input type="text"
          name="Full Name"
@@ -552,32 +560,46 @@
 </script>
 
 <!-- ============================================================
-     QUICK QUOTE LANGUAGE ROUTING (SAFE)
+     QUICK QUOTE LANGUAGE + ROUND ROBIN ROUTING (SAFE)
 ============================================================ -->
 <script>
   (function () {
-    const form = document.querySelector(".quick-quote-form");
+    const form = document.getElementById("quickQuoteForm");
     if (!form) return;
 
     const preferred = form.querySelector("#preferredLanguage");
     const routing = form.querySelector("#routingLanguage");
+
+    const ccField = form.querySelector("#ccField");
+    const rrField = form.querySelector("#rrEmail");
+
+    const assignedAgentEmail = form.querySelector("#assignedAgentEmail");
+    const rrLangField = form.querySelector("#roundRobinLang");
+    const rrIndexField = form.querySelector("#roundRobinIndex");
+    const rrAssignedAtField = form.querySelector("#roundRobinAssignedAt");
+
+    const OFFICE_EMAIL = "office@insaces.com";
 
     function currentSiteLang() {
       const lang = (localStorage.getItem("acesLang") || "en").toLowerCase();
       return lang === "es" ? "es" : "en";
     }
 
+    function normalizeLang(v) {
+      return String(v || "").toLowerCase() === "es" ? "es" : "en";
+    }
+
     function syncFromSiteLanguage() {
       if (!preferred) return;
       if (!preferred.value) preferred.value = currentSiteLang();
-      if (routing) routing.value = preferred.value || currentSiteLang();
+      if (routing) routing.value = normalizeLang(preferred.value || currentSiteLang());
     }
 
     syncFromSiteLanguage();
 
     if (preferred) {
       preferred.addEventListener("change", function () {
-        if (routing) routing.value = preferred.value || currentSiteLang();
+        if (routing) routing.value = normalizeLang(preferred.value || currentSiteLang());
       });
     }
 
@@ -586,9 +608,36 @@
     });
 
     form.addEventListener("submit", function () {
-      const normalized = (preferred && preferred.value === "es") ? "es" : "en";
-      if (routing) routing.value = normalized;
-      if (preferred) preferred.value = normalized;
+      const lang = normalizeLang(preferred && preferred.value ? preferred.value : currentSiteLang());
+
+      if (routing) routing.value = lang;
+      if (preferred) preferred.value = lang;
+
+      if (!window.acesRoundRobin || typeof window.acesRoundRobin.getNextAssignment !== "function") {
+        // Safe fallback if engine isn't available
+        if (rrField) rrField.value = OFFICE_EMAIL;
+        if (assignedAgentEmail) assignedAgentEmail.value = OFFICE_EMAIL;
+        if (rrLangField) rrLangField.value = lang;
+        if (rrIndexField) rrIndexField.value = "";
+        if (rrAssignedAtField) rrAssignedAtField.value = new Date().toISOString();
+        if (ccField) ccField.value = "";
+        return;
+      }
+
+      const assignment = window.acesRoundRobin.getNextAssignment(lang) || {};
+      const agentEmail = String(assignment.email || "").toLowerCase().trim() || OFFICE_EMAIL;
+      const assignedIndex = Number.isInteger(assignment.assignedIndex) ? assignment.assignedIndex : "";
+
+      // Primary recipient remains office. CC only if assigned agent is not office.
+      if (ccField) {
+        ccField.value = agentEmail !== OFFICE_EMAIL ? agentEmail : "";
+      }
+
+      if (rrField) rrField.value = agentEmail;
+      if (assignedAgentEmail) assignedAgentEmail.value = agentEmail;
+      if (rrLangField) rrLangField.value = lang;
+      if (rrIndexField) rrIndexField.value = String(assignedIndex);
+      if (rrAssignedAtField) rrAssignedAtField.value = new Date().toISOString();
     });
   })();
 </script>
