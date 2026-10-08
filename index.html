@@ -61,6 +61,7 @@
 </script>
 
 <link rel="stylesheet" href="style.css">
+<script src="rr-engine.js" defer></script>
 <script src="global.js" defer></script>
 
 <style>
@@ -589,6 +590,13 @@
       const normalized = (preferred && preferred.value === "es") ? "es" : "en";
       if (routing) routing.value = normalized;
       if (preferred) preferred.value = normalized;
+
+      const ccField = form.querySelector("input[name='_cc']");
+      const rrField = form.querySelector("#rrEmail");
+      const assignment = window.acesRoundRobin?.getNextAssignment(normalized);
+      const agentEmail = assignment?.email || "";
+      if (ccField) ccField.value = agentEmail ? "office@insaces.com," + agentEmail : "office@insaces.com";
+      if (rrField) rrField.value = agentEmail;
     });
   })();
 </script>

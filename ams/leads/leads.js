@@ -35,9 +35,7 @@ const EMAIL_POOLS = {
 
   const STORAGE_KEYS = {
     leads: "acesLeads",
-    clients: "acesClients",
-    rrIndexEn: "acesRoundRobinIndexEn",
-    rrIndexEs: "acesRoundRobinIndexEs"
+    clients: "acesClients"
   };
 
   let leads = [];
@@ -310,10 +308,6 @@ const EMAIL_POOLS = {
     return normalizeLanguage(lang) === "es" ? EMAIL_POOLS.es : EMAIL_POOLS.en;
   }
 
-  function getIndexKey(lang) {
-    return normalizeLanguage(lang) === "es" ? STORAGE_KEYS.rrIndexEs : STORAGE_KEYS.rrIndexEn;
-  }
-
   function nextRoundRobinEmail(language) {
     const lang = normalizeLanguage(language);
 
@@ -322,19 +316,7 @@ const EMAIL_POOLS = {
       const assignment = window.acesRoundRobin.getNextAssignment(lang);
       return assignment?.email || "";
     }
-
-    // Local fallback
-    const pool = getPool(lang);
-    if (!pool.length) return "";
-
-    const key = getIndexKey(lang);
-    const raw = Number(localStorage.getItem(key));
-    const idx = Number.isFinite(raw) && raw >= 0 ? raw : 0;
-
-    const selected = pool[idx % pool.length];
-    localStorage.setItem(key, String((idx + 1) % pool.length));
-    localStorage.setItem("acesRrLastAssigned", selected);
-    return selected;
+    return "";
   }
 
   function resetRoundRobin(enIndex = 0, esIndex = 0) {
@@ -345,18 +327,7 @@ const EMAIL_POOLS = {
       return;
     }
 
-    // Local fallback
-    const enPoolSize = EMAIL_POOLS.en.length || 1;
-    const esPoolSize = EMAIL_POOLS.es.length || 1;
-
-    const safeEn = Number.isInteger(enIndex) && enIndex >= 0 ? enIndex % enPoolSize : 0;
-    const safeEs = Number.isInteger(esIndex) && esIndex >= 0 ? esIndex % esPoolSize : 0;
-
-    localStorage.setItem(STORAGE_KEYS.rrIndexEn, String(safeEn));
-    localStorage.setItem(STORAGE_KEYS.rrIndexEs, String(safeEs));
-    localStorage.setItem("acesRrLastAssigned", "—");
-    renderRoundRobinStatus();
-    alert(`Round Robin reset. EN=${safeEn}, ES=${safeEs}`);
+    console.error("acesRoundRobin engine (rr-engine.js) is missing.");
   }
 
   function pushToNextEmail(leadId) {
@@ -501,7 +472,7 @@ const EMAIL_POOLS = {
     const esPool = EMAIL_POOLS.es.join(" → ") || "—";
     const enNext = previewNext("en");
     const esNext = previewNext("es");
-    const last = localStorage.getItem("acesRrLastAssigned") || "—";
+    const last = window.acesRoundRobin?.getLastAssigned?.() || "—";
 
     if (els.rrLastAssigned) els.rrLastAssigned.textContent = last;
     if (els.rrNextUp) els.rrNextUp.textContent = `EN: ${enNext} | ES: ${esNext}`;
@@ -515,13 +486,7 @@ const EMAIL_POOLS = {
     if (window.acesRoundRobin?.previewNext) {
       return window.acesRoundRobin.previewNext(nLang);
     }
-
-    // Local fallback
-    const pool = getPool(nLang);
-    if (!pool.length) return "—";
-    const idx = Number(localStorage.getItem(getIndexKey(nLang)));
-    const safeIdx = Number.isFinite(idx) && idx >= 0 ? idx : 0;
-    return pool[safeIdx % pool.length];
+    return "—";
   }
 
   // =========================

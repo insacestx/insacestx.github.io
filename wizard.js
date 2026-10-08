@@ -8,59 +8,6 @@ let currentStep = 0;
 let formData = {};
 let reviewMode = false;
 
-/* ==========================================
-   ROUND ROBIN (NO CLOUDFLARE)
-========================================== */
-function normalizeLang(lang) {
-  const v = String(lang || "").trim().toLowerCase();
-  return v === "es" || v === "spanish" ? "es" : "en";
-}
-
-function getNextRoundRobinEmail(lang) {
-  const n = normalizeLang(lang);
-
-  // Single source of truth: global.js engine
-  if (window.acesRoundRobin?.getNextAssignment) {
-    const assignment = window.acesRoundRobin.getNextAssignment(n);
-    return assignment?.email || "";
-  }
-
-  // Safe fallback (only if global engine unavailable)
-  console.warn("acesRoundRobin engine missing; fallback routing engaged.");
-  const fallback = n === "es"
-    ? ["george@insaces.com", "jimmy@insaces.com"]
-    : [
-        "bryan@insaces.com",
-        "jordan@insaces.com",
-        "lanse@insaces.com",
-        "robert@insaces.com",
-        "george@insaces.com",
-        "jimmy@insaces.com",
-        "office@insaces.com"
-      ];
-
-  const key = n === "es" ? "acesRoundRobinIndexEs" : "acesRoundRobinIndexEn";
-  const idxRaw = Number(localStorage.getItem(key));
-  const idx = Number.isFinite(idxRaw) && idxRaw >= 0 ? idxRaw : 0;
-
-  const selected = fallback[idx % fallback.length];
-  localStorage.setItem(key, String((idx + 1) % fallback.length));
-  localStorage.setItem("acesRrLastAssigned", selected);
-  return selected;
-}
-
-/* Optional admin helper */
-function resetRoundRobin(enIndex = 0, esIndex = 0) {
-  if (window.acesRoundRobin?.reset) {
-    window.acesRoundRobin.reset(enIndex, esIndex);
-    return;
-  }
-  localStorage.setItem("acesRoundRobinIndexEn", String(enIndex || 0));
-  localStorage.setItem("acesRoundRobinIndexEs", String(esIndex || 0));
-  localStorage.setItem("acesRrLastAssigned", "—");
-}
-window.resetRoundRobin = resetRoundRobin;
-
 /* Language helpers */
 function getCurrentLang() {
   // Unified key with global.js
@@ -549,7 +496,7 @@ function buildReview() {
 function buildApplicationEmailBody(data, appType) {
   const lines = [];
   lines.push(`Application Type: ${appType || "Unknown"}`);
-  lines.push(`Language: ${normalizeLang(getCurrentLang()).toUpperCase()}`);
+  lines.push(`Language: ${(isSpanish() ? "ES" : "EN")}`);
   lines.push(`Submitted At: ${new Date().toLocaleString()}`);
   lines.push("");
 
@@ -578,8 +525,16 @@ function submitApplication() {
     });
   });
 
-  const lang = normalizeLang(getCurrentLang());
-  const agentEmail = getNextRoundRobinEmail(lang);
+  if (!window.acesRoundRobin?.getNextAssignment) {
+    console.error("acesRoundRobin engine (rr-engine.js) is missing; cannot route application.");
+    alert(isSpanish()
+      ? "No se pudo enviar la solicitud. Por favor recargue la página e intente de nuevo."
+      : "Unable to submit the application. Please reload the page and try again.");
+    return;
+  }
+
+  const lang = getCurrentLang();
+  const agentEmail = window.acesRoundRobin.getNextAssignment(lang)?.email;
   const appType = getAppType() || "application";
   const subject = `New ${appType} application - ${data.fullName || data.name || data.firstName || "Customer"}`;
   const body = buildApplicationEmailBody(data, appType);
@@ -592,7 +547,7 @@ function submitApplication() {
     return;
   }
 
-  const mailto = `mailto:${encodeURIComponent(agentEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const mailto = `mailto:${encodeURIComponent(agentEmail)}?cc=${encodeURIComponent("office@insaces.com")}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   window.location.href = mailto;
 
   alert(
