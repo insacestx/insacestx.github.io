@@ -35,28 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
       target = next?.email || "";
     }
 
-    // Fallback only if global RR not loaded
-    if (!target) {
-      const fallback = lang === "es"
-        ? ["george@insaces.com", "jimmy@insaces.com"]
-        : [
-            "george@insaces.com",
-            "jordan@insaces.com",
-            "lanse@insaces.com",
-            "robert@insaces.com",
-            "bryan@insaces.com",
-            "jimmy@insaces.com",
-            "office@insaces.com"
-          ];
-
-      const key = lang === "es" ? "acesRoundRobinIndexEs" : "acesRoundRobinIndexEn";
-      const idxRaw = Number(localStorage.getItem(key));
-      const idx = Number.isFinite(idxRaw) && idxRaw >= 0 ? idxRaw : 0;
-      target = fallback[idx % fallback.length];
-      localStorage.setItem(key, String((idx + 1) % fallback.length));
-      localStorage.setItem("acesRrLastAssigned", target);
-    }
-
     let hidden = form.querySelector("input[name='_to']");
     if (!hidden) {
       hidden = document.createElement("input");
