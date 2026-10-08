@@ -589,6 +589,15 @@
       const normalized = (preferred && preferred.value === "es") ? "es" : "en";
       if (routing) routing.value = normalized;
       if (preferred) preferred.value = normalized;
+
+      const rr = window.acesRoundRobin;
+      const assignment = rr && rr.getNextAssignment ? rr.getNextAssignment(normalized) : null;
+      const agentEmail = assignment && assignment.email;
+      if (agentEmail) {
+        form.action = "https://formsubmit.co/" + encodeURIComponent(agentEmail).replace(/%40/g, "@");
+        const rrField = form.querySelector("#rrEmail");
+        if (rrField) rrField.value = agentEmail;
+      }
     });
   })();
 </script>
