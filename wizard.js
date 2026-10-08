@@ -9,44 +9,28 @@ let formData = {};
 let reviewMode = false;
 
 /* ==========================================
-   ROUND ROBIN (NO CLOUDFLARE)
+   ROUND ROBIN (SHARED ENGINE)
 ========================================== */
 function normalizeLang(lang) {
   const v = String(lang || "").trim().toLowerCase();
   return v === "es" || v === "spanish" ? "es" : "en";
 }
 
-function getNextRoundRobinEmail(lang) {
+function getRoundRobinAssignment(lang) {
   const n = normalizeLang(lang);
 
-  // Single source of truth: global.js engine
   if (window.acesRoundRobin?.getNextAssignment) {
     const assignment = window.acesRoundRobin.getNextAssignment(n);
-    return assignment?.email || "";
+    if (assignment?.email) return assignment;
   }
 
-  // Safe fallback (only if global engine unavailable)
-  console.warn("acesRoundRobin engine missing; fallback routing engaged.");
-  const fallback = n === "es"
-    ? ["george@insaces.com", "jimmy@insaces.com"]
-    : [
-        "bryan@insaces.com",
-        "jordan@insaces.com",
-        "lanse@insaces.com",
-        "robert@insaces.com",
-        "george@insaces.com",
-        "jimmy@insaces.com",
-        "office@insaces.com"
-      ];
-
-  const key = n === "es" ? "acesRoundRobinIndexEs" : "acesRoundRobinIndexEn";
-  const idxRaw = Number(localStorage.getItem(key));
-  const idx = Number.isFinite(idxRaw) && idxRaw >= 0 ? idxRaw : 0;
-
-  const selected = fallback[idx % fallback.length];
-  localStorage.setItem(key, String((idx + 1) % fallback.length));
-  localStorage.setItem("acesRrLastAssigned", selected);
-  return selected;
+  console.warn("acesRoundRobin engine missing; office fallback routing engaged.");
+  return {
+    email: "office@insaces.com",
+    lang: n,
+    assignedIndex: -1,
+    nextIndex: -1
+  };
 }
 
 /* Optional admin helper */
@@ -55,9 +39,7 @@ function resetRoundRobin(enIndex = 0, esIndex = 0) {
     window.acesRoundRobin.reset(enIndex, esIndex);
     return;
   }
-  localStorage.setItem("acesRoundRobinIndexEn", String(enIndex || 0));
-  localStorage.setItem("acesRoundRobinIndexEs", String(esIndex || 0));
-  localStorage.setItem("acesRrLastAssigned", "—");
+  console.warn("acesRoundRobin.reset unavailable.");
 }
 window.resetRoundRobin = resetRoundRobin;
 
@@ -546,19 +528,30 @@ function buildReview() {
 }
 
 /* Build email body */
-function buildApplicationEmailBody(data, appType) {
+function buildApplicationEmailBody(data, appType, assignment) {
   const lines = [];
   lines.push(`Application Type: ${appType || "Unknown"}`);
   lines.push(`Language: ${normalizeLang(getCurrentLang()).toUpperCase()}`);
   lines.push(`Submitted At: ${new Date().toLocaleString()}`);
+  lines.push(`Assigned Agent: ${assignment?.email || "office@insaces.com"}`);
+  lines.push(`Assigned Lang Pool: ${assignment?.lang || normalizeLang(getCurrentLang())}`);
+  lines.push(
+    `Assigned Index: ${
+      Number.isInteger(assignment?.assignedIndex) ? assignment.assignedIndex : "n/a"
+    }`
+  );
   lines.push("");
 
   wizardConfig.steps.forEach(step => {
-    const stepTitle = isSpanish() ? (step.title_es || step.title_en || step.title || "Step") : (step.title_en || step.title || "Step");
+    const stepTitle = isSpanish()
+      ? (step.title_es || step.title_en || step.title || "Step")
+      : (step.title_en || step.title || "Step");
     lines.push(`=== ${stepTitle} ===`);
 
     step.fields.forEach(field => {
-      const label = isSpanish() ? (field.label_es || field.label_en || field.label || field.id) : (field.label_en || field.label || field.id);
+      const label = isSpanish()
+        ? (field.label_es || field.label_en || field.label || field.id)
+        : (field.label_en || field.label || field.id);
       lines.push(`${label}: ${data[field.id] || ""}`);
     });
 
@@ -578,11 +571,14 @@ function submitApplication() {
     });
   });
 
+  const OFFICE_EMAIL = "office@insaces.com";
   const lang = normalizeLang(getCurrentLang());
-  const agentEmail = getNextRoundRobinEmail(lang);
+  const assignment = getRoundRobinAssignment(lang);
+  const agentEmail = String(assignment?.email || "").trim().toLowerCase() || OFFICE_EMAIL;
+
   const appType = getAppType() || "application";
   const subject = `New ${appType} application - ${data.fullName || data.name || data.firstName || "Customer"}`;
-  const body = buildApplicationEmailBody(data, appType);
+  const body = buildApplicationEmailBody(data, appType, assignment);
 
   console.log("📤 Submitting application data:", data);
   console.log("📬 Assigned agent:", agentEmail);
@@ -592,7 +588,13 @@ function submitApplication() {
     return;
   }
 
-  const mailto = `mailto:${encodeURIComponent(agentEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  let mailto = `mailto:${encodeURIComponent(agentEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  // If assigned agent isn't office, CC office for operational visibility
+  if (agentEmail !== OFFICE_EMAIL) {
+    mailto = `mailto:${encodeURIComponent(agentEmail)}?cc=${encodeURIComponent(OFFICE_EMAIL)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
   window.location.href = mailto;
 
   alert(
