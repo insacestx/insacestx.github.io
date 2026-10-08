@@ -18,9 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initQuotePanel();
   initLoginPanel();
 
-  // Backward compatible field support
-  initRoundRobinEmail();
-
   // Conflict-safe legacy wizard bootstrap
   initWizardNav();
 });
@@ -726,13 +723,6 @@ function setRoundRobinState(state) {
 
 function getNextRoundRobinAssignment(lang = "en") {
   return rrGetNextAssignment(lang);
-}
-
-function initRoundRobinEmail() {
-  const rrField = document.getElementById("rrEmail");
-  if (!rrField) return;
-  const assignment = rrGetNextAssignment("en");
-  rrField.value = assignment?.email || "";
 }
 
 function resetRoundRobin(startIndex = 0) {
