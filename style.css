@@ -2822,21 +2822,57 @@ section.coi-hero p {
 
 /* CTA */
 .service-btn {
-  margin-top: auto;
   display: inline-block;
-  background: #d40000;
-  color: #fff;
   padding: 9px 12px;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
   transition: background 0.25s ease, transform 0.2s ease;
+  text-align: center;
 }
 
 .service-btn:hover {
-  background: #b70000;
   transform: translateY(-1px);
+}
+
+.service-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.service-btn-secondary {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--aces-primary, #d40000);
+  color: var(--aces-primary, #d40000);
+}
+
+.service-btn-secondary:hover {
+  background: rgba(212, 0, 0, 0.05);
+}
+
+.service-btn-primary {
+  flex: 1;
+  background: var(--aces-primary, #d40000);
+  color: #fff;
+}
+
+.service-btn-primary:hover {
+  background: var(--aces-primary-hover, #b70000);
+}
+
+/* Single-button cards (no application available) */
+.service-actions .service-btn:only-child {
+  flex: none;
+  margin-top: 0;
+  background: #d40000;
+  color: #fff;
+}
+
+.service-actions .service-btn:only-child:hover {
+  background: #b70000;
 }
 
 /* Optional no-results state */
