@@ -33,6 +33,27 @@ function getRoundRobinAssignment(lang) {
   };
 }
 
+/* NEW: read assignment passed from applications page */
+function getAssignmentFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+
+  const rrEmail = String(params.get("rrEmail") || "").trim().toLowerCase();
+  const rrLang = normalizeLang(params.get("rrLang") || "");
+  const rrIndexRaw = params.get("rrIndex");
+  const rrAssignedAt = String(params.get("rrAssignedAt") || "").trim();
+
+  if (!rrEmail) return null;
+
+  const rrIndex = Number(rrIndexRaw);
+  return {
+    email: rrEmail,
+    lang: rrLang || normalizeLang(getCurrentLang()),
+    assignedIndex: Number.isInteger(rrIndex) ? rrIndex : -1,
+    assignedAt: rrAssignedAt || new Date().toISOString(),
+    source: "url"
+  };
+}
+
 /* Optional admin helper */
 function resetRoundRobin(enIndex = 0, esIndex = 0) {
   if (window.acesRoundRobin?.reset) {
@@ -573,7 +594,11 @@ function submitApplication() {
 
   const OFFICE_EMAIL = "office@insaces.com";
   const lang = normalizeLang(getCurrentLang());
-  const assignment = getRoundRobinAssignment(lang);
+
+  // NEW: Prefer assignment passed from applications page; fallback to RR assignment
+  const urlAssignment = getAssignmentFromUrl();
+  const assignment = urlAssignment || getRoundRobinAssignment(lang);
+
   const agentEmail = String(assignment?.email || "").trim().toLowerCase() || OFFICE_EMAIL;
 
   const appType = getAppType() || "application";
@@ -581,7 +606,7 @@ function submitApplication() {
   const body = buildApplicationEmailBody(data, appType, assignment);
 
   console.log("📤 Submitting application data:", data);
-  console.log("📬 Assigned agent:", agentEmail);
+  console.log("📬 Assigned agent:", agentEmail, assignment);
 
   if (!agentEmail) {
     alert(isSpanish() ? "No hay correo de agente disponible." : "No agent email available.");
