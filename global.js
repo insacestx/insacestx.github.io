@@ -1,4 +1,4 @@
-// ACES 2026 — global.js (Cleaned for submit-time RR; legacy-safe)
+// ACES 2026 — global.js (Cleaned / modern RR-compatible)
 
 /* ============================================================
    FEATURE FLAGS
@@ -329,6 +329,7 @@ function applyLanguage(lang) {
 
     if ((el.tagName === "INPUT" || el.tagName === "TEXTAREA") && el.hasAttribute("placeholder")) {
       el.setAttribute("placeholder", translated);
+      return;
     }
 
     if (el.tagName === "OPTION") {
@@ -336,9 +337,7 @@ function applyLanguage(lang) {
       return;
     }
 
-    if (!((el.tagName === "INPUT" || el.tagName === "TEXTAREA") && el.hasAttribute("placeholder"))) {
-      el.textContent = translated;
-    }
+    el.textContent = translated;
   });
 
   const langBtn = document.getElementById("lang-toggle");
@@ -535,33 +534,57 @@ function goBackToApplications() {
   const root = getRelativeRoot();
   window.location.href = `${root}applications.html`;
 }
+window.goBackToApplications = goBackToApplications;
 
 /* ============================================================
-   ROUND ROBIN BRIDGE + BACKWARD-COMPAT WRAPPERS
-   NOTE: Canonical engine now lives in roundrobin.js (window.acesRoundRobin)
+   ROUND ROBIN BRIDGE (MODERN)
+   Canonical engine lives in roundrobin.js (window.acesRoundRobin)
 ============================================================ */
-function getRoundRobinList() {
-  if (window.acesRoundRobin?.getPool) return window.acesRoundRobin.getPool("en");
+function getRoundRobinList(lang = "en") {
+  if (window.acesRoundRobin?.getPool) return window.acesRoundRobin.getPool(lang);
   return [];
 }
 
 function getRoundRobinState() {
   if (window.acesRoundRobin?.getState) {
-    const s = window.acesRoundRobin.getState();
-    return { index: s?.enIndex || 0, ...s };
+    const s = window.acesRoundRobin.getState() || {};
+    return {
+      enIndex: Number.isInteger(s.enIndex) ? s.enIndex : 0,
+      esIndex: Number.isInteger(s.esIndex) ? s.esIndex : 0,
+      lastAssignedEmail: String(s.lastAssignedEmail || ""),
+      lastAssignedLang: String(s.lastAssignedLang || "en"),
+      lastAssignedAt: String(s.lastAssignedAt || ""),
+      lastAction: String(s.lastAction || "")
+    };
   }
-  return { index: 0, enIndex: 0, esIndex: 0, lastAssignedEmail: "", lastAssignedLang: "en", lastAssignedAt: "" };
+  return {
+    enIndex: 0,
+    esIndex: 0,
+    lastAssignedEmail: "",
+    lastAssignedLang: "en",
+    lastAssignedAt: "",
+    lastAction: ""
+  };
 }
 
 function setRoundRobinState(state) {
-  // Optional compatibility shim: only works if roundrobin.js exposes setState
-  if (window.acesRoundRobin?.setState) {
-    const current = window.acesRoundRobin.getState ? window.acesRoundRobin.getState() : {};
-    window.acesRoundRobin.setState({
-      ...current,
-      enIndex: Number.isInteger(state?.index) ? state.index : current?.enIndex || 0
-    });
-  }
+  if (!window.acesRoundRobin?.setState) return;
+  const current = getRoundRobinState();
+
+  const next = {
+    enIndex: Number.isInteger(state?.enIndex) ? state.enIndex : current.enIndex,
+    esIndex: Number.isInteger(state?.esIndex) ? state.esIndex : current.esIndex,
+    lastAssignedEmail:
+      typeof state?.lastAssignedEmail === "string" ? state.lastAssignedEmail : current.lastAssignedEmail,
+    lastAssignedLang:
+      typeof state?.lastAssignedLang === "string" ? state.lastAssignedLang : current.lastAssignedLang,
+    lastAssignedAt:
+      typeof state?.lastAssignedAt === "string" ? state.lastAssignedAt : current.lastAssignedAt,
+    lastAction:
+      typeof state?.lastAction === "string" ? state.lastAction : current.lastAction
+  };
+
+  window.acesRoundRobin.setState(next);
 }
 
 function getNextRoundRobinAssignment(lang = "en") {
@@ -569,14 +592,19 @@ function getNextRoundRobinAssignment(lang = "en") {
   return null;
 }
 
-function initRoundRobinEmail() {
-  // Deprecated intentionally:
-  // RR assignment must happen only at form submit-time.
-  // Leaving no-op to avoid accidental page-load consumption and keep legacy calls safe.
-}
+/* Deprecated intentionally:
+   RR assignment must happen only at form submit-time.
+   Kept as no-op for legacy call safety. */
+function initRoundRobinEmail() {}
 
-function resetRoundRobin(startIndex = 0) {
+function resetRoundRobin(enIndex = 0, esIndex = 0) {
   if (window.acesRoundRobin?.reset) {
-    window.acesRoundRobin.reset(startIndex, startIndex);
+    window.acesRoundRobin.reset(enIndex, esIndex);
   }
 }
+window.resetRoundRobin = resetRoundRobin;
+window.getRoundRobinList = getRoundRobinList;
+window.getRoundRobinState = getRoundRobinState;
+window.setRoundRobinState = setRoundRobinState;
+window.getNextRoundRobinAssignment = getNextRoundRobinAssignment;
+window.initRoundRobinEmail = initRoundRobinEmail;
