@@ -16,6 +16,7 @@ function normalizeLang(lang) {
   return v === "es" || v === "spanish" ? "es" : "en";
 }
 
+/* Kept for compatibility/debug; submit flow no longer rotates if URL assignment is missing */
 function getRoundRobinAssignment(lang) {
   const n = normalizeLang(lang);
 
@@ -29,11 +30,12 @@ function getRoundRobinAssignment(lang) {
     email: "office@insaces.com",
     lang: n,
     assignedIndex: -1,
-    nextIndex: -1
+    nextIndex: -1,
+    assignedAt: new Date().toISOString()
   };
 }
 
-/* NEW: read assignment passed from applications page */
+/* Read assignment passed from applications page */
 function getAssignmentFromUrl() {
   const params = new URLSearchParams(window.location.search);
 
@@ -66,7 +68,6 @@ window.resetRoundRobin = resetRoundRobin;
 
 /* Language helpers */
 function getCurrentLang() {
-  // Unified key with global.js
   return localStorage.getItem("acesLang") || "en";
 }
 
@@ -105,7 +106,6 @@ function applicationsHomeUrl() {
 function getAppType() {
   const params = new URLSearchParams(window.location.search);
 
-  // Support query-based routes
   let type =
     params.get("app") ||
     params.get("type") ||
@@ -115,12 +115,10 @@ function getAppType() {
   type = (type || "").toLowerCase().trim();
   if (type) return type;
 
-  // Fallback: infer from filename (/applications/auto.html => auto)
   const path = (window.location.pathname || "").toLowerCase();
   const file = path.split("/").pop() || "";
   const slug = file.replace(".html", "").trim();
 
-  // Map dashed filenames to manifest keys
   const map = {
     "commercial-auto": "commercialauto",
     "commercial-trucking": "commercialtrucking",
@@ -137,7 +135,7 @@ function persistCurrentStepData() {
   const step = wizardConfig.steps[currentStep];
   if (!step || !step.fields) return;
 
-  step.fields.forEach(field => {
+  step.fields.forEach((field) => {
     const el = document.getElementById(field.id);
     if (el) formData[field.id] = el.value;
   });
@@ -193,18 +191,13 @@ async function loadConfig(appType) {
   try {
     const base = getBasePath();
 
-    console.log("🔍 Loading wizard for app type:", appType);
-
     const manifestUrl = `${base}/applications/manifest.json`;
-    console.log("📄 Fetching manifest from:", manifestUrl);
-
     const manifestRes = await fetch(manifestUrl, { cache: "no-store" });
     if (!manifestRes.ok) {
       throw new Error(`Manifest fetch failed: ${manifestRes.status} ${manifestRes.statusText} (${manifestUrl})`);
     }
 
     const manifest = await manifestRes.json();
-    console.log("✅ Manifest loaded:", manifest);
 
     if (!manifest[appType]) {
       throw new Error(`Application '${appType}' not found in manifest. Available apps: ${Object.keys(manifest).join(", ")}`);
@@ -215,14 +208,11 @@ async function loadConfig(appType) {
       throw new Error(`Missing/invalid config path for app '${appType}'.`);
     }
 
-    console.log("📦 Config path from manifest:", configPath);
-
     let importUrl = configPath;
     if (!importUrl.startsWith("/") && !importUrl.startsWith("./")) {
       importUrl = "./" + importUrl;
     }
 
-    console.log("⚙️ Importing config from:", importUrl);
     const module = await import(importUrl);
 
     if (!module || !module.default) {
@@ -230,7 +220,6 @@ async function loadConfig(appType) {
     }
 
     wizardConfig = module.default;
-    console.log("✅ Config loaded successfully:", wizardConfig);
 
     if (!wizardConfig.steps || !Array.isArray(wizardConfig.steps)) {
       throw new Error(`Invalid wizard config format (steps missing/invalid): ${importUrl}`);
@@ -348,7 +337,7 @@ function buildStep(index) {
   title.textContent = stepTitle || step.title || "";
   card.appendChild(title);
 
-  step.fields.forEach(field => {
+  step.fields.forEach((field) => {
     const wrap = document.createElement("div");
     wrap.className = "wizard-field";
 
@@ -365,7 +354,7 @@ function buildStep(index) {
       input = document.createElement("select");
       input.id = field.id;
 
-      (field.options || []).forEach(opt => {
+      (field.options || []).forEach((opt) => {
         const o = document.createElement("option");
         o.value = opt.value;
         const optLabel = useEs
@@ -374,6 +363,14 @@ function buildStep(index) {
         o.textContent = optLabel || opt.value;
         input.appendChild(o);
       });
+    } else if (field.type === "textarea") {
+      input = document.createElement("textarea");
+      input.id = field.id;
+      if (field.placeholder_en || field.placeholder_es) {
+        input.placeholder = useEs
+          ? (field.placeholder_es || field.placeholder_en || "")
+          : (field.placeholder_en || "");
+      }
     } else {
       input = document.createElement("input");
       input.type = field.type || "text";
@@ -465,13 +462,13 @@ function validateStep() {
   const step = wizardConfig.steps[currentStep];
   let valid = true;
 
-  step.fields.forEach(field => {
+  step.fields.forEach((field) => {
     const el = document.getElementById(field.id);
     if (field.required && (!el || String(el.value).trim() === "")) {
       if (el) el.style.border = "2px solid red";
       valid = false;
     } else if (el) {
-      el.style.border = "1px solid #bbb";
+      el.style.border = "";
     }
   });
 
@@ -497,7 +494,7 @@ function buildReview() {
 
   const useEs = isSpanish();
 
-  wizardConfig.steps.forEach(step => {
+  wizardConfig.steps.forEach((step) => {
     const section = document.createElement("div");
     section.className = "review-section";
 
@@ -506,7 +503,7 @@ function buildReview() {
     h.textContent = stepTitle || step.title || "";
     section.appendChild(h);
 
-    step.fields.forEach(field => {
+    step.fields.forEach((field) => {
       const val = formData[field.id] || "";
       const row = document.createElement("p");
 
@@ -563,13 +560,13 @@ function buildApplicationEmailBody(data, appType, assignment) {
   );
   lines.push("");
 
-  wizardConfig.steps.forEach(step => {
+  wizardConfig.steps.forEach((step) => {
     const stepTitle = isSpanish()
       ? (step.title_es || step.title_en || step.title || "Step")
       : (step.title_en || step.title || "Step");
     lines.push(`=== ${stepTitle} ===`);
 
-    step.fields.forEach(field => {
+    step.fields.forEach((field) => {
       const label = isSpanish()
         ? (field.label_es || field.label_en || field.label || field.id)
         : (field.label_en || field.label || field.id);
@@ -586,8 +583,8 @@ function buildApplicationEmailBody(data, appType, assignment) {
 function submitApplication() {
   const data = {};
 
-  wizardConfig.steps.forEach(step => {
-    step.fields.forEach(field => {
+  wizardConfig.steps.forEach((step) => {
+    step.fields.forEach((field) => {
       data[field.id] = formData[field.id] || "";
     });
   });
@@ -595,18 +592,22 @@ function submitApplication() {
   const OFFICE_EMAIL = "office@insaces.com";
   const lang = normalizeLang(getCurrentLang());
 
-  // NEW: Prefer assignment passed from applications page; fallback to RR assignment
+  // STRICT SINGLE-ASSIGNMENT: use assignment passed from applications page.
+  // If missing, do NOT rotate RR here; route to office fallback.
   const urlAssignment = getAssignmentFromUrl();
-  const assignment = urlAssignment || getRoundRobinAssignment(lang);
+  const assignment = urlAssignment || {
+    email: OFFICE_EMAIL,
+    lang,
+    assignedIndex: -1,
+    assignedAt: new Date().toISOString(),
+    source: "fallback-office"
+  };
 
   const agentEmail = String(assignment?.email || "").trim().toLowerCase() || OFFICE_EMAIL;
 
   const appType = getAppType() || "application";
   const subject = `New ${appType} application - ${data.fullName || data.name || data.firstName || "Customer"}`;
   const body = buildApplicationEmailBody(data, appType, assignment);
-
-  console.log("📤 Submitting application data:", data);
-  console.log("📬 Assigned agent:", agentEmail, assignment);
 
   if (!agentEmail) {
     alert(isSpanish() ? "No hay correo de agente disponible." : "No agent email available.");
@@ -615,7 +616,6 @@ function submitApplication() {
 
   let mailto = `mailto:${encodeURIComponent(agentEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-  // If assigned agent isn't office, CC office for operational visibility
   if (agentEmail !== OFFICE_EMAIL) {
     mailto = `mailto:${encodeURIComponent(agentEmail)}?cc=${encodeURIComponent(OFFICE_EMAIL)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
