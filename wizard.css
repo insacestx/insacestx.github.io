@@ -11,21 +11,75 @@
 }
 
 /* HERO */
-.wizard-hero {
-  background: linear-gradient(
-    180deg,
-    var(--aces-surface-soft, #fff5f5) 0%,
-    #ffeaea 60%,
-    #fff7f7 100%
-  );
-  color: var(--aces-text, #1f2937);
-  padding: 60px 20px 40px;
+.wizard-hero.wizard-hero--bg {
+  position: relative;
+  min-height: 380px;
   border-bottom: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
+  background-image: url("/Icons/hero-applications-aces.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 0;
 }
 
-.wizard-hero-inner {
-  max-width: 1100px;
+.wizard-hero-overlay {
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.58) 0%,
+    rgba(15, 23, 42, 0.50) 45%,
+    rgba(15, 23, 42, 0.62) 100%
+  );
+}
+
+.wizard-hero-content {
+  max-width: 900px;
+  color: #fff;
+}
+
+.wizard-hero h1 {
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.12;
+  margin: 0 0 12px;
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+.wizard-hero p {
+  color: rgba(255, 255, 255, 0.96);
+  font-size: clamp(1rem, 1.7vw, 1.25rem);
+  line-height: 1.5;
   margin: 0 auto;
+  max-width: 780px;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+.wizard-back-btn--hero {
+  margin-top: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--aces-primary, #d40000);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.wizard-back-btn--hero:hover {
+  background: #fff;
+  border-color: #fff;
+}
+
+@media (max-width: 860px) {
+  .wizard-hero.wizard-hero--bg,
+  .wizard-hero-overlay {
+    min-height: 300px;
+  }
+
+  .wizard-hero-overlay {
+    padding: 32px 16px;
+  }
 }
 
 /* New: hero image in wizard top section */
