@@ -3,12 +3,52 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("appSearch");
   const cards = () => Array.from(document.querySelectorAll(".app-card"));
 
-  const getLang = () => localStorage.getItem("acesLang") || "en";
+  const OFFICE_EMAIL = "office@insaces.com";
+
+  function normalizeLang(v) {
+    const x = String(v || "").trim().toLowerCase();
+    return x === "es" || x === "spanish" ? "es" : "en";
+  }
+
+  const getLang = () => normalizeLang(localStorage.getItem("acesLang") || "en");
+
+  function getAssignment(lang) {
+    const nLang = normalizeLang(lang);
+    if (window.acesRoundRobin?.getNextAssignment) {
+      const a = window.acesRoundRobin.getNextAssignment(nLang) || {};
+      return {
+        email: String(a.email || OFFICE_EMAIL).toLowerCase().trim(),
+        lang: normalizeLang(a.lang || nLang),
+        assignedIndex: Number.isInteger(a.assignedIndex) ? a.assignedIndex : -1,
+        assignedAt: new Date().toISOString()
+      };
+    }
+
+    return {
+      email: OFFICE_EMAIL,
+      lang: nLang,
+      assignedIndex: -1,
+      assignedAt: new Date().toISOString()
+    };
+  }
+
+  function withRoutingParams(href, assignment) {
+    try {
+      const url = new URL(href, window.location.origin);
+      url.searchParams.set("rrEmail", assignment.email);
+      url.searchParams.set("rrLang", assignment.lang);
+      url.searchParams.set("rrAssignedAt", assignment.assignedAt);
+      url.searchParams.set("rrIndex", String(assignment.assignedIndex));
+      return url.toString();
+    } catch {
+      return href;
+    }
+  }
 
   function applyFilters() {
     const activeBtn = document.querySelector(".apps-filter-btn.active");
     const filter = activeBtn ? activeBtn.getAttribute("data-filter") : "all";
-    const term = (searchInput.value || "").toLowerCase().trim();
+    const term = (searchInput?.value || "").toLowerCase().trim();
     const lang = getLang();
     const isEs = lang === "es";
 
@@ -40,6 +80,24 @@ document.addEventListener("DOMContentLoaded", () => {
       applyFilters();
     });
   }
+
+  // Attach routing to application buttons/links inside each card
+  cards().forEach(card => {
+    const link = card.querySelector("a[href]");
+    if (!link) return;
+
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("javascript:")) return;
+
+      e.preventDefault();
+
+      const assignment = getAssignment(getLang());
+      const routedUrl = withRoutingParams(href, assignment);
+
+      window.location.href = routedUrl;
+    });
+  });
 
   // Small delay to ensure cards are rendered before first filter
   setTimeout(applyFilters, 200);
