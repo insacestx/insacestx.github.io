@@ -28,38 +28,33 @@
   <main class="wizard-page fade-in">
 
     <!-- HERO -->
-    <section class="wizard-hero">
-  <div class="wizard-hero-inner">
-    <img
-  src="/Icons/hero-applications-aces.png"
-  alt="ACES Applications"
-  class="wizard-hero-image"
-  loading="eager"
-/>
+    <section class="wizard-hero wizard-hero--bg">
+  <div class="wizard-hero-overlay">
+    <div class="wizard-hero-content">
+      <h1
+        data-en="Insurance Application Wizard"
+        data-es="Asistente de Solicitud de Seguro">
+        Insurance Application Wizard
+      </h1>
 
-    <h1
-      data-en="Insurance Application Wizard"
-      data-es="Asistente de Solicitud de Seguro">
-      Insurance Application Wizard
-    </h1>
+      <p
+        data-en="Complete each step to submit your application."
+        data-es="Complete cada paso para enviar su solicitud.">
+        Complete each step to submit your application.
+      </p>
 
-    <p
-      data-en="Complete each step to submit your application."
-      data-es="Complete cada paso para enviar su solicitud.">
-      Complete each step to submit your application.
-    </p>
-
-    <button
-      type="button"
-      class="wizard-back-btn"
-      onclick="goBackToApplications()"
-      data-en="← Back to Applications"
-      data-es="← Volver a Solicitudes">
-      ← Back to Applications
-    </button>
+      <button
+        type="button"
+        class="wizard-back-btn wizard-back-btn--hero"
+        onclick="goBackToApplications()"
+        data-en="← Back to Applications"
+        data-es="← Volver a Solicitudes">
+        ← Back to Applications
+      </button>
+    </div>
   </div>
 </section>
-
+    
     <!-- PROGRESS BAR -->
     <div class="wizard-progress-wrap">
       <div id="wizard-progress"></div>
