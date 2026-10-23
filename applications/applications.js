@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getAssignment(lang) {
     const nLang = normalizeLang(lang);
+
     if (window.acesRoundRobin?.getNextAssignment) {
       const a = window.acesRoundRobin.getNextAssignment(nLang) || {};
       return {
@@ -43,6 +44,40 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch {
       return href;
     }
+  }
+
+  // Only assign Round Robin for actual application flow destinations
+  function isApplicationFlowHref(href) {
+    if (!href) return false;
+
+    const cleanHref = String(href).trim().toLowerCase();
+
+    // Ignore non-navigation links
+    if (
+      cleanHref.startsWith("#") ||
+      cleanHref.startsWith("javascript:") ||
+      cleanHref.startsWith("mailto:") ||
+      cleanHref.startsWith("tel:")
+    ) {
+      return false;
+    }
+
+    // Resolve relative/absolute safely
+    let path = "";
+    try {
+      const u = new URL(cleanHref, window.location.origin);
+      path = (u.pathname || "").toLowerCase();
+    } catch {
+      path = cleanHref;
+    }
+
+    // Match real application routes only
+    return (
+      path.endsWith("/wizard.html") ||
+      path.includes("/applications/") ||
+      cleanHref.startsWith("applications/") ||
+      cleanHref.includes("wizard.html")
+    );
   }
 
   function applyFilters() {
@@ -81,20 +116,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Attach routing to application buttons/links inside each card
+  // Attach routing to application links only
   cards().forEach(card => {
     const link = card.querySelector("a[href]");
     if (!link) return;
 
     link.addEventListener("click", (e) => {
       const href = link.getAttribute("href");
-      if (!href || href.startsWith("#") || href.startsWith("javascript:")) return;
+      if (!href) return;
+
+      // Do NOT consume RR turn for non-application links
+      if (!isApplicationFlowHref(href)) return;
 
       e.preventDefault();
 
       const assignment = getAssignment(getLang());
       const routedUrl = withRoutingParams(href, assignment);
-
       window.location.href = routedUrl;
     });
   });
