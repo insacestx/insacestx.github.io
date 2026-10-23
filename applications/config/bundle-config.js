@@ -22,23 +22,23 @@ const bundleConfig = {
           ]
         },
         {
-  id: "policyTypes",
-  type: "checkbox-group",
-  required: true,
-  minSelected: 2,
-  label_en: "Which policy types are you interested in?",
-  label_es: "¿Qué tipos de póliza le interesan?",
-  options: [
-    { value: "auto", label_en: "Auto", label_es: "Auto" },
-    { value: "homeowners", label_en: "Homeowners", label_es: "Casa" },
-    { value: "renters", label_en: "Renters", label_es: "Inquilinos" },
-    { value: "condo", label_en: "Condo", label_es: "Condominio" },
-    { value: "motorcycle", label_en: "Motorcycle", label_es: "Motocicleta" },
-    { value: "boat", label_en: "Boat", label_es: "Barco" },
-    { value: "rv", label_en: "RV", label_es: "RV" },
-    { value: "umbrella", label_en: "Umbrella", label_es: "Umbrella" }
-  ]
-}
+          id: "policyTypes",
+          type: "checkbox-group",
+          required: true,
+          minSelected: 2,
+          label_en: "Which policy types are you interested in?",
+          label_es: "¿Qué tipos de póliza le interesan?",
+          options: [
+            { value: "auto", label_en: "Auto", label_es: "Auto" },
+            { value: "homeowners", label_en: "Homeowners", label_es: "Casa" },
+            { value: "renters", label_en: "Renters", label_es: "Inquilinos" },
+            { value: "condo", label_en: "Condo", label_es: "Condominio" },
+            { value: "motorcycle", label_en: "Motorcycle", label_es: "Motocicleta" },
+            { value: "boat", label_en: "Boat", label_es: "Barco" },
+            { value: "rv", label_en: "RV", label_es: "RV" },
+            { value: "umbrella", label_en: "Umbrella", label_es: "Umbrella" }
+          ]
+        }
       ]
     },
 
@@ -158,6 +158,19 @@ const bundleConfig = {
             { value: "phone", label_en: "Phone", label_es: "Teléfono" },
             { value: "email", label_en: "Email", label_es: "Correo electrónico" },
             { value: "text", label_en: "Text Message", label_es: "Mensaje de texto" }
+          ]
+        },
+        {
+          id: "preferredAgentLanguage",
+          type: "select",
+          required: true,
+          label_en: "Would you like to speak with an English or Spanish speaker?",
+          label_es: "¿Le gustaría hablar con una persona que hable inglés o español?",
+          options: [
+            { value: "", label_en: "Select one", label_es: "Seleccione una" },
+            { value: "english", label_en: "English", label_es: "Inglés" },
+            { value: "spanish", label_en: "Spanish", label_es: "Español" },
+            { value: "no_preference", label_en: "No Preference", label_es: "Sin preferencia" }
           ]
         },
         {
