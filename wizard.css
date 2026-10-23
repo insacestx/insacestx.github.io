@@ -1,6 +1,5 @@
 /* ============================================================
-   ACES 2026 — UNIVERSAL WIZARD STYLES (Cleaned)
-   Universal hero default included
+   ACES 2026 — UNIVERSAL WIZARD STYLES
 ============================================================ */
 
 /* GLOBAL WRAPPER */
@@ -10,7 +9,7 @@
   padding-bottom: 60px;
 }
 
-/* HERO */
+/* HERO — full-bleed style */
 .wizard-hero.wizard-hero--bg {
   position: relative;
   min-height: 380px;
@@ -32,7 +31,7 @@
   background: linear-gradient(
     180deg,
     rgba(15, 23, 42, 0.58) 0%,
-    rgba(15, 23, 42, 0.50) 45%,
+    rgba(15, 23, 42, 0.5) 45%,
     rgba(15, 23, 42, 0.62) 100%
   );
 }
@@ -69,40 +68,6 @@
 .wizard-back-btn--hero:hover {
   background: #fff;
   border-color: #fff;
-}
-
-@media (max-width: 860px) {
-  .wizard-hero.wizard-hero--bg,
-  .wizard-hero-overlay {
-    min-height: 300px;
-  }
-
-  .wizard-hero-overlay {
-    padding: 32px 16px;
-  }
-}
-
-/* New: hero image in wizard top section */
-.wizard-hero-image {
-  display: block;
-  width: min(100%, 760px);
-  height: auto;
-  margin: 0 auto 1rem;
-  border-radius: 14px;
-  object-fit: cover;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-}
-
-.wizard-hero h1 {
-  font-size: 2.2rem;
-  margin-bottom: 8px;
-  color: var(--aces-primary, #d40000);
-}
-
-.wizard-hero p {
-  font-size: 1.05rem;
-  max-width: 600px;
-  color: var(--aces-text-muted, #555);
 }
 
 /* PROGRESS BAR */
@@ -282,7 +247,7 @@
   margin: 4px 0;
 }
 
-/* BACK TO APPLICATIONS BUTTON */
+/* BACK TO APPLICATIONS BUTTON (default style) */
 .wizard-back-btn {
   margin-top: 14px;
   padding: 10px 16px;
@@ -300,25 +265,19 @@
   border-color: var(--aces-primary, #d40000);
 }
 
-/* ============================================================
-   REUSABLE APPLICATION HERO (FULL BACKGROUND IMAGE)
-   Text aligned right
-============================================================ */
+/* Reusable application hero block */
 .app-selected-hero {
   position: relative;
   border-radius: 18px;
   overflow: hidden;
   margin: 0 0 1.25rem;
   min-height: 260px;
-
-  /* full background image */
   background-image: var(--app-hero-image, url("/Icons/heroservices/hero-wizard-application.png"));
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
-/* dark overlay for readability */
 .app-selected-hero::before {
   content: "";
   position: absolute;
@@ -332,7 +291,6 @@
   z-index: 1;
 }
 
-/* content wrapper */
 .app-selected-overlay {
   position: relative;
   z-index: 2;
@@ -343,7 +301,6 @@
   padding: 1.25rem 1.5rem;
 }
 
-/* text block on right */
 .app-selected-content {
   color: #fff;
   max-width: 560px;
@@ -367,6 +324,15 @@
 
 /* Mobile */
 @media (max-width: 860px) {
+  .wizard-hero.wizard-hero--bg,
+  .wizard-hero-overlay {
+    min-height: 300px;
+  }
+
+  .wizard-hero-overlay {
+    padding: 32px 16px;
+  }
+
   .app-selected-hero {
     min-height: 230px;
     background-position: center;
@@ -380,14 +346,5 @@
 
   .app-selected-content {
     max-width: 100%;
-  }
-}
-
-/* Small hero image adjustment */
-@media (max-width: 768px) {
-  .wizard-hero-image {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 0.85rem;
   }
 }
