@@ -86,7 +86,8 @@ function getText(key) {
     reviewTitle: es ? "Revise su Información" : "Review Your Information",
     configError: es ? "Error al cargar la configuración de la solicitud." : "Error loading application configuration.",
     noAppType: es ? "No se especificó el tipo de solicitud." : "No application type specified.",
-    loading: es ? "Cargando solicitud..." : "Loading application..."
+    loading: es ? "Cargando solicitud..." : "Loading application...",
+    minSelectPrefix: es ? "Seleccione al menos" : "Select at least"
   };
   return map[key] || key;
 }
@@ -129,6 +130,28 @@ function getAppType() {
   return map[slug] || slug || null;
 }
 
+/* Helpers */
+function valueToText(v) {
+  if (Array.isArray(v)) return v.join(", ");
+  return v == null ? "" : String(v);
+}
+
+function getCheckboxValues(groupEl) {
+  if (!groupEl) return [];
+  return [...groupEl.querySelectorAll("input[type='checkbox']:checked")].map((cb) => cb.value);
+}
+
+function getFieldValue(field) {
+  if (!field?.id) return "";
+  if (field.type === "checkbox-group") {
+    const saved = formData[field.id];
+    return Array.isArray(saved) ? saved : [];
+  }
+  const el = document.getElementById(field.id);
+  if (!el) return formData[field.id] ?? "";
+  return el.value ?? "";
+}
+
 /* Save current visible step values */
 function persistCurrentStepData() {
   if (!wizardConfig || !wizardConfig.steps || reviewMode) return;
@@ -136,6 +159,11 @@ function persistCurrentStepData() {
   if (!step || !step.fields) return;
 
   step.fields.forEach((field) => {
+    if (field.type === "checkbox-group") {
+      const group = document.getElementById(field.id);
+      formData[field.id] = getCheckboxValues(group);
+      return;
+    }
     const el = document.getElementById(field.id);
     if (el) formData[field.id] = el.value;
   });
@@ -350,6 +378,7 @@ function buildStep(index) {
     wrap.appendChild(label);
 
     let input;
+
     if (field.type === "select") {
       input = document.createElement("select");
       input.id = field.id;
@@ -363,6 +392,15 @@ function buildStep(index) {
         o.textContent = optLabel || opt.value;
         input.appendChild(o);
       });
+
+      if (formData[field.id] != null) input.value = formData[field.id];
+
+      input.addEventListener("input", () => {
+        formData[field.id] = input.value;
+      });
+      input.addEventListener("change", () => {
+        formData[field.id] = input.value;
+      });
     } else if (field.type === "textarea") {
       input = document.createElement("textarea");
       input.id = field.id;
@@ -370,6 +408,70 @@ function buildStep(index) {
         input.placeholder = useEs
           ? (field.placeholder_es || field.placeholder_en || "")
           : (field.placeholder_en || "");
+      }
+
+      if (formData[field.id] != null) input.value = formData[field.id];
+
+      input.addEventListener("input", () => {
+        formData[field.id] = input.value;
+      });
+      input.addEventListener("change", () => {
+        formData[field.id] = input.value;
+      });
+    } else if (field.type === "checkbox-group") {
+      input = document.createElement("div");
+      input.id = field.id;
+      input.className = "wizard-checkbox-group";
+
+      const selectedValues = Array.isArray(formData[field.id]) ? formData[field.id] : [];
+
+      (field.options || []).forEach((opt, idx) => {
+        const optId = `${field.id}_${idx}`;
+
+        const item = document.createElement("label");
+        item.className = "wizard-checkbox-item";
+        item.setAttribute("for", optId);
+
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.id = optId;
+        cb.value = opt.value;
+
+        if (selectedValues.includes(opt.value)) cb.checked = true;
+
+        cb.addEventListener("change", () => {
+          const checked = getCheckboxValues(input);
+          formData[field.id] = checked;
+
+          if (input.classList.contains("invalid")) {
+            const min = Number(field.minSelected || (field.required ? 1 : 0));
+            if (checked.length >= min) input.classList.remove("invalid");
+          }
+        });
+
+        const txt = document.createElement("span");
+        txt.textContent = useEs
+          ? (opt.label_es || opt.label_en || opt.label || opt.value)
+          : (opt.label_en || opt.label || opt.value);
+
+        item.appendChild(cb);
+        item.appendChild(txt);
+        input.appendChild(item);
+      });
+
+      if (!Array.isArray(formData[field.id])) formData[field.id] = selectedValues;
+
+      if ((field.required || field.minSelected) && !wrap.querySelector(".wizard-help")) {
+        const min = Number(field.minSelected || (field.required ? 1 : 0));
+        if (min > 0) {
+          const help = document.createElement("small");
+          help.className = "wizard-help";
+          help.style.color = "#6b7280";
+          help.textContent = isSpanish()
+            ? `Seleccione al menos ${min}.`
+            : `Select at least ${min}.`;
+          wrap.appendChild(help);
+        }
       }
     } else {
       input = document.createElement("input");
@@ -380,18 +482,16 @@ function buildStep(index) {
           ? (field.placeholder_es || field.placeholder_en || "")
           : (field.placeholder_en || "");
       }
-    }
 
-    if (formData[field.id] != null) {
-      input.value = formData[field.id];
-    }
+      if (formData[field.id] != null) input.value = formData[field.id];
 
-    input.addEventListener("input", () => {
-      formData[field.id] = input.value;
-    });
-    input.addEventListener("change", () => {
-      formData[field.id] = input.value;
-    });
+      input.addEventListener("input", () => {
+        formData[field.id] = input.value;
+      });
+      input.addEventListener("change", () => {
+        formData[field.id] = input.value;
+      });
+    }
 
     wrap.appendChild(input);
     card.appendChild(wrap);
@@ -463,6 +563,20 @@ function validateStep() {
   let valid = true;
 
   step.fields.forEach((field) => {
+    if (field.type === "checkbox-group") {
+      const selected = Array.isArray(formData[field.id]) ? formData[field.id] : [];
+      const min = Number(field.minSelected || (field.required ? 1 : 0));
+      const groupEl = document.getElementById(field.id);
+
+      if (selected.length < min) {
+        valid = false;
+        if (groupEl) groupEl.classList.add("invalid");
+      } else if (groupEl) {
+        groupEl.classList.remove("invalid");
+      }
+      return;
+    }
+
     const el = document.getElementById(field.id);
     if (field.required && (!el || String(el.value).trim() === "")) {
       if (el) el.style.border = "2px solid red";
@@ -504,7 +618,8 @@ function buildReview() {
     section.appendChild(h);
 
     step.fields.forEach((field) => {
-      const val = formData[field.id] || "";
+      const rawVal = formData[field.id];
+      const val = valueToText(rawVal);
       const row = document.createElement("p");
 
       const labelText = useEs ? (field.label_es || field.label_en) : field.label_en;
@@ -570,7 +685,10 @@ function buildApplicationEmailBody(data, appType, assignment) {
       const label = isSpanish()
         ? (field.label_es || field.label_en || field.label || field.id)
         : (field.label_en || field.label || field.id);
-      lines.push(`${label}: ${data[field.id] || ""}`);
+
+      const rawVal = data[field.id];
+      const val = valueToText(rawVal);
+      lines.push(`${label}: ${val}`);
     });
 
     lines.push("");
@@ -585,7 +703,7 @@ function submitApplication() {
 
   wizardConfig.steps.forEach((step) => {
     step.fields.forEach((field) => {
-      data[field.id] = formData[field.id] || "";
+      data[field.id] = getFieldValue(field);
     });
   });
 
