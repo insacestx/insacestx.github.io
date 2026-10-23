@@ -87,6 +87,16 @@
     "description_es": "Protección para su unidad de condominio."
   },
 
+  "bundle": {
+  "name_en": "Bundle & Save",
+  "name_es": "Paquete y Ahorre",
+  "category": "personal",
+  "config": "/applications/config/bundle-config.js",
+  "page": "/wizard.html?app=bundle",
+  "icon": "/Icons/icon-bundle-aces.png",
+  "description_en": "Combine multiple policies and let ACES shop the best package rates.",
+  "description_es": "Combine múltiples pólizas y permita que ACES busque las mejores tarifas de paquete."
+},
   "flood": {
     "name_en": "Flood Insurance",
     "name_es": "Seguro contra Inundaciones",
