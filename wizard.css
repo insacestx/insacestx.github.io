@@ -28,6 +28,17 @@
   margin: 0 auto;
 }
 
+/* New: hero image in wizard top section */
+.wizard-hero-image {
+  display: block;
+  width: min(100%, 760px);
+  height: auto;
+  margin: 0 auto 1rem;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
 .wizard-hero h1 {
   font-size: 2.2rem;
   margin-bottom: 8px;
@@ -137,7 +148,8 @@
 
 /* INPUTS */
 .wizard-field input,
-.wizard-field select {
+.wizard-field select,
+.wizard-field textarea {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid var(--aces-border, rgba(212, 0, 0, 0.12));
@@ -149,7 +161,8 @@
 }
 
 .wizard-field input:focus,
-.wizard-field select:focus {
+.wizard-field select:focus,
+.wizard-field textarea:focus {
   border-color: var(--aces-primary, #d40000);
   box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.12);
 }
@@ -234,12 +247,6 @@
 }
 
 /* ============================================================
-   REUSABLE APPLICATION HERO (ALL /applications/*.html)
-   Universal default image set below.
-   Optional per-page override:
-   :root { --app-hero-image: url("/images/your-image-name.png"); }
-============================================================ */
-/* ============================================================
    REUSABLE APPLICATION HERO (FULL BACKGROUND IMAGE)
    Text aligned right
 ============================================================ */
@@ -253,8 +260,8 @@
   /* full background image */
   background-image: var(--app-hero-image, url("/Icons/heroservices/hero-wizard-application.png"));
   background-repeat: no-repeat;
-  background-size: cover;      /* keep as full background */
-  background-position: center; /* center image */
+  background-size: cover;
+  background-position: center;
 }
 
 /* dark overlay for readability */
@@ -278,7 +285,7 @@
   min-height: 260px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;  /* move text to right */
+  justify-content: flex-end;
   padding: 1.25rem 1.5rem;
 }
 
@@ -288,7 +295,7 @@
   max-width: 560px;
   width: 100%;
   text-align: left;
-  margin-left: auto; /* anchor to right side */
+  margin-left: auto;
 }
 
 .app-selected-content h1 {
@@ -313,11 +320,20 @@
 
   .app-selected-overlay {
     min-height: 230px;
-    justify-content: flex-start; /* easier reading on small screens */
+    justify-content: flex-start;
     padding: 1rem;
   }
 
   .app-selected-content {
     max-width: 100%;
+  }
+}
+
+/* Small hero image adjustment */
+@media (max-width: 768px) {
+  .wizard-hero-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 0.85rem;
   }
 }
