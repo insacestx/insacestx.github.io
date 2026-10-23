@@ -22,14 +22,23 @@ const bundleConfig = {
           ]
         },
         {
-          id: "policyTypes",
-          type: "text",
-          required: true,
-          label_en: "Which policy types are you interested in?",
-          label_es: "¿Qué tipos de póliza le interesan?",
-          placeholder_en: "Example: Auto, Homeowners, Umbrella",
-          placeholder_es: "Ejemplo: Auto, Casa, Umbrella"
-        }
+  id: "policyTypes",
+  type: "checkbox-group",
+  required: true,
+  minSelected: 2,
+  label_en: "Which policy types are you interested in?",
+  label_es: "¿Qué tipos de póliza le interesan?",
+  options: [
+    { value: "auto", label_en: "Auto", label_es: "Auto" },
+    { value: "homeowners", label_en: "Homeowners", label_es: "Casa" },
+    { value: "renters", label_en: "Renters", label_es: "Inquilinos" },
+    { value: "condo", label_en: "Condo", label_es: "Condominio" },
+    { value: "motorcycle", label_en: "Motorcycle", label_es: "Motocicleta" },
+    { value: "boat", label_en: "Boat", label_es: "Barco" },
+    { value: "rv", label_en: "RV", label_es: "RV" },
+    { value: "umbrella", label_en: "Umbrella", label_es: "Umbrella" }
+  ]
+}
       ]
     },
 
