@@ -112,11 +112,13 @@
     const pool = getPool(nLang);
 
     if (!pool.length) {
+      const assignedAt = new Date().toISOString();
       return {
         email: OFFICE_EMAIL,
         lang: nLang,
         assignedIndex: -1,
-        nextIndex: -1
+        nextIndex: -1,
+        assignedAt
       };
     }
 
@@ -126,15 +128,16 @@
     const assignedIndex = current;
     const email = String(pool[assignedIndex] || OFFICE_EMAIL).toLowerCase();
     const nextIndex = (assignedIndex + 1) % pool.length;
+    const assignedAt = new Date().toISOString();
 
     state[idxKey] = nextIndex;
     state.lastAssignedEmail = email;
     state.lastAssignedLang = nLang;
-    state.lastAssignedAt = new Date().toISOString();
+    state.lastAssignedAt = assignedAt;
     state.lastAction = "assigned";
     writeState(state);
 
-    return { email, lang: nLang, assignedIndex, nextIndex };
+    return { email, lang: nLang, assignedIndex, nextIndex, assignedAt };
   }
 
   function skipNext(lang = "en") {
