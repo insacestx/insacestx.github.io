@@ -87,7 +87,11 @@ function getText(key) {
     configError: es ? "Error al cargar la configuración de la solicitud." : "Error loading application configuration.",
     noAppType: es ? "No se especificó el tipo de solicitud." : "No application type specified.",
     loading: es ? "Cargando solicitud..." : "Loading application...",
-    minSelectPrefix: es ? "Seleccione al menos" : "Select at least"
+    minSelectPrefix: es ? "Seleccione al menos" : "Select at least",
+    submitPreparing: es ? "Preparando su correo..." : "Preparing your email...",
+    submitContinueHint: es
+      ? "Si no se abre su correo, revise su bloqueador de ventanas emergentes."
+      : "If your email app does not open, check your popup blocker."
   };
   return map[key] || key;
 }
@@ -728,6 +732,7 @@ function submitApplication() {
   const body = buildApplicationEmailBody(data, appType, assignment);
 
   if (!agentEmail) {
+    // Keep this alert for genuine error conditions only
     alert(isSpanish() ? "No hay correo de agente disponible." : "No agent email available.");
     return;
   }
@@ -738,15 +743,28 @@ function submitApplication() {
     mailto = `mailto:${encodeURIComponent(agentEmail)}?cc=${encodeURIComponent(OFFICE_EMAIL)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
+  // Replace surprise popup with inline, non-blocking status message
+  const container = document.getElementById("wizard-container");
+  if (container) {
+    container.innerHTML = `
+      <div style="background:#fff; border:1px solid #fee2e2; border-radius:12px; padding:28px; max-width:680px; margin:0 auto; text-align:center;">
+        <h3 style="margin:0 0 10px; color:#111827;">
+          ${getText("submitPreparing")}
+        </h3>
+        <p style="margin:0; color:#6b7280;">
+          ${getText("submitContinueHint")}
+        </p>
+      </div>
+    `;
+  }
+
+  // Trigger mail client
   window.location.href = mailto;
 
-  alert(
-    isSpanish()
-      ? "¡Su solicitud fue preparada y dirigida al agente asignado!"
-      : "Your application was prepared and routed to the assigned agent!"
-  );
-
-  window.location.href = applicationsHomeUrl();
+  // Return to applications page without popup
+  setTimeout(() => {
+    window.location.href = applicationsHomeUrl();
+  }, 900);
 }
 
 /* Go back to applications page */
