@@ -18,8 +18,8 @@
   <!-- GLOBAL LANGUAGE + NAV -->
   <script src="/global.js" defer></script>
 
-  <!-- UNIVERSAL WIZARD ENGINE -->
-  <script src="/wizard.js" type="module" defer></script>
+  <!-- UNIVERSAL WIZARD ENGINE (cache-busted) -->
+  <script src="/wizard.js?v=20261027-1" type="module" defer></script>
 </head>
 
 <body>
@@ -29,32 +29,32 @@
 
     <!-- HERO -->
     <section class="wizard-hero wizard-hero--bg">
-  <div class="wizard-hero-overlay">
-    <div class="wizard-hero-content">
-      <h1
-        data-en="Insurance Application Wizard"
-        data-es="Asistente de Solicitud de Seguro">
-        Insurance Application Wizard
-      </h1>
+      <div class="wizard-hero-overlay">
+        <div class="wizard-hero-content">
+          <h1
+            data-en="Insurance Application Wizard"
+            data-es="Asistente de Solicitud de Seguro">
+            Insurance Application Wizard
+          </h1>
 
-      <p
-        data-en="Complete each step to submit your application."
-        data-es="Complete cada paso para enviar su solicitud.">
-        Complete each step to submit your application.
-      </p>
+          <p
+            data-en="Complete each step to submit your application."
+            data-es="Complete cada paso para enviar su solicitud.">
+            Complete each step to submit your application.
+          </p>
 
-      <button
-        type="button"
-        class="wizard-back-btn wizard-back-btn--hero"
-        onclick="goBackToApplications()"
-        data-en="← Back to Applications"
-        data-es="← Volver a Solicitudes">
-        ← Back to Applications
-      </button>
-    </div>
-  </div>
-</section>
-    
+          <button
+            type="button"
+            class="wizard-back-btn wizard-back-btn--hero"
+            onclick="goBackToApplications()"
+            data-en="← Back to Applications"
+            data-es="← Volver a Solicitudes">
+            ← Back to Applications
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- PROGRESS BAR -->
     <div class="wizard-progress-wrap">
       <div id="wizard-progress"></div>
