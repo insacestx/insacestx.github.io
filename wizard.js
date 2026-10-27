@@ -710,16 +710,33 @@ function submitApplication() {
   const OFFICE_EMAIL = "office@insaces.com";
   const lang = normalizeLang(getCurrentLang());
 
-  // STRICT SINGLE-ASSIGNMENT: use assignment passed from applications page.
-  // If missing, do NOT rotate RR here; route to office fallback.
+  // SINGLE-ASSIGNMENT STRATEGY:
+  // 1) Prefer URL assignment if present (compat with older entry flow)
+  // 2) Else assign once at submit-time from RR engine
+  // 3) Else fallback to office
   const urlAssignment = getAssignmentFromUrl();
-  const assignment = urlAssignment || {
-    email: OFFICE_EMAIL,
-    lang,
-    assignedIndex: -1,
-    assignedAt: new Date().toISOString(),
-    source: "fallback-office"
-  };
+  let assignment = null;
+
+  if (urlAssignment) {
+    assignment = { ...urlAssignment, source: "url" };
+  } else if (window.acesRoundRobin?.getNextAssignment) {
+    const rr = window.acesRoundRobin.getNextAssignment(lang) || {};
+    assignment = {
+      email: String(rr.email || OFFICE_EMAIL).trim().toLowerCase(),
+      lang: normalizeLang(rr.lang || lang),
+      assignedIndex: Number.isInteger(rr.assignedIndex) ? rr.assignedIndex : -1,
+      assignedAt: rr.assignedAt || new Date().toISOString(),
+      source: "submit-rr"
+    };
+  } else {
+    assignment = {
+      email: OFFICE_EMAIL,
+      lang,
+      assignedIndex: -1,
+      assignedAt: new Date().toISOString(),
+      source: "fallback-office"
+    };
+  }
 
   const agentEmail = String(assignment?.email || "").trim().toLowerCase() || OFFICE_EMAIL;
   const appType = getAppType() || "application";
