@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const filterButtons = document.querySelectorAll(".apps-filter-btn");
   const searchInput = document.getElementById("appSearch");
+  const cardContainer = document.getElementById("app-card-container");
   const cards = () => Array.from(document.querySelectorAll(".app-card"));
 
   const OFFICE_EMAIL = "office@insaces.com";
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Only assign Round Robin for actual application flow destinations
+  // Only assign Round Robin for wizard flow destinations
   function isApplicationFlowHref(href) {
     if (!href) return false;
 
@@ -71,13 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
       path = cleanHref;
     }
 
-    // Match real application routes only
-    return (
-      path.endsWith("/wizard.html") ||
-      path.includes("/applications/") ||
-      cleanHref.startsWith("applications/") ||
-      cleanHref.includes("wizard.html")
-    );
+    // Strict wizard route match
+    return path.endsWith("/wizard.html") || cleanHref.includes("wizard.html");
   }
 
   function applyFilters() {
@@ -87,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const lang = getLang();
     const isEs = lang === "es";
 
-    cards().forEach(card => {
+    cards().forEach((card) => {
       const cat = card.getAttribute("data-category") || "";
       const name = (isEs ? card.getAttribute("data-name-es") : card.getAttribute("data-name-en")) || "";
       const desc = (isEs ? card.getAttribute("data-desc-es") : card.getAttribute("data-desc-en")) || "";
@@ -102,9 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  filterButtons.forEach(btn => {
+  filterButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      filterButtons.forEach(b => b.classList.remove("active"));
+      filterButtons.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       applyFilters();
     });
@@ -116,16 +112,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Attach routing to application links only
-  cards().forEach(card => {
-    const link = card.querySelector("a[href]");
-    if (!link) return;
+  // Delegated routing handler (works for dynamically rendered cards)
+  if (cardContainer) {
+    cardContainer.addEventListener("click", (e) => {
+      const link = e.target.closest("a[href]");
+      if (!link || !cardContainer.contains(link)) return;
 
-    link.addEventListener("click", (e) => {
       const href = link.getAttribute("href");
       if (!href) return;
 
-      // Do NOT consume RR turn for non-application links
+      // Do NOT consume RR turn for non-wizard links
       if (!isApplicationFlowHref(href)) return;
 
       e.preventDefault();
@@ -134,8 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const routedUrl = withRoutingParams(href, assignment);
       window.location.href = routedUrl;
     });
-  });
+  }
 
-  // Small delay to ensure cards are rendered before first filter
+  // Ensure first render pass applies filters after cards load
   setTimeout(applyFilters, 200);
+
+  // Optional: keep filters synced if language changes in same tab
+  window.addEventListener("aces:language-changed", applyFilters);
+  window.addEventListener("storage", (e) => {
+    if (e.key === "acesLang") applyFilters();
+  });
 });
