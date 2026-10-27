@@ -23,12 +23,19 @@ function getAssetPath(base, p) {
   return p.startsWith("/") ? `${base}${p}` : `${base}/${p}`;
 }
 
+function buildAppHref(base, page) {
+  if (!page || typeof page !== "string") return null;
+  const clean = page.trim();
+  if (!clean) return null;
+  return clean.startsWith("/") ? `${base}${clean}` : `${base}/${clean}`;
+}
+
 function buildCards(container, manifest) {
   const base = getBasePath();
   const currentLang = getCurrentLang();
   const isEs = currentLang === "es";
 
-  const apps = Object.keys(manifest).map(id => ({ id, ...manifest[id] }));
+  const apps = Object.keys(manifest).map((id) => ({ id, ...manifest[id] }));
 
   if (!apps.length) {
     container.innerHTML = `<div class="apps-empty">
@@ -39,7 +46,7 @@ function buildCards(container, manifest) {
 
   container.innerHTML = "";
 
-  apps.forEach(app => {
+  apps.forEach((app) => {
     const card = document.createElement("article");
     card.className = "app-card";
     card.setAttribute("data-category", app.category || "");
@@ -97,8 +104,24 @@ function buildCards(container, manifest) {
 
     const btn = document.createElement("a");
     btn.className = "app-card-btn";
-    btn.href = `${base}${app.page}`;
+
+    const href = buildAppHref(base, app.page);
+    if (href) {
+      btn.href = href;
+    } else {
+      btn.href = "#";
+      btn.setAttribute("aria-disabled", "true");
+      btn.style.pointerEvents = "none";
+      btn.style.opacity = "0.6";
+    }
+
     btn.textContent = isEs ? "Comenzar solicitud" : "Start application";
+    btn.setAttribute(
+      "aria-label",
+      isEs
+        ? `Comenzar solicitud: ${app.name_es || app.name_en || "Aplicación"}`
+        : `Start application: ${app.name_en || app.name_es || "Application"}`
+    );
 
     footer.appendChild(chip);
     footer.appendChild(btn);
@@ -110,7 +133,7 @@ function buildCards(container, manifest) {
     container.appendChild(card);
   });
 
-  // If your applications.js exposes a filter/search refresh hook, call it safely:
+  // If applications.js exposes a filter/search refresh hook, call it safely.
   if (typeof window.refreshApplicationsFilters === "function") {
     window.refreshApplicationsFilters();
   }
@@ -123,7 +146,7 @@ async function renderCards() {
   try {
     if (!__appsManifestCache) {
       const base = getBasePath();
-      const response = await fetch(`${base}/applications/manifest.json`);
+      const response = await fetch(`${base}/applications/manifest.json`, { cache: "no-store" });
       if (!response.ok) throw new Error(`Failed to load manifest: ${response.status}`);
       __appsManifestCache = await response.json();
     }
