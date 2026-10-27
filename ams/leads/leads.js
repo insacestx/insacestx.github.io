@@ -645,7 +645,7 @@
   }
 
   // =========================
-  // EMAIL (LOCAL / NO CLOUDFLARE)
+  // EMAIL (FORMSUBMIT / NO MAILTO)
   // =========================
   function buildLeadEmailSummary(lead) {
     return [
@@ -675,11 +675,58 @@
       return;
     }
 
+    const OFFICE_EMAIL = "office@insaces.com";
+    const assignedEmail = String(lead.assignedEmail || "").trim().toLowerCase();
     const subject = `New Lead Assigned: ${lead.leadNumber || lead.id} - ${lead.name || "Customer"}`;
-    const body = buildLeadEmailSummary(lead);
+    const summary = buildLeadEmailSummary(lead);
 
-    const mailto = `mailto:${encodeURIComponent(lead.assignedEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    const btn = document.querySelector(`[data-email-owner="${leadId}"]`);
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Sending...";
+    }
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = `https://formsubmit.co/${encodeURIComponent(OFFICE_EMAIL)}`;
+    form.style.display = "none";
+
+    function addField(name, value) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value == null ? "" : String(value);
+      form.appendChild(input);
+    }
+
+    addField("_subject", subject);
+    addField("_captcha", "false");
+    addField("_template", "table");
+    addField("_next", `${window.location.origin}/ams/leads/leads.html`);
+    addField("_to", OFFICE_EMAIL);
+    addField("_cc", assignedEmail !== OFFICE_EMAIL ? assignedEmail : "");
+
+    if (lead.email) addField("_replyto", lead.email);
+
+    addField("Lead Number", lead.leadNumber || "—");
+    addField("Lead Name", lead.name || `${lead.firstName || ""} ${lead.lastName || ""}`.trim() || "—");
+    addField("Assigned Agent Email", assignedEmail || "—");
+    addField("Customer Email", lead.email || "—");
+    addField("Customer Phone", lead.phone || "—");
+    addField("Language", (lead.language || "en").toUpperCase());
+    addField("Line of Business", lead.lineOfBusiness || "—");
+    addField("Stage", labelStatus(lead.status) || "—");
+    addField("Quoted Premium", lead.quotedPremium ? `$${Number(lead.quotedPremium).toFixed(2)}` : "—");
+    addField("Carrier", lead.carrier || "—");
+    addField("Effective Date", lead.effectiveDate || "—");
+    addField("Policy Number", lead.policyNumber || "—");
+    addField("Notes", lead.notes || "—");
+    addField("AMS Link", `${window.location.origin}/ams/leads/leads.html?leadId=${encodeURIComponent(lead.id)}`);
+
+    addField("Lead Summary", summary);
+
+    document.body.appendChild(form);
+    form.submit();
   }
 
   // =========================
