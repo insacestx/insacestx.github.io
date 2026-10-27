@@ -276,6 +276,7 @@
   <input type="hidden" name="_captcha" value="false">
   <input type="hidden" name="_next" value="https://insacestx.github.io/thank-you.html">
   <input type="hidden" name="_subject" value="New Quick Quote Request">
+  <input type="hidden" name="_replyto" id="replyToField" value="">
   <input type="hidden" id="rrEmail" name="rrEmail">
   <input type="hidden" id="routingLanguage" name="routingLanguage" value="en">
 
@@ -572,6 +573,8 @@
 
     const ccField = form.querySelector("#ccField");
     const rrField = form.querySelector("#rrEmail");
+    const replyToField = form.querySelector("#replyToField");
+    const emailInput = form.querySelector('input[name="Email"]');
 
     const assignedAgentEmail = form.querySelector("#assignedAgentEmail");
     const rrLangField = form.querySelector("#roundRobinLang");
@@ -612,6 +615,11 @@
 
       if (routing) routing.value = lang;
       if (preferred) preferred.value = lang;
+
+      // Set reply-to for mailbox workflow
+      if (replyToField && emailInput) {
+        replyToField.value = String(emailInput.value || "").trim();
+      }
 
       if (!window.acesRoundRobin || typeof window.acesRoundRobin.getNextAssignment !== "function") {
         // Safe fallback if engine isn't available
