@@ -762,8 +762,10 @@ function submitApplication() {
 
   const postForm = document.createElement("form");
   postForm.method = "POST";
-  postForm.action = `https://formsubmit.co/${encodeURIComponent(OFFICE_EMAIL)}`;
+  postForm.action = `https://formsubmit.co/${OFFICE_EMAIL}`; // IMPORTANT: do not encode @
   postForm.style.display = "none";
+  postForm.acceptCharset = "UTF-8";
+  postForm.noValidate = true;
 
   function addField(name, value) {
     const input = document.createElement("input");
