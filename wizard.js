@@ -1,6 +1,6 @@
 /* ==========================================
    ACES 2026 UNIVERSAL WIZARD ENGINE (BILINGUAL)
-   CLEAN BUILD (NO CLOUDFLARE)
+   FORM SUBMIT BUILD (NO MAILTO)
 ========================================== */
 
 let wizardConfig = null;
@@ -87,11 +87,7 @@ function getText(key) {
     configError: es ? "Error al cargar la configuración de la solicitud." : "Error loading application configuration.",
     noAppType: es ? "No se especificó el tipo de solicitud." : "No application type specified.",
     loading: es ? "Cargando solicitud..." : "Loading application...",
-    minSelectPrefix: es ? "Seleccione al menos" : "Select at least",
-    submitPreparing: es ? "Preparando su correo..." : "Preparing your email...",
-    submitContinueHint: es
-      ? "Si no se abre su correo, revise su bloqueador de ventanas emergentes."
-      : "If your email app does not open, check your popup blocker."
+    minSelectPrefix: es ? "Seleccione al menos" : "Select at least"
   };
   return map[key] || key;
 }
@@ -701,7 +697,7 @@ function buildApplicationEmailBody(data, appType, assignment) {
   return lines.join("\n");
 }
 
-/* Submit */
+/* Submit via FormSubmit (NO mailto) */
 function submitApplication() {
   const data = {};
 
@@ -726,45 +722,86 @@ function submitApplication() {
   };
 
   const agentEmail = String(assignment?.email || "").trim().toLowerCase() || OFFICE_EMAIL;
-
   const appType = getAppType() || "application";
-  const subject = `New ${appType} application - ${data.fullName || data.name || data.firstName || "Customer"}`;
+
+  const customerName =
+    data.fullName || data.name || data.firstName || data.contactName || "Customer";
+  const subject = `New ${appType} application - ${customerName}`;
   const body = buildApplicationEmailBody(data, appType, assignment);
 
-  if (!agentEmail) {
-    // Keep this alert for genuine error conditions only
-    alert(isSpanish() ? "No hay correo de agente disponible." : "No agent email available.");
-    return;
-  }
-
-  let mailto = `mailto:${encodeURIComponent(agentEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-  if (agentEmail !== OFFICE_EMAIL) {
-    mailto = `mailto:${encodeURIComponent(agentEmail)}?cc=${encodeURIComponent(OFFICE_EMAIL)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  }
-
-  // Replace surprise popup with inline, non-blocking status message
   const container = document.getElementById("wizard-container");
   if (container) {
     container.innerHTML = `
       <div style="background:#fff; border:1px solid #fee2e2; border-radius:12px; padding:28px; max-width:680px; margin:0 auto; text-align:center;">
         <h3 style="margin:0 0 10px; color:#111827;">
-          ${getText("submitPreparing")}
+          ${isSpanish() ? "Enviando su solicitud..." : "Submitting your application..."}
         </h3>
         <p style="margin:0; color:#6b7280;">
-          ${getText("submitContinueHint")}
+          ${isSpanish() ? "Por favor espere un momento." : "Please wait a moment."}
         </p>
       </div>
     `;
   }
 
-  // Trigger mail client
-  window.location.href = mailto;
+  const postForm = document.createElement("form");
+  postForm.method = "POST";
+  postForm.action = `https://formsubmit.co/${encodeURIComponent(OFFICE_EMAIL)}`;
+  postForm.style.display = "none";
 
-  // Return to applications page without popup
-  setTimeout(() => {
-    window.location.href = applicationsHomeUrl();
-  }, 900);
+  function addField(name, value) {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value == null ? "" : String(value);
+    postForm.appendChild(input);
+  }
+
+  // FormSubmit control fields
+  addField("_subject", subject);
+  addField("_captcha", "false");
+  addField("_next", "https://insacestx.github.io/thank-you.html");
+  addField("_template", "table");
+
+  // Recipient strategy: office primary, agent cc
+  addField("_to", OFFICE_EMAIL);
+  addField("_cc", agentEmail !== OFFICE_EMAIL ? agentEmail : "");
+
+  // Optional reply-to if present
+  const replyEmail =
+    data.email ||
+    data.Email ||
+    data.contactEmail ||
+    data.clientEmail ||
+    "";
+  if (replyEmail) addField("_replyto", replyEmail);
+
+  // Top metadata
+  addField("Application Type", appType);
+  addField("Submission Language", lang.toUpperCase());
+  addField("Submitted At", new Date().toISOString());
+
+  // Round robin metadata
+  addField("RR Assigned Agent Email", agentEmail);
+  addField("RR Lang Pool", assignment?.lang || lang);
+  addField(
+    "RR Assigned Index",
+    Number.isInteger(assignment?.assignedIndex) ? assignment.assignedIndex : ""
+  );
+  addField("RR Assigned At", assignment?.assignedAt || new Date().toISOString());
+  addField("RR Source", assignment?.source || "unknown");
+  addField("RR Mode", "office-primary-agent-cc");
+
+  // Flattened field payload
+  Object.entries(data).forEach(([k, v]) => {
+    const val = Array.isArray(v) ? v.join(", ") : (v ?? "");
+    addField(k, val);
+  });
+
+  // Human-readable summary
+  addField("Application Summary", body);
+
+  document.body.appendChild(postForm);
+  postForm.submit();
 }
 
 /* Go back to applications page */
