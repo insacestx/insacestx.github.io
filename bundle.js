@@ -3,7 +3,7 @@
    - Multi-step wizard
    - Dynamic sections for selected policies
    - Unified Round Robin routing (shared with whole site)
-   - No Cloudflare
+   - FormSubmit POST delivery (no mailto)
 ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const steps = document.querySelectorAll(".form-step");
   const indicators = document.querySelectorAll(".wizard-step");
 
+  const OFFICE_EMAIL = "office@insaces.com";
+
   function normalizeLang(v) {
     const x = String(v || "").trim().toLowerCase();
     return x === "es" || x === "spanish" ? "es" : "en";
@@ -23,33 +25,62 @@ document.addEventListener("DOMContentLoaded", () => {
     return normalizeLang(localStorage.getItem("acesLang") || "en");
   }
 
-  function assignRoundRobinEmail() {
-    if (!form) return "";
+  function ensureHiddenInput(name, value = "") {
+    if (!form) return null;
+    let input = form.querySelector(`input[name="${name}"]`);
+    if (!input) {
+      input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      form.appendChild(input);
+    }
+    input.value = value;
+    return input;
+  }
+
+  /**
+   * Routing mode:
+   * - Primary recipient remains OFFICE via form action.
+   * - Assigned agent is copied via _cc.
+   * - We still store rr metadata fields for audit/tracking.
+   */
+  function assignRoundRobinForSubmit() {
+    if (!form) return { email: OFFICE_EMAIL, lang: getCurrentLang(), assignedIndex: -1 };
 
     const lang = getCurrentLang();
-    let target = "";
+    let assignment = null;
 
-    // Shared global RR engine (single source of truth)
     if (window.acesRoundRobin?.getNextAssignment) {
-      const next = window.acesRoundRobin.getNextAssignment(lang);
-      target = next?.email || "";
+      assignment = window.acesRoundRobin.getNextAssignment(lang);
     }
 
-    // Fallback only if RR engine isn't available
-    if (!target) {
-      target = "office@insaces.com";
-    }
+    const agentEmail = String(assignment?.email || "").toLowerCase().trim() || OFFICE_EMAIL;
+    const assignedIndex = Number.isInteger(assignment?.assignedIndex) ? assignment.assignedIndex : -1;
+    const assignedAt = assignment?.assignedAt || new Date().toISOString();
 
-    let hidden = form.querySelector("input[name='_to']");
-    if (!hidden) {
-      hidden = document.createElement("input");
-      hidden.type = "hidden";
-      hidden.name = "_to";
-      form.appendChild(hidden);
-    }
-    hidden.value = target;
+    // Keep office as primary destination (set in HTML form action)
+    // Agent gets CC only if not office.
+    ensureHiddenInput("_cc", agentEmail !== OFFICE_EMAIL ? agentEmail : "");
 
-    return target;
+    // Optional safety if your form HTML has/uses _to elsewhere:
+    // force _to to office so primary recipient is consistent
+    ensureHiddenInput("_to", OFFICE_EMAIL);
+
+    // FormSubmit helpers
+    ensureHiddenInput("_captcha", "false");
+    ensureHiddenInput("_next", "https://insacestx.github.io/thank-you.html");
+    ensureHiddenInput("_subject", "New Bundle Quote Request");
+
+    // Round-robin/audit metadata included in email body table
+    ensureHiddenInput("rrEmail", agentEmail);
+    ensureHiddenInput("routingLanguage", lang);
+    ensureHiddenInput("assignedAgentEmail", agentEmail);
+    ensureHiddenInput("roundRobinLang", lang);
+    ensureHiddenInput("roundRobinIndex", assignedIndex >= 0 ? String(assignedIndex) : "");
+    ensureHiddenInput("roundRobinAssignedAt", assignedAt);
+    ensureHiddenInput("roundRobinMode", "office-primary-agent-cc");
+
+    return { email: agentEmail, lang, assignedIndex, assignedAt };
   }
 
   /* ---------- Dynamic Sections ---------- */
@@ -147,55 +178,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ---------- Email ---------- */
-
-  function buildBundleEmailBody(entries, assignedEmail) {
-    const lines = [
-      "New Bundle Quote Request",
-      `Assigned Agent: ${assignedEmail || "—"}`,
-      `Language: ${getCurrentLang().toUpperCase()}`,
-      `Submitted At: ${new Date().toLocaleString()}`,
-      "",
-      "----- Form Data -----"
-    ];
-
-    Object.entries(entries).forEach(([k, v]) => {
-      lines.push(`${k}: ${v}`);
-    });
-
-    return lines.join("\n");
-  }
-
   /* ---------- Form Submit ---------- */
 
   if (form) {
     form.addEventListener("submit", (e) => {
-      e.preventDefault();
+      // IMPORTANT: do NOT prevent default; allow normal POST to FormSubmit.
+      const assignment = assignRoundRobinForSubmit();
 
-      const assignedEmail = assignRoundRobinEmail();
-      const formData = new FormData(form);
-      const entries = Object.fromEntries(formData.entries());
-
-      console.log("Bundle Quote Submitted:", entries);
-
-      if (!assignedEmail) {
+      // Optional: lightweight validation guard
+      if (!assignment?.email) {
+        e.preventDefault();
         alert("No assigned agent email found. Please try again.");
         return;
       }
 
-      const subject = `New Bundle Quote - ${entries.fullName || entries.name || entries.email || "Customer"}`;
-      const body = buildBundleEmailBody(entries, assignedEmail);
-
-      const mailto = `mailto:${encodeURIComponent(assignedEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailto;
-
-      alert("Your bundle quote request has been submitted! An ACES agent will contact you shortly.");
-
-      form.reset();
-      if (detailsContainer) detailsContainer.innerHTML = "";
-      if (coverageContainer) coverageContainer.innerHTML = "";
-      checks.forEach(c => (c.checked = false));
-      showStep(1);
+      // Helpful debug log (can remove in production)
+      const formData = new FormData(form);
+      const entries = Object.fromEntries(formData.entries());
+      console.log("Bundle Quote POST (FormSubmit):", entries);
     });
   }
 
