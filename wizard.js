@@ -106,7 +106,8 @@ function getBasePath() {
 }
 
 function appUrl(pathFromRoot) {
-  return `${getBasePath()}/${String(pathFromRoot || "").replace(/^\/+/, "")}`.replace(/\/{2,}/g, "/");
+  const clean = String(pathFromRoot || "").replace(/^\/+/, "");
+  return `${window.location.origin}${getBasePath()}/${clean}`;
 }
 
 /* Safe navigation helper */
