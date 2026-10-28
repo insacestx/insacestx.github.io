@@ -92,15 +92,26 @@ function getText(key) {
   return map[key] || key;
 }
 
-/* Path helper for GitHub Pages project/user site compatibility */
+/* Path helpers for GitHub Pages project/user site compatibility */
+function isProjectSite() {
+  const segs = (window.location.pathname || "").split("/").filter(Boolean);
+  return window.location.hostname.endsWith(".github.io") && segs.length > 0 && segs[0] !== "index.html";
+}
+
 function getBasePath() {
-  const path = window.location.pathname || "";
-  return path.includes("insacestx.github.io") ? "/insacestx.github.io" : "";
+  if (!window.location.hostname.endsWith(".github.io")) return "";
+  if (!isProjectSite()) return "";
+  const segs = (window.location.pathname || "").split("/").filter(Boolean);
+  return `/${segs[0]}`;
+}
+
+function appUrl(pathFromRoot) {
+  return `${getBasePath()}/${String(pathFromRoot || "").replace(/^\/+/, "")}`.replace(/\/{2,}/g, "/");
 }
 
 /* Safe navigation helper */
 function applicationsHomeUrl() {
-  return `${getBasePath()}/applications.html`;
+  return appUrl("applications.html");
 }
 
 /* Detect application type */
@@ -217,9 +228,7 @@ function showError(appType, errorMessage) {
 /* Load config — MANIFEST‑DRIVEN */
 async function loadConfig(appType) {
   try {
-    const base = getBasePath();
-
-    const manifestUrl = `${base}/applications/manifest.json`;
+    const manifestUrl = appUrl("applications/manifest.json");
     const manifestRes = await fetch(manifestUrl, { cache: "no-store" });
     if (!manifestRes.ok) {
       throw new Error(`Manifest fetch failed: ${manifestRes.status} ${manifestRes.statusText} (${manifestUrl})`);
@@ -236,11 +245,7 @@ async function loadConfig(appType) {
       throw new Error(`Missing/invalid config path for app '${appType}'.`);
     }
 
-    let importUrl = configPath;
-    if (!importUrl.startsWith("/") && !importUrl.startsWith("./")) {
-      importUrl = "./" + importUrl;
-    }
-
+    const importUrl = new URL(configPath, window.location.href).href;
     const module = await import(importUrl);
 
     if (!module || !module.default) {
@@ -778,7 +783,7 @@ function submitApplication() {
   // FormSubmit control fields
   addField("_subject", subject);
   addField("_captcha", "false");
-  addField("_next", "https://insacestx.github.io/thank-you.html");
+  addField("_next", appUrl("thank-you.html"));
   addField("_template", "table");
 
   // Recipient strategy: office primary, agent cc
