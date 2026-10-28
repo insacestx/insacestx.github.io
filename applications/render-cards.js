@@ -33,7 +33,7 @@ function getCategoryLabel(cat, isEs) {
 function getAssetPath(p) {
   if (!p) return appUrl("img/icons/default.svg");
   if (p.startsWith("http://") || p.startsWith("https://")) return p;
-  if (p.startsWith("/")) return `${getBasePath()}${p}`;
+  if (p.startsWith("/")) return `${window.location.origin}${getBasePath()}${p}`;
   return appUrl(p);
 }
 
