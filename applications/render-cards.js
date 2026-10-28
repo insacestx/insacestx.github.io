@@ -1,8 +1,19 @@
 let __appsManifestCache = null;
 
+function isProjectSite() {
+  const segs = window.location.pathname.split("/").filter(Boolean);
+  return window.location.hostname.endsWith(".github.io") && segs.length > 0 && segs[0] !== "index.html";
+}
+
 function getBasePath() {
-  const path = window.location.pathname;
-  return path.includes("insacestx.github.io") ? "/insacestx.github.io" : "";
+  if (!window.location.hostname.endsWith(".github.io")) return "";
+  if (!isProjectSite()) return "";
+  const segs = window.location.pathname.split("/").filter(Boolean);
+  return `/${segs[0]}`;
+}
+
+function appUrl(pathFromRoot) {
+  return `${getBasePath()}/${pathFromRoot}`.replace(/\/{2,}/g, "/");
 }
 
 function getCurrentLang() {
@@ -18,20 +29,51 @@ function getCategoryLabel(cat, isEs) {
   return (map[cat] && (isEs ? map[cat].es : map[cat].en)) || cat || "";
 }
 
-function getAssetPath(base, p) {
-  if (!p) return `${base}/img/icons/default.svg`;
-  return p.startsWith("/") ? `${base}${p}` : `${base}/${p}`;
+function getAssetPath(p) {
+  if (!p) return appUrl("img/icons/default.svg");
+  if (p.startsWith("http://") || p.startsWith("https://")) return p;
+  if (p.startsWith("/")) return `${getBasePath()}${p}`;
+  return appUrl(p);
 }
 
-function buildAppHref(base, page) {
-  if (!page || typeof page !== "string") return null;
+/**
+ * Normalize all app links to wizard route when needed:
+ * - If manifest page already includes app=..., preserve it
+ * - If it points to wizard.html without app param, add ?app=<appId>
+ * - If it points to legacy per-app html, convert to wizard.html?app=<appId>
+ */
+function buildAppHref(appId, page) {
+  const fallback = `wizard.html?app=${encodeURIComponent(appId)}`;
+
+  if (!page || typeof page !== "string" || !page.trim()) {
+    return appUrl(fallback);
+  }
+
   const clean = page.trim();
-  if (!clean) return null;
-  return clean.startsWith("/") ? `${base}${clean}` : `${base}/${clean}`;
+
+  let u;
+  try {
+    u = new URL(clean, window.location.href);
+  } catch {
+    return appUrl(fallback);
+  }
+
+  const pathname = (u.pathname || "").toLowerCase();
+  const file = pathname.split("/").pop() || "";
+
+  const isWizard = file === "wizard.html";
+  const hasAppParam = u.searchParams.has("app") && String(u.searchParams.get("app") || "").trim() !== "";
+
+  if (isWizard) {
+    if (!hasAppParam) u.searchParams.set("app", appId);
+    return u.toString();
+  }
+
+  // Any non-wizard app page gets normalized to wizard route
+  return appUrl(`wizard.html?app=${encodeURIComponent(appId)}`);
 }
 
 function buildCards(container, manifest) {
-  const base = getBasePath();
   const currentLang = getCurrentLang();
   const isEs = currentLang === "es";
 
@@ -63,12 +105,12 @@ function buildCards(container, manifest) {
 
     const icon = document.createElement("img");
     icon.className = "app-card-icon";
-    icon.src = getAssetPath(base, app.icon);
+    icon.src = getAssetPath(app.icon);
     icon.alt = isEs ? (app.name_es || app.name_en || "") : (app.name_en || app.name_es || "");
     icon.onerror = function () {
       if (!this.dataset.errorHandled) {
         this.dataset.errorHandled = "true";
-        this.src = `${base}/img/icons/default.svg`;
+        this.src = appUrl("img/icons/default.svg");
       }
     };
     iconWrap.appendChild(icon);
@@ -104,16 +146,7 @@ function buildCards(container, manifest) {
 
     const btn = document.createElement("a");
     btn.className = "app-card-btn";
-
-    const href = buildAppHref(base, app.page);
-    if (href) {
-      btn.href = href;
-    } else {
-      btn.href = "#";
-      btn.setAttribute("aria-disabled", "true");
-      btn.style.pointerEvents = "none";
-      btn.style.opacity = "0.6";
-    }
+    btn.href = buildAppHref(app.id, app.page);
 
     btn.textContent = isEs ? "Comenzar solicitud" : "Start application";
     btn.setAttribute(
@@ -133,7 +166,6 @@ function buildCards(container, manifest) {
     container.appendChild(card);
   });
 
-  // If applications.js exposes a filter/search refresh hook, call it safely.
   if (typeof window.refreshApplicationsFilters === "function") {
     window.refreshApplicationsFilters();
   }
@@ -145,8 +177,7 @@ async function renderCards() {
 
   try {
     if (!__appsManifestCache) {
-      const base = getBasePath();
-      const response = await fetch(`${base}/applications/manifest.json`, { cache: "no-store" });
+      const response = await fetch(appUrl("applications/manifest.json"), { cache: "no-store" });
       if (!response.ok) throw new Error(`Failed to load manifest: ${response.status}`);
       __appsManifestCache = await response.json();
     }
@@ -167,12 +198,10 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCards();
 });
 
-// Same-tab language change from global.js
 window.addEventListener("aces:language-changed", () => {
   renderCards();
 });
 
-// Cross-tab language change
 window.addEventListener("storage", (e) => {
   if (e.key === "acesLang") renderCards();
 });
