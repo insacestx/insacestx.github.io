@@ -13,7 +13,8 @@ function getBasePath() {
 }
 
 function appUrl(pathFromRoot) {
-  return `${getBasePath()}/${pathFromRoot}`.replace(/\/{2,}/g, "/");
+  const clean = String(pathFromRoot || "").replace(/^\/+/, "");
+  return `${window.location.origin}${getBasePath()}/${clean}`;
 }
 
 function getCurrentLang() {
