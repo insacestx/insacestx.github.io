@@ -11,30 +11,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const getLang = () => normalizeLang(localStorage.getItem("acesLang") || "en");
 
-  // Only detect wizard flow links; RR assignment is deferred to submit-time in wizard.js
   function isApplicationFlowHref(href) {
     if (!href) return false;
 
-    const cleanHref = String(href).trim().toLowerCase();
+    const cleanHref = String(href).trim();
+    const lower = cleanHref.toLowerCase();
 
     if (
-      cleanHref.startsWith("#") ||
-      cleanHref.startsWith("javascript:") ||
-      cleanHref.startsWith("mailto:") ||
-      cleanHref.startsWith("tel:")
+      lower.startsWith("#") ||
+      lower.startsWith("javascript:") ||
+      lower.startsWith("mailto:") ||
+      lower.startsWith("tel:")
     ) {
       return false;
     }
 
-    let path = "";
     try {
-      const u = new URL(cleanHref, window.location.origin);
-      path = (u.pathname || "").toLowerCase();
+      const u = new URL(cleanHref, window.location.href);
+      const path = (u.pathname || "").toLowerCase();
+      return path.endsWith("/wizard.html") || path.endsWith("wizard.html");
     } catch {
-      path = cleanHref;
+      return lower.includes("wizard.html");
     }
-
-    return path.endsWith("/wizard.html") || cleanHref.includes("wizard.html");
   }
 
   function applyFilters() {
@@ -71,6 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.addEventListener("input", applyFilters);
   }
 
+  // Keep routing simple: no RR assignment here.
+  // Wizard handles assignment exactly once at submit-time.
   if (cardContainer) {
     cardContainer.addEventListener("click", (e) => {
       const link = e.target.closest("a[href]");
@@ -78,14 +78,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const href = link.getAttribute("href");
       if (!href) return;
-
-      // Only intercept wizard routes, but do not consume RR here
       if (!isApplicationFlowHref(href)) return;
 
       e.preventDefault();
-      window.location.href = href;
+      const target = new URL(href, window.location.href);
+      window.location.href = target.toString();
     });
   }
+
+  // Optional hook for render-cards.js to trigger re-filter after rebuild
+  window.refreshApplicationsFilters = applyFilters;
 
   setTimeout(applyFilters, 200);
 
