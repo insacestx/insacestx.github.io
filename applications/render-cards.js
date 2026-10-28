@@ -1,20 +1,12 @@
 let __appsManifestCache = null;
 
-function isProjectSite() {
-  const segs = window.location.pathname.split("/").filter(Boolean);
-  return window.location.hostname.endsWith(".github.io") && segs.length > 0 && segs[0] !== "index.html";
-}
-
 function getBasePath() {
-  if (!window.location.hostname.endsWith(".github.io")) return "";
-  if (!isProjectSite()) return "";
-  const segs = window.location.pathname.split("/").filter(Boolean);
-  return `/${segs[0]}`;
+  return "";
 }
 
 function appUrl(pathFromRoot) {
   const clean = String(pathFromRoot || "").replace(/^\/+/, "");
-  return `${window.location.origin}${getBasePath()}/${clean}`;
+  return `${window.location.origin}/${clean}`;
 }
 
 function getCurrentLang() {
