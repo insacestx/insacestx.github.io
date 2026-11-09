@@ -1,85 +1,100 @@
 export default {
-    title_en: "Life Insurance Application",
-    title_es: "Solicitud de Seguro de Vida",
+  title_en: "Life Insurance Application",
+  title_es: "Solicitud de Seguro de Vida",
 
-    steps: [
+  steps: [
+    {
+      id: "insured",
+      title_en: "Proposed Insured",
+      title_es: "Asegurado Propuesto",
+      fields: [
+        { id: "fullName", label_en: "Full Name", label_es: "Nombre Completo", type: "text", required: true },
         {
-            id: "insured",
-            title_en: "Proposed Insured",
-            title_es: "Asegurado Propuesto",
-            fields: [
-                { id: "fullName", label_en: "Full Name", label_es: "Nombre Completo", type: "text", required: true },
-                {
-                    id: "preferredLanguage",
-                    label_en: "Preferred Agent Language",
-                    label_es: "Idioma Preferido del Agente",
-                    type: "select",
-                    required: true,
-                    options: [
-                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
-                        { value: "en", label_en: "English", label_es: "Inglés" },
-                        { value: "es", label_en: "Spanish", label_es: "Español" }
-                    ]
-                },
-                { id: "dob", label_en: "Date of Birth", label_es: "Fecha de Nacimiento", type: "date", required: true },
-                {
-                    id: "gender",
-                    label_en: "Gender",
-                    label_es: "Género",
-                    type: "select",
-                    options: [
-                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
-                        { value: "male", label_en: "Male", label_es: "Masculino" },
-                        { value: "female", label_en: "Female", label_es: "Femenino" },
-                        { value: "other", label_en: "Other", label_es: "Otro" }
-                    ]
-                },
-                {
-                    id: "tobaccoUse",
-                    label_en: "Tobacco Use?",
-                    label_es: "¿Uso de Tabaco?",
-                    type: "select",
-                    required: true,
-                    options: [
-                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
-                        { value: "yes", label_en: "Yes", label_es: "Sí" },
-                        { value: "no", label_en: "No", label_es: "No" }
-                    ]
-                }
-            ]
+          id: "preferredLanguage",
+          label_en: "Preferred Agent Language",
+          label_es: "Idioma Preferido del Agente",
+          type: "select",
+          required: true,
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "en", label_en: "English", label_es: "Inglés" },
+            { value: "es", label_en: "Spanish", label_es: "Español" }
+          ]
         },
-
+        { id: "phone", label_en: "Phone Number", label_es: "Número de Teléfono", type: "text", required: true },
+        { id: "email", label_en: "Email Address", label_es: "Correo Electrónico", type: "email", required: true },
+        { id: "dob", label_en: "Date of Birth", label_es: "Fecha de Nacimiento", type: "date", required: true },
         {
-            id: "coverage",
-            title_en: "Coverage Requested",
-            title_es: "Cobertura Solicitada",
-            fields: [
-                {
-                    id: "productType",
-                    label_en: "Product Type",
-                    label_es: "Tipo de Producto",
-                    type: "select",
-                    required: true,
-                    options: [
-                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
-                        { value: "term", label_en: "Term", label_es: "Plazo" },
-                        { value: "whole", label_en: "Whole Life", label_es: "Vida Entera" },
-                        { value: "ul", label_en: "Universal Life", label_es: "Vida Universal" }
-                    ]
-                },
-                { id: "faceAmount", label_en: "Face Amount", label_es: "Monto de la Póliza", type: "number", required: true },
-                { id: "termLength", label_en: "Term Length (if Term)", label_es: "Duración del Plazo (si aplica)", type: "number" }
-            ]
+          id: "gender",
+          label_en: "Gender",
+          label_es: "Género",
+          type: "select",
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "male", label_en: "Male", label_es: "Masculino" },
+            { value: "female", label_en: "Female", label_es: "Femenino" },
+            { value: "other", label_en: "Other", label_es: "Otro" }
+          ]
         },
-
         {
-            id: "beneficiaries",
-            title_en: "Beneficiaries",
-            title_es: "Beneficiarios",
-            fields: [
-                { id: "primaryBeneficiary", label_en: "Primary Beneficiary", label_es: "Beneficiario Principal", type: "text", required: true },
-                { id: "contingentBeneficiary", label_en: "Contingent Beneficiary", label_es: "Beneficiario Contingente", type: "text" }
-            ]
+          id: "tobaccoUse",
+          label_en: "Tobacco Use?",
+          label_es: "¿Uso de Tabaco?",
+          type: "select",
+          required: true,
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "yes", label_en: "Yes", label_es: "Sí" },
+            { value: "no", label_en: "No", label_es: "No" }
+          ]
         }
-    ]
+      ]
+    },
+
+    {
+      id: "coverage",
+      title_en: "Coverage Requested",
+      title_es: "Cobertura Solicitada",
+      fields: [
+        {
+          id: "productType",
+          label_en: "Product Type",
+          label_es: "Tipo de Producto",
+          type: "select",
+          required: true,
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "term", label_en: "Term", label_es: "Plazo" },
+            { value: "whole", label_en: "Whole Life", label_es: "Vida Entera" },
+            { value: "ul", label_en: "Universal Life", label_es: "Vida Universal" }
+          ]
+        },
+        { id: "faceAmount", label_en: "Face Amount", label_es: "Monto de la Póliza", type: "number", required: true },
+        {
+          id: "termLength",
+          label_en: "Term Length (if Term)",
+          label_es: "Duración del Plazo (si aplica)",
+          type: "select",
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "10", label_en: "10 Years", label_es: "10 Años" },
+            { value: "15", label_en: "15 Years", label_es: "15 Años" },
+            { value: "20", label_en: "20 Years", label_es: "20 Años" },
+            { value: "25", label_en: "25 Years", label_es: "25 Años" },
+            { value: "30", label_en: "30 Years", label_es: "30 Años" }
+          ]
+        }
+      ]
+    },
+
+    {
+      id: "beneficiaries",
+      title_en: "Beneficiaries",
+      title_es: "Beneficiarios",
+      fields: [
+        { id: "primaryBeneficiary", label_en: "Primary Beneficiary", label_es: "Beneficiario Principal", type: "text", required: true },
+        { id: "contingentBeneficiary", label_en: "Contingent Beneficiary", label_es: "Beneficiario Contingente", type: "text" }
+      ]
+    }
+  ]
 };
