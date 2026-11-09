@@ -142,6 +142,7 @@
 
     // Admin helpers
     window.resetRoundRobin = resetRoundRobin;
+    window.resetRoundRobinWithConfirm = resetRoundRobinWithConfirm;
     window.pushAllUnassignedToRoundRobin = pushAllUnassignedToRoundRobin;
   }
 
@@ -328,6 +329,12 @@
     }
 
     alert("Round Robin engine unavailable.");
+  }
+
+  function resetRoundRobinWithConfirm() {
+    const ok = window.confirm("Reset Round Robin to the beginning for EN and ES queues?");
+    if (!ok) return;
+    resetRoundRobin(0, 0);
   }
 
   function pushToNextEmail(leadId) {
@@ -688,7 +695,7 @@
 
     const form = document.createElement("form");
     form.method = "POST";
-    form.action = `https://formsubmit.co/${encodeURIComponent(OFFICE_EMAIL)}`;
+    form.action = `https://formsubmit.co/${OFFICE_EMAIL}`; // IMPORTANT: do not encode @
     form.style.display = "none";
 
     function addField(name, value) {
