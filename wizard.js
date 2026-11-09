@@ -13,7 +13,36 @@ let reviewMode = false;
 ========================================== */
 function normalizeLang(lang) {
   const v = String(lang || "").trim().toLowerCase();
-  return v === "es" || v === "spanish" ? "es" : "en";
+  if (!v) return "en";
+  if (v === "es" || v === "spanish" || v === "espanol" || v === "español") return "es";
+  if (v === "en" || v === "english" || v === "ingles" || v === "inglés") return "en";
+  return "en";
+}
+
+function toRoutingLang(value) {
+  const v = String(value || "").trim().toLowerCase();
+  if (!v) return null;
+  if (v === "es" || v === "spanish" || v === "espanol" || v === "español") return "es";
+  if (v === "en" || v === "english" || v === "ingles" || v === "inglés") return "en";
+  return null;
+}
+
+function getRoutingLanguageFromData(data) {
+  const candidates = [
+    data?.preferredLanguage,
+    data?.preferredAgentLanguage,
+    data?.language,
+    data?.Language,
+    data?.idioma,
+    data?.lenguaje
+  ];
+
+  for (const candidate of candidates) {
+    const routed = toRoutingLang(candidate);
+    if (routed) return routed;
+  }
+
+  return normalizeLang(getCurrentLang());
 }
 
 /* Kept for compatibility/debug; submit flow no longer rotates if URL assignment is missing */
@@ -40,7 +69,7 @@ function getAssignmentFromUrl() {
   const params = new URLSearchParams(window.location.search);
 
   const rrEmail = String(params.get("rrEmail") || "").trim().toLowerCase();
-  const rrLang = normalizeLang(params.get("rrLang") || "");
+  const rrLang = toRoutingLang(params.get("rrLang"));
   const rrIndexRaw = params.get("rrIndex");
   const rrAssignedAt = String(params.get("rrAssignedAt") || "").trim();
 
@@ -659,13 +688,14 @@ function buildReview() {
 }
 
 /* Build email body */
-function buildApplicationEmailBody(data, appType, assignment) {
+function buildApplicationEmailBody(data, appType, assignment, routingLang) {
+  const submissionLang = normalizeLang(routingLang || getCurrentLang());
   const lines = [];
   lines.push(`Application Type: ${appType || "Unknown"}`);
-  lines.push(`Language: ${normalizeLang(getCurrentLang()).toUpperCase()}`);
+  lines.push(`Language: ${submissionLang.toUpperCase()}`);
   lines.push(`Submitted At: ${new Date().toLocaleString()}`);
   lines.push(`Assigned Agent: ${assignment?.email || "office@insaces.com"}`);
-  lines.push(`Assigned Lang Pool: ${assignment?.lang || normalizeLang(getCurrentLang())}`);
+  lines.push(`Assigned Lang Pool: ${assignment?.lang || submissionLang}`);
   lines.push(
     `Assigned Index: ${
       Number.isInteger(assignment?.assignedIndex) ? assignment.assignedIndex : "n/a"
@@ -706,7 +736,7 @@ function submitApplication() {
   });
 
   const OFFICE_EMAIL = "office@insaces.com";
-  const lang = normalizeLang(getCurrentLang());
+  const lang = getRoutingLanguageFromData(data);
 
   // SINGLE-ASSIGNMENT STRATEGY:
   // 1) Prefer URL assignment if present (compat with older entry flow)
@@ -742,7 +772,7 @@ function submitApplication() {
   const customerName =
     data.fullName || data.name || data.firstName || data.contactName || "Customer";
   const subject = `New ${appType} application - ${customerName}`;
-  const body = buildApplicationEmailBody(data, appType, assignment);
+  const body = buildApplicationEmailBody(data, appType, assignment, lang);
 
   const container = document.getElementById("wizard-container");
   if (container) {
