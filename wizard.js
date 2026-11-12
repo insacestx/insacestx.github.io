@@ -1355,8 +1355,28 @@ function buildApplicationEmailBody(data, appType, assignment, routingLang) {
   return lines.join("\n");
 }
 
-/* Submit via FormSubmit (NO mailto) */
-function submitApplication() {
+function submitViaDirectPost(fields, officeEmail) {
+  const postForm = document.createElement("form");
+  postForm.method = "POST";
+  postForm.action = `https://formsubmit.co/${officeEmail}`; // IMPORTANT: do not encode @
+  postForm.style.display = "none";
+  postForm.acceptCharset = "UTF-8";
+  postForm.noValidate = true;
+
+  fields.forEach(({ name, value }) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value == null ? "" : String(value);
+    postForm.appendChild(input);
+  });
+
+  document.body.appendChild(postForm);
+  postForm.submit();
+}
+
+/* Submit via FormSubmit with AJAX primary + direct post fallback */
+async function submitApplication() {
   const data = {};
 
   wizardConfig.steps.forEach((step) => {
@@ -1373,10 +1393,6 @@ function submitApplication() {
   const OFFICE_EMAIL = "office@insaces.com";
   const lang = getRoutingLanguageFromData(data);
 
-  // SINGLE-ASSIGNMENT STRATEGY:
-  // 1) Prefer URL assignment if present (compat with older entry flow)
-  // 2) Else assign once at submit-time from RR engine
-  // 3) Else fallback to office
   const urlAssignment = getAssignmentFromUrl();
   let assignment = null;
 
@@ -1423,32 +1439,18 @@ function submitApplication() {
     `;
   }
 
-  const postForm = document.createElement("form");
-  postForm.method = "POST";
-  postForm.action = `https://formsubmit.co/${OFFICE_EMAIL}`; // IMPORTANT: do not encode @
-  postForm.style.display = "none";
-  postForm.acceptCharset = "UTF-8";
-  postForm.noValidate = true;
+  const fields = [];
+  const addField = (name, value) => {
+    fields.push({ name, value: value == null ? "" : String(value) });
+  };
 
-  function addField(name, value) {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = name;
-    input.value = value == null ? "" : String(value);
-    postForm.appendChild(input);
-  }
-
-  // FormSubmit control fields
   addField("_subject", subject);
   addField("_captcha", "false");
   addField("_next", appUrl("thank-you.html"));
   addField("_template", "table");
-
-  // Recipient strategy: office primary, agent cc
   addField("_to", OFFICE_EMAIL);
   addField("_cc", agentEmail !== OFFICE_EMAIL ? agentEmail : "");
 
-  // Optional reply-to if present
   const replyEmail =
     data.email ||
     data.Email ||
@@ -1457,12 +1459,10 @@ function submitApplication() {
     "";
   if (replyEmail) addField("_replyto", replyEmail);
 
-  // Top metadata
   addField("Application Type", appType);
   addField("Submission Language", lang.toUpperCase());
   addField("Submitted At", new Date().toISOString());
 
-  // Round robin metadata
   addField("RR Assigned Agent Email", agentEmail);
   addField("RR Lang Pool", assignment?.lang || lang);
   addField(
@@ -1473,16 +1473,51 @@ function submitApplication() {
   addField("RR Source", assignment?.source || "unknown");
   addField("RR Mode", "office-primary-agent-cc");
 
-  // Flattened field payload
   Object.entries(data).forEach(([k, v]) => {
     addField(k, valueToText(v));
   });
 
-  // Human-readable summary
   addField("Application Summary", body);
 
-  document.body.appendChild(postForm);
-  postForm.submit();
+  const payload = new FormData();
+  fields.forEach(({ name, value }) => payload.append(name, value));
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+
+    const response = await fetch(`https://formsubmit.co/ajax/${OFFICE_EMAIL}`, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: payload,
+      signal: controller.signal
+    });
+
+    window.clearTimeout(timeoutId);
+
+    let result = null;
+    try {
+      result = await response.json();
+    } catch {
+      result = null;
+    }
+
+    if (!response.ok || result?.success === "false") {
+      const detail = result?.message || `HTTP ${response.status}`;
+      throw new Error(detail);
+    }
+
+    alert(
+      isSpanish()
+        ? "¡Su solicitud fue enviada y dirigida al agente asignado!"
+        : "Your application was sent and routed to the assigned agent!"
+    );
+
+    window.location.href = applicationsHomeUrl();
+  } catch (err) {
+    console.error("FormSubmit AJAX failed; falling back to direct POST.", err);
+    submitViaDirectPost(fields, OFFICE_EMAIL);
+  }
 }
 
 /* Go back to applications page */
