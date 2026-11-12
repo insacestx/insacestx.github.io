@@ -1272,9 +1272,13 @@ async function submitApplication() {
   addField("RR Source", assignment?.source || "unknown");
   addField("RR Mode", "office-primary-agent-cc");
 
-  Object.entries(data).forEach(([k, v]) => {
-    addField(k, valueToText(v));
-  });
+Object.entries(data).forEach(([k, v]) => {
+  const key = String(k || "");
+  const lower = key.toLowerCase();
+  const reserved = new Set(["cc", "to", "subject", "captcha", "next", "template", "replyto"]);
+  const safeKey = reserved.has(lower) ? `field_${key}` : key;
+  addField(safeKey, valueToText(v));
+});
 
   addField("Application Summary", body);
 
