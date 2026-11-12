@@ -1513,7 +1513,7 @@ async function submitApplication() {
         : "Your application was sent and routed to the assigned agent!"
     );
 
-    window.location.href = applicationsHomeUrl();
+    window.location.href = appUrl("thank-you.html");
   } catch (err) {
     console.error("FormSubmit AJAX failed; falling back to direct POST.", err);
     submitViaDirectPost(fields, OFFICE_EMAIL);
