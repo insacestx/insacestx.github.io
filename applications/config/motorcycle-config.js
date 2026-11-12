@@ -100,21 +100,21 @@ export default {
         { id: "bikeModel", label_en: "Model", label_es: "Modelo", type: "text", required: true },
         { id: "vin", label_en: "VIN", label_es: "VIN", type: "text", required: true },
         {
-          id: "cc",
-          label_en: "Engine CC",
-          label_es: "Cilindraje (CC)",
-          type: "select",
-          required: true,
-          options: [
-            { value: "", label_en: "Select...", label_es: "Seleccione..." },
-            { value: "0-125", label_en: "Up to 125cc", label_es: "Hasta 125cc" },
-            { value: "126-250", label_en: "126cc - 250cc", label_es: "126cc - 250cc" },
-            { value: "251-500", label_en: "251cc - 500cc", label_es: "251cc - 500cc" },
-            { value: "501-750", label_en: "501cc - 750cc", label_es: "501cc - 750cc" },
-            { value: "751-1000", label_en: "751cc - 1000cc", label_es: "751cc - 1000cc" },
-            { value: "1001+", label_en: "1001cc+", label_es: "1001cc+" }
-          ]
-        },
+  id: "engineCc",
+  label_en: "Engine CC",
+  label_es: "Cilindraje (CC)",
+  type: "select",
+  required: true,
+  options: [
+    { value: "", label_en: "Select...", label_es: "Seleccione..." },
+    { value: "0-125", label_en: "Up to 125cc", label_es: "Hasta 125cc" },
+    { value: "126-250", label_en: "126cc - 250cc", label_es: "126cc - 250cc" },
+    { value: "251-500", label_en: "251cc - 500cc", label_es: "251cc - 500cc" },
+    { value: "501-750", label_en: "501cc - 750cc", label_es: "501cc - 750cc" },
+    { value: "751-1000", label_en: "751cc - 1000cc", label_es: "751cc - 1000cc" },
+    { value: "1001+", label_en: "1001cc+", label_es: "1001cc+" }
+  ]
+},
         {
           id: "usage",
           label_en: "Primary Use",
