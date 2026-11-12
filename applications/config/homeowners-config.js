@@ -9,6 +9,27 @@ export default {
             title_es: "Información de la Propiedad",
             fields: [
                 {
+                    id: "fullName",
+                    label_en: "Full Name",
+                    label_es: "Nombre Completo",
+                    type: "text",
+                    required: true
+                },
+                {
+                    id: "phone",
+                    label_en: "Phone Number",
+                    label_es: "Número de Teléfono",
+                    type: "text",
+                    required: true
+                },
+                {
+                    id: "email",
+                    label_en: "Email Address",
+                    label_es: "Correo Electrónico",
+                    type: "email",
+                    required: true
+                },
+                {
                     id: "preferredLanguage",
                     label_en: "Preferred Agent Language",
                     label_es: "Idioma Preferido del Agente",
@@ -36,10 +57,14 @@ export default {
                 },
                 {
                     id: "propertyState",
-                    label_en: "State",
-                    label_es: "Estado",
-                    type: "text",
-                    required: true
+                    label_en: "State (Texas only for now)",
+                    label_es: "Estado (solo Texas por ahora)",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "TX", label_en: "Texas", label_es: "Texas" }
+                    ]
                 },
                 {
                     id: "propertyZip",
@@ -95,15 +120,29 @@ export default {
                     id: "liabilityCoverage",
                     label_en: "Liability Coverage",
                     label_es: "Cobertura de Responsabilidad",
-                    type: "number",
-                    required: true
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "100000", label_en: "$100,000", label_es: "$100,000" },
+                        { value: "300000", label_en: "$300,000", label_es: "$300,000" },
+                        { value: "500000", label_en: "$500,000", label_es: "$500,000" },
+                        { value: "1000000", label_en: "$1,000,000", label_es: "$1,000,000" }
+                    ]
                 },
                 {
                     id: "deductible",
                     label_en: "Deductible Amount",
                     label_es: "Monto del Deducible",
-                    type: "number",
-                    required: true
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "500", label_en: "$500", label_es: "$500" },
+                        { value: "1000", label_en: "$1,000", label_es: "$1,000" },
+                        { value: "2500", label_en: "$2,500", label_es: "$2,500" },
+                        { value: "5000", label_en: "$5,000", label_es: "$5,000" }
+                    ]
                 },
                 {
                     id: "roofType",
