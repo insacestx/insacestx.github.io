@@ -164,9 +164,157 @@ function getAppType() {
 }
 
 /* Helpers */
+const DROPDOWN_PRESETS = {
+  "deductible-standard": [
+    { value: "250", label_en: "$250", label_es: "$250" },
+    { value: "500", label_en: "$500", label_es: "$500" },
+    { value: "1000", label_en: "$1,000", label_es: "$1,000" },
+    { value: "2500", label_en: "$2,500", label_es: "$2,500" }
+  ],
+  "deductible-extended": [
+    { value: "250", label_en: "$250", label_es: "$250" },
+    { value: "500", label_en: "$500", label_es: "$500" },
+    { value: "1000", label_en: "$1,000", label_es: "$1,000" },
+    { value: "2500", label_en: "$2,500", label_es: "$2,500" },
+    { value: "5000", label_en: "$5,000", label_es: "$5,000" },
+    { value: "10000", label_en: "$10,000", label_es: "$10,000" }
+  ],
+  "liability-split-standard": [
+    { value: "30/60/25", label_en: "30/60/25", label_es: "30/60/25" },
+    { value: "50/100/50", label_en: "50/100/50", label_es: "50/100/50" },
+    { value: "100/300/100", label_en: "100/300/100", label_es: "100/300/100" },
+    { value: "250/500/100", label_en: "250/500/100", label_es: "250/500/100" }
+  ],
+  "liability-limit-personal": [
+    { value: "100000", label_en: "$100,000", label_es: "$100,000" },
+    { value: "300000", label_en: "$300,000", label_es: "$300,000" },
+    { value: "500000", label_en: "$500,000", label_es: "$500,000" },
+    { value: "1000000", label_en: "$1,000,000", label_es: "$1,000,000" }
+  ],
+  "liability-limit-commercial": [
+    { value: "300000", label_en: "$300,000", label_es: "$300,000" },
+    { value: "500000", label_en: "$500,000", label_es: "$500,000" },
+    { value: "750000", label_en: "$750,000", label_es: "$750,000" },
+    { value: "1000000", label_en: "$1,000,000", label_es: "$1,000,000" }
+  ],
+  "term-length-standard": [
+    { value: "10", label_en: "10 Years", label_es: "10 Años" },
+    { value: "15", label_en: "15 Years", label_es: "15 Años" },
+    { value: "20", label_en: "20 Years", label_es: "20 Años" },
+    { value: "25", label_en: "25 Years", label_es: "25 Años" },
+    { value: "30", label_en: "30 Years", label_es: "30 Años" }
+  ],
+  "state-texas-only": [
+    { value: "TX", label_en: "Texas", label_es: "Texas" }
+  ]
+};
+
+const COMMERCIAL_DRIVER_FIELDS = [
+  { key: "name", label_en: "Full Name", label_es: "Nombre Completo", type: "text", required: true },
+  { key: "dob", label_en: "Date of Birth", label_es: "Fecha de Nacimiento", type: "date", required: true },
+  { key: "licenseState", label_en: "License State", label_es: "Estado de Licencia", type: "select", optionsPreset: "state-texas-only", required: true },
+  {
+    key: "cdlClass",
+    label_en: "CDL Class",
+    label_es: "Clase CDL",
+    type: "select",
+    required: true,
+    options: [
+      { value: "", label_en: "Select...", label_es: "Seleccione..." },
+      { value: "A", label_en: "Class A", label_es: "Clase A" },
+      { value: "B", label_en: "Class B", label_es: "Clase B" },
+      { value: "C", label_en: "Class C", label_es: "Clase C" }
+    ]
+  },
+  { key: "yearsExperience", label_en: "Years of Experience", label_es: "Años de Experiencia", type: "number", required: true }
+];
+
 function valueToText(v) {
-  if (Array.isArray(v)) return v.join(", ");
+  if (Array.isArray(v)) {
+    if (!v.length) return "";
+    if (v.every((item) => item == null || ["string", "number", "boolean"].includes(typeof item))) {
+      return v.map((item) => String(item ?? "")).join(", ");
+    }
+    return v
+      .map((item, index) => {
+        if (item && typeof item === "object" && !Array.isArray(item)) {
+          const body = Object.entries(item)
+            .filter(([, val]) => String(val ?? "").trim() !== "")
+            .map(([key, val]) => `${key}: ${String(val ?? "").trim()}`)
+            .join("; ");
+          return body ? `${index + 1}) ${body}` : `${index + 1})`;
+        }
+        return `${index + 1}) ${String(item ?? "")}`;
+      })
+      .join(" | ");
+  }
+
+  if (v && typeof v === "object") {
+    return Object.entries(v)
+      .map(([key, val]) => `${key}: ${valueToText(val)}`)
+      .join("; ");
+  }
+
   return v == null ? "" : String(v);
+}
+
+function cloneOptions(options) {
+  return options.map((opt) => ({ ...opt }));
+}
+
+function hasPlaceholderOption(options) {
+  return options.some((opt) => String(opt?.value ?? "") === "");
+}
+
+function getPresetKey(field) {
+  return (
+    field?.optionsPreset ||
+    field?.dropdownPreset ||
+    (typeof field?.preset === "string" ? field.preset : "")
+  );
+}
+
+function getResolvedFieldOptions(field) {
+  const inlineOptions = Array.isArray(field?.options) ? cloneOptions(field.options) : [];
+  const presetKey = getPresetKey(field);
+  const presetOptions = presetKey && DROPDOWN_PRESETS[presetKey] ? cloneOptions(DROPDOWN_PRESETS[presetKey]) : null;
+
+  const usePreset = Boolean(presetOptions) && (inlineOptions.length === 0 || field?.presetOverridesOptions);
+  const resolved = usePreset ? presetOptions : inlineOptions;
+
+  if (!resolved.length) return [];
+  if (field?.includeSelectOption === false || hasPlaceholderOption(resolved)) return resolved;
+  return [{ value: "", label_en: "Select...", label_es: "Seleccione..." }, ...resolved];
+}
+
+function getTodayISODate() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function shouldShowTodayButton(field) {
+  if (field?.showTodayButton || field?.todayButton) return true;
+  const haystack = `${field?.id || ""} ${field?.label_en || ""} ${field?.label_es || ""}`.toLowerCase();
+  return haystack.includes("effective") || haystack.includes("efectiva") || haystack.includes("vigencia");
+}
+
+function buildTodayButton(inputEl, useEs) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "wizard-btn back";
+  btn.textContent = useEs ? "Hoy" : "Today";
+  btn.style.padding = "8px 12px";
+  btn.style.borderRadius = "8px";
+  btn.style.minWidth = "84px";
+  btn.addEventListener("click", () => {
+    inputEl.value = getTodayISODate();
+    inputEl.dispatchEvent(new Event("input", { bubbles: true }));
+    inputEl.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+  return btn;
 }
 
 function getCheckboxValues(groupEl) {
@@ -185,6 +333,244 @@ function getFieldValue(field) {
   return el.value ?? "";
 }
 
+function isCommercialTruckingDriverStep(step) {
+  return getAppType() === "commercialtrucking" && step?.id === "drivers";
+}
+
+function buildDriverDetailFieldId(index, key) {
+  return `driverDetail_${index}_${key}`;
+}
+
+function getCommercialDriverCount() {
+  const raw = formData?.numDrivers ?? "";
+  const parsed = Number.parseInt(String(raw), 10);
+  if (!Number.isFinite(parsed) || parsed < 0) return 0;
+  return Math.min(parsed, 25);
+}
+
+function normalizeCommercialDriverDetails(count) {
+  const current = Array.isArray(formData.driverDetails) ? formData.driverDetails : [];
+  const next = [];
+
+  for (let i = 0; i < count; i += 1) {
+    const row = current[i];
+    next.push(row && typeof row === "object" ? { ...row } : {});
+  }
+
+  formData.driverDetails = next;
+  return next;
+}
+
+function syncCommercialDriverDetailsFromInputs() {
+  const count = getCommercialDriverCount();
+  if (!formData.driverDetailsEnabled || count === 0) return;
+
+  const details = normalizeCommercialDriverDetails(count);
+
+  details.forEach((item, index) => {
+    COMMERCIAL_DRIVER_FIELDS.forEach((field) => {
+      const el = document.getElementById(buildDriverDetailFieldId(index, field.key));
+      if (el) item[field.key] = el.value;
+    });
+  });
+
+  formData.driverDetails = details;
+}
+
+function renderCommercialDriverRepeater(root, useEs) {
+  if (!root) return;
+  root.innerHTML = "";
+
+  if (formData.driverDetailsEnabled == null) {
+    formData.driverDetailsEnabled = true;
+  }
+
+  const enabled = Boolean(formData.driverDetailsEnabled);
+  const count = getCommercialDriverCount();
+
+  const toggleWrap = document.createElement("label");
+  toggleWrap.style.display = "flex";
+  toggleWrap.style.alignItems = "center";
+  toggleWrap.style.gap = "8px";
+  toggleWrap.style.marginBottom = "8px";
+
+  const toggle = document.createElement("input");
+  toggle.type = "checkbox";
+  toggle.checked = enabled;
+  toggle.addEventListener("change", () => {
+    formData.driverDetailsEnabled = toggle.checked;
+    renderCommercialDriverRepeater(root, useEs);
+  });
+
+  const toggleText = document.createElement("span");
+  toggleText.textContent = useEs
+    ? "Agregar detalle individual de conductores"
+    : "Add detailed driver records";
+
+  toggleWrap.appendChild(toggle);
+  toggleWrap.appendChild(toggleText);
+  root.appendChild(toggleWrap);
+
+  const hint = document.createElement("small");
+  hint.className = "wizard-help";
+  hint.style.color = "#6b7280";
+  hint.textContent = useEs
+    ? "Use el número de conductores para generar bloques de detalle."
+    : "Use the number of drivers to generate driver detail blocks.";
+  root.appendChild(hint);
+
+  if (!enabled || count === 0) return;
+
+  const details = normalizeCommercialDriverDetails(count);
+
+  const groups = document.createElement("div");
+  groups.style.display = "grid";
+  groups.style.gap = "12px";
+  groups.style.marginTop = "10px";
+
+  details.forEach((item, index) => {
+    const group = document.createElement("div");
+    group.style.border = "1px solid rgba(212, 0, 0, 0.14)";
+    group.style.borderRadius = "10px";
+    group.style.padding = "12px";
+    group.style.background = "#fff";
+
+    const heading = document.createElement("div");
+    heading.style.fontWeight = "700";
+    heading.style.marginBottom = "10px";
+    heading.style.color = "#1f2937";
+    heading.textContent = `${useEs ? "Conductor" : "Driver"} ${index + 1}`;
+    group.appendChild(heading);
+
+    COMMERCIAL_DRIVER_FIELDS.forEach((field) => {
+      const row = document.createElement("div");
+      row.className = "wizard-field";
+      row.style.marginBottom = "12px";
+
+      const label = document.createElement("label");
+      const fieldLabel = useEs ? (field.label_es || field.label_en || field.key) : (field.label_en || field.key);
+      label.textContent = field.required ? `${fieldLabel} *` : fieldLabel;
+      row.appendChild(label);
+
+      let inputEl;
+      if (field.type === "select") {
+        inputEl = document.createElement("select");
+        getResolvedFieldOptions(field).forEach((opt) => {
+          const option = document.createElement("option");
+          option.value = opt.value;
+          option.textContent = useEs
+            ? (opt.label_es || opt.label_en || opt.label || opt.value)
+            : (opt.label_en || opt.label || opt.value);
+          inputEl.appendChild(option);
+        });
+      } else {
+        inputEl = document.createElement("input");
+        inputEl.type = field.type || "text";
+      }
+
+      inputEl.id = buildDriverDetailFieldId(index, field.key);
+      inputEl.value = item[field.key] ?? "";
+
+      inputEl.addEventListener("input", () => {
+        item[field.key] = inputEl.value;
+        formData.driverDetails[index] = { ...item };
+      });
+
+      inputEl.addEventListener("change", () => {
+        item[field.key] = inputEl.value;
+        formData.driverDetails[index] = { ...item };
+      });
+
+      row.appendChild(inputEl);
+      group.appendChild(row);
+    });
+
+    groups.appendChild(group);
+  });
+
+  root.appendChild(groups);
+}
+
+function buildCommercialDriverRepeater(card, useEs) {
+  const countInput = document.getElementById("numDrivers");
+  if (!countInput) return;
+
+  const wrap = document.createElement("div");
+  wrap.className = "wizard-field";
+
+  const root = document.createElement("div");
+  root.id = "commercial-driver-repeater-root";
+  wrap.appendChild(root);
+  card.appendChild(wrap);
+
+  if (!countInput.dataset.driverRepeaterBound) {
+    countInput.addEventListener("input", () => {
+      formData.numDrivers = countInput.value;
+      renderCommercialDriverRepeater(root, useEs);
+    });
+    countInput.addEventListener("change", () => {
+      formData.numDrivers = countInput.value;
+      renderCommercialDriverRepeater(root, useEs);
+    });
+    countInput.dataset.driverRepeaterBound = "1";
+  }
+
+  renderCommercialDriverRepeater(root, useEs);
+}
+
+function validateCommercialDriverRepeater(step) {
+  if (!isCommercialTruckingDriverStep(step)) return true;
+  if (!formData.driverDetailsEnabled) return true;
+
+  const count = getCommercialDriverCount();
+  if (count === 0) return true;
+
+  syncCommercialDriverDetailsFromInputs();
+
+  let valid = true;
+  const details = Array.isArray(formData.driverDetails) ? formData.driverDetails : [];
+
+  for (let i = 0; i < count; i += 1) {
+    const row = details[i] || {};
+
+    COMMERCIAL_DRIVER_FIELDS.forEach((field) => {
+      if (!field.required) return;
+
+      const value = String(row[field.key] ?? "").trim();
+      const el = document.getElementById(buildDriverDetailFieldId(i, field.key));
+
+      if (!value) {
+        valid = false;
+        if (el) el.style.border = "2px solid red";
+      } else if (el) {
+        el.style.border = "";
+      }
+    });
+  }
+
+  return valid;
+}
+
+function getCommercialDriverDetailsReviewText(useEs) {
+  if (!formData.driverDetailsEnabled) return "";
+  const details = Array.isArray(formData.driverDetails) ? formData.driverDetails : [];
+  if (!details.length) return "";
+
+  return details
+    .map((driver, idx) => {
+      const parts = COMMERCIAL_DRIVER_FIELDS
+        .map((field) => {
+          const val = String(driver[field.key] ?? "").trim();
+          if (!val) return "";
+          const label = useEs ? (field.label_es || field.label_en || field.key) : (field.label_en || field.key);
+          return `${label}: ${val}`;
+        })
+        .filter(Boolean);
+      return `${useEs ? "Conductor" : "Driver"} ${idx + 1} (${parts.join(", ")})`;
+    })
+    .join(" | ");
+}
+
 /* Save current visible step values */
 function persistCurrentStepData() {
   if (!wizardConfig || !wizardConfig.steps || reviewMode) return;
@@ -200,6 +586,10 @@ function persistCurrentStepData() {
     const el = document.getElementById(field.id);
     if (el) formData[field.id] = el.value;
   });
+
+  if (isCommercialTruckingDriverStep(step)) {
+    syncCommercialDriverDetailsFromInputs();
+  }
 }
 
 /* Show loading state */
@@ -405,12 +795,214 @@ function buildStep(index) {
     wrap.appendChild(label);
 
     let input;
+    let appendedCustomInput = false;
 
     if (field.type === "select") {
       input = document.createElement("select");
       input.id = field.id;
 
-      (field.options || []).forEach((opt) => {
+      const options = getResolvedFieldOptions(field);
+      options.forEach((opt) => {
+        const o = document.createElement("option");
+        o.value = opt.value;
+        const optLabel = useEs
+          ? (opt.label_es || opt.label_en || opt.label)
+          : (opt.label_en || opt.label);
+        o.textContent = optLabel || opt.value;
+        input.appendChild(o);
+      });
+
+      if (formData[field.id] != null) input.value = formData[field.id];
+
+      input.addEventListener("input", () => {
+        formData[field.id] = input.value;
+      });
+      input.addEventListener("change", () => {
+        formData[field.id] = input.value;
+      });
+    } else if (field.type === "textarea") {
+      input = document.createElement("textarea");
+      input.id = field.id;
+      if (field.placeholder_en || field.placeholder_es) {
+        input.placeholder = useEs
+          ? (field.placeholder_es || field.placeholder_en || "")
+          : (field.placeholder_en || "");
+      }
+
+      if (formData[field.id] != null) input.value = formData[field.id];
+
+      input.addEventListener("input", () => {
+        formData[field.id] = input.value;
+      });
+      input.addEventListener("change", () => {
+        formData[field.id] = input.value;
+      });
+    } else if (field.type === "checkbox-group") {
+      input = document.createElement("div");
+      input.id = field.id;
+      input.className = "wizard-checkbox-group";
+
+      const selectedValues = Array.isArray(formData[field.id]) ? formData[field.id] : [];
+
+      (field.options || []).forEach((opt, idx) => {
+        const optId = `${field.id}_${idx}`;
+
+        const item = document.createElement("label");
+        item.className = "wizard-checkbox-item";
+        item.setAttribute("for", optId);
+
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.id = optId;
+        cb.value = opt.value;
+
+        if (selectedValues.includes(opt.value)) cb.checked = true;
+
+        cb.addEventListener("change", () => {
+          const checked = getCheckboxValues(input);
+          formData[field.id] = checked;
+
+          if (input.classList.contains("invalid")) {
+            const min = Number(field.minSelected || (field.required ? 1 : 0));
+            if (checked.length >= min) input.classList.remove("invalid");
+          }
+        });
+
+        const txt = document.createElement("span");
+        txt.textContent = useEs
+          ? (opt.label_es || opt.label_en || opt.label || opt.value)
+          : (opt.label_en || opt.label || opt.value);
+
+        item.appendChild(cb);
+        item.appendChild(txt);
+        input.appendChild(item);
+      });
+
+      if (!Array.isArray(formData[field.id])) formData[field.id] = selectedValues;
+
+      if ((field.required || field.minSelected) && !wrap.querySelector(".wizard-help")) {
+        const min = Number(field.minSelected || (field.required ? 1 : 0));
+        if (min > 0) {
+          const help = document.createElement("small");
+          help.className = "wizard-help";
+          help.style.color = "#6b7280";
+          help.textContent = isSpanish()
+            ? `Seleccione al menos ${min}.`
+            : `Select at least ${min}.`;
+          wrap.appendChild(help);
+        }
+      }
+    } else {
+      input = document.createElement("input");
+      input.type = field.type || "text";
+      input.id = field.id;
+
+      if (field.placeholder_en || field.placeholder_es) {
+        input.placeholder = useEs
+          ? (field.placeholder_es || field.placeholder_en || "")
+          : (field.placeholder_en || "");
+      }
+
+      if (formData[field.id] != null) input.value = formData[field.id];
+
+      input.addEventListener("input", () => {
+        formData[field.id] = input.value;
+      });
+      input.addEventListener("change", () => {
+        formData[field.id] = input.value;
+      });
+
+      if (input.type === "date" && shouldShowTodayButton(field)) {
+        const dateWrap = document.createElement("div");
+        dateWrap.style.display = "flex";
+        dateWrap.style.gap = "8px";
+        dateWrap.style.alignItems = "center";
+        dateWrap.appendChild(input);
+        dateWrap.appendChild(buildTodayButton(input, useEs));
+        wrap.appendChild(dateWrap);
+        appendedCustomInput = true;
+      }
+    }
+
+    if (!appendedCustomInput) {
+      wrap.appendChild(input);
+    }
+    card.appendChild(wrap);
+  });
+
+  if (isCommercialTruckingDriverStep(step)) {
+    buildCommercialDriverRepeater(card, useEs);
+  }
+
+  const btns = document.createElement("div");
+  btns.className = "wizard-buttons";
+
+  const back = document.createElement("button");
+  back.type = "button";
+  back.className = "wizard-btn back";
+  back.textContent = getText("back");
+  back.disabled = index === 0;
+  back.addEventListener("click", goBack);
+
+  const next = document.createElement("button");
+  next.type = "button";
+  next.className = "wizard-btn next";
+  const isLastStep = index === wizardConfig.steps.length - 1;
+  next.textContent = isLastStep ? getText("review") : getText("next");
+  next.addEventListener("click", goNext);
+
+  btns.appendChild(back);
+  btns.appendChild(next);
+  card.appendChild(btns);
+
+  container.appendChild(card);
+
+  setActiveTab(index);
+  updateProgress();
+}
+/* Build Step */
+function buildStep(index) {
+  reviewMode = false;
+  currentStep = index;
+
+  const container = document.getElementById("wizard-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const step = wizardConfig.steps[index];
+  const useEs = isSpanish();
+
+  const card = document.createElement("div");
+  card.className = "wizard-step-card";
+
+  const title = document.createElement("div");
+  title.className = "wizard-step-title";
+
+  const stepTitle = useEs ? (step.title_es || step.title_en) : step.title_en;
+  title.textContent = stepTitle || step.title || "";
+  card.appendChild(title);
+
+  step.fields.forEach((field) => {
+    const wrap = document.createElement("div");
+    wrap.className = "wizard-field";
+
+    const label = document.createElement("label");
+    const labelText = useEs ? (field.label_es || field.label_en) : field.label_en;
+    const finalLabel = labelText || field.label || field.id || "";
+
+    label.textContent = finalLabel + (field.required ? " *" : "");
+    label.setAttribute("for", field.id);
+    wrap.appendChild(label);
+
+    let input;
+    let appendedCustomInput = false;
+
+    if (field.type === "select") {
+      input = document.createElement("select");
+      input.id = field.id;
+
+      const options = getResolvedFieldOptions(field);
+      options.forEach((opt) => {
         const o = document.createElement("option");
         o.value = opt.value;
         const optLabel = useEs
@@ -518,11 +1110,29 @@ function buildStep(index) {
       input.addEventListener("change", () => {
         formData[field.id] = input.value;
       });
+
+      if (input.type === "date" && shouldShowTodayButton(field)) {
+        const dateWrap = document.createElement("div");
+        dateWrap.style.display = "flex";
+        dateWrap.style.gap = "8px";
+        dateWrap.style.alignItems = "center";
+        dateWrap.appendChild(input);
+        dateWrap.appendChild(buildTodayButton(input, useEs));
+        wrap.appendChild(dateWrap);
+        appendedCustomInput = true;
+      }
     }
 
-    wrap.appendChild(input);
+    if (!appendedCustomInput) {
+      wrap.appendChild(input);
+    }
+
     card.appendChild(wrap);
   });
+
+  if (isCommercialTruckingDriverStep(step)) {
+    buildCommercialDriverRepeater(card, useEs);
+  }
 
   const btns = document.createElement("div");
   btns.className = "wizard-buttons";
@@ -613,6 +1223,10 @@ function validateStep() {
     }
   });
 
+  if (!validateCommercialDriverRepeater(step)) {
+    valid = false;
+  }
+
   return valid;
 }
 
@@ -655,6 +1269,15 @@ function buildReview() {
       row.innerHTML = `<strong>${finalLabel}:</strong> ${val}`;
       section.appendChild(row);
     });
+
+    if (isCommercialTruckingDriverStep(step) && formData.driverDetailsEnabled) {
+      const detailsText = getCommercialDriverDetailsReviewText(useEs);
+      if (detailsText) {
+        const row = document.createElement("p");
+        row.innerHTML = `<strong>${useEs ? "Detalle de Conductores" : "Driver Details"}:</strong> ${detailsText}`;
+        section.appendChild(row);
+      }
+    }
 
     card.appendChild(section);
   });
@@ -719,6 +1342,13 @@ function buildApplicationEmailBody(data, appType, assignment, routingLang) {
       lines.push(`${label}: ${val}`);
     });
 
+    if (isCommercialTruckingDriverStep(step) && formData.driverDetailsEnabled) {
+      const detailsText = getCommercialDriverDetailsReviewText(isSpanish());
+      if (detailsText) {
+        lines.push(`${isSpanish() ? "Detalle de Conductores" : "Driver Details"}: ${detailsText}`);
+      }
+    }
+
     lines.push("");
   });
 
@@ -733,6 +1363,11 @@ function submitApplication() {
     step.fields.forEach((field) => {
       data[field.id] = getFieldValue(field);
     });
+
+    if (isCommercialTruckingDriverStep(step) && formData.driverDetailsEnabled) {
+      syncCommercialDriverDetailsFromInputs();
+      data.driverDetails = Array.isArray(formData.driverDetails) ? formData.driverDetails : [];
+    }
   });
 
   const OFFICE_EMAIL = "office@insaces.com";
@@ -840,8 +1475,7 @@ function submitApplication() {
 
   // Flattened field payload
   Object.entries(data).forEach(([k, v]) => {
-    const val = Array.isArray(v) ? v.join(", ") : (v ?? "");
-    addField(k, val);
+    addField(k, valueToText(v));
   });
 
   // Human-readable summary
