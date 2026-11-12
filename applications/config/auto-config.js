@@ -43,10 +43,14 @@ export default {
                 },
                 {
                     id: "driverState",
-                    label_en: "License State",
-                    label_es: "Estado de la Licencia",
-                    type: "text",
-                    required: true
+                    label_en: "License State (Texas only for now)",
+                    label_es: "Estado de la Licencia (solo Texas por ahora)",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "TX", label_en: "Texas", label_es: "Texas" }
+                    ]
                 },
                 {
                     id: "maritalStatus",
@@ -137,15 +141,29 @@ export default {
                     id: "compDeductible",
                     label_en: "Comprehensive Deductible",
                     label_es: "Deducible de Cobertura Amplia",
-                    type: "number",
-                    required: true
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "250", label_en: "$250", label_es: "$250" },
+                        { value: "500", label_en: "$500", label_es: "$500" },
+                        { value: "1000", label_en: "$1,000", label_es: "$1,000" },
+                        { value: "2500", label_en: "$2,500", label_es: "$2,500" }
+                    ]
                 },
                 {
                     id: "collisionDeductible",
                     label_en: "Collision Deductible",
                     label_es: "Deducible de Colisión",
-                    type: "number",
-                    required: true
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "250", label_en: "$250", label_es: "$250" },
+                        { value: "500", label_en: "$500", label_es: "$500" },
+                        { value: "1000", label_en: "$1,000", label_es: "$1,000" },
+                        { value: "2500", label_en: "$2,500", label_es: "$2,500" }
+                    ]
                 },
                 {
                     id: "rentalCoverage",
