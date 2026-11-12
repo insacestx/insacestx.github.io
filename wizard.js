@@ -147,11 +147,6 @@ function getAppType() {
     "";
 
   type = (type || "").toLowerCase().trim();
-  if (type) return type;
-
-  const path = (window.location.pathname || "").toLowerCase();
-  const file = path.split("/").pop() || "";
-  const slug = file.replace(".html", "").trim();
 
   const map = {
     "commercial-auto": "commercialauto",
@@ -159,6 +154,12 @@ function getAppType() {
     "commercial-property": "commercialproperty",
     "commercial-umbrella": "commercialumbrella"
   };
+
+  if (type) return map[type] || type;
+
+  const path = (window.location.pathname || "").toLowerCase();
+  const file = path.split("/").pop() || "";
+  const slug = file.replace(".html", "").trim();
 
   return map[slug] || slug || null;
 }
@@ -204,9 +205,7 @@ const DROPDOWN_PRESETS = {
     { value: "25", label_en: "25 Years", label_es: "25 Años" },
     { value: "30", label_en: "30 Years", label_es: "30 Años" }
   ],
-  "state-texas-only": [
-    { value: "TX", label_en: "Texas", label_es: "Texas" }
-  ]
+  "state-texas-only": [{ value: "TX", label_en: "Texas", label_es: "Texas" }]
 };
 
 const COMMERCIAL_DRIVER_FIELDS = [
@@ -960,206 +959,6 @@ function buildStep(index) {
   setActiveTab(index);
   updateProgress();
 }
-/* Build Step */
-function buildStep(index) {
-  reviewMode = false;
-  currentStep = index;
-
-  const container = document.getElementById("wizard-container");
-  if (!container) return;
-  container.innerHTML = "";
-
-  const step = wizardConfig.steps[index];
-  const useEs = isSpanish();
-
-  const card = document.createElement("div");
-  card.className = "wizard-step-card";
-
-  const title = document.createElement("div");
-  title.className = "wizard-step-title";
-
-  const stepTitle = useEs ? (step.title_es || step.title_en) : step.title_en;
-  title.textContent = stepTitle || step.title || "";
-  card.appendChild(title);
-
-  step.fields.forEach((field) => {
-    const wrap = document.createElement("div");
-    wrap.className = "wizard-field";
-
-    const label = document.createElement("label");
-    const labelText = useEs ? (field.label_es || field.label_en) : field.label_en;
-    const finalLabel = labelText || field.label || field.id || "";
-
-    label.textContent = finalLabel + (field.required ? " *" : "");
-    label.setAttribute("for", field.id);
-    wrap.appendChild(label);
-
-    let input;
-    let appendedCustomInput = false;
-
-    if (field.type === "select") {
-      input = document.createElement("select");
-      input.id = field.id;
-
-      const options = getResolvedFieldOptions(field);
-      options.forEach((opt) => {
-        const o = document.createElement("option");
-        o.value = opt.value;
-        const optLabel = useEs
-          ? (opt.label_es || opt.label_en || opt.label)
-          : (opt.label_en || opt.label);
-        o.textContent = optLabel || opt.value;
-        input.appendChild(o);
-      });
-
-      if (formData[field.id] != null) input.value = formData[field.id];
-
-      input.addEventListener("input", () => {
-        formData[field.id] = input.value;
-      });
-      input.addEventListener("change", () => {
-        formData[field.id] = input.value;
-      });
-    } else if (field.type === "textarea") {
-      input = document.createElement("textarea");
-      input.id = field.id;
-      if (field.placeholder_en || field.placeholder_es) {
-        input.placeholder = useEs
-          ? (field.placeholder_es || field.placeholder_en || "")
-          : (field.placeholder_en || "");
-      }
-
-      if (formData[field.id] != null) input.value = formData[field.id];
-
-      input.addEventListener("input", () => {
-        formData[field.id] = input.value;
-      });
-      input.addEventListener("change", () => {
-        formData[field.id] = input.value;
-      });
-    } else if (field.type === "checkbox-group") {
-      input = document.createElement("div");
-      input.id = field.id;
-      input.className = "wizard-checkbox-group";
-
-      const selectedValues = Array.isArray(formData[field.id]) ? formData[field.id] : [];
-
-      (field.options || []).forEach((opt, idx) => {
-        const optId = `${field.id}_${idx}`;
-
-        const item = document.createElement("label");
-        item.className = "wizard-checkbox-item";
-        item.setAttribute("for", optId);
-
-        const cb = document.createElement("input");
-        cb.type = "checkbox";
-        cb.id = optId;
-        cb.value = opt.value;
-
-        if (selectedValues.includes(opt.value)) cb.checked = true;
-
-        cb.addEventListener("change", () => {
-          const checked = getCheckboxValues(input);
-          formData[field.id] = checked;
-
-          if (input.classList.contains("invalid")) {
-            const min = Number(field.minSelected || (field.required ? 1 : 0));
-            if (checked.length >= min) input.classList.remove("invalid");
-          }
-        });
-
-        const txt = document.createElement("span");
-        txt.textContent = useEs
-          ? (opt.label_es || opt.label_en || opt.label || opt.value)
-          : (opt.label_en || opt.label || opt.value);
-
-        item.appendChild(cb);
-        item.appendChild(txt);
-        input.appendChild(item);
-      });
-
-      if (!Array.isArray(formData[field.id])) formData[field.id] = selectedValues;
-
-      if ((field.required || field.minSelected) && !wrap.querySelector(".wizard-help")) {
-        const min = Number(field.minSelected || (field.required ? 1 : 0));
-        if (min > 0) {
-          const help = document.createElement("small");
-          help.className = "wizard-help";
-          help.style.color = "#6b7280";
-          help.textContent = isSpanish()
-            ? `Seleccione al menos ${min}.`
-            : `Select at least ${min}.`;
-          wrap.appendChild(help);
-        }
-      }
-    } else {
-      input = document.createElement("input");
-      input.type = field.type || "text";
-      input.id = field.id;
-      if (field.placeholder_en || field.placeholder_es) {
-        input.placeholder = useEs
-          ? (field.placeholder_es || field.placeholder_en || "")
-          : (field.placeholder_en || "");
-      }
-
-      if (formData[field.id] != null) input.value = formData[field.id];
-
-      input.addEventListener("input", () => {
-        formData[field.id] = input.value;
-      });
-      input.addEventListener("change", () => {
-        formData[field.id] = input.value;
-      });
-
-      if (input.type === "date" && shouldShowTodayButton(field)) {
-        const dateWrap = document.createElement("div");
-        dateWrap.style.display = "flex";
-        dateWrap.style.gap = "8px";
-        dateWrap.style.alignItems = "center";
-        dateWrap.appendChild(input);
-        dateWrap.appendChild(buildTodayButton(input, useEs));
-        wrap.appendChild(dateWrap);
-        appendedCustomInput = true;
-      }
-    }
-
-    if (!appendedCustomInput) {
-      wrap.appendChild(input);
-    }
-
-    card.appendChild(wrap);
-  });
-
-  if (isCommercialTruckingDriverStep(step)) {
-    buildCommercialDriverRepeater(card, useEs);
-  }
-
-  const btns = document.createElement("div");
-  btns.className = "wizard-buttons";
-
-  const back = document.createElement("button");
-  back.type = "button";
-  back.className = "wizard-btn back";
-  back.textContent = getText("back");
-  back.disabled = index === 0;
-  back.addEventListener("click", goBack);
-
-  const next = document.createElement("button");
-  next.type = "button";
-  next.className = "wizard-btn next";
-  const isLastStep = index === wizardConfig.steps.length - 1;
-  next.textContent = isLastStep ? getText("review") : getText("next");
-  next.addEventListener("click", goNext);
-
-  btns.appendChild(back);
-  btns.appendChild(next);
-  card.appendChild(btns);
-
-  container.appendChild(card);
-
-  setActiveTab(index);
-  updateProgress();
-}
 
 /* Navigation */
 function goToStep(i) {
@@ -1358,7 +1157,7 @@ function buildApplicationEmailBody(data, appType, assignment, routingLang) {
 function submitViaDirectPost(fields, officeEmail) {
   const postForm = document.createElement("form");
   postForm.method = "POST";
-  postForm.action = `https://formsubmit.co/${officeEmail}`; // IMPORTANT: do not encode @
+  postForm.action = `https://formsubmit.co/${officeEmail}`;
   postForm.style.display = "none";
   postForm.acceptCharset = "UTF-8";
   postForm.noValidate = true;
