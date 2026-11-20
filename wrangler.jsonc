@@ -1,6 +1,8 @@
 {
-  "$schema": "https://developers.cloudflare.com/workers/wrangler/config-schema.json",
-  "name": "insacestx-github-io",
-  "compatibility_date": "2026-11-20",
-  "pages_build_output_dir": "."
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "insacestx",
+  "compatibility_date": "2026-11-18",
+  "assets": {
+    "directory": "./"
+  }
 }
