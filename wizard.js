@@ -668,7 +668,7 @@ async function loadConfig(appType) {
       try {
         const r = await fetch(importUrl, { cache: "no-store" });
         const text = await r.text();
-        preview = `\nServed ${r.status} (${r.headers.get("content-type") || "unknown type"}) from ${configPath}\nStarts with: ${text.slice(0, 120)}`;
+        preview = `\nServed ${r.status} (${r.headers.get("content-type") || "unknown type"}) from ${configPath}\nStarts with: ${text.slice(0, 200)}`;
       } catch (_) {}
       throw new Error(`${importErr.message}${preview}`);
     }
