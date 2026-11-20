@@ -1,3 +1,8 @@
+Only **one config file** needs to be replaced for this error: `applications/config/auto-config.js`.
+
+Paste this as the **entire file content**:
+
+```js
 export default {
     title_en: "Auto Insurance Application",
     title_es: "Solicitud de Seguro de Auto",
@@ -101,7 +106,7 @@ export default {
     { value: "WY", label_en: "Wyoming", label_es: "Wyoming" },
     { value: "DC", label_en: "District of Columbia", label_es: "Distrito de Columbia" }
   ]
-}
+},
                 {
                     id: "maritalStatus",
                     label_en: "Marital Status",
@@ -267,3 +272,4 @@ export default {
         }
     ]
 };
+```
