@@ -1,0 +1,23 @@
+# Git internals (this is what caused the 56.9 MiB failure)
+.git
+.git/**
+
+# Dependencies
+node_modules
+node_modules/**
+
+# OS files
+.DS_Store
+**/.DS_Store
+
+# Config & metadata (not part of the public site)
+wrangler.jsonc
+wrangler.toml
+package.json
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+README.md
+.github
+.github/**
+.assetsignore
