@@ -656,8 +656,22 @@ async function loadConfig(appType) {
       throw new Error(`Missing/invalid config path for app '${appType}'.`);
     }
 
-    const importUrl = new URL(configPath, window.location.href).href;
-    const module = await import(importUrl);
+    const url = new URL(configPath, window.location.href);
+    url.searchParams.set("v", Date.now());
+    const importUrl = url.href;
+
+    let module;
+    try {
+      module = await import(importUrl);
+    } catch (importErr) {
+      let preview = "";
+      try {
+        const r = await fetch(importUrl, { cache: "no-store" });
+        const text = await r.text();
+        preview = `\nServed ${r.status} (${r.headers.get("content-type") || "unknown type"}) from ${configPath}\nStarts with: ${text.slice(0, 120)}`;
+      } catch (_) {}
+      throw new Error(`${importErr.message}${preview}`);
+    }
 
     if (!module || !module.default) {
       throw new Error(`Config module has no default export: ${importUrl}`);
@@ -677,7 +691,6 @@ async function loadConfig(appType) {
     return false;
   }
 }
-
 /* Init */
 async function initWizard() {
   const appType = getAppType();
