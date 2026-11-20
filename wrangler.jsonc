@@ -1,0 +1,8 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "insacestx-github-io",
+  "compatibility_date": "2026-11-20",
+
+  // Cloudflare Pages: your static site is served from repo root
+  "pages_build_output_dir": "."
+}
