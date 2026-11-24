@@ -98,8 +98,6 @@ const commercialTruckingConfig = {
           ]
         },
         { id: "radius", label_en: "Radius of Operation (miles)", label_es: "Radio de Operación (millas)", type: "number", required: true },
-        { id: "unitList", label_en: "List All Power Units (Year/Make/Model/VIN/GVWR)", label_es: "Lista de Unidades (Año/Marca/Modelo/VIN/GVWR)", type: "text" },
-        { id: "trailerList", label_en: "List All Trailers (Type/Year/VIN)", label_es: "Lista de Remolques (Tipo/Año/VIN)", type: "text" },
         {
           id: "hiredNonOwned",
           label_en: "Any Hired or Non-Owned Exposure?",
@@ -223,8 +221,35 @@ const commercialTruckingConfig = {
       title_en: "Coverage Options",
       title_es: "Opciones de Cobertura",
       fields: [
-        { id: "liabilityLimit", label_en: "Liability Limit", label_es: "Límite de Responsabilidad", type: "number", required: true },
-        { id: "cargoLimit", label_en: "Cargo Coverage Limit", label_es: "Límite de Cobertura de Carga", type: "number" },
+        {
+          id: "liabilityLimit",
+          label_en: "Liability Limit",
+          label_es: "Límite de Responsabilidad",
+          type: "select",
+          required: true,
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "300000", label_en: "$300,000", label_es: "$300,000" },
+            { value: "500000", label_en: "$500,000", label_es: "$500,000" },
+            { value: "750000", label_en: "$750,000", label_es: "$750,000" },
+            { value: "1000000", label_en: "$1,000,000", label_es: "$1,000,000" },
+            { value: "2000000", label_en: "$2,000,000", label_es: "$2,000,000" }
+          ]
+        },
+        {
+          id: "cargoLimit",
+          label_en: "Cargo Coverage Limit",
+          label_es: "Límite de Cobertura de Carga",
+          type: "select",
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "50000", label_en: "$50,000", label_es: "$50,000" },
+            { value: "100000", label_en: "$100,000", label_es: "$100,000" },
+            { value: "150000", label_en: "$150,000", label_es: "$150,000" },
+            { value: "250000", label_en: "$250,000", label_es: "$250,000" },
+            { value: "500000", label_en: "$500,000", label_es: "$500,000" }
+          ]
+        },
         {
           id: "physicalDamage",
           label_en: "Physical Damage Coverage?",
@@ -237,10 +262,60 @@ const commercialTruckingConfig = {
           ]
         },
         { id: "statedValue", label_en: "Stated Value of Units", label_es: "Valor Declarado de las Unidades", type: "text" },
-        { id: "trailerInterchange", label_en: "Trailer Interchange Limit", label_es: "Límite de Intercambio de Remolque", type: "number" },
-        { id: "nonOwnedTrailer", label_en: "Non-Owned Trailer Limit", label_es: "Límite de Remolque No Propio", type: "number" },
-        { id: "reeferBreakdown", label_en: "Reefer Breakdown Coverage", label_es: "Cobertura de Avería de Refrigeración", type: "number" },
-        { id: "deductible", label_en: "Deductible", label_es: "Deducible", type: "number" }
+        {
+          id: "trailerInterchange",
+          label_en: "Trailer Interchange Limit",
+          label_es: "Límite de Intercambio de Remolque",
+          type: "select",
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "none", label_en: "Not Needed", label_es: "No Necesario" },
+            { value: "20000", label_en: "$20,000", label_es: "$20,000" },
+            { value: "30000", label_en: "$30,000", label_es: "$30,000" },
+            { value: "50000", label_en: "$50,000", label_es: "$50,000" },
+            { value: "100000", label_en: "$100,000", label_es: "$100,000" }
+          ]
+        },
+        {
+          id: "nonOwnedTrailer",
+          label_en: "Non-Owned Trailer Limit",
+          label_es: "Límite de Remolque No Propio",
+          type: "select",
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "none", label_en: "Not Needed", label_es: "No Necesario" },
+            { value: "20000", label_en: "$20,000", label_es: "$20,000" },
+            { value: "30000", label_en: "$30,000", label_es: "$30,000" },
+            { value: "50000", label_en: "$50,000", label_es: "$50,000" },
+            { value: "100000", label_en: "$100,000", label_es: "$100,000" }
+          ]
+        },
+        {
+          id: "reeferBreakdown",
+          label_en: "Reefer Breakdown Coverage",
+          label_es: "Cobertura de Avería de Refrigeración",
+          type: "select",
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "none", label_en: "Not Needed", label_es: "No Necesario" },
+            { value: "25000", label_en: "$25,000", label_es: "$25,000" },
+            { value: "50000", label_en: "$50,000", label_es: "$50,000" },
+            { value: "100000", label_en: "$100,000", label_es: "$100,000" }
+          ]
+        },
+        {
+          id: "deductible",
+          label_en: "Deductible",
+          label_es: "Deducible",
+          type: "select",
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "1000", label_en: "$1,000", label_es: "$1,000" },
+            { value: "2500", label_en: "$2,500", label_es: "$2,500" },
+            { value: "5000", label_en: "$5,000", label_es: "$5,000" },
+            { value: "10000", label_en: "$10,000", label_es: "$10,000" }
+          ]
+        }
       ]
     },
 
