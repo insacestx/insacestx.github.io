@@ -68,8 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // FormSubmit helpers
     ensureHiddenInput("_captcha", "false");
-    ensureHiddenInput("_next", "https://insacestx.github.io/thank-you.html");
-    ensureHiddenInput("_subject", "New Bundle Quote Request");
+ensureHiddenInput("_next", "https://insaces.com/thank-you.html");
+     ensureHiddenInput("_subject", "New Bundle Quote Request");
 
     // Round-robin/audit metadata included in email body table
     ensureHiddenInput("rrEmail", agentEmail);
