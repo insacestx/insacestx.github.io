@@ -121,6 +121,10 @@ function getText(key) {
   return map[key] || key;
 }
 
+/* Canonical public site; never derive redirects from the current hostname */
+const SITE_ORIGIN = "https://insaces.com";
+const THANK_YOU_URL = `${SITE_ORIGIN}/thank-you.html`;
+
 /* Path helpers for user-site GitHub Pages */
 function getBasePath() {
   return "";
@@ -1167,27 +1171,7 @@ function buildApplicationEmailBody(data, appType, assignment, routingLang) {
   return lines.join("\n");
 }
 
-function submitViaDirectPost(fields, officeEmail) {
-  const postForm = document.createElement("form");
-  postForm.method = "POST";
-  postForm.action = `https://formsubmit.co/${officeEmail}`;
-  postForm.style.display = "none";
-  postForm.acceptCharset = "UTF-8";
-  postForm.noValidate = true;
-
-  fields.forEach(({ name, value }) => {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = name;
-    input.value = value == null ? "" : String(value);
-    postForm.appendChild(input);
-  });
-
-  document.body.appendChild(postForm);
-  postForm.submit();
-}
-
-/* Submit via FormSubmit with AJAX primary + direct post fallback */
+/* Submit via FormSubmit AJAX (one retry, no redirect-based fallback) */
 async function submitApplication() {
   const data = {};
 
@@ -1203,6 +1187,7 @@ async function submitApplication() {
   });
 
   const OFFICE_EMAIL = "office@insaces.com";
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const lang = getRoutingLanguageFromData(data);
 
   const urlAssignment = getAssignmentFromUrl();
@@ -1258,10 +1243,10 @@ async function submitApplication() {
 
   addField("_subject", subject);
   addField("_captcha", "false");
-  addField("_next", appUrl("thank-you.html"));
+  addField("_next", THANK_YOU_URL);
   addField("_template", "table");
   addField("_to", OFFICE_EMAIL);
-  addField("_cc", agentEmail !== OFFICE_EMAIL ? agentEmail : "");
+  if (agentEmail !== OFFICE_EMAIL && EMAIL_RE.test(agentEmail)) addField("_cc", agentEmail);
 
   const replyEmail =
     data.email ||
@@ -1269,7 +1254,10 @@ async function submitApplication() {
     data.contactEmail ||
     data.clientEmail ||
     "";
-  if (replyEmail) addField("_replyto", replyEmail);
+  if (EMAIL_RE.test(String(replyEmail).trim())) addField("_replyto", String(replyEmail).trim());
+
+  const submissionId = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+  addField("Submission ID", submissionId);
 
   addField("Application Type", appType);
   addField("Submission Language", lang.toUpperCase());
@@ -1285,42 +1273,59 @@ async function submitApplication() {
   addField("RR Source", assignment?.source || "unknown");
   addField("RR Mode", "office-primary-agent-cc");
 
-Object.entries(data).forEach(([k, v]) => {
-  const key = String(k || "");
-  const lower = key.toLowerCase();
-  const reserved = new Set(["cc", "to", "subject", "captcha", "next", "template", "replyto"]);
-  const safeKey = reserved.has(lower) ? `field_${key}` : key;
-  addField(safeKey, valueToText(v));
-});
+  Object.entries(data).forEach(([k, v]) => {
+    const key = String(k || "");
+    const lower = key.toLowerCase();
+    const reserved = new Set(["cc", "to", "subject", "captcha", "next", "template", "replyto"]);
+    const safeKey = reserved.has(lower) ? `field_${key}` : key;
+    addField(safeKey, valueToText(v));
+  });
 
   addField("Application Summary", body);
 
-  const payload = new FormData();
-  fields.forEach(({ name, value }) => payload.append(name, value));
+  const buildPayload = (includeCc) => {
+    const payload = new FormData();
+    fields.forEach(({ name, value }) => {
+      if (name === "_cc" && !includeCc) return;
+      payload.append(name, value);
+    });
+    return payload;
+  };
+
+  const postOnce = async (includeCc) => {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 20000);
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${OFFICE_EMAIL}`, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: buildPayload(includeCc),
+        signal: controller.signal
+      });
+
+      let result = null;
+      try {
+        result = await response.json();
+      } catch {
+        result = null;
+      }
+
+      if (!response.ok || String(result?.success) === "false") {
+        throw new Error(result?.message || `HTTP ${response.status}`);
+      }
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
+  };
 
   try {
-    const controller = new AbortController();
-    const timeoutId = window.setTimeout(() => controller.abort(), 15000);
-
-    const response = await fetch(`https://formsubmit.co/ajax/${OFFICE_EMAIL}`, {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: payload,
-      signal: controller.signal
-    });
-
-    window.clearTimeout(timeoutId);
-
-    let result = null;
     try {
-      result = await response.json();
-    } catch {
-      result = null;
-    }
-
-    if (!response.ok || result?.success === "false") {
-      const detail = result?.message || `HTTP ${response.status}`;
-      throw new Error(detail);
+      await postOnce(true);
+    } catch (firstErr) {
+      // Retry without the agent CC: office still receives it and the agent is named in the body
+      console.warn("FormSubmit attempt 1 failed; retrying once without CC.", firstErr);
+      await new Promise((resolve) => window.setTimeout(resolve, 1500));
+      await postOnce(false);
     }
 
     alert(
@@ -1329,11 +1334,39 @@ Object.entries(data).forEach(([k, v]) => {
         : "Your application was sent and routed to the assigned agent!"
     );
 
-    window.location.href = appUrl("thank-you.html");
+    window.location.href = THANK_YOU_URL;
   } catch (err) {
-    console.error("FormSubmit AJAX failed; falling back to direct POST.", err);
-    submitViaDirectPost(fields, OFFICE_EMAIL);
+    console.error("FormSubmit failed after retry.", err);
+    showSubmitError(() => submitApplication());
   }
+}
+
+/* Show an in-page error (never navigate to FormSubmit's own pages) */
+function showSubmitError(retry) {
+  const container = document.getElementById("wizard-container");
+  if (!container) return;
+
+  const es = isSpanish();
+  container.innerHTML = `
+    <div style="background:#fff; border:1px solid #fee2e2; border-radius:12px; padding:28px; max-width:680px; margin:0 auto; text-align:center;">
+      <h3 style="margin:0 0 10px; color:#111827;">
+        ${es ? "No pudimos enviar su solicitud" : "We couldn't send your application"}
+      </h3>
+      <p style="margin:0 0 16px; color:#6b7280;">
+        ${es
+          ? "Por favor intente de nuevo. Si el problema continúa, escríbanos a office@insaces.com."
+          : "Please try again. If the problem continues, email us at office@insaces.com."}
+      </p>
+      <button type="button" id="wizard-retry-submit" class="wizard-btn next">${es ? "Intentar de nuevo" : "Try Again"}</button>
+      <button type="button" id="wizard-back-review" class="wizard-btn back">${es ? "Regresar" : "Back"}</button>
+    </div>
+  `;
+
+  document.getElementById("wizard-retry-submit")?.addEventListener("click", retry);
+  document.getElementById("wizard-back-review")?.addEventListener("click", () => {
+    reviewMode = false;
+    buildStep(currentStep);
+  });
 }
 
 /* Go back to applications page */
