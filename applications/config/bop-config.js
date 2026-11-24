@@ -69,9 +69,54 @@ export default {
             title_en: "Coverage Options",
             title_es: "Opciones de Cobertura",
             fields: [
-                { id: "buildingLimit", label_en: "Building Limit", label_es: "Límite del Edificio", type: "number" },
-                { id: "bppLimit", label_en: "Business Personal Property Limit", label_es: "Límite de Propiedad Personal Comercial", type: "number", required: true },
-                { id: "liabilityLimit", label_en: "Liability Limit", label_es: "Límite de Responsabilidad", type: "number", required: true }
+                {
+                    id: "buildingLimit",
+                    label_en: "Building Limit",
+                    label_es: "Límite del Edificio",
+                    type: "select",
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "Not applicable (renting)", label_en: "Not applicable (renting)", label_es: "No aplica (renta)" },
+                        { value: "$100,000", label_en: "$100,000", label_es: "$100,000" },
+                        { value: "$250,000", label_en: "$250,000", label_es: "$250,000" },
+                        { value: "$500,000", label_en: "$500,000", label_es: "$500,000" },
+                        { value: "$750,000", label_en: "$750,000", label_es: "$750,000" },
+                        { value: "$1,000,000", label_en: "$1,000,000", label_es: "$1,000,000" },
+                        { value: "$2,000,000", label_en: "$2,000,000", label_es: "$2,000,000" },
+                        { value: "Over $2,000,000", label_en: "Over $2,000,000", label_es: "Más de $2,000,000" }
+                    ]
+                },
+                {
+                    id: "bppLimit",
+                    label_en: "Business Personal Property Limit",
+                    label_es: "Límite de Propiedad Personal Comercial",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "$25,000", label_en: "$25,000", label_es: "$25,000" },
+                        { value: "$50,000", label_en: "$50,000", label_es: "$50,000" },
+                        { value: "$100,000", label_en: "$100,000", label_es: "$100,000" },
+                        { value: "$250,000", label_en: "$250,000", label_es: "$250,000" },
+                        { value: "$500,000", label_en: "$500,000", label_es: "$500,000" },
+                        { value: "$1,000,000", label_en: "$1,000,000", label_es: "$1,000,000" },
+                        { value: "Over $1,000,000", label_en: "Over $1,000,000", label_es: "Más de $1,000,000" }
+                    ]
+                },
+                {
+                    id: "liabilityLimit",
+                    label_en: "Liability Limit",
+                    label_es: "Límite de Responsabilidad",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "$300,000", label_en: "$300,000", label_es: "$300,000" },
+                        { value: "$500,000", label_en: "$500,000", label_es: "$500,000" },
+                        { value: "$1,000,000", label_en: "$1,000,000", label_es: "$1,000,000" },
+                        { value: "$2,000,000", label_en: "$2,000,000", label_es: "$2,000,000" }
+                    ]
+                }
             ]
         }
     ]
