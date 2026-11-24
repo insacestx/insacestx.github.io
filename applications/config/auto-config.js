@@ -16,6 +16,20 @@ export default {
                     required: true
                 },
                 {
+                    id: "phone",
+                    label_en: "Phone Number",
+                    label_es: "Número de Teléfono",
+                    type: "text",
+                    required: true
+                },
+                {
+                    id: "email",
+                    label_en: "Email Address",
+                    label_es: "Correo Electrónico",
+                    type: "email",
+                    required: true
+                },
+                {
                     id: "preferredLanguage",
                     label_en: "Preferred Agent Language",
                     label_es: "Idioma Preferido del Agente",
