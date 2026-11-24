@@ -89,7 +89,22 @@ export default {
             { value: "offshore", label_en: "Offshore", label_es: "Mar Abierto" }
           ]
         },
-        { id: "mooringLocation", label_en: "Mooring Location", label_es: "Lugar de Atraque", type: "text", required: true },
+        {
+          id: "mooringLocation",
+          label_en: "Mooring Location",
+          label_es: "Lugar de Atraque",
+          type: "select",
+          required: true,
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "marina-wet-slip", label_en: "Marina - Wet Slip", label_es: "Marina - Muelle en el Agua" },
+            { value: "dry-storage", label_en: "Dry Storage / Rack", label_es: "Almacenaje en Seco / Rack" },
+            { value: "private-dock", label_en: "Private Dock / Boat Lift", label_es: "Muelle Privado / Elevador" },
+            { value: "trailer-home", label_en: "Trailered at Home", label_es: "En Remolque en Casa" },
+            { value: "mooring-buoy", label_en: "Mooring Buoy / Anchored", label_es: "Boya de Amarre / Anclado" },
+            { value: "other", label_en: "Other", label_es: "Otro" }
+          ]
+        },
         {
           id: "layupPeriod",
           label_en: "Lay-Up Period",
