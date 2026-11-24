@@ -91,8 +91,37 @@ export default {
             title_en: "Coverage Requested",
             title_es: "Cobertura Solicitada",
             fields: [
-                { id: "limit", label_en: "Liability Limit", label_es: "Límite de Responsabilidad", type: "number", required: true },
-                { id: "deductible", label_en: "Deductible", label_es: "Deducible", type: "number", required: true }
+                {
+                    id: "limit",
+                    label_en: "Liability Limit",
+                    label_es: "Límite de Responsabilidad",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "$250,000", label_en: "$250,000", label_es: "$250,000" },
+                        { value: "$500,000", label_en: "$500,000", label_es: "$500,000" },
+                        { value: "$1,000,000", label_en: "$1,000,000", label_es: "$1,000,000" },
+                        { value: "$2,000,000", label_en: "$2,000,000", label_es: "$2,000,000" },
+                        { value: "$3,000,000", label_en: "$3,000,000", label_es: "$3,000,000" },
+                        { value: "$5,000,000", label_en: "$5,000,000", label_es: "$5,000,000" }
+                    ]
+                },
+                {
+                    id: "deductible",
+                    label_en: "Deductible",
+                    label_es: "Deducible",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "$1,000", label_en: "$1,000", label_es: "$1,000" },
+                        { value: "$2,500", label_en: "$2,500", label_es: "$2,500" },
+                        { value: "$5,000", label_en: "$5,000", label_es: "$5,000" },
+                        { value: "$10,000", label_en: "$10,000", label_es: "$10,000" },
+                        { value: "$25,000", label_en: "$25,000", label_es: "$25,000" }
+                    ]
+                }
             ]
         }
     ]
