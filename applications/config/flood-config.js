@@ -113,7 +113,15 @@ export default {
           id: "foundationType",
           label_en: "Foundation Type",
           label_es: "Tipo de Cimentación",
-          type: "text"
+          type: "select",
+          options: [
+            { value: "", label_en: "Select...", label_es: "Seleccione..." },
+            { value: "slab", label_en: "Slab on Grade", label_es: "Losa a Nivel del Suelo" },
+            { value: "crawl-space", label_en: "Crawl Space", label_es: "Espacio de Arrastre (Crawl Space)" },
+            { value: "enclosed", label_en: "Enclosed", label_es: "Cerrada" },
+            { value: "pier-and-beam", label_en: "Pier and Beam", label_es: "Pilotes y Vigas" },
+            { value: "other", label_en: "Other", label_es: "Otra" }
+          ]
         },
         {
           id: "elevationCert",
