@@ -31,8 +31,33 @@ export default {
             title_en: "Underlying Policies",
             title_es: "Pólizas Subyacentes",
             fields: [
-                { id: "glLimit", label_en: "General Liability Limit", label_es: "Límite de Responsabilidad General", type: "number", required: true },
-                { id: "autoLimit", label_en: "Commercial Auto Limit", label_es: "Límite de Auto Comercial", type: "number" },
+                {
+                    id: "glLimit",
+                    label_en: "General Liability Limit",
+                    label_es: "Límite de Responsabilidad General",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "$500,000", label_en: "$500,000", label_es: "$500,000" },
+                        { value: "$1,000,000", label_en: "$1,000,000", label_es: "$1,000,000" },
+                        { value: "$2,000,000", label_en: "$2,000,000", label_es: "$2,000,000" }
+                    ]
+                },
+                {
+                    id: "autoLimit",
+                    label_en: "Commercial Auto Limit",
+                    label_es: "Límite de Auto Comercial",
+                    type: "select",
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "None", label_en: "None", label_es: "Ninguno" },
+                        { value: "$500,000", label_en: "$500,000", label_es: "$500,000" },
+                        { value: "$750,000", label_en: "$750,000", label_es: "$750,000" },
+                        { value: "$1,000,000", label_en: "$1,000,000", label_es: "$1,000,000" },
+                        { value: "$2,000,000", label_en: "$2,000,000", label_es: "$2,000,000" }
+                    ]
+                },
                 {
                     id: "workersComp",
                     label_en: "Workers Comp Policy?",
@@ -63,7 +88,22 @@ export default {
             title_en: "Coverage Requested",
             title_es: "Cobertura Solicitada",
             fields: [
-                { id: "umbrellaLimit", label_en: "Umbrella Limit Requested", label_es: "Límite Umbrella Solicitado", type: "number", required: true }
+                {
+                    id: "umbrellaLimit",
+                    label_en: "Umbrella Limit Requested",
+                    label_es: "Límite Umbrella Solicitado",
+                    type: "select",
+                    required: true,
+                    options: [
+                        { value: "", label_en: "Select...", label_es: "Seleccione..." },
+                        { value: "$1,000,000", label_en: "$1,000,000", label_es: "$1,000,000" },
+                        { value: "$2,000,000", label_en: "$2,000,000", label_es: "$2,000,000" },
+                        { value: "$3,000,000", label_en: "$3,000,000", label_es: "$3,000,000" },
+                        { value: "$4,000,000", label_en: "$4,000,000", label_es: "$4,000,000" },
+                        { value: "$5,000,000", label_en: "$5,000,000", label_es: "$5,000,000" },
+                        { value: "$10,000,000", label_en: "$10,000,000", label_es: "$10,000,000" }
+                    ]
+                }
             ]
         }
     ]
