@@ -1171,8 +1171,28 @@ function buildApplicationEmailBody(data, appType, assignment, routingLang) {
   return lines.join("\n");
 }
 
-/* Submit via FormSubmit AJAX (lean payload, one minimal retry, no redirect-based fallback) */
+/* Submit via FormSubmit AJAX: exactly one request per click.
+   Never retried automatically: a retry doubles the load and trips FormSubmit's 429 rate limit. */
+let isSubmitting = false;
+
 async function submitApplication() {
+  if (isSubmitting) return;
+  isSubmitting = true;
+
+  try {
+    await sendApplication();
+  } catch (err) {
+    isSubmitting = false;
+    console.error("FormSubmit failed.", err);
+    showSubmitError(
+      () => submitApplication(),
+      err?.detail || String(err?.message || err),
+      err?.status
+    );
+  }
+}
+
+async function sendApplication() {
   const data = {};
 
   wizardConfig.steps.forEach((step) => {
@@ -1222,6 +1242,8 @@ async function submitApplication() {
     data.name ||
     data.firstName ||
     data.contactName ||
+    data.ownerName ||
+    data.insuredName ||
     data.driverName ||
     data.businessName ||
     data.business_name ||
@@ -1229,6 +1251,27 @@ async function submitApplication() {
     "Customer";
   const subject = `New ${appType} application - ${customerName}`;
   const body = buildApplicationEmailBody(data, appType, assignment, lang);
+
+  const replyEmail = String(
+    data.email || data.Email || data.contactEmail || data.clientEmail ||
+    data.business_email || data.contact_email || ""
+  ).trim();
+  const submissionId = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+
+  const payload = new FormData();
+  const add = (name, value) => payload.append(name, value == null ? "" : String(value));
+
+  add("_subject", subject);
+  add("_captcha", "false");
+  add("_template", "table");
+  add("_to", OFFICE_EMAIL);
+  if (agentEmail !== OFFICE_EMAIL && EMAIL_RE.test(agentEmail)) add("_cc", agentEmail);
+  if (EMAIL_RE.test(replyEmail)) add("_replyto", replyEmail);
+  add("Applicant", customerName);
+  add("Application Type", appType);
+  add("Submission ID", submissionId);
+  add("Assigned Agent", agentEmail);
+  add("Application Summary", body);
 
   const container = document.getElementById("wizard-container");
   if (container) {
@@ -1244,112 +1287,69 @@ async function submitApplication() {
     `;
   }
 
-  const replyEmail = String(
-    data.email || data.Email || data.contactEmail || data.clientEmail ||
-    data.business_email || data.contact_email || ""
-  ).trim();
-  const submissionId = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
-
-  /* Full attempt: table template + CC + reply-to. Minimal attempt: plain message only. */
-  const buildPayload = (minimal) => {
-    const payload = new FormData();
-    const add = (name, value) => payload.append(name, value == null ? "" : String(value));
-
-    add("_subject", subject);
-    add("_captcha", "false");
-    add("_to", OFFICE_EMAIL);
-
-    if (!minimal) {
-      add("_template", "table");
-      if (agentEmail !== OFFICE_EMAIL && EMAIL_RE.test(agentEmail)) add("_cc", agentEmail);
-      if (EMAIL_RE.test(replyEmail)) add("_replyto", replyEmail);
-      add("Applicant", customerName);
-      add("Application Type", appType);
-      add("Submission ID", submissionId);
-      add("Assigned Agent", agentEmail);
-      add("Application Summary", body);
-    } else {
-      add("message", `Submission ID: ${submissionId}\nContact email: ${replyEmail}\n\n${body}`);
-    }
-
-    return payload;
-  };
-
-  let lastDetail = "";
-
-  const postOnce = async (minimal) => {
-    const controller = new AbortController();
-    const timeoutId = window.setTimeout(() => controller.abort(), 20000);
-    try {
-      const response = await fetch(`https://formsubmit.co/ajax/${OFFICE_EMAIL}`, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: buildPayload(minimal),
-        signal: controller.signal
-      });
-
-      const text = await response.text().catch(() => "");
-      let result = null;
-      try {
-        result = JSON.parse(text);
-      } catch {
-        result = null;
-      }
-
-      if (!response.ok || String(result?.success) === "false") {
-        lastDetail = `HTTP ${response.status}${result?.message ? ` - ${result.message}` : ""}`;
-        console.error("FormSubmit response:", response.status, text);
-        throw new Error(lastDetail);
-      }
-    } catch (err) {
-      if (!lastDetail) lastDetail = String(err?.message || err);
-      throw err;
-    } finally {
-      window.clearTimeout(timeoutId);
-    }
-  };
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), 20000);
 
   try {
+    const response = await fetch(`https://formsubmit.co/ajax/${OFFICE_EMAIL}`, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: payload,
+      signal: controller.signal
+    });
+
+    const text = await response.text().catch(() => "");
+    let result = null;
     try {
-      await postOnce(false);
-    } catch (firstErr) {
-      console.warn("FormSubmit attempt 1 failed; retrying with minimal payload.", firstErr);
-      lastDetail = "";
-      await new Promise((resolve) => window.setTimeout(resolve, 1500));
-      await postOnce(true);
+      result = JSON.parse(text);
+    } catch {
+      result = null;
     }
 
-    alert(
-      isSpanish()
-        ? "¡Su solicitud fue enviada y dirigida al agente asignado!"
-        : "Your application was sent and routed to the assigned agent!"
-    );
-
-    window.location.href = THANK_YOU_URL;
-  } catch (err) {
-    console.error("FormSubmit failed after retry.", err);
-    showSubmitError(() => submitApplication(), lastDetail);
+    if (!response.ok || String(result?.success) === "false") {
+      const detail = `HTTP ${response.status}${result?.message ? ` - ${result.message}` : ""}`;
+      console.error("FormSubmit response:", response.status, text);
+      const error = new Error(detail);
+      error.status = response.status;
+      error.detail = detail;
+      throw error;
+    }
+  } finally {
+    window.clearTimeout(timeoutId);
   }
+
+  alert(
+    isSpanish()
+      ? "¡Su solicitud fue enviada y dirigida al agente asignado!"
+      : "Your application was sent and routed to the assigned agent!"
+  );
+
+  window.location.href = THANK_YOU_URL;
 }
 
 /* Show an in-page error (never navigate to FormSubmit's own pages) */
-function showSubmitError(retry, detail) {
+function showSubmitError(retry, detail, status) {
   const container = document.getElementById("wizard-container");
   if (!container) return;
 
   const es = isSpanish();
   const safeDetail = String(detail || "").replace(/[<>&]/g, "");
+  const tooMany = Number(status) === 429;
+  const message = tooMany
+    ? (es
+        ? "Recibimos demasiados envíos en poco tiempo. Espere un minuto y presione Intentar de nuevo."
+        : "Too many submissions were received in a short time. Please wait a minute, then press Try Again.")
+    : (es
+        ? "Por favor intente de nuevo. Si el problema continúa, escríbanos a office@insaces.com."
+        : "Please try again. If the problem continues, email us at office@insaces.com.");
+
   container.innerHTML = `
     <div style="background:#fff; border:1px solid #fee2e2; border-radius:12px; padding:28px; max-width:680px; margin:0 auto; text-align:center;">
       <h3 style="margin:0 0 10px; color:#111827;">
         ${es ? "No pudimos enviar su solicitud" : "We couldn't send your application"}
       </h3>
-      <p style="margin:0 0 16px; color:#6b7280;">
-        ${es
-          ? "Por favor intente de nuevo. Si el problema continúa, escríbanos a office@insaces.com."
-          : "Please try again. If the problem continues, email us at office@insaces.com."}
-      </p>
-      ${safeDetail ? `<p style="margin:0 0 16px; color:#9ca3af; font-size:12px;">Details: ${safeDetail}</p>` : ""}
+      <p style="margin:0 0 16px; color:#6b7280;">${message}</p>
+      ${safeDetail ? `<p style="margin:0 0 16px; color:#9ca3af; font-size:0.85rem;">Details: ${safeDetail}</p>` : ""}
       <button type="button" id="wizard-retry-submit" class="wizard-btn next">${es ? "Intentar de nuevo" : "Try Again"}</button>
       <button type="button" id="wizard-back-review" class="wizard-btn back">${es ? "Regresar" : "Back"}</button>
     </div>
@@ -1361,7 +1361,6 @@ function showSubmitError(retry, detail) {
     buildStep(currentStep);
   });
 }
-
 
 /* Go back to applications page */
 function goBackToApplications() {
